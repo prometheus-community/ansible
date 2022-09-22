@@ -1,0 +1,13 @@
+---
+- name: restart blackbox exporter
+  become: true
+  systemd:
+    daemon_reload: true
+    name: blackbox_exporter
+    state: restarted
+
+- name: reload blackbox exporter
+  become: true
+  systemd:
+    name: blackbox_exporter
+    state: reloaded

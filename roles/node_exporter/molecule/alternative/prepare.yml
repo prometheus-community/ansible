@@ -1,0 +1,57 @@
+---
+- name: Prepare
+  hosts: localhost
+  gather_facts: false
+  vars:
+    go_arch: amd64
+    node_exporter_version: 1.0.0
+  tasks:
+    - name: Download node_exporter binary to local folder
+      become: false
+      get_url:
+        url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+      register: _download_binary
+      until: _download_binary is succeeded
+      retries: 5
+      delay: 2
+      run_once: true
+      check_mode: false
+
+    - name: Unpack node_exporter binary
+      become: false
+      unarchive:
+        src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "/tmp"
+        creates: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
+      run_once: true
+      check_mode: false
+
+    - name: link to node_exporter binaries directory
+      become: false
+      file:
+        src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-amd64"
+        dest: "/tmp/node_exporter-linux-amd64"
+        state: link
+      run_once: true
+      check_mode: false
+
+    - name: install pyOpenSSL for certificate generation
+      pip:
+        name: "pyOpenSSL"
+
+    - name: Create private key
+      openssl_privatekey:
+        path: "/tmp/tls.key"
+
+    - name: Create CSR
+      openssl_csr:
+        path: "/tmp/tls.csr"
+        privatekey_path: "/tmp/tls.key"
+
+    - name: Create certificate
+      openssl_certificate:
+        path: "/tmp/tls.cert"
+        csr_path: "/tmp/tls.csr"
+        privatekey_path: "/tmp/tls.key"
+        provider: selfsigned

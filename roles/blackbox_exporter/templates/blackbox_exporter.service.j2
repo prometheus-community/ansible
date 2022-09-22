@@ -1,0 +1,45 @@
+{{ ansible_managed | comment }}
+[Unit]
+Description=Blackbox Exporter
+After=network-online.target
+StartLimitInterval=0
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=blackbox-exp
+Group=blackbox-exp
+PermissionsStartOnly=true
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/blackbox_exporter \
+  --config.file=/etc/blackbox_exporter.yml \
+  {% for flag, flag_value in blackbox_exporter_cli_flags.items() -%}
+  --{{ flag }}={{ flag_value }} \
+  {% endfor -%}
+  --web.listen-address={{ blackbox_exporter_web_listen_address }}
+
+SyslogIdentifier=blackbox_exporter
+KillMode=process
+Restart=always
+RestartSec=5
+
+LockPersonality=true
+NoNewPrivileges=true
+MemoryDenyWriteExecute=true
+PrivateTmp=true
+ProtectHome=true
+RemoveIPC=true
+RestrictSUIDSGID=true
+
+AmbientCapabilities=CAP_NET_RAW
+{% if blackbox_exporter_systemd_version | int >= 232 %}
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+ProtectSystem=strict
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target

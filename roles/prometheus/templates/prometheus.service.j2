@@ -1,0 +1,85 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus
+After=network-online.target
+Requires=local-fs.target
+After=local-fs.target
+
+[Service]
+Type=simple
+Environment="GOMAXPROCS={{ ansible_processor_vcpus|default(ansible_processor_count) }}"
+User=prometheus
+Group=prometheus
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart={{ _prometheus_binary_install_dir }}/prometheus \
+  --storage.tsdb.path={{ prometheus_db_dir }} \
+{% if prometheus_version is version('2.7.0', '>=') %}
+  --storage.tsdb.retention.time={{ prometheus_storage_retention }} \
+  --storage.tsdb.retention.size={{ prometheus_storage_retention_size }} \
+{% else %}
+  --storage.tsdb.retention={{ prometheus_storage_retention }} \
+{% endif %}
+{% if prometheus_version is version('2.24.0', '>=') %}
+  --web.config.file={{ prometheus_config_dir }}/web.yml \
+{% endif %}
+  --web.console.libraries={{ prometheus_config_dir }}/console_libraries \
+  --web.console.templates={{ prometheus_config_dir }}/consoles \
+  --web.listen-address={{ prometheus_web_listen_address }} \
+  --web.external-url={{ prometheus_web_external_url }} \
+{% for flag, flag_value in prometheus_config_flags_extra.items() %}
+{% if not flag_value %}
+  --{{ flag }} \
+{% elif flag_value is string %}
+  --{{ flag }}={{ flag_value }} \
+{% elif flag_value is sequence %}
+{% for flag_value_item in flag_value %}
+  --{{ flag }}={{ flag_value_item }} \
+{% endfor %}
+{% endif %}
+{% endfor %}
+  --config.file={{ prometheus_config_dir }}/prometheus.yml
+
+CapabilityBoundingSet=CAP_SET_UID
+LimitNOFILE=65000
+LockPersonality=true
+NoNewPrivileges=true
+MemoryDenyWriteExecute=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectHome=true
+RemoveIPC=true
+RestrictSUIDSGID=true
+#SystemCallFilter=@signal @timer
+
+{% if prometheus_systemd_version | int >= 231 %}
+ReadWritePaths={{ prometheus_db_dir }}
+{% for path in prometheus_read_only_dirs %}
+ReadOnlyPaths={{ path }}
+{% endfor %}
+{% else %}
+ReadWriteDirectories={{ prometheus_db_dir }}
+{% for path in prometheus_read_only_dirs %}
+ReadOnlyDirectories={{ path }}
+{% endfor %}
+{% endif %}
+
+{% if prometheus_systemd_version | int >= 232 %}
+PrivateUsers=true
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+{% if http_proxy is defined %}
+Environment="HTTP_PROXY={{ http_proxy }}"{% if https_proxy is defined %} "HTTPS_PROXY={{ https_proxy }}{% endif %}"
+{% endif %}
+
+SyslogIdentifier=prometheus
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

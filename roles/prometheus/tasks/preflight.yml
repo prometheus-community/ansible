@@ -1,0 +1,114 @@
+---
+- name: Assert usage of systemd as an init system
+  assert:
+    that: ansible_service_mgr == 'systemd'
+    msg: "This module only works with systemd"
+
+- name: Get systemd version
+  command: systemctl --version
+  changed_when: false
+  check_mode: false
+  register: __systemd_version
+  tags:
+    - skip_ansible_lint
+
+- name: Set systemd version fact
+  set_fact:
+    prometheus_systemd_version: "{{ __systemd_version.stdout_lines[0].split(' ')[-1] }}"
+
+- name: Assert no duplicate config flags
+  assert:
+    that:
+      - prometheus_config_flags_extra['config.file'] is not defined
+      - prometheus_config_flags_extra['storage.tsdb.path'] is not defined
+      - prometheus_config_flags_extra['storage.local.path'] is not defined
+      - prometheus_config_flags_extra['web.listen-address'] is not defined
+      - prometheus_config_flags_extra['web.external-url'] is not defined
+    msg: "Detected duplicate configuration entry. Please check your ansible variables and role README.md."
+
+- name: Assert external_labels aren't configured twice
+  assert:
+    that: prometheus_global.external_labels is not defined
+    msg: "Use prometheus_external_labels to define external labels"
+
+- name: Set prometheus external metrics path
+  set_fact:
+    prometheus_metrics_path: "/{{ ( prometheus_web_external_url + '/metrics' ) | regex_replace('^(.*://)?(.*?)/') }}"
+
+- name: Fail when prometheus_config_flags_extra duplicates parameters set by other variables
+  fail:
+    msg: >
+      Whooops. You are duplicating configuration. Please look at your prometheus_config_flags_extra
+      and check against other variables in defaults/main.yml
+  with_items:
+    - 'storage.tsdb.retention'
+    - 'storage.tsdb.path'
+    - 'storage.local.retention'
+    - 'storage.local.path'
+    - 'config.file'
+    - 'web.listen-address'
+    - 'web.external-url'
+  when: item in prometheus_config_flags_extra.keys()
+
+- name: Get all file_sd files from scrape_configs
+  set_fact:
+    file_sd_files: "{{ prometheus_scrape_configs | json_query('[*][].file_sd_configs[*][].files[]') }}"
+
+- name: Fail when file_sd targets are not defined in scrape_configs
+  fail:
+    msg: >
+      Oh, snap! `{{ item.key }}` couldn't be found in your scrape configs. Please ensure you provided
+      all targets from prometheus_targets in prometheus_scrape_configs
+  when: not prometheus_config_dir + "/file_sd/" + item.key + ".yml" in file_sd_files
+  #  when: not item | basename | splitext | difference(['.yml']) | join('') in prometheus_targets.keys()
+  with_dict: "{{ prometheus_targets }}"
+
+- name: Alert when prometheus_alertmanager_config is empty, but prometheus_alert_rules is specified
+  debug:
+    msg: >
+      No alertmanager configuration was specified. If you want your alerts to be sent make sure to
+      specify a prometheus_alertmanager_config in defaults/main.yml.
+  when:
+    - prometheus_alertmanager_config == []
+    - prometheus_alert_rules != []
+
+- block:
+    - name: Get latest release
+      uri:
+        url: "https://api.github.com/repos/prometheus/prometheus/releases/latest"
+        method: GET
+        return_content: true
+        status_code: 200
+        body_format: json
+        validate_certs: false
+        user: "{{ lookup('env', 'GH_USER') | default(omit) }}"
+        password: "{{ lookup('env', 'GH_TOKEN') | default(omit) }}"
+      no_log: "{{ not lookup('env', 'ANSIBLE_DEBUG') | bool }}"
+      register: _latest_release
+      until: _latest_release.status == 200
+      retries: 5
+
+    - name: "Set prometheus version to {{ _latest_release.json.tag_name[1:] }}"
+      set_fact:
+        prometheus_version: "{{ _latest_release.json.tag_name[1:] }}"
+  when:
+    - prometheus_version == "latest"
+    - prometheus_binary_local_dir | length == 0
+    - not prometheus_skip_install
+
+- block:
+    - name: "Get checksum list"
+      set_fact:
+        __prometheus_checksums: "{{ lookup('url', 'https://github.com/prometheus/prometheus/releases/download/v' + prometheus_version + '/sha256sums.txt', wantlist=True) | list }}"
+      run_once: true
+
+    - name: "Get checksum for {{ go_arch }} architecture"
+      set_fact:
+        __prometheus_checksum: "{{ item.split(' ')[0] }}"
+      with_items: "{{ __prometheus_checksums }}"
+      when:
+        - "('linux-' + go_arch + '.tar.gz') in item"
+  delegate_to: localhost
+  when:
+    - prometheus_binary_local_dir | length == 0
+    - not prometheus_skip_install

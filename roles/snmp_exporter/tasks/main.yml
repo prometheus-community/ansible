@@ -1,0 +1,26 @@
+---
+- include: preflight.yml
+  tags:
+    - snmp_exporter_install
+    - snmp_exporter_configure
+    - snmp_exporter_run
+
+- include: install.yml
+  become: true
+  tags:
+    - snmp_exporter_install
+
+- include: configure.yml
+  become: true
+  tags:
+    - snmp_exporter_configure
+
+- name: ensure snmp_exporter service is started and enabled
+  become: true
+  systemd:
+    daemon_reload: true
+    name: snmp_exporter
+    state: started
+    enabled: true
+  tags:
+    - snmp_exporter_run

@@ -1,0 +1,6 @@
+---
+- name: Run role
+  hosts: all
+  any_errors_fatal: true
+  roles:
+    - cloudalchemy.prometheus

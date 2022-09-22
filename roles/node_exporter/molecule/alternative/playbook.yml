@@ -1,0 +1,38 @@
+---
+- name: Run role
+  hosts: all
+  any_errors_fatal: true
+  roles:
+    - cloudalchemy.node_exporter
+  pre_tasks:
+    - name: Create node_exporter cert dir
+      file:
+        path: "{{ node_exporter_tls_server_config.cert_file | dirname }}"
+        state: directory
+        owner: root
+        group: root
+    - name: Copy cert and key
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+      with_items:
+        - src: "/tmp/tls.cert"
+          dest: "{{ node_exporter_tls_server_config.cert_file }}"
+        - src: "/tmp/tls.key"
+          dest: "{{ node_exporter_tls_server_config.key_file }}"
+  vars:
+    node_exporter_binary_local_dir: "/tmp/node_exporter-linux-amd64"
+    node_exporter_web_listen_address: "127.0.0.1:8080"
+    node_exporter_textfile_dir: ""
+    node_exporter_enabled_collectors:
+      - entropy
+    node_exporter_disabled_collectors:
+      - diskstats
+
+    node_exporter_tls_server_config:
+      cert_file: /etc/node_exporter/tls.cert
+      key_file: /etc/node_exporter/tls.key
+    node_exporter_http_server_config:
+      http2: true
+    node_exporter_basic_auth_users:
+      randomuser: examplepassword

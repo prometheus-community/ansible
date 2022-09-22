@@ -1,0 +1,37 @@
+---
+- name: Prepare
+  hosts: localhost
+  gather_facts: false
+  vars:
+    # Version seeds to be specified here as molecule doesn't have access to ansible_version at this stage
+    version: 0.19.0
+  tasks:
+    - name: download alertmanager binary to local folder
+      become: false
+      get_url:
+        url: "https://github.com/prometheus/alertmanager/releases/download/v{{ version }}/alertmanager-{{ version }}.linux-amd64.tar.gz"
+        dest: "/tmp/alertmanager-{{ version }}.linux-amd64.tar.gz"
+      register: _download_archive
+      until: _download_archive is succeeded
+      retries: 5
+      delay: 2
+      run_once: true
+      check_mode: false
+
+    - name: unpack alertmanager binaries
+      become: false
+      unarchive:
+        src: "/tmp/alertmanager-{{ version }}.linux-amd64.tar.gz"
+        dest: "/tmp"
+        creates: "/tmp/alertmanager-{{ version }}.linux-amd64/alertmanager"
+      run_once: true
+      check_mode: false
+
+    - name: link to alertmanager binaries directory
+      become: false
+      file:
+        src: "/tmp/alertmanager-{{ version }}.linux-amd64"
+        dest: "/tmp/alertmanager-linux-amd64"
+        state: link
+      run_once: true
+      check_mode: false
