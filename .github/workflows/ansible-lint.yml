@@ -1,0 +1,15 @@
+---
+name: Ansible Lint # feel free to pick your own name
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Lint roles
+        uses: ansible-community/ansible-lint-action@v6
+        with:
+          path: roles
