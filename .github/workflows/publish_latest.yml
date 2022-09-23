@@ -1,0 +1,89 @@
+name: Publish Collection
+on:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - 'published'
+
+env:
+  python-version: 3.9
+
+jobs:
+  publish-latest:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ansible_collections/prometheus/prometheus
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          path: ansible_collections/prometheus/prometheus
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ env.python-version }}
+
+      - name: Install ansible-base (devel)
+        run: pip install https://github.com/ansible/ansible/archive/devel.tar.gz --disable-pip-version-check
+
+      - name: Build the collection
+        run: ansible-galaxy collection build
+
+      - name: Rename the build artifact
+        run: mv prometheus-prometheus-*.tar.gz prometheus-community-prometheus-latest.tar.gz
+
+      # Moving the tag leaves an orphan artifact. Just changing the artifact doesn't move the tag.
+      - name: Delete latest tag and release
+        uses: dev-drprasad/delete-tag-and-release@v0.1.2
+        with:
+          delete_release: true
+          tag_name: latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload files to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ansible_collections/prometheus/prometheus/prometheus-community-prometheus-latest.tar.gz
+          asset_name: prometheus-community-prometheus-latest.tar.gz
+          body: "Development release"
+          tag: latest
+          overwrite: true
+
+  publish-tagged:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ansible_collections/prometheus/prometheus
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          path: ansible_collections/prometheus/prometheus
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ env.python-version }}
+
+      - name: Install ansible-base (devel)
+        run: pip install https://github.com/ansible/ansible/archive/devel.tar.gz --disable-pip-version-check
+
+      - name: Build the collection
+        run: ansible-galaxy collection build
+
+      - name: Upload files to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ansible_collections/prometheus/prometheus/prometheus-community-prometheus-*.tar.gz
+          file_glob: true
+          tag: ${{ github.ref }}
+          overwrite: true
