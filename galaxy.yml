@@ -2,9 +2,9 @@
 # The namespace of the collection. This can be a company/brand/organization or product namespace under which all
 # content lives. May only contain alphanumeric lowercase characters and underscores. Namespaces cannot start with
 # underscores or numbers and cannot contain consecutive underscores
-namespace: community
+namespace: prometheus
 name: prometheus
-version: 1.0.0
+version: 0.0.1
 
 readme: README.md
 authors:
@@ -14,12 +14,13 @@ authors:
 description: your collection description
 license_file: LICENSE
 tags:
+- observability
+- o11y
 - monitoring
 - prometheus
 - metrics
 - alerts
 - alerting
-- molecule
 - cloud
 
 # Collections that this collection requires to be installed for it to be usable. The key of the dict is the
