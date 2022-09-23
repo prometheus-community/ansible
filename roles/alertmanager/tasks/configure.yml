@@ -1,0 +1,43 @@
+---
+- name: copy amtool config
+  template:
+    force: true
+    src: "{{ alertmanager_amtool_config_file }}"
+    dest: "{{ _alertmanager_amtool_config_dir }}/config.yml"
+    owner: alertmanager
+    group: alertmanager
+    mode: 0644
+
+- name: copy alertmanager config
+  template:
+    force: true
+    src: "{{ alertmanager_config_file }}"
+    dest: "{{ alertmanager_config_dir }}/alertmanager.yml"
+    owner: alertmanager
+    group: alertmanager
+    mode: 0644
+    validate: "{{ _alertmanager_binary_install_dir }}/amtool check-config %s"
+  notify:
+    - restart alertmanager
+
+- name: create systemd service unit
+  template:
+    src: alertmanager.service.j2
+    dest: /etc/systemd/system/alertmanager.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart alertmanager
+
+- name: copy alertmanager template files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ alertmanager_config_dir }}/templates/"
+    force: true
+    owner: alertmanager
+    group: alertmanager
+    mode: 0644
+  with_fileglob: "{{ alertmanager_template_files }}"
+  notify:
+    - restart alertmanager

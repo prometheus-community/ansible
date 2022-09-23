@@ -1,0 +1,7 @@
+---
+snmp_exporter_version: 0.19.0
+snmp_exporter_web_listen_address: "0.0.0.0:9116"
+snmp_exporter_log_level: info
+
+# If this is empty, role will download snmp.yml file from https://github.com/prometheus/snmp_exporter.
+snmp_exporter_config_file: ""

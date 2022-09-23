@@ -1,0 +1,135 @@
+---
+- name: Assert usage of systemd as an init system
+  assert:
+    that: ansible_service_mgr == 'systemd'
+    msg: "This module only works with systemd"
+
+- name: Get systemd version
+  command: systemctl --version
+  changed_when: false
+  check_mode: false
+  register: __systemd_version
+  tags:
+    - skip_ansible_lint
+
+- name: Set systemd version fact
+  set_fact:
+    alertmanager_systemd_version: "{{ __systemd_version.stdout_lines[0].split(' ')[-1] }}"
+
+- block:
+    - name: Get latest release
+      uri:
+        url: "https://api.github.com/repos/prometheus/alertmanager/releases/latest"
+        method: GET
+        return_content: true
+        status_code: 200
+        body_format: json
+        user: "{{ lookup('env', 'GH_USER') | default(omit) }}"
+        password: "{{ lookup('env', 'GH_TOKEN') | default(omit) }}"
+      no_log: "{{ not lookup('env', 'MOLECULE_DEBUG') | bool }}"
+      register: _latest_release
+      until: _latest_release.status == 200
+      retries: 5
+
+    - name: "Set alertmanager version to {{ _latest_release.json.tag_name[1:] }}"
+      set_fact:
+        alertmanager_version: "{{ _latest_release.json.tag_name[1:] }}"
+        alertmanager_checksum_url: "https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/sha256sums.txt"
+  when:
+    - alertmanager_version == "latest"
+    - alertmanager_binary_local_dir | length == 0
+
+- block:
+    - name: "Get checksum list"
+      set_fact:
+        __alertmanager_checksums: "{{ lookup('url', 'https://github.com/prometheus/alertmanager/releases/download/v' + alertmanager_version + '/sha256sums.txt', wantlist=True) | list }}"
+      run_once: true
+
+    - name: "Get checksum for {{ go_arch }} architecture"
+      set_fact:
+        __alertmanager_checksum: "{{ item.split(' ')[0] }}"
+      with_items: "{{ __alertmanager_checksums }}"
+      when:
+        - "('linux-' + go_arch + '.tar.gz') in item"
+  delegate_to: localhost
+  when:
+    - alertmanager_binary_local_dir | length == 0
+
+
+- name: Fail when extra config flags are duplicating ansible variables
+  fail:
+    msg: "Detected duplicate configuration entry. Please check your ansible variables and role README.md."
+  when:
+    (alertmanager_config_flags_extra['config.file'] is defined) or
+    (alertmanager_config_flags_extra['storage.path'] is defined) or
+    (alertmanager_config_flags_extra['web.listen-address'] is defined) or
+    (alertmanager_config_flags_extra['web.external-url'] is defined)
+
+- name: Fail when there are no receivers defined
+  fail:
+    msg: "Configure alert receivers (`alertmanager_receivers`). Otherwise alertmanager won't know where to send alerts."
+  when:
+    - alertmanager_config_file == 'alertmanager.yml.j2'
+    - alertmanager_receivers == []
+
+- name: Fail when there is no alert route defined
+  fail:
+    msg: "Configure alert routing (`alertmanager_route`). Otherwise alertmanager won't know how to send alerts."
+  when:
+    - alertmanager_config_file == 'alertmanager.yml.j2'
+    - alertmanager_route == {}
+
+- name: "DEPRECATION WARNING: alertmanager version 0.15 and earlier are no longer supported and will be dropped from future releases"
+  ignore_errors: true
+  fail:
+    msg: "Please use `alertmanager_version >= v0.16.0`"
+  when: alertmanager_version is version_compare('0.16.0', '<')
+
+- block:
+    - name: Backward compatibility of variable [part 1]
+      set_fact:
+        alertmanager_config_flags_extra: "{{ alertmanager_cli_flags }}"
+
+    - name: "DEPRECATION WARNING: `alertmanager_cli_flags` is no longer supported and will be dropped from future releases"
+      ignore_errors: true
+      fail:
+        msg: "Please use `alertmanager_config_flags_extra` instead of `alertmanager_cli_flags`"
+  when: alertmanager_cli_flags is defined
+
+- block:
+    - name: Backward compatibility of variable [part 2]
+      set_fact:
+        alertmanager_web_listen_address: "{{ alertmanager_listen_address }}"
+
+    - name: "DEPRECATION WARNING: `alertmanager_listen_address` is no longer supported and will be dropped from future releases"
+      ignore_errors: true
+      fail:
+        msg: "Please use `alertmanager_web_listen_address` instead of `alertmanager_listen_address`"
+  when: alertmanager_listen_address is defined
+
+- block:
+    - name: Backward compatibility of variable [part 3]
+      set_fact:
+        alertmanager_web_external_url: "{{ alertmanager_external_url }}"
+
+    - name: "DEPRECATION WARNING: `alertmanager_external_url` is no longer supported and will be dropped from future releases"
+      ignore_errors: true
+      fail:
+        msg: "Please use `alertmanager_web_external_url` instead of `alertmanager_external_url`"
+  when: alertmanager_external_url is defined
+
+- block:
+    - name: HA config compatibility with alertmanager<0.15.0
+      set_fact:
+        alertmanager_cluster: "{{ alertmanager_mesh }}"
+
+    - name: "DEPRECATION WARNING: `alertmanager_mesh` is no longer supported and will be dropped from future releases"
+      ignore_errors: true
+      fail:
+        msg: "Please use `alertmanager_cluster` instead of `alertmanager_cluster`"
+  when: alertmanager_mesh is defined
+
+- name: "`alertmanager_child_routes` is no longer supported"
+  fail:
+    msg: "Please move content of `alertmanager_child_routes` to `alertmanager_route.routes` as the former variable is deprecated and will be removed in future versions."
+  when: alertmanager_child_routes is defined

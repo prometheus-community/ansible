@@ -1,0 +1,13 @@
+---
+- name: restart alertmanager
+  become: true
+  systemd:
+    daemon_reload: true
+    name: alertmanager
+    state: restarted
+
+- name: reload alertmanager
+  become: true
+  systemd:
+    name: alertmanager
+    state: reloaded

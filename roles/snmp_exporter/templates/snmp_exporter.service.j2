@@ -1,0 +1,23 @@
+[Unit]
+Description=Prometheus SNMP Exporter
+After=network-online.target
+StartLimitInterval=0
+
+[Service]
+Type=simple
+User=nobody
+Group={{ 'nogroup' if ansible_os_family == 'Debian' else 'nobody' }}
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/snmp_exporter \
+  --web.listen-address={{ snmp_exporter_web_listen_address }} \
+  --log.level={{ snmp_exporter_log_level }} \
+  --config.file=/etc/snmp_exporter/snmp.yml
+
+KillMode=process
+
+SyslogIdentifier=snmp_exporter
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target

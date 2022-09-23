@@ -1,0 +1,20 @@
+---
+- name: create systemd service unit
+  template:
+    src: blackbox_exporter.service.j2
+    dest: /etc/systemd/system/blackbox_exporter.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart blackbox exporter
+
+- name: configure blackbox exporter
+  template:
+    src: blackbox_exporter.yml.j2
+    dest: /etc/blackbox_exporter.yml
+    owner: blackbox-exp
+    group: blackbox-exp
+    mode: 0644
+  notify:
+    - reload blackbox exporter

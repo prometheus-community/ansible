@@ -1,0 +1,26 @@
+---
+- include: preflight.yml
+  tags:
+    - blackbox_exporter_install
+    - blackbox_exporter_configure
+    - blackbox_exporter_run
+
+- include: install.yml
+  become: true
+  tags:
+    - blackbox_exporter_install
+
+- include: configure.yml
+  become: true
+  tags:
+    - blackbox_exporter_configure
+
+- name: ensure blackbox_exporter service is started and enabled
+  become: true
+  systemd:
+    daemon_reload: true
+    name: blackbox_exporter
+    state: started
+    enabled: true
+  tags:
+    - blackbox_exporter_run

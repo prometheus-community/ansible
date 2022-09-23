@@ -1,0 +1,8 @@
+---
+- name: Run role
+  hosts: all
+  any_errors_fatal: true
+  roles:
+    - cloudalchemy.node_exporter
+  vars:
+    node_exporter_version: latest

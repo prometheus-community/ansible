@@ -1,0 +1,8 @@
+---
+- hosts: all
+  roles:
+    - ansible-snmp-exporter
+  vars:
+    __testing_on_travis: true
+    snmp_exporter_web_listen_address: "127.0.0.1:9116"
+    snmp_exporter_config_file: snmp.yml

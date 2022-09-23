@@ -1,0 +1,34 @@
+---
+- hosts: all
+  any_errors_fatal: true
+  roles:
+    - cloudalchemy.alertmanager
+  vars:
+    alertmanager_binary_local_dir: '/tmp/alertmanager-linux-amd64'
+    alertmanager_config_dir: /opt/am/etc
+    alertmanager_db_dir: /opt/am/lib
+    alertmanager_web_listen_address: '127.0.0.1:9093'
+    alertmanager_web_external_url: 'http://localhost:9093/alertmanager'
+    alertmanager_resolve_timeout: 10m
+    alertmanager_slack_api_url: "http://example.com"
+    alertmanager_receivers:
+      - name: slack
+        slack_configs:
+          - send_resolved: true
+            api_url: 'https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX'
+            channel: '#alerts'
+    alertmanager_route:
+      group_by: ['alertname', 'cluster', 'service']
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 3h
+      receiver: slack
+      routes:
+        - match_re:
+            service: ^(foo1|foo2|baz)$
+          receiver: slack
+    alertmanager_mesh:
+      listen-address: "127.0.0.1:6783"
+      peers:
+        - "127.0.0.1:6783"
+        - "demo.cloudalchemy.org:6783"

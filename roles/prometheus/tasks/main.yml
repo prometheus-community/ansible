@@ -1,0 +1,38 @@
+---
+- name: Gather variables for each operating system
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution | lower }}.yml"
+    - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "{{ ansible_os_family | lower }}.yml"
+  tags:
+    - prometheus_configure
+    - prometheus_install
+    - prometheus_run
+
+- include: preflight.yml
+  tags:
+    - prometheus_configure
+    - prometheus_install
+    - prometheus_run
+
+- include: install.yml
+  become: true
+  tags:
+    - prometheus_install
+
+- include: configure.yml
+  become: true
+  tags:
+    - prometheus_configure
+
+- name: ensure prometheus service is started and enabled
+  become: true
+  systemd:
+    daemon_reload: true
+    name: prometheus
+    state: started
+    enabled: true
+  tags:
+    - prometheus_run

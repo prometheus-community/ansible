@@ -1,0 +1,60 @@
+---
+- name: create blackbox_exporter system group
+  group:
+    name: blackbox-exp
+    system: true
+    state: present
+
+- name: create blackbox_exporter system user
+  user:
+    name: blackbox-exp
+    system: true
+    shell: "/usr/sbin/nologin"
+    group: blackbox-exp
+    createhome: false
+
+- name: download blackbox exporter binary to local folder
+  become: false
+  unarchive:
+    src: "https://github.com/prometheus/blackbox_exporter/releases/download/v{{ blackbox_exporter_version }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
+    dest: "/tmp"
+    remote_src: true
+    creates: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/blackbox_exporter"
+  register: _download_binary
+  until: _download_binary is succeeded
+  retries: 5
+  delay: 2
+  delegate_to: localhost
+  check_mode: false
+
+- name: propagate blackbox exporter binary
+  copy:
+    src: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/blackbox_exporter"
+    dest: "/usr/local/bin/blackbox_exporter"
+    mode: 0750
+    owner: blackbox-exp
+    group: blackbox-exp
+  notify:
+    - restart blackbox exporter
+
+- name: Install libcap on Debian systems
+  package:
+    name: "libcap2-bin"
+    state: present
+  register: _download_packages
+  until: _download_packages is succeeded
+  retries: 5
+  delay: 2
+  when: ansible_os_family | lower == "debian"
+
+- name: Ensure blackbox exporter binary has cap_net_raw capability
+  capabilities:
+    path: '/usr/local/bin/blackbox_exporter'
+    capability: cap_net_raw+ep
+    state: present
+  when: not ansible_check_mode
+
+- name: Check Debug Message
+  debug:
+    msg: "The capabilities module is skipped during check mode, as the file may not exist, causing execution to fail."
+  when: ansible_check_mode
