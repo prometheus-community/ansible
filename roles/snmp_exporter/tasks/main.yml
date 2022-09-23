@@ -15,9 +15,9 @@
   tags:
     - snmp_exporter_configure
 
-- name: ensure snmp_exporter service is started and enabled
+- name: Ensure snmp_exporter service is started and enabled
   become: true
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
     name: snmp_exporter
     state: started

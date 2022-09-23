@@ -8,7 +8,7 @@
   tasks:
     - name: Download node_exporter binary to local folder
       become: false
-      get_url:
+      ansible.builtin.get_url:
         url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
       register: _download_binary
@@ -20,7 +20,7 @@
 
     - name: Unpack node_exporter binary
       become: false
-      unarchive:
+      ansible.builtin.unarchive:
         src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp"
         creates: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
@@ -29,7 +29,7 @@
 
     - name: link to node_exporter binaries directory
       become: false
-      file:
+      ansible.builtin.file:
         src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-amd64"
         dest: "/tmp/node_exporter-linux-amd64"
         state: link
@@ -37,20 +37,20 @@
       check_mode: false
 
     - name: install pyOpenSSL for certificate generation
-      pip:
+      ansible.builtin.pip:
         name: "pyOpenSSL"
 
     - name: Create private key
-      openssl_privatekey:
+      community.crypto.openssl_privatekey:
         path: "/tmp/tls.key"
 
     - name: Create CSR
-      openssl_csr:
+      community.crypto.openssl_csr:
         path: "/tmp/tls.csr"
         privatekey_path: "/tmp/tls.key"
 
     - name: Create certificate
-      openssl_certificate:
+      community.crypto.openssl_certificate:
         path: "/tmp/tls.cert"
         csr_path: "/tmp/tls.csr"
         privatekey_path: "/tmp/tls.key"

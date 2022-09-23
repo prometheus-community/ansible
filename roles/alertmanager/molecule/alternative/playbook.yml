@@ -2,7 +2,7 @@
 - hosts: all
   any_errors_fatal: true
   roles:
-    - cloudalchemy.alertmanager
+    - alertmanager
   vars:
     alertmanager_binary_local_dir: '/tmp/alertmanager-linux-amd64'
     alertmanager_config_dir: /opt/am/etc

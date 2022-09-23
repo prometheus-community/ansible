@@ -1,12 +1,12 @@
 ---
 - name: reload snmp exporter
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
     name: snmp_exporter
     state: reloaded
 
 - name: restart snmp exporter
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
     name: snmp_exporter
     state: restarted

@@ -8,7 +8,7 @@
   tasks:
     - name: download alertmanager binary to local folder
       become: false
-      get_url:
+      ansible.builtin.get_url:
         url: "https://github.com/prometheus/alertmanager/releases/download/v{{ version }}/alertmanager-{{ version }}.linux-amd64.tar.gz"
         dest: "/tmp/alertmanager-{{ version }}.linux-amd64.tar.gz"
       register: _download_archive
@@ -20,7 +20,7 @@
 
     - name: unpack alertmanager binaries
       become: false
-      unarchive:
+      ansible.builtin.unarchive:
         src: "/tmp/alertmanager-{{ version }}.linux-amd64.tar.gz"
         dest: "/tmp"
         creates: "/tmp/alertmanager-{{ version }}.linux-amd64/alertmanager"
@@ -29,7 +29,7 @@
 
     - name: link to alertmanager binaries directory
       become: false
-      file:
+      ansible.builtin.file:
         src: "/tmp/alertmanager-{{ version }}.linux-amd64"
         dest: "/tmp/alertmanager-linux-amd64"
         state: link

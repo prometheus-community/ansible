@@ -1,7 +1,7 @@
 ---
 - name: Download snmp_exporter binary to local folder
   become: false
-  get_url:
+  ansible.builtin.get_url:
     url: "https://github.com/prometheus/snmp_exporter/releases/download/v{{ snmp_exporter_version }}/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
     dest: "/tmp"
     checksum: "sha256:{{ snmp_exporter_checksum }}"
@@ -14,7 +14,7 @@
 
 - name: Unpack snmp_exporter binary
   become: false
-  unarchive:
+  ansible.builtin.unarchive:
     src: "/tmp/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
     dest: "/tmp"
     creates: "/tmp/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/snmp_exporter"
@@ -22,7 +22,7 @@
   check_mode: false
 
 - name: Propagate SNMP Exporter binaries
-  copy:
+  ansible.builtin.copy:
     src: "/tmp/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/snmp_exporter"
     dest: "/usr/local/bin/snmp_exporter"
     mode: 0755
@@ -30,9 +30,9 @@
     - restart snmp exporter
 
 - name: Create configuration directory
-  file:
+  ansible.builtin.file:
     path: "/etc/snmp_exporter"
     state: directory
     owner: root
-    group: root
+    ansible.builtin.group: root
     mode: 0755

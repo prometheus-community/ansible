@@ -1,24 +1,24 @@
 ---
-- name: create alertmanager system group
-  group:
+- name: Create alertmanager system group
+  ansible.builtin.group:
     name: alertmanager
     system: true
     state: present
 
-- name: create alertmanager system user
-  user:
+- name: Create alertmanager system user
+  ansible.builtin.user:
     name: alertmanager
     system: true
     shell: "/usr/sbin/nologin"
-    group: alertmanager
+    ansible.builtin.group: alertmanager
     createhome: false
 
-- name: create alertmanager directories
-  file:
+- name: Create alertmanager directories
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     owner: alertmanager
-    group: alertmanager
+    ansible.builtin.group: alertmanager
     mode: 0755
   with_items:
     - "{{ alertmanager_config_dir }}"
@@ -29,7 +29,7 @@
 - block:
     - name: download alertmanager binary to local folder
       become: false
-      get_url:
+      ansible.builtin.get_url:
         url: "https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __alertmanager_checksum }}"
@@ -43,7 +43,7 @@
 
     - name: unpack alertmanager binaries
       become: false
-      unarchive:
+      ansible.builtin.unarchive:
         src: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp"
         mode: 0755
@@ -52,12 +52,12 @@
       check_mode: false
 
     - name: propagate official alertmanager and amtool binaries
-      copy:
+      ansible.builtin.copy:
         src: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}/{{ item }}"
         dest: "{{ _alertmanager_binary_install_dir }}/{{ item }}"
         mode: 0755
         owner: root
-        group: root
+        ansible.builtin.group: root
       with_items:
         - alertmanager
         - amtool
@@ -66,12 +66,12 @@
   when: alertmanager_binary_local_dir | length == 0
 
 - name: propagate locally distributed alertmanager and amtool binaries
-  copy:
+  ansible.builtin.copy:
     src: "{{ alertmanager_binary_local_dir }}/{{ item }}"
     dest: "{{ _alertmanager_binary_install_dir }}/{{ item }}"
     mode: 0755
     owner: root
-    group: root
+    ansible.builtin.group: root
   with_items:
     - alertmanager
     - amtool

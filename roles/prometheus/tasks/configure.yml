@@ -1,10 +1,10 @@
 ---
 - name: alerting rules file
-  template:
+  ansible.builtin.template:
     src: "alert.rules.j2"
     dest: "{{ prometheus_config_dir }}/rules/ansible_managed.rules"
     owner: root
-    group: prometheus
+    ansible.builtin.group: prometheus
     mode: 0640
     validate: "{{ _prometheus_binary_install_dir }}/promtool check rules %s"
   when:
@@ -13,11 +13,11 @@
     - reload prometheus
 
 - name: copy custom alerting rule files
-  copy:
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ prometheus_config_dir }}/rules/"
     owner: root
-    group: prometheus
+    ansible.builtin.group: prometheus
     mode: 0640
     validate: "{{ _prometheus_binary_install_dir }}/promtool check rules %s"
   with_fileglob: "{{ prometheus_alert_rules_files }}"
@@ -25,45 +25,45 @@
     - reload prometheus
 
 - name: configure prometheus
-  template:
+  ansible.builtin.template:
     src: "{{ prometheus_config_file }}"
     dest: "{{ prometheus_config_dir }}/prometheus.yml"
     force: true
     owner: root
-    group: prometheus
+    ansible.builtin.group: prometheus
     mode: 0640
     validate: "{{ _prometheus_binary_install_dir }}/promtool check config %s"
   notify:
     - reload prometheus
 
 - name: configure Prometheus web
-  copy:
+  ansible.builtin.template:
     content: "{{ prometheus_web_config | to_nice_yaml(indent=2,sort_keys=False) }}"
     dest: "{{ prometheus_config_dir }}/web.yml"
     force: true
     owner: root
-    group: prometheus
+    ansible.builtin.group: prometheus
     mode: 0640
 
 - name: configure prometheus static targets
-  copy:
+  ansible.builtin.template:
     content: |
       #jinja2: lstrip_blocks: True
       {{ item.value | to_nice_yaml(indent=2,sort_keys=False) }}
     dest: "{{ prometheus_config_dir }}/file_sd/{{ item.key }}.yml"
     force: true
     owner: root
-    group: prometheus
+    ansible.builtin.group: prometheus
     mode: 0640
   with_dict: "{{ prometheus_targets }}"
   when: prometheus_targets != {}
 
 - name: copy prometheus custom static targets
-  copy:
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ prometheus_config_dir }}/file_sd/"
     force: true
     owner: root
-    group: prometheus
+    ansible.builtin.group: prometheus
     mode: 0640
   with_fileglob: "{{ prometheus_static_targets_files }}"

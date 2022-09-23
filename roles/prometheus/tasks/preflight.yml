@@ -1,11 +1,11 @@
 ---
 - name: Assert usage of systemd as an init system
-  assert:
+  ansible.builtin.assert:
     that: ansible_service_mgr == 'systemd'
     msg: "This module only works with systemd"
 
 - name: Get systemd version
-  command: systemctl --version
+  ansible.builtin.command: systemctl --version
   changed_when: false
   check_mode: false
   register: __systemd_version
@@ -13,11 +13,11 @@
     - skip_ansible_lint
 
 - name: Set systemd version fact
-  set_fact:
+  ansible.builtin.set_fact:
     prometheus_systemd_version: "{{ __systemd_version.stdout_lines[0].split(' ')[-1] }}"
 
 - name: Assert no duplicate config flags
-  assert:
+  ansible.builtin.assert:
     that:
       - prometheus_config_flags_extra['config.file'] is not defined
       - prometheus_config_flags_extra['storage.tsdb.path'] is not defined
@@ -27,16 +27,16 @@
     msg: "Detected duplicate configuration entry. Please check your ansible variables and role README.md."
 
 - name: Assert external_labels aren't configured twice
-  assert:
+  ansible.builtin.assert:
     that: prometheus_global.external_labels is not defined
     msg: "Use prometheus_external_labels to define external labels"
 
 - name: Set prometheus external metrics path
-  set_fact:
-    prometheus_metrics_path: "/{{ ( prometheus_web_external_url + '/metrics' ) | regex_replace('^(.*://)?(.*?)/') }}"
+  ansible.builtin.set_fact:
+    prometheus_metrics_path: "/{{ (prometheus_web_external_url + '/metrics') | regex_replace('^(.*://)?(.*?)/') }}"
 
 - name: Fail when prometheus_config_flags_extra duplicates parameters set by other variables
-  fail:
+  ansible.builtin.fail:
     msg: >
       Whooops. You are duplicating configuration. Please look at your prometheus_config_flags_extra
       and check against other variables in defaults/main.yml
@@ -51,11 +51,11 @@
   when: item in prometheus_config_flags_extra.keys()
 
 - name: Get all file_sd files from scrape_configs
-  set_fact:
+  ansible.builtin.set_fact:
     file_sd_files: "{{ prometheus_scrape_configs | json_query('[*][].file_sd_configs[*][].files[]') }}"
 
 - name: Fail when file_sd targets are not defined in scrape_configs
-  fail:
+  ansible.builtin.fail:
     msg: >
       Oh, snap! `{{ item.key }}` couldn't be found in your scrape configs. Please ensure you provided
       all targets from prometheus_targets in prometheus_scrape_configs
@@ -64,7 +64,7 @@
   with_dict: "{{ prometheus_targets }}"
 
 - name: Alert when prometheus_alertmanager_config is empty, but prometheus_alert_rules is specified
-  debug:
+  ansible.builtin.debug:
     msg: >
       No alertmanager configuration was specified. If you want your alerts to be sent make sure to
       specify a prometheus_alertmanager_config in defaults/main.yml.
@@ -74,14 +74,14 @@
 
 - block:
     - name: Get latest release
-      uri:
+      ansible.builtin.uri:
         url: "https://api.github.com/repos/prometheus/prometheus/releases/latest"
         method: GET
         return_content: true
         status_code: 200
         body_format: json
         validate_certs: false
-        user: "{{ lookup('env', 'GH_USER') | default(omit) }}"
+        ansible.builtin.user: "{{ lookup('env', 'GH_USER') | default(omit) }}"
         password: "{{ lookup('env', 'GH_TOKEN') | default(omit) }}"
       no_log: "{{ not lookup('env', 'ANSIBLE_DEBUG') | bool }}"
       register: _latest_release
@@ -89,7 +89,7 @@
       retries: 5
 
     - name: "Set prometheus version to {{ _latest_release.json.tag_name[1:] }}"
-      set_fact:
+      ansible.builtin.set_fact:
         prometheus_version: "{{ _latest_release.json.tag_name[1:] }}"
   when:
     - prometheus_version == "latest"
@@ -98,12 +98,12 @@
 
 - block:
     - name: "Get checksum list"
-      set_fact:
+      ansible.builtin.set_fact:
         __prometheus_checksums: "{{ lookup('url', 'https://github.com/prometheus/prometheus/releases/download/v' + prometheus_version + '/sha256sums.txt', wantlist=True) | list }}"
       run_once: true
 
     - name: "Get checksum for {{ go_arch }} architecture"
-      set_fact:
+      ansible.builtin.set_fact:
         __prometheus_checksum: "{{ item.split(' ')[0] }}"
       with_items: "{{ __prometheus_checksums }}"
       when:

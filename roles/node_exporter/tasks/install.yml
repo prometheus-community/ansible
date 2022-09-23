@@ -1,13 +1,13 @@
 ---
 - name: Create the node_exporter group
-  group:
+  ansible.builtin.group:
     name: "{{ _node_exporter_system_group }}"
     state: present
     system: true
   when: _node_exporter_system_group != "root"
 
 - name: Create the node_exporter user
-  user:
+  ansible.builtin.user:
     name: "{{ _node_exporter_system_user }}"
     groups: "{{ _node_exporter_system_group }}"
     append: true
@@ -20,7 +20,7 @@
 - block:
     - name: Download node_exporter binary to local folder
       become: false
-      get_url:
+      ansible.builtin.get_url:
         url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ node_exporter_checksum }}"
@@ -34,7 +34,7 @@
 
     - name: Unpack node_exporter binary
       become: false
-      unarchive:
+      ansible.builtin.unarchive:
         src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp"
         creates: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
@@ -42,22 +42,22 @@
       check_mode: false
 
     - name: Propagate node_exporter binaries
-      copy:
+      ansible.builtin.copy:
         src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
         dest: "{{ _node_exporter_binary_install_dir }}/node_exporter"
         mode: 0755
         owner: root
-        group: root
+        ansible.builtin.group: root
       notify: restart node_exporter
       when: not ansible_check_mode
   when: node_exporter_binary_local_dir | length == 0
 
 - name: propagate locally distributed node_exporter binary
-  copy:
+  ansible.builtin.copy:
     src: "{{ node_exporter_binary_local_dir }}/node_exporter"
     dest: "{{ _node_exporter_binary_install_dir }}/node_exporter"
     mode: 0755
     owner: root
-    group: root
+    ansible.builtin.group: root
   when: node_exporter_binary_local_dir | length > 0
   notify: restart node_exporter

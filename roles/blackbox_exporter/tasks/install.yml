@@ -1,21 +1,21 @@
 ---
-- name: create blackbox_exporter system group
-  group:
+- name: Create blackbox_exporter system group
+  ansible.builtin.group:
     name: blackbox-exp
     system: true
     state: present
 
-- name: create blackbox_exporter system user
-  user:
+- name: Create blackbox_exporter system user
+  ansible.builtin.user:
     name: blackbox-exp
     system: true
     shell: "/usr/sbin/nologin"
-    group: blackbox-exp
+    ansible.builtin.group: blackbox-exp
     createhome: false
 
 - name: download blackbox exporter binary to local folder
   become: false
-  unarchive:
+  ansible.builtin.unarchive:
     src: "https://github.com/prometheus/blackbox_exporter/releases/download/v{{ blackbox_exporter_version }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
     dest: "/tmp"
     remote_src: true
@@ -28,17 +28,17 @@
   check_mode: false
 
 - name: propagate blackbox exporter binary
-  copy:
+  ansible.builtin.copy:
     src: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/blackbox_exporter"
     dest: "/usr/local/bin/blackbox_exporter"
     mode: 0750
     owner: blackbox-exp
-    group: blackbox-exp
+    ansible.builtin.group: blackbox-exp
   notify:
     - restart blackbox exporter
 
 - name: Install libcap on Debian systems
-  package:
+  ansible.builtin.package:
     name: "libcap2-bin"
     state: present
   register: _download_packages
@@ -48,13 +48,13 @@
   when: ansible_os_family | lower == "debian"
 
 - name: Ensure blackbox exporter binary has cap_net_raw capability
-  capabilities:
+  community.general.capabilities:
     path: '/usr/local/bin/blackbox_exporter'
     capability: cap_net_raw+ep
     state: present
   when: not ansible_check_mode
 
 - name: Check Debug Message
-  debug:
+  ansible.builtin.debug:
     msg: "The capabilities module is skipped during check mode, as the file may not exist, causing execution to fail."
   when: ansible_check_mode

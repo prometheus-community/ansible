@@ -7,9 +7,9 @@
     # flag features in the systemd service file.
     version: 2.25.2
   tasks:
-    - name: download prometheus binary to local folder
+    - name: Download prometheus binary to local folder
       become: false
-      get_url:
+      ansible.builtin.get_url:
         url: "https://github.com/prometheus/prometheus/releases/download/v{{ version }}/prometheus-{{ version }}.linux-amd64.tar.gz"
         dest: "/tmp/prometheus-{{ version }}.linux-amd64.tar.gz"
       register: _download_archive
@@ -21,7 +21,7 @@
 
     - name: unpack prometheus binaries
       become: false
-      unarchive:
+      ansible.builtin.unarchive:
         src: "/tmp/prometheus-{{ version }}.linux-amd64.tar.gz"
         dest: "/tmp"
         creates: "/tmp/prometheus-{{ version }}.linux-amd64/prometheus"
@@ -30,7 +30,7 @@
 
     - name: link to prometheus binaries directory
       become: false
-      file:
+      ansible.builtin.file:
         src: "/tmp/prometheus-{{ version }}.linux-amd64"
         dest: "/tmp/prometheus-linux-amd64"
         state: link

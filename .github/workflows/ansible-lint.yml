@@ -9,7 +9,23 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install community.crypto
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 3
+          command: ansible-galaxy collection install 'community.crypto' -p /github/home/.ansible/collections/
+
+      - name: Install community.general
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 3
+          command: ansible-galaxy collection install 'community.general' -p /github/home/.ansible/collections/
+
       - name: Lint roles
         uses: ansible-community/ansible-lint-action@v6
+        env:
+          ANSIBLE_COLLECTIONS_PATH: ansible_collections
         with:
           path: roles

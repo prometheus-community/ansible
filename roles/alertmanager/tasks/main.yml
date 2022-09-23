@@ -21,9 +21,9 @@
   tags:
     - alertmanager_configure
 
-- name: ensure alertmanager service is started and enabled
+- name: Ensure alertmanager service is started and enabled
   become: true
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
     name: alertmanager
     state: started
@@ -32,4 +32,4 @@
     - alertmanager_run
 
 - name: Flush alertmangaer handlers after run.
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers

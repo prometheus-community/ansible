@@ -1,6 +1,6 @@
 ---
 - name: Install selinux python packages [RHEL]
-  package:
+  ansible.builtin.package:
     name:
       - "{{ ( (ansible_facts.distribution_major_version | int) < 8) | ternary('libselinux-python','python3-libselinux') }}"
       - "{{ ( (ansible_facts.distribution_major_version | int) < 8) | ternary('policycoreutils-python','python3-policycoreutils') }}"
@@ -14,7 +14,7 @@
       (ansible_distribution | lower == "centos")
 
 - name: Install selinux python packages [Fedora]
-  package:
+  ansible.builtin.package:
     name:
       - "{{ ( (ansible_facts.distribution_major_version | int) < 29) | ternary('libselinux-python','python3-libselinux') }}"
       - "{{ ( (ansible_facts.distribution_major_version | int) < 29) | ternary('policycoreutils-python','python3-policycoreutils') }}"
@@ -28,7 +28,7 @@
     - ansible_distribution | lower == "fedora"
 
 - name: Install selinux python packages [clearlinux]
-  package:
+  ansible.builtin.package:
     name: sysadmin-basic
     state: present
   register: _install_selinux_packages
