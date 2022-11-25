@@ -1,17 +1,24 @@
 ---
-- include: preflight.yml
+- name: Preflight
+  ansible.builtin.include_tasks: preflight.yml
   tags:
     - blackbox_exporter_install
     - blackbox_exporter_configure
     - blackbox_exporter_run
 
-- include: install.yml
-  become: true
+- name: Install
+  ansible.builtin.include_tasks:
+    file: install.yml
+    apply:
+      become: true
   tags:
     - blackbox_exporter_install
 
-- include: configure.yml
-  become: true
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yml
+    apply:
+      become: true
   tags:
     - blackbox_exporter_configure
 

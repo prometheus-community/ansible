@@ -45,7 +45,7 @@
         __alertmanager_checksums: "{{ lookup('url', 'https://github.com/prometheus/alertmanager/releases/download/v' + alertmanager_version + '/sha256sums.txt', wantlist=True) | list }}"
       run_once: true
 
-    - name: "Get checksum for {{ go_arch }} architecture"
+    - name: "Get checksum for {{ go_arch }}"
       ansible.builtin.set_fact:
         __alertmanager_checksum: "{{ item.split(' ')[0] }}"
       with_items: "{{ __alertmanager_checksums }}"

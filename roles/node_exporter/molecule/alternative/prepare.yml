@@ -41,11 +41,11 @@
         name: "pyOpenSSL"
 
     - name: Create private key
-      community.crypto.x509_privatekey:
+      community.crypto.openssl_privatekey:
         path: "/tmp/tls.key"
 
     - name: Create CSR
-      community.crypto.x509_csr:
+      community.crypto.openssl_csr:
         path: "/tmp/tls.csr"
         privatekey_path: "/tmp/tls.key"
 
