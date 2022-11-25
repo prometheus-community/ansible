@@ -27,7 +27,9 @@
       - "item not in node_exporter_enabled_collectors"
   with_items: "{{ node_exporter_disabled_collectors }}"
 
-- block:
+- name: Assert that TLS config is correct
+  when: node_exporter_tls_server_config | length > 0
+  block:
     - name: Assert that TLS key and cert path are set
       ansible.builtin.assert:
         that:
@@ -49,7 +51,6 @@
         that:
           - "{{ __node_exporter_cert_file.stat.exists }}"
           - "{{ __node_exporter_key_file.stat.exists }}"
-  when: node_exporter_tls_server_config | length > 0
 
 - name: Check if node_exporter is installed
   ansible.builtin.stat:
@@ -71,7 +72,13 @@
     - node_exporter_install
     - skip_ansible_lint
 
-- block:
+- name: Discover latest version
+  when:
+    - node_exporter_version == "latest"
+    - node_exporter_binary_local_dir | length == 0
+  delegate_to: localhost
+  run_once: true
+  block:
     - name: Get latest release
       ansible.builtin.uri:
         url: "https://api.github.com/repos/prometheus/node_exporter/releases/latest"
@@ -89,23 +96,19 @@
     - name: "Set node_exporter version to {{ _latest_release.json.tag_name[1:] }}"
       ansible.builtin.set_fact:
         node_exporter_version: "{{ _latest_release.json.tag_name[1:] }}"
-  when:
-    - node_exporter_version == "latest"
-    - node_exporter_binary_local_dir | length == 0
-  delegate_to: localhost
-  run_once: true
 
-- block:
+- name: Get node_exporter binary checksum
+  delegate_to: localhost
+  when: node_exporter_binary_local_dir | length == 0
+  block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:
         _checksums: "{{ lookup('url', 'https://github.com/prometheus/node_exporter/releases/download/v' + node_exporter_version + '/sha256sums.txt', wantlist=True) | list }}"
       run_once: true
 
-    - name: "Get checksum for {{ go_arch }} architecture"
+    - name: "Get checksum for {{ go_arch }}"
       ansible.builtin.set_fact:
         node_exporter_checksum: "{{ item.split(' ')[0] }}"
       with_items: "{{ _checksums }}"
       when:
         - "('linux-' + go_arch + '.tar.gz') in item"
-  delegate_to: localhost
-  when: node_exporter_binary_local_dir | length == 0

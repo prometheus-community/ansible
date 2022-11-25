@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: Converge
+  hosts: all
   roles:
     - snmp_exporter
   vars:

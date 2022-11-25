@@ -11,11 +11,14 @@
         state: directory
         owner: root
         group: root
+        mode: 0755
+
     - name: Copy cert and key
       ansible.builtin.copy:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
-      with_items:
+        mode: "{{ item.mode | default(0644) }}"
+      loop:
         - src: "/tmp/tls.cert"
           dest: "{{ node_exporter_tls_server_config.cert_file }}"
         - src: "/tmp/tls.key"

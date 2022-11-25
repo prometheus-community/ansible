@@ -1,31 +1,18 @@
 ---
-name: Ansible Lint # feel free to pick your own name
+name: Ansible Lint
 on: [push, pull_request]
 
+env:
+  ANSIBLE_FORCE_COLOR: true
+
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Install community.crypto
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 3
-          max_attempts: 3
-          command: ansible-galaxy collection install 'community.crypto' -p /github/home/.ansible/collections/
-
-      - name: Install community.general
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 3
-          max_attempts: 3
-          command: ansible-galaxy collection install 'community.general' -p /github/home/.ansible/collections/
+      - uses: actions/checkout@v3
 
       - name: Lint roles
-        uses: ansible-community/ansible-lint-action@v6
-        env:
-          ANSIBLE_COLLECTIONS_PATH: ansible_collections
+        uses: ansible/ansible-lint-action@main
         with:
           path: roles

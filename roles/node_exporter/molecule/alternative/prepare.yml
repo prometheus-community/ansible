@@ -9,8 +9,10 @@
     - name: Download node_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/
+              node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        mode: 0644
       register: _download_binary
       until: _download_binary is succeeded
       retries: 5
@@ -27,7 +29,7 @@
       run_once: true
       check_mode: false
 
-    - name: link to node_exporter binaries directory
+    - name: Link to node_exporter binaries directory
       become: false
       ansible.builtin.file:
         src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-amd64"
@@ -36,7 +38,7 @@
       run_once: true
       check_mode: false
 
-    - name: install pyOpenSSL for certificate generation
+    - name: Install pyOpenSSL for certificate generation
       ansible.builtin.pip:
         name: "pyOpenSSL"
 
@@ -50,7 +52,7 @@
         privatekey_path: "/tmp/tls.key"
 
     - name: Create certificate
-      community.crypto.openssl_certificate:
+      community.crypto.x509_certificate:
         path: "/tmp/tls.cert"
         csr_path: "/tmp/tls.csr"
         privatekey_path: "/tmp/tls.key"

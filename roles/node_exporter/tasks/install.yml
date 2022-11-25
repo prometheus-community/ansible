@@ -17,11 +17,15 @@
     home: /
   when: _node_exporter_system_user != "root"
 
-- block:
+- name: Discover latest version
+  when: node_exporter_binary_local_dir | length == 0
+  block:
+
     - name: Download node_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/
+              node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ node_exporter_checksum }}"
         mode: '0644'
@@ -50,9 +54,8 @@
         ansible.builtin.group: root
       notify: restart node_exporter
       when: not ansible_check_mode
-  when: node_exporter_binary_local_dir | length == 0
 
-- name: propagate locally distributed node_exporter binary
+- name: Propagate locally distributed node_exporter binary
   ansible.builtin.copy:
     src: "{{ node_exporter_binary_local_dir }}/node_exporter"
     dest: "{{ _node_exporter_binary_install_dir }}/node_exporter"

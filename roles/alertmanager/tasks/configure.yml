@@ -1,5 +1,5 @@
 ---
-- name: copy amtool config
+- name: Copy amtool config
   ansible.builtin.template:
     force: true
     src: "{{ alertmanager_amtool_config_file }}"
@@ -8,7 +8,7 @@
     ansible.builtin.group: alertmanager
     mode: 0644
 
-- name: copy alertmanager config
+- name: Copy alertmanager config
   ansible.builtin.template:
     force: true
     src: "{{ alertmanager_config_file }}"
@@ -30,7 +30,7 @@
   notify:
     - restart alertmanager
 
-- name: copy alertmanager template files
+- name: Copy alertmanager template files
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ alertmanager_config_dir }}/templates/"
