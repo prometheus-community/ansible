@@ -2,6 +2,9 @@
 name: Ansible Lint
 on: [push, pull_request]
 
+env:
+  ANSIBLE_FORCE_COLOR: true
+
 jobs:
   lint:
     runs-on: ubuntu-latest
