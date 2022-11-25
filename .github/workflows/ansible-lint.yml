@@ -11,7 +11,5 @@ jobs:
 
       - name: Lint roles
         uses: ansible/ansible-lint-action@main
-        env:
-          ANSIBLE_COLLECTIONS_PATH: ansible_collections
         with:
           path: roles
