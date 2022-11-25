@@ -16,10 +16,12 @@
 - name: Download blackbox exporter binary to local folder
   become: false
   ansible.builtin.unarchive:
-    src: "https://github.com/prometheus/blackbox_exporter/releases/download/v{{ blackbox_exporter_version }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
+    src: "https://github.com/prometheus/blackbox_exporter/releases/download/v{{ blackbox_exporter_version }}/
+          blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
     dest: "/tmp"
     remote_src: true
-    creates: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/blackbox_exporter"
+    creates: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/
+              blackbox_exporter"
   register: _download_binary
   until: _download_binary is succeeded
   retries: 5
@@ -29,7 +31,8 @@
 
 - name: Propagate blackbox exporter binary
   ansible.builtin.copy:
-    src: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/blackbox_exporter"
+    src: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/
+          blackbox_exporter"
     dest: "/usr/local/bin/blackbox_exporter"
     mode: 0750
     owner: blackbox-exp

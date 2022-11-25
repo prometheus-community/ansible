@@ -72,7 +72,13 @@
     - prometheus_alertmanager_config == []
     - prometheus_alert_rules != []
 
-- block:
+- name: Discover latest version
+  when:
+    - prometheus_version == "latest"
+    - prometheus_binary_local_dir | length == 0
+    - not prometheus_skip_install
+  block:
+
     - name: Get latest release
       ansible.builtin.uri:
         url: "https://api.github.com/repos/prometheus/prometheus/releases/latest"
@@ -91,12 +97,13 @@
     - name: "Set prometheus version to {{ _latest_release.json.tag_name[1:] }}"
       ansible.builtin.set_fact:
         prometheus_version: "{{ _latest_release.json.tag_name[1:] }}"
+
+- name: Get prometheus binary checksum
+  delegate_to: localhost
   when:
-    - prometheus_version == "latest"
     - prometheus_binary_local_dir | length == 0
     - not prometheus_skip_install
-
-- block:
+  block:
     - name: "Get checksum list"
       ansible.builtin.set_fact:
         __prometheus_checksums: "{{ lookup('url', 'https://github.com/prometheus/prometheus/releases/download/v' + prometheus_version + '/sha256sums.txt', wantlist=True) | list }}"
@@ -108,7 +115,3 @@
       with_items: "{{ __prometheus_checksums }}"
       when:
         - "('linux-' + go_arch + '.tar.gz') in item"
-  delegate_to: localhost
-  when:
-    - prometheus_binary_local_dir | length == 0
-    - not prometheus_skip_install

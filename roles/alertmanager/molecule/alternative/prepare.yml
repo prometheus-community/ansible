@@ -11,6 +11,7 @@
       ansible.builtin.get_url:
         url: "https://github.com/prometheus/alertmanager/releases/download/v{{ version }}/alertmanager-{{ version }}.linux-amd64.tar.gz"
         dest: "/tmp/alertmanager-{{ version }}.linux-amd64.tar.gz"
+        mode: 0644
       register: _download_archive
       until: _download_archive is succeeded
       retries: 5

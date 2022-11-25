@@ -12,6 +12,7 @@
       ansible.builtin.get_url:
         url: "https://github.com/prometheus/prometheus/releases/download/v{{ version }}/prometheus-{{ version }}.linux-amd64.tar.gz"
         dest: "/tmp/prometheus-{{ version }}.linux-amd64.tar.gz"
+        mode: 0644
       register: _download_archive
       until: _download_archive is succeeded
       retries: 5
