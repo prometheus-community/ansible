@@ -19,7 +19,7 @@
       run_once: true
       check_mode: false
 
-    - name: unpack prometheus binaries
+    - name: Unpack prometheus binaries
       become: false
       ansible.builtin.unarchive:
         src: "/tmp/prometheus-{{ version }}.linux-amd64.tar.gz"
@@ -28,7 +28,7 @@
       run_once: true
       check_mode: false
 
-    - name: link to prometheus binaries directory
+    - name: Link to prometheus binaries directory
       become: false
       ansible.builtin.file:
         src: "/tmp/prometheus-{{ version }}.linux-amd64"

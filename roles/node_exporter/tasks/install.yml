@@ -52,7 +52,7 @@
       when: not ansible_check_mode
   when: node_exporter_binary_local_dir | length == 0
 
-- name: propagate locally distributed node_exporter binary
+- name: Propagate locally distributed node_exporter binary
   ansible.builtin.copy:
     src: "{{ node_exporter_binary_local_dir }}/node_exporter"
     dest: "{{ _node_exporter_binary_install_dir }}/node_exporter"

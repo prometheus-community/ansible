@@ -26,8 +26,11 @@
     - "{{ alertmanager_db_dir }}"
     - "{{ _alertmanager_amtool_config_dir }}"
 
-- block:
-    - name: download alertmanager binary to local folder
+- name: Get alertmanager binary
+  when: alertmanager_binary_local_dir | length == 0
+  block:
+
+    - name: Download alertmanager binary to local folder
       become: false
       ansible.builtin.get_url:
         url: "https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
@@ -37,11 +40,11 @@
       until: _download_archive is succeeded
       retries: 5
       delay: 2
-      # run_once: true # <-- this can't be set due to multi-arch support
+      # run_once: true  # <-- this can't be set due to multi-arch support
       delegate_to: localhost
       check_mode: false
 
-    - name: unpack alertmanager binaries
+    - name: Unpack alertmanager binaries
       become: false
       ansible.builtin.unarchive:
         src: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
@@ -51,7 +54,7 @@
       delegate_to: localhost
       check_mode: false
 
-    - name: propagate official alertmanager and amtool binaries
+    - name: Propagate official alertmanager and amtool binaries
       ansible.builtin.copy:
         src: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}/{{ item }}"
         dest: "{{ _alertmanager_binary_install_dir }}/{{ item }}"
@@ -63,9 +66,8 @@
         - amtool
       notify:
         - restart alertmanager
-  when: alertmanager_binary_local_dir | length == 0
 
-- name: propagate locally distributed alertmanager and amtool binaries
+- name: Propagate locally distributed alertmanager and amtool binaries
   ansible.builtin.copy:
     src: "{{ alertmanager_binary_local_dir }}/{{ item }}"
     dest: "{{ _alertmanager_binary_install_dir }}/{{ item }}"

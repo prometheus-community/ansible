@@ -34,8 +34,13 @@
     - "{{ prometheus_config_dir }}/rules"
     - "{{ prometheus_config_dir }}/file_sd"
 
-- block:
-    - name: download prometheus binary to local folder
+- name: Get prometheus binary
+  when:
+    - prometheus_binary_local_dir | length == 0
+    - not prometheus_skip_install
+  block:
+
+    - name: Download prometheus binary to local folder
       become: false
       ansible.builtin.get_url:
         url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
@@ -49,7 +54,7 @@
       delegate_to: localhost
       check_mode: false
 
-    - name: unpack prometheus binaries
+    - name: Unpack prometheus binaries
       become: false
       ansible.builtin.unarchive:
         src: "/tmp/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
@@ -58,7 +63,7 @@
       delegate_to: localhost
       check_mode: false
 
-    - name: propagate official prometheus and promtool binaries
+    - name: Propagate official prometheus and promtool binaries
       ansible.builtin.copy:
         src: "/tmp/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}/{{ item }}"
         dest: "{{ _prometheus_binary_install_dir }}/{{ item }}"
@@ -71,7 +76,7 @@
       notify:
         - restart prometheus
 
-    - name: propagate official console templates
+    - name: Propagate official console templates
       ansible.builtin.copy:
         src: "/tmp/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}/{{ item }}/"
         dest: "{{ prometheus_config_dir }}/{{ item }}/"
@@ -83,11 +88,8 @@
         - consoles
       notify:
         - restart prometheus
-  when:
-    - prometheus_binary_local_dir | length == 0
-    - not prometheus_skip_install
 
-- name: propagate locally distributed prometheus and promtool binaries
+- name: Propagate locally distributed prometheus and promtool binaries
   ansible.builtin.copy:
     src: "{{ prometheus_binary_local_dir }}/{{ item }}"
     dest: "{{ _prometheus_binary_install_dir }}/{{ item }}"
@@ -115,9 +117,8 @@
 
 - name: Install SELinux dependencies
   ansible.builtin.package:
-    name: "{{ item }}"
+    name: "{{ _prometheus_selinux_packages }}"
     state: present
-  with_items: "{{ prometheus_selinux_packages }}"
   register: _install_packages
   until: _install_packages is succeeded
   retries: 5

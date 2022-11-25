@@ -9,7 +9,7 @@
   notify:
     - restart blackbox exporter
 
-- name: configure blackbox exporter
+- name: Configure blackbox exporter
   ansible.builtin.template:
     src: blackbox_exporter.yml.j2
     dest: /etc/blackbox_exporter.yml

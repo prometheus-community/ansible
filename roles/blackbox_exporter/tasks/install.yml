@@ -13,7 +13,7 @@
     ansible.builtin.group: blackbox-exp
     createhome: false
 
-- name: download blackbox exporter binary to local folder
+- name: Download blackbox exporter binary to local folder
   become: false
   ansible.builtin.unarchive:
     src: "https://github.com/prometheus/blackbox_exporter/releases/download/v{{ blackbox_exporter_version }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
@@ -27,7 +27,7 @@
   delegate_to: localhost
   check_mode: false
 
-- name: propagate blackbox exporter binary
+- name: Propagate blackbox exporter binary
   ansible.builtin.copy:
     src: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/blackbox_exporter"
     dest: "/usr/local/bin/blackbox_exporter"
