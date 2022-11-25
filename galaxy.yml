@@ -1,3 +1,4 @@
+---
 ### REQUIRED
 # The namespace of the collection. This can be a company/brand/organization or product namespace under which all
 # content lives. May only contain alphanumeric lowercase characters and underscores. Namespaces cannot start with
@@ -27,7 +28,9 @@ tags:
 # collection label 'namespace.name'. The value is a version range
 # L(specifiers,https://python-semanticversion.readthedocs.io/en/latest/#requirement-specification). Multiple version
 # range specifiers can be set and are separated by ','
-dependencies: {}
+dependencies:
+  community.crypto: '>=2.0.0'
+  community.general: '>=1.0.0'
 
 repository: https://github.com/prometheus-community/ansible
 documentation: https://github.com/prometheus-community/ansible/blob/main/docs

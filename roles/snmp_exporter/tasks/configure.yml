@@ -1,21 +1,21 @@
 ---
 - name: Copy the SNMP Exporter systemd service file
-  template:
+  ansible.builtin.template:
     src: snmp_exporter.service.j2
     dest: /etc/systemd/system/snmp_exporter.service
     owner: root
-    group: root
+    ansible.builtin.group: root
     mode: 0644
   notify:
     - restart snmp exporter
 
 - name: Download snmp configuration file from github repository
-  get_url:
+  ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/prometheus/snmp_exporter/v{{ snmp_exporter_version }}/snmp.yml"
     dest: /etc/snmp_exporter/snmp.yml
     validate_certs: false
     owner: root
-    group: root
+    ansible.builtin.group: root
     mode: 0644
   register: _download_config
   until: _download_config is success
@@ -26,11 +26,11 @@
   when: snmp_exporter_config_file == ""
 
 - name: Copy configuration file
-  template:
+  ansible.builtin.template:
     src: "{{ snmp_exporter_config_file }}"
     dest: /etc/snmp_exporter/snmp.yml
     owner: root
-    group: root
+    ansible.builtin.group: root
     mode: 0644
   no_log: "{{ 'true' if __testing_on_travis is defined else 'false' }}"
   notify:

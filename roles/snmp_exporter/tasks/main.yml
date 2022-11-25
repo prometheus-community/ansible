@@ -1,23 +1,30 @@
 ---
-- include: preflight.yml
+- name: Preflight
+  ansible.builtin.include_tasks: preflight.yml
   tags:
     - snmp_exporter_install
     - snmp_exporter_configure
     - snmp_exporter_run
 
-- include: install.yml
-  become: true
+- name: Install
+  ansible.builtin.include_tasks:
+    file: install.yml
+    apply:
+      become: true
   tags:
     - snmp_exporter_install
 
-- include: configure.yml
-  become: true
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yml
+    apply:
+      become: true
   tags:
     - snmp_exporter_configure
 
-- name: ensure snmp_exporter service is started and enabled
+- name: Ensure snmp_exporter service is started and enabled
   become: true
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
     name: snmp_exporter
     state: started

@@ -90,7 +90,7 @@ prometheus_static_targets_files:
   - prometheus/targets/*.yml
   - prometheus/targets/*.json
 
-prometheus_alert_rules:
+prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
   - alert: Watchdog
     expr: vector(1)
     for: 10m

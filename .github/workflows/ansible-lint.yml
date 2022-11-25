@@ -1,0 +1,18 @@
+---
+name: Ansible Lint
+on: [push, pull_request]
+
+env:
+  ANSIBLE_FORCE_COLOR: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Lint roles
+        uses: ansible/ansible-lint-action@main
+        with:
+          path: roles

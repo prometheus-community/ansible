@@ -3,19 +3,22 @@
   hosts: all
   any_errors_fatal: true
   roles:
-    - cloudalchemy.node_exporter
+    - node_exporter
   pre_tasks:
     - name: Create node_exporter cert dir
-      file:
+      ansible.builtin.file:
         path: "{{ node_exporter_tls_server_config.cert_file | dirname }}"
         state: directory
         owner: root
         group: root
+        mode: 0755
+
     - name: Copy cert and key
-      copy:
+      ansible.builtin.copy:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
-      with_items:
+        mode: "{{ item.mode | default(0644) }}"
+      loop:
         - src: "/tmp/tls.cert"
           dest: "{{ node_exporter_tls_server_config.cert_file }}"
         - src: "/tmp/tls.key"

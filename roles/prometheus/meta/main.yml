@@ -16,19 +16,19 @@ galaxy_info:
         - buster
     - name: EL
       versions:
-        - 7
-        - 8
+        - '7'
+        - '8'
     - name: Fedora
       versions:
-        - 30
-        - 31
+        - '30'
+        - '31'
   galaxy_tags:
-  - monitoring
-  - prometheus
-  - metrics
-  - alerts
-  - alerting
-  - molecule
-  - cloud
+    - monitoring
+    - prometheus
+    - metrics
+    - alerts
+    - alerting
+    - molecule
+    - cloud
 
 dependencies: []
