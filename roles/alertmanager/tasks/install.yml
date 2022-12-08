@@ -10,7 +10,7 @@
     name: alertmanager
     system: true
     shell: "/usr/sbin/nologin"
-    ansible.builtin.group: alertmanager
+    group: alertmanager
     createhome: false
 
 - name: Create alertmanager directories
@@ -18,7 +18,7 @@
     path: "{{ item }}"
     state: directory
     owner: alertmanager
-    ansible.builtin.group: alertmanager
+    group: alertmanager
     mode: 0755
   with_items:
     - "{{ alertmanager_config_dir }}"
@@ -62,7 +62,7 @@
         dest: "{{ _alertmanager_binary_install_dir }}/{{ item }}"
         mode: 0755
         owner: root
-        ansible.builtin.group: root
+        group: root
       with_items:
         - alertmanager
         - amtool
@@ -75,7 +75,7 @@
     dest: "{{ _alertmanager_binary_install_dir }}/{{ item }}"
     mode: 0755
     owner: root
-    ansible.builtin.group: root
+    group: root
   with_items:
     - alertmanager
     - amtool

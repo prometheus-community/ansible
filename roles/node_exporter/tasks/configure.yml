@@ -4,7 +4,7 @@
     src: node_exporter.service.j2
     dest: /etc/systemd/system/node_exporter.service
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0644
   notify: restart node_exporter
 
@@ -19,7 +19,7 @@
         path: "/etc/node_exporter"
         state: directory
         owner: root
-        ansible.builtin.group: root
+        group: root
         mode: u+rwX,g+rwX,o=rX
 
     - name: Copy the node_exporter config file
@@ -27,7 +27,7 @@
         src: config.yaml.j2
         dest: /etc/node_exporter/config.yaml
         owner: root
-        ansible.builtin.group: root
+        group: root
         mode: 0644
       notify: restart node_exporter
 
@@ -36,7 +36,7 @@
     path: "{{ node_exporter_textfile_dir }}"
     state: directory
     owner: "{{ _node_exporter_system_user }}"
-    ansible.builtin.group: "{{ _node_exporter_system_group }}"
+    group: "{{ _node_exporter_system_group }}"
     recurse: true
     mode: u+rwX,g+rwX,o=rX
   when: node_exporter_textfile_dir | length > 0
