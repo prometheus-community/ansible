@@ -1,5 +1,5 @@
 ---
-- name: "Get checksum for {{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
+- name: "Get checksum for snmp exporter"
   ansible.builtin.set_fact:
     snmp_exporter_checksum: "{{ item.split(' ')[0] }}"
   with_items:

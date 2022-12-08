@@ -130,7 +130,7 @@
     - ansible_selinux.status == "enabled"
 
 - name: Allow prometheus to bind to port in SELinux
-  ansible.builtin.seport:
+  community.general.seport:
     ports: "{{ prometheus_web_listen_address.split(':')[1] }}"
     proto: tcp
     setype: http_port_t
