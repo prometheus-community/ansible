@@ -17,7 +17,6 @@
       until: _download_archive is succeeded
       retries: 5
       delay: 2
-      run_once: true
       check_mode: false
 
     - name: Unpack prometheus binaries
@@ -26,7 +25,6 @@
         src: "/tmp/prometheus-{{ version }}.linux-amd64.tar.gz"
         dest: "/tmp"
         creates: "/tmp/prometheus-{{ version }}.linux-amd64/prometheus"
-      run_once: true
       check_mode: false
 
     - name: Link to prometheus binaries directory
@@ -35,5 +33,4 @@
         src: "/tmp/prometheus-{{ version }}.linux-amd64"
         dest: "/tmp/prometheus-linux-amd64"
         state: link
-      run_once: true
       check_mode: false

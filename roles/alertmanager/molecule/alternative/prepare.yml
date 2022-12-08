@@ -16,7 +16,6 @@
       until: _download_archive is succeeded
       retries: 5
       delay: 2
-      run_once: true
       check_mode: false
 
     - name: Unpack alertmanager binaries
@@ -25,7 +24,6 @@
         src: "/tmp/alertmanager-{{ version }}.linux-amd64.tar.gz"
         dest: "/tmp"
         creates: "/tmp/alertmanager-{{ version }}.linux-amd64/alertmanager"
-      run_once: true
       check_mode: false
 
     - name: Link to alertmanager binaries directory
@@ -34,5 +32,4 @@
         src: "/tmp/alertmanager-{{ version }}.linux-amd64"
         dest: "/tmp/alertmanager-linux-amd64"
         state: link
-      run_once: true
       check_mode: false
