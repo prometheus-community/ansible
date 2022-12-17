@@ -36,5 +36,5 @@
     path: "/etc/snmp_exporter"
     state: directory
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0755

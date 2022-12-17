@@ -51,7 +51,7 @@
         dest: "{{ _node_exporter_binary_install_dir }}/node_exporter"
         mode: 0755
         owner: root
-        ansible.builtin.group: root
+        group: root
       notify: restart node_exporter
       when: not ansible_check_mode
 
@@ -61,6 +61,6 @@
     dest: "{{ _node_exporter_binary_install_dir }}/node_exporter"
     mode: 0755
     owner: root
-    ansible.builtin.group: root
+    group: root
   when: node_exporter_binary_local_dir | length > 0
   notify: restart node_exporter

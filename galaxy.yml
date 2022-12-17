@@ -1,46 +1,34 @@
 ---
-### REQUIRED
-# The namespace of the collection. This can be a company/brand/organization or product namespace under which all
-# content lives. May only contain alphanumeric lowercase characters and underscores. Namespaces cannot start with
-# underscores or numbers and cannot contain consecutive underscores
 namespace: prometheus
 name: prometheus
 version: 0.0.1
 
 readme: README.md
 authors:
-- Ben Kochie (https://github.com/SuperQ)
-- Paweł Krupa (https://github.com/paulfantom)
+  - "Ben Kochie (https://github.com/SuperQ)"
+  - "Paweł Krupa (https://github.com/paulfantom)"
 
-description: your collection description
+description: "Ansible Collection for Prometheus"
 license_file: LICENSE
 tags:
-- observability
-- o11y
-- monitoring
-- prometheus
-- metrics
-- alerts
-- alerting
-- cloud
+  - observability
+  - o11y
+  - monitoring
+  - prometheus
+  - metrics
+  - alerts
+  - alerting
+  - cloud
 
-# Collections that this collection requires to be installed for it to be usable. The key of the dict is the
-# collection label 'namespace.name'. The value is a version range
-# L(specifiers,https://python-semanticversion.readthedocs.io/en/latest/#requirement-specification). Multiple version
-# range specifiers can be set and are separated by ','
 dependencies:
   community.crypto: '>=2.0.0'
   community.general: '>=1.0.0'
 
-repository: https://github.com/prometheus-community/ansible
-documentation: https://github.com/prometheus-community/ansible/blob/main/docs
-homepage: https://prometheus.io
-issues: https://github.com/prometheus-community/ansible/issues
+repository: "https://github.com/prometheus-community/ansible"
+documentation: "https://github.com/prometheus-community/ansible/blob/main/docs"
+homepage: "https://prometheus.io"
+issues: "https://github.com/prometheus-community/ansible/issues"
 
-# A list of file glob-like patterns used to filter any files or directories that should not be included in the build
-# artifact. A pattern is matched from the relative path of the file or directory of the collection directory. This
-# uses 'fnmatch' to match the files or directories. Some directories and files like 'galaxy.yml', '*.pyc', '*.retry',
-# and '.git' are always filtered
 build_ignore:
   - 'tests/*'
   - '*.tar.gz'

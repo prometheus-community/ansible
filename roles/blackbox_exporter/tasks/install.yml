@@ -10,7 +10,7 @@
     name: blackbox-exp
     system: true
     shell: "/usr/sbin/nologin"
-    ansible.builtin.group: blackbox-exp
+    group: blackbox-exp
     createhome: false
 
 - name: Download blackbox exporter binary to local folder
@@ -36,7 +36,7 @@
     dest: "/usr/local/bin/blackbox_exporter"
     mode: 0750
     owner: blackbox-exp
-    ansible.builtin.group: blackbox-exp
+    group: blackbox-exp
   notify:
     - restart blackbox exporter
 

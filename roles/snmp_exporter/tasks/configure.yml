@@ -4,7 +4,7 @@
     src: snmp_exporter.service.j2
     dest: /etc/systemd/system/snmp_exporter.service
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0644
   notify:
     - restart snmp exporter
@@ -15,7 +15,7 @@
     dest: /etc/snmp_exporter/snmp.yml
     validate_certs: false
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0644
   register: _download_config
   until: _download_config is success
@@ -30,7 +30,7 @@
     src: "{{ snmp_exporter_config_file }}"
     dest: /etc/snmp_exporter/snmp.yml
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0644
   no_log: "{{ 'true' if __testing_on_travis is defined else 'false' }}"
   notify:
