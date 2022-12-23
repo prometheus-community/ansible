@@ -62,8 +62,6 @@
 
 - name: Gather currently installed node_exporter version (if any)
   ansible.builtin.command: "{{ _node_exporter_binary_install_dir }}/node_exporter --version"
-  args:
-    warn: false
   changed_when: false
   register: __node_exporter_current_version_output
   check_mode: false
