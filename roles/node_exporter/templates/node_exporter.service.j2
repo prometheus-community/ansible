@@ -24,7 +24,11 @@ ExecStart={{ _node_exporter_binary_install_dir }}/node_exporter \
     --no-collector.{{ collector }} \
 {% endfor %}
 {% if node_exporter_tls_server_config | length > 0 or node_exporter_http_server_config | length > 0 or node_exporter_basic_auth_users | length > 0 %}
+    {% if node_exporter_version is version('1.5.0', '>=') %}
+    --web.config.file=/etc/node_exporter/config.yaml \
+    {% else %}
     --web.config=/etc/node_exporter/config.yaml \
+    {% endif %}
 {% endif %}
     --web.listen-address={{ node_exporter_web_listen_address }} \
     --web.telemetry-path={{ node_exporter_web_telemetry_path }}
