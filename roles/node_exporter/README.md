@@ -22,7 +22,7 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 
 | Name           | Default Value | Description                        |
 | -------------- | ------------- | -----------------------------------|
-| `node_exporter_version` | 1.1.2 | Node exporter package version. Also accepts latest as parameter. |
+| `node_exporter_version` | 1.5.0 | Node exporter package version. Also accepts latest as parameter. |
 | `node_exporter_binary_local_dir` | "" | Enables the use of local packages instead of those distributed on github. The parameter may be set to a directory where the `node_exporter` binary is stored on the host where ansible is run. This overrides the `node_exporter_version` parameter |
 | `node_exporter_web_listen_address` | "0.0.0.0:9100" | Address on which node exporter will listen |
 | `node_exporter_web_telemetry_path` | "/metrics" | Path under which to expose metrics |
