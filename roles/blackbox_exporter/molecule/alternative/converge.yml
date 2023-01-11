@@ -3,7 +3,7 @@
   hosts: all
   any_errors_fatal: true
   roles:
-    - blackbox_exporter
+    - prometheus.prometheus.blackbox_exporter
   vars:
     blackbox_exporter_web_listen_address: "127.0.0.1:9000"
     blackbox_exporter_cli_flags:

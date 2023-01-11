@@ -3,6 +3,6 @@
   hosts: all
   any_errors_fatal: true
   roles:
-    - prometheus
+    - prometheus.prometheus.prometheus
   vars:
     prometheus_version: latest

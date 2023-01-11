@@ -3,4 +3,4 @@
   hosts: all
   any_errors_fatal: true
   roles:
-    - blackbox_exporter
+    - prometheus.prometheus.blackbox_exporter

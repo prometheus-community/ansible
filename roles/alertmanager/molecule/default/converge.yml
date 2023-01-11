@@ -3,7 +3,7 @@
   hosts: all
   any_errors_fatal: true
   roles:
-    - alertmanager
+    - prometheus.prometheus.alertmanager
   vars:
     alertmanager_slack_api_url: "http://example.com"
     alertmanager_receivers:
