@@ -1,0 +1,52 @@
+---
+name: Ansible CI
+on: [push, pull_request]
+
+env:
+  ANSIBLE_FORCE_COLOR: true
+
+jobs:
+  ansible-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out codebase
+        uses: actions/checkout@v3
+      - name: Lint collection
+        uses: ansible/ansible-lint-action@main
+
+  ansible-test-sanity:
+    uses: ./.github/workflows/ansible-test-sanity.yml
+    needs: ansible-lint
+    with:
+      ansible-core-versions: '["stable-2.9","stable-2.10","stable-2.11","stable-2.12","stable-2.13","stable-2.14"]'
+
+  discover-ansible-tests:
+    runs-on: ubuntu-latest
+    needs: ansible-lint
+    outputs:
+      molecule-tests: ${{ steps.set-tests.outputs.ansible-test-molecule }}
+      integration-tests: ${{ steps.set-tests.outputs.ansible-test-integration }}
+    steps:
+      - name: Check out codebase
+        uses: actions/checkout@v3
+      - name: Discover tests
+        id: set-tests
+        run: |
+          echo ansible-test-molecule="[`for x in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -iname "molecule-*" -printf "%f\n"); do echo '{"test":\"'"${x}"'\","name":\"'"${x#*-}\"'"}'; done | tr '\n' ',' | sed '$s/,$//'`]" >> $GITHUB_OUTPUT
+          echo ansible-test-integration="[`for x in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -not -iname "molecule-*" -printf "%f\n"); do echo '{"test":\"'"${x}"'\","name":\"'"${x}\"'"}'; done | tr '\n' ',' | sed '$s/,$//'`]" >> $GITHUB_OUTPUT
+
+  ansible-test-molecule:
+    uses: ./.github/workflows/ansible-test-integration.yml
+    needs: discover-ansible-tests
+    if: needs.discover-ansible-tests.outputs.molecule-tests != '[]'
+    with:
+      targets: ${{ needs.discover-ansible-tests.outputs.molecule-tests }}
+      ansible-core-versions: '["stable-2.9","stable-2.10","stable-2.11","stable-2.12","stable-2.13","stable-2.14"]'
+
+  ansible-test-integration:
+    uses: ./.github/workflows/ansible-test-integration.yml
+    needs: discover-ansible-tests
+    if: needs.discover-ansible-tests.outputs.integration-tests != '[]'
+    with:
+      targets: ${{ needs.discover-ansible-tests.outputs.integration-tests }}
+      ansible-core-versions: '["stable-2.9","stable-2.10","stable-2.11","stable-2.12","stable-2.13","stable-2.14"]'

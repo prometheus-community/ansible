@@ -1,0 +1,25 @@
+---
+name: Ansible Sanity Test
+on:
+  workflow_call:
+    inputs:
+      ansible-core-versions:
+        required: false
+        default: '["stable-2.14"]'
+        type: string
+
+jobs:
+  ansible-test-sanity:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ansible-core-versions: ${{ fromJson(inputs.ansible-core-versions) }}
+
+    name: "sanity-${{ matrix.ansible-core-versions }}"
+    steps:
+      - name: "Perform sanity test with ansible-test"
+        uses: ansible-community/ansible-test-gh-action@release/v1
+        with:
+          ansible-core-version: ${{ matrix.ansible-core-versions }}
+          testing-type: sanity
