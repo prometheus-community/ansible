@@ -5,67 +5,56 @@ driver:
   name: docker
 lint: |
   set -e
-  yamllint .
+  yamllint -c ${YAMLLINT_CONFIG_FILE} .
   ansible-lint
 platforms:
-  - name: bionic
+  - name: almalinux-8
+    image: dokken/almalinux-8
     pre_build_image: true
-    image: quay.io/paulfantom/molecule-systemd:ubuntu-18.04
-    docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
     privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-  - name: xenial
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
+  - name: centos-7
+    image: dokken/centos-7
     pre_build_image: true
-    image: quay.io/paulfantom/molecule-systemd:ubuntu-16.04
-    docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
     privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-  - name: stretch
+    cgroup_parent: docker.slice
+    command: /usr/lib/systemd/systemd
+  - name: centos-stream-8
+    image: dokken/centos-stream-8
     pre_build_image: true
-    image: quay.io/paulfantom/molecule-systemd:debian-9
-    docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
     privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-  - name: buster
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
+  - name: debian-9
+    image: dokken/debian-9
     pre_build_image: true
-    image: quay.io/paulfantom/molecule-systemd:debian-10
-    docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
     privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-  - name: centos7
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
+  - name: debian-10
+    image: dokken/debian-10
     pre_build_image: true
-    image: quay.io/paulfantom/molecule-systemd:centos-7
-    docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
     privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-  - name: centos8
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
+  - name: debian-11
+    image: dokken/debian-11
     pre_build_image: true
-    image: quay.io/paulfantom/molecule-systemd:centos-8
-    docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
     privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    groups:
-      - python3
-  - name: fedora
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
+  - name: fedora-30
+    image: dokken/fedora-30
     pre_build_image: true
-    image: quay.io/paulfantom/molecule-systemd:fedora-30
-    docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
     privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    groups:
-      - python3
-provisioner:
-  name: ansible
-  inventory:
-    group_vars:
-      python3:
-        ansible_python_interpreter: /usr/bin/python3
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
+  - name: ubuntu-18.04
+    image: dokken/ubuntu-18.04
+    pre_build_image: true
+    privileged: true
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
 verifier:
   name: testinfra
