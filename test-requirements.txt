@@ -1,10 +1,8 @@
-# temporarily lock versions of molecule and ansible-compat to avoid a bug:
-ansible-compat==0.5.0
-molecule==3.5.2
-molecule-docker
+molecule
 docker
-ansible-lint>=3.4.0
-testinfra>=1.7.0
+ansible-lint
+pytest-testinfra
 jmespath
 selinux
 passlib
+yamllint
