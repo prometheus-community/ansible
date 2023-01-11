@@ -56,6 +56,7 @@
     capability: cap_net_raw+ep
     state: present
   when: not ansible_check_mode
+  changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"
 
 - name: Check Debug Message
   ansible.builtin.debug:
