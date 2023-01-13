@@ -90,6 +90,7 @@ prometheus_static_targets_files:
   - prometheus/targets/*.yml
   - prometheus/targets/*.json
 
+# yamllint disable rule:line-length
 prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
   - alert: Watchdog
     expr: vector(1)
@@ -217,3 +218,4 @@ prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
     for: 10m
     labels:
       severity: warning
+# yamllint enable rule:line-length

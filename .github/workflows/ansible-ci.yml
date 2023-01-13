@@ -1,0 +1,98 @@
+---
+name: Ansible CI
+on: [push, pull_request]
+
+env:
+  ANSIBLE_FORCE_COLOR: true
+
+jobs:
+  ansible-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Lint collection
+        uses: ansible/ansible-lint-action@main
+
+  discover-ansible-versions:
+    runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ steps.supported-ansible-versions.outputs.result }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get Ansible versions that the collection supports
+        id: supported-ansible-versions
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq -o json -I=0 '.requires_ansible | split(",") | .[] |= sub("(.*)", "stable-${1}")' meta/runtime.yml
+
+  ansible-test-sanity:
+    uses: ./.github/workflows/ansible-test-sanity.yml
+    needs:
+      - ansible-lint
+      - discover-ansible-versions
+    with:
+      ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}
+
+  discover-ansible-tests:
+    runs-on: ubuntu-latest
+    needs: ansible-lint
+    outputs:
+      molecule-tests: ${{ steps.set-molecule-tests.outputs.tests }}
+      integration-tests: ${{ steps.set-integration-tests.outputs.tests }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get changed roles
+        id: changed-roles
+        uses: tj-actions/changed-files@v35
+        with:
+          path: "roles"
+          diff_relative: "true"
+          files: "**"
+          dir_names: "true"
+          dir_names_max_depth: "1"
+          since_last_remote_commit: "true"
+
+      - name: Discover role tests
+        if: steps.changed-roles.outputs.any_changed == 'true'
+        id: set-molecule-tests
+        run: |
+          echo tests="[`for role in ${{ steps.changed-roles.outputs.all_changed_and_modified_files }}; do
+            for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -iname "molecule-${role}-*" -printf "%f\n"); do
+              echo '{"test":\"'"${test}"'\","name":\"'"${test#*-}\"'"}';
+            done
+          done | tr '\n' ',' | sed '$s/,$//'`]" >> $GITHUB_OUTPUT
+
+      - name: Discover integration tests
+        id: set-integration-tests
+        run: |
+          echo tests="[`for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -not -iname "molecule-*" -printf "%f\n"); do
+            echo '{"test":\"'"${test}"'\","name":\"'"${test}\"'"}';
+          done | tr '\n' ',' | sed '$s/,$//'`]" >> $GITHUB_OUTPUT
+
+  ansible-test-molecule:
+    uses: ./.github/workflows/ansible-test-integration.yml
+    needs:
+      - discover-ansible-tests
+      - discover-ansible-versions
+    if: needs.discover-ansible-tests.outputs.molecule-tests != '[]' &&
+        needs.discover-ansible-tests.outputs.molecule-tests != ''
+    with:
+      targets: ${{ needs.discover-ansible-tests.outputs.molecule-tests }}
+      ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}
+
+  ansible-test-integration:
+    uses: ./.github/workflows/ansible-test-integration.yml
+    needs:
+      - discover-ansible-tests
+      - discover-ansible-versions
+    if:
+      needs.discover-ansible-tests.outputs.integration-tests != '[]' &&
+      needs.discover-ansible-tests.outputs.integration-tests != ''
+    with:
+      targets: ${{ needs.discover-ansible-tests.outputs.integration-tests }}
+      ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}

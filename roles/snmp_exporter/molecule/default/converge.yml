@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - prometheus.prometheus.snmp_exporter
+  vars:
+    __testing_on_travis: true
+    snmp_exporter_web_listen_address: "127.0.0.1:9116"

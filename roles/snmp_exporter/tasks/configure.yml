@@ -23,7 +23,7 @@
   delay: 2
   notify:
     - reload snmp exporter
-  when: snmp_exporter_config_file == ""
+  when: not (snmp_exporter_config_file)
 
 - name: Copy configuration file
   ansible.builtin.template:
@@ -35,4 +35,4 @@
   no_log: "{{ 'true' if __testing_on_travis is defined else 'false' }}"
   notify:
     - reload snmp exporter
-  when: snmp_exporter_config_file != ""
+  when: (snmp_exporter_config_file)

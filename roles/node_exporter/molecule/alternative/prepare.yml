@@ -9,7 +9,7 @@
     - name: Download node_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/
+        url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/\
               node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         mode: 0644

@@ -48,7 +48,8 @@
   block:
     - name: "Get checksum list"
       ansible.builtin.set_fact:
-        __alertmanager_checksums: "{{ lookup('url', 'https://github.com/prometheus/alertmanager/releases/download/v' + alertmanager_version + '/sha256sums.txt', wantlist=True) | list }}"
+        __alertmanager_checksums: "{{ lookup('url', 'https://github.com/prometheus/alertmanager/releases/download/v' + alertmanager_version +
+                                   '/sha256sums.txt', wantlist=True) | list }}"
       run_once: true
 
     - name: "Get checksum for {{ go_arch }}"
@@ -138,5 +139,6 @@
 
 - name: "`alertmanager_child_routes` is no longer supported"
   ansible.builtin.fail:
-    msg: "Please move content of `alertmanager_child_routes` to `alertmanager_route.routes` as the former variable is deprecated and will be removed in future versions."
+    msg: "Please move content of `alertmanager_child_routes` to `alertmanager_route.routes` as the former variable is deprecated
+          and will be removed in future versions."
   when: alertmanager_child_routes is defined

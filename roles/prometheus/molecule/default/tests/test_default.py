@@ -1,7 +1,10 @@
-import pytest
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
 import os
 import yaml
 import testinfra.utils.ansible_runner
+import pytest
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
@@ -10,7 +13,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 @pytest.fixture()
 def AnsibleDefaults():
     with open("defaults/main.yml", 'r') as stream:
-        return yaml.load(stream)
+        return yaml.full_load(stream)
 
 
 @pytest.mark.parametrize("dirs", [
@@ -69,5 +72,5 @@ def test_socket(host):
 def test_version(host, AnsibleDefaults):
     version = os.getenv('PROMETHEUS', AnsibleDefaults['prometheus_version'])
     run = host.run("/usr/local/bin/prometheus --version")
-    out = run.stdout+run.stderr
+    out = run.stdout + run.stderr
     assert "prometheus, version " + version in out

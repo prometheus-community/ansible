@@ -2,7 +2,7 @@
 - name: Download snmp_exporter binary to local folder
   become: false
   ansible.builtin.get_url:
-    url: "https://github.com/prometheus/snmp_exporter/releases/download/v{{ snmp_exporter_version }}/
+    url: "https://github.com/prometheus/snmp_exporter/releases/download/v{{ snmp_exporter_version }}/\
           snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
     dest: "/tmp"
     checksum: "sha256:{{ snmp_exporter_checksum }}"

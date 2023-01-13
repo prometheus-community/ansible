@@ -106,7 +106,8 @@
   block:
     - name: "Get checksum list"
       ansible.builtin.set_fact:
-        __prometheus_checksums: "{{ lookup('url', 'https://github.com/prometheus/prometheus/releases/download/v' + prometheus_version + '/sha256sums.txt', wantlist=True) | list }}"
+        __prometheus_checksums: "{{ lookup('url', 'https://github.com/prometheus/prometheus/releases/download/v' + prometheus_version + '/sha256sums.txt',
+                                 wantlist=True) | list }}"
       run_once: true
 
     - name: "Get checksum for {{ go_arch }}"
