@@ -9,16 +9,31 @@ jobs:
   ansible-lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out codebase
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+
       - name: Lint collection
         uses: ansible/ansible-lint-action@main
 
+  discover-ansible-versions:
+    runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ steps.supported-ansible-versions.outputs.result }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get Ansible versions that the collection supports
+        id: supported-ansible-versions
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq -o json -I=0 '.requires_ansible | split(",") | .[] |= sub("(.*)", "stable-${1}")' meta/runtime.yml
+
   ansible-test-sanity:
     uses: ./.github/workflows/ansible-test-sanity.yml
-    needs: ansible-lint
+    needs:
+      - ansible-lint
+      - discover-ansible-versions
     with:
-      ansible-core-versions: '["stable-2.9","stable-2.10","stable-2.11","stable-2.12","stable-2.13","stable-2.14"]'
+      ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}
 
   discover-ansible-tests:
     runs-on: ubuntu-latest
@@ -37,16 +52,20 @@ jobs:
 
   ansible-test-molecule:
     uses: ./.github/workflows/ansible-test-integration.yml
-    needs: discover-ansible-tests
+    needs:
+      - discover-ansible-tests
+      - discover-ansible-versions
     if: needs.discover-ansible-tests.outputs.molecule-tests != '[]'
     with:
       targets: ${{ needs.discover-ansible-tests.outputs.molecule-tests }}
-      ansible-core-versions: '["stable-2.9","stable-2.10","stable-2.11","stable-2.12","stable-2.13","stable-2.14"]'
+      ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}
 
   ansible-test-integration:
     uses: ./.github/workflows/ansible-test-integration.yml
-    needs: discover-ansible-tests
+    needs:
+      - discover-ansible-tests
+      - discover-ansible-versions
     if: needs.discover-ansible-tests.outputs.integration-tests != '[]'
     with:
       targets: ${{ needs.discover-ansible-tests.outputs.integration-tests }}
-      ansible-core-versions: '["stable-2.9","stable-2.10","stable-2.11","stable-2.12","stable-2.13","stable-2.14"]'
+      ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}

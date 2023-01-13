@@ -1,2 +1,2 @@
 ---
-requires_ansible: '>=2.9.10'
+requires_ansible: "2.9,2.10,2.11,2.12,2.13,2.14"
