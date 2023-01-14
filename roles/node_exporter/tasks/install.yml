@@ -27,7 +27,7 @@
         url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/\
               node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
-        checksum: "sha256:{{ node_exporter_checksum }}"
+        checksum: "sha256:{{ __node_exporter_checksum }}"
         mode: '0644'
       register: _download_binary
       until: _download_binary is succeeded

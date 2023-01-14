@@ -17,32 +17,17 @@
     alertmanager_systemd_version: "{{ __systemd_version.stdout_lines[0].split(' ')[-1] }}"
 
 - name: Discover latest version
+  ansible.builtin.set_fact:
+    alertmanager_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus/alertmanager/releases/latest', split_lines=False) |
+                            from_json).get('tag_name') | replace('v', '') }}"
+  run_once: true
+  until: alertmanager_version is version('0.0.0', '>=')
+  retries: 10
   when:
     - alertmanager_version == "latest"
     - alertmanager_binary_local_dir | length == 0
-  block:
-
-    - name: Get latest release
-      ansible.builtin.uri:
-        url: "https://api.github.com/repos/prometheus/alertmanager/releases/latest"
-        method: GET
-        return_content: true
-        status_code: 200
-        body_format: json
-        user: "{{ lookup('env', 'GH_USER') | default(omit) }}"
-        password: "{{ lookup('env', 'GH_TOKEN') | default(omit) }}"
-      no_log: "{{ not lookup('env', 'MOLECULE_DEBUG') | bool }}"
-      register: _latest_release
-      until: _latest_release.status == 200
-      retries: 5
-
-    - name: "Set alertmanager version to {{ _latest_release.json.tag_name[1:] }}"
-      ansible.builtin.set_fact:
-        alertmanager_version: "{{ _latest_release.json.tag_name[1:] }}"
-        alertmanager_checksum_url: "https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/sha256sums.txt"
 
 - name: Get alertmanager binary checksum
-  delegate_to: localhost
   when:
     - alertmanager_binary_local_dir | length == 0
   block:
@@ -51,6 +36,8 @@
         __alertmanager_checksums: "{{ lookup('url', 'https://github.com/prometheus/alertmanager/releases/download/v' + alertmanager_version +
                                    '/sha256sums.txt', wantlist=True) | list }}"
       run_once: true
+      until: __alertmanager_checksums is search('linux-' + go_arch + '.tar.gz')
+      retries: 10
 
     - name: "Get checksum for {{ go_arch }}"
       ansible.builtin.set_fact:

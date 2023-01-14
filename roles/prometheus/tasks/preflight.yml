@@ -73,33 +73,18 @@
     - prometheus_alert_rules != []
 
 - name: Discover latest version
+  ansible.builtin.set_fact:
+    prometheus_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus/prometheus/releases/latest', split_lines=False) |
+                         from_json).get('tag_name') | replace('v', '') }}"
+  run_once: true
+  until: prometheus_version is version('0.0.0', '>=')
+  retries: 10
   when:
     - prometheus_version == "latest"
     - prometheus_binary_local_dir | length == 0
     - not prometheus_skip_install
-  block:
-
-    - name: Get latest release
-      ansible.builtin.uri:
-        url: "https://api.github.com/repos/prometheus/prometheus/releases/latest"
-        method: GET
-        return_content: true
-        status_code: 200
-        body_format: json
-        validate_certs: false
-        user: "{{ lookup('env', 'GH_USER') | default(omit) }}"
-        password: "{{ lookup('env', 'GH_TOKEN') | default(omit) }}"
-      no_log: "{{ not lookup('env', 'ANSIBLE_DEBUG') | bool }}"
-      register: _latest_release
-      until: _latest_release.status == 200
-      retries: 5
-
-    - name: "Set prometheus version to {{ _latest_release.json.tag_name[1:] }}"
-      ansible.builtin.set_fact:
-        prometheus_version: "{{ _latest_release.json.tag_name[1:] }}"
 
 - name: Get prometheus binary checksum
-  delegate_to: localhost
   when:
     - prometheus_binary_local_dir | length == 0
     - not prometheus_skip_install
@@ -109,6 +94,8 @@
         __prometheus_checksums: "{{ lookup('url', 'https://github.com/prometheus/prometheus/releases/download/v' + prometheus_version + '/sha256sums.txt',
                                  wantlist=True) | list }}"
       run_once: true
+      until: __prometheus_checksums is search('linux-' + go_arch + '.tar.gz')
+      retries: 10
 
     - name: "Get checksum for {{ go_arch }}"
       ansible.builtin.set_fact:
