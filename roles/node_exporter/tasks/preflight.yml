@@ -71,42 +71,30 @@
     - skip_ansible_lint
 
 - name: Discover latest version
+  ansible.builtin.set_fact:
+    node_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus/node_exporter/releases/latest', split_lines=False) |
+                            from_json).get('tag_name') | replace('v', '') }}"
+  run_once: true
+  until: node_exporter_version is version('0.0.0', '>=')
+  retries: 10
   when:
     - node_exporter_version == "latest"
     - node_exporter_binary_local_dir | length == 0
-  delegate_to: localhost
-  run_once: true
-  block:
-    - name: Get latest release
-      ansible.builtin.uri:
-        url: "https://api.github.com/repos/prometheus/node_exporter/releases/latest"
-        method: GET
-        return_content: true
-        status_code: 200
-        body_format: json
-        user: "{{ lookup('env', 'GH_USER') | default(omit) }}"
-        password: "{{ lookup('env', 'GH_TOKEN') | default(omit) }}"
-      no_log: "{{ not lookup('env', 'MOLECULE_DEBUG') | bool }}"
-      register: _latest_release
-      until: _latest_release.status == 200
-      retries: 5
-
-    - name: "Set node_exporter version to {{ _latest_release.json.tag_name[1:] }}"
-      ansible.builtin.set_fact:
-        node_exporter_version: "{{ _latest_release.json.tag_name[1:] }}"
 
 - name: Get node_exporter binary checksum
-  delegate_to: localhost
   when: node_exporter_binary_local_dir | length == 0
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:
-        _checksums: "{{ lookup('url', 'https://github.com/prometheus/node_exporter/releases/download/v' + node_exporter_version + '/sha256sums.txt', wantlist=True) | list }}"
+        __node_exporter_checksums: "{{ lookup('url', 'https://github.com/prometheus/node_exporter/releases/download/v' + node_exporter_version +
+                                    '/sha256sums.txt', wantlist=True) | list }}"
       run_once: true
+      until: __node_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
+      retries: 10
 
     - name: "Get checksum for {{ go_arch }}"
       ansible.builtin.set_fact:
-        node_exporter_checksum: "{{ item.split(' ')[0] }}"
-      with_items: "{{ _checksums }}"
+        __node_exporter_checksum: "{{ item.split(' ')[0] }}"
+      with_items: "{{ __node_exporter_checksums }}"
       when:
         - "('linux-' + go_arch + '.tar.gz') in item"

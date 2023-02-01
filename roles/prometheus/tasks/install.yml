@@ -43,7 +43,7 @@
     - name: Download prometheus binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/
+        url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/\
               prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __prometheus_checksum }}"
