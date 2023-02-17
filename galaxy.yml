@@ -1,13 +1,11 @@
 ---
 namespace: prometheus
 name: prometheus
-version: 1.0.0
-
+version: 0.0.1
 readme: README.md
 authors:
   - "Ben Kochie (https://github.com/SuperQ)"
   - "Paweł Krupa (https://github.com/paulfantom)"
-
 description: "Ansible Collection for Prometheus"
 license_file: LICENSE
 tags:
@@ -19,16 +17,13 @@ tags:
   - alerts
   - alerting
   - cloud
-
 dependencies:
   community.crypto: '>=2.0.0'
   community.general: '>=1.0.0'
-
 repository: "https://github.com/prometheus-community/ansible"
 documentation: "https://github.com/prometheus-community/ansible/blob/main/docs"
 homepage: "https://prometheus.io"
 issues: "https://github.com/prometheus-community/ansible/issues"
-
 build_ignore:
   - 'tests/*'
   - '*.tar.gz'

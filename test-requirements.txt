@@ -1,3 +1,5 @@
+antsibull-changelog
+antsichaut
 molecule
 docker
 ansible-lint
