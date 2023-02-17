@@ -11,6 +11,9 @@ on:
 
 env:
   ANSIBLE_FORCE_COLOR: true
+  ANSIBLE_GALAXY_SERVER_GALAXY_URL: "https://galaxy.ansible.com"
+  ANSIBLE_GALAXY_SERVER_GALAXY_TIMEOUT: 120
+  ANSIBLE_GALAXY_SERVER_LIST: "galaxy"
 
 jobs:
   ansible-lint:
