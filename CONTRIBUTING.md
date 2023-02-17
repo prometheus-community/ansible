@@ -42,9 +42,9 @@ to a commit with merge request. Available keywords are (square brackets are impo
 * `[major]`, `[breaking change]` - for MAJOR version release
  
 ## Changelog
- 
-Changelog is generated automatically during release process and all information is taken from github issues, PRs and
-labels.
+This project uses [antsibull-changelog](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections_changelogs.html#generating-changelogs) to generate changelogs.
+
+Changelog is generated automatically during release process and all information is taken from github PRs, commits and labels.
 
 ## Expectations
 
