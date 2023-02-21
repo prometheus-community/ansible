@@ -1,0 +1,30 @@
+---
+argument_specs:
+  main:
+    short_description: "Deploy and manage Prometheus blackbox exporter"
+    description:
+      - "Deploy and manage Prometheus blackbox exporter which allows blackbox probing of endpoints over HTTP, HTTPS, DNS, TCP and ICMP."
+    author:
+      - "Prometheus Community"
+    options:
+      blackbox_exporter_version:
+        description: "Blackbox exporter package version"
+        default: "0.18.0"
+      blackbox_exporter_web_listen_address:
+        description: "Address on which blackbox exporter will be listening"
+        default: "0.0.0.0:9115"
+      blackbox_exporter_cli_flags:
+        description: "Additional configuration flags passed to blackbox exporter binary at startup"
+        type: "dict"
+        elements: "str"
+      blackbox_exporter_configuration_modules:
+        description: "Endpoints configuration"
+        type: "dict"
+        elements: "dict"
+        default:
+          http_2xx:
+            prober: http
+            timeout: 5s
+            http:
+              method: GET
+              valid_status_codes: []
