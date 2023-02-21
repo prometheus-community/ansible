@@ -10,7 +10,7 @@ jobs:
     if: |
       github.event.pull_request.merged &&
       github.ref == github.event.repository.default_branch &&
-      !contains(github.event.pull_request.labels.*.name, 'skip-release')
+      !contains(github.event.pull_request.labels.*.name, 'skip_changelog')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -33,7 +33,7 @@ jobs:
         run: antsibull-changelog release -v --version "${{ steps.version.outputs.next-version }}"
 
       - name: "Run antsichaut"
-        uses: gardar/antsichaut-action@yaml-lint  # Until PR gets merged: https://github.com/rndmh3ro/antsichaut/pull/4
+        uses: rndmh3ro/antsichaut-action@main
         with:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           since_version: "${{ steps.version.outputs.current-version }}"
