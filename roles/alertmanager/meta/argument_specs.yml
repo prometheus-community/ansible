@@ -1,0 +1,98 @@
+---
+argument_specs:
+  main:
+    short_description: "Prometheus Alertmanager service"
+    description:
+      - "Deploy and manage Prometheus (alertmanager,https://github.com/prometheus/alertmanager) service using ansible."
+    author:
+      - "Prometheus Community"
+    options:
+      alertmanager_version:
+        description: "Alertmanager package version. Also accepts `latest` as parameter."
+        default: 0.21.0
+      alertmanager_binary_local_dir:
+        description:
+          - "Allows to use local packages instead of ones distributed on github."
+          - "As parameter it takes a directory where C(alertmanager) AND C(amtool) binaries are stored on host on which ansible is ran."
+          - "This overrides I(alertmanager_version) parameter"
+      alertmanager_web_listen_address:
+        description: "Address on which alertmanager will be listening"
+        default: "0.0.0.0:9093"
+      alertmanager_web_external_url:
+        description: "External address on which alertmanager is available. Useful when behind reverse proxy. Ex. example.org/alertmanager"
+        default: "http://localhost:9093/"
+      alertmanager_config_dir:
+        description: "Path to directory with alertmanager configuration"
+        default: "/etc/alertmanager"
+      alertmanager_db_dir:
+        description: "Path to directory with alertmanager database"
+        default: "/var/lib/alertmanager"
+      alertmanager_config_file:
+        description: "Variable used to provide custom alertmanager configuration file in form of ansible template"
+        default: "alertmanager.yml.j2"
+      alertmanager_config_flags_extra:
+        description: "Additional configuration flags passed to prometheus binary at startup"
+        type: "dict"
+      alertmanager_template_files:
+        description:
+          - 'List of folders where ansible will look for template files which will be copied to C("{{ alertmanager_config_dir }}/templates/").'
+          - "Files must have C(*.tmpl) extension"
+        type: "list"
+        default:
+          - "alertmanager/templates/*.tmpl"
+      alertmanager_resolve_timeout:
+        description: "Time after which an alert is declared resolved"
+        default: "3m"
+      alertmanager_smtp:
+        description: "SMTP (email) configuration"
+        type: "dict"
+      alertmanager_http_config:
+        description: "Http config for using custom webhooks"
+        type: "dict"
+      alertmanager_slack_api_url:
+        description: "Slack webhook url"
+      alertmanager_pagerduty_url:
+        description: "Pagerduty webhook url"
+      alertmanager_opsgenie_api_key:
+        description: "Opsgenie webhook key"
+      alertmanager_opsgenie_api_url:
+        description: "Opsgenie webhook url"
+      alertmanager_victorops_api_key:
+        description: "VictorOps webhook key"
+      alertmanager_victorops_api_url:
+        description: "VictorOps webhook url"
+      alertmanager_hipchat_api_url:
+        description: "Hipchat webhook url"
+      alertmanager_hipchat_auth_token:
+        description: "Hipchat authentication token"
+      alertmanager_wechat_url:
+        description: "Enterprise WeChat webhook url"
+      alertmanager_wechat_secret:
+        description: "Enterprise WeChat secret token"
+      alertmanager_wechat_corp_id:
+        description: "Enterprise WeChat corporation id"
+      alertmanager_cluster:
+        description:
+          - "HA cluster network configuration. Disabled by default."
+          - "More information in L(alertmanager readme,https://github.com/prometheus/alertmanager#high-availability)"
+        type: "dict"
+        default:
+          listen-address: ""
+      alertmanager_receivers:
+        description: "A list of notification receivers. Configuration same as in L(official docs,https://prometheus.io/docs/alerting/configuration/#<receiver>)"
+        type: "list"
+      alertmanager_inhibit_rules:
+        description: "List of inhibition rules. Same as in L(official docs,https://prometheus.io/docs/alerting/configuration/#inhibit_rule)"
+        type: "list"
+      alertmanager_route:
+        description: "Alert routing. More in L(official docs,https://prometheus.io/docs/alerting/configuration/#<route>)"
+        type: "dict"
+      alertmanager_amtool_config_file:
+        description: "Template for amtool config"
+        default: "amtool.yml.j2"
+      alertmanager_amtool_config_alertmanager_url:
+        description: "URL of the alertmanager"
+        default: "{{ alertmanager_web_external_url }}"
+      alertmanager_amtool_config_output:
+        description: 'Extended output, use C("") for simple output.'
+        default: "extended"
