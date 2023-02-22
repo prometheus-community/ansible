@@ -24,6 +24,8 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | -------------- | ------------- | -----------------------------------|
 | `node_exporter_version` | 1.1.2 | Node exporter package version. Also accepts latest as parameter. |
 | `node_exporter_binary_local_dir` | "" | Enables the use of local packages instead of those distributed on github. The parameter may be set to a directory where the `node_exporter` binary is stored on the host where ansible is run. This overrides the `node_exporter_version` parameter |
+| `node_exporter_binary_url` | `https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz` | URL of the node exporter binaries .tar.gz file |
+| `node_exporter_checksums_url` | `https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/sha256sums.txt` | URL of the node exporter checksums file |
 | `node_exporter_web_listen_address` | "0.0.0.0:9100" | Address on which node exporter will listen |
 | `node_exporter_web_telemetry_path` | "/metrics" | Path under which to expose metrics |
 | `node_exporter_enabled_collectors` | ```["systemd",{textfile: {directory: "{{node_exporter_textfile_dir}}"}}]``` | List of dicts defining additionally enabled collectors and their configuration. It adds collectors to [those enabled by default](https://github.com/prometheus/node_exporter#enabled-by-default). |
