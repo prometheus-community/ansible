@@ -26,6 +26,8 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | `prometheus_skip_install` | false | Prometheus installation tasks gets skipped when set to true. |
 | `prometheus_binary_local_dir` | "" | Allows to use local packages instead of ones distributed on github. As parameter it takes a directory where `prometheus` AND `promtool` binaries are stored on host on which ansible is ran. This overrides `prometheus_version` parameter |
 | `prometheus_config_dir` | /etc/prometheus | Path to directory with prometheus configuration |
+| `prometheus_binary_url` | `https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz` | URL of the prometheus binaries .tar.gz file |
+| `prometheus_checksums_url` | `https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/sha256sums.txt` | URL of the prometheus checksums file |
 | `prometheus_db_dir` | /var/lib/prometheus | Path to directory with prometheus database |
 | `prometheus_read_only_dirs`| [] | Additional paths that Prometheus is allowed to read (useful for SSL certs outside of the config directory) |
 | `prometheus_web_listen_address` | "0.0.0.0:9090" | Address on which prometheus will be listening |
