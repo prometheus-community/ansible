@@ -1,7 +1,7 @@
 ---
 name: Ansible collection release
 on:
-  pull_request:
+  pull_request_target:
     types:
       - closed
 
