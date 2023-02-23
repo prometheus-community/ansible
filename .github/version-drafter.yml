@@ -1,0 +1,4 @@
+---
+major-labels: ['semver:major', 'major', 'breaking']
+minor-labels: ['semver:minor', 'minor', 'enhancement', 'deprecated', 'removed', 'security']
+patch-labels: ['semver:patch', 'bug', 'trivial', 'bugfix']

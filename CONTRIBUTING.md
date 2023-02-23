@@ -25,26 +25,24 @@ To have your code merged, see the expectations listed below.
 
 You can find a well-written guide [here](https://help.github.com/articles/fork-a-repo).
 
-Please follow common commit best-practices. Be explicit, have a short summary, a well-written description and
+Please follow conventional commits for best-practices. Be explicit, have a short summary, a well-written description and
 references. This is especially important for the merge-request.
 
-Some great guidelines can be found [here](https://wiki.openstack.org/wiki/GitCommitMessages) and
-[here](http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message).
+Some great guidelines can be found [here](https://www.conventionalcommits.org/).
 
 ## Releases
 
-We try to stick to semantic versioning and our releases are automated. Release is created by assigning a keyword (in a
-way similar to circle ci keyword [`[ci skip]`](https://docs.travis-ci.com/user/customizing-the-build#Skipping-a-build))
-to a commit with merge request. Available keywords are (square brackets are important!):
+We try to stick to semantic versioning and our releases are automated. Release is created by assigning [conventional commits](https://www.conventionalcommits.org/)
+to PR title. Available keywords are:
  
-* `[patch]`, `[fix]`, `[bugfix]` - for PATCH version release
-* `[minor]`, `[feature]`, `[feat]` - for MINOR version release
-* `[major]`, `[breaking change]` - for MAJOR version release
+* `[patch]`, `[fix]`, `[bug]`, `[bugfix]`, `[test]`, `[refactor]`, `[packaging]`, `[docs]` - for PATCH version release
+* `[minor]`, `[enhancement]`, `[feature]`, `[feat]`, `[deprecated]`, `[removed]`, `[security]` - for MINOR version release
+* `[major]`, `[breaking]` - for MAJOR version release
  
 ## Changelog
- 
-Changelog is generated automatically during release process and all information is taken from github issues, PRs and
-labels.
+This project uses [antsibull-changelog](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections_changelogs.html#generating-changelogs) to generate changelogs.
+
+Changelog is generated automatically during release process and all information is taken from github PRs, commits and labels.
 
 ## Expectations
 
