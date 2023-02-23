@@ -26,9 +26,6 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: "Check git repo before changelog"
-        run: git status
-
       - name: "Generate new version in changelog.yaml"
         run: antsibull-changelog release -v --version "${{ steps.version.outputs.next-version }}"
 
@@ -46,9 +43,6 @@ jobs:
         with:
           cmd: yq -i '.version = "${{ steps.version.outputs.next-version }}"' 'galaxy.yml'
 
-      - name: "Check git repo"
-        run: git status
-
       - name: "Write changelog and version"
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
@@ -56,26 +50,12 @@ jobs:
           commit_message: "chore: update version"
 
       - name: "Checkout updated branch"
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.base.ref }}
-
-      - name: "Build the collection"
-        run: ansible-galaxy collection build
 
       - name: "Publish release"
         id: release-publish
         uses: release-drafter/release-drafter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          publish: true
-
-      - name: "Upload built collection to release"
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: prometheus-prometheus-*.tar.gz
-          file_glob: true
-          tag: ${{ steps.release-publish.outputs.tag_name }}
-          overwrite: true
