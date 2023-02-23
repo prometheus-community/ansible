@@ -36,7 +36,7 @@ We try to stick to semantic versioning and our releases are automated. Release i
 to PR title. Available keywords are:
  
 * `[patch]`, `[fix]`, `[bug]`, `[bugfix]`, `[test]`, `[refactor]`, `[packaging]`, `[docs]` - for PATCH version release
-* `[minor]`, `[enhancement]`, `[feat]`, `[deprecated]`, `[removed]`, `[security]` - for MINOR version release
+* `[minor]`, `[enhancement]`, `[feature]`, `[feat]`, `[deprecated]`, `[removed]`, `[security]` - for MINOR version release
 * `[major]`, `[breaking]` - for MAJOR version release
  
 ## Changelog

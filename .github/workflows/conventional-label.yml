@@ -10,7 +10,7 @@ jobs:
       - name: "Confirm correct pull request title"
         uses: deepakputhraya/action-pr-title@master
         with:
-          allowed_prefixes: 'feat,fix,major,breaking,minor,enhancement,deprecated,removed,security,bug,bugfix,docs,packaging,test,refactor,refactoring,skip-release,skip_changelog'
+          allowed_prefixes: 'feat,feature,fix,major,breaking,minor,enhancement,deprecated,removed,security,bug,bugfix,docs,packaging,test,refactor,refactoring,skip-release,skip_changelog'
 
       - name: "Apply label"
         if: github.event.pull_request.labels.length == 0
@@ -18,6 +18,7 @@ jobs:
         with:
           type_labels: |
               {
+              "feature": "enhancement",
               "feat": "enhancement",
               "fix": "bugfix",
               "major": "major",
