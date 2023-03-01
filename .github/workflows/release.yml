@@ -9,9 +9,10 @@ jobs:
   release:
     if: |
       github.event.pull_request.merged &&
-      github.ref == github.event.repository.default_branch &&
       !contains(github.event.pull_request.labels.*.name, 'skip_changelog')
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
         with:

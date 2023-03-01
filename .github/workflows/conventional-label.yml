@@ -2,13 +2,15 @@
 on:
   pull_request_target:
     types: [opened, edited, synchronize, reopened]
+permissions:
+  pull-requests: write
 name: Auto label pull request
 jobs:
   label:
     runs-on: ubuntu-latest
     steps:
       - name: "Confirm correct pull request title"
-        uses: deepakputhraya/action-pr-title@master
+        uses: mmubeen/action-pr-title@master # until PR gets merged https://github.com/deepakputhraya/action-pr-title/pull/29
         with:
           allowed_prefixes: 'feat,feature,fix,major,breaking,minor,enhancement,deprecated,removed,security,bug,bugfix,docs,packaging,test,refactor,refactoring,skip-release,skip_changelog'
 
