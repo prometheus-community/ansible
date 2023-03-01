@@ -31,7 +31,7 @@ jobs:
         run: antsibull-changelog release -v --version "${{ steps.version.outputs.next-version }}"
 
       - name: "Run antsichaut"
-        uses: gardar/antsichaut-action@latest  # Until new pip release gets published:  https://github.com/rndmh3ro/antsichaut/issues/7
+        uses: rndmh3ro/antsichaut-action@main
         with:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           since_version: "${{ steps.version.outputs.current-version }}"
