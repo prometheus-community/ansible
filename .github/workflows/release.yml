@@ -9,9 +9,10 @@ jobs:
   release:
     if: |
       github.event.pull_request.merged &&
-      github.ref == github.event.repository.default_branch &&
       !contains(github.event.pull_request.labels.*.name, 'skip_changelog')
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
         with:
@@ -30,7 +31,7 @@ jobs:
         run: antsibull-changelog release -v --version "${{ steps.version.outputs.next-version }}"
 
       - name: "Run antsichaut"
-        uses: rndmh3ro/antsichaut-action@main
+        uses: gardar/antsichaut-action@latest  # Until new pip release gets published:  https://github.com/rndmh3ro/antsichaut/issues/7
         with:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           since_version: "${{ steps.version.outputs.current-version }}"

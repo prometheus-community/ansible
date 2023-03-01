@@ -4,9 +4,11 @@ on:
   push:
     branches-ignore:
       - main
-  pull_request_target:
+  pull_request:
     types:
-      - '!closed'
+      - opened
+      - edited
+      - reopened
   workflow_dispatch:
 
 env:
