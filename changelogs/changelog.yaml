@@ -4,5 +4,18 @@ releases:
   0.0.1:
     changes:
       major_changes:
-        - 'Initial Release'
+        - Initial Release
     release_date: '2023-02-17'
+  0.1.0:
+    changes:
+      bugfixes:
+        - 'fix: grab dependencies from github to avoid galaxy timeouts (https://github.com/prometheus-community/ansible/pull/33)'
+        - 'fix: avoid installing changelog tools when testing (https://github.com/prometheus-community/ansible/pull/34)'
+        - 'fix: Force push git changelogs (https://github.com/prometheus-community/ansible/pull/36)'
+      removed_features:
+        - 'removed: remove lint from molecule to avoid repetition (https://github.com/prometheus-community/ansible/pull/35)'
+      trivial:
+        - 'fix: use workflow trigger that gives writable token (https://github.com/prometheus-community/ansible/pull/29)'
+        - 'fix: writable token in all pull request workflows (https://github.com/prometheus-community/ansible/pull/30)'
+        - 'fix: correct workflow triggers and writable permissions (https://github.com/prometheus-community/ansible/pull/32)'
+    release_date: '2023-03-02'
