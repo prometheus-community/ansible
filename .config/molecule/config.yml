@@ -3,10 +3,6 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint: |
-  set -e
-  yamllint -c ${YAMLLINT_CONFIG_FILE} .
-  ansible-lint
 platforms:
   - name: almalinux-8
     image: dokken/almalinux-8
