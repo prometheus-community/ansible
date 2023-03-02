@@ -49,6 +49,7 @@ jobs:
         with:
           branch: ${{ github.event.pull_request.base.ref }}
           commit_message: "chore: update version"
+          push_options: --force
 
       - name: "Checkout updated branch"
         uses: actions/checkout@v3
