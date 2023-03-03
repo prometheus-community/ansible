@@ -25,3 +25,8 @@ jobs:
           file_glob: true
           tag: ${{ github.ref }}
           overwrite: true
+
+      - name: "Publish collection on galaxy"
+        uses: ansible/ansible-publish-action@v1
+        with:
+          api_key: ${{ secrets.ANSIBLE_GALAXY_API_KEY }}
