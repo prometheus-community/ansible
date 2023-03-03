@@ -25,6 +25,11 @@ documentation: "https://github.com/prometheus-community/ansible/blob/main/docs"
 homepage: "https://prometheus.io"
 issues: "https://github.com/prometheus-community/ansible/issues"
 build_ignore:
-  - 'tests/*'
+  - .config
+  - .github
+  - .gitignore
+  - changelogs
+  - roles/*/molecule
+  - tests
+  - '*test-requirements.txt'
   - '*.tar.gz'
-  - 'docs/*'
