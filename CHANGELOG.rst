@@ -8,6 +8,11 @@ Prometheus.Prometheus Release Notes
 v0.1.0
 ======
 
+Minor Changes
+-------------
+
+- feat: Allow grabbing binaries and checksums from a custom url/mirror (https://github.com/prometheus-community/ansible/pull/28)
+
 Removed Features (previously deprecated)
 ----------------------------------------
 
