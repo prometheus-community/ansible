@@ -33,8 +33,7 @@
     - name: Download alertmanager binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/\
-              alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
+        url: "{{ alertmanager_binary_url }}"
         dest: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __alertmanager_checksum }}"
         mode: 0644

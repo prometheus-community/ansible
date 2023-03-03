@@ -3,5 +3,5 @@
   ansible.builtin.set_fact:
     snmp_exporter_checksum: "{{ item.split(' ')[0] }}"
   with_items:
-    - "{{ lookup('url', 'https://github.com/prometheus/snmp_exporter/releases/download/v' + snmp_exporter_version + '/sha256sums.txt', wantlist=True) | list }}"
+    - "{{ lookup('url', snmp_exporter_checksums_url, wantlist=True) | list }}"
   when: "('linux-' + (go_arch_map[ansible_architecture] | default(ansible_architecture)) + '.tar.gz') in item"
