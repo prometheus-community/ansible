@@ -17,6 +17,7 @@ Bugfixes
 --------
 
 - fix: Force push git changelogs (https://github.com/prometheus-community/ansible/pull/36)
+- fix: Remove unnecessary dependency on jmespath (https://github.com/prometheus-community/ansible/pull/22)
 - fix: ansible 2.9 workaround for galaxy install from git (https://github.com/prometheus-community/ansible/pull/37)
 - fix: avoid installing changelog tools when testing (https://github.com/prometheus-community/ansible/pull/34)
 - fix: grab dependencies from github to avoid galaxy timeouts (https://github.com/prometheus-community/ansible/pull/33)
