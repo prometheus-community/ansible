@@ -16,12 +16,17 @@ releases:
         - 'fix: ansible 2.9 workaround for galaxy install from git (https://github.com/prometheus-community/ansible/pull/37)'
         - 'fix: avoid installing changelog tools when testing (https://github.com/prometheus-community/ansible/pull/34)'
         - 'fix: grab dependencies from github to avoid galaxy timeouts (https://github.com/prometheus-community/ansible/pull/33)'
+      minor_changes:
+        - 'feat: Allow grabbing binaries and checksums from a custom url/mirror (https://github.com/prometheus-community/ansible/pull/28)'
       removed_features:
         - 'removed: remove lint from molecule to avoid repetition (https://github.com/prometheus-community/ansible/pull/35)'
       trivial:
         - 'fix: correct workflow triggers and writable permissions (https://github.com/prometheus-community/ansible/pull/32)'
         - 'fix: use workflow trigger that gives writable token (https://github.com/prometheus-community/ansible/pull/29)'
         - 'fix: writable token in all pull request workflows (https://github.com/prometheus-community/ansible/pull/30)'
-      minor_changes:
-        - 'feat: Allow grabbing binaries and checksums from a custom url/mirror (https://github.com/prometheus-community/ansible/pull/28)'
     release_date: '2023-03-02'
+  0.1.1:
+    changes:
+      trivial:
+        - 'docs: Add gardar as a maintainer (https://github.com/prometheus-community/ansible/pull/39)'
+    release_date: '2023-03-03'
