@@ -5,6 +5,7 @@ version: 0.1.0
 readme: README.md
 authors:
   - "Ben Kochie (https://github.com/SuperQ)"
+  - "Garðar Arnarsson (https://github.com/gardar)"
   - "Paweł Krupa (https://github.com/paulfantom)"
 description: "Ansible Collection for Prometheus"
 license_file: LICENSE
