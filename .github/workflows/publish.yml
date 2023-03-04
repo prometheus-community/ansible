@@ -27,6 +27,6 @@ jobs:
           overwrite: true
 
       - name: "Publish collection on galaxy"
-        uses: ansible/ansible-publish-action@v1
+        uses: ansible/ansible-publish-action@v1.0.0
         with:
           api_key: ${{ secrets.ANSIBLE_GALAXY_API_KEY }}
