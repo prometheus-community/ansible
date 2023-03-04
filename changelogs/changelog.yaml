@@ -30,3 +30,8 @@ releases:
       trivial:
         - 'docs: Add gardar as a maintainer (https://github.com/prometheus-community/ansible/pull/39)'
     release_date: '2023-03-03'
+  0.1.2:
+    changes:
+      trivial:
+        - 'packaging: publish on ansible galaxy on release (https://github.com/prometheus-community/ansible/pull/41)'
+    release_date: '2023-03-04'
