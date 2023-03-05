@@ -1,0 +1,145 @@
+---
+argument_specs:
+  main:
+    short_description: "Installs and configures prometheus"
+    description:
+      - "Prometheus monitoring system configuration and management"
+    author:
+      - "Prometheus Community"
+    options:
+      prometheus_version:
+        description:
+          - "Prometheus package version. Also accepts C(latest) as parameter."
+          - "Only prometheus 2.x is supported"
+        default: "2.27.0"
+      prometheus_skip_install:
+        description: "Prometheus installation tasks gets skipped when set to true."
+        type: bool
+        default: false
+      prometheus_binary_local_dir:
+        description:
+          - "Allows to use local packages instead of ones distributed on github."
+          - "As parameter it takes a directory where I(prometheus) AND I(promtool) binaries are stored on host on which ansible is ran."
+          - "This overrides I(prometheus_version) parameter"
+      prometheus_config_dir:
+        description: "Path to directory with prometheus configuration"
+        default: "/etc/prometheus"
+      prometheus_db_dir:
+        description: "Path to directory with prometheus database"
+        default: "/var/lib/prometheus"
+      prometheus_read_only_dirs:
+        description: "Additional paths that Prometheus is allowed to read (useful for SSL certs outside of the config directory)"
+        type: "list"
+        elements: "str"
+      prometheus_web_listen_address:
+        description: "Address on which prometheus will be listening"
+        default: "0.0.0.0:9090"
+      prometheus_web_config:
+        description: "A Prometheus L(web config yaml,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)
+                      for configuring TLS and auth."
+        type: "dict"
+        elements: "dict"
+      prometheus_web_external_url:
+        description: "External address on which prometheus is available. Useful when behind reverse proxy. Ex. `http://example.org/prometheus`"
+      prometheus_storage_retention:
+        description: "Data retention period"
+        default: "30d"
+      prometheus_storage_retention_size:
+        description: "Data retention period by size"
+        type: "int"
+        default: 0
+      prometheus_config_flags_extra:
+        description: "Additional configuration flags passed to prometheus binary at startup"
+        type: "dict"
+        elements: "str"
+      prometheus_alertmanager_config:
+        description:
+          - "Configuration responsible for pointing where alertmanagers are. This should be specified as list in yaml format."
+          - "It is compatible with the official
+             L(alertmanager_config,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#alertmanager_config)"
+        type: "list"
+        elements: "str"
+      prometheus_alert_relabel_configs:
+        description:
+          - "Alert relabeling rules. This should be specified as list in yaml format."
+          - "It is compatible with the official
+             L(alert_relabel_configs,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#alert_relabel_configs)"
+        type: "list"
+        elements: "str"
+      prometheus_global:
+        description:
+          - "Prometheus global config. It is compatible with the
+             L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file)"
+        type: "dict"
+        elements: "str"
+        default:
+          scrape_interval: "60s"
+          scrape_timeout: "15s"
+          evaluation_interval: "15s"
+      prometheus_remote_write:
+        description:
+          - "Remote write. Compatible with the
+             L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#<remote_write>)"
+        type: "list"
+        elements: "str"
+      prometheus_remote_read:
+        description:
+          - "Remote read. It is compatible with the
+             L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#<remote_read>)"
+        type: "list"
+        elements: "str"
+      prometheus_external_labels:
+        description: "Provide map of additional labels which will be added to any time series or alerts when communicating with external systems"
+        type: "dict"
+        elements: "str"
+        default:
+          environment: "{{ ansible_fqdn | default(ansible_host) | default(inventory_hostname) }}"
+      prometheus_targets:
+        description:
+          - "Targets which will be scraped. Better example is provided in our
+             L(demo site,https://github.com/cloudalchemy/demo-site/blob/2a8a56fc10ce613d8b08dc8623230dace6704f9a/group_vars/all/vars#L8)"
+        type: "dict"
+        elements: "str"
+      prometheus_scrape_configs:
+        description:
+          - "Prometheus scrape jobs provided in same format as in the
+             L(official docs,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config)"
+        type: "list"
+        elements: "dict"
+        default:
+          - job_name: "prometheus"
+            metrics_path: "{{ prometheus_metrics_path }}"
+            static_configs:
+              - targets:
+                  - "{{ ansible_fqdn | default(ansible_host) | default('localhost') }}:9090"
+          - job_name: "node"
+            file_sd_configs:
+              - files:
+                  - "{{ prometheus_config_dir }}/file_sd/node.yml"
+      prometheus_config_file:
+        description: "Variable used to provide custom prometheus configuration file in form of ansible template"
+        default: "prometheus.yml.j2"
+      prometheus_alert_rules:
+        description:
+          - "Full list of alerting rules which will be copied to C({{ prometheus_config_dir }}/rules/ansible_managed.rules)."
+          - "Alerting rules can be also provided by other files located in C({{ prometheus_config_dir }}/rules/) which have C(*.rules) extension"
+          - "Please see default values in role defaults/main.yml"
+        type: "list"
+        elements: "dict"
+      prometheus_alert_rules_files:
+        description:
+          - "List of folders where ansible will look for files containing alerting rules which will be copied to C({{ prometheus_config_dir }}/rules/)."
+          - "Files must have C(*.rules) extension"
+        type: "list"
+        elements: "str"
+        default:
+          - "prometheus/rules/*.rules"
+      prometheus_static_targets_files:
+        description:
+          - "List of folders where ansible will look for files containing custom static target configuration files
+             which will be copied to C({{ prometheus_config_dir }}/file_sd/)."
+        type: "list"
+        elements: "str"
+        default:
+          - "prometheus/targets/*.yml"
+          - "prometheus/targets/*.json"
