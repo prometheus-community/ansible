@@ -37,7 +37,7 @@ jobs:
         id: supported-ansible-versions
         uses: mikefarah/yq@master
         with:
-          cmd: yq -o json -I=0 '.requires_ansible | split(",") | .[] |= sub("(.*)", "stable-${1}")' meta/runtime.yml
+          cmd: yq -o json -I=0 '.requires_ansible | split(",") | .[] |= sub("(.*?)(\d+\.\d+)"; "stable-${2}")' meta/runtime.yml
 
   ansible-test-sanity:
     uses: ./.github/workflows/ansible-test-sanity.yml
