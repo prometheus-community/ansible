@@ -96,8 +96,7 @@ argument_specs:
           environment: "{{ ansible_fqdn | default(ansible_host) | default(inventory_hostname) }}"
       prometheus_targets:
         description:
-          - "Targets which will be scraped. Better example is provided in our
-             L(demo site,https://github.com/cloudalchemy/demo-site/blob/2a8a56fc10ce613d8b08dc8623230dace6704f9a/group_vars/all/vars#L8)"
+          - "Targets which will be scraped."
         type: "dict"
         elements: "str"
       prometheus_scrape_configs:

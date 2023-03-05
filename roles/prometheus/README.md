@@ -98,13 +98,13 @@ prometheus_scrape_configs:
 ---
 - hosts: all
   roles:
-  - cloudalchemy.prometheus
+  - prometheus.prometheus.prometheus
   vars:
     prometheus_targets:
       node:
       - targets:
         - localhost:9100
-        - demo.cloudalchemy.org:9100
+        - node.demo.do.prometheus.io
         labels:
           env: demosite
 ```
