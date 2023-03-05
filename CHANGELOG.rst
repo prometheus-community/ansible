@@ -5,6 +5,14 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.1.5
+======
+
+Bugfixes
+--------
+
+- fix: follow PEP 440 standard for supported ansible versions (https://github.com/prometheus-community/ansible/pull/46)
+
 v0.1.4
 ======
 

@@ -45,3 +45,8 @@ releases:
       trivial:
         - 'docs: add argument specs to roles (https://github.com/prometheus-community/ansible/pull/27)'
     release_date: '2023-03-05'
+  0.1.5:
+    changes:
+      bugfixes:
+        - 'fix: follow PEP 440 standard for supported ansible versions (https://github.com/prometheus-community/ansible/pull/46)'
+    release_date: '2023-03-05'
