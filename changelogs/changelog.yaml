@@ -40,3 +40,8 @@ releases:
       trivial:
         - 'packaging: Fix publish action version (https://github.com/prometheus-community/ansible/pull/42)'
     release_date: '2023-03-04'
+  0.1.4:
+    changes:
+      trivial:
+        - 'docs: add argument specs to roles (https://github.com/prometheus-community/ansible/pull/27)'
+    release_date: '2023-03-05'
