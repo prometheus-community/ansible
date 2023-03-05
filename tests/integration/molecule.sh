@@ -42,7 +42,7 @@ fi
 
 # Define config locations within collection
 export MOLECULE_FILE=$collection_root/.config/molecule/config.yml
-export YAMLLINT_CONFIG_FILE=$collection_root/.config/yamllint/config.yml
+export YAMLLINT_CONFIG_FILE=$collection_root/.yamllint.yml
 
 # Unset ansible-test variables that break molecule
 unset _ANSIBLE_COVERAGE_CONFIG

@@ -21,3 +21,6 @@ rules:
     level: error
   line-length:
     max: 160
+
+ignore: |
+  changelogs/.plugin-cache.yaml
