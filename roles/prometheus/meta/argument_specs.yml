@@ -47,9 +47,11 @@ argument_specs:
         description: "Data retention period"
         default: "30d"
       prometheus_storage_retention_size:
-        description: "Data retention period by size"
-        type: "int"
-        default: 0
+        description:
+          - "Data retention period by size"
+          - "Maximum number of bytes that can be stored for blocks."
+          - "Units supported: KB, MB, GB, TB, PB."
+        default: "0"
       prometheus_config_flags_extra:
         description: "Additional configuration flags passed to prometheus binary at startup"
         type: "dict"
