@@ -79,13 +79,13 @@ argument_specs:
       prometheus_remote_write:
         description:
           - "Remote write. Compatible with the
-             L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#<remote_write>)"
+             L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)"
         type: "list"
         elements: "str"
       prometheus_remote_read:
         description:
           - "Remote read. It is compatible with the
-             L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#<remote_read>)"
+             L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)"
         type: "list"
         elements: "str"
       prometheus_external_labels:
