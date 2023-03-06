@@ -1,6 +1,7 @@
 ---
 blackbox_exporter_version: 0.18.0
-blackbox_exporter_binary_url: "https://github.com/prometheus/blackbox_exporter/releases/download/v{{ blackbox_exporter_version }}/\
+blackbox_exporter_repo: "prometheus/blackbox_exporter"
+blackbox_exporter_binary_url: "https://github.com/{{ blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/\
                                blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] |
                                default(ansible_architecture) }}.tar.gz"
 
