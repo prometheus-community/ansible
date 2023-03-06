@@ -9,6 +9,7 @@ on:
       - opened
       - edited
       - reopened
+      - synchronize
   workflow_dispatch:
 
 env:
