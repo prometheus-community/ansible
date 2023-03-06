@@ -51,4 +51,6 @@ releases:
         - 'fix: follow PEP 440 standard for supported ansible versions (https://github.com/prometheus-community/ansible/pull/46)'
       trivial:
         - 'refactor: move yamllint cfg to standard path (https://github.com/prometheus-community/ansible/pull/47)'
+        - 'docs: Remove references to to previous named ansible collection cloudalchemy
+          (https://github.com/prometheus-community/ansible/pull/44)'
     release_date: '2023-03-05'
