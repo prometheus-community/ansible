@@ -38,7 +38,6 @@ argument_specs:
         description: "A Prometheus L(web config yaml,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)
                       for configuring TLS and auth."
         type: "dict"
-        elements: "dict"
       prometheus_web_external_url:
         description: "External address on which prometheus is available. Useful when behind reverse proxy. Ex. `http://example.org/prometheus`"
       prometheus_metrics_path:
@@ -54,7 +53,6 @@ argument_specs:
       prometheus_config_flags_extra:
         description: "Additional configuration flags passed to prometheus binary at startup"
         type: "dict"
-        elements: "str"
       prometheus_alertmanager_config:
         description:
           - "Configuration responsible for pointing where alertmanagers are. This should be specified as list in yaml format."
@@ -74,7 +72,6 @@ argument_specs:
           - "Prometheus global config. It is compatible with the
              L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file)"
         type: "dict"
-        elements: "str"
         default:
           scrape_interval: "60s"
           scrape_timeout: "15s"
@@ -94,14 +91,12 @@ argument_specs:
       prometheus_external_labels:
         description: "Provide map of additional labels which will be added to any time series or alerts when communicating with external systems"
         type: "dict"
-        elements: "str"
         default:
           environment: "{{ ansible_fqdn | default(ansible_host) | default(inventory_hostname) }}"
       prometheus_targets:
         description:
           - "Targets which will be scraped."
         type: "dict"
-        elements: "str"
       prometheus_scrape_configs:
         description:
           - "Prometheus scrape jobs provided in same format as in the
