@@ -16,11 +16,9 @@ argument_specs:
       blackbox_exporter_cli_flags:
         description: "Additional configuration flags passed to blackbox exporter binary at startup"
         type: "dict"
-        elements: "str"
       blackbox_exporter_configuration_modules:
         description: "Endpoints configuration"
         type: "dict"
-        elements: "dict"
         default:
           http_2xx:
             prober: http
