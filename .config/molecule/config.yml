@@ -22,12 +22,6 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
-  - name: debian-9
-    image: dokken/debian-9
-    pre_build_image: true
-    privileged: true
-    cgroup_parent: docker.slice
-    command: /lib/systemd/systemd
   - name: debian-10
     image: dokken/debian-10
     pre_build_image: true
