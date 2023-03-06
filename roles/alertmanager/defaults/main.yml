@@ -55,7 +55,7 @@ alertmanager_cluster:
 #   listen-address: "{{ ansible_default_ipv4.address }}:6783"
 #   peers:
 #     - "{{ ansible_default_ipv4.address }}:6783"
-#     - "demo.cloudalchemy.org:6783"
+#     - "alertmanager.demo.do.prometheus.io:6783"
 
 alertmanager_receivers: []
 # alertmanager_receivers:

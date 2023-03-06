@@ -2,10 +2,6 @@
 
 # Ansible Role: node exporter
 
-## Warning
-
-Due to limitations of galaxy.ansible.com we had to move the role to https://galaxy.ansible.com/cloudalchemy/node_exporter and use `_` instead of `-` in role name. This is a breaking change and unfortunately, it affects all versions of node_exporter role as ansible galaxy doesn't offer any form of redirection. We are sorry for the inconvenience.
-
 ## Description
 
 Deploy prometheus [node exporter](https://github.com/prometheus/node_exporter) using ansible.
@@ -43,7 +39,7 @@ Use it in a playbook as follows:
 ```yaml
 - hosts: all
   roles:
-    - cloudalchemy.node_exporter
+    - prometheus.prometheus.node_exporter
 ```
 
 ### TLS config
@@ -66,7 +62,7 @@ Before running node_exporter role, the user needs to provision their own certifi
         privatekey_path: /etc/node_exporter/tls.key
         provider: selfsigned
   roles:
-    - cloudalchemy.node_exporter
+    - prometheus.prometheus.node_exporter
   vars:
     node_exporter_tls_server_config:
       cert_file: /etc/node_exporter/tls.cert

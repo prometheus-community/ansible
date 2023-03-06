@@ -37,27 +37,27 @@
       scrape_timeout: 2s
       evaluation_interval: 10s
     prometheus_remote_write:
-      - url: http://influx.cloudalchemy.org:8086/api/v1/prom/write?db=test
+      - url: http://influx.example.org:8086/api/v1/prom/write?db=test
         basic_auth:
           username: prometheus
           password: SuperSecret
     prometheus_remote_read:
-      - url: http://influx.cloudalchemy.org:8086/api/v1/prom/read?db=cloudalchemy
+      - url: http://influx.example.org:8086/api/v1/prom/read?db=demo
     prometheus_external_labels:
       environment: "alternative"
     prometheus_targets:
       node:
         - targets:
-            - demo.cloudalchemy.org:9100
-            - influx.cloudalchemy.org:9100
+            - node.demo.do.prometheus.io
+            - influx.example.org:9100
           labels:
-            env: cloudalchemy
+            env: demo
       docker:
         - targets:
-            - demo.cloudalchemy.org:8080
-            - influx.cloudalchemy.org:8080
+            - demo.do.prometheus.io:8080
+            - influx.example.org:8080
           labels:
-            env: cloudalchemy
+            env: demo
     prometheus_scrape_configs:
       - job_name: "prometheus"
         metrics_path: "{{ prometheus_metrics_path }}"
@@ -78,8 +78,8 @@
           module: [http_2xx]
         static_configs:
           - targets:
-              - http://demo.cloudalchemy.org:9100
-              - http://influx.cloudalchemy.org:9100
+              - http://node.demo.do.prometheus.io
+              - http://influx.example.org:9100
         relabel_configs:
           - source_labels: [__address__]
             target_label: __param_target

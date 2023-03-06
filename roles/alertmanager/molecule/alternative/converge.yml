@@ -32,4 +32,4 @@
       listen-address: "127.0.0.1:6783"
       peers:
         - "127.0.0.1:6783"
-        - "demo.cloudalchemy.org:6783"
+        - "alertmanager.demo.do.prometheus.io:6783"

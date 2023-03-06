@@ -31,7 +31,7 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 - hosts: all
   become: true
   roles:
-    - cloudalchemy.blackbox-exporter
+    - prometheus.prometheus.blackbox-exporter
 ```
 
 ### Demo site
