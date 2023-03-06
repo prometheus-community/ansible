@@ -40,7 +40,8 @@
 
 - name: Get all file_sd files from scrape_configs
   ansible.builtin.set_fact:
-    file_sd_files: "{{ prometheus_scrape_configs | selectattr('file_sd_configs', 'defined') | map(attribute='file_sd_configs') | flatten | map(attribute='files') | flatten }}"
+    file_sd_files: "{{ prometheus_scrape_configs | selectattr('file_sd_configs', 'defined') | map(attribute='file_sd_configs') |
+                    flatten | map(attribute='files') | flatten }}"
 
 - name: Fail when file_sd targets are not defined in scrape_configs
   ansible.builtin.fail:
