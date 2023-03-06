@@ -31,10 +31,6 @@
     that: prometheus_global.external_labels is not defined
     msg: "Use prometheus_external_labels to define external labels"
 
-- name: Set prometheus external metrics path
-  ansible.builtin.set_fact:
-    prometheus_metrics_path: "/{{ (prometheus_web_external_url + '/metrics') | regex_replace('^(.*://)?(.*?)/') }}"
-
 - name: Fail when prometheus_config_flags_extra duplicates parameters set by other variables
   ansible.builtin.fail:
     msg: >

@@ -41,6 +41,9 @@ argument_specs:
         elements: "dict"
       prometheus_web_external_url:
         description: "External address on which prometheus is available. Useful when behind reverse proxy. Ex. `http://example.org/prometheus`"
+      prometheus_metrics_path:
+        description: "Prometheus external metrics path"
+        default: "/metrics"
       prometheus_storage_retention:
         description: "Data retention period"
         default: "30d"
