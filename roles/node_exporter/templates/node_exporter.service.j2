@@ -45,7 +45,7 @@ StartLimitInterval=0
 ProtectHome={{ protect_home }}
 NoNewPrivileges=yes
 
-{% if node_exporter_systemd_version | int >= 232 %}
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
 ProtectSystem=strict
 ProtectControlGroups=true
 ProtectKernelModules=true

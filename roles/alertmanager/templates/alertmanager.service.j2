@@ -51,7 +51,7 @@ ReadWriteDirectories={{ alertmanager_db_dir }}
 RemoveIPC=true
 RestrictSUIDSGID=true
 
-{% if alertmanager_systemd_version | int >= 232 %}
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
 PrivateUsers=true
 ProtectControlGroups=true
 ProtectKernelModules=true

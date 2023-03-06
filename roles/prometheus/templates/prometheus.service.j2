@@ -52,7 +52,7 @@ RemoveIPC=true
 RestrictSUIDSGID=true
 #SystemCallFilter=@signal @timer
 
-{% if prometheus_systemd_version | int >= 231 %}
+{% if (ansible_facts.packages.systemd | first).version is version('231', '>=') %}
 ReadWritePaths={{ prometheus_db_dir }}
 {% for path in prometheus_read_only_dirs %}
 ReadOnlyPaths={{ path }}
@@ -64,7 +64,7 @@ ReadOnlyDirectories={{ path }}
 {% endfor %}
 {% endif %}
 
-{% if prometheus_systemd_version | int >= 232 %}
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
 PrivateUsers=true
 ProtectControlGroups=true
 ProtectKernelModules=true

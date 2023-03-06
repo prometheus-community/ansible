@@ -4,17 +4,9 @@
     that: ansible_service_mgr == 'systemd'
     msg: "This module only works with systemd"
 
-- name: Get systemd version
-  ansible.builtin.command: systemctl --version
-  changed_when: false
-  check_mode: false
-  register: __systemd_version
-  tags:
-    - skip_ansible_lint
-
-- name: Set systemd version fact
-  ansible.builtin.set_fact:
-    alertmanager_systemd_version: "{{ __systemd_version.stdout_lines[0].split(' ')[-1] }}"
+- name: Gather package facts
+  ansible.builtin.package_facts:
+  when: "not 'packages' in ansible_facts"
 
 - name: Discover latest version
   ansible.builtin.set_fact:
