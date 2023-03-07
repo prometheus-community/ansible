@@ -40,17 +40,30 @@
       ansible.builtin.stat:
         path: "{{ node_exporter_tls_server_config.cert_file }}"
       register: __node_exporter_cert_file
+      become: true
+      become_user: "{{ _node_exporter_system_user }}"
 
     - name: Check existence of TLS key file
       ansible.builtin.stat:
         path: "{{ node_exporter_tls_server_config.key_file }}"
       register: __node_exporter_key_file
+      become: true
+      become_user: "{{ _node_exporter_system_user }}"
 
     - name: Assert that TLS key and cert are present
       ansible.builtin.assert:
         that:
           - "{{ __node_exporter_cert_file.stat.exists }}"
           - "{{ __node_exporter_key_file.stat.exists }}"
+
+    - name: Assert that node_exporter can read TLS key and cert
+      ansible.builtin.assert:
+        that:
+          - "{{ __node_exporter_cert_file.stat.readable }}"
+          - "{{ __node_exporter_key_file.stat.readable }}"
+        msg: >-
+          {{ _node_exporter_system_user }} system user does not have read
+          permission on the TLS key and/or certificate.
 
 - name: Check if node_exporter is installed
   ansible.builtin.stat:
