@@ -15,6 +15,13 @@ argument_specs:
           - "Enables the use of local packages instead of those distributed on github."
           - "The parameter may be set to a directory where the C(node_exporter) binary is stored on the host where ansible is run."
           - "This overrides the I(node_exporter_version) parameter"
+      node_exporter_binary_url:
+        description: "URL of the node exporter binaries .tar.gz file"
+        default: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/\
+                  node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+      node_exporter_checksums_url:
+        description: "URL of the node exporter checksums file"
+        default: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/sha256sums.txt"
       node_exporter_web_listen_address:
         description: "Address on which node exporter will listen"
         default: "0.0.0.0:9100"
@@ -47,14 +54,11 @@ argument_specs:
           - "Configuration for TLS authentication."
           - "Keys and values are the same as in L(node_exporter docs,https://github.com/prometheus/node_exporter/blob/master/https/README.md#sample-config)."
         type: "dict"
-        elements: "str"
       node_exporter_http_server_config:
         description:
           - "Config for HTTP/2 support."
           - "Keys and values are the same as in L(node_exporter docs,https://github.com/prometheus/node_exporter/blob/master/https/README.md#sample-config)."
         type: "dict"
-        elements: "str"
       node_exporter_basic_auth_users:
         description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
         type: "dict"
-        elements: "str"

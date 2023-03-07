@@ -15,6 +15,13 @@ argument_specs:
           - "Allows to use local packages instead of ones distributed on github."
           - "As parameter it takes a directory where C(alertmanager) AND C(amtool) binaries are stored on host on which ansible is ran."
           - "This overrides I(alertmanager_version) parameter"
+      alertmanager_binary_url:
+        description: "URL of the alertmanager binaries .tar.gz file"
+        default: "https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/\
+                  alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
+      alertmanager_checksums_url:
+        description: "URL of the alertmanager checksums file"
+        default: "https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/sha256sums.txt"
       alertmanager_web_listen_address:
         description: "Address on which alertmanager will be listening"
         default: "0.0.0.0:9093"

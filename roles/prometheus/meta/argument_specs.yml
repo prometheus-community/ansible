@@ -21,6 +21,13 @@ argument_specs:
           - "Allows to use local packages instead of ones distributed on github."
           - "As parameter it takes a directory where I(prometheus) AND I(promtool) binaries are stored on host on which ansible is ran."
           - "This overrides I(prometheus_version) parameter"
+      prometheus_binary_url:
+        description: "URL of the prometheus binaries .tar.gz file"
+        default: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/\
+                  prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
+      prometheus_checksums_url:
+        description: URL of the prometheus checksums file
+        default: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/sha256sums.txt"
       prometheus_config_dir:
         description: "Path to directory with prometheus configuration"
         default: "/etc/prometheus"
@@ -38,20 +45,26 @@ argument_specs:
         description: "A Prometheus L(web config yaml,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)
                       for configuring TLS and auth."
         type: "dict"
-        elements: "dict"
       prometheus_web_external_url:
         description: "External address on which prometheus is available. Useful when behind reverse proxy. Ex. `http://example.org/prometheus`"
+      prometheus_metrics_path:
+        description: "Prometheus external metrics path"
+        default: "/{{ (prometheus_web_external_url + '/metrics') | regex_replace('^(.*://)?(.*?)/') }}"
       prometheus_storage_retention:
-        description: "Data retention period"
+        description:
+          - "Data retention period"
         default: "30d"
       prometheus_storage_retention_size:
-        description: "Data retention period by size"
-        type: "int"
-        default: 0
+        description:
+          - "Data retention period by size"
+          - "Maximum number of bytes that can be stored for blocks."
+          - "Units supported: KB, MB, GB, TB, PB."
+        default: "0"
       prometheus_config_flags_extra:
-        description: "Additional configuration flags passed to prometheus binary at startup"
+        description:
+          - "Additional configuration flags passed to prometheus binary at startup"
+          - "Example: prometheus_config_flags_extra: { storage.tsdb.retention: 15d, alertmanager.timeout: 10s }"
         type: "dict"
-        elements: "str"
       prometheus_alertmanager_config:
         description:
           - "Configuration responsible for pointing where alertmanagers are. This should be specified as list in yaml format."
@@ -71,7 +84,6 @@ argument_specs:
           - "Prometheus global config. It is compatible with the
              L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file)"
         type: "dict"
-        elements: "str"
         default:
           scrape_interval: "60s"
           scrape_timeout: "15s"
@@ -91,14 +103,12 @@ argument_specs:
       prometheus_external_labels:
         description: "Provide map of additional labels which will be added to any time series or alerts when communicating with external systems"
         type: "dict"
-        elements: "str"
         default:
           environment: "{{ ansible_fqdn | default(ansible_host) | default(inventory_hostname) }}"
       prometheus_targets:
         description:
           - "Targets which will be scraped."
         type: "dict"
-        elements: "str"
       prometheus_scrape_configs:
         description:
           - "Prometheus scrape jobs provided in same format as in the
