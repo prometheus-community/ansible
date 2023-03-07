@@ -12,6 +12,7 @@ Bugfixes
 --------
 
 - fix: follow PEP 440 standard for supported ansible versions (https://github.com/prometheus-community/ansible/pull/46)
+- fix: various role argument specs (https://github.com/prometheus-community/ansible/pull/50)
 
 v0.1.4
 ======
