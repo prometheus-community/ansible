@@ -57,8 +57,10 @@ releases:
     release_date: '2023-03-05'
   0.2.0:
     changes:
-      removed_features:
-        - 'removed: community.crypto is only needed when testing (https://github.com/prometheus-community/ansible/pull/56)'
       bugfixes:
         - 'fix: Fix typo on Install selinux python packages for RedHat family (https://github.com/prometheus-community/ansible/pull/57)'
+      removed_features:
+        - 'removed: community.crypto is only needed when testing (https://github.com/prometheus-community/ansible/pull/56)'
+      trivial:
+        - 'refactor: Disable line-length check in arguments_specs (https://github.com/prometheus-community/ansible/pull/58)'
     release_date: '2023-03-08'
