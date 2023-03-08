@@ -1,4 +1,5 @@
 ---
+# yamllint disable rule:line-length
 argument_specs:
   main:
     short_description: "Prometheus Node Exporter"
@@ -17,8 +18,7 @@ argument_specs:
           - "This overrides the I(node_exporter_version) parameter"
       node_exporter_binary_url:
         description: "URL of the node exporter binaries .tar.gz file"
-        default: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/\
-                  node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
       node_exporter_checksums_url:
         description: "URL of the node exporter checksums file"
         default: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/sha256sums.txt"

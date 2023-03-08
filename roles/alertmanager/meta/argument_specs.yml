@@ -1,4 +1,5 @@
 ---
+# yamllint disable rule:line-length
 argument_specs:
   main:
     short_description: "Prometheus Alertmanager service"
@@ -17,8 +18,7 @@ argument_specs:
           - "This overrides I(alertmanager_version) parameter"
       alertmanager_binary_url:
         description: "URL of the alertmanager binaries .tar.gz file"
-        default: "https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/\
-                  alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
       alertmanager_checksums_url:
         description: "URL of the alertmanager checksums file"
         default: "https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/sha256sums.txt"
