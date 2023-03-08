@@ -1,4 +1,5 @@
 ---
+# yamllint disable rule:line-length
 argument_specs:
   main:
     short_description: "Deploy and manage Prometheus blackbox exporter"

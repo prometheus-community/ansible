@@ -1,4 +1,5 @@
 ---
+# yamllint disable rule:line-length
 argument_specs:
   main:
     short_description: "Installs and configures prometheus"
@@ -23,8 +24,7 @@ argument_specs:
           - "This overrides I(prometheus_version) parameter"
       prometheus_binary_url:
         description: "URL of the prometheus binaries .tar.gz file"
-        default: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/\
-                  prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/ prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
       prometheus_checksums_url:
         description: URL of the prometheus checksums file
         default: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/sha256sums.txt"
@@ -42,8 +42,7 @@ argument_specs:
         description: "Address on which prometheus will be listening"
         default: "0.0.0.0:9090"
       prometheus_web_config:
-        description: "A Prometheus L(web config yaml,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)
-                      for configuring TLS and auth."
+        description: "A Prometheus L(web config yaml,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md) for configuring TLS and auth."
         type: "dict"
       prometheus_web_external_url:
         description: "External address on which prometheus is available. Useful when behind reverse proxy. Ex. `http://example.org/prometheus`"
@@ -68,21 +67,18 @@ argument_specs:
       prometheus_alertmanager_config:
         description:
           - "Configuration responsible for pointing where alertmanagers are. This should be specified as list in yaml format."
-          - "It is compatible with the official
-             L(alertmanager_config,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#alertmanager_config)"
+          - "It is compatible with the official L(alertmanager_config,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#alertmanager_config)"
         type: "list"
         elements: "str"
       prometheus_alert_relabel_configs:
         description:
           - "Alert relabeling rules. This should be specified as list in yaml format."
-          - "It is compatible with the official
-             L(alert_relabel_configs,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#alert_relabel_configs)"
+          - "It is compatible with the official L(alert_relabel_configs,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#alert_relabel_configs)"
         type: "list"
         elements: "str"
       prometheus_global:
         description:
-          - "Prometheus global config. It is compatible with the
-             L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file)"
+          - "Prometheus global config. It is compatible with the L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file)"
         type: "dict"
         default:
           scrape_interval: "60s"
@@ -90,14 +86,12 @@ argument_specs:
           evaluation_interval: "15s"
       prometheus_remote_write:
         description:
-          - "Remote write. Compatible with the
-             L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)"
+          - "Remote write. Compatible with the L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)"
         type: "list"
         elements: "str"
       prometheus_remote_read:
         description:
-          - "Remote read. It is compatible with the
-             L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)"
+          - "Remote read. It is compatible with the L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)"
         type: "list"
         elements: "str"
       prometheus_external_labels:
@@ -111,8 +105,7 @@ argument_specs:
         type: "dict"
       prometheus_scrape_configs:
         description:
-          - "Prometheus scrape jobs provided in same format as in the
-             L(official docs,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config)"
+          - "Prometheus scrape jobs provided in same format as in the L(official docs,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config)"
         type: "list"
         elements: "dict"
         default:
@@ -145,8 +138,7 @@ argument_specs:
           - "prometheus/rules/*.rules"
       prometheus_static_targets_files:
         description:
-          - "List of folders where ansible will look for files containing custom static target configuration files
-             which will be copied to C({{ prometheus_config_dir }}/file_sd/)."
+          - "List of folders where ansible will look for files containing custom static target configuration files which will be copied to C({{ prometheus_config_dir }}/file_sd/)."
         type: "list"
         elements: "str"
         default:
