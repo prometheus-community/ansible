@@ -9,7 +9,7 @@
   until: _install_selinux_packages is success
   retries: 5
   delay: 2
-  when: ansible_os_family | lower == redhat
+  when: ansible_os_family | lower == "redhat"
 
 - name: Install selinux python packages [clearlinux]
   ansible.builtin.package:
