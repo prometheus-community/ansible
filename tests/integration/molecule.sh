@@ -23,6 +23,8 @@ fi
 # Install ansible version specific requirements
 if [ "$(printf '%s\n' "2.12" "$ansible_version" | sort -V | head -n1)" = "2.12" ]; then 
        python -m pip install molecule molecule-plugins[docker]
+       ansible-galaxy collection install git+https://github.com/ansible-collections/community.docker.git
+       ansible-galaxy collection install -r "$collection_root/requirements.yml"
 elif [ "$(printf '%s\n' "2.10" "$ansible_version" | sort -V | head -n1)" = "2.10" ]; then
        python -m pip install molecule molecule-docker
        ansible-galaxy collection install git+https://github.com/ansible-collections/community.docker.git
