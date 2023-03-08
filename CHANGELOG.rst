@@ -8,6 +8,16 @@ Prometheus.Prometheus Release Notes
 v0.2.0
 ======
 
+Removed Features (previously deprecated)
+----------------------------------------
+
+- removed: community.crypto is only needed when testing (https://github.com/prometheus-community/ansible/pull/56)
+
+Bugfixes
+--------
+
+- fix: Fix typo on Install selinux python packages for RedHat family (https://github.com/prometheus-community/ansible/pull/57)
+
 v0.1.5
 ======
 
