@@ -12,6 +12,7 @@
         url: "https://github.com/povilasv/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/\
               systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        mode: 0644
       register: _download_binary
       until: _download_binary is succeeded
       retries: 5
