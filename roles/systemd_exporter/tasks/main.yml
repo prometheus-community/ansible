@@ -23,7 +23,6 @@
     file: selinux.yml
     apply:
       become: true
-  become: true
   when: ansible_selinux.status == "enabled"
   tags:
     - systemd_exporter_configure
