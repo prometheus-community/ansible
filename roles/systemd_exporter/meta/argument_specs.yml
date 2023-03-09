@@ -4,7 +4,7 @@ argument_specs:
   main:
     short_description: "Prometheus Systemd Exporter"
     description:
-      - "Deploy prometheus L(systemd exporter,,https://github.com/povilasv/systemd_exporter) using ansible."
+      - "Deploy prometheus L(systemd exporter,,https://github.com/prometheus-community/systemd_exporter) using ansible."
     author:
       - "Prometheus Community"
     options:
@@ -18,10 +18,10 @@ argument_specs:
           - "This overrides I(systemd_exporter_version) parameter"
       systemd_exporter_binary_url:
         description: URL of the systemd exporter binaries .tar.gz file"
-        default: "https://github.com/povilasv/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
       systemd_exporter_checksums_url:
         description: "URL of the systemd exporter checksums file"
-        default: "https://github.com/povilasv/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/sha256sums.txt"
+        default: "https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/sha256sums.txt"
       systemd_exporter_web_listen_address:
         description: Address on which systemd exporter will listen"
         default: "0.0.0.0:9558"
@@ -38,9 +38,9 @@ argument_specs:
         type: "bool"
         default: false
       systemd_exporter_unit_allowlist:
-        description: "Include some systemd units. Expects a regex. More in L(https://github.com/povilasv/systemd_exporter#configuration)"
+        description: "Include some systemd units. Expects a regex. More in L(https://github.com/prometheus-community/systemd_exporter#configuration)"
       systemd_exporter_unit_denylist:
-        description: "Exclude some systemd units. Expects a regex. More in L(https://github.com/povilasv/systemd_exporter#configuration)"
+        description: "Exclude some systemd units. Expects a regex. More in L(https://github.com/prometheus-community/systemd_exporter#configuration)"
       systemd_exporter_binary_install_dir:
         description:
           - "I(Advanced)"

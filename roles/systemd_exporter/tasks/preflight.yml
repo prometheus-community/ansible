@@ -56,7 +56,7 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    systemd_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/povilasv/systemd_exporter/releases/latest', split_lines=False) |
+    systemd_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus-community/systemd_exporter/releases/latest', split_lines=False) |
                             from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
   until: systemd_exporter_version is version('0.0.0', '>=')

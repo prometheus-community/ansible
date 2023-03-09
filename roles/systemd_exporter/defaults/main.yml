@@ -1,9 +1,9 @@
 ---
 systemd_exporter_version: 0.4.0
 systemd_exporter_binary_local_dir: ""
-systemd_exporter_binary_url: "https://github.com/povilasv/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/\
+systemd_exporter_binary_url: "https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/\
                                     systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
-systemd_exporter_checksums_url: "https://github.com/povilasv/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/sha256sums.txt"
+systemd_exporter_checksums_url: "https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/sha256sums.txt"
 systemd_exporter_web_listen_address: "0.0.0.0:9558"
 
 systemd_exporter_enable_restart_count: false
