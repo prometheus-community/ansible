@@ -62,3 +62,18 @@ argument_specs:
       node_exporter_basic_auth_users:
         description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
         type: "dict"
+      node_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install node_exporter binary"
+        default: "/usr/local/bin"
+      node_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for node exporter"
+        default: "node-exp"
+      node_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "Node exporter user"
+        default: "node-exp"

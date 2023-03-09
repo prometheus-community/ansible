@@ -54,14 +54,14 @@
 
 - name: Check if node_exporter is installed
   ansible.builtin.stat:
-    path: "{{ _node_exporter_binary_install_dir }}/node_exporter"
+    path: "{{ node_exporter_binary_install_dir }}/node_exporter"
   register: __node_exporter_is_installed
   check_mode: false
   tags:
     - node_exporter_install
 
 - name: Gather currently installed node_exporter version (if any)
-  ansible.builtin.command: "{{ _node_exporter_binary_install_dir }}/node_exporter --version"
+  ansible.builtin.command: "{{ node_exporter_binary_install_dir }}/node_exporter --version"
   changed_when: false
   register: __node_exporter_current_version_output
   check_mode: false

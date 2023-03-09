@@ -1,21 +1,21 @@
 ---
 - name: Create the node_exporter group
   ansible.builtin.group:
-    name: "{{ _node_exporter_system_group }}"
+    name: "{{ node_exporter_system_group }}"
     state: present
     system: true
-  when: _node_exporter_system_group != "root"
+  when: node_exporter_system_group != "root"
 
 - name: Create the node_exporter user
   ansible.builtin.user:
-    name: "{{ _node_exporter_system_user }}"
-    groups: "{{ _node_exporter_system_group }}"
+    name: "{{ node_exporter_system_user }}"
+    groups: "{{ node_exporter_system_group }}"
     append: true
     shell: /usr/sbin/nologin
     system: true
     create_home: false
     home: /
-  when: _node_exporter_system_user != "root"
+  when: node_exporter_system_user != "root"
 
 - name: Discover latest version
   when: node_exporter_binary_local_dir | length == 0
@@ -47,7 +47,7 @@
     - name: Propagate node_exporter binaries
       ansible.builtin.copy:
         src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
-        dest: "{{ _node_exporter_binary_install_dir }}/node_exporter"
+        dest: "{{ node_exporter_binary_install_dir }}/node_exporter"
         mode: 0755
         owner: root
         group: root
@@ -57,7 +57,7 @@
 - name: Propagate locally distributed node_exporter binary
   ansible.builtin.copy:
     src: "{{ node_exporter_binary_local_dir }}/node_exporter"
-    dest: "{{ _node_exporter_binary_install_dir }}/node_exporter"
+    dest: "{{ node_exporter_binary_install_dir }}/node_exporter"
     mode: 0755
     owner: root
     group: root
