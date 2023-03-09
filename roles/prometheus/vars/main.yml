@@ -9,6 +9,6 @@ go_arch_map:
 go_arch: "{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
 _prometheus_binary_install_dir: '/usr/local/bin'
 
-_prometheus_selinux_packages: "{{ ['libselinux-python', 'python-policycoreutils']
+_prometheus_selinux_packages: "{{ ['libselinux-python', 'policycoreutils-python']
                                if ansible_python_version is version('3', '<') else
                                ['python3-libselinux', 'python3-policycoreutils'] }}"
