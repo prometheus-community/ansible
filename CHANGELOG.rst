@@ -8,6 +8,11 @@ Prometheus.Prometheus Release Notes
 v0.2.0
 ======
 
+Minor Changes
+-------------
+
+- feat: add systemd exporter role (https://github.com/prometheus-community/ansible/pull/62)
+
 Removed Features (previously deprecated)
 ----------------------------------------
 
