@@ -1,7 +1,7 @@
 ---
 - name: Install selinux python packages [RedHat]
   ansible.builtin.package:
-    name: "{{ ['libselinux-python', 'python-policycoreutils']
+    name: "{{ ['libselinux-python', 'policycoreutils-python']
            if ansible_python_version is version('3', '<') else
            ['python3-libselinux', 'python3-policycoreutils'] }}"
     state: present
