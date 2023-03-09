@@ -1,0 +1,8 @@
+---
+- name: Run role
+  hosts: all
+  any_errors_fatal: true
+  roles:
+    - prometheus.prometheus.systemd_exporter
+  vars:
+    systemd_exporter_version: latest

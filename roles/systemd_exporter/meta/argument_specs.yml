@@ -1,0 +1,58 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus Systemd Exporter"
+    description:
+      - "Deploy prometheus L(systemd exporter,,https://github.com/prometheus-community/systemd_exporter) using ansible."
+    author:
+      - "Prometheus Community"
+    options:
+      systemd_exporter_version:
+        description: "SystemD exporter package version. Also accepts latest as parameter."
+        default: "0.4.0"
+      systemd_exporter_binary_local_dir:
+        description:
+          - "Allows to use local packages instead of ones distributed on github."
+          - "As parameter it takes a directory where C(systemd_exporter) binary is stored on host on which ansible is run."
+          - "This overrides I(systemd_exporter_version) parameter"
+      systemd_exporter_binary_url:
+        description: URL of the systemd exporter binaries .tar.gz file"
+        default: "https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+      systemd_exporter_checksums_url:
+        description: "URL of the systemd exporter checksums file"
+        default: "https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/sha256sums.txt"
+      systemd_exporter_web_listen_address:
+        description: Address on which systemd exporter will listen"
+        default: "0.0.0.0:9558"
+      systemd_exporter_enable_restart_count:
+        description: Enables service restart count metrics. This feature only works with systemd 235 and above"
+        type: "bool"
+        default: false
+      systemd_exporter_enable_ip_accounting:
+        description: Enables service ip accounting metrics. This feature only works with systemd 235 and above"
+        type: "bool"
+        default: false
+      systemd_exporter_enable_file_descriptor_size:
+        description: Enables file descriptor size metrics. This feature will cause exporter to run as root as it needs access to /proc/X/fd"
+        type: "bool"
+        default: false
+      systemd_exporter_unit_allowlist:
+        description: "Include some systemd units. Expects a regex. More in L(https://github.com/prometheus-community/systemd_exporter#configuration)"
+      systemd_exporter_unit_denylist:
+        description: "Exclude some systemd units. Expects a regex. More in L(https://github.com/prometheus-community/systemd_exporter#configuration)"
+      systemd_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install systemd_exporter binary"
+        default: "/usr/local/bin"
+      systemd_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for systemd exporter"
+        default: "systemd-exporter"
+      systemd_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "Systemd exporter user"
+        default: "systemd-exporter"

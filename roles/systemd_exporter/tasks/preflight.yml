@@ -1,0 +1,83 @@
+---
+- name: Assert usage of systemd as an init system
+  ansible.builtin.assert:
+    that: ansible_service_mgr == 'systemd'
+    msg: "This role only works with systemd"
+
+- name: Install package fact dependencies
+  ansible.builtin.package:
+    name: "{{ _pkg_fact_req }}"
+    state: present
+  when: (_pkg_fact_req)
+  vars:
+    _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
+                    {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
+                    {% else %}\
+                    {% endif %}"
+
+- name: Gather package facts
+  ansible.builtin.package_facts:
+  when: "not 'packages' in ansible_facts"
+
+- name: Naive assertion of proper listen address
+  ansible.builtin.assert:
+    that:
+      - "':' in systemd_exporter_web_listen_address"
+
+- name: Assert that systemd version is >= 235 when enabling ip accounting or measuring restart count
+  ansible.builtin.assert:
+    that:
+      - (ansible_facts.packages.systemd | first).version is version('235', '>=')
+  when: systemd_exporter_enable_ip_accounting or systemd_exporter_enable_restart_count
+
+- name: Set user and group to root to allow access to /proc/X/fd
+  ansible.builtin.set_fact:
+    systemd_exporter_system_group: "root"
+    systemd_exporter_system_user: "root"
+  when: systemd_exporter_enable_file_descriptor_size
+
+- name: Check if systemd_exporter is installed
+  ansible.builtin.stat:
+    path: "{{ systemd_exporter_binary_install_dir }}/systemd_exporter"
+  register: __systemd_exporter_is_installed
+  check_mode: false
+  tags:
+    - systemd_exporter_install
+
+- name: Gather currently installed systemd_exporter version (if any)
+  command: "{{ systemd_exporter_binary_install_dir }}/systemd_exporter --version"
+  changed_when: false
+  register: __systemd_exporter_current_version_output
+  check_mode: false
+  when: __systemd_exporter_is_installed.stat.exists
+  tags:
+    - systemd_exporter_install
+    - skip_ansible_lint
+
+- name: Discover latest version
+  ansible.builtin.set_fact:
+    systemd_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus-community/systemd_exporter/releases/latest', split_lines=False) |
+                            from_json).get('tag_name') | replace('v', '') }}"
+  run_once: true
+  until: systemd_exporter_version is version('0.0.0', '>=')
+  retries: 10
+  when:
+    - systemd_exporter_version == "latest"
+    - systemd_exporter_binary_local_dir | length == 0
+
+- name: Get systemd exporter binary checksum
+  when: systemd_exporter_binary_local_dir | length == 0
+  block:
+    - name: Get checksum list from github
+      ansible.builtin.set_fact:
+        _systemd_exporter_checksums: "{{ lookup('url', systemd_exporter_checksums_url, wantlist=True) | list }}"
+      run_once: true
+      until: _systemd_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
+      retries: 10
+
+    - name: "Get checksum for {{ go_arch }}"
+      ansible.builtin.set_fact:
+        _systemd_exporter_checksum: "{{ item.split(' ')[0] }}"
+      with_items: "{{ _systemd_exporter_checksums }}"
+      when:
+        - "('linux-' + go_arch + '.tar.gz') in item"
