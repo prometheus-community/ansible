@@ -1,0 +1,47 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus SystemD Exporter
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ systemd_exporter_system_user }}
+Group={{ systemd_exporter_system_group }}
+ExecStart={{ systemd_exporter_binary_install_dir }}/systemd_exporter \
+{% if systemd_exporter_enable_restart_count %}
+    --collector.enable-restart-count \
+{% endif %}
+{% if systemd_exporter_enable_file_descriptor_size %}
+    --collector.enable-file-descriptor-size \
+{% endif %}
+{% if systemd_exporter_enable_ip_accounting %}
+    --collector.enable-ip-accounting \
+{% endif %}
+{% if systemd_exporter_unit_whitelist != ""%}
+    --collector.unit-whitelist={{ systemd_exporter_unit_whitelist }} \
+{% endif %}
+{% if systemd_exporter_unit_blacklist != "" %}
+    --collector.unit-blacklist={{ systemd_exporter_unit_blacklist }} \
+{% endif %}
+    --web.listen-address={{ systemd_exporter_web_listen_address }}
+
+SyslogIdentifier=systemd_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+ProtectHome=yes
+NoNewPrivileges=yes
+
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target

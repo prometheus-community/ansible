@@ -1,0 +1,18 @@
+---
+systemd_exporter_version: 0.4.0
+systemd_exporter_binary_local_dir: ""
+systemd_exporter_binary_url: "https://github.com/povilasv/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/\
+                                    systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+systemd_exporter_checksums_url: "https://github.com/povilasv/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/sha256sums.txt"
+systemd_exporter_web_listen_address: "0.0.0.0:9558"
+
+systemd_exporter_enable_restart_count: false
+systemd_exporter_enable_ip_accounting: false
+systemd_exporter_enable_file_descriptor_size: false
+
+systemd_exporter_unit_whitelist: ""
+systemd_exporter_unit_blacklist: ""
+
+systemd_exporter_binary_install_dir: "/usr/local/bin"
+systemd_exporter_system_group: "systemd-exporter"
+systemd_exporter_system_user: "{{ systemd_exporter_system_group }}"
