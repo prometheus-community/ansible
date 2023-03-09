@@ -46,8 +46,6 @@
 
 - name: Gather currently installed systemd_exporter version (if any)
   command: "{{ systemd_exporter_binary_install_dir }}/systemd_exporter --version"
-  args:
-    warn: false
   changed_when: false
   register: __systemd_exporter_current_version_output
   check_mode: false
