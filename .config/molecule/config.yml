@@ -58,6 +58,12 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
+  - name: ubuntu-16.04
+    image: dokken/ubuntu-16.04
+    pre_build_image: true
+    privileged: true
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
   - name: ubuntu-18.04
     image: dokken/ubuntu-18.04
     pre_build_image: true
@@ -78,3 +84,9 @@ platforms:
     command: /lib/systemd/systemd
 verifier:
   name: testinfra
+
+provisioner:
+  inventory:
+    host_vars:
+      ubuntu-16.04:
+        ansible_python_interpreter: /usr/bin/python2.7
