@@ -4,17 +4,20 @@
     that: ansible_service_mgr == 'systemd'
     msg: "This role only works with systemd"
 
-- name: Get systemd version
-  ansible.builtin.command: systemctl --version
-  changed_when: false
-  check_mode: false
-  register: __systemd_version
-  tags:
-    - skip_ansible_lint
+- name: Install package fact dependencies
+  ansible.builtin.package:
+    name: "{{ _pkg_fact_req }}"
+    state: present
+  when: (_pkg_fact_req)
+  vars:
+    _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
+                    {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
+                    {% else %}\
+                    {% endif %}"
 
-- name: Set systemd version fact
-  ansible.builtin.set_fact:
-    node_exporter_systemd_version: "{{ __systemd_version.stdout_lines[0] | regex_replace('^systemd\\s(\\d+).*$', '\\1') }}"
+- name: Gather package facts
+  ansible.builtin.package_facts:
+  when: "not 'packages' in ansible_facts"
 
 - name: Naive assertion of proper listen address
   ansible.builtin.assert:
@@ -68,7 +71,6 @@
   when: __node_exporter_is_installed.stat.exists
   tags:
     - node_exporter_install
-    - skip_ansible_lint
 
 - name: Discover latest version
   ansible.builtin.set_fact:

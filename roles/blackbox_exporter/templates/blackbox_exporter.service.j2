@@ -32,7 +32,7 @@ RemoveIPC=true
 RestrictSUIDSGID=true
 
 AmbientCapabilities=CAP_NET_RAW
-{% if blackbox_exporter_systemd_version | int >= 232 %}
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
 ProtectControlGroups=true
 ProtectKernelModules=true
 ProtectKernelTunables=yes
