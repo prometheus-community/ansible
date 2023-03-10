@@ -9,19 +9,22 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - bionic
+        - focal
+        - jammy
         - xenial
     - name: Debian
       versions:
-        - stretch
+        - bullseye
         - buster
     - name: EL
       versions:
         - '7'
-        - '8'
+        - '7'
+        - '9'
     - name: Fedora
       versions:
-        - '30'
-        - '31'
+        - '36'
+        - '37'
   galaxy_tags:
     - monitoring
     - prometheus

@@ -4,24 +4,27 @@ galaxy_info:
   description: Prometheus monitoring system configuration and management
   license: Apache
   company: none
-  min_ansible_version: "2.7"
+  min_ansible_version: "2.9"
   platforms:
     - name: Ubuntu
       versions:
         - bionic
+        - focal
+        - jammy
         - xenial
     - name: Debian
       versions:
-        - stretch
+        - bullseye
         - buster
     - name: EL
       versions:
         - '7'
         - '8'
+        - '9'
     - name: Fedora
       versions:
-        - '30'
-        - '31'
+        - '36'
+        - '37'
   galaxy_tags:
     - monitoring
     - prometheus
