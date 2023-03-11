@@ -1,0 +1,46 @@
+---
+name: Sync repo files
+on:
+  schedule:
+    - cron: '21 14 * * *'
+  workflow_call:
+    inputs:
+      role-repos:
+        required: true
+        type: string
+jobs:
+  discover-role-repos:
+    runs-on: ubuntu-latest
+    outputs:
+      role-repos: ${{ steps.discovered-role-repos.outputs.result }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get repos for each role
+        id: discovered-role-repos
+        uses: mikefarah/yq@master
+        with:
+          cmd: |
+            for defaults_file in roles/*/defaults/main.yml ; do
+              role="$(echo "${defaults_file}" | cut -f2 -d'/')"
+              yq eval "[{\"repo\": .${role}_repo, \"role\": \"${role}\"}]" "${defaults_file}"
+            done | yq -o json -I=0
+
+  repo_sync:
+    runs-on: ubuntu-latest
+    needs: discover-role-repos
+    permissions:
+      contents: write
+    container:
+      image: quay.io/prometheus/golang-builder:base
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    strategy:
+      matrix:
+        include: ${{ fromJson(needs.discover-role-repos.outputs.role-repos) }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - run: ./version_bumper.sh ${{ matrix.repo }} ${{ matrix.role }}
