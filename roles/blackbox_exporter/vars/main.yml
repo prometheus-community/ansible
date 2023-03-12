@@ -5,3 +5,4 @@ go_arch_map:
   aarch64: 'arm64'
   armv7l: 'armv7'
   armv6l: 'armv6'
+_blackbox_exporter_repo: "prometheus/blackbox_exporter"

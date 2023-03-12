@@ -11,6 +11,9 @@ argument_specs:
       blackbox_exporter_version:
         description: "Blackbox exporter package version"
         default: "0.18.0"
+      blackbox_exporter_binary_url:
+        description: "URL of the blackbox_exporter binaries .tar.gz file"
+        default: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
       blackbox_exporter_web_listen_address:
         description: "Address on which blackbox exporter will be listening"
         default: "0.0.0.0:9115"
