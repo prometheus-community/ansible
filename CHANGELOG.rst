@@ -8,6 +8,11 @@ Prometheus.Prometheus Release Notes
 v0.2.1
 ======
 
+Bugfixes
+--------
+
+- fix: policycoreutils python package name (https://github.com/prometheus-community/ansible/pull/63)
+
 v0.2.0
 ======
 

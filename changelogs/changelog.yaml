@@ -72,4 +72,6 @@ releases:
     changes:
       trivial:
         - 'refactor: underscore variable prefix should be reserved... (https://github.com/prometheus-community/ansible/pull/65)'
+      bugfixes:
+        - 'fix: policycoreutils python package name (https://github.com/prometheus-community/ansible/pull/63)'
     release_date: '2023-03-13'
