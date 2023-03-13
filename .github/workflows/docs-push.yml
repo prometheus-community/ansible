@@ -1,0 +1,52 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+name: Collection Docs
+concurrency:
+  group: docs-push-${{ github.sha }}
+  cancel-in-progress: true
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+  # Run CI once per day (at 06:00 UTC)
+  schedule:
+    - cron: '0 6 * * *'
+  # Allow manual trigger (for newer antsibull-docs, sphinx-ansible-theme, ... versions)
+  workflow_dispatch:
+
+jobs:
+  build-docs:
+    permissions:
+      contents: read
+    name: Build Ansible Docs
+    uses: ansible-community/github-docs-build/.github/workflows/_shared-docs-build-push.yml@main
+    with:
+      collection-name: prometheus.prometheus
+      init-lenient: false
+      init-fail-on-error: true
+      squash-hierarchy: true
+      init-project: Prometheus.Prometheus Collection
+      init-copyright: Prometheus.Prometheus Contributors
+      init-title: Prometheus.Prometheus Collection Documentation
+      init-html-short-title: Prometheus.Prometheus Collection Docs
+      init-extra-html-theme-options: |
+        documentation_home_url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/branch/main/
+      extra-collections: community.crypto community.general
+
+  publish-docs-gh-pages:
+    # for now we won't run this on forks
+    if: github.repository == 'prometheus-community/ansible'
+    permissions:
+      contents: write
+    needs: [build-docs]
+    name: Publish Ansible Docs
+    uses: ansible-community/github-docs-build/.github/workflows/_shared-docs-build-publish-gh-pages.yml@main
+    with:
+      artifact-name: ${{ needs.build-docs.outputs.artifact-name }}
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
