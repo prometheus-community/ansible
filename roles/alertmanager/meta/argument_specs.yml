@@ -4,7 +4,7 @@ argument_specs:
   main:
     short_description: "Prometheus Alertmanager service"
     description:
-      - "Deploy and manage Prometheus (alertmanager,https://github.com/prometheus/alertmanager) service using ansible."
+      - "Deploy and manage Prometheus L(alertmanager,https://github.com/prometheus/alertmanager) service using ansible."
     author:
       - "Prometheus Community"
     options:
@@ -86,13 +86,13 @@ argument_specs:
         default:
           listen-address: ""
       alertmanager_receivers:
-        description: "A list of notification receivers. Configuration same as in L(official docs,https://prometheus.io/docs/alerting/configuration/#<receiver>)"
+        description: "A list of notification receivers. Configuration same as in L(official docs,https://prometheus.io/docs/alerting/configuration/#receiver)"
         type: "list"
       alertmanager_inhibit_rules:
         description: "List of inhibition rules. Same as in L(official docs,https://prometheus.io/docs/alerting/configuration/#inhibit_rule)"
         type: "list"
       alertmanager_route:
-        description: "Alert routing. More in L(official docs,https://prometheus.io/docs/alerting/configuration/#<route>)"
+        description: "Alert routing. More in L(official docs,https://prometheus.io/docs/alerting/configuration/#route)"
         type: "dict"
       alertmanager_amtool_config_file:
         description: "Template for amtool config"
