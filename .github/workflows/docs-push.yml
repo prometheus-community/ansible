@@ -36,7 +36,6 @@ jobs:
       init-html-short-title: Prometheus.Prometheus Collection Docs
       init-extra-html-theme-options: |
         documentation_home_url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/branch/main/
-      extra-collections: community.crypto community.general
 
   publish-docs-gh-pages:
     # for now we won't run this on forks

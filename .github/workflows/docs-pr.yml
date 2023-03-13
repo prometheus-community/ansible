@@ -31,8 +31,8 @@ jobs:
       init-html-short-title: Prometheus.Prometheus Collection Docs
       init-extra-html-theme-options: |
           documentation_home_url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/branch/main/
-        render-file-line: '> * `$<status>` [$<path_tail>](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr/${{ github.event.number }}/$<path_tail>)'
-        extra-collections: community.crypto amazon.aws community.dns community.sops
+      render-file-line: '> * `$<status>` [$<path_tail>](https://${{ github.repository_owner }}.github.io/\
+                         ${{ github.event.repository.name }}/pr/${{ github.event.number }}/$<path_tail>)'
 
     publish-docs-gh-pages:
       # for now we won't run this on forks
@@ -83,11 +83,11 @@ jobs:
               You can compare to the docs for the `main` branch here:
               ${{ env.GHP_BASE_URL }}/branch/main
 
-            The docsite for **this PR** is also available for download as an artifact from this run:
-            ${{ needs.build-docs.outputs.artifact-url }}
+              The docsite for **this PR** is also available for download as an artifact from this run:
+              ${{ needs.build-docs.outputs.artifact-url }}
 
-            File changes:
+              File changes:
 
-            ${{ needs.build-docs.outputs.diff-files-rendered }}
+              ${{ needs.build-docs.outputs.diff-files-rendered }}
 
-            ${{ needs.build-docs.outputs.diff-rendered }}
+              ${{ needs.build-docs.outputs.diff-rendered }}
