@@ -1,0 +1,93 @@
+---
+# Copyright (c) Ansible Project
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+name: Collection Docs
+concurrency:
+  group: docs-pr-${{ github.head_ref }}
+  cancel-in-progress: true
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, closed]
+
+env:
+  GHP_BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+
+jobs:
+  build-docs:
+    permissions:
+      contents: read
+    name: Build Ansible Docs
+    uses: ansible-community/github-docs-build/.github/workflows/_shared-docs-build-pr.yml@main
+    with:
+      collection-name: prometheus.prometheus
+      init-lenient: false
+      init-fail-on-error: true
+      squash-hierarchy: true
+      init-project: Prometheus.Prometheus Collection
+      init-copyright: Prometheus.Prometheus Contributors
+      init-title: Prometheus.Prometheus Collection Documentation
+      init-html-short-title: Prometheus.Prometheus Collection Docs
+      init-extra-html-theme-options: |
+          documentation_home_url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/branch/main/
+      render-file-line: '> * `$<status>` [$<path_tail>](https://${{ github.repository_owner }}.github.io/\
+                         ${{ github.event.repository.name }}/pr/${{ github.event.number }}/$<path_tail>)'
+
+    publish-docs-gh-pages:
+      # for now we won't run this on forks
+      if: github.repository == 'prometheus-community/ansible'
+      permissions:
+        contents: write
+      needs: [build-docs]
+      name: Publish Ansible Docs
+      uses: ansible-community/github-docs-build/.github/workflows/_shared-docs-build-publish-gh-pages.yml@main
+      with:
+        artifact-name: ${{ needs.build-docs.outputs.artifact-name }}
+        action: ${{ (github.event.action == 'closed' || needs.build-docs.outputs.changed != 'true') && 'teardown' || 'publish' }}
+      secrets:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    comment:
+      permissions:
+        pull-requests: write
+      runs-on: ubuntu-latest
+      needs: build-docs
+      name: PR comments
+      steps:
+        - name: PR comment
+          uses: ansible-community/github-docs-build/actions/ansible-docs-build-comment@main
+          with:
+            body-includes: '## Docs Build'
+            reactions: heart
+            action: ${{ needs.build-docs.outputs.changed != 'true' && 'remove' || '' }}
+            on-closed-body: |
+              ## Docs Build 📝
+
+              This PR is closed and any previously published docsite has been unpublished.
+            on-merged-body: |
+              ## Docs Build 📝
+
+              Thank you for contribution!✨
+
+              This PR has been merged and the docs are now incorporated into `main`:
+              ${{ env.GHP_BASE_URL }}/branch/main
+            body: |
+              ## Docs Build 📝
+
+              Thank you for contribution!✨
+
+              The docs for **this PR** have been published here:
+              ${{ env.GHP_BASE_URL }}/pr/${{ github.event.number }}
+
+              You can compare to the docs for the `main` branch here:
+              ${{ env.GHP_BASE_URL }}/branch/main
+
+              The docsite for **this PR** is also available for download as an artifact from this run:
+              ${{ needs.build-docs.outputs.artifact-url }}
+
+              File changes:
+
+              ${{ needs.build-docs.outputs.diff-files-rendered }}
+
+              ${{ needs.build-docs.outputs.diff-rendered }}
