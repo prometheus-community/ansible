@@ -13,10 +13,10 @@ argument_specs:
         default: "0.19.0"
       snmp_exporter_binary_url:
         description: "URL of the snmp exporter binaries .tar.gz file"
-        default: "https://github.com/prometheus/snmp_exporter/releases/download/v{{ snmp_exporter_version }}/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
+        default: "https://github.com/{{ _snmp_exporter_repo }}/releases/download/v{{ snmp_exporter_version }}/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
       snmp_exporter_checksums_url:
         description: "URL of the snmp exporter checksums file"
-        default: "https://github.com/prometheus/snmp_exporter/releases/download/v{{ snmp_exporter_version }}/sha256sums.txt"
+        default: "https://github.com/{{ _snmp_exporter_repo }}/releases/download/v{{ snmp_exporter_version }}/sha256sums.txt"
       snmp_exporter_web_listen_address:
         description: "Address on which SNMP exporter will be listening"
         default: "0.0.0.0:9116"

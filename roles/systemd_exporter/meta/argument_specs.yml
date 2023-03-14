@@ -18,10 +18,10 @@ argument_specs:
           - "This overrides I(systemd_exporter_version) parameter"
       systemd_exporter_binary_url:
         description: URL of the systemd exporter binaries .tar.gz file"
-        default: "https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _systemd_exporter_repo }}/releases/download/v{{ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
       systemd_exporter_checksums_url:
         description: "URL of the systemd exporter checksums file"
-        default: "https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/sha256sums.txt"
+        default: "https://github.com/{{ _systemd_exporter_repo }}/releases/download/v{{ systemd_exporter_version }}/sha256sums.txt"
       systemd_exporter_web_listen_address:
         description: Address on which systemd exporter will listen"
         default: "0.0.0.0:9558"

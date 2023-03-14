@@ -7,3 +7,4 @@ go_arch_map:
   armv6l: 'armv6'
 
 go_arch: "{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
+_node_exporter_repo: "prometheus/node_exporter"

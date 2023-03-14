@@ -24,10 +24,10 @@ argument_specs:
           - "This overrides I(prometheus_version) parameter"
       prometheus_binary_url:
         description: "URL of the prometheus binaries .tar.gz file"
-        default: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/ prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/ prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
       prometheus_checksums_url:
         description: URL of the prometheus checksums file
-        default: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/sha256sums.txt"
+        default: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/sha256sums.txt"
       prometheus_config_dir:
         description: "Path to directory with prometheus configuration"
         default: "/etc/prometheus"
