@@ -1,0 +1,11 @@
+{{ ansible_managed | comment }}
+[client]
+user={{ mysqld_exporter_username }}
+password={{ mysqld_exporter_password }}
+{% if mysqld_exporter_host is defined %}
+host=localhost
+port=3306
+{% endif %}
+{% if mysqld_exporter_socket is defined %}
+socket={{ mysqld_exporter_socket }}
+{% endif %}

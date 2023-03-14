@@ -1,0 +1,34 @@
+---
+galaxy_info:
+  author: Prometheus Community
+  description: Prometheus MySQLd Exporter
+  license: Apache
+  company: none
+  min_ansible_version: "2.7"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        - xenial
+    - name: Debian
+      versions:
+        - stretch
+        - buster
+    - name: EL
+      versions:
+        - '7'
+        - '8'
+    - name: Fedora
+      versions:
+        - '30'
+        - '31'
+  galaxy_tags:
+    - monitoring
+    - prometheus
+    - exporter
+    - metrics
+    - system
+    - mysql
+    - mariadb
+
+dependencies: []

@@ -1,0 +1,10 @@
+---
+- name: Restart mysqld_exporter
+  listen: "restart mysqld_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: mysqld_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode
