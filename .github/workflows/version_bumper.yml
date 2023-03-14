@@ -13,12 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       role-repos: ${{ steps.discovered-role-repos.outputs.result }}
+    container:
+      image: quay.io/prometheus/golang-builder:base
     steps:
       - uses: actions/checkout@v3
 
       - name: Get repos for each role
         id: discovered-role-repos
-        uses: mikefarah/yq@master
         with:
           cmd: ./.github/scripts/discover_role_repos.sh
 
