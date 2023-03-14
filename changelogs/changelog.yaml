@@ -83,4 +83,5 @@ releases:
         - 'feat: Add mysqld_exporter role (https://github.com/prometheus-community/ansible/pull/45)'
       trivial:
         - 'refactor: underscore variable prefix should be reserved... (https://github.com/prometheus-community/ansible/pull/65)'
+        - Fixup version bumper job (https://github.com/prometheus-community/ansible/pull/67)
     release_date: '2023-03-14'
