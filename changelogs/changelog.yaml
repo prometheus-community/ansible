@@ -70,8 +70,17 @@ releases:
     release_date: '2023-03-08'
   0.2.1:
     changes:
-      trivial:
-        - 'refactor: underscore variable prefix should be reserved... (https://github.com/prometheus-community/ansible/pull/65)'
       bugfixes:
         - 'fix: policycoreutils python package name (https://github.com/prometheus-community/ansible/pull/63)'
+      trivial:
+        - 'refactor: underscore variable prefix should be reserved... (https://github.com/prometheus-community/ansible/pull/65)'
     release_date: '2023-03-13'
+  0.3.0:
+    changes:
+      bugfixes:
+        - 'fix: policycoreutils python package name (https://github.com/prometheus-community/ansible/pull/63)'
+      minor_changes:
+        - 'feat: Add mysqld_exporter role (https://github.com/prometheus-community/ansible/pull/45)'
+      trivial:
+        - 'refactor: underscore variable prefix should be reserved... (https://github.com/prometheus-community/ansible/pull/65)'
+    release_date: '2023-03-14'

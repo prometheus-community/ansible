@@ -5,6 +5,19 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.3.0
+======
+
+Minor Changes
+-------------
+
+- feat: Add mysqld_exporter role (https://github.com/prometheus-community/ansible/pull/45)
+
+Bugfixes
+--------
+
+- fix: policycoreutils python package name (https://github.com/prometheus-community/ansible/pull/63)
+
 v0.2.1
 ======
 
