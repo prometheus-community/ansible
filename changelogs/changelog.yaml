@@ -82,6 +82,11 @@ releases:
       minor_changes:
         - 'feat: Add mysqld_exporter role (https://github.com/prometheus-community/ansible/pull/45)'
       trivial:
-        - 'refactor: underscore variable prefix should be reserved... (https://github.com/prometheus-community/ansible/pull/65)'
         - Fixup version bumper job (https://github.com/prometheus-community/ansible/pull/67)
+        - 'refactor: underscore variable prefix should be reserved... (https://github.com/prometheus-community/ansible/pull/65)'
+    release_date: '2023-03-14'
+  0.3.1:
+    changes:
+      trivial:
+        - 'docs: add workflow for auto generating ansible docs (https://github.com/prometheus-community/ansible/pull/69)'
     release_date: '2023-03-14'
