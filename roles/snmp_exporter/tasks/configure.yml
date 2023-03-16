@@ -32,7 +32,7 @@
     owner: root
     group: root
     mode: 0644
-  no_log: "{{ 'true' if __testing_on_travis is defined else 'false' }}"
+  no_log: "{{ 'false' if lookup('env', 'CI') else 'true' }}"
   notify:
     - reload snmp exporter
   when: (snmp_exporter_config_file)

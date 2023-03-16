@@ -23,6 +23,7 @@
     owner: root
     group: root
     mode: 0644
+  no_log: "{{ 'false' if lookup('env', 'CI') else 'true' }}"
   notify: restart mysqld_exporter
 
 - name: Configure mysqld_exporter web config
