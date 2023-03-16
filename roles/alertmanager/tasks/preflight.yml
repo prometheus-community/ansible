@@ -29,10 +29,12 @@
   when:
     - alertmanager_version == "latest"
     - alertmanager_binary_local_dir | length == 0
+    - not alertmanager_skip_install
 
 - name: Get alertmanager binary checksum
   when:
     - alertmanager_binary_local_dir | length == 0
+    - not alertmanager_skip_install
   block:
     - name: "Get checksum list"
       ansible.builtin.set_fact:
