@@ -8,6 +8,11 @@ Prometheus.Prometheus Release Notes
 v0.3.1
 ======
 
+Bugfixes
+--------
+
+- fix: Don't log config deployments (https://github.com/prometheus-community/ansible/pull/73)
+
 v0.3.0
 ======
 

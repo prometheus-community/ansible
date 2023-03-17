@@ -89,4 +89,6 @@ releases:
     changes:
       trivial:
         - 'docs: add workflow for auto generating ansible docs (https://github.com/prometheus-community/ansible/pull/69)'
+      bugfixes:
+        - "fix: Don't log config deployments (https://github.com/prometheus-community/ansible/pull/73)"
     release_date: '2023-03-14'
