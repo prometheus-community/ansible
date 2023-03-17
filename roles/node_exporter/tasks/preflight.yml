@@ -62,7 +62,7 @@
           - "{{ __node_exporter_cert_file.stat.readable }}"
           - "{{ __node_exporter_key_file.stat.readable }}"
         msg: >-
-          {{ _node_exporter_system_user }} system user does not have read
+          {{ node_exporter_system_user }} system user does not have read
           permission on the TLS key and/or certificate.
 
 - name: Check if node_exporter is installed
