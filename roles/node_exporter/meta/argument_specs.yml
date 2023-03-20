@@ -11,6 +11,10 @@ argument_specs:
       node_exporter_version:
         description: "Node exporter package version. Also accepts latest as parameter."
         default: "1.1.2"
+      node_exporter_skip_install:
+        description: "Node exporter installation tasks gets skipped when set to true."
+        type: bool
+        default: false
       node_exporter_binary_local_dir:
         description:
           - "Enables the use of local packages instead of those distributed on github."

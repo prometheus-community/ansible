@@ -18,7 +18,9 @@
   when: node_exporter_system_user != "root"
 
 - name: Discover latest version
-  when: node_exporter_binary_local_dir | length == 0
+  when:
+    - node_exporter_binary_local_dir | length == 0
+    - not node_exporter_skip_install
   block:
 
     - name: Download node_exporter binary to local folder
@@ -61,5 +63,7 @@
     mode: 0755
     owner: root
     group: root
-  when: node_exporter_binary_local_dir | length > 0
+  when:
+    - node_exporter_binary_local_dir | length > 0
+    - not node_exporter_skip_install
   notify: restart node_exporter
