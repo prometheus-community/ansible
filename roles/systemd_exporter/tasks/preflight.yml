@@ -64,9 +64,12 @@
   when:
     - systemd_exporter_version == "latest"
     - systemd_exporter_binary_local_dir | length == 0
+    - not systemd_exporter_skip_install
 
 - name: Get systemd exporter binary checksum
-  when: systemd_exporter_binary_local_dir | length == 0
+  when:
+    - systemd_exporter_binary_local_dir | length == 0
+    - not systemd_exporter_skip_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

@@ -18,7 +18,9 @@
   when: systemd_exporter_system_user != "root"
 
 - name: Get systemd exporter binary
-  when: systemd_exporter_binary_local_dir | length == 0
+  when:
+    - systemd_exporter_binary_local_dir | length == 0
+    - not systemd_exporter_skip_install
   block:
     - name: Download systemd_exporter binary to local folder
       become: false
@@ -60,5 +62,7 @@
     mode: 0755
     owner: root
     group: root
-  when: systemd_exporter_binary_local_dir | length > 0
+  when:
+    - systemd_exporter_binary_local_dir | length > 0
+    - not systemd_exporter_skip_install
   notify: restart systemd_exporter
