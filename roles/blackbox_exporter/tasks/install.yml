@@ -27,6 +27,7 @@
   delay: 2
   delegate_to: localhost
   check_mode: false
+  when: not blackbox_exporter_skip_install
 
 - name: Propagate blackbox exporter binary
   ansible.builtin.copy:
@@ -36,6 +37,7 @@
     mode: 0750
     owner: blackbox-exp
     group: blackbox-exp
+  when: not blackbox_exporter_skip_install
   notify:
     - restart blackbox exporter
 

@@ -3,6 +3,7 @@ blackbox_exporter_version: 0.18.0
 blackbox_exporter_binary_url: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/\
                                blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] |
                                default(ansible_architecture) }}.tar.gz"
+blackbox_exporter_skip_install: false
 
 blackbox_exporter_web_listen_address: "0.0.0.0:9115"
 
