@@ -4,6 +4,7 @@ mysqld_exporter_binary_local_dir: ""
 mysqld_exporter_binary_url: "https://github.com/{{ _mysqld_exporter_repo }}/releases/download/v{{ mysqld_exporter_version }}/\
                            mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ go_arch }}.tar.gz"
 mysqld_exporter_checksums_url: "https://github.com/{{ _mysqld_exporter_repo }}/releases/download/v{{ mysqld_exporter_version }}/sha256sums.txt"
+mysqld_exporter_skip_install: false
 
 mysqld_exporter_web_listen_address: "0.0.0.0:9104"
 mysqld_exporter_web_telemetry_path: "/metrics"

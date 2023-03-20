@@ -18,7 +18,9 @@
   when: mysqld_exporter_system_user != "root"
 
 - name: Discover latest version
-  when: mysqld_exporter_binary_local_dir | length == 0
+  when:
+    - mysqld_exporter_binary_local_dir | length == 0
+    - not mysqld_exporter_skip_install
   block:
 
     - name: Download mysqld_exporter binary to local folder
@@ -61,5 +63,7 @@
     mode: 0755
     owner: root
     group: root
-  when: mysqld_exporter_binary_local_dir | length > 0
+  when:
+    - mysqld_exporter_binary_local_dir | length > 0
+    - not mysqld_exporter_skip_install
   notify: restart mysqld_exporter
