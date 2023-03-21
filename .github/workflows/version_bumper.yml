@@ -20,8 +20,7 @@ jobs:
 
       - name: Get repos for each role
         id: discovered-role-repos
-        with:
-          cmd: ./.github/scripts/discover_role_repos.sh
+        run: ./.github/scripts/discover_role_repos.sh
 
   check_for_new_versions:
     runs-on: ubuntu-latest
