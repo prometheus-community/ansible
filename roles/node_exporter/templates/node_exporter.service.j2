@@ -11,27 +11,27 @@ Group={{ node_exporter_system_group }}
 ExecStart={{ node_exporter_binary_install_dir }}/node_exporter \
 {% for collector in node_exporter_enabled_collectors -%}
 {%   if not collector is mapping %}
-    --collector.{{ collector }} \
+    '--collector.{{ collector }}' \
 {%   else -%}
 {%     set name, options = (collector.items()|list)[0] -%}
-    --collector.{{ name }} \
+    '--collector.{{ name }}' \
 {%     for k,v in options|dictsort %}
-    --collector.{{ name }}.{{ k }}={{ v | quote }} \
+    '--collector.{{ name }}.{{ k }}={{ v }}' \
 {%     endfor -%}
 {%   endif -%}
 {% endfor -%}
 {% for collector in node_exporter_disabled_collectors %}
-    --no-collector.{{ collector }} \
+    '--no-collector.{{ collector }}' \
 {% endfor %}
 {% if node_exporter_tls_server_config | length > 0 or node_exporter_http_server_config | length > 0 or node_exporter_basic_auth_users | length > 0 %}
     {% if node_exporter_version is version('1.5.0', '>=') %}
-    --web.config.file=/etc/node_exporter/config.yaml \
+    '--web.config.file=/etc/node_exporter/config.yaml' \
     {% else %}
-    --web.config=/etc/node_exporter/config.yaml \
+    '--web.config=/etc/node_exporter/config.yaml' \
     {% endif %}
 {% endif %}
-    --web.listen-address={{ node_exporter_web_listen_address }} \
-    --web.telemetry-path={{ node_exporter_web_telemetry_path }}
+    '--web.listen-address={{ node_exporter_web_listen_address }}' \
+    '--web.telemetry-path={{ node_exporter_web_telemetry_path }}'
 
 SyslogIdentifier=node_exporter
 Restart=always
