@@ -41,7 +41,7 @@
         path: "{{ node_exporter_tls_server_config.cert_file }}"
       register: __node_exporter_cert_file
       become: true
-      become_user: "{{ _node_exporter_system_user }}"
+      become_user: "{{ node_exporter_system_user }}"
 
     - name: Check existence of TLS key file
       ansible.builtin.stat:
