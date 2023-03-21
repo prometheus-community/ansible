@@ -87,8 +87,10 @@ releases:
     release_date: '2023-03-14'
   0.3.1:
     changes:
-      trivial:
-        - 'docs: add workflow for auto generating ansible docs (https://github.com/prometheus-community/ansible/pull/69)'
       bugfixes:
         - "fix: Don't log config deployments (https://github.com/prometheus-community/ansible/pull/73)"
+      trivial:
+        - 'docs: add workflow for auto generating ansible docs (https://github.com/prometheus-community/ansible/pull/69)'
+        - 'docs: Quote value latest to be explicit about the possible value for node_exporter_version
+          (https://github.com/prometheus-community/ansible/pull/43)'
     release_date: '2023-03-14'
