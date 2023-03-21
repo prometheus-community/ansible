@@ -13,6 +13,7 @@ Bugfixes
 
 - fix: Don't log config deployments (https://github.com/prometheus-community/ansible/pull/73)
 - fix: correct quotation of flags in systemd config file (https://github.com/prometheus-community/ansible/pull/71)
+- fix: version bumper action (https://github.com/prometheus-community/ansible/pull/75)
 
 v0.3.0
 ======

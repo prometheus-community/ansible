@@ -90,6 +90,7 @@ releases:
       bugfixes:
         - "fix: Don't log config deployments (https://github.com/prometheus-community/ansible/pull/73)"
         - 'fix: correct quotation of flags in systemd config file (https://github.com/prometheus-community/ansible/pull/71)'
+        - 'fix: version bumper action (https://github.com/prometheus-community/ansible/pull/75)'
       trivial:
         - 'docs: Quote value latest to be explicit about the possible value for node_exporter_version
           (https://github.com/prometheus-community/ansible/pull/43)'
