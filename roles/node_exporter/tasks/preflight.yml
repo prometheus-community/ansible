@@ -74,10 +74,10 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    node_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus/node_exporter/releases/latest', split_lines=False) |
+    _node_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus/node_exporter/releases/latest', split_lines=False) |
                             from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
-  until: node_exporter_version is version('0.0.0', '>=')
+  until: _node_exporter_version is version('0.0.0', '>=')
   retries: 10
   when:
     - node_exporter_version == "latest"
@@ -86,6 +86,7 @@
 - name: Get node_exporter binary checksum
   when: node_exporter_binary_local_dir | length == 0
   block:
+
     - name: Get checksum list from github
       ansible.builtin.set_fact:
         __node_exporter_checksums: "{{ lookup('url', node_exporter_checksums_url, wantlist=True) | list }}"

@@ -1,9 +1,11 @@
 ---
 node_exporter_version: 1.1.2
+_node_exporter_version: "{{ node_exporter_version }}"
+
 node_exporter_binary_local_dir: ""
-node_exporter_binary_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/\
-                           node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
-node_exporter_checksums_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/sha256sums.txt"
+node_exporter_binary_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ _node_exporter_version }}/\
+                           node_exporter-{{ _node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+node_exporter_checksums_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ _node_exporter_version }}/sha256sums.txt"
 
 node_exporter_web_listen_address: "0.0.0.0:9100"
 node_exporter_web_telemetry_path: "/metrics"
