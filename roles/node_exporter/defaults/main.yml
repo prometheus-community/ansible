@@ -1,6 +1,5 @@
 ---
 node_exporter_version: 1.1.2
-_node_exporter_version: "{{ node_exporter_version }}"
 
 node_exporter_binary_local_dir: ""
 node_exporter_binary_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ _node_exporter_version }}/\
