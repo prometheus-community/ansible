@@ -222,6 +222,18 @@
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--node_exporter_skip_install"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-node-exporter-role-parameter-main-node-exporter-skip-install"><strong>node_exporter_skip_install</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--node_exporter_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Node exporter installation tasks gets skipped when set to true.</p>
+<p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><span class="pre">false</span></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--node_exporter_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-node-exporter-role-parameter-main-node-exporter-system-group"><strong>node_exporter_system_group</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--node_exporter_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -230,7 +242,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;node-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--node_exporter_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-node-exporter-role-parameter-main-node-exporter-system-user"><strong>node_exporter_system_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--node_exporter_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -239,7 +251,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;node-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--node_exporter_textfile_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-node-exporter-role-parameter-main-node-exporter-textfile-dir"><strong>node_exporter_textfile_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--node_exporter_textfile_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -249,7 +261,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/var/lib/node_exporter&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--node_exporter_tls_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-node-exporter-role-parameter-main-node-exporter-tls-server-config"><strong>node_exporter_tls_server_config</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--node_exporter_tls_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -257,7 +269,7 @@
 <p>Keys and values are the same as in <a class="reference external" href="https://github.com/prometheus/node_exporter/blob/master/https/README.md#sample-config">node_exporter docs</a>.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--node_exporter_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-node-exporter-role-parameter-main-node-exporter-version"><strong>node_exporter_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--node_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -265,7 +277,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;1.1.2&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--node_exporter_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-node-exporter-role-parameter-main-node-exporter-web-listen-address"><strong>node_exporter_web_listen_address</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--node_exporter_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -273,7 +285,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9100&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--node_exporter_web_telemetry_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-node-exporter-role-parameter-main-node-exporter-web-telemetry-path"><strong>node_exporter_web_telemetry_path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--node_exporter_web_telemetry_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
