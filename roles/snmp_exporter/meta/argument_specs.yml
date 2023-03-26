@@ -11,6 +11,10 @@ argument_specs:
       snmp_exporter_version:
         description: "SNMP exporter package version"
         default: "0.19.0"
+      snmp_exporter_skip_install:
+        description: "SNMP exporter installation tasks gets skipped when set to true."
+        type: bool
+        default: false
       snmp_exporter_binary_url:
         description: "URL of the snmp exporter binaries .tar.gz file"
         default: "https://github.com/{{ _snmp_exporter_repo }}/releases/download/v{{ snmp_exporter_version }}/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"

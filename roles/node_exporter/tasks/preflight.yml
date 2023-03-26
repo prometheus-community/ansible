@@ -82,9 +82,12 @@
   when:
     - node_exporter_version == "latest"
     - node_exporter_binary_local_dir | length == 0
+    - not node_exporter_skip_install
 
 - name: Get node_exporter binary checksum
-  when: node_exporter_binary_local_dir | length == 0
+  when:
+    - node_exporter_binary_local_dir | length == 0
+    - not node_exporter_skip_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

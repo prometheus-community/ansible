@@ -18,6 +18,7 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | Name           | Default Value | Description                        |
 | -------------- | ------------- | -----------------------------------|
 | `systemd_exporter_version` | 0.4.0 | SystemD exporter package version. Also accepts latest as parameter. |
+| `systemd_exporter_skip_install` | false | SystemD exporter installation tasks gets skipped when set to true. |
 | `systemd_exporter_binary_local_dir` | "" | Allows to use local packages instead of ones distributed on github. As parameter it takes a directory where `systemd_exporter` binary is stored on host on which ansible is ran. This overrides `systemd_exporter_version` parameter |
 | `systemd_exporter_binary_url` | `https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz` | URL of the systemd exporter binaries .tar.gz file |
 | `systemd_exporter_checksums_url` | `https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/sha256sums.txt` | URL of the systemd exporter checksums file |

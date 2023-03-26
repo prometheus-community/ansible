@@ -12,6 +12,7 @@
   delay: 2
   delegate_to: localhost
   check_mode: false
+  when: not snmp_exporter_skip_install
 
 - name: Unpack snmp_exporter binary
   become: false
@@ -21,12 +22,14 @@
     creates: "/tmp/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/snmp_exporter"
   delegate_to: localhost
   check_mode: false
+  when: not snmp_exporter_skip_install
 
 - name: Propagate SNMP Exporter binaries
   ansible.builtin.copy:
     src: "/tmp/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/snmp_exporter"
     dest: "/usr/local/bin/snmp_exporter"
     mode: 0755
+  when: not snmp_exporter_skip_install
   notify:
     - restart snmp exporter
 

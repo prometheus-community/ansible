@@ -18,6 +18,7 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | Name           | Default Value | Description                        |
 | -------------- | ------------- | -----------------------------------|
 | `mysqld_exporter_version` | 0.14.0 | mysqld exporter package version. Also accepts latest as parameter. |
+| `mysqld_exporter_skip_install` | false | mysqld exporter installation tasks gets skipped when set to true. |
 | `mysqld_exporter_binary_local_dir` | "" | Enables the use of local packages instead of those distributed on github. The parameter may be set to a directory where the `mysqld_exporter` binary is stored on the host where ansible is run. This overrides the `mysqld_exporter_version` parameter |
 | `mysqld_exporter_binary_url` | `https://github.com/prometheus/mysqld_exporter/releases/download/v{{ mysqld_exporter_version }}/mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ go_arch }}.tar.gz` | URL of the mysqld\_exporter binaries .tar.gz file |
 | `mysqld_exporter_checksums_url` | `https://github.com/prometheus/mysqld_exporter/releases/download/v{{ mysqld_exporter_version }}/sha256sums.txt` | URL of the mysqld\_exporter checksums file |

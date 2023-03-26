@@ -17,6 +17,7 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | Name           | Default Value | Description                        |
 | -------------- | ------------- | -----------------------------------|
 | `snmp_exporter_version` | 0.19.0 | SNMP exporter package version |
+| `snmp_exporter_skip_install` | false | SNMP exporter installation tasks gets skipped when set to true. |
 | `snmp_exporter_binary_url` | `https://github.com/prometheus/snmp_exporter/releases/download/v{{ snmp_exporter_version }}/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz` | URL of the snmp exporter binaries .tar.gz file |
 | `snmp_exporter_checksums_url` | `https://github.com/prometheus/snmp_exporter/releases/download/v{{ snmp_exporter_version }}/sha256sums.txt` | URL of the snmp exporter checksums file |
 | `snmp_exporter_web_listen_address` | "0.0.0.0:9116" | Address on which SNMP exporter will be listening |
