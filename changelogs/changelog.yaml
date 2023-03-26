@@ -96,3 +96,8 @@ releases:
           (https://github.com/prometheus-community/ansible/pull/43)'
         - 'docs: add workflow for auto generating ansible docs (https://github.com/prometheus-community/ansible/pull/69)'
     release_date: '2023-03-14'
+  0.4.0:
+    changes:
+      minor_changes:
+        - 'enhancement: add `skip_install` variables to various roles (https://github.com/prometheus-community/ansible/pull/74)'
+    release_date: '2023-03-26'

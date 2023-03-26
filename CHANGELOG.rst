@@ -5,6 +5,14 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.4.0
+======
+
+Minor Changes
+-------------
+
+- enhancement: add `skip_install` variables to various roles (https://github.com/prometheus-community/ansible/pull/74)
+
 v0.3.1
 ======
 
