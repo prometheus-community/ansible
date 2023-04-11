@@ -13,37 +13,8 @@ Deploy [Prometheus](https://github.com/prometheus/prometheus) monitoring system 
 
 ## Role Variables
 
-All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) file as well as in table below.
-
-| Name           | Default Value | Description                        |
-| -------------- | ------------- | -----------------------------------|
-| `prometheus_version` | 2.27.0 | Prometheus package version. Also accepts `latest` as parameter. Only prometheus 2.x is supported |
-| `prometheus_skip_install` | false | Prometheus installation tasks gets skipped when set to true. |
-| `prometheus_binary_local_dir` | "" | Allows to use local packages instead of ones distributed on github. As parameter it takes a directory where `prometheus` AND `promtool` binaries are stored on host on which ansible is ran. This overrides `prometheus_version` parameter |
-| `prometheus_config_dir` | /etc/prometheus | Path to directory with prometheus configuration |
-| `prometheus_binary_url` | `https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz` | URL of the prometheus binaries .tar.gz file |
-| `prometheus_checksums_url` | `https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/sha256sums.txt` | URL of the prometheus checksums file |
-| `prometheus_db_dir` | /var/lib/prometheus | Path to directory with prometheus database |
-| `prometheus_read_only_dirs`| [] | Additional paths that Prometheus is allowed to read (useful for SSL certs outside of the config directory) |
-| `prometheus_web_listen_address` | "0.0.0.0:9090" | Address on which prometheus will be listening |
-| `prometheus_web_config` | {} | A Prometheus [web config yaml](https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md) for configuring TLS and auth. |
-| `prometheus_web_external_url` | "" | External address on which prometheus is available. Useful when behind reverse proxy. Ex. `http://example.org/prometheus` |
-| `prometheus_storage_retention` | "30d" | Data retention period |
-| `prometheus_storage_retention_size` | "0" | Data retention period by size |
-| `prometheus_config_flags_extra` | {} | Additional configuration flags passed to prometheus binary at startup |
-| `prometheus_alertmanager_config` | [] | Configuration responsible for pointing where alertmanagers are. This should be specified as list in yaml format. It is compatible with official [<alertmanager_config>](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#alertmanager_config) |
-| `prometheus_alert_relabel_configs` | [] | Alert relabeling rules. This should be specified as list in yaml format. It is compatible with the official [<alert_relabel_configs>](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#alert_relabel_configs) |
-| `prometheus_global` | { scrape_interval: 60s, scrape_timeout: 15s, evaluation_interval: 15s } | Prometheus global config. Compatible with [official configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) |
-| `prometheus_remote_write` | [] | Remote write. Compatible with [official configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write) |
-| `prometheus_remote_read` | [] | Remote read. Compatible with [official configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read) |
-| `prometheus_external_labels` | environment: "{{ ansible_fqdn \| default(ansible_host) \| default(inventory_hostname) }}" | Provide map of additional labels which will be added to any time series or alerts when communicating with external systems |
-| `prometheus_targets` | {} | Targets which will be scraped. |
-| `prometheus_scrape_configs` | [defaults/main.yml#L75](https://github.com/prometheus-community/ansible/blob/685521ccb25e28a888a363d962822ee745ab6f6c/roles/prometheus/defaults/main.yml#L75) | Prometheus scrape jobs provided in same format as in [official docs](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) |
-| `prometheus_config_file` | "prometheus.yml.j2" | Variable used to provide custom prometheus configuration file in form of ansible template |
-| `prometheus_alert_rules` | [defaults/main.yml#L97](https://github.com/prometheus-community/ansible/blob/685521ccb25e28a888a363d962822ee745ab6f6c/roles/prometheus/defaults/main.yml#L97) | Full list of alerting rules which will be copied to `{{ prometheus_config_dir }}/rules/ansible_managed.rules`. Alerting rules can be also provided by other files located in `{{ prometheus_config_dir }}/rules/` which have `*.rules` extension |
-| `prometheus_alert_rules_files` | [defaults/main.yml#L89](https://github.com/prometheus-community/ansible/blob/685521ccb25e28a888a363d962822ee745ab6f6c/roles/prometheus/defaults/main.yml#L89) | List of folders where ansible will look for files containing alerting rules which will be copied to `{{ prometheus_config_dir }}/rules/`. Files must have `*.rules` extension |
-| `prometheus_static_targets_files` | [defaults/main.yml#L92](https://github.com/prometheus-community/ansible/blob/685521ccb25e28a888a363d962822ee745ab6f6c/roles/prometheus/defaults/main.yml#L92) | List of folders where ansible will look for files containing custom static target configuration files which will be copied to `{{ prometheus_config_dir }}/file_sd/`. |
-
+All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) file as well as in [meta/argument_specs.yml](meta/argument_specs.yml).
+Please refer to the [collection docs](https://prometheus-community.github.io/ansible/branch/main/prometheus_role.html) for description and default values of the variables.
 
 ### Relation between `prometheus_scrape_configs` and `prometheus_targets`
 

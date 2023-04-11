@@ -21,7 +21,7 @@ tags:
 dependencies:
   community.general: '>=1.0.0'
 repository: "https://github.com/prometheus-community/ansible"
-documentation: "https://github.com/prometheus-community/ansible/blob/main/docs"
+documentation: "https://prometheus-community.github.io/ansible"
 homepage: "https://prometheus.io"
 issues: "https://github.com/prometheus-community/ansible/issues"
 build_ignore:

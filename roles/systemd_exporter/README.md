@@ -13,21 +13,8 @@ Deploy prometheus [systemd exporter](https://github.com/prometheus-community/sys
 
 ## Role Variables
 
-All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) file as well as in table below.
-
-| Name           | Default Value | Description                        |
-| -------------- | ------------- | -----------------------------------|
-| `systemd_exporter_version` | 0.4.0 | SystemD exporter package version. Also accepts latest as parameter. |
-| `systemd_exporter_skip_install` | false | SystemD exporter installation tasks gets skipped when set to true. |
-| `systemd_exporter_binary_local_dir` | "" | Allows to use local packages instead of ones distributed on github. As parameter it takes a directory where `systemd_exporter` binary is stored on host on which ansible is ran. This overrides `systemd_exporter_version` parameter |
-| `systemd_exporter_binary_url` | `https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz` | URL of the systemd exporter binaries .tar.gz file |
-| `systemd_exporter_checksums_url` | `https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/sha256sums.txt` | URL of the systemd exporter checksums file |
-| `systemd_exporter_web_listen_address` | "0.0.0.0:9558" | Address on which systemd exporter will listen |
-| `systemd_exporter_enable_restart_count` | false | Enables service restart count metrics. This feature only works with systemd 235 and above |
-| `systemd_exporter_enable_ip_accounting` | false | Enables service ip accounting metrics. This feature only works with systemd 235 and above |
-| `systemd_exporter_enable_file_descriptor_size` | false | Enables file descriptor size metrics. This feature will cause exporter to run as root as it needs access to /proc/X/fd |
-| `systemd_exporter_unit_allowlist` | "" | Include some systemd units. Expects a regex. More in https://github.com/prometheus-community/systemd_exporter#configuration |
-| `systemd_exporter_unit_denylist` | "" | Exclude some systemd units. Expects a regex. More in https://github.com/prometheus-community/systemd_exporter#configuration |
+All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) file as well as in [meta/argument_specs.yml](meta/argument_specs.yml).
+Please refer to the [collection docs](https://prometheus-community.github.io/ansible/branch/main/systemd_exporter_role.html) for description and default values of the variables.
 
 ## Example
 

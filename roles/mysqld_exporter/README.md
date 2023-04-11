@@ -12,23 +12,8 @@ Deploy prometheus [mysql exporter](https://github.com/prometheus/mysqld_exporter
 - Passlib is required when using the basic authentication feature (`pip install passlib[bcrypt]`)
 
 ## Role Variables
-
-All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) and are listed in the table below.
-
-| Name           | Default Value | Description                        |
-| -------------- | ------------- | -----------------------------------|
-| `mysqld_exporter_version` | 0.14.0 | mysqld exporter package version. Also accepts latest as parameter. |
-| `mysqld_exporter_skip_install` | false | mysqld exporter installation tasks gets skipped when set to true. |
-| `mysqld_exporter_binary_local_dir` | "" | Enables the use of local packages instead of those distributed on github. The parameter may be set to a directory where the `mysqld_exporter` binary is stored on the host where ansible is run. This overrides the `mysqld_exporter_version` parameter |
-| `mysqld_exporter_binary_url` | `https://github.com/prometheus/mysqld_exporter/releases/download/v{{ mysqld_exporter_version }}/mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ go_arch }}.tar.gz` | URL of the mysqld\_exporter binaries .tar.gz file |
-| `mysqld_exporter_checksums_url` | `https://github.com/prometheus/mysqld_exporter/releases/download/v{{ mysqld_exporter_version }}/sha256sums.txt` | URL of the mysqld\_exporter checksums file |
-| `mysqld_exporter_web_listen_address` | "0.0.0.0:9104" | Address on which mysqld\_exporter will listen |
-| `mysqld_exporter_web_telemetry_path` | "/metrics" | Path under which to expose metrics |
-| `mysqld_exporter_enabled_collectors` | `[]` | List of dicts defining additionally enabled collectors and their configuration. It adds collectors to [those enabled by default](https://github.com/prometheus/mysqld_exporter#collector-flags). |
-| `mysqld_exporter_disabled_collectors` | [] | List of disabled collectors. By default mysqld_exporter disables collectors listed [here](https://github.com/prometheus/mysqld_exporter#collector-flags). |
-| `mysqld_exporter_tls_server_config` | {} | Configuration for TLS authentication. Keys and values are the same as in [mysqld_exporter docs](https://github.com/prometheus/mysqld_exporter/blob/master/https/README.md#sample-config). |
-| `mysqld_exporter_http_server_config` | {} | Config for HTTP/2 support. Keys and values are the same as in [mysqld_exporter docs](https://github.com/prometheus/mysqld_exporter/blob/master/https/README.md#sample-config). |
-| `mysqld_exporter_basic_auth_users` | {} | Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt. |
+All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) file as well as in [meta/argument_specs.yml](meta/argument_specs.yml).
+Please refer to the [collection docs](https://prometheus-community.github.io/ansible/branch/main/mysqld_exporter_role.html) for description and default values of the variables.
 
 ## Example
 

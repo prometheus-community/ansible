@@ -14,23 +14,8 @@ Deploy prometheus [node exporter](https://github.com/prometheus/node_exporter) u
 
 ## Role Variables
 
-All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) and are listed in the table below.
-
-| Name           | Default Value | Description                        |
-| -------------- | ------------- | -----------------------------------|
-| `node_exporter_version` | 1.1.2 | Node exporter package version. Also accepts `latest` as parameter. |
-| `node_exporter_skip_install` | false | Node exporter installation tasks gets skipped when set to true. |
-| `node_exporter_binary_local_dir` | "" | Enables the use of local packages instead of those distributed on github. The parameter may be set to a directory where the `node_exporter` binary is stored on the host where ansible is run. This overrides the `node_exporter_version` parameter |
-| `node_exporter_binary_url` | `https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz` | URL of the node exporter binaries .tar.gz file |
-| `node_exporter_checksums_url` | `https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/sha256sums.txt` | URL of the node exporter checksums file |
-| `node_exporter_web_listen_address` | "0.0.0.0:9100" | Address on which node exporter will listen |
-| `node_exporter_web_telemetry_path` | "/metrics" | Path under which to expose metrics |
-| `node_exporter_enabled_collectors` | ```["systemd",{textfile: {directory: "{{node_exporter_textfile_dir}}"}}]``` | List of dicts defining additionally enabled collectors and their configuration. It adds collectors to [those enabled by default](https://github.com/prometheus/node_exporter#enabled-by-default). |
-| `node_exporter_disabled_collectors` | [] | List of disabled collectors. By default node_exporter disables collectors listed [here](https://github.com/prometheus/node_exporter#disabled-by-default). |
-| `node_exporter_textfile_dir` | "/var/lib/node_exporter" | Directory used by the [Textfile Collector](https://github.com/prometheus/node_exporter#textfile-collector). To get permissions to write metrics in this directory, users must be in `node-exp` system group. __Note__: More information in TROUBLESHOOTING.md guide.
-| `node_exporter_tls_server_config` | {} | Configuration for TLS authentication. Keys and values are the same as in [node_exporter docs](https://github.com/prometheus/node_exporter/blob/master/https/README.md#sample-config). |
-| `node_exporter_http_server_config` | {} | Config for HTTP/2 support. Keys and values are the same as in [node_exporter docs](https://github.com/prometheus/node_exporter/blob/master/https/README.md#sample-config). |
-| `node_exporter_basic_auth_users` | {} | Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt. |
+All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) file as well as in [meta/argument_specs.yml](meta/argument_specs.yml).
+Please refer to the [collection docs](https://prometheus-community.github.io/ansible/branch/main/node_exporter_role.html) for description and default values of the variables.
 
 ## Example
 
