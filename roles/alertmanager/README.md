@@ -14,43 +14,8 @@ It would be nice to have prometheus installed somewhere
 
 ## Role Variables
 
-All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) file as well as in table below.
-
-| Name           | Default Value | Description                        |
-| -------------- | ------------- | -----------------------------------|
-| `alertmanager_version` | 0.21.0 | Alertmanager package version. Also accepts `latest` as parameter. |
-| `alertmanager_skip_install` | false | Alertmanager installation tasks gets skipped when set to true. |
-| `alertmanager_binary_local_dir` | "" | Allows to use local packages instead of ones distributed on github. As parameter it takes a directory where `alertmanager` AND `amtool` binaries are stored on host on which ansible is ran. This overrides `alertmanager_version` parameter |
-| `alertmanager_binary_url` | `https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz` | URL of the alertmanager binaries .tar.gz file |
-| `alertmanager_checksums_url` | `https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/sha256sums.txt` | URL of the alertmanager checksums file |
-| `alertmanager_web_listen_address` | 0.0.0.0:9093 | Address on which alertmanager will be listening |
-| `alertmanager_web_external_url` | http://localhost:9093/ | External address on which alertmanager is available. Useful when behind reverse proxy. Ex. example.org/alertmanager |
-| `alertmanager_config_dir` | /etc/alertmanager | Path to directory with alertmanager configuration |
-| `alertmanager_db_dir` | /var/lib/alertmanager | Path to directory with alertmanager database |
-| `alertmanager_config_file` | alertmanager.yml.j2 | Variable used to provide custom alertmanager configuration file in form of ansible template |
-| `alertmanager_config_flags_extra` | {} | Additional configuration flags passed to prometheus binary at startup |
-| `alertmanager_template_files` | ['alertmanager/templates/*.tmpl'] | List of folders where ansible will look for template files which will be copied to `{{ alertmanager_config_dir }}/templates/`. Files must have `*.tmpl` extension |
-| `alertmanager_resolve_timeout` | 3m | Time after which an alert is declared resolved |
-| `alertmanager_smtp` | {} | SMTP (email) configuration |
-| `alertmanager_http_config` | {} | Http config for using custom webhooks |
-| `alertmanager_slack_api_url` | "" | Slack webhook url |
-| `alertmanager_pagerduty_url` | "" | Pagerduty webhook url |
-| `alertmanager_opsgenie_api_key` | "" | Opsgenie webhook key |
-| `alertmanager_opsgenie_api_url` | "" | Opsgenie webhook url |
-| `alertmanager_victorops_api_key` | "" | VictorOps webhook key |
-| `alertmanager_victorops_api_url` | "" | VictorOps webhook url |
-| `alertmanager_hipchat_api_url` | "" | Hipchat webhook url |
-| `alertmanager_hipchat_auth_token` | "" | Hipchat authentication token |
-| `alertmanager_wechat_url` | "" | Enterprise WeChat webhook url |
-| `alertmanager_wechat_secret` | "" | Enterprise WeChat secret token |
-| `alertmanager_wechat_corp_id` | "" | Enterprise WeChat corporation id |
-| `alertmanager_cluster` | {listen-address: ""} | HA cluster network configuration. Disabled by default. More information in [alertmanager readme](https://github.com/prometheus/alertmanager#high-availability) |
-| `alertmanager_receivers` | [] | A list of notification receivers. Configuration same as in [official docs](https://prometheus.io/docs/alerting/configuration/#<receiver>) |
-| `alertmanager_inhibit_rules` | [] | List of inhibition rules. Same as in [official docs](https://prometheus.io/docs/alerting/configuration/#inhibit_rule) |
-| `alertmanager_route` | {} | Alert routing. More in [official docs](https://prometheus.io/docs/alerting/configuration/#<route>) |
-| `alertmanager_amtool_config_file` | amtool.yml.j2 | Template for amtool config |
-| `alertmanager_amtool_config_alertmanager_url` | `alertmanager_web_external_url` | URL of the alertmanager |
-| `alertmanager_amtool_config_output` | extended | Extended output, use `""` for simple output. |
+All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) file as well as in [meta/argument_specs.yml](meta/argument_specs.yml).
+Please refer to the [collection docs](https://prometheus-community.github.io/ansible/branch/main/alertmanager_role.html) for description and default values of the variables.
 
 ## Example
 
