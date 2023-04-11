@@ -13,6 +13,11 @@ Minor Changes
 
 - enhancement: add `skip_install` variables to various roles (https://github.com/prometheus-community/ansible/pull/74)
 
+Bugfixes
+--------
+
+- fix: meta-runtime now needs minor in version string (https://github.com/prometheus-community/ansible/pull/84)
+
 v0.3.1
 ======
 
