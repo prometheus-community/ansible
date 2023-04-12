@@ -13,6 +13,6 @@ http_server_config:
 {% if node_exporter_basic_auth_users | length > 0 %}
 basic_auth_users:
 {% for k, v in node_exporter_basic_auth_users.items() %}
-  {{ k }}: {{ v | password_hash('bcrypt', ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890' | shuffle(seed=inventory_hostname) | join)[:22], rounds=9) }}
+  {{ k }}: {{ v | string | password_hash('bcrypt', ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890' | shuffle(seed=inventory_hostname) | join)[:22], rounds=9) }}
 {% endfor %}
 {% endif %}
