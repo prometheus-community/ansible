@@ -12,6 +12,7 @@ Minor Changes
 -------------
 
 - enhancement: add `skip_install` variables to various roles (https://github.com/prometheus-community/ansible/pull/74)
+- enhancement: support ansible-vaulted basic auth passwords (https://github.com/prometheus-community/ansible/pull/83)
 
 Bugfixes
 --------
