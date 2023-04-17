@@ -1,6 +1,12 @@
 ---
 - name: Preflight
-  ansible.builtin.include_tasks: preflight.yml
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+    apply:
+    tags:
+      - mysqld_exporter_install
+      - mysqld_exporter_configure
+      - mysqld_exporter_run
   tags:
     - mysqld_exporter_install
     - mysqld_exporter_configure
@@ -11,6 +17,8 @@
     file: install.yml
     apply:
       become: true
+      tags:
+        - mysqld_exporter_install
   when:
     ( not __mysqld_exporter_is_installed.stat.exists ) or
     ( (__mysqld_exporter_current_version_output.stderr_lines | length > 0)
@@ -26,6 +34,8 @@
     file: selinux.yml
     apply:
       become: true
+      tags:
+        - mysqld_exporter_configure
   when: ansible_selinux.status == "enabled"
   tags:
     - mysqld_exporter_configure
@@ -35,6 +45,8 @@
     file: configure.yml
     apply:
       become: true
+      tags:
+        - mysqld_exporter_configure
   tags:
     - mysqld_exporter_configure
 
