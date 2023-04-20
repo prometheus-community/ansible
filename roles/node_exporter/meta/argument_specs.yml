@@ -88,3 +88,6 @@ argument_specs:
       node_exporter_archive_path:
         description: 'Local path to stash the archive and its extraction'
         default: "/tmp"
+      node_exporter_vrf:
+        description: 'Executes the exporter in a specific vrf with `ip vrf exec`'
+        default: ""

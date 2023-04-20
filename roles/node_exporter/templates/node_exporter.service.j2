@@ -6,9 +6,13 @@ After=network-online.target
 
 [Service]
 Type=simple
+{% if node_exporter_vrf | length %}
+ExecStart=ip vrf exec {{ node_exporter_vrf }} runuser -u {{ node_exporter_system_user }} -g {{ node_exporter_system_group }} -- {{ node_exporter_binary_install_dir }}/node_exporter \
+{% else %}
 User={{ node_exporter_system_user }}
 Group={{ node_exporter_system_group }}
 ExecStart={{ node_exporter_binary_install_dir }}/node_exporter \
+{% endif %}
 {% for collector in node_exporter_enabled_collectors -%}
 {%   if not collector is mapping %}
     '--collector.{{ collector }}' \
@@ -62,7 +66,11 @@ NoNewPrivileges=yes
 
 {% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
 ProtectSystem=strict
+{% if node_exporter_vrf | length %}
+ProtectControlGroups=false
+{% else %}
 ProtectControlGroups=true
+{% endif %}
 ProtectKernelModules=true
 ProtectKernelTunables=yes
 {% else %}
