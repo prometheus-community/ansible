@@ -17,7 +17,7 @@
     home: /
   when: node_exporter_system_user != "root"
 
-- name: Discover latest version
+- name: Install from non-local archive
   when:
     - node_exporter_binary_local_dir | length == 0
     - not node_exporter_skip_install

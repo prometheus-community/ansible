@@ -73,16 +73,22 @@
     - node_exporter_install
 
 - name: Discover latest version
-  ansible.builtin.set_fact:
-    node_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus/node_exporter/releases/latest', split_lines=False) |
-                            from_json).get('tag_name') | replace('v', '') }}"
-  run_once: true
-  until: node_exporter_version is version('0.0.0', '>=')
-  retries: 10
   when:
     - node_exporter_version == "latest"
     - node_exporter_binary_local_dir | length == 0
     - not node_exporter_skip_install
+  block:
+    - name: get the version
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/prometheus/node_exporter/releases/latest
+      run_once: true
+      retries: 10
+      register: __node_exporter_latest_version_info
+
+    - name: set the version
+      ansible.builtin.set_fact:
+        node_exporter_version: "{{ __node_exporter_latest_version_info.json.tag_name | replace('v', '') }}"
+      failed_when: node_exporter_version is not version('0.0.0', '>=')
 
 - name: Get node_exporter binary checksum
   when:
@@ -90,15 +96,17 @@
     - not node_exporter_skip_install
   block:
     - name: Get checksum list from github
-      ansible.builtin.set_fact:
-        __node_exporter_checksums: "{{ lookup('url', node_exporter_checksums_url, wantlist=True) | list }}"
+      ansible.builtin.uri:
+        url: "{{ node_exporter_checksums_url }}"
+        return_content: true
       run_once: true
-      until: __node_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
       retries: 10
+      register: __node_exporter_checksums
+      failed_when: __node_exporter_checksums.content is not search('linux-' + go_arch + '.tar.gz')
 
     - name: "Get checksum for {{ go_arch }}"
       ansible.builtin.set_fact:
         __node_exporter_checksum: "{{ item.split(' ')[0] }}"
-      with_items: "{{ __node_exporter_checksums }}"
+      with_items: "{{ __node_exporter_checksums.content.splitlines() }}"
       when:
         - "('linux-' + go_arch + '.tar.gz') in item"
