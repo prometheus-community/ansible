@@ -106,3 +106,8 @@ releases:
       trivial:
         - 'docs: avoid maintaining variable documentation in many places (https://github.com/prometheus-community/ansible/pull/85)'
     release_date: '2023-03-26'
+  0.4.1:
+    changes:
+      bugfixes:
+        - 'fix: pass token to github api for higher ratelimit (https://github.com/prometheus-community/ansible/pull/91)'
+    release_date: '2023-04-26'

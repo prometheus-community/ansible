@@ -5,6 +5,14 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.4.1
+======
+
+Bugfixes
+--------
+
+- fix: pass token to github api for higher ratelimit (https://github.com/prometheus-community/ansible/pull/91)
+
 v0.4.0
 ======
 
