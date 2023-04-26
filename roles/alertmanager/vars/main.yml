@@ -12,3 +12,4 @@ _alertmanager_binary_install_dir: '/usr/local/bin'
 # The expected location of the amtool configuration file
 _alertmanager_amtool_config_dir: '/etc/amtool'
 _alertmanager_repo: "prometheus/alertmanager"
+_github_api_headers: "{{ {'GITHUB_TOKEN': lookup('ansible.builtin.env', 'GITHUB_TOKEN')} if (lookup('ansible.builtin.env', 'GITHUB_TOKEN')) else {} }}"
