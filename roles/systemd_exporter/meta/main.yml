@@ -1,35 +1,32 @@
 ---
 galaxy_info:
-  author: Prometheus Community
-  description: Prometheus Systemd Exporter
-  license: Apache
-  company: none
+  author: "Prometheus Community"
+  description: "Prometheus Systemd Exporter"
+  license: "Apache"
   min_ansible_version: "2.9"
   platforms:
-    - name: Ubuntu
+    - name: "Ubuntu"
       versions:
-        - bionic
-        - focal
-        - jammy
-        - xenial
-    - name: Debian
+        - "bionic"
+        - "focal"
+        - "jammy"
+        - "xenial"
+    - name: "Debian"
       versions:
-        - bullseye
-        - buster
-    - name: EL
+        - "bullseye"
+        - "buster"
+    - name: "EL"
       versions:
-        - '7'
-        - '7'
-        - '9'
-    - name: Fedora
+        - "7"
+        - "8"
+        - "9"
+    - name: "Fedora"
       versions:
-        - '36'
-        - '37'
+        - "36"
+        - "37"
   galaxy_tags:
-    - monitoring
-    - prometheus
-    - exporter
-    - metrics
-    - systemd
-
-dependencies: []
+    - "monitoring"
+    - "prometheus"
+    - "exporter"
+    - "metrics"
+    - "systemd"

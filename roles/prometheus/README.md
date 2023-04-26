@@ -8,7 +8,7 @@ Deploy [Prometheus](https://github.com/prometheus/prometheus) monitoring system 
 
 ## Requirements
 
-- Ansible >= 2.9 (It might work on previous versions, but we cannot guarantee it)
+- Ansible >= "2.9" (It might work on previous versions, but we cannot guarantee it)
 - gnu-tar on Mac deployer host (`brew install gnu-tar`)
 
 ## Role Variables
