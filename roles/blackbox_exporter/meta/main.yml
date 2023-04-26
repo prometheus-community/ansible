@@ -1,33 +1,32 @@
 ---
 galaxy_info:
-  author: Prometheus Community
-  description: Prometheus Blackbox Exporter
-  license: Apache
-  company: none
-  min_ansible_version: "2.7"
+  author: "Prometheus Community"
+  description: "Prometheus Blackbox Exporter"
+  license: "Apache"
+  min_ansible_version: "2.9"
   platforms:
-    - name: Ubuntu
+    - name: "Ubuntu"
       versions:
-        - bionic
-        - xenial
-    - name: Debian
+        - "bionic"
+        - "focal"
+        - "jammy"
+    - name: "Debian"
       versions:
-        - stretch
-        - buster
-    - name: EL
+        - "bullseye"
+        - "buster"
+    - name: "EL"
       versions:
-        - '7'
-        - '8'
-    - name: Fedora
+        - "7"
+        - "8"
+        - "9"
+    - name: "Fedora"
       versions:
-        - '30'
-        - '31'
+        - "36"
+        - "37"
   galaxy_tags:
-    - exporter
-    - monitoring
-    - prometheus
-    - metrics
-    - blackbox
-    - probe
-
-dependencies: []
+    - "exporter"
+    - "monitoring"
+    - "prometheus"
+    - "metrics"
+    - "blackbox"
+    - "probe"

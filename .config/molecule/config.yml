@@ -10,6 +10,12 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
+  - name: almalinux-9
+    image: dokken/almalinux-9
+    pre_build_image: true
+    privileged: true
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
   - name: centos-7
     image: dokken/centos-7
     pre_build_image: true
@@ -22,8 +28,8 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
-  - name: debian-9
-    image: dokken/debian-9
+  - name: centos-stream-9
+    image: dokken/centos-stream-9
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
@@ -40,14 +46,32 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
-  - name: fedora-30
-    image: dokken/fedora-30
+  - name: fedora-36
+    image: dokken/fedora-36
+    pre_build_image: true
+    privileged: true
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
+  - name: fedora-37
+    image: dokken/fedora-37
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
   - name: ubuntu-18.04
     image: dokken/ubuntu-18.04
+    pre_build_image: true
+    privileged: true
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
+  - name: ubuntu-20.04
+    image: dokken/ubuntu-20.04
+    pre_build_image: true
+    privileged: true
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
+  - name: ubuntu-22.04
+    image: dokken/ubuntu-22.04
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice

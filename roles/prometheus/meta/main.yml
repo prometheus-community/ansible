@@ -1,34 +1,33 @@
 ---
 galaxy_info:
-  author: Prometheus Community
-  description: Prometheus monitoring system configuration and management
-  license: Apache
-  company: none
-  min_ansible_version: "2.7"
+  author: "Prometheus Community"
+  description: "Prometheus monitoring system configuration and management"
+  license: "Apache"
+  min_ansible_version: "2.9"
   platforms:
-    - name: Ubuntu
+    - name: "Ubuntu"
       versions:
-        - bionic
-        - xenial
-    - name: Debian
+        - "bionic"
+        - "focal"
+        - "jammy"
+    - name: "Debian"
       versions:
-        - stretch
-        - buster
-    - name: EL
+        - "bullseye"
+        - "buster"
+    - name: "EL"
       versions:
-        - '7'
-        - '8'
-    - name: Fedora
+        - "7"
+        - "8"
+        - "9"
+    - name: "Fedora"
       versions:
-        - '30'
-        - '31'
+        - "36"
+        - "37"
   galaxy_tags:
-    - monitoring
-    - prometheus
-    - metrics
-    - alerts
-    - alerting
-    - molecule
-    - cloud
-
-dependencies: []
+    - "monitoring"
+    - "prometheus"
+    - "metrics"
+    - "alerts"
+    - "alerting"
+    - "molecule"
+    - "cloud"
