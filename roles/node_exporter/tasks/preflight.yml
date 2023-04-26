@@ -74,8 +74,8 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    node_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus/node_exporter/releases/latest', split_lines=False) |
-                            from_json).get('tag_name') | replace('v', '') }}"
+    node_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus/node_exporter/releases/latest', headers=_github_api_headers,
+                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
   until: node_exporter_version is version('0.0.0', '>=')
   retries: 10
@@ -91,7 +91,7 @@
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:
-        __node_exporter_checksums: "{{ lookup('url', node_exporter_checksums_url, wantlist=True) | list }}"
+        __node_exporter_checksums: "{{ lookup('url', node_exporter_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
       run_once: true
       until: __node_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
       retries: 10

@@ -6,3 +6,4 @@ go_arch_map:
   armv7l: 'armv7'
   armv6l: 'armv6'
 _snmp_exporter_repo: "prometheus/snmp_exporter"
+_github_api_headers: "{{ {'GITHUB_TOKEN': lookup('ansible.builtin.env', 'GITHUB_TOKEN')} if (lookup('ansible.builtin.env', 'GITHUB_TOKEN')) else {} }}"
