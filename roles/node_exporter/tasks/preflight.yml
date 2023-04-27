@@ -79,11 +79,14 @@
     - not node_exporter_skip_install
   block:
     - name: get the version
+      become: false
       ansible.builtin.uri:
         url: https://api.github.com/repos/prometheus/node_exporter/releases/latest
       run_once: true
       retries: 10
       register: __node_exporter_latest_version_info
+      delegate_to: localhost
+
 
     - name: set the version
       ansible.builtin.set_fact:
@@ -96,12 +99,14 @@
     - not node_exporter_skip_install
   block:
     - name: Get checksum list from github
+      become: false
       ansible.builtin.uri:
         url: "{{ node_exporter_checksums_url }}"
         return_content: true
       run_once: true
       retries: 10
       register: __node_exporter_checksums
+      delegate_to: localhost
       failed_when: __node_exporter_checksums.content is not search('linux-' + go_arch + '.tar.gz')
 
     - name: "Get checksum for {{ go_arch }}"
