@@ -3,10 +3,10 @@
   ansible.builtin.include_tasks:
     file: preflight.yml
     apply:
-    tags:
-      - mysqld_exporter_install
-      - mysqld_exporter_configure
-      - mysqld_exporter_run
+      tags:
+        - mysqld_exporter_install
+        - mysqld_exporter_configure
+        - mysqld_exporter_run
   tags:
     - mysqld_exporter_install
     - mysqld_exporter_configure
