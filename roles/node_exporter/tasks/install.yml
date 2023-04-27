@@ -22,18 +22,12 @@
     - node_exporter_binary_local_dir | length == 0
     - not node_exporter_skip_install
   block:
-    - name: create temporary directory for download
-      become: false
-      ansible.builtin.tempfile:
-        state: directory
-      register: __node_exporter_tempdir
-      delegate_to: localhost
 
     - name: Download node_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
         url: "{{ node_exporter_binary_url }}"
-        dest: "{{ __node_exporter_tempdir.path }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __node_exporter_checksum }}"
         mode: '0644'
       register: _download_binary
@@ -46,29 +40,21 @@
     - name: Unpack node_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "{{ __node_exporter_tempdir.path }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "{{ __node_exporter_tempdir.path }}"
-        creates: "{{ __node_exporter_tempdir.path }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
+        src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "/tmp"
+        creates: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
       delegate_to: localhost
       check_mode: false
 
     - name: Propagate node_exporter binaries
       ansible.builtin.copy:
-        src: "{{ __node_exporter_tempdir.path }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
+        src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
         dest: "{{ node_exporter_binary_install_dir }}/node_exporter"
         mode: 0755
         owner: root
         group: root
       notify: restart node_exporter
       when: not ansible_check_mode
-
-  always:
-    - name: delete locally downloaded data
-      become: false
-      ansible.builtin.file:
-        path: "{{ __node_exporter_tempdir.path }}"
-        state: absent
-      delegate_to: localhost
 
 - name: Propagate locally distributed node_exporter binary
   ansible.builtin.copy:
