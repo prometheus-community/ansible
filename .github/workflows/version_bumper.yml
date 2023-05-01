@@ -12,15 +12,15 @@ jobs:
   discover-role-repos:
     runs-on: ubuntu-latest
     outputs:
-      role-repos: ${{ steps.discovered-role-repos.outputs.result }}
+      role-repos: ${{ steps.discover.outputs.result }}
     container:
       image: quay.io/prometheus/golang-builder:base
     steps:
       - uses: actions/checkout@v3
 
       - name: Get repos for each role
-        id: discovered-role-repos
-        run: ./.github/scripts/discover_role_repos.sh
+        id: discover
+        run: ./.github/scripts/discover_role_repos.sh >> "$GITHUB_OUTPUT"
 
   check_for_new_versions:
     runs-on: ubuntu-latest
