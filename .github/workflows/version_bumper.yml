@@ -39,4 +39,4 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: ./.github/scripts/version_bumper.sh ${{ matrix.repo }} ${{ matrix.role }}
+      - run: ./.github/scripts/version_updater.sh ${{ matrix.repo }} ${{ matrix.role }}
