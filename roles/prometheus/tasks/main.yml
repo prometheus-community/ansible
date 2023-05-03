@@ -1,6 +1,12 @@
 ---
 - name: Preflight
-  ansible.builtin.include_tasks: preflight.yml
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+    apply:
+      tags:
+        - prometheus_configure
+        - prometheus_install
+        - prometheus_run
   tags:
     - prometheus_configure
     - prometheus_install
@@ -11,6 +17,8 @@
     file: install.yml
     apply:
       become: true
+      tags:
+        - prometheus_install
   tags:
     - prometheus_install
 
@@ -19,6 +27,8 @@
     file: configure.yml
     apply:
       become: true
+      tags:
+        - prometheus_configure
   tags:
     - prometheus_configure
 
