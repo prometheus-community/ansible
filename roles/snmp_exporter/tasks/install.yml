@@ -17,7 +17,7 @@
 - name: Unpack snmp_exporter binary
   become: false
   ansible.builtin.unarchive:
-    src: "/tmp/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
+    src: "{{ _download_binary.dest }}"
     dest: "/tmp"
     creates: "/tmp/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/snmp_exporter"
   delegate_to: localhost
