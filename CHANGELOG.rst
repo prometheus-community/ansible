@@ -11,8 +11,10 @@ v0.4.1
 Bugfixes
 --------
 
+- fix: add "become: true" to snmp_exporter handlers (https://github.com/prometheus-community/ansible/pull/99)
 - fix: pass token to github api for higher ratelimit (https://github.com/prometheus-community/ansible/pull/91)
 - fix: replace eol platforms with current (https://github.com/prometheus-community/ansible/pull/53)
+- fix: tags support for included tasks (https://github.com/prometheus-community/ansible/pull/87)
 
 v0.4.0
 ======
