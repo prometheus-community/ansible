@@ -471,9 +471,10 @@ tr .ansibleOptionLink {
     }
     /*
      * Without this,
-     * for example most links in the page's TOC aren't usable anymore
+     * for example most links in the page's TOC aren't usable anymore, and tables
+	 * sometimes overlap the text above
      * */
-    section a[id] {
+    section a[id], section table[id] {
         padding-top: 0;
         margin-top: 0;
     }
