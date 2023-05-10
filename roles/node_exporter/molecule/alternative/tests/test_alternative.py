@@ -23,6 +23,12 @@ def test_service(host):
     assert s.is_running
 
 
+def test_protecthome_property(host):
+    s = host.service("node_exporter")
+    p = s.systemd_properties
+    assert p.get("ProtectHome") == "yes"
+
+
 def test_socket(host):
     sockets = [
         "tcp://127.0.0.1:8080"
