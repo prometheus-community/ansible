@@ -39,6 +39,8 @@ jobs:
           cmd: yq -o json -I=0 '.requires_ansible | split(",") | .[] |= sub("(.*?)(\d+\.\d+)(.*)"; "stable-${2}")' meta/runtime.yml
 
   ansible-test-sanity:
+    if: |
+      !github.event.label
     uses: ./.github/workflows/ansible-test-sanity.yml
     needs:
       - ansible-lint
