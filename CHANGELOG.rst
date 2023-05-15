@@ -5,6 +5,23 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.5.0
+======
+
+Minor Changes
+-------------
+
+- minor: Add ansible 2.15 support (https://github.com/prometheus-community/ansible/pull/106)
+
+Bugfixes
+--------
+
+- fix: add "become: true" to snmp_exporter handlers (https://github.com/prometheus-community/ansible/pull/99)
+- fix: node_exporter - Fix Systemd ProtectHome option in service unit (https://github.com/prometheus-community/ansible/pull/94)
+- fix: pass token to github api for higher ratelimit (https://github.com/prometheus-community/ansible/pull/91)
+- fix: replace eol platforms with current (https://github.com/prometheus-community/ansible/pull/53)
+- fix: tags support for included tasks (https://github.com/prometheus-community/ansible/pull/87)
+
 v0.4.1
 ======
 

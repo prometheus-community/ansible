@@ -1,5 +1,5 @@
 ---
-ancestor: null
+ancestor:
 releases:
   0.0.1:
     changes:
@@ -82,13 +82,13 @@ releases:
       minor_changes:
         - 'feat: Add mysqld_exporter role (https://github.com/prometheus-community/ansible/pull/45)'
       trivial:
-        - 'fix version bumper job (https://github.com/prometheus-community/ansible/pull/67)'
+        - fix version bumper job (https://github.com/prometheus-community/ansible/pull/67)
         - 'refactor: underscore variable prefix should be reserved... (https://github.com/prometheus-community/ansible/pull/65)'
     release_date: '2023-03-14'
   0.3.1:
     changes:
       bugfixes:
-        - 'fix: Don''t log config deployments (https://github.com/prometheus-community/ansible/pull/73)'
+        - "fix: Don't log config deployments (https://github.com/prometheus-community/ansible/pull/73)"
         - 'fix: correct quotation of flags in systemd config file (https://github.com/prometheus-community/ansible/pull/71)'
         - 'fix: version bumper action (https://github.com/prometheus-community/ansible/pull/75)'
       trivial:
@@ -114,3 +114,14 @@ releases:
         - 'fix: replace eol platforms with current (https://github.com/prometheus-community/ansible/pull/53)'
         - 'fix: tags support for included tasks (https://github.com/prometheus-community/ansible/pull/87)'
     release_date: '2023-04-26'
+  0.5.0:
+    changes:
+      bugfixes:
+        - 'fix: tags support for included tasks (https://github.com/prometheus-community/ansible/pull/87)'
+        - 'fix: add "become: true" to snmp_exporter handlers (https://github.com/prometheus-community/ansible/pull/99)'
+        - 'fix: pass token to github api for higher ratelimit (https://github.com/prometheus-community/ansible/pull/91)'
+        - 'fix: replace eol platforms with current (https://github.com/prometheus-community/ansible/pull/53)'
+        - 'fix: node_exporter - Fix Systemd ProtectHome option in service unit (https://github.com/prometheus-community/ansible/pull/94)'
+      minor_changes:
+        - 'minor: Add ansible 2.15 support (https://github.com/prometheus-community/ansible/pull/106)'
+    release_date: '2023-05-15'
