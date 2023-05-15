@@ -7,6 +7,7 @@ on:
       - edited
       - reopened
       - synchronize
+      - labeled
   workflow_dispatch:
 
 env:
@@ -68,14 +69,18 @@ jobs:
           since_last_remote_commit: "true"
 
       - name: Discover role tests
-        if: steps.changed-roles.outputs.any_changed == 'true'
+        if: ${{ (steps.changed-roles.outputs.any_changed == 'true') || (contains(github.event.label.name, 'test-role-')) }}
         id: set-molecule-tests
         run: |
-          echo tests="[`for role in ${{ steps.changed-roles.outputs.all_changed_and_modified_files }}; do
+          roles=${{ steps.changed-roles.outputs.all_changed_and_modified_files }}
+          roles+="${LABEL##*-}"
+          echo tests="[`for role in $roles; do
             for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -iname "molecule-${role}-*" -printf "%f\n"); do
               echo '{"test":\"'"${test}"'\","name":\"'"${test#*-}\"'"}';
             done
           done | tr '\n' ',' | sed '$s/,$//'`]" >> $GITHUB_OUTPUT
+        env:
+          LABEL: ${{ github.event.label.name }}
 
       - name: Discover integration tests
         id: set-integration-tests
