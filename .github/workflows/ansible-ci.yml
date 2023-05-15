@@ -7,6 +7,7 @@ on:
       - edited
       - reopened
       - synchronize
+      - labeled
   workflow_dispatch:
 
 env:
@@ -38,6 +39,8 @@ jobs:
           cmd: yq -o json -I=0 '.requires_ansible | split(",") | .[] |= sub("(.*?)(\d+\.\d+)(.*)"; "stable-${2}")' meta/runtime.yml
 
   ansible-test-sanity:
+    if: |
+      !github.event.label
     uses: ./.github/workflows/ansible-test-sanity.yml
     needs:
       - ansible-lint
@@ -68,10 +71,11 @@ jobs:
           since_last_remote_commit: "true"
 
       - name: Discover role tests
-        if: steps.changed-roles.outputs.any_changed == 'true'
         id: set-molecule-tests
         run: |
-          echo tests="[`for role in ${{ steps.changed-roles.outputs.all_changed_and_modified_files }}; do
+          roles=${{ steps.changed-roles.outputs.all_changed_and_modified_files }}
+          roles+=${{ github.event.label.name }}
+          echo tests="[`for role in $roles; do
             for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -iname "molecule-${role}-*" -printf "%f\n"); do
               echo '{"test":\"'"${test}"'\","name":\"'"${test#*-}\"'"}';
             done
