@@ -5,6 +5,14 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.5.1
+======
+
+Bugfixes
+--------
+
+- fix: Checkout full branch for version updates (https://github.com/prometheus-community/ansible/pull/108)
+
 v0.5.0
 ======
 

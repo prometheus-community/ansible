@@ -117,11 +117,16 @@ releases:
   0.5.0:
     changes:
       bugfixes:
-        - 'fix: tags support for included tasks (https://github.com/prometheus-community/ansible/pull/87)'
         - 'fix: add "become: true" to snmp_exporter handlers (https://github.com/prometheus-community/ansible/pull/99)'
+        - 'fix: node_exporter - Fix Systemd ProtectHome option in service unit (https://github.com/prometheus-community/ansible/pull/94)'
         - 'fix: pass token to github api for higher ratelimit (https://github.com/prometheus-community/ansible/pull/91)'
         - 'fix: replace eol platforms with current (https://github.com/prometheus-community/ansible/pull/53)'
-        - 'fix: node_exporter - Fix Systemd ProtectHome option in service unit (https://github.com/prometheus-community/ansible/pull/94)'
+        - 'fix: tags support for included tasks (https://github.com/prometheus-community/ansible/pull/87)'
       minor_changes:
         - 'minor: Add ansible 2.15 support (https://github.com/prometheus-community/ansible/pull/106)'
     release_date: '2023-05-15'
+  0.5.1:
+    changes:
+      bugfixes:
+        - 'fix: Checkout full branch for version updates (https://github.com/prometheus-community/ansible/pull/108)'
+    release_date: '2023-05-16'
