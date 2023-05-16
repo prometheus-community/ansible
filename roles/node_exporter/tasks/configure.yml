@@ -37,7 +37,6 @@
     state: directory
     owner: "{{ node_exporter_system_user }}"
     group: "{{ node_exporter_system_group }}"
-    recurse: true
     mode: u+rwX,g+rwX,o=rX
   when: node_exporter_textfile_dir | length > 0
 
