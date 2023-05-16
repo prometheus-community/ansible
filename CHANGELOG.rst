@@ -13,6 +13,7 @@ Bugfixes
 
 - fix: Checkout full branch for version updates (https://github.com/prometheus-community/ansible/pull/108)
 - fix: don't require role name on internal vars (https://github.com/prometheus-community/ansible/pull/109)
+- fix: textfile collector dir by setting recurse to false (https://github.com/prometheus-community/ansible/pull/105)
 
 v0.5.0
 ======
