@@ -4,7 +4,7 @@ argument_specs:
   main:
     short_description: "Prometheus Systemd Exporter"
     description:
-      - "Deploy prometheus L(systemd exporter,,https://github.com/prometheus-community/systemd_exporter) using ansible."
+      - "Deploy prometheus L(systemd exporter,https://github.com/prometheus-community/systemd_exporter) using ansible."
     author:
       - "Prometheus Community"
     options:
