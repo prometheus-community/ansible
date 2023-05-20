@@ -27,6 +27,7 @@ jobs:
     needs: discover-role-repos
     permissions:
       contents: write
+      pull-request: write
     container:
       image: quay.io/prometheus/golang-builder:base
     env:
