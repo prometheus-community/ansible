@@ -9,6 +9,7 @@
     name: "{{ _pkg_fact_req }}"
     state: present
   when: (_pkg_fact_req)
+  become: true
   vars:
     _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
                     {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
