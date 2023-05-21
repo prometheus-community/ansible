@@ -10,6 +10,10 @@ on:
       - labeled
   workflow_dispatch:
 
+concurrency:
+  group: ansible-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 env:
   ANSIBLE_FORCE_COLOR: true
   ANSIBLE_GALAXY_SERVER_GALAXY_URL: "https://galaxy.ansible.com"
