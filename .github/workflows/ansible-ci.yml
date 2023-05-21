@@ -24,6 +24,8 @@ jobs:
   pr-label:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
+      issues: write
       pull-requests: write
     steps:
       - name: "Confirm correct pull request title"
