@@ -58,8 +58,41 @@ jobs:
               "skip_changelog": "skip_changelog"
               }
 
+  role-label:
+    runs-on: ubuntu-latest
+    needs: pr-label
+    if: github.event.pull_request.labels.length == 0
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get changed roles
+        id: changed-roles
+        uses: tj-actions/changed-files@v35
+        with:
+          path: "roles"
+          diff_relative: "true"
+          files: "**"
+          dir_names: "true"
+          dir_names_max_depth: "1"
+          since_last_remote_commit: "true"
+
+      - name: Add changed roles labels
+        uses: actions/github-script@v6
+        if: |
+          steps.changed-roles.outputs.all_changed_and_modified_files
+        with:
+          script: |
+            const labels = '${{ steps.changed-roles.outputs.all_changed_and_modified_files }}'.split(' ');
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: labels
+            })
+
   ansible-lint:
     runs-on: ubuntu-latest
+    needs: pr-label
     steps:
       - uses: actions/checkout@v3
 
@@ -68,6 +101,7 @@ jobs:
 
   discover-ansible-versions:
     runs-on: ubuntu-latest
+    needs: pr-label
     outputs:
       versions: ${{ steps.supported-ansible-versions.outputs.result }}
     steps:
@@ -91,7 +125,10 @@ jobs:
 
   discover-ansible-tests:
     runs-on: ubuntu-latest
-    needs: ansible-lint
+    needs:
+      - pr-label
+      - role-label
+      - ansible-lint
     outputs:
       molecule-tests: ${{ steps.set-molecule-tests.outputs.tests }}
       integration-tests: ${{ steps.set-integration-tests.outputs.tests }}
@@ -100,22 +137,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get changed roles
-        id: changed-roles
-        uses: tj-actions/changed-files@v35
-        with:
-          path: "roles"
-          diff_relative: "true"
-          files: "**"
-          dir_names: "true"
-          dir_names_max_depth: "1"
-          since_last_remote_commit: "true"
-
       - name: Discover role tests
         id: set-molecule-tests
+        env:
+          LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
         run: |
-          roles=${{ steps.changed-roles.outputs.all_changed_and_modified_files }}
-          roles+=${{ github.event.label.name }}
+          roles=$(echo $LABELS | jq -r '.[]')
           echo tests="[`for role in $roles; do
             for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -iname "molecule-${role}-*" -printf "%f\n"); do
               echo '{"test":\"'"${test}"'\","name":\"'"${test#*-}\"'"}';
