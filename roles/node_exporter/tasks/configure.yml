@@ -8,28 +8,22 @@
     mode: 0644
   notify: restart node_exporter
 
-- name: Configure node_exporter
-  when:
-    ( node_exporter_tls_server_config | length > 0 ) or
-    ( node_exporter_http_server_config | length > 0 ) or
-    ( node_exporter_basic_auth_users | length > 0 )
-  block:
-    - name: Create node_exporter config directory
-      ansible.builtin.file:
-        path: "/etc/node_exporter"
-        state: directory
-        owner: root
-        group: root
-        mode: u+rwX,g+rwX,o=rX
+- name: Create node_exporter config directory
+  ansible.builtin.file:
+    path: "/etc/node_exporter"
+    state: directory
+    owner: root
+    group: root
+    mode: u+rwX,g+rwX,o=rX
 
-    - name: Copy the node_exporter config file
-      ansible.builtin.template:
-        src: config.yaml.j2
-        dest: /etc/node_exporter/config.yaml
-        owner: root
-        group: root
-        mode: 0644
-      notify: restart node_exporter
+- name: Copy the node_exporter config file
+  ansible.builtin.template:
+    src: config.yaml.j2
+    dest: /etc/node_exporter/config.yaml
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart node_exporter
 
 - name: Create textfile collector dir
   ansible.builtin.file:
