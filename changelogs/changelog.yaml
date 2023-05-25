@@ -132,6 +132,7 @@ releases:
         - 'fix: textfile collector dir by setting recurse to false (https://github.com/prometheus-community/ansible/pull/105)'
         - 'fix: Checkout full branch for version updates (https://github.com/prometheus-community/ansible/pull/108)'
         - 'fix: always create config file (https://github.com/prometheus-community/ansible/pull/113)'
+        - 'fix: Install package fact dependencies needs to be run as root (https://github.com/prometheus-community/ansible/pull/89)'
       trivial:
         - 'docs: broken link to systemd exporter on docs (https://github.com/prometheus-community/ansible/pull/104)'
     release_date: '2023-05-16'
