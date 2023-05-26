@@ -1,0 +1,78 @@
+---
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize, reopened]
+permissions:
+  pull-requests: write
+name: Auto label pull request
+jobs:
+  pr-label:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    steps:
+      - name: "Confirm correct pull request title"
+        uses: mmubeen/action-pr-title@master # until PR gets merged https://github.com/deepakputhraya/action-pr-title/pull/29
+        with:
+          allowed_prefixes: 'feat,feature,fix,major,breaking,minor,enhancement,deprecated,removed,security,bug,bugfix,docs,packaging,test,refactor,refactoring,skip-release,skip_changelog'
+
+      - name: "Apply label"
+        if: github.event.pull_request.labels.length == 0
+        uses: bcoe/conventional-release-labels@v1
+        with:
+          type_labels: |
+              {
+              "feature": "enhancement",
+              "feat": "enhancement",
+              "fix": "bugfix",
+              "major": "major",
+              "breaking": "breaking",
+              "minor": "minor",
+              "enhancement": "enhancement",
+              "deprecated": "deprecated",
+              "removed": "removed",
+              "security": "security",
+              "bug": "bug",
+              "bugfix": "bugfix",
+              "docs": "trivial",
+              "packaging": "trivial",
+              "test": "trivial",
+              "refactor": "trivial",
+              "refactoring": "trivial",
+              "skip-release": "skip_changelog",
+              "skip_changelog": "skip_changelog"
+              }
+
+  role-label:
+    runs-on: ubuntu-latest
+    needs: pr-label
+    if: github.event.pull_request.labels.length == 0
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get changed roles
+        id: changed-roles
+        uses: tj-actions/changed-files@v35
+        with:
+          path: "roles"
+          diff_relative: "true"
+          files: "**"
+          dir_names: "true"
+          dir_names_max_depth: "1"
+          sha: ${{ github.event.pull_request.head.sha }}
+
+      - name: Add changed roles labels
+        uses: actions/github-script@v6
+        if: |
+          steps.changed-roles.outputs.all_changed_and_modified_files
+        with:
+          script: |
+            const labels = '${{ steps.changed-roles.outputs.all_changed_and_modified_files }}'.split(' ');
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: labels
+            })
