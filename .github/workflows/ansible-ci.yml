@@ -51,8 +51,6 @@ jobs:
           echo "result=$(python ./.github/scripts/collection_version_parser.py)" >> $GITHUB_ENV
 
   ansible-test-sanity:
-    if: |
-      !github.event.label
     uses: ./.github/workflows/ansible-test-sanity.yml
     needs:
       - ansible-lint
