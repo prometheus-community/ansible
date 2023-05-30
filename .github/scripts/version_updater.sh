@@ -96,7 +96,7 @@ git add \
   "roles/${role}/defaults/main.yml" \
   "roles/${role}/meta/argument_specs.yml" \
   "roles/${role}/README.md"
-git commit -m 'patch: :tada: automated upstream release update'
+git commit --signoff -m 'patch: :tada: automated upstream release update'
 echo_green "Pushing to ${update_branch} branch in ${role}"
 if ! git push "https://${GITHUB_TOKEN}:@github.com/${GIT_REPO}" --set-upstream "${update_branch}"; then
     echo_yellow "Branch push failed."
@@ -107,7 +107,7 @@ if ! post_pull_request \
   "patch: New ${source_repo} upstream release!" \
   "main" \
   "${update_branch}" \
-  "The upstream [${source_repo}](https://github.com/${source_repo}/releases) released new software version - **${version}**!\n\nThis automated PR updates code to bring new version into repository.\n\nSigned-off-by: ${GIT_USER} <${GIT_MAIL}>" ; then
+  "The upstream [${source_repo}](https://github.com/${source_repo}/releases) released new software version - **${version}**!\n\nThis automated PR updates code to bring new version into repository." ; then
   echo_red "Pull request failed"
   exit 1
 fi
