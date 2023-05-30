@@ -107,7 +107,7 @@ if ! post_pull_request \
   "patch: New ${source_repo} upstream release!" \
   "main" \
   "${update_branch}" \
-  "The upstream [${source_repo}](https://github.com/${source_repo}/releases) released new software version - **${version}**!\n\nThis automated PR updates code to bring new version into repository." ; then
+  "The upstream [${source_repo}](https://github.com/${source_repo}/releases) released new software version - **${version}**!\n\nThis automated PR updates code to bring new version into repository.\n\nSigned-off-by: ${GIT_USER} <${GIT_MAIL}>" ; then
   echo_red "Pull request failed"
   exit 1
 fi
