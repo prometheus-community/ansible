@@ -10,7 +10,7 @@ argument_specs:
     options:
       systemd_exporter_version:
         description: "SystemD exporter package version. Also accepts latest as parameter."
-        default: "0.4.0"
+        default: "0.5.0"
       systemd_exporter_skip_install:
         description: "SystemD exporter installation tasks gets skipped when set to true."
         type: bool
