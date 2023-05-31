@@ -1,0 +1,36 @@
+---
+- name: Run role
+  hosts: all
+  any_errors_fatal: true
+  roles:
+    - prometheus.prometheus.smokeping_prober
+  pre_tasks:
+    - name: Create smokeping_prober cert dir
+      ansible.builtin.file:
+        path: "{{ smokeping_prober_tls_server_config.cert_file | dirname }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u+rwX,g+rwX,o=rX
+
+    - name: Copy cert and key
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "{{ item.mode | default('0644') }}"
+      loop:
+        - src: "/tmp/tls.cert"
+          dest: "{{ smokeping_prober_tls_server_config.cert_file }}"
+        - src: "/tmp/tls.key"
+          dest: "{{ smokeping_prober_tls_server_config.key_file }}"
+  vars:
+    smokeping_prober_binary_local_dir: "/tmp/smokeping_prober-linux-amd64"
+    smokeping_prober_web_listen_address: "127.0.0.1:8080"
+
+    smokeping_prober_tls_server_config:
+      cert_file: /etc/smokeping_prober/tls.cert
+      key_file: /etc/smokeping_prober/tls.key
+    smokeping_prober_http_server_config:
+      http2: true
+    smokeping_prober_basic_auth_users:
+      randomuser: examplepassword
