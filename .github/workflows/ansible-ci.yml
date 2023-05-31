@@ -19,6 +19,7 @@ env:
   ANSIBLE_GALAXY_SERVER_GALAXY_URL: "https://galaxy.ansible.com"
   ANSIBLE_GALAXY_SERVER_GALAXY_TIMEOUT: 120
   ANSIBLE_GALAXY_SERVER_LIST: "galaxy"
+  ANSIBLE_TEST_MOLECULE_VERSION: 0.1.3
 
 jobs:
   ansible-lint:
@@ -51,6 +52,46 @@ jobs:
       - discover-ansible-versions
     with:
       ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}
+
+  ensure-ansible-test-molecule:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: "Download ansible-test-molecule"
+        run: |
+          src="https://github.com/gardar/ansible-test-molecule/releases/download/${ANSIBLE_TEST_MOLECULE_VERSION}/ansible-test-molecule.sh"
+          if [[ -v GITHUB_TOKEN ]]
+          then
+            curl -L -s -H "Authorization: token $GITHUB_TOKEN" $src -o ansible-test-molecule.sh
+          else
+            curl -L -s $src -o ansible-test-molecule.sh
+          fi
+
+      - name: "Setup molecule integration tests for roles"
+        run: |
+          for dir in $(find roles -type d -name 'molecule'); do
+            role=$(basename $(dirname $dir))
+            for test in $(ls $dir); do
+              new_dir="tests/integration/targets/molecule-${role}-${test}"
+              echo "Creating integration test: ${new_dir}"
+              mkdir -p $new_dir
+
+              cp ansible-test-molecule.sh ${new_dir}/runme.sh
+              chmod +x ${new_dir}/runme.sh
+            done
+          done
+
+      - name: "Commit molecule integration tests"
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: ansible-test molecule integration test"
 
   discover-ansible-tests:
     runs-on: ubuntu-latest
