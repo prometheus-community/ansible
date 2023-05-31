@@ -10,7 +10,7 @@ argument_specs:
     options:
       blackbox_exporter_version:
         description: "Blackbox exporter package version"
-        default: "0.18.0"
+        default: "0.24.0"
       blackbox_exporter_skip_install:
         description: "Blackbox exporter installation tasks gets skipped when set to true."
         type: bool
