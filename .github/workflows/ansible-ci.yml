@@ -8,6 +8,7 @@ on:
       - reopened
       - synchronize
       - labeled
+  pull_request_target:
   workflow_dispatch:
 
 concurrency:
