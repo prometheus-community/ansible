@@ -1,5 +1,5 @@
 ---
-systemd_exporter_version: 0.4.0
+systemd_exporter_version: 0.5.0
 systemd_exporter_binary_local_dir: ""
 systemd_exporter_binary_url: "https://github.com/{{ _systemd_exporter_repo }}/releases/download/v{{ systemd_exporter_version }}/\
                                     systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
