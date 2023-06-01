@@ -135,4 +135,6 @@ releases:
         - 'fix: Install package fact dependencies needs to be run as root (https://github.com/prometheus-community/ansible/pull/89)'
       trivial:
         - 'docs: broken link to systemd exporter on docs (https://github.com/prometheus-community/ansible/pull/104)'
+        - 'patch: New prometheus/blackbox_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/139)'
+        - 'patch: New prometheus/node_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/138)'
     release_date: '2023-05-16'
