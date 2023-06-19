@@ -29,7 +29,6 @@
 - name: Get alertmanager binary
   when:
     - alertmanager_binary_local_dir | length == 0
-    - not alertmanager_skip_install
   block:
 
     - name: Download alertmanager binary to local folder
@@ -57,29 +56,41 @@
       delegate_to: localhost
       check_mode: false
 
-    - name: Propagate official alertmanager and amtool binaries
+    - name: Propagate official amtool binary
       ansible.builtin.copy:
-        src: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}/{{ item }}"
-        dest: "{{ _alertmanager_binary_install_dir }}/{{ item }}"
+        src: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}/amtool"
+        dest: "{{ _alertmanager_binary_install_dir }}/amtool"
         mode: 0755
         owner: root
         group: root
-      with_items:
-        - alertmanager
-        - amtool
+
+    - name: Propagate official alertmanager binary
+      ansible.builtin.copy:
+        src: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}/alertmanager"
+        dest: "{{ _alertmanager_binary_install_dir }}/alertmanager"
+        mode: 0755
+        owner: root
+        group: root
+      when: not alertmanager_skip_install
       notify:
         - restart alertmanager
 
-- name: Propagate locally distributed alertmanager and amtool binaries
+- name: Propagate locally distributed amtool binary
   ansible.builtin.copy:
-    src: "{{ alertmanager_binary_local_dir }}/{{ item }}"
-    dest: "{{ _alertmanager_binary_install_dir }}/{{ item }}"
+    src: "{{ alertmanager_binary_local_dir }}/amtool"
+    dest: "{{ _alertmanager_binary_install_dir }}/amtool"
     mode: 0755
     owner: root
     group: root
-  with_items:
-    - alertmanager
-    - amtool
+  when: alertmanager_binary_local_dir | length > 0
+
+- name: Propagate locally distributed alertmanager binary
+  ansible.builtin.copy:
+    src: "{{ alertmanager_binary_local_dir }}/alertmanager"
+    dest: "{{ _alertmanager_binary_install_dir }}/alertmanager"
+    mode: 0755
+    owner: root
+    group: root
   when:
     - alertmanager_binary_local_dir | length > 0
     - not alertmanager_skip_install
