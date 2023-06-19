@@ -50,6 +50,7 @@
     name: alertmanager
     state: started
     enabled: true
+  when: not alertmanager_skip_service_install | bool
   tags:
     - alertmanager_run
 
