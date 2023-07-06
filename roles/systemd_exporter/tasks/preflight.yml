@@ -5,6 +5,7 @@
     msg: "This role only works with systemd"
 
 - name: Install package fact dependencies
+  become: true
   ansible.builtin.package:
     name: "{{ _pkg_fact_req }}"
     state: present
@@ -56,8 +57,8 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    systemd_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus-community/systemd_exporter/releases/latest', split_lines=False) |
-                            from_json).get('tag_name') | replace('v', '') }}"
+    systemd_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus-community/systemd_exporter/releases/latest',
+                               headers=_github_api_headers, split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
   until: systemd_exporter_version is version('0.0.0', '>=')
   retries: 10
@@ -73,7 +74,7 @@
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:
-        _systemd_exporter_checksums: "{{ lookup('url', systemd_exporter_checksums_url, wantlist=True) | list }}"
+        _systemd_exporter_checksums: "{{ lookup('url', systemd_exporter_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
       run_once: true
       until: _systemd_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
       retries: 10

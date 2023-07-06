@@ -8,7 +8,7 @@ Deploy and manage prometheus [SNMP exporter](https://github.com/prometheus/snmp_
 
 ## Requirements
 
-- Ansible >= 2.7 (It might work on previous versions, but we cannot guarantee it)
+- Ansible >= 2.9 (It might work on previous versions, but we cannot guarantee it)
 
 ## Role Variables
 

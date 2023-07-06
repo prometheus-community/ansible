@@ -81,6 +81,13 @@ yq eval -i ".argument_specs.main.options.${role}_version.default = \"${version}\
 
 update_branch="autoupdate/${role}/${version}"
 
+remote_branch="$(github_api "repos/${GIT_REPO}/branches/${update_branch}" | jq -r .name)"
+
+if [[ -n "${remote_branch}" ]] ; then
+  echo_yellow "Branch is already on remote."
+  exit 0
+fi
+
 # Push new version
 git config user.email "${GIT_MAIL}"
 git config user.name "${GIT_USER}"
@@ -89,11 +96,11 @@ git add \
   "roles/${role}/defaults/main.yml" \
   "roles/${role}/meta/argument_specs.yml" \
   "roles/${role}/README.md"
-git commit -m 'patch: :tada: automated upstream release update'
+git commit --signoff -m 'patch: :tada: automated upstream release update'
 echo_green "Pushing to ${update_branch} branch in ${role}"
 if ! git push "https://${GITHUB_TOKEN}:@github.com/${GIT_REPO}" --set-upstream "${update_branch}"; then
-    echo_yellow "Branch is already on remote."
-    exit 0
+    echo_yellow "Branch push failed."
+    exit 1
 fi
 
 if ! post_pull_request \

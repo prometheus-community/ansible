@@ -3,7 +3,7 @@
   ansible.builtin.set_fact:
     snmp_exporter_checksum: "{{ item.split(' ')[0] }}"
   with_items:
-    - "{{ lookup('url', snmp_exporter_checksums_url, wantlist=True) | list }}"
+    - "{{ lookup('url', snmp_exporter_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
   when:
     - "('linux-' + (go_arch_map[ansible_architecture] | default(ansible_architecture)) + '.tar.gz') in item"
     - not snmp_exporter_skip_install

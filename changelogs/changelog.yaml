@@ -82,7 +82,7 @@ releases:
       minor_changes:
         - 'feat: Add mysqld_exporter role (https://github.com/prometheus-community/ansible/pull/45)'
       trivial:
-        - Fixup version bumper job (https://github.com/prometheus-community/ansible/pull/67)
+        - fix version bumper job (https://github.com/prometheus-community/ansible/pull/67)
         - 'refactor: underscore variable prefix should be reserved... (https://github.com/prometheus-community/ansible/pull/65)'
     release_date: '2023-03-14'
   0.3.1:
@@ -106,3 +106,45 @@ releases:
       trivial:
         - 'docs: avoid maintaining variable documentation in many places (https://github.com/prometheus-community/ansible/pull/85)'
     release_date: '2023-03-26'
+  0.4.1:
+    changes:
+      bugfixes:
+        - 'fix: add "become: true" to snmp_exporter handlers (https://github.com/prometheus-community/ansible/pull/99)'
+        - 'fix: pass token to github api for higher ratelimit (https://github.com/prometheus-community/ansible/pull/91)'
+        - 'fix: replace eol platforms with current (https://github.com/prometheus-community/ansible/pull/53)'
+        - 'fix: tags support for included tasks (https://github.com/prometheus-community/ansible/pull/87)'
+    release_date: '2023-04-26'
+  0.5.0:
+    changes:
+      bugfixes:
+        - 'fix: add "become: true" to snmp_exporter handlers (https://github.com/prometheus-community/ansible/pull/99)'
+        - 'fix: node_exporter - Fix Systemd ProtectHome option in service unit (https://github.com/prometheus-community/ansible/pull/94)'
+        - 'fix: pass token to github api for higher ratelimit (https://github.com/prometheus-community/ansible/pull/91)'
+        - 'fix: replace eol platforms with current (https://github.com/prometheus-community/ansible/pull/53)'
+        - 'fix: tags support for included tasks (https://github.com/prometheus-community/ansible/pull/87)'
+      minor_changes:
+        - 'minor: Add ansible 2.15 support (https://github.com/prometheus-community/ansible/pull/106)'
+    release_date: '2023-05-15'
+  0.5.1:
+    changes:
+      bugfixes:
+        - 'fix: Checkout full branch for version updates (https://github.com/prometheus-community/ansible/pull/108)'
+        - 'fix: Install package fact dependencies needs to be run as root (https://github.com/prometheus-community/ansible/pull/89)'
+        - 'fix: always create config file (https://github.com/prometheus-community/ansible/pull/113)'
+        - "fix: don't require role name on internal vars (https://github.com/prometheus-community/ansible/pull/109)"
+        - 'fix: textfile collector dir by setting recurse to false (https://github.com/prometheus-community/ansible/pull/105)'
+      trivial:
+        - 'docs: broken link to systemd exporter on docs (https://github.com/prometheus-community/ansible/pull/104)'
+        - 'patch: New prometheus-community/systemd_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/141)'
+        - 'patch: New prometheus/alertmanager upstream release! (https://github.com/prometheus-community/ansible/pull/143)'
+        - 'patch: New prometheus/blackbox_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/139)'
+        - 'patch: New prometheus/node_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/138)'
+        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/140)'
+        - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/142)'
+    release_date: '2023-05-16'
+  0.5.2:
+    changes:
+      trivial:
+        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/152)'
+        - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/146)'
+    release_date: '2023-06-24'

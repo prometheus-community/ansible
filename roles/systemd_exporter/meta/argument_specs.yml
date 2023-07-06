@@ -4,13 +4,13 @@ argument_specs:
   main:
     short_description: "Prometheus Systemd Exporter"
     description:
-      - "Deploy prometheus L(systemd exporter,,https://github.com/prometheus-community/systemd_exporter) using ansible."
+      - "Deploy prometheus L(systemd exporter,https://github.com/prometheus-community/systemd_exporter) using ansible."
     author:
       - "Prometheus Community"
     options:
       systemd_exporter_version:
         description: "SystemD exporter package version. Also accepts latest as parameter."
-        default: "0.4.0"
+        default: "0.5.0"
       systemd_exporter_skip_install:
         description: "SystemD exporter installation tasks gets skipped when set to true."
         type: bool

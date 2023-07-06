@@ -7,7 +7,12 @@ on:
       - edited
       - reopened
       - synchronize
+      - labeled
   workflow_dispatch:
+
+concurrency:
+  group: ansible-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 env:
   ANSIBLE_FORCE_COLOR: true
@@ -38,6 +43,8 @@ jobs:
           cmd: yq -o json -I=0 '.requires_ansible | split(",") | .[] |= sub("(.*?)(\d+\.\d+)(.*)"; "stable-${2}")' meta/runtime.yml
 
   ansible-test-sanity:
+    if: |
+      !github.event.label
     uses: ./.github/workflows/ansible-test-sanity.yml
     needs:
       - ansible-lint
@@ -47,7 +54,8 @@ jobs:
 
   discover-ansible-tests:
     runs-on: ubuntu-latest
-    needs: ansible-lint
+    needs:
+      - ansible-lint
     outputs:
       molecule-tests: ${{ steps.set-molecule-tests.outputs.tests }}
       integration-tests: ${{ steps.set-integration-tests.outputs.tests }}
@@ -56,22 +64,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get changed roles
-        id: changed-roles
-        uses: tj-actions/changed-files@v35
-        with:
-          path: "roles"
-          diff_relative: "true"
-          files: "**"
-          dir_names: "true"
-          dir_names_max_depth: "1"
-          since_last_remote_commit: "true"
-
       - name: Discover role tests
-        if: steps.changed-roles.outputs.any_changed == 'true'
         id: set-molecule-tests
+        env:
+          LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
         run: |
-          echo tests="[`for role in ${{ steps.changed-roles.outputs.all_changed_and_modified_files }}; do
+          roles=$(echo $LABELS | jq -r '.[]')
+          echo tests="[`for role in $roles; do
             for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -iname "molecule-${role}-*" -printf "%f\n"); do
               echo '{"test":\"'"${test}"'\","name":\"'"${test#*-}\"'"}';
             done
