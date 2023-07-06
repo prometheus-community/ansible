@@ -146,4 +146,5 @@ releases:
     changes:
       trivial:
         - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/152)'
+        - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/146)'
     release_date: '2023-06-24'
