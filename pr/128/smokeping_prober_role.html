@@ -126,7 +126,7 @@
 <h1>prometheus.prometheus.smokeping_prober role – Prometheus Smokeping Prober<a class="headerlink" href="#prometheus-prometheus-smokeping-prober-role-prometheus-smokeping-prober" title="Permalink to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/prometheus/prometheus">prometheus.prometheus collection</a> (version 0.5.1).</p>
+<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/prometheus/prometheus">prometheus.prometheus collection</a> (version 0.5.2).</p>
 <p>To install it use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">prometheus.prometheus</span></code>.</p>
 <p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">prometheus.prometheus.smokeping_prober</span></code>.</p>
 </div>
@@ -200,6 +200,14 @@
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--smokeping_prober_config_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-smokeping-prober-role-parameter-main-smokeping-prober-config-file"><strong>smokeping_prober_config_file</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--smokeping_prober_config_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>The filename of the smokeping_prober probes config file</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;probes.yml&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--smokeping_prober_http_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-smokeping-prober-role-parameter-main-smokeping-prober-http-server-config"><strong>smokeping_prober_http_server_config</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--smokeping_prober_http_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -207,7 +215,7 @@
 <p>Keys and values are the same as in <a class="reference external" href="https://github.com/prometheus/smokeping_prober/blob/master/https/README.md#sample-config">smokeping_prober docs</a>.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--smokeping_prober_skip_install"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-smokeping-prober-role-parameter-main-smokeping-prober-skip-install"><strong>smokeping_prober_skip_install</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--smokeping_prober_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -219,25 +227,25 @@
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--smokeping_prober_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-smokeping-prober-role-parameter-main-smokeping-prober-system-group"><strong>smokeping_prober_system_group</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--smokeping_prober_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p><em>Advanced</em></p>
 <p>System group for Smokeping Prober</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;smokeping_prober&quot;</span></code></p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;smokeping&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--smokeping_prober_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-smokeping-prober-role-parameter-main-smokeping-prober-system-user"><strong>smokeping_prober_system_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--smokeping_prober_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p><em>Advanced</em></p>
 <p>Smokeping Prober user</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;smokeping_prober&quot;</span></code></p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;smokeping&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--smokeping_prober_tls_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-smokeping-prober-role-parameter-main-smokeping-prober-tls-server-config"><strong>smokeping_prober_tls_server_config</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--smokeping_prober_tls_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -245,7 +253,7 @@
 <p>Keys and values are the same as in <a class="reference external" href="https://github.com/prometheus/smokeping_prober/blob/master/https/README.md#sample-config">smokeping_prober docs</a>.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--smokeping_prober_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-smokeping-prober-role-parameter-main-smokeping-prober-version"><strong>smokeping_prober_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--smokeping_prober_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -253,7 +261,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;1.1.2&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--smokeping_prober_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-smokeping-prober-role-parameter-main-smokeping-prober-web-listen-address"><strong>smokeping_prober_web_listen_address</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--smokeping_prober_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -261,7 +269,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9374&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--smokeping_prober_web_telemetry_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-smokeping-prober-role-parameter-main-smokeping-prober-web-telemetry-path"><strong>smokeping_prober_web_telemetry_path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--smokeping_prober_web_telemetry_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
