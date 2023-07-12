@@ -47,6 +47,12 @@ argument_specs:
           - "By default node_exporter disables collectors listed L(here,https://github.com/prometheus/node_exporter#disabled-by-default)."
         type: "list"
         elements: "str"
+      node_exporter_disable_default_collectors:
+        description:
+          - "Bool to control whether to disable the default enabled collectors."
+          - "Use in combination with node_exporter_enabled_collectors to set an explicit list of collectors to use."
+        type: bool
+        default: false
       node_exporter_textfile_dir:
         description:
           - "Directory used by the L(Textfile Collector,https://github.com/prometheus/node_exporter#textfile-collector)."
