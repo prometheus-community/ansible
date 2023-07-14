@@ -1,0 +1,26 @@
+---
+chrony_exporter_version: 0.6.1
+chrony_exporter_binary_local_dir: ""
+chrony_exporter_binary_url: "https://github.com/{{ _chrony_exporter_repo }}/releases/download/v{{ chrony_exporter_version }}/\
+                           chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+chrony_exporter_checksums_url: "https://github.com/{{ _chrony_exporter_repo }}/releases/download/v{{ chrony_exporter_version }}/sha256sums.txt"
+chrony_exporter_skip_install: false
+
+chrony_exporter_web_listen_address: "0.0.0.0:9123"
+chrony_exporter_web_telemetry_path: "/metrics"
+
+chrony_exporter_tls_server_config: {}
+
+chrony_exporter_http_server_config: {}
+
+chrony_exporter_basic_auth_users: {}
+
+chrony_exporter_enabled_collectors: []
+# - tracking
+# - sources
+
+chrony_exporter_disabled_collectors: []
+
+chrony_exporter_binary_install_dir: "/usr/local/bin"
+chrony_exporter_system_group: "chrony-exp"
+chrony_exporter_system_user: "{{ chrony_exporter_system_group }}"

@@ -1,0 +1,10 @@
+---
+- name: Restart chrony_exporter
+  listen: "restart chrony_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: chrony_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode

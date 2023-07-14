@@ -1,0 +1,63 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+    apply:
+      tags:
+        - chrony_exporter_install
+        - chrony_exporter_configure
+        - chrony_exporter_run
+  tags:
+    - chrony_exporter_install
+    - chrony_exporter_configure
+    - chrony_exporter_run
+
+- name: Install
+  ansible.builtin.include_tasks:
+    file: install.yml
+    apply:
+      become: true
+      tags:
+        - chrony_exporter_install
+  when:
+    ( not __chrony_exporter_is_installed.stat.exists ) or
+    ( (__chrony_exporter_current_version_output.stderr_lines | length > 0)
+      and (__chrony_exporter_current_version_output.stderr_lines[0].split(" ")[2] != chrony_exporter_version) ) or
+    ( (__chrony_exporter_current_version_output.stdout_lines | length > 0)
+      and (__chrony_exporter_current_version_output.stdout_lines[0].split(" ")[2] != chrony_exporter_version) ) or
+    ( chrony_exporter_binary_local_dir | length > 0 )
+  tags:
+    - chrony_exporter_install
+
+- name: SELinux
+  ansible.builtin.include_tasks:
+    file: selinux.yml
+    apply:
+      become: true
+      tags:
+        - chrony_exporter_configure
+  when: ansible_selinux.status == "enabled"
+  tags:
+    - chrony_exporter_configure
+
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yml
+    apply:
+      become: true
+      tags:
+        - chrony_exporter_configure
+  tags:
+    - chrony_exporter_configure
+
+- name: Ensure Chrony Exporter is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: chrony_exporter
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - chrony_exporter_run
