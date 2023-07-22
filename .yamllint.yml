@@ -20,7 +20,9 @@ rules:
   hyphens:
     level: error
   line-length:
-    max: 160
+    max: 200
+  truthy:
+    check-keys: false
 
 ignore: |
   changelogs/.plugin-cache.yaml
