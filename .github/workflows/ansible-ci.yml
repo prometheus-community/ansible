@@ -69,7 +69,7 @@ jobs:
         env:
           LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
         run: |
-          roles=$(echo $LABELS | jq -r '.[]')
+          roles=$(echo $LABELS | jq -r '.[]' | grep '^roles/' | sed 's|^roles/||')
           echo tests="[`for role in $roles; do
             for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -iname "molecule-${role}-*" -printf "%f\n"); do
               echo '{"test":\"'"${test}"'\","name":\"'"${test#*-}\"'"}';
