@@ -10,19 +10,19 @@ User={{ systemd_exporter_system_user }}
 Group={{ systemd_exporter_system_group }}
 ExecStart={{ systemd_exporter_binary_install_dir }}/systemd_exporter \
 {% if systemd_exporter_enable_restart_count %}
-    --collector.enable-restart-count \
+    --systemd.collector.enable-restart-count \
 {% endif %}
 {% if systemd_exporter_enable_file_descriptor_size %}
-    --collector.enable-file-descriptor-size \
+    --systemd.collector.enable-file-descriptor-size \
 {% endif %}
 {% if systemd_exporter_enable_ip_accounting %}
-    --collector.enable-ip-accounting \
+    --systemd.collector.enable-ip-accounting \
 {% endif %}
 {% if systemd_exporter_unit_include != ""%}
-    --collector.unit-include={{ systemd_exporter_unit_include }} \
+    --systemd.collector.unit-include={{ systemd_exporter_unit_include }} \
 {% endif %}
 {% if systemd_exporter_unit_exclude != "" %}
-    --collector.unit-exclude={{ systemd_exporter_unit_exclude }} \
+    --systemd.collector.unit-exclude={{ systemd_exporter_unit_exclude }} \
 {% endif %}
     --web.listen-address={{ systemd_exporter_web_listen_address }}
 
