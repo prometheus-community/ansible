@@ -42,9 +42,9 @@ argument_specs:
         type: "bool"
         default: false
       systemd_exporter_unit_include:
-        description: "Include some systemd units. Expects a regex. More in L(systemd_exporter docs,https://github.com/prometheus-community/systemd_exporter#configuration)"
+        description: "Include some systemd units. Expects a regex. More in L(systemd_exporter docs,https://github.com/prometheus-community/systemd_exporter#configuration)."
       systemd_exporter_unit_exclude:
-        description: "Exclude some systemd units. Expects a regex. More in L(systemd_exporter docs,https://github.com/prometheus-community/systemd_exporter#configuration)"
+        description: "Exclude some systemd units. Expects a regex. More in L(systemd_exporter docs,https://github.com/prometheus-community/systemd_exporter#configuration)."
       systemd_exporter_binary_install_dir:
         description:
           - "I(Advanced)"
