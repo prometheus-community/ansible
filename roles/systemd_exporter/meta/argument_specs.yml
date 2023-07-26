@@ -41,10 +41,10 @@ argument_specs:
         description: Enables file descriptor size metrics. This feature will cause exporter to run as root as it needs access to /proc/X/fd"
         type: "bool"
         default: false
-      systemd_exporter_unit_allowlist:
-        description: "Include some systemd units. Expects a regex. More in L(https://github.com/prometheus-community/systemd_exporter#configuration)"
-      systemd_exporter_unit_denylist:
-        description: "Exclude some systemd units. Expects a regex. More in L(https://github.com/prometheus-community/systemd_exporter#configuration)"
+      systemd_exporter_unit_include:
+        description: "Include some systemd units. Expects a regex. More in L(systemd_exporter docs,https://github.com/prometheus-community/systemd_exporter#configuration)."
+      systemd_exporter_unit_exclude:
+        description: "Exclude some systemd units. Expects a regex. More in L(systemd_exporter docs,https://github.com/prometheus-community/systemd_exporter#configuration)."
       systemd_exporter_binary_install_dir:
         description:
           - "I(Advanced)"

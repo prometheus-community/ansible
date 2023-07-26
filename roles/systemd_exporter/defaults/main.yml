@@ -11,8 +11,8 @@ systemd_exporter_enable_restart_count: false
 systemd_exporter_enable_ip_accounting: false
 systemd_exporter_enable_file_descriptor_size: false
 
-systemd_exporter_unit_whitelist: ""
-systemd_exporter_unit_blacklist: ""
+systemd_exporter_unit_include: ""
+systemd_exporter_unit_exclude: ""
 
 systemd_exporter_binary_install_dir: "/usr/local/bin"
 systemd_exporter_system_group: "systemd-exporter"
