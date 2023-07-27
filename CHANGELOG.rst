@@ -5,6 +5,14 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.5.2
+======
+
+Bugfixes
+--------
+
+- fix: mysqld_exporter should actually respect the mysqld_exporter_host variable (https://github.com/prometheus-community/ansible/pull/88)
+
 v0.5.1
 ======
 
