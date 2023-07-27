@@ -5,7 +5,7 @@
     dest: /etc/systemd/system/mysqld_exporter.service
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   notify: restart mysqld_exporter
 
 - name: Create mysqld_exporter config directory
