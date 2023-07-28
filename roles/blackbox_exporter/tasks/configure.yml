@@ -12,7 +12,7 @@
 - name: Configure blackbox exporter
   ansible.builtin.template:
     src: blackbox_exporter.yml.j2
-    dest: /etc/blackbox_exporter.yml
+    dest: "{{ blackbox_exporter_conf_dir }}/blackbox_exporter.yml"
     owner: blackbox-exp
     group: blackbox-exp
     mode: 0644
