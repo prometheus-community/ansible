@@ -7,8 +7,8 @@ StartLimitIntervalSec=0
 
 [Service]
 Type=simple
-User=blackbox-exp
-Group=blackbox-exp
+User={{ blackbox_exporter_user }}
+Group={{ blackbox_exporter_group }}
 PermissionsStartOnly=true
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart=/usr/local/bin/blackbox_exporter \
