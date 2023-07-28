@@ -5,7 +5,7 @@
     dest: /etc/systemd/system/blackbox_exporter.service
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   notify:
     - restart blackbox exporter
 
@@ -15,6 +15,6 @@
     dest: /etc/blackbox_exporter.yml
     owner: blackbox-exp
     group: blackbox-exp
-    mode: 0644
+    mode: '0644'
   notify:
     - reload blackbox exporter
