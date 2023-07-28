@@ -49,14 +49,18 @@
   until: _download_packages is succeeded
   retries: 5
   delay: 2
-  when: ansible_os_family | lower == "debian"
+  when:
+    - ansible_os_family | lower == "debian"
+    - not blackbox_exporter_skip_install | bool
 
 - name: Ensure blackbox exporter binary has cap_net_raw capability
   community.general.capabilities:
     path: '/usr/local/bin/blackbox_exporter'
     capability: cap_net_raw+ep
     state: present
-  when: not ansible_check_mode
+  when:
+    - not ansible_check_mode
+    - not blackbox_exporter_skip_install | bool
   changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"
 
 - name: Check Debug Message
