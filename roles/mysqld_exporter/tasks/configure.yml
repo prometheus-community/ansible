@@ -21,8 +21,8 @@
     src: my_cnf.j2
     dest: "{{ mysqld_exporter_config_dir }}/{{ mysqld_exporter_config_file }}"
     owner: root
-    group: root
-    mode: 0644
+    group: '{{ mysqld_exporter_system_group }}'
+    mode: '0640'
   no_log: "{{ 'false' if lookup('env', 'CI') else 'true' }}"
   notify: restart mysqld_exporter
 
@@ -37,8 +37,8 @@
         src: web_config.yaml.j2
         dest: "{{ mysqld_exporter_config_dir }}/web_config.yaml"
         owner: root
-        group: root
-        mode: 0644
+        group: '{{ mysqld_exporter_system_group }}'
+        mode: '0640'
       notify: restart mysqld_exporter
 
 - name: Allow mysqld_exporter port in SELinux on RedHat OS family
