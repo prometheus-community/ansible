@@ -67,4 +67,4 @@ blackbox_exporter_configuration_modules:
 #        fail_if_matches_regexp: [test]
 
 # Where to put the blackbox_exporter.yml main configuration file
-blackbox_exporter_conf_dir: /etc
+blackbox_exporter_config_dir: /etc
