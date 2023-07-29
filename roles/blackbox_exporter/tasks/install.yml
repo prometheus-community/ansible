@@ -1,17 +1,19 @@
 ---
 - name: Create blackbox_exporter system group
   ansible.builtin.group:
-    name: blackbox-exp
+    name: "{{ blackbox_exporter_group }}"
     system: true
     state: present
+  when: blackbox_exporter_group != 'root'
 
 - name: Create blackbox_exporter system user
   ansible.builtin.user:
-    name: blackbox-exp
+    name: "{{ blackbox_exporter_user }}"
     system: true
     shell: "/usr/sbin/nologin"
-    group: blackbox-exp
+    group: "{{ blackbox_exporter_group }}"
     createhome: false
+  when: blackbox_exporter_user != 'root'
 
 - name: Download blackbox exporter binary to local folder
   become: false
@@ -35,8 +37,8 @@
           blackbox_exporter"
     dest: "/usr/local/bin/blackbox_exporter"
     mode: '0750'
-    owner: blackbox-exp
-    group: blackbox-exp
+    owner: root
+    group: "{{ blackbox_exporter_group }}"
   when: not blackbox_exporter_skip_install
   notify:
     - restart blackbox exporter

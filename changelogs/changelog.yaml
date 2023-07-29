@@ -148,11 +148,28 @@ releases:
         - 'fix: mysqld_exporter should actually respect the mysqld_exporter_host variable
           (https://github.com/prometheus-community/ansible/pull/88)'
       trivial:
+        - Fix mysqld_exporter world-readable secrets (https://github.com/prometheus-community/ansible/pull/169)
+        - 'Fix: rename collector flags (https://github.com/prometheus-community/ansible/pull/167)'
+        - 'patch: New prometheus/mysqld_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/153)'
+        - 'patch: New prometheus/node_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/162)'
+        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/152)'
+        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/168)'
+        - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/146)'
+    release_date: '2023-06-24'
+  0.6.0:
+    changes:
+      bugfixes:
+        - 'fix: mysqld_exporter should actually respect the mysqld_exporter_host variable
+          (https://github.com/prometheus-community/ansible/pull/88)'
+      minor_changes:
+        - 'feature: blackbox exporter user/group configurable (https://github.com/prometheus-community/ansible/pull/172)'
+      trivial:
+        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/152)'
         - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/146)'
         - 'patch: New prometheus/mysqld_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/153)'
-        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/152)'
+        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/168)'
         - 'patch: New prometheus/node_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/162)'
         - 'Fix: rename collector flags (https://github.com/prometheus-community/ansible/pull/167)'
-        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/168)'
         - Fix mysqld_exporter world-readable secrets (https://github.com/prometheus-community/ansible/pull/169)
-    release_date: '2023-06-24'
+        - 'fix ansible-lint: risky-octal & no-same-owner (https://github.com/prometheus-community/ansible/pull/171)'
+    release_date: '2023-07-29'

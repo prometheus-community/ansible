@@ -13,8 +13,8 @@
   ansible.builtin.template:
     src: blackbox_exporter.yml.j2
     dest: /etc/blackbox_exporter.yml
-    owner: blackbox-exp
-    group: blackbox-exp
+    owner: root
+    group: "{{ blackbox_exporter_group }}"
     mode: '0644'
   notify:
     - reload blackbox exporter
