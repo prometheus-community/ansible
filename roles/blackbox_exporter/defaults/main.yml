@@ -7,6 +7,9 @@ blackbox_exporter_skip_install: false
 
 blackbox_exporter_web_listen_address: "0.0.0.0:9115"
 
+blackbox_exporter_user: blackbox-exp
+blackbox_exporter_group: "{{ blackbox_exporter_user }}"
+
 blackbox_exporter_cli_flags: {}
 # blackbox_exporter_cli_flags:
 #   log.level: "warn"
@@ -65,3 +68,6 @@ blackbox_exporter_configuration_modules:
 #      preferred_ip_protocol: ip6
 #      validate_answer_rrs:
 #        fail_if_matches_regexp: [test]
+
+# Where to put the blackbox_exporter.yml main configuration file
+blackbox_exporter_config_dir: /etc

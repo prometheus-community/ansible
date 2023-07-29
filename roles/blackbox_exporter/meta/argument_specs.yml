@@ -34,3 +34,6 @@ argument_specs:
             http:
               method: GET
               valid_status_codes: []
+      blackbox_exporter_config_dir:
+        description: "Directory where the blackbox exporter configuration file is placed"
+        default: "/etc"
