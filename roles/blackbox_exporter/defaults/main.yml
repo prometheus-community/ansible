@@ -7,6 +7,9 @@ blackbox_exporter_skip_install: false
 
 blackbox_exporter_web_listen_address: "0.0.0.0:9115"
 
+blackbox_exporter_user: blackbox-exp
+blackbox_exporter_group: "{{ blackbox_exporter_user }}"
+
 blackbox_exporter_cli_flags: {}
 # blackbox_exporter_cli_flags:
 #   log.level: "warn"
