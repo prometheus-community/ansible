@@ -34,7 +34,7 @@
       until: _download_binary is succeeded
       retries: 5
       delay: 2
-      delegate_to: localhost
+      delegate_to: "{{ groups['targets'][0] }}"
       check_mode: false
 
     - name: Unpack node_exporter binary
@@ -43,7 +43,7 @@
         src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp"
         creates: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
-      delegate_to: localhost
+      delegate_to: "{{ groups['targets'][0] }}"
       check_mode: false
 
     - name: Propagate node_exporter binaries
