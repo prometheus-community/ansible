@@ -27,14 +27,13 @@
   until: _download_binary is succeeded
   retries: 5
   delay: 2
-  delegate_to: localhost
   check_mode: false
   when: not blackbox_exporter_skip_install
 
 - name: Propagate blackbox exporter binary
   ansible.builtin.copy:
     src: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/\
-          blackbox_exporter"
+              blackbox_exporter"
     dest: "/usr/local/bin/blackbox_exporter"
     mode: 0750
     owner: root
