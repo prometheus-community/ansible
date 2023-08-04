@@ -19,6 +19,16 @@ def test_files(host, files):
     assert f.is_file
 
 
+def test_directories(host):
+    dirs = [
+        "/home/node_exporter"
+    ]
+    for dir in dirs:
+        d = host.file(dir)
+        assert d.is_directory
+        assert d.exists
+
+
 def test_service(host):
     s = host.service("node_exporter")
     try:
@@ -35,7 +45,7 @@ def test_service(host):
 def test_protecthome_property(host):
     s = host.service("node_exporter")
     p = s.systemd_properties
-    assert p.get("ProtectHome") == "yes"
+    assert p.get("ProtectHome") == "read-only"
 
 
 def test_socket(host):
