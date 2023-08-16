@@ -178,4 +178,5 @@ releases:
         - 'fix ansible-lint: risky-octal & no-same-owner (https://github.com/prometheus-community/ansible/pull/171)'
         - 'Fix: rename collector flags (https://github.com/prometheus-community/ansible/pull/167)'
         - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/188)'
+        - 'docs(smokeping_prober): Update arguments specs (https://github.com/prometheus-community/ansible/pull/190)'
     release_date: '2023-07-29'
