@@ -28,7 +28,7 @@ jobs:
         targets: ${{ fromJson(inputs.targets) }}
         ansible-core-versions: ${{ fromJson(inputs.ansible-core-versions) }}
         target-python-versions: ${{ fromJson(inputs.target-python-versions) }}
-        coverage: ${{ fromJson(inputs.coverage) }}
+        coverage: ${{ inputs.coverage }}
 
     name: "${{ matrix.targets.name }}-${{ matrix.ansible-core-versions }}"
     steps:
