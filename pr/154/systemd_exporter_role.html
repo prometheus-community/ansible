@@ -124,7 +124,7 @@
 <h1>prometheus.prometheus.systemd_exporter role – Prometheus Systemd Exporter<a class="headerlink" href="#prometheus-prometheus-systemd-exporter-role-prometheus-systemd-exporter" title="Permalink to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/prometheus/prometheus">prometheus.prometheus collection</a> (version 0.5.2).</p>
+<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/prometheus/prometheus">prometheus.prometheus collection</a> (version 0.6.0).</p>
 <p>To install it use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">prometheus.prometheus</span></code>.</p>
 <p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">prometheus.prometheus.systemd_exporter</span></code>.</p>
 </div>
@@ -257,17 +257,17 @@
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_unit_allowlist"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-unit-allowlist"><strong>systemd_exporter_unit_allowlist</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_unit_allowlist" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_unit_exclude"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-unit-exclude"><strong>systemd_exporter_unit_exclude</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_unit_exclude" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Include some systemd units. Expects a regex. More in <strong>ERROR while parsing</strong>: While parsing “L(<a class="reference external" href="https://github.com/prometheus-community/systemd_exporter#configuration">https://github.com/prometheus-community/systemd_exporter#configuration</a>)” at index 54: Cannot find comma separating parameter 1 from the next one</p>
+<td><div class="ansible-option-cell"><p>Exclude some systemd units. Expects a regex. More in <a class="reference external" href="https://github.com/prometheus-community/systemd_exporter#configuration">systemd_exporter docs</a>.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_unit_denylist"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-unit-denylist"><strong>systemd_exporter_unit_denylist</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_unit_denylist" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_unit_include"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-unit-include"><strong>systemd_exporter_unit_include</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_unit_include" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Exclude some systemd units. Expects a regex. More in <strong>ERROR while parsing</strong>: While parsing “L(<a class="reference external" href="https://github.com/prometheus-community/systemd_exporter#configuration">https://github.com/prometheus-community/systemd_exporter#configuration</a>)” at index 54: Cannot find comma separating parameter 1 from the next one</p>
+<td><div class="ansible-option-cell"><p>Include some systemd units. Expects a regex. More in <a class="reference external" href="https://github.com/prometheus-community/systemd_exporter#configuration">systemd_exporter docs</a>.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
