@@ -32,6 +32,9 @@ argument_specs:
       smokeping_prober_web_telemetry_path:
         description: "Path under which to expose metrics"
         default: "/metrics"
+      smokeping_prober_config_dir:
+        description: "The directory of the smokeping_prober probes config files"
+        default: "/etc/smokeping_prober"
       smokeping_prober_config_file:
         description: "The filename of the smokeping_prober probes config file"
         default: "probes.yml"
@@ -48,6 +51,9 @@ argument_specs:
       smokeping_prober_basic_auth_users:
         description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
         type: "dict"
+      smokeping_prober_targets:
+        description: "List of smokeping_prober targets. See: https://github.com/SuperQ/smokeping_prober/#configuration"
+        type: "list"
       smokeping_prober_binary_install_dir:
         description:
           - "I(Advanced)"
