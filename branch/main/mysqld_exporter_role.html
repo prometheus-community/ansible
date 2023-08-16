@@ -202,6 +202,14 @@
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_config_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-config-dir"><strong>mysqld_exporter_config_dir</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_config_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>The path where exporter configuration is stored</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/etc/mysqld_exporter&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_config_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-config-file"><strong>mysqld_exporter_config_file</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_config_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -209,7 +217,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;mysqld_exporter.cnf&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_disabled_collectors"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-disabled-collectors"><strong>mysqld_exporter_disabled_collectors</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_disabled_collectors" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
@@ -217,7 +225,7 @@
 <p>By default mysqld_exporter disables collectors listed <a class="reference external" href="https://github.com/prometheus/mysqld_exporter#disabled-by-default">here</a>.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_enabled_collectors"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-enabled-collectors"><strong>mysqld_exporter_enabled_collectors</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_enabled_collectors" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
@@ -226,19 +234,27 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_host"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-host"><strong>mysqld_exporter_host</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_host" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The target MySQL host</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_http_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-http-server-config"><strong>mysqld_exporter_http_server_config</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_http_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Config for HTTP/2 support.</p>
 <p>Keys and values are the same as in <a class="reference external" href="https://github.com/prometheus/mysqld_exporter/blob/master/https/README.md#sample-config">mysqld_exporter docs</a>.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_password"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-password"><strong>mysqld_exporter_password</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>The password for MySQL login</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;secret&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -295,6 +311,14 @@
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_username"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-username"><strong>mysqld_exporter_username</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_username" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>The username for MySQL login</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;exporter&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-version"><strong>mysqld_exporter_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -302,7 +326,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.15.0&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-web-listen-address"><strong>mysqld_exporter_web_listen_address</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -310,7 +334,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9104&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_web_telemetry_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-web-telemetry-path"><strong>mysqld_exporter_web_telemetry_path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_web_telemetry_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
