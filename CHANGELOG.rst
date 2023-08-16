@@ -11,6 +11,7 @@ v0.6.0
 Minor Changes
 -------------
 
+- feat: Add chrony_exporter role (https://github.com/prometheus-community/ansible/pull/159)
 - feature: Make config installation dir configurable (https://github.com/prometheus-community/ansible/pull/173)
 - feature: blackbox exporter user/group configurable (https://github.com/prometheus-community/ansible/pull/172)
 
