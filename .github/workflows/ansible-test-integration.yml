@@ -28,7 +28,6 @@ jobs:
         targets: ${{ fromJson(inputs.targets) }}
         ansible-core-versions: ${{ fromJson(inputs.ansible-core-versions) }}
         target-python-versions: ${{ fromJson(inputs.target-python-versions) }}
-        coverage: ${{ inputs.coverage }}
 
     name: "${{ matrix.targets.name }}-${{ matrix.ansible-core-versions }}"
     steps:
@@ -41,6 +40,6 @@ jobs:
           docker-image: "--docker-privileged"  # Workaround because ansible-test action doesn't support setting privileged flag
           testing-type: integration
           target: ${{ matrix.targets.test }}
-          coverage: ${{ matrix.coverage }}
+          coverage: ${{ inputs.coverage }}
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
