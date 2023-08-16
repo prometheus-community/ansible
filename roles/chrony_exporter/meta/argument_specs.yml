@@ -1,0 +1,75 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus Chrony Exporter"
+    description:
+      - "Deploy prometheus L(chrony_exporter,https://github.com/superq/chrony_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      chrony_exporter_version:
+        description: "Chrony exporter package version. Also accepts latest as parameter."
+        default: "1.6.0"
+      chrony_exporter_skip_install:
+        description: "Chrony exporter installation tasks gets skipped when set to true."
+        type: bool
+        default: false
+      chrony_exporter_binary_local_dir:
+        description:
+          - "Enables the use of local packages instead of those distributed on github."
+          - "The parameter may be set to a directory where the C(chrony_exporter) binary is stored on the host where ansible is run."
+          - "This overrides the I(chrony_exporter_version) parameter"
+      chrony_exporter_binary_url:
+        description: "URL of the chrony_exporter binaries .tar.gz file"
+        default: "https://github.com/{{ _chrony_exporter_repo }}/releases/download/v{{ chrony_exporter_version }}/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+      chrony_exporter_checksums_url:
+        description: "URL of the chrony_exporter checksums file"
+        default: "https://github.com/{{ _chrony_exporter_repo }}/releases/download/v{{ chrony_exporter_version }}/sha256sums.txt"
+      chrony_exporter_web_listen_address:
+        description: "Address on which chrony_exporter will listen"
+        default: "0.0.0.0:9123"
+      chrony_exporter_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      chrony_exporter_enabled_collectors:
+        description:
+          - "List of dicts defining additionally enabled collectors and their configuration."
+          - "It adds collectors to L(those enabled by default,https://github.com/superq/chrony_exporter#enabled-by-default)."
+        type: "list"
+        default:
+          - tracking
+      chrony_exporter_disabled_collectors:
+        description:
+          - "List of disabled collectors."
+          - "By default chrony_exporter disables collectors listed L(here,https://github.com/superq/chrony_exporter#disabled-by-default)."
+        type: "list"
+        elements: "str"
+      chrony_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(chrony_exporter docs,https://github.com/superq/chrony_exporter/blob/master/https/README.md#sample-config)."
+        type: "dict"
+      chrony_exporter_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(chrony_exporter docs,https://github.com/superq/chrony_exporter/blob/master/https/README.md#sample-config)."
+        type: "dict"
+      chrony_exporter_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      chrony_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install chrony_exporter binary"
+        default: "/usr/local/bin"
+      chrony_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for chrony_exporter"
+        default: "chrony-exp"
+      chrony_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "Chrony exporter user"
+        default: "chrony-exp"

@@ -1,5 +1,5 @@
 ---
-snmp_exporter_version: 0.22.0
+snmp_exporter_version: 0.23.0
 snmp_exporter_binary_url: "https://github.com/{{ _snmp_exporter_repo }}/releases/download/v{{ snmp_exporter_version }}/\
                            snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
 snmp_exporter_checksums_url: "https://github.com/{{ _snmp_exporter_repo }}/releases/download/v{{ snmp_exporter_version }}/sha256sums.txt"

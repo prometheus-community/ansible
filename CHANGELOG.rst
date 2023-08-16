@@ -5,6 +5,24 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.6.0
+======
+
+Minor Changes
+-------------
+
+- feat: Add chrony_exporter role (https://github.com/prometheus-community/ansible/pull/159)
+- feat: Add pushgateway role (https://github.com/prometheus-community/ansible/pull/127)
+- feat: Add role smokeping_prober (https://github.com/prometheus-community/ansible/pull/128)
+- feature: Make config installation dir configurable (https://github.com/prometheus-community/ansible/pull/173)
+- feature: blackbox exporter user/group configurable (https://github.com/prometheus-community/ansible/pull/172)
+
+Bugfixes
+--------
+
+- fix: Add test for argument_specs matching (https://github.com/prometheus-community/ansible/pull/177)
+- fix: mysqld_exporter should actually respect the mysqld_exporter_host variable (https://github.com/prometheus-community/ansible/pull/88)
+
 v0.5.2
 ======
 

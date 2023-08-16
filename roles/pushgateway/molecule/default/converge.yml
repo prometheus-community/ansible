@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  any_errors_fatal: true
+  roles:
+    - prometheus.prometheus.pushgateway
+  vars:
+    pushgateway_web_listen_address: "127.0.0.1:9091"

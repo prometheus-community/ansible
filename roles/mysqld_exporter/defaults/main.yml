@@ -13,8 +13,8 @@ mysqld_exporter_username: exporter
 mysqld_exporter_password: secret
 
 mysqld_exporter_config_file: "mysqld_exporter.cnf"
-# mysqld_exporter_host: localhost
-# mysqld_exporter_port: 3306
+mysqld_exporter_host: null
+mysqld_exporter_port: null
 mysqld_exporter_socket: "/run/mysqld/mysqld.sock"
 
 mysqld_exporter_tls_server_config: {}

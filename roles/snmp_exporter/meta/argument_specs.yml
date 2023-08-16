@@ -10,7 +10,7 @@ argument_specs:
     options:
       snmp_exporter_version:
         description: "SNMP exporter package version"
-        default: "0.22.0"
+        default: "0.23.0"
       snmp_exporter_skip_install:
         description: "SNMP exporter installation tasks gets skipped when set to true."
         type: bool
