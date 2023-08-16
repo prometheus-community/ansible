@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  any_errors_fatal: true
+  roles:
+    - prometheus.prometheus.smokeping_prober
+  vars:
+    smokeping_prober_web_listen_address: "127.0.0.1:9374"
