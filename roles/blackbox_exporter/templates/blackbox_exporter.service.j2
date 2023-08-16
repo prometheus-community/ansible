@@ -12,7 +12,7 @@ Group={{ blackbox_exporter_group }}
 PermissionsStartOnly=true
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart=/usr/local/bin/blackbox_exporter \
-  --config.file=/etc/blackbox_exporter.yml \
+  --config.file={{ blackbox_exporter_config_dir }}/blackbox_exporter.yml \
   {% for flag, flag_value in blackbox_exporter_cli_flags.items() -%}
   --{{ flag }}={{ flag_value }} \
   {% endfor -%}
