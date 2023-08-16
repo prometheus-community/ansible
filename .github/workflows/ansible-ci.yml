@@ -102,6 +102,7 @@ jobs:
     with:
       targets: ${{ needs.discover-ansible-tests.outputs.molecule-tests }}
       ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}
+      coverage: never
 
   ansible-test-integration:
     uses: ./.github/workflows/ansible-test-integration.yml
