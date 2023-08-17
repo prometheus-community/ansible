@@ -180,4 +180,5 @@ releases:
         - 'Fix: rename collector flags (https://github.com/prometheus-community/ansible/pull/167)'
         - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/188)'
         - 'docs(smokeping_prober): Update arguments specs (https://github.com/prometheus-community/ansible/pull/190)'
+        - 'patch: New superq/smokeping_prober upstream release! (https://github.com/prometheus-community/ansible/pull/196)'
     release_date: '2023-07-29'
