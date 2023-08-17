@@ -86,6 +86,7 @@ alertmanager_route: {}
 #   receiver: slack
 #   # This routes performs a regular expression match on alert labels to
 #   # catch alerts that are related to a list of services.
+#   routes:
 #     - match_re:
 #         service: ^(foo1|foo2|baz)$
 #       receiver: team-X-mails
