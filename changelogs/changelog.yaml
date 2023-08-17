@@ -161,13 +161,14 @@ releases:
       minor_changes:
         - 'feature: blackbox exporter user/group configurable (https://github.com/prometheus-community/ansible/pull/172)'
         - 'feature: Make config installation dir configurable (https://github.com/prometheus-community/ansible/pull/173)'
-        - 'feat: Add chrony_exporter role (https://github.com/prometheus-community/ansible/pull/159)'
-        - 'feat: Add role smokeping_prober (https://github.com/prometheus-community/ansible/pull/128)'
         - 'feat: Add pushgateway role (https://github.com/prometheus-community/ansible/pull/127)'
+        - 'feat: Add role smokeping_prober (https://github.com/prometheus-community/ansible/pull/128)'
+        - 'feat: Add chrony_exporter role (https://github.com/prometheus-community/ansible/pull/159)'
       bugfixes:
         - 'fix: mysqld_exporter should actually respect the mysqld_exporter_host variable
           (https://github.com/prometheus-community/ansible/pull/88)'
         - 'fix: Add test for argument_specs matching (https://github.com/prometheus-community/ansible/pull/177)'
+        - 'fix(alertmanager): add routes before match_re (https://github.com/prometheus-community/ansible/pull/194)'
       trivial:
         - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/146)'
         - 'patch: New prometheus/mysqld_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/153)'
