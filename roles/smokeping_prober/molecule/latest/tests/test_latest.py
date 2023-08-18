@@ -21,8 +21,15 @@ def test_files(host, files):
 
 def test_service(host):
     s = host.service("smokeping_prober")
-    # assert s.is_enabled
-    assert s.is_running
+    try:
+        assert s.is_running
+    except AssertionError:
+        # Capture service logs
+        journal_output = host.run('journalctl -u smokeping_prober --since "1 hour ago"')
+        print("\n==== journalctl -u smokeping_prober Output ====\n")
+        print(journal_output)
+        print("\n============================================\n")
+        raise  # Re-raise the original assertion error
 
 
 def test_socket(host):
