@@ -1,16 +1,13 @@
 ---
-- name: Prepare
+- name: Run localhost preparation
   hosts: localhost
   gather_facts: false
-  vars:
-    go_arch: amd64
-    pushgateway_version: 1.5.1
   tasks:
     - name: Download pushgateway binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus/pushgateway/releases/download/v{{ pushgateway_version }}/\
-              pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"
+        url: "https://github.com/prometheus/pushgateway/releases/download/v{{ pushgateway_version\
+          \ }}/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"
         mode: 0644
       register: _download_binary
@@ -54,3 +51,26 @@
         csr_path: "/tmp/tls.csr"
         privatekey_path: "/tmp/tls.key"
         provider: selfsigned
+
+- name: Run target preparation
+  hosts: all
+  any_errors_fatal: true
+  tasks:
+    - name: Create pushgateway cert dir
+      ansible.builtin.file:
+        path: "{{ pushgateway_tls_server_config.cert_file | dirname }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u+rwX,g+rwX,o=rX
+
+    - name: Copy cert and key
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "{{ item.mode | default('0644') }}"
+      loop:
+        - src: "/tmp/tls.cert"
+          dest: "{{ pushgateway_tls_server_config.cert_file }}"
+        - src: "/tmp/tls.key"
+          dest: "{{ pushgateway_tls_server_config.key_file }}"

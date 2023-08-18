@@ -1,8 +1,0 @@
----
-- name: Converge
-  hosts: all
-  any_errors_fatal: true
-  roles:
-    - prometheus.prometheus.chrony_exporter
-  vars:
-    chrony_exporter_web_listen_address: "127.0.0.1:9123"
