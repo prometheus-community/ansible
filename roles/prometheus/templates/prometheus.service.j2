@@ -23,6 +23,7 @@ ExecStart={{ _prometheus_binary_install_dir }}/prometheus \
   {% endif %}
 {% else %}
   --enable-feature=agent \
+  --storage.agent.path={{ prometheus_db_dir }} \
 {% endif %}
 {% if prometheus_version is version('2.24.0', '>=') %}
   --web.config.file={{ prometheus_config_dir }}/web.yml \
@@ -58,7 +59,6 @@ RestrictSUIDSGID=true
 
 {% if (ansible_facts.packages.systemd | first).version is version('231', '>=') %}
 ReadWritePaths={{ prometheus_db_dir }}
-WorkingDirectory={{ prometheus_db_dir }}
 {% for path in prometheus_read_only_dirs %}
 ReadOnlyPaths={{ path }}
 {% endfor %}
