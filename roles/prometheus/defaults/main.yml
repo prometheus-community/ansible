@@ -25,6 +25,9 @@ prometheus_storage_retention: "30d"
 # supported: KB, MB, GB, TB, PB.
 prometheus_storage_retention_size: "0"
 
+# The Agent mode optimizes Prometheus for the remote write use case: https://prometheus.io/blog/2021/11/16/agent/
+prometheus_agent_mode: false
+
 prometheus_config_flags_extra: {}
 # prometheus_config_flags_extra:
 #   storage.tsdb.retention: 15d
@@ -86,6 +89,8 @@ prometheus_scrape_configs:
 
 # Alternative config file name, searched in ansible templates path.
 prometheus_config_file: 'prometheus.yml.j2'
+
+prometheus_rules_enable: true
 
 prometheus_alert_rules_files:
   - prometheus/rules/*.rules

@@ -59,6 +59,12 @@ argument_specs:
           - "Maximum number of bytes that can be stored for blocks."
           - "Units supported: KB, MB, GB, TB, PB."
         default: "0"
+      prometheus_agent_mode:
+        description:
+          - "The Agent mode optimizes Prometheus for the remote write use case. It disables querying, alerting, and local storage, and replaces it with a customized TSDB WAL. L(Everything,https://prometheus.io/docs/prometheus/latest/feature_flags/#prometheus-agent) else stays the same."
+          - "This feature is available starting from Prometheus v2.32.0."
+        type: bool
+        default: false
       prometheus_config_flags_extra:
         description:
           - "Additional configuration flags passed to prometheus binary at startup"
@@ -121,6 +127,10 @@ argument_specs:
       prometheus_config_file:
         description: "Variable used to provide custom prometheus configuration file in form of ansible template"
         default: "prometheus.yml.j2"
+      prometheus_rules_enable:
+        description: "To enable rules via the rule_files field in the Prometheus configuration"
+        type: bool
+        default: true
       prometheus_alert_rules:
         description:
           - "Full list of alerting rules which will be copied to C({{ prometheus_config_dir }}/rules/ansible_managed.rules)."
