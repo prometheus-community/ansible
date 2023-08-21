@@ -32,7 +32,7 @@
     owner: root
     group: root
     mode: 0644
-  no_log: "{{ 'false' if lookup('env', 'CI') else 'true' }}"
+  no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   notify:
     - reload snmp exporter
   when: (snmp_exporter_config_file)
