@@ -1,16 +1,13 @@
 ---
-- name: Prepare
+- name: Run local preparation
   hosts: localhost
   gather_facts: false
-  vars:
-    # This is meant to test a local prepared binary. It needs to be updated to support the minium
-    # flag features in the systemd service file.
-    version: 2.25.2
   tasks:
     - name: Download prometheus binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus/prometheus/releases/download/v{{ version }}/prometheus-{{ version }}.linux-amd64.tar.gz"
+        url: "https://github.com/prometheus/prometheus/releases/download/v{{ version\
+          \ }}/prometheus-{{ version }}.linux-amd64.tar.gz"
         dest: "/tmp/prometheus-{{ version }}.linux-amd64.tar.gz"
         mode: 0644
       register: _download_archive

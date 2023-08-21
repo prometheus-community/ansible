@@ -1,17 +1,15 @@
 ---
-- name: Prepare
+- name: Run local preparation
   hosts: localhost
   gather_facts: false
-  vars:
-    go_arch: amd64
-    chrony_exporter_version: 0.6.0
   tasks:
     - name: Download chrony_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/superq/chrony_exporter/releases/download/v{{ chrony_exporter_version }}/\
-              chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        url: "https://github.com/superq/chrony_exporter/releases/download/v{{ chrony_exporter_version\
+          \ }}/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "/tmp/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch\
+          \ }}.tar.gz"
         mode: 0644
       register: _download_binary
       until: _download_binary is succeeded
@@ -22,9 +20,11 @@
     - name: Unpack chrony_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        src: "/tmp/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch\
+          \ }}.tar.gz"
         dest: "/tmp"
-        creates: "/tmp/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch }}/chrony_exporter"
+        creates: "/tmp/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch\
+          \ }}/chrony_exporter"
       check_mode: false
 
     - name: Link to chrony_exporter binaries directory
@@ -54,3 +54,26 @@
         csr_path: "/tmp/tls.csr"
         privatekey_path: "/tmp/tls.key"
         provider: selfsigned
+
+- name: Run target preparation
+  hosts: all
+  any_errors_fatal: true
+  tasks:
+    - name: Create chrony_exporter cert dir
+      ansible.builtin.file:
+        path: "{{ chrony_exporter_tls_server_config.cert_file | dirname }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u+rwX,g+rwX,o=rX
+
+    - name: Copy cert and key
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "{{ item.mode | default('0644') }}"
+      loop:
+        - src: "/tmp/tls.cert"
+          dest: "{{ chrony_exporter_tls_server_config.cert_file }}"
+        - src: "/tmp/tls.key"
+          dest: "{{ chrony_exporter_tls_server_config.key_file }}"

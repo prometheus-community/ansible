@@ -1,1 +1,6 @@
 ---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        node_exporter_version: latest
