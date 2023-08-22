@@ -1,0 +1,6 @@
+---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        blackbox_exporter_version: latest
