@@ -48,7 +48,7 @@ platforms:
     command: /lib/systemd/systemd
   - name: debian-12
     image: dokken/debian-12
-    pre_build_image: true
+    pre_build_image: false
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
