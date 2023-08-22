@@ -16,6 +16,7 @@ Minor Changes
 - feat: Add role smokeping_prober (https://github.com/prometheus-community/ansible/pull/128)
 - feature: Make config installation dir configurable (https://github.com/prometheus-community/ansible/pull/173)
 - feature: blackbox exporter user/group configurable (https://github.com/prometheus-community/ansible/pull/172)
+- minor: support fedora 38 (https://github.com/prometheus-community/ansible/pull/202)
 
 Removed Features (previously deprecated)
 ----------------------------------------
