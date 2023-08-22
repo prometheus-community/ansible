@@ -20,7 +20,6 @@ galaxy_info:
         - "9"
     - name: "Fedora"
       versions:
-        - "36"
         - "37"
   galaxy_tags:
     - "monitoring"
