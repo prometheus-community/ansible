@@ -17,6 +17,11 @@ Minor Changes
 - feature: Make config installation dir configurable (https://github.com/prometheus-community/ansible/pull/173)
 - feature: blackbox exporter user/group configurable (https://github.com/prometheus-community/ansible/pull/172)
 
+Removed Features (previously deprecated)
+----------------------------------------
+
+- removed: Drop ubuntu 18.04 support as it is EOL (https://github.com/prometheus-community/ansible/pull/199)
+
 Bugfixes
 --------
 
