@@ -15,12 +15,12 @@ ExecReload=/bin/kill -HUP $MAINPID
 ExecStart={{ _prometheus_binary_install_dir }}/prometheus \
 {% if not prometheus_agent_mode %}
   --storage.tsdb.path={{ prometheus_db_dir }} \
-  {% if prometheus_version is version('2.7.0', '>=') %}
+{% if prometheus_version is version('2.7.0', '>=') %}
   --storage.tsdb.retention.time={{ prometheus_storage_retention }} \
   --storage.tsdb.retention.size={{ prometheus_storage_retention_size }} \
-  {% else %}
+{% else %}
   --storage.tsdb.retention={{ prometheus_storage_retention }} \
-  {% endif %}
+{% endif %}
 {% else %}
   --enable-feature=agent \
   --storage.agent.path={{ prometheus_db_dir }} \
