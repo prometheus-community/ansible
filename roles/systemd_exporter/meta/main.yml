@@ -14,7 +14,7 @@ galaxy_info:
       versions:
         - "bullseye"
         - "buster"
-        - bookworm
+        - "bookworm"
     - name: "EL"
       versions:
         - "7"
