@@ -46,12 +46,6 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
-  - name: fedora-36
-    image: dokken/fedora-36
-    pre_build_image: true
-    privileged: true
-    cgroup_parent: docker.slice
-    command: /lib/systemd/systemd
   - name: fedora-37
     image: dokken/fedora-37
     pre_build_image: true
@@ -60,12 +54,6 @@ platforms:
     command: /lib/systemd/systemd
   - name: fedora-38
     image: dokken/fedora-38
-    pre_build_image: true
-    privileged: true
-    cgroup_parent: docker.slice
-    command: /lib/systemd/systemd
-  - name: ubuntu-18.04
-    image: dokken/ubuntu-18.04
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
