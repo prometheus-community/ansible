@@ -46,6 +46,12 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
+  - name: debian-12
+    image: dokken/debian-12
+    pre_build_image: true
+    privileged: true
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
   - name: fedora-36
     image: dokken/fedora-36
     pre_build_image: true
