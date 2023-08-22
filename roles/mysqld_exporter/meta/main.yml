@@ -23,6 +23,7 @@ galaxy_info:
       versions:
         - "36"
         - "37"
+        - '38'
   galaxy_tags:
     - "monitoring"
     - "prometheus"
