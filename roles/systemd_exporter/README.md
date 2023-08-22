@@ -27,6 +27,14 @@ Use it in a playbook as follows:
     - prometheus.prometheus.systemd_exporter
 ```
 
+### TLS config
+
+See node_exporter README for more extensive example:
+
+    systemd_exporter_tls_server_config:
+      cert_file: /etc/systemd_exporter/tls.cert
+      key_file: /etc/systemd_exporter/tls.key
+
 ## Local Testing
 
 The preferred way of locally testing the role is to use Docker and [molecule](https://github.com/ansible-community/molecule) (v3.x). You will have to install Docker on your system. See "Get started" for a Docker package suitable to for your system. Running your tests is as simple as executing `molecule test`.

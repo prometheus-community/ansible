@@ -24,6 +24,9 @@ ExecStart={{ systemd_exporter_binary_install_dir }}/systemd_exporter \
 {% if systemd_exporter_unit_exclude != "" %}
     --systemd.collector.unit-exclude={{ systemd_exporter_unit_exclude }} \
 {% endif %}
+{% if systemd_exporter_tls_server_config | length > 0 %}
+    --web.config.file=/etc/systemd_exporter/config.yaml \
+{% endif %}
     --web.listen-address={{ systemd_exporter_web_listen_address }}
 
 SyslogIdentifier=systemd_exporter

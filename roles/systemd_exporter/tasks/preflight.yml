@@ -25,6 +25,31 @@
     that:
       - "':' in systemd_exporter_web_listen_address"
 
+- name: Assert that TLS config is correct
+  when: systemd_exporter_tls_server_config | length > 0
+  block:
+    - name: Assert that TLS key and cert path are set
+      ansible.builtin.assert:
+        that:
+          - "systemd_exporter_tls_server_config.cert_file is defined"
+          - "systemd_exporter_tls_server_config.key_file is defined"
+
+    - name: Check existence of TLS cert file
+      ansible.builtin.stat:
+        path: "{{ systemd_exporter_tls_server_config.cert_file }}"
+      register: __systemd_exporter_cert_file
+
+    - name: Check existence of TLS key file
+      ansible.builtin.stat:
+        path: "{{ systemd_exporter_tls_server_config.key_file }}"
+      register: __systemd_exporter_key_file
+
+    - name: Assert that TLS key and cert are present
+      ansible.builtin.assert:
+        that:
+          - "{{ __systemd_exporter_cert_file.stat.exists }}"
+          - "{{ __systemd_exporter_key_file.stat.exists }}"
+
 - name: Assert that systemd version is >= 235 when enabling ip accounting or measuring restart count
   ansible.builtin.assert:
     that:
