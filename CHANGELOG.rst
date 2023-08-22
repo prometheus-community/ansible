@@ -20,6 +20,7 @@ Minor Changes
 Removed Features (previously deprecated)
 ----------------------------------------
 
+- removed: Drop fedora 36 support as it is EOL (https://github.com/prometheus-community/ansible/pull/200)
 - removed: Drop ubuntu 18.04 support as it is EOL (https://github.com/prometheus-community/ansible/pull/199)
 
 Bugfixes
