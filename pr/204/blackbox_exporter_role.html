@@ -178,13 +178,21 @@
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_checksums_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-checksums-url"><strong>blackbox_exporter_checksums_url</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_checksums_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>URL of the blackbox exporter checksums file</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_blackbox_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">blackbox_exporter_version</span> <span class="pre">}}/sha256sums.txt&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_cli_flags"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-cli-flags"><strong>blackbox_exporter_cli_flags</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_cli_flags" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Additional configuration flags passed to blackbox exporter binary at startup</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_config_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-config-dir"><strong>blackbox_exporter_config_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_config_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -192,7 +200,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/etc&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_configuration_modules"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-configuration-modules"><strong>blackbox_exporter_configuration_modules</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_configuration_modules" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -200,7 +208,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">{&quot;http_2xx&quot;:</span> <span class="pre">{&quot;http&quot;:</span> <span class="pre">{&quot;method&quot;:</span> <span class="pre">&quot;GET&quot;,</span> <span class="pre">&quot;valid_status_codes&quot;:</span> <span class="pre">[]},</span> <span class="pre">&quot;prober&quot;:</span> <span class="pre">&quot;http&quot;,</span> <span class="pre">&quot;timeout&quot;:</span> <span class="pre">&quot;5s&quot;}}</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-group"><strong>blackbox_exporter_group</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -208,7 +216,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;blackbox-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_skip_install"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-skip-install"><strong>blackbox_exporter_skip_install</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -220,7 +228,7 @@
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-user"><strong>blackbox_exporter_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -228,7 +236,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;blackbox-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-version"><strong>blackbox_exporter_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -236,7 +244,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.24.0&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-web-listen-address"><strong>blackbox_exporter_web_listen_address</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
