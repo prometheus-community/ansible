@@ -58,12 +58,6 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
-  - name: ubuntu-18.04
-    image: dokken/ubuntu-18.04
-    pre_build_image: true
-    privileged: true
-    cgroup_parent: docker.slice
-    command: /lib/systemd/systemd
   - name: ubuntu-20.04
     image: dokken/ubuntu-20.04
     pre_build_image: true
