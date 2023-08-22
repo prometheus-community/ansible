@@ -27,6 +27,7 @@ Bugfixes
 --------
 
 - fix(alertmanager): add routes before match_re (https://github.com/prometheus-community/ansible/pull/194)
+- fix(node_exporter): Fix ProtectHome for textfiles (https://github.com/prometheus-community/ansible/pull/184)
 - fix: Add test for argument_specs matching (https://github.com/prometheus-community/ansible/pull/177)
 - fix: mysqld_exporter should actually respect the mysqld_exporter_host variable (https://github.com/prometheus-community/ansible/pull/88)
 
