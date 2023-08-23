@@ -1,8 +1,0 @@
----
-- name: Run role
-  hosts: all
-  any_errors_fatal: true
-  roles:
-    - prometheus.prometheus.prometheus
-  vars:
-    prometheus_agent_mode: true
