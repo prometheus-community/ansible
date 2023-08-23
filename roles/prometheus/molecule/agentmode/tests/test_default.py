@@ -39,6 +39,7 @@ def test_agent_enabled(host):
     output = host.check_output('curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:9090/agent')
     assert '200' in output
 
+
 def test_socket(host):
     s = host.socket("tcp://0.0.0.0:9090")
     assert s.is_listening
