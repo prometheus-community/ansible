@@ -9,6 +9,7 @@
     validate: "{{ _prometheus_binary_install_dir }}/promtool check rules %s"
   when:
     - prometheus_alert_rules != []
+    - not prometheus_agent_mode
   notify:
     - reload prometheus
 
@@ -21,6 +22,8 @@
     mode: 0640
     validate: "{{ _prometheus_binary_install_dir }}/promtool check rules %s"
   with_fileglob: "{{ prometheus_alert_rules_files }}"
+  when:
+    - not prometheus_agent_mode
   notify:
     - reload prometheus
 
