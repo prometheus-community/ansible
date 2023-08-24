@@ -187,4 +187,5 @@ releases:
         - Fix mysqld_exporter world-readable secrets (https://github.com/prometheus-community/ansible/pull/169)
         - 'fix ansible-lint: risky-octal & no-same-owner (https://github.com/prometheus-community/ansible/pull/171)'
         - 'Fix: rename collector flags (https://github.com/prometheus-community/ansible/pull/167)'
+        - 'patch: New prometheus/alertmanager upstream release! (https://github.com/prometheus-community/ansible/pull/206)'
     release_date: '2023-07-29'
