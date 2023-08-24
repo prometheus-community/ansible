@@ -14,6 +14,7 @@ Minor Changes
 - feat: Add chrony_exporter role (https://github.com/prometheus-community/ansible/pull/159)
 - feat: Add pushgateway role (https://github.com/prometheus-community/ansible/pull/127)
 - feat: Add role smokeping_prober (https://github.com/prometheus-community/ansible/pull/128)
+- feature: Agent mode support (https://github.com/prometheus-community/ansible/pull/198)
 - feature: Make config installation dir configurable (https://github.com/prometheus-community/ansible/pull/173)
 - feature: blackbox exporter user/group configurable (https://github.com/prometheus-community/ansible/pull/172)
 - minor: support fedora 38 (https://github.com/prometheus-community/ansible/pull/202)
