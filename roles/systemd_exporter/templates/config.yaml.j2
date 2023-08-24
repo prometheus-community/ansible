@@ -1,6 +1,6 @@
 ---
 {{ ansible_managed | comment }}
-{% if node_exporter_tls_server_config | length > 0 %}
+{% if systemd_exporter_tls_server_config | length > 0 %}
 tls_server_config:
-{{ node_exporter_tls_server_config | to_nice_yaml | indent(2, true) }}
+{{ systemd_exporter_tls_server_config | to_nice_yaml | indent(2, true) }}
 {% endif %}
