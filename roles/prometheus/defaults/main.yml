@@ -90,8 +90,6 @@ prometheus_scrape_configs:
 # Alternative config file name, searched in ansible templates path.
 prometheus_config_file: 'prometheus.yml.j2'
 
-prometheus_rules_enable: true
-
 prometheus_alert_rules_files:
   - prometheus/rules/*.rules
 

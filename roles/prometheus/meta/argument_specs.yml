@@ -127,10 +127,6 @@ argument_specs:
       prometheus_config_file:
         description: "Variable used to provide custom prometheus configuration file in form of ansible template"
         default: "prometheus.yml.j2"
-      prometheus_rules_enable:
-        description: "To enable rules via the rule_files field in the Prometheus configuration"
-        type: bool
-        default: true
       prometheus_alert_rules:
         description:
           - "Full list of alerting rules which will be copied to C({{ prometheus_config_dir }}/rules/ansible_managed.rules)."
