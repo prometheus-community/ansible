@@ -26,3 +26,13 @@
     mode: '0644'
   notify:
     - reload blackbox_exporter
+
+- name: Configure blackbox_exporter web
+  ansible.builtin.copy:
+    content: "{{ blackbox_exporter_web_config | to_nice_yaml(indent=2, sort_keys=False) }}"
+    dest: "{{ blackbox_exporter_config_dir }}/web.yml"
+    owner: root
+    group: "{{ blackbox_exporter_group }}"
+    mode: 0644
+  notify:
+    - reload blackbox_exporter
