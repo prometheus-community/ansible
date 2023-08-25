@@ -7,7 +7,7 @@
     group: root
     mode: 0644
   notify:
-    - restart blackbox exporter
+    - restart blackbox_exporter
 
 - name: Configure blackbox exporter
   ansible.builtin.template:
@@ -17,4 +17,4 @@
     group: "{{ blackbox_exporter_group }}"
     mode: 0644
   notify:
-    - reload blackbox exporter
+    - reload blackbox_exporter
