@@ -29,7 +29,7 @@ Use it in a playbook as follows:
 
 ### TLS config
 
-See node_exporter README for more extensive example:
+See node_exporter README for more extensive example. Requires systemd_exporter >= 0.5.0.
 
     systemd_exporter_tls_server_config:
       cert_file: /etc/systemd_exporter/tls.cert
