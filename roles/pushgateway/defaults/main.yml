@@ -1,0 +1,20 @@
+---
+pushgateway_version: 1.6.0
+pushgateway_binary_local_dir: ""
+pushgateway_binary_url: "https://github.com/{{ _pushgateway_repo }}/releases/download/v{{ pushgateway_version }}/\
+                           pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"
+pushgateway_checksums_url: "https://github.com/{{ _pushgateway_repo }}/releases/download/v{{ pushgateway_version }}/sha256sums.txt"
+pushgateway_skip_install: false
+
+pushgateway_web_listen_address: "0.0.0.0:9091"
+pushgateway_web_telemetry_path: "/metrics"
+
+pushgateway_tls_server_config: {}
+
+pushgateway_http_server_config: {}
+
+pushgateway_basic_auth_users: {}
+
+pushgateway_binary_install_dir: "/usr/local/bin"
+pushgateway_system_group: "pushgateway"
+pushgateway_system_user: "{{ pushgateway_system_group }}"

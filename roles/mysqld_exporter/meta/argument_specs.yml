@@ -32,6 +32,9 @@ argument_specs:
       mysqld_exporter_web_telemetry_path:
         description: "Path under which to expose metrics"
         default: "/metrics"
+      mysqld_exporter_config_dir:
+        description: "The path where exporter configuration is stored"
+        default: "/etc/mysqld_exporter"
       mysqld_exporter_config_file:
         description: "The filename of the exporter mysql config file"
         default: "mysqld_exporter.cnf"
@@ -42,6 +45,12 @@ argument_specs:
       mysqld_exporter_socket:
         description: "The target MySQL unix socket"
         default: "/run/mysqld/mysqld.sock"
+      mysqld_exporter_username:
+        description: "The username for MySQL login"
+        default: "exporter"
+      mysqld_exporter_password:
+        description: "The password for MySQL login"
+        default: "secret"
       mysqld_exporter_enabled_collectors:
         description:
           - "List of dicts defining additionally enabled collectors and their configuration."

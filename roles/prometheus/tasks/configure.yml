@@ -9,6 +9,7 @@
     validate: "{{ _prometheus_binary_install_dir }}/promtool check rules %s"
   when:
     - prometheus_alert_rules != []
+    - not prometheus_agent_mode
   notify:
     - reload prometheus
 
@@ -21,6 +22,8 @@
     mode: 0640
     validate: "{{ _prometheus_binary_install_dir }}/promtool check rules %s"
   with_fileglob: "{{ prometheus_alert_rules_files }}"
+  when:
+    - not prometheus_agent_mode
   notify:
     - reload prometheus
 
@@ -33,7 +36,7 @@
     group: prometheus
     mode: 0640
     validate: "{{ _prometheus_binary_install_dir }}/promtool check config %s"
-  no_log: "{{ 'false' if lookup('env', 'CI') else 'true' }}"
+  no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   notify:
     - reload prometheus
 

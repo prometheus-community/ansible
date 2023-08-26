@@ -5,7 +5,7 @@
     dest: /etc/systemd/system/mysqld_exporter.service
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   notify: restart mysqld_exporter
 
 - name: Create mysqld_exporter config directory
@@ -23,7 +23,7 @@
     owner: root
     group: '{{ mysqld_exporter_system_group }}'
     mode: '0640'
-  no_log: "{{ 'false' if lookup('env', 'CI') else 'true' }}"
+  no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   notify: restart mysqld_exporter
 
 - name: Configure mysqld_exporter web config

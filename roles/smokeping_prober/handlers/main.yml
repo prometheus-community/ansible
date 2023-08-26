@@ -1,0 +1,10 @@
+---
+- name: Restart smokeping_prober
+  listen: "restart smokeping_prober"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: smokeping_prober
+    state: restarted
+  when:
+    - not ansible_check_mode

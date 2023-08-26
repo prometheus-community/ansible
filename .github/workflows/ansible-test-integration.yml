@@ -14,6 +14,10 @@ on:
         required: false
         default: '["default"]'
         type: string
+      coverage:
+        required: false
+        default: auto
+        type: string
 
 jobs:
   ansible-test-integration:
@@ -36,6 +40,6 @@ jobs:
           docker-image: "--docker-privileged"  # Workaround because ansible-test action doesn't support setting privileged flag
           testing-type: integration
           target: ${{ matrix.targets.test }}
-          # coverage: never  # https://github.com/ansible-community/ansible-test-gh-action/pull/50
+          coverage: ${{ inputs.coverage }}
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

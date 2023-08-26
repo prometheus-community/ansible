@@ -1,17 +1,16 @@
 ---
-- name: Prepare
+- name: Run local preparation
   hosts: localhost
   gather_facts: false
-  vars:
-    go_arch: amd64
-    systemd_exporter_version: 0.4.0
   tasks:
     - name: Download systemd_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/\
-              systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        url: "https://github.com/prometheus-community/systemd_exporter/releases/download/v{{\
+          \ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version\
+          \ }}.linux-{{ go_arch }}.tar.gz"
+        dest: "/tmp/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch\
+          \ }}.tar.gz"
         mode: 0644
       register: _download_binary
       until: _download_binary is succeeded
@@ -22,9 +21,11 @@
     - name: Unpack systemd_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        src: "/tmp/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch\
+          \ }}.tar.gz"
         dest: "/tmp"
-        creates: "/tmp/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}/systemd_exporter"
+        creates: "/tmp/systemd_exporter-{{ systemd_exporter_version }}.linux-{{\
+          \ go_arch }}/systemd_exporter"
       check_mode: false
 
     - name: Link to systemd_exporter binaries directory

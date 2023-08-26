@@ -1,0 +1,62 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus Pushgateway"
+    description:
+      - "Deploy prometheus L(Pushgateway,https://github.com/prometheus/pushgateway) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      pushgateway_version:
+        description: "Pushgateway package version. Also accepts latest as parameter."
+        default: "1.1.2"
+      pushgateway_skip_install:
+        description: "Pushgateway installation tasks gets skipped when set to true."
+        type: bool
+        default: false
+      pushgateway_binary_local_dir:
+        description:
+          - "Enables the use of local packages instead of those distributed on github."
+          - "The parameter may be set to a directory where the C(pushgateway) binary is stored on the host where ansible is run."
+          - "This overrides the I(pushgateway_version) parameter"
+      pushgateway_binary_url:
+        description: "URL of the Pushgateway binaries .tar.gz file"
+        default: "https://github.com/{{ _pushgateway_repo }}/releases/download/v{{ pushgateway_version }}/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"
+      pushgateway_checksums_url:
+        description: "URL of the Pushgateway checksums file"
+        default: "https://github.com/{{ _pushgateway_repo }}/releases/download/v{{ pushgateway_version }}/sha256sums.txt"
+      pushgateway_web_listen_address:
+        description: "Address on which Pushgateway will listen"
+        default: "0.0.0.0:9091"
+      pushgateway_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      pushgateway_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(pushgateway docs,https://github.com/prometheus/pushgateway/blob/master/https/README.md#sample-config)."
+        type: "dict"
+      pushgateway_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(pushgateway docs,https://github.com/prometheus/pushgateway/blob/master/https/README.md#sample-config)."
+        type: "dict"
+      pushgateway_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      pushgateway_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install pushgateway binary"
+        default: "/usr/local/bin"
+      pushgateway_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for Pushgateway"
+        default: "pushgateway"
+      pushgateway_system_user:
+        description:
+          - "I(Advanced)"
+          - "Pushgateway user"
+        default: "pushgateway"

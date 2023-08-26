@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  any_errors_fatal: true
+  tasks:
+    - name: "Run role"
+      ansible.builtin.include_role:
+        name: "prometheus.prometheus.{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"

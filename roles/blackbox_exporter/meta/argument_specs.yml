@@ -9,15 +9,23 @@ argument_specs:
       - "Prometheus Community"
     options:
       blackbox_exporter_version:
-        description: "Blackbox exporter package version"
+        description: "Blackbox exporter package version. Also accepts latest as parameter."
         default: "0.24.0"
       blackbox_exporter_skip_install:
         description: "Blackbox exporter installation tasks gets skipped when set to true."
         type: bool
         default: false
+      blackbox_exporter_binary_local_dir:
+        description:
+          - "Enables the use of local packages instead of those distributed on github."
+          - "The parameter may be set to a directory where the C(blackbox_exporter) binary is stored on the host where ansible is run."
+          - "This overrides the I(blackbox_exporter_version) parameter"
       blackbox_exporter_binary_url:
         description: "URL of the blackbox_exporter binaries .tar.gz file"
         default: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
+      blackbox_exporter_checksums_url:
+        description: "URL of the blackbox exporter checksums file"
+        default: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/sha256sums.txt"
       blackbox_exporter_web_listen_address:
         description: "Address on which blackbox exporter will be listening"
         default: "0.0.0.0:9115"
@@ -34,3 +42,17 @@ argument_specs:
             http:
               method: GET
               valid_status_codes: []
+      blackbox_exporter_config_dir:
+        description: "Directory where the blackbox exporter configuration file is placed"
+        default: "/etc"
+      blackbox_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install blackbox_exporter binary"
+        default: "/usr/local/bin"
+      blackbox_exporter_user:
+        description: "The user the exporter runs as"
+        default: "blackbox-exp"
+      blackbox_exporter_group:
+        description: "The group the exporter runs as"
+        default: "blackbox-exp"
