@@ -1,0 +1,63 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+    apply:
+      tags:
+        - pushgateway_install
+        - pushgateway_configure
+        - pushgateway_run
+  tags:
+    - pushgateway_install
+    - pushgateway_configure
+    - pushgateway_run
+
+- name: Install
+  ansible.builtin.include_tasks:
+    file: install.yml
+    apply:
+      become: true
+      tags:
+        - pushgateway_install
+  when:
+    ( not __pushgateway_is_installed.stat.exists ) or
+    ( (__pushgateway_current_version_output.stderr_lines | length > 0)
+      and (__pushgateway_current_version_output.stderr_lines[0].split(" ")[2] != pushgateway_version) ) or
+    ( (__pushgateway_current_version_output.stdout_lines | length > 0)
+      and (__pushgateway_current_version_output.stdout_lines[0].split(" ")[2] != pushgateway_version) ) or
+    ( pushgateway_binary_local_dir | length > 0 )
+  tags:
+    - pushgateway_install
+
+- name: SELinux
+  ansible.builtin.include_tasks:
+    file: selinux.yml
+    apply:
+      become: true
+      tags:
+        - pushgateway_configure
+  when: ansible_selinux.status == "enabled"
+  tags:
+    - pushgateway_configure
+
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yml
+    apply:
+      become: true
+      tags:
+        - pushgateway_configure
+  tags:
+    - pushgateway_configure
+
+- name: Ensure Pushgateway is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: pushgateway
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - pushgateway_run

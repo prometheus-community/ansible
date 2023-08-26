@@ -1,0 +1,71 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus Smokeping Prober"
+    description:
+      - "Deploy prometheus L(Smokeping Prober,https://github.com/superq/smokeping_prober) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      smokeping_prober_version:
+        description: "Smokeping Prober package version. Also accepts latest as parameter."
+        default: "0.7.1"
+      smokeping_prober_skip_install:
+        description: "Smokeping Prober installation tasks gets skipped when set to true."
+        type: bool
+        default: false
+      smokeping_prober_binary_local_dir:
+        description:
+          - "Enables the use of local packages instead of those distributed on github."
+          - "The parameter may be set to a directory where the C(smokeping_prober) binary is stored on the host where ansible is run."
+          - "This overrides the I(smokeping_prober_version) parameter"
+      smokeping_prober_binary_url:
+        description: "URL of the Smokeping Prober binaries .tar.gz file"
+        default: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
+      smokeping_prober_checksums_url:
+        description: "URL of the Smokeping Prober checksums file"
+        default: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/sha256sums.txt"
+      smokeping_prober_web_listen_address:
+        description: "Address on which Smokeping Prober will listen"
+        default: "0.0.0.0:9374"
+      smokeping_prober_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      smokeping_prober_config_dir:
+        description: "The directory of the smokeping_prober probes config files"
+        default: "/etc/smokeping_prober"
+      smokeping_prober_config_file:
+        description: "The filename of the smokeping_prober probes config file"
+        default: "probes.yml"
+      smokeping_prober_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(smokeping_prober docs,https://github.com/superq/smokeping_prober/blob/master/https/README.md#sample-config)."
+        type: "dict"
+      smokeping_prober_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(smokeping_prober docs,https://github.com/superq/smokeping_prober/blob/master/https/README.md#sample-config)."
+        type: "dict"
+      smokeping_prober_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      smokeping_prober_targets:
+        description: "List of smokeping_prober targets. See: https://github.com/SuperQ/smokeping_prober/#configuration"
+        type: "list"
+      smokeping_prober_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install smokeping_prober binary"
+        default: "/usr/local/bin"
+      smokeping_prober_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for Smokeping Prober"
+        default: "smokeping"
+      smokeping_prober_system_user:
+        description:
+          - "I(Advanced)"
+          - "Smokeping Prober user"
+        default: "smokeping"

@@ -1,16 +1,14 @@
 ---
-- name: Prepare
+- name: Run local preparation
   hosts: localhost
   gather_facts: false
-  vars:
-    go_arch: amd64
-    node_exporter_version: 1.0.0
   tasks:
     - name: Download node_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/\
-              node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        url: "https://github.com/prometheus/node_exporter/releases/download/v{{\
+          \ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-{{\
+          \ go_arch }}.tar.gz"
         dest: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         mode: 0644
       register: _download_binary
@@ -24,7 +22,8 @@
       ansible.builtin.unarchive:
         src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp"
-        creates: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}/node_exporter"
+        creates: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch\
+          \ }}/node_exporter"
       check_mode: false
 
     - name: Link to node_exporter binaries directory
@@ -54,3 +53,26 @@
         csr_path: "/tmp/tls.csr"
         privatekey_path: "/tmp/tls.key"
         provider: selfsigned
+
+- name: Run target preparation
+  hosts: all
+  any_errors_fatal: true
+  tasks:
+    - name: Create node_exporter cert dir
+      ansible.builtin.file:
+        path: "{{ node_exporter_tls_server_config.cert_file | dirname }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u+rwX,g+rwX,o=rX
+
+    - name: Copy cert and key
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "{{ item.mode | default('0644') }}"
+      loop:
+        - src: "/tmp/tls.cert"
+          dest: "{{ node_exporter_tls_server_config.cert_file }}"
+        - src: "/tmp/tls.key"
+          dest: "{{ node_exporter_tls_server_config.key_file }}"

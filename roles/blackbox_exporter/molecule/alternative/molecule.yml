@@ -1,1 +1,12 @@
 ---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        blackbox_exporter_web_listen_address: "127.0.0.1:9000"
+        blackbox_exporter_cli_flags:
+          log.level: "warn"
+        blackbox_exporter_configuration_modules:
+          tcp_connect:
+            prober: tcp
+            timeout: 5s

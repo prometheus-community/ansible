@@ -1,5 +1,5 @@
 ---
-alertmanager_version: 0.25.0
+alertmanager_version: 0.26.0
 alertmanager_binary_local_dir: ''
 alertmanager_binary_url: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/\
                           alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
@@ -88,6 +88,7 @@ alertmanager_route: {}
 #   receiver: slack
 #   # This routes performs a regular expression match on alert labels to
 #   # catch alerts that are related to a list of services.
+#   routes:
 #     - match_re:
 #         service: ^(foo1|foo2|baz)$
 #       receiver: team-X-mails

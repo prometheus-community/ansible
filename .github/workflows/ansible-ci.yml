@@ -27,7 +27,16 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Lint collection
-        uses: ansible/ansible-lint-action@main
+        uses: ansible/ansible-lint@main
+
+  arguments-spec-lint:
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/prometheus/golang-builder:base
+    steps:
+      - uses: actions/checkout@v3
+      - name: Lint arguments spec
+        run: ./.github/scripts/lint_arguments_spec.sh
 
   discover-ansible-versions:
     runs-on: ubuntu-latest
@@ -69,7 +78,7 @@ jobs:
         env:
           LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
         run: |
-          roles=$(echo $LABELS | jq -r '.[]')
+          roles=$(echo $LABELS | jq -r '.[]' | grep '^roles/' | sed 's|^roles/||')
           echo tests="[`for role in $roles; do
             for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -iname "molecule-${role}-*" -printf "%f\n"); do
               echo '{"test":\"'"${test}"'\","name":\"'"${test#*-}\"'"}';
@@ -93,6 +102,7 @@ jobs:
     with:
       targets: ${{ needs.discover-ansible-tests.outputs.molecule-tests }}
       ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}
+      coverage: never
 
   ansible-test-integration:
     uses: ./.github/workflows/ansible-test-integration.yml

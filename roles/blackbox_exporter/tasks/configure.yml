@@ -5,9 +5,9 @@
     dest: /etc/systemd/system/blackbox_exporter.service
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   notify:
-    - restart blackbox exporter
+    - restart blackbox_exporter
 
 - name: Configure blackbox exporter
   ansible.builtin.template:
@@ -15,6 +15,6 @@
     dest: "{{ blackbox_exporter_config_dir }}/blackbox_exporter.yml"
     owner: root
     group: "{{ blackbox_exporter_group }}"
-    mode: 0644
+    mode: '0644'
   notify:
-    - reload blackbox exporter
+    - reload blackbox_exporter

@@ -1,0 +1,35 @@
+---
+smokeping_prober_version: 0.7.1
+smokeping_prober_binary_local_dir: ""
+smokeping_prober_binary_url: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/\
+                           smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
+smokeping_prober_checksums_url: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/sha256sums.txt"
+smokeping_prober_skip_install: false
+
+smokeping_prober_web_listen_address: ":9374"
+smokeping_prober_web_telemetry_path: "/metrics"
+
+# List of smokeping_prober targets.
+# See: https://github.com/SuperQ/smokeping_prober/#configuration
+smokeping_prober_targets:
+  - hosts:
+      - localhost
+    interval: 1s  # Duration, Default 1s.
+    network: ip  # One of ip, ip4, ip6. Default: ip (automatic IPv4/IPv6)
+    protocol: icmp  # One of icmp, udp. Default: icmp (Requires privileged operation)
+    size: 56  # Packet data size in bytes. Default 56 (Range: 24 - 65535)
+    source: 127.0.1.1  # Souce IP address to use. Default: None (automatic selection)
+
+smokeping_prober_config_file: "probes.yml"
+
+smokeping_prober_tls_server_config: {}
+
+smokeping_prober_http_server_config: {}
+
+smokeping_prober_basic_auth_users: {}
+
+# Internal variables.
+smokeping_prober_binary_install_dir: "/usr/local/bin"
+smokeping_prober_config_dir: "/etc/smokeping_prober"
+smokeping_prober_system_group: "smokeping"
+smokeping_prober_system_user: "{{ smokeping_prober_system_group }}"

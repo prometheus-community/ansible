@@ -1,1 +1,22 @@
 ---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        node_exporter_binary_local_dir: "/tmp/node_exporter-linux-amd64"
+        node_exporter_web_listen_address: "127.0.0.1:8080"
+        node_exporter_textfile_dir: ""
+        node_exporter_enabled_collectors:
+          - entropy
+        node_exporter_disabled_collectors:
+          - diskstats
+
+        node_exporter_tls_server_config:
+          cert_file: /etc/node_exporter/tls.cert
+          key_file: /etc/node_exporter/tls.key
+        node_exporter_http_server_config:
+          http2: true
+        node_exporter_basic_auth_users:
+          randomuser: examplepassword
+        go_arch: amd64
+        node_exporter_version: 1.0.0
