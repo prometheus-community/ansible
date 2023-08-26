@@ -158,36 +158,41 @@ releases:
     release_date: '2023-06-24'
   0.6.0:
     changes:
-      minor_changes:
-        - 'feat: Add role smokeping_prober (https://github.com/prometheus-community/ansible/pull/128)'
-        - 'feature: blackbox exporter user/group configurable (https://github.com/prometheus-community/ansible/pull/172)'
-        - 'feat: Add chrony_exporter role (https://github.com/prometheus-community/ansible/pull/159)'
-        - 'feature: Make config installation dir configurable (https://github.com/prometheus-community/ansible/pull/173)'
-        - 'feat: Add pushgateway role (https://github.com/prometheus-community/ansible/pull/127)'
-        - 'minor: support fedora 38 (https://github.com/prometheus-community/ansible/pull/202)'
-        - 'feature: Agent mode support (https://github.com/prometheus-community/ansible/pull/198)'
       bugfixes:
-        - 'fix: Add test for argument_specs matching (https://github.com/prometheus-community/ansible/pull/177)'
-        - 'fix: mysqld_exporter should actually respect the mysqld_exporter_host variable
-          (https://github.com/prometheus-community/ansible/pull/88)'
         - 'fix(alertmanager): add routes before match_re (https://github.com/prometheus-community/ansible/pull/194)'
         - 'fix(node_exporter): Fix ProtectHome for textfiles (https://github.com/prometheus-community/ansible/pull/184)'
+        - 'fix: Add test for argument_specs matching (https://github.com/prometheus-community/ansible/pull/177)'
         - 'fix: Make binary installs consistent (https://github.com/prometheus-community/ansible/pull/204)'
+        - 'fix: mysqld_exporter should actually respect the mysqld_exporter_host variable
+          (https://github.com/prometheus-community/ansible/pull/88)'
+      minor_changes:
+        - 'feat: Add chrony_exporter role (https://github.com/prometheus-community/ansible/pull/159)'
+        - 'feat: Add pushgateway role (https://github.com/prometheus-community/ansible/pull/127)'
+        - 'feat: Add role smokeping_prober (https://github.com/prometheus-community/ansible/pull/128)'
+        - 'feature: Agent mode support (https://github.com/prometheus-community/ansible/pull/198)'
+        - 'feature: Make config installation dir configurable (https://github.com/prometheus-community/ansible/pull/173)'
+        - 'feature: blackbox exporter user/group configurable (https://github.com/prometheus-community/ansible/pull/172)'
+        - 'minor: support fedora 38 (https://github.com/prometheus-community/ansible/pull/202)'
       removed_features:
-        - 'removed: Drop ubuntu 18.04 support as it is EOL (https://github.com/prometheus-community/ansible/pull/199)'
         - 'removed: Drop fedora 36 support as it is EOL (https://github.com/prometheus-community/ansible/pull/200)'
+        - 'removed: Drop ubuntu 18.04 support as it is EOL (https://github.com/prometheus-community/ansible/pull/199)'
       trivial:
-        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/152)'
-        - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/146)'
-        - 'patch: New prometheus/mysqld_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/153)'
-        - 'patch: New prometheus/node_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/162)'
-        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/168)'
+        - Fix mysqld_exporter world-readable secrets (https://github.com/prometheus-community/ansible/pull/169)
         - 'Fix: rename collector flags (https://github.com/prometheus-community/ansible/pull/167)'
         - 'docs(smokeping_prober): Update arguments specs (https://github.com/prometheus-community/ansible/pull/190)'
-        - 'patch: New superq/smokeping_prober upstream release! (https://github.com/prometheus-community/ansible/pull/196)'
         - 'docs: Fix node_exporter 404 TLS auth links (https://github.com/prometheus-community/ansible/pull/154)'
-        - Fix mysqld_exporter world-readable secrets (https://github.com/prometheus-community/ansible/pull/169)
         - 'fix ansible-lint: risky-octal & no-same-owner (https://github.com/prometheus-community/ansible/pull/171)'
-        - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/188)'
         - 'patch: New prometheus/alertmanager upstream release! (https://github.com/prometheus-community/ansible/pull/206)'
+        - 'patch: New prometheus/mysqld_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/153)'
+        - 'patch: New prometheus/node_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/162)'
+        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/152)'
+        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/168)'
+        - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/146)'
+        - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/188)'
+        - 'patch: New superq/smokeping_prober upstream release! (https://github.com/prometheus-community/ansible/pull/196)'
     release_date: '2023-07-29'
+  0.6.1:
+    changes:
+      bugfixes:
+        - 'fix: blackbox_exporter ansible-lint risky-octal (https://github.com/prometheus-community/ansible/pull/174)'
+    release_date: '2023-08-26'

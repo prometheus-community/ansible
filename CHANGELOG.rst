@@ -5,6 +5,14 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.6.1
+======
+
+Bugfixes
+--------
+
+- fix: blackbox_exporter ansible-lint risky-octal (https://github.com/prometheus-community/ansible/pull/174)
+
 v0.6.0
 ======
 
