@@ -17,7 +17,7 @@
     home: /
   when: pushgateway_system_user != "root"
 
-- name: Discover latest version
+- name: Get binary
   when:
     - pushgateway_binary_local_dir | length == 0
     - not pushgateway_skip_install
