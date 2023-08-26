@@ -10,8 +10,8 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 
 @pytest.mark.parametrize("files", [
-    "/etc/systemd/system/node_exporter.service",
-    "/usr/local/bin/node_exporter"
+    "/etc/systemd/system/snmp_exporter.service",
+    "/usr/local/bin/snmp_exporter"
 ])
 def test_files(host, files):
     f = host.file(files)
@@ -20,15 +20,16 @@ def test_files(host, files):
 
 
 def test_service(host):
-    s = host.service("node_exporter")
-    # assert s.is_enabled
-    assert s.is_running
-
-
-def test_protecthome_property(host):
-    s = host.service("node_exporter")
-    p = s.systemd_properties
-    assert p.get("ProtectHome") == "yes"
+    s = host.service("snmp_exporter")
+    try:
+        assert s.is_running
+    except AssertionError:
+        # Capture service logs
+        journal_output = host.run('journalctl -u snmp_exporter --since "1 hour ago"')
+        print("\n==== journalctl -u snmp_exporter Output ====\n")
+        print(journal_output)
+        print("\n============================================\n")
+        raise  # Re-raise the original assertion error
 
 
 def test_socket(host):

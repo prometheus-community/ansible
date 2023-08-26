@@ -1,1 +1,9 @@
 ---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        systemd_exporter_binary_local_dir: "/tmp/systemd_exporter-linux-amd64"
+        systemd_exporter_web_listen_address: "127.0.0.1:9000"
+        go_arch: amd64
+        systemd_exporter_version: 0.4.0

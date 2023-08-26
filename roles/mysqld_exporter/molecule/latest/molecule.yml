@@ -1,1 +1,6 @@
 ---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        mysqld_exporter_version: latest

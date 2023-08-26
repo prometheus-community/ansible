@@ -1,1 +1,21 @@
 ---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        chrony_exporter_binary_local_dir: "/tmp/chrony_exporter-linux-amd64"
+        chrony_exporter_web_listen_address: "127.0.0.1:8080"
+        chrony_exporter_enabled_collectors:
+          - sources
+        chrony_exporter_disabled_collectors:
+          - tracking
+
+        chrony_exporter_tls_server_config:
+          cert_file: /etc/chrony_exporter/tls.cert
+          key_file: /etc/chrony_exporter/tls.key
+        chrony_exporter_http_server_config:
+          http2: true
+        chrony_exporter_basic_auth_users:
+          randomuser: examplepassword
+        go_arch: amd64
+        chrony_exporter_version: 0.6.0

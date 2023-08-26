@@ -15,33 +15,56 @@
     createhome: false
   when: blackbox_exporter_user != 'root'
 
-- name: Download blackbox exporter binary to local folder
-  become: false
-  ansible.builtin.unarchive:
-    src: "{{ blackbox_exporter_binary_url }}"
-    dest: "/tmp"
-    remote_src: true
-    creates: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/\
-              blackbox_exporter"
-  register: _download_binary
-  until: _download_binary is succeeded
-  retries: 5
-  delay: 2
-  delegate_to: localhost
-  check_mode: false
-  when: not blackbox_exporter_skip_install
+- name: Get binary
+  when:
+    - blackbox_exporter_binary_local_dir | length == 0
+    - not blackbox_exporter_skip_install
+  block:
 
-- name: Propagate blackbox exporter binary
+    - name: Download blackbox_exporter binary to local folder
+      become: false
+      ansible.builtin.get_url:
+        url: "{{ blackbox_exporter_binary_url }}"
+        dest: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        checksum: "sha256:{{ __blackbox_exporter_checksum }}"
+        mode: '0644'
+      register: _download_binary
+      until: _download_binary is succeeded
+      retries: 5
+      delay: 2
+      delegate_to: localhost
+      check_mode: false
+
+    - name: Unpack blackbox_exporter binary
+      become: false
+      ansible.builtin.unarchive:
+        src: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "/tmp"
+        creates: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch }}/blackbox_exporter"
+      delegate_to: localhost
+      check_mode: false
+
+    - name: Propagate blackbox_exporter binaries
+      ansible.builtin.copy:
+        src: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch }}/blackbox_exporter"
+        dest: "{{ blackbox_exporter_binary_install_dir }}/blackbox_exporter"
+        mode: 0755
+        owner: root
+        group: root
+      notify: restart blackbox_exporter
+      when: not ansible_check_mode
+
+- name: Propagate locally distributed blackbox_exporter binary
   ansible.builtin.copy:
-    src: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/\
-          blackbox_exporter"
-    dest: "/usr/local/bin/blackbox_exporter"
-    mode: '0750'
+    src: "{{ blackbox_exporter_binary_local_dir }}/blackbox_exporter"
+    dest: "{{ blackbox_exporter_binary_install_dir }}/blackbox_exporter"
+    mode: '0755'
     owner: root
-    group: "{{ blackbox_exporter_group }}"
-  when: not blackbox_exporter_skip_install
-  notify:
-    - restart blackbox exporter
+    group: root
+  when:
+    - blackbox_exporter_binary_local_dir | length > 0
+    - not blackbox_exporter_skip_install
+  notify: restart blackbox_exporter
 
 - name: Install libcap on Debian systems
   ansible.builtin.package:

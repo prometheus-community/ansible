@@ -1,17 +1,16 @@
 ---
-- name: Prepare
+- name: Run local preparation
   hosts: localhost
   gather_facts: false
-  vars:
-    go_arch: amd64
-    smokeping_prober_version: 0.6.1
   tasks:
     - name: Download smokeping_prober binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/superq/smokeping_prober/releases/download/v{{ smokeping_prober_version }}/\
-              smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
+        url: "https://github.com/superq/smokeping_prober/releases/download/v{{ smokeping_prober_version\
+          \ }}/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch\
+          \ }}.tar.gz"
+        dest: "/tmp/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch\
+          \ }}.tar.gz"
         mode: 0644
       register: _download_binary
       until: _download_binary is succeeded
@@ -22,9 +21,11 @@
     - name: Unpack smokeping_prober binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
+        src: "/tmp/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch\
+          \ }}.tar.gz"
         dest: "/tmp"
-        creates: "/tmp/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}/smokeping_prober"
+        creates: "/tmp/smokeping_prober-{{ smokeping_prober_version }}.linux-{{\
+          \ go_arch }}/smokeping_prober"
       check_mode: false
 
     - name: Link to smokeping_prober binaries directory
@@ -54,3 +55,26 @@
         csr_path: "/tmp/tls.csr"
         privatekey_path: "/tmp/tls.key"
         provider: selfsigned
+
+- name: Run target preparation
+  hosts: all
+  any_errors_fatal: true
+  tasks:
+    - name: Create smokeping_prober cert dir
+      ansible.builtin.file:
+        path: "{{ smokeping_prober_tls_server_config.cert_file | dirname }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u+rwX,g+rwX,o=rX
+
+    - name: Copy cert and key
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "{{ item.mode | default('0644') }}"
+      loop:
+        - src: "/tmp/tls.cert"
+          dest: "{{ smokeping_prober_tls_server_config.cert_file }}"
+        - src: "/tmp/tls.key"
+          dest: "{{ smokeping_prober_tls_server_config.key_file }}"

@@ -14,13 +14,24 @@ Minor Changes
 - feat: Add chrony_exporter role (https://github.com/prometheus-community/ansible/pull/159)
 - feat: Add pushgateway role (https://github.com/prometheus-community/ansible/pull/127)
 - feat: Add role smokeping_prober (https://github.com/prometheus-community/ansible/pull/128)
+- feature: Agent mode support (https://github.com/prometheus-community/ansible/pull/198)
 - feature: Make config installation dir configurable (https://github.com/prometheus-community/ansible/pull/173)
 - feature: blackbox exporter user/group configurable (https://github.com/prometheus-community/ansible/pull/172)
+- minor: support fedora 38 (https://github.com/prometheus-community/ansible/pull/202)
+
+Removed Features (previously deprecated)
+----------------------------------------
+
+- removed: Drop fedora 36 support as it is EOL (https://github.com/prometheus-community/ansible/pull/200)
+- removed: Drop ubuntu 18.04 support as it is EOL (https://github.com/prometheus-community/ansible/pull/199)
 
 Bugfixes
 --------
 
+- fix(alertmanager): add routes before match_re (https://github.com/prometheus-community/ansible/pull/194)
+- fix(node_exporter): Fix ProtectHome for textfiles (https://github.com/prometheus-community/ansible/pull/184)
 - fix: Add test for argument_specs matching (https://github.com/prometheus-community/ansible/pull/177)
+- fix: Make binary installs consistent (https://github.com/prometheus-community/ansible/pull/204)
 - fix: mysqld_exporter should actually respect the mysqld_exporter_host variable (https://github.com/prometheus-community/ansible/pull/88)
 
 v0.5.2
