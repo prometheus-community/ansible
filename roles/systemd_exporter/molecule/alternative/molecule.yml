@@ -7,3 +7,6 @@ provisioner:
         systemd_exporter_web_listen_address: "127.0.0.1:9000"
         go_arch: amd64
         systemd_exporter_version: 0.4.0
+        systemd_exporter_enable_restart_count: true
+        systemd_exporter_enable_ip_accounting: true
+        systemd_exporter_enable_file_descriptor_size: true
