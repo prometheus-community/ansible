@@ -28,6 +28,11 @@
 - name: Assert that TLS config is correct
   when: systemd_exporter_tls_server_config | length > 0
   block:
+    - name: Assert that systemd_exporter version supports TLS config
+      ansible.builtin.assert:
+        that:
+          - "systemd_exporter_version is version('0.5.0', '>=')"
+
     - name: Assert that TLS key and cert path are set
       ansible.builtin.assert:
         that:
