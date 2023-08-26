@@ -1,1 +1,7 @@
 ---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        node_exporter_version: latest
+        node_exporter_textfile_dir: /home/node_exporter

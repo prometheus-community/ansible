@@ -52,8 +52,15 @@ def test_file_contents(host, file, content):
 
 def test_service(host):
     s = host.service("prometheus")
-    # assert s.is_enabled
-    assert s.is_running
+    try:
+        assert s.is_running
+    except AssertionError:
+        # Capture service logs
+        journal_output = host.run('journalctl -u prometheus --since "1 hour ago"')
+        print("\n==== journalctl -u prometheus Output ====\n")
+        print(journal_output)
+        print("\n============================================\n")
+        raise  # Re-raise the original assertion error
 
 
 def test_socket(host):
