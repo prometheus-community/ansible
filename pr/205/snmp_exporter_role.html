@@ -128,7 +128,7 @@
 <h1>prometheus.prometheus.snmp_exporter role – Prometheus SNMP exporter<a class="headerlink" href="#prometheus-prometheus-snmp-exporter-role-prometheus-snmp-exporter" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/prometheus/prometheus">prometheus.prometheus collection</a> (version 0.6.0).</p>
+<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/prometheus/prometheus">prometheus.prometheus collection</a> (version 0.6.1).</p>
 <p>To install it use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">prometheus.prometheus</span></code>.</p>
 <p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">prometheus.prometheus.snmp_exporter</span></code>.</p>
 </div>
@@ -160,6 +160,24 @@
 </tr>
 </thead>
 <tbody>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_binary_install_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-binary-install-dir"><strong>snmp_exporter_binary_install_dir</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_binary_install_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p><em>Advanced</em></p>
+<p>Directory to install snmp_exporter binary</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/usr/local/bin&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_binary_local_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-binary-local-dir"><strong>snmp_exporter_binary_local_dir</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_binary_local_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Enables the use of local packages instead of those distributed on github.</p>
+<p>The parameter masnmp set to a directory where the <code class="docutils literal notranslate"><span class="pre">snmp_exporter</span></code> binary is stored on the host where ansible is run.</p>
+<p>This overrides the <em>snmp_exporter_version</em> parameter</p>
+</div></td>
+</tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_binary_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-binary-url"><strong>snmp_exporter_binary_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
@@ -208,7 +226,7 @@
 <div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-version"><strong>snmp_exporter_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>SNMP exporter package version</p>
+<td><div class="ansible-option-cell"><p>SNMP exporter package version. Also accepts latest as parameter.</p>
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.23.0&quot;</span></code></p>
 </div></td>
 </tr>
