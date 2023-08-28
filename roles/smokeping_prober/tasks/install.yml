@@ -17,7 +17,7 @@
     home: /
   when: smokeping_prober_system_user != "root"
 
-- name: Discover latest version
+- name: Get binary
   when:
     - smokeping_prober_binary_local_dir | length == 0
     - not smokeping_prober_skip_install
