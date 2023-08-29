@@ -6,5 +6,8 @@ provisioner:
         systemd_exporter_binary_local_dir: "/tmp/systemd_exporter-linux-amd64"
         systemd_exporter_web_listen_address: "127.0.0.1:9000"
         go_arch: amd64
-        systemd_exporter_version: 0.4.0
+        systemd_exporter_version: 0.5.0
+        systemd_exporter_tls_server_config:
+          cert_file: /etc/systemd_exporter/tls.cert
+          key_file: /etc/systemd_exporter/tls.key
         systemd_exporter_enable_file_descriptor_size: true

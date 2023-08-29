@@ -29,6 +29,11 @@ argument_specs:
       systemd_exporter_web_listen_address:
         description: Address on which systemd exporter will listen"
         default: "0.0.0.0:9558"
+      systemd_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(Prometheus docs,https://prometheus.io/docs/prometheus/latest/configuration/https/)."
+        type: "dict"
       systemd_exporter_enable_restart_count:
         description: Enables service restart count metrics. This feature only works with systemd 235 and above"
         type: "bool"

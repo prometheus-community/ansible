@@ -7,6 +7,8 @@ systemd_exporter_checksums_url: "https://github.com/{{ _systemd_exporter_repo }}
 systemd_exporter_skip_install: false
 systemd_exporter_web_listen_address: "0.0.0.0:9558"
 
+systemd_exporter_tls_server_config: {}
+
 systemd_exporter_enable_restart_count: false
 systemd_exporter_enable_ip_accounting: false
 systemd_exporter_enable_file_descriptor_size: false
