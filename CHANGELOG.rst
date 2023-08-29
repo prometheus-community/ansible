@@ -11,6 +11,7 @@ v0.6.1
 Bugfixes
 --------
 
+- fix(systemd_exporter): Fix collector flags for older versions (https://github.com/prometheus-community/ansible/pull/208)
 - fix: blackbox_exporter ansible-lint risky-octal (https://github.com/prometheus-community/ansible/pull/174)
 
 v0.6.0

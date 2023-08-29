@@ -195,4 +195,5 @@ releases:
     changes:
       bugfixes:
         - 'fix: blackbox_exporter ansible-lint risky-octal (https://github.com/prometheus-community/ansible/pull/174)'
+        - 'fix(systemd_exporter): Fix collector flags for older versions (https://github.com/prometheus-community/ansible/pull/208)'
     release_date: '2023-08-26'
