@@ -10,3 +10,4 @@ provisioner:
         systemd_exporter_tls_server_config:
           cert_file: /etc/systemd_exporter/tls.cert
           key_file: /etc/systemd_exporter/tls.key
+        systemd_exporter_enable_file_descriptor_size: true

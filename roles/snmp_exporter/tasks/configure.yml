@@ -7,7 +7,7 @@
     group: root
     mode: 0644
   notify:
-    - restart snmp exporter
+    - restart snmp_exporter
 
 - name: Download snmp configuration file from github repository
   ansible.builtin.get_url:
@@ -22,7 +22,7 @@
   retries: 5
   delay: 2
   notify:
-    - reload snmp exporter
+    - reload snmp_exporter
   when: not (snmp_exporter_config_file)
 
 - name: Copy configuration file
@@ -34,5 +34,5 @@
     mode: 0644
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   notify:
-    - reload snmp exporter
+    - reload snmp_exporter
   when: (snmp_exporter_config_file)
