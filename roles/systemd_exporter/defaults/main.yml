@@ -19,3 +19,5 @@ systemd_exporter_unit_exclude: ""
 systemd_exporter_binary_install_dir: "/usr/local/bin"
 systemd_exporter_system_group: "systemd-exporter"
 systemd_exporter_system_user: "{{ systemd_exporter_system_group }}"
+
+systemd_exporter_log_level: info

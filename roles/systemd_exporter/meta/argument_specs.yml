@@ -65,3 +65,5 @@ argument_specs:
           - "I(Advanced)"
           - "Systemd exporter user"
         default: "systemd-exporter"
+      systemd_exporter_log_level:
+        description: Only log messages with the given severity or above.
