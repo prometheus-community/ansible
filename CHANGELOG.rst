@@ -12,6 +12,7 @@ Minor Changes
 -------------
 
 - feat(systemd_exporter): Add TLS configuration (https://github.com/prometheus-community/ansible/pull/205)
+- feat(systemd_exporter): Add logging configuration to systemd_exporter (https://github.com/prometheus-community/ansible/pull/210)
 
 Bugfixes
 --------
