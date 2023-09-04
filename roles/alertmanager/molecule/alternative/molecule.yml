@@ -6,7 +6,9 @@ provisioner:
         alertmanager_binary_local_dir: '/tmp/alertmanager-linux-amd64'
         alertmanager_config_dir: /opt/am/etc
         alertmanager_db_dir: /opt/am/lib
-        alertmanager_web_listen_address: '127.0.0.1:9093'
+        alertmanager_web_listen_address:
+          - '127.0.0.1:9093'
+          - '127.0.1.1:9093'
         alertmanager_web_external_url: 'http://localhost:9093/alertmanager'
         alertmanager_resolve_timeout: 10m
         alertmanager_slack_api_url: "http://example.com"
@@ -31,4 +33,4 @@ provisioner:
           peers:
             - "127.0.0.1:6783"
             - "alertmanager.demo.do.prometheus.io:6783"
-        version: 0.19.0
+        alertmanager_version: 0.25.0
