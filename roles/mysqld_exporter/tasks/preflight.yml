@@ -20,10 +20,26 @@
   ansible.builtin.package_facts:
   when: "not 'packages' in ansible_facts"
 
+- name: Assert that used version supports listen address type
+  ansible.builtin.assert:
+    that:
+      - >-
+        mysqld_exporter_web_listen_address is string
+        or
+        (
+          mysqld_exporter_version is version('0.15.0', '>=') and
+          mysqld_exporter_web_listen_address | type_debug == "list"
+        )
+
 - name: Naive assertion of proper listen address
   ansible.builtin.assert:
     that:
-      - "':' in mysqld_exporter_web_listen_address"
+      - >-
+        [mysqld_exporter_web_listen_address] |
+          flatten |
+          reject('match', '.+:\\d+$') |
+          list |
+          length == 0
 
 - name: Assert collectors are not both disabled and enabled at the same time
   ansible.builtin.assert:
