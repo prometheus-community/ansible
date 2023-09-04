@@ -65,6 +65,8 @@ def test_service(host):
         raise  # Re-raise the original assertion error
 
 
-def test_socket(host):
-    s = host.socket("tcp://127.0.0.1:9090")
-    assert s.is_listening
+@pytest.mark.parametrize("sockets", [
+    "tcp://127.0.0.1:9090",
+])
+def test_socket(host, sockets):
+    assert host.socket(sockets).is_listening
