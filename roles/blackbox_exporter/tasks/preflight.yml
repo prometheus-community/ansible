@@ -20,10 +20,26 @@
   ansible.builtin.package_facts:
   when: "not 'packages' in ansible_facts"
 
+- name: Assert that used version supports listen address type
+  ansible.builtin.assert:
+    that:
+      - >-
+        blackbox_exporter_web_listen_address is string
+        or
+        (
+          blackbox_exporter_version is version('0.23.0', '>=') and
+          blackbox_exporter_web_listen_address | type_debug == "list"
+        )
+
 - name: Naive assertion of proper listen address
   ansible.builtin.assert:
     that:
-      - "':' in blackbox_exporter_web_listen_address"
+      - >-
+        [blackbox_exporter_web_listen_address] |
+          flatten |
+          reject('match', '.+:\\d+$') |
+          list |
+          length == 0
 
 - name: Discover latest version
   ansible.builtin.set_fact:
