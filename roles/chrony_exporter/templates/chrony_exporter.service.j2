@@ -26,7 +26,16 @@ ExecStart={{ chrony_exporter_binary_install_dir }}/chrony_exporter \
 {% if chrony_exporter_tls_server_config | length > 0 or chrony_exporter_http_server_config | length > 0 or chrony_exporter_basic_auth_users | length > 0 %}
     '--web.config.file=/etc/chrony_exporter/web_config.yaml' \
 {% endif %}
+{% if chrony_exporter_version is version('0.5.0', '>=') and
+      chrony_exporter_web_listen_address is iterable and
+      chrony_exporter_web_listen_address is not mapping and
+      chrony_exporter_web_listen_address is not string %}
+{%   for address in chrony_exporter_web_listen_address %}
+    '--web.listen-address={{ address }}' \
+{%   endfor %}
+{% else %}
     '--web.listen-address={{ chrony_exporter_web_listen_address }}' \
+{% endif %}
     '--web.telemetry-path={{ chrony_exporter_web_telemetry_path }}'
 
 SyslogIdentifier=chrony_exporter

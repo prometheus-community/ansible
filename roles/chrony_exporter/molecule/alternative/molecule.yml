@@ -4,7 +4,9 @@ provisioner:
     group_vars:
       all:
         chrony_exporter_binary_local_dir: "/tmp/chrony_exporter-linux-amd64"
-        chrony_exporter_web_listen_address: "127.0.0.1:8080"
+        chrony_exporter_web_listen_address:
+          - '127.0.0.1:8080'
+          - '127.0.1.1:8080'
         chrony_exporter_enabled_collectors:
           - sources
         chrony_exporter_disabled_collectors:
