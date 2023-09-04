@@ -3,6 +3,7 @@ __metaclass__ = type
 
 import os
 import testinfra.utils.ansible_runner
+import pytest
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
@@ -37,10 +38,9 @@ def test_protecthome_property(host):
     assert p.get("ProtectHome") == "yes"
 
 
-def test_socket(host):
-    sockets = [
-        "tcp://127.0.0.1:8080"
-    ]
-    for socket in sockets:
-        s = host.socket(socket)
-        assert s.is_listening
+@pytest.mark.parametrize("sockets", [
+    "tcp://127.0.0.1:8080",
+    "tcp://127.0.1.1:8080",
+])
+def test_socket(host, sockets):
+    assert host.socket(sockets).is_listening
