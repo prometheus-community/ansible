@@ -12,7 +12,7 @@ argument_specs:
         description:
           - "Prometheus package version. Also accepts C(latest) as parameter."
           - "Only prometheus 2.x is supported"
-        default: "2.46.0"
+        default: "2.47.0"
       prometheus_skip_install:
         description: "Prometheus installation tasks gets skipped when set to true."
         type: bool
