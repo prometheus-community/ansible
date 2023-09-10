@@ -106,16 +106,6 @@
   notify:
     - restart prometheus
 
-- name: Create systemd service unit
-  ansible.builtin.template:
-    src: prometheus.service.j2
-    dest: /etc/systemd/system/prometheus.service
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - restart prometheus
-
 - name: Install SELinux dependencies
   ansible.builtin.package:
     name: "{{ _prometheus_selinux_packages }}"
