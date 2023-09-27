@@ -42,6 +42,8 @@ def test_files(host, files):
      "enable-feature=promql-at-modifier"),
     ("/etc/systemd/system/prometheus.service",
      "enable-feature=remote-write-receiver"),
+    ("/etc/systemd/system/prometheus.service",
+     "TimeoutStopSec=1min"),
 ])
 def test_file_contents(host, file, content):
     f = host.file(file)

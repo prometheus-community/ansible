@@ -226,3 +226,5 @@ prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
     labels:
       severity: warning
 # yamllint enable rule:line-length
+
+prometheus_stop_timeout: '600s'

@@ -85,6 +85,7 @@ Environment="HTTP_PROXY={{ http_proxy }}"{% if https_proxy is defined %} "HTTPS_
 
 SyslogIdentifier=prometheus
 Restart=always
+TimeoutStopSec={{ prometheus_stop_timeout }}
 
 [Install]
 WantedBy=multi-user.target
