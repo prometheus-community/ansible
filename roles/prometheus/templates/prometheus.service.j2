@@ -43,31 +43,22 @@ ExecStart={{ _prometheus_binary_install_dir }}/prometheus \
 {% endif %}
 {% endfor %}
   --config.file={{ prometheus_config_dir }}/prometheus.yml
+{% if http_proxy is defined %}
+Environment="HTTP_PROXY={{ http_proxy }}"{% if https_proxy is defined %} "HTTPS_PROXY={{ https_proxy }}{% endif %}"
+{% endif %}
 
+SyslogIdentifier=prometheus
+Restart=always
+TimeoutStopSec={{ prometheus_stop_timeout }}
+
+# systemd hardening-options
 CapabilityBoundingSet=CAP_SET_UID
 LimitNOFILE=65000
 LockPersonality=true
-NoNewPrivileges=true
 MemoryDenyWriteExecute=true
+NoNewPrivileges=true
 PrivateDevices=true
 PrivateTmp=true
-ProtectHome=true
-RemoveIPC=true
-RestrictSUIDSGID=true
-#SystemCallFilter=@signal @timer
-
-{% if (ansible_facts.packages.systemd | first).version is version('231', '>=') %}
-ReadWritePaths={{ prometheus_db_dir }}
-{% for path in prometheus_read_only_dirs %}
-ReadOnlyPaths={{ path }}
-{% endfor %}
-{% else %}
-ReadWriteDirectories={{ prometheus_db_dir }}
-{% for path in prometheus_read_only_dirs %}
-ReadOnlyDirectories={{ path }}
-{% endfor %}
-{% endif %}
-
 {% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
 PrivateUsers=true
 ProtectControlGroups=true
@@ -77,14 +68,21 @@ ProtectSystem=strict
 {% else %}
 ProtectSystem=full
 {% endif %}
-
-{% if http_proxy is defined %}
-Environment="HTTP_PROXY={{ http_proxy }}"{% if https_proxy is defined %} "HTTPS_PROXY={{ https_proxy }}{% endif %}"
+ProtectHome=true
+{% if (ansible_facts.packages.systemd | first).version is version('231', '>=') %}
+{% for path in prometheus_read_only_dirs %}
+ReadOnlyPaths={{ path }}
+{% endfor %}
+ReadWritePaths={{ prometheus_db_dir }}
+{% else %}
+{% for path in prometheus_read_only_dirs %}
+ReadOnlyDirectories={{ path }}
+{% endfor %}
+ReadWriteDirectories={{ prometheus_db_dir }}
 {% endif %}
-
-SyslogIdentifier=prometheus
-Restart=always
-TimeoutStopSec={{ prometheus_stop_timeout }}
+RemoveIPC=true
+RestrictSUIDSGID=true
+#SystemCallFilter=@signal @timer
 
 [Install]
 WantedBy=multi-user.target
