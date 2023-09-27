@@ -52,7 +52,11 @@ Restart=always
 TimeoutStopSec={{ prometheus_stop_timeout }}
 
 # systemd hardening-options
-CapabilityBoundingSet=CAP_SET_UID
+AmbientCapabilities=
+CapabilityBoundingSet=
+DeviceAllow=/dev/null rw
+DevicePolicy=strict
+LimitMEMLOCK=0
 LimitNOFILE=65000
 LockPersonality=true
 MemoryDenyWriteExecute=true
@@ -82,6 +86,9 @@ ReadWriteDirectories={{ prometheus_db_dir }}
 {% endif %}
 RemoveIPC=true
 RestrictSUIDSGID=true
+RestrictNamespaces=true
+RestrictRealtime=true
+SystemCallArchitectures=native
 #SystemCallFilter=@signal @timer
 
 [Install]
