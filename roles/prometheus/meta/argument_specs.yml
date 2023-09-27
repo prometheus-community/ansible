@@ -150,3 +150,8 @@ argument_specs:
         default:
           - "prometheus/targets/*.yml"
           - "prometheus/targets/*.json"
+      prometheus_stop_timeout:
+        description:
+          - "How long to wait for Prometheus to shutdown. This is passed as a systemd TimeoutStopSec time spec."
+        type: "str"
+        default: "600s"
