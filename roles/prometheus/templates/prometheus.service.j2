@@ -1,7 +1,8 @@
 {{ ansible_managed | comment }}
 
 [Unit]
-Description=Prometheus
+Description=Monitoring system and time series database
+Documentation=https://prometheus.io/docs/introduction/overview/ man:prometheus(1)
 After=time-sync.target
 
 [Service]
