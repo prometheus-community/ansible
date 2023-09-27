@@ -338,6 +338,14 @@
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--prometheus_stop_timeout"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-stop-timeout"><strong>prometheus_stop_timeout</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--prometheus_stop_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>How long to wait for Prometheus to shutdown. This is passed as a systemd TimeoutStopSec time spec.</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;600s&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_storage_retention"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-storage-retention"><strong>prometheus_storage_retention</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_storage_retention" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -345,7 +353,7 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;30d&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_storage_retention_size"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-storage-retention-size"><strong>prometheus_storage_retention_size</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_storage_retention_size" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -355,14 +363,14 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_targets"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-targets"><strong>prometheus_targets</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_targets" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Targets which will be scraped.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-version"><strong>prometheus_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -371,21 +379,21 @@
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;2.46.0&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_web_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-web-config"><strong>prometheus_web_config</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_web_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>A Prometheus <a class="reference external" href="https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md">web config yaml</a> for configuring TLS and auth.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_web_external_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-web-external-url"><strong>prometheus_web_external_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_web_external_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>External address on which prometheus is available. Useful when behind reverse proxy. Ex. `http://example.org/prometheus`</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-web-listen-address"><strong>prometheus_web_listen_address</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
