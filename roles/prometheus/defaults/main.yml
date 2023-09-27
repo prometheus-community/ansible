@@ -5,6 +5,7 @@ prometheus_binary_url: "https://github.com/{{ _prometheus_repo }}/releases/downl
                         prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
 prometheus_checksums_url: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/sha256sums.txt"
 prometheus_skip_install: false
+_prometheus_binary_install_dir: '/usr/local/bin'
 
 prometheus_config_dir: /etc/prometheus
 prometheus_db_dir: /var/lib/prometheus
