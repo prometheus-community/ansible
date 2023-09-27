@@ -8,6 +8,7 @@ After=local-fs.target
 
 [Service]
 Type=simple
+Restart=on-failure
 User=prometheus
 Group=prometheus
 ExecReload=/bin/kill -HUP $MAINPID
@@ -48,7 +49,6 @@ Environment="HTTP_PROXY={{ http_proxy }}"{% if https_proxy is defined %} "HTTPS_
 {% endif %}
 
 SyslogIdentifier=prometheus
-Restart=always
 TimeoutStopSec={{ prometheus_stop_timeout }}
 
 # systemd hardening-options
