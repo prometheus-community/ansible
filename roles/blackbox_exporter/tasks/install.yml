@@ -47,7 +47,7 @@
     - name: Propagate blackbox_exporter binaries
       ansible.builtin.copy:
         src: "/tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch }}/blackbox_exporter"
-        dest: "{{ blackbox_exporter_binary_install_dir }}/blackbox_exporter"
+        dest: "{{ blackbox_exporter_binary_install_dir }}/{{ blackbox_exporter_binary_name }}"
         mode: 0755
         owner: root
         group: root
@@ -57,7 +57,7 @@
 - name: Propagate locally distributed blackbox_exporter binary
   ansible.builtin.copy:
     src: "{{ blackbox_exporter_binary_local_dir }}/blackbox_exporter"
-    dest: "{{ blackbox_exporter_binary_install_dir }}/blackbox_exporter"
+    dest: "{{ blackbox_exporter_binary_install_dir }}/{{ blackbox_exporter_binary_name }}"
     mode: '0755'
     owner: root
     group: root
@@ -78,7 +78,7 @@
 
 - name: Ensure blackbox exporter binary has cap_net_raw capability
   community.general.capabilities:
-    path: '{{ blackbox_exporter_binary_install_dir }}/blackbox_exporter'
+    path: '{{ blackbox_exporter_binary_install_dir }}/{{ blackbox_exporter_binary_name }}'
     capability: cap_net_raw+ep
     state: present
   when: not ansible_check_mode

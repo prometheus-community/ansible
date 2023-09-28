@@ -75,5 +75,6 @@ blackbox_exporter_configuration_modules:
 blackbox_exporter_config_dir: /etc/blackbox_exporter
 
 blackbox_exporter_binary_install_dir: "/usr/local/bin"
+blackbox_exporter_binary_name: "blackbox_exporter"
 
 blackbox_exporter_service_name: blackbox_exporter
