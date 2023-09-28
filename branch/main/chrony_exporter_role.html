@@ -2,6 +2,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<meta content="2.4.0" name="antsibull-docs" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>prometheus.prometheus.chrony_exporter role – Prometheus Chrony Exporter &mdash; Prometheus.Prometheus Collection  documentation</title>
@@ -129,6 +130,8 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/prometheus/prometheus">prometheus.prometheus collection</a> (version 0.7.0).</p>
+<p>It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
+To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
 <p>To install it use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">prometheus.prometheus</span></code>.</p>
 <p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">prometheus.prometheus.chrony_exporter</span></code>.</p>
 </div>
@@ -153,7 +156,7 @@
 </section>
 <section id="parameters">
 <h3><a class="toc-backref" href="#id3" role="doc-backlink">Parameters</a><a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
-<table class="ansible-option-table docutils align-default" style="width: 100%">
+<table class="longtable ansible-option-table docutils align-default" style="width: 100%">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
 <th class="head"><p>Comments</p></th>
@@ -173,7 +176,7 @@
 </div></td>
 <td><div class="ansible-option-cell"><p><em>Advanced</em></p>
 <p>Directory to install chrony_exporter binary</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/usr/local/bin&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/usr/local/bin&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -190,7 +193,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--chrony_exporter_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>URL of the chrony_exporter binaries .tar.gz file</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_chrony_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">chrony_exporter_version</span> <span class="pre">}}/chrony_exporter-{{</span> <span class="pre">chrony_exporter_version</span> <span class="pre">}}.linux-{{</span> <span class="pre">go_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_chrony_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">chrony_exporter_version</span> <span class="pre">}}/chrony_exporter-{{</span> <span class="pre">chrony_exporter_version</span> <span class="pre">}}.linux-{{</span> <span class="pre">go_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -198,7 +201,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--chrony_exporter_checksums_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>URL of the chrony_exporter checksums file</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_chrony_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">chrony_exporter_version</span> <span class="pre">}}/sha256sums.txt&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_chrony_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">chrony_exporter_version</span> <span class="pre">}}/sha256sums.txt&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -215,7 +218,7 @@
 </div></td>
 <td><div class="ansible-option-cell"><p>List of dicts defining additionally enabled collectors and their configuration.</p>
 <p>It adds collectors to <a class="reference external" href="https://github.com/superq/chrony_exporter#enabled-by-default">those enabled by default</a>.</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[&quot;tracking&quot;]</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[&quot;tracking&quot;]</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -231,9 +234,9 @@
 <a class="ansibleOptionLink" href="#parameter-main--chrony_exporter_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Chrony exporter installation tasks gets skipped when set to true.</p>
-<p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
 <ul class="simple">
-<li><p><code class="ansible-option-default-bold docutils literal notranslate"><span class="pre">false</span></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
 </ul>
 </div></td>
@@ -244,7 +247,7 @@
 </div></td>
 <td><div class="ansible-option-cell"><p><em>Advanced</em></p>
 <p>System group for chrony_exporter</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;chrony-exp&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;chrony-exp&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -253,7 +256,7 @@
 </div></td>
 <td><div class="ansible-option-cell"><p><em>Advanced</em></p>
 <p>Chrony exporter user</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;chrony-exp&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;chrony-exp&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -269,7 +272,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--chrony_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Chrony exporter package version. Also accepts latest as parameter.</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;1.6.0&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;1.6.0&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -277,7 +280,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--chrony_exporter_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Address on which chrony_exporter will listen</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9123&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9123&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -285,7 +288,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--chrony_exporter_web_telemetry_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Path under which to expose metrics</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/metrics&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/metrics&quot;</span></code></p>
 </div></td>
 </tr>
 </tbody>
@@ -298,11 +301,12 @@
 </ul>
 <section id="collection-links">
 <h4>Collection links<a class="headerlink" href="#collection-links" title="Link to this heading"></a></h4>
-<p class="ansible-links">
-  <a href="https://github.com/prometheus-community/ansible/issues" aria-role="button" target="_blank" rel="noopener external">Issue Tracker</a>
-  <a href="https://prometheus.io" aria-role="button" target="_blank" rel="noopener external">Homepage</a>
-  <a href="https://github.com/prometheus-community/ansible" aria-role="button" target="_blank" rel="noopener external">Repository (Sources)</a>
-</p></section>
+<ul class="ansible-links">
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/prometheus-community/ansible/issues" rel="noopener external" target="_blank">Issue Tracker</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://prometheus.io" rel="noopener external" target="_blank">Homepage</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/prometheus-community/ansible" rel="noopener external" target="_blank">Repository (Sources)</a></span></li>
+</ul>
+</section>
 </section>
 </section>
 </section>

@@ -2,6 +2,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<meta content="2.4.0" name="antsibull-docs" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>prometheus.prometheus.alertmanager role – Prometheus Alertmanager service &mdash; Prometheus.Prometheus Collection  documentation</title>
@@ -129,6 +130,8 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/prometheus/prometheus">prometheus.prometheus collection</a> (version 0.7.0).</p>
+<p>It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
+To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
 <p>To install it use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">prometheus.prometheus</span></code>.</p>
 <p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">prometheus.prometheus.alertmanager</span></code>.</p>
 </div>
@@ -153,7 +156,7 @@
 </section>
 <section id="parameters">
 <h3><a class="toc-backref" href="#id3" role="doc-backlink">Parameters</a><a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
-<table class="ansible-option-table docutils align-default" style="width: 100%">
+<table class="longtable ansible-option-table docutils align-default" style="width: 100%">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
 <th class="head"><p>Comments</p></th>
@@ -165,7 +168,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_amtool_config_alertmanager_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>URL of the alertmanager</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;{{</span> <span class="pre">alertmanager_web_external_url</span> <span class="pre">}}&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;{{</span> <span class="pre">alertmanager_web_external_url</span> <span class="pre">}}&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -173,7 +176,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_amtool_config_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Template for amtool config</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;amtool.yml.j2&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;amtool.yml.j2&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -181,7 +184,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_amtool_config_output" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Extended output, use <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> for simple output.</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;extended&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;extended&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -198,7 +201,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>URL of the alertmanager binaries .tar.gz file</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_alertmanager_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">alertmanager_version</span> <span class="pre">}}/alertmanager-{{</span> <span class="pre">alertmanager_version</span> <span class="pre">}}.linux-{{</span> <span class="pre">go_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_alertmanager_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">alertmanager_version</span> <span class="pre">}}/alertmanager-{{</span> <span class="pre">alertmanager_version</span> <span class="pre">}}.linux-{{</span> <span class="pre">go_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -206,7 +209,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_checksums_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>URL of the alertmanager checksums file</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_alertmanager_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">alertmanager_version</span> <span class="pre">}}/sha256sums.txt&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_alertmanager_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">alertmanager_version</span> <span class="pre">}}/sha256sums.txt&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -215,7 +218,7 @@
 </div></td>
 <td><div class="ansible-option-cell"><p>HA cluster network configuration. Disabled by default.</p>
 <p>More information in <a class="reference external" href="https://github.com/prometheus/alertmanager#high-availability">alertmanager readme</a></p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">{&quot;listen-address&quot;:</span> <span class="pre">&quot;&quot;}</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">{&quot;listen-address&quot;:</span> <span class="pre">&quot;&quot;}</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -223,7 +226,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_config_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Path to directory with alertmanager configuration</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/etc/alertmanager&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/etc/alertmanager&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -231,7 +234,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_config_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Variable used to provide custom alertmanager configuration file in form of ansible template</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;alertmanager.yml.j2&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;alertmanager.yml.j2&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -246,7 +249,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_db_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Path to directory with alertmanager database</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/var/lib/alertmanager&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/var/lib/alertmanager&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -310,7 +313,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_resolve_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Time after which an alert is declared resolved</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;3m&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;3m&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -325,9 +328,9 @@
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Alertmanager installation tasks gets skipped when set to true.</p>
-<p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
 <ul class="simple">
-<li><p><code class="ansible-option-default-bold docutils literal notranslate"><span class="pre">false</span></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
 </ul>
 </div></td>
@@ -352,7 +355,7 @@
 </div></td>
 <td><div class="ansible-option-cell"><p>List of folders where ansible will look for template files which will be copied to <code class="docutils literal notranslate"><span class="pre">&quot;{{</span> <span class="pre">alertmanager_config_dir</span> <span class="pre">}}/templates/&quot;</span></code>.</p>
 <p>Files must have <code class="docutils literal notranslate"><span class="pre">*.tmpl</span></code> extension</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[&quot;alertmanager/templates/*.tmpl&quot;]</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[&quot;alertmanager/templates/*.tmpl&quot;]</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -360,7 +363,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Alertmanager package version. Also accepts `latest` as parameter.</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.26.0&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.26.0&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -382,7 +385,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_web_external_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>External address on which alertmanager is available. Useful when behind reverse proxy. Ex. example.org/alertmanager</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;http://localhost:9093/&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;http://localhost:9093/&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -390,7 +393,7 @@
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Address on which alertmanager will be listening</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9093&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9093&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -424,11 +427,12 @@
 </ul>
 <section id="collection-links">
 <h4>Collection links<a class="headerlink" href="#collection-links" title="Link to this heading"></a></h4>
-<p class="ansible-links">
-  <a href="https://github.com/prometheus-community/ansible/issues" aria-role="button" target="_blank" rel="noopener external">Issue Tracker</a>
-  <a href="https://prometheus.io" aria-role="button" target="_blank" rel="noopener external">Homepage</a>
-  <a href="https://github.com/prometheus-community/ansible" aria-role="button" target="_blank" rel="noopener external">Repository (Sources)</a>
-</p></section>
+<ul class="ansible-links">
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/prometheus-community/ansible/issues" rel="noopener external" target="_blank">Issue Tracker</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://prometheus.io" rel="noopener external" target="_blank">Homepage</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/prometheus-community/ansible" rel="noopener external" target="_blank">Repository (Sources)</a></span></li>
+</ul>
+</section>
 </section>
 </section>
 </section>
