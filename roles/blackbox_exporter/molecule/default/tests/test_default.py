@@ -10,7 +10,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 
 @pytest.mark.parametrize("files", [
-    "/etc/blackbox_exporter.yml",
+    "/etc/prometheus/blackbox.yml",
     "/etc/systemd/system/blackbox_exporter.service",
     "/usr/local/bin/blackbox_exporter"
 ])

@@ -71,7 +71,7 @@ blackbox_exporter_configuration_modules:
 #      validate_answer_rrs:
 #        fail_if_matches_regexp: [test]
 
-# Where to put the blackbox_exporter.yml main configuration file
-blackbox_exporter_config_dir: /etc
+# Where to put the blackbox.yml main configuration file
+blackbox_exporter_config_dir: /etc/blackbox_exporter
 
 blackbox_exporter_binary_install_dir: "/usr/local/bin"
