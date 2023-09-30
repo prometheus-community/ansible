@@ -10,7 +10,7 @@ argument_specs:
     options:
       pushgateway_version:
         description: "Pushgateway package version. Also accepts latest as parameter."
-        default: "1.1.2"
+        default: "1.6.2"
       pushgateway_skip_install:
         description: "Pushgateway installation tasks gets skipped when set to true."
         type: bool
