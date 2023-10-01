@@ -1,0 +1,30 @@
+---
+smartctl_exporter_version: 0.11.0
+smartctl_exporter_binary_local_dir: ""
+smartctl_exporter_binary_url: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/\
+                           smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+smartctl_exporter_checksums_url: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/sha256sums.txt"
+smartctl_exporter_skip_install: false
+
+smartctl_exporter_smartctl_path: "/usr/sbin/smartctl"
+smartctl_exporter_smartctl_interval: "60s"
+smartctl_exporter_smartctl_rescan: "10m"
+smartctl_exporter_smartctl_devices: []
+smartctl_exporter_smartctl_device_exclude: ""
+smartctl_exporter_smartctl_device_include: ""
+
+smartctl_exporter_web_listen_address: "0.0.0.0:9633"
+smartctl_exporter_web_telemetry_path: "/metrics"
+
+smartctl_exporter_tls_server_config: {}
+
+smartctl_exporter_http_server_config: {}
+
+smartctl_exporter_basic_auth_users: {}
+
+smartctl_exporter_log_level: "info"
+smartctl_exporter_log_format: "logfmt"
+
+smartctl_exporter_binary_install_dir: "/usr/local/bin"
+smartctl_exporter_system_group: "smartctl-exp"
+smartctl_exporter_system_user: "{{ smartctl_exporter_system_group }}"
