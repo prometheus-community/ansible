@@ -101,17 +101,5 @@
   when:
     - systemd_exporter_binary_local_dir | length == 0
     - not systemd_exporter_skip_install
-  block:
-    - name: Get checksum list from github
-      ansible.builtin.set_fact:
-        _systemd_exporter_checksums: "{{ lookup('url', systemd_exporter_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
-      run_once: true
-      until: _systemd_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
-      retries: 10
-
-    - name: "Get checksum for {{ go_arch }}"
-      ansible.builtin.set_fact:
-        _systemd_exporter_checksum: "{{ item.split(' ')[0] }}"
-      with_items: "{{ _systemd_exporter_checksums }}"
-      when:
-        - "('linux-' + go_arch + '.tar.gz') in item"
+  ansible.builtin.include_tasks:
+    file: get_checksum.yml
