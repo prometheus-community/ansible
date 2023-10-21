@@ -132,7 +132,7 @@ argument_specs:
         elements: "str"
       prometheus_scrape_config_custom:
         description:
-          - "Custom scrape config files."
+          - "Prometheus scrape jobs that should be included via files from scrape_config_directory, provided in same format as in the L(official docs,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config)"
         type: "dict"
       prometheus_config_file:
         description: "Variable used to provide custom prometheus configuration file in form of ansible template"
