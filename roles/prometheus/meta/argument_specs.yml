@@ -124,6 +124,16 @@ argument_specs:
             file_sd_configs:
               - files:
                   - "{{ prometheus_config_dir }}/file_sd/node.yml"
+      prometheus_scrape_config_files:
+        description:
+          - "List of folders where ansible will look for files containing scrape config which will be copied to C({{ prometheus_config_dir }}/configs/)."
+          - "Files must have C(*.yaml) extension"
+        type: "list"
+        elements: "str"
+      prometheus_scrape_config_custom:
+        description:
+          - "Custom scrape config files."
+        type: "dict"
       prometheus_config_file:
         description: "Variable used to provide custom prometheus configuration file in form of ansible template"
         default: "prometheus.yml.j2"

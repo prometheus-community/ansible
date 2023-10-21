@@ -70,3 +70,26 @@
     group: prometheus
     mode: 0640
   with_fileglob: "{{ prometheus_static_targets_files }}"
+
+- name: Create prometheus custom scrape configs directory
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: prometheus
+    mode: 0770
+  with_items:
+    - "{{ prometheus_config_dir }}/configs"
+  when: prometheus_scrape_config_custom != {}
+
+- name: Configure custom prometheus scrape config files
+  ansible.builtin.copy:
+    content: |
+      {{ item.value | to_nice_yaml(indent=2, sort_keys=False) }}
+    dest: "{{ prometheus_config_dir }}/configs/{{ item.key }}.yml"
+    force: true
+    owner: root
+    group: prometheus
+    mode: 0640
+  with_dict: "{{ prometheus_scrape_config_custom }}"
+  when: prometheus_scrape_config_custom != {}
