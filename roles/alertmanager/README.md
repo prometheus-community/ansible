@@ -25,7 +25,7 @@ Please refer to the [collection docs](https://prometheus-community.github.io/ans
 ---
   hosts: all
   roles:
-    - ansible-alertmanager
+    - prometheus.prometheus.alertmanager
   vars:
     alertmanager_version: latest
     alertmanager_slack_api_url: "http://example.com"
