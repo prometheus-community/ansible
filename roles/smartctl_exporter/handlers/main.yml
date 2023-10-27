@@ -1,0 +1,10 @@
+---
+- name: Restart smartctl_exporter
+  listen: "restart smartctl_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: smartctl_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode
