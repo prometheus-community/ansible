@@ -104,7 +104,7 @@ if ! git push "https://${GITHUB_TOKEN}:@github.com/${GIT_REPO}" --set-upstream "
 fi
 
 if ! post_pull_request \
-  "patch: New ${source_repo} upstream release!" \
+  "patch: New ${source_repo} upstream release ${version}!" \
   "main" \
   "${update_branch}" \
   "The upstream [${source_repo}](https://github.com/${source_repo}/releases) released new software version - **${version}**!\n\nThis automated PR updates code to bring new version into repository." ; then
