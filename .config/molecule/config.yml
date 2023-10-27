@@ -1,6 +1,7 @@
 ---
 dependency:
   name: galaxy
+prerun: false
 driver:
   name: docker
 platforms:
