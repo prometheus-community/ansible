@@ -217,4 +217,7 @@ releases:
       bugfixes:
         - "fix(molecule): don't contact galaxy api since requirements come from git
           (https://github.com/prometheus-community/ansible/pull/241)"
+      trivial:
+        - 'docs: fix alertmanager role name (https://github.com/prometheus-community/ansible/pull/240)'
+        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/232)'
     release_date: '2023-10-27'
