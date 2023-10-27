@@ -5,6 +5,19 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.8.0
+======
+
+Minor Changes
+-------------
+
+- feat: add smartctl_exporter role (https://github.com/prometheus-community/ansible/pull/229)
+
+Bugfixes
+--------
+
+- fix(molecule): don't contact galaxy api since requirements come from git (https://github.com/prometheus-community/ansible/pull/241)
+
 v0.7.1
 ======
 
