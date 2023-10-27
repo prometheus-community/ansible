@@ -1,0 +1,21 @@
+---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        smartctl_exporter_binary_local_dir: "/tmp/smartctl_exporter-linux-amd64"
+        smartctl_exporter_web_listen_address: "127.0.0.1:8080"
+        smartctl_exporter_smartctl_interval: "30s"
+        smartctl_exporter_smartctl_rescan: "5m"
+        smartctl_exporter_smartctl_device_include: "/dev/sda"
+        smartctl_exporter_smartctl_device_exclude: "/dev/sdb"
+
+        smartctl_exporter_tls_server_config:
+          cert_file: /etc/smartctl_exporter/tls.cert
+          key_file: /etc/smartctl_exporter/tls.key
+        smartctl_exporter_http_server_config:
+          http2: true
+        smartctl_exporter_basic_auth_users:
+          randomuser: examplepassword
+        go_arch: amd64
+        smartctl_exporter_version: 0.11.0
