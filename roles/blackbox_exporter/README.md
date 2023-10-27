@@ -24,7 +24,7 @@ Please refer to the [collection docs](https://prometheus-community.github.io/ans
 - hosts: all
   become: true
   roles:
-    - prometheus.prometheus.blackbox-exporter
+    - prometheus.prometheus.blackbox_exporter
 ```
 
 ### Demo site

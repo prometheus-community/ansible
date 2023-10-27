@@ -199,16 +199,27 @@ releases:
     release_date: '2023-08-26'
   0.7.0:
     changes:
-      minor_changes:
-        - 'feat(systemd_exporter): Add logging configuration to systemd_exporter (https://github.com/prometheus-community/ansible/pull/210)'
-        - 'feat(systemd_exporter): Add TLS configuration (https://github.com/prometheus-community/ansible/pull/205)'
-        - 'feat(prometheus): Add shutdown timeout variable (https://github.com/prometheus-community/ansible/pull/220)'
       bugfixes:
         - 'fix(systemd_exporter): Fix collector flags for older versions (https://github.com/prometheus-community/ansible/pull/208)'
         - 'fix: blackbox_exporter ansible-lint risky-octal (https://github.com/prometheus-community/ansible/pull/174)'
+      minor_changes:
+        - 'feat(prometheus): Add shutdown timeout variable (https://github.com/prometheus-community/ansible/pull/220)'
+        - 'feat(systemd_exporter): Add TLS configuration (https://github.com/prometheus-community/ansible/pull/205)'
+        - 'feat(systemd_exporter): Add logging configuration to systemd_exporter (https://github.com/prometheus-community/ansible/pull/210)'
       trivial:
-        - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/211)'
         - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/215)'
-        - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/214)'
         - 'patch: New prometheus/pushgateway upstream release! (https://github.com/prometheus-community/ansible/pull/219)'
+        - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/211)'
+        - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/214)'
     release_date: '2023-08-29'
+  0.7.1:
+    changes:
+      bugfixes:
+        - "fix(molecule): don't contact galaxy api since requirements come from git
+          (https://github.com/prometheus-community/ansible/pull/241)"
+      trivial:
+        - 'docs: fix alertmanager role name (https://github.com/prometheus-community/ansible/pull/240)'
+        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/232)'
+        - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/228)'
+        - 'docs: fix blackbox_exporter role name (https://github.com/prometheus-community/ansible/pull/239)'
+    release_date: '2023-10-27'

@@ -5,6 +5,14 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.7.1
+======
+
+Bugfixes
+--------
+
+- fix(molecule): don't contact galaxy api since requirements come from git (https://github.com/prometheus-community/ansible/pull/241)
+
 v0.7.0
 ======
 
