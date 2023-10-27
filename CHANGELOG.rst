@@ -5,6 +5,39 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.7.1
+======
+
+Bugfixes
+--------
+
+- fix(molecule): don't contact galaxy api since requirements come from git (https://github.com/prometheus-community/ansible/pull/241)
+
+v0.7.0
+======
+
+Minor Changes
+-------------
+
+- feat(prometheus): Add shutdown timeout variable (https://github.com/prometheus-community/ansible/pull/220)
+- feat(systemd_exporter): Add TLS configuration (https://github.com/prometheus-community/ansible/pull/205)
+- feat(systemd_exporter): Add logging configuration to systemd_exporter (https://github.com/prometheus-community/ansible/pull/210)
+
+Bugfixes
+--------
+
+- fix(systemd_exporter): Fix collector flags for older versions (https://github.com/prometheus-community/ansible/pull/208)
+- fix: blackbox_exporter ansible-lint risky-octal (https://github.com/prometheus-community/ansible/pull/174)
+
+v0.6.1
+======
+
+Bugfixes
+--------
+
+- fix(systemd_exporter): Fix collector flags for older versions (https://github.com/prometheus-community/ansible/pull/208)
+- fix: blackbox_exporter ansible-lint risky-octal (https://github.com/prometheus-community/ansible/pull/174)
+
 v0.6.0
 ======
 
@@ -14,8 +47,10 @@ Minor Changes
 - feat: Add chrony_exporter role (https://github.com/prometheus-community/ansible/pull/159)
 - feat: Add pushgateway role (https://github.com/prometheus-community/ansible/pull/127)
 - feat: Add role smokeping_prober (https://github.com/prometheus-community/ansible/pull/128)
+- feature: Agent mode support (https://github.com/prometheus-community/ansible/pull/198)
 - feature: Make config installation dir configurable (https://github.com/prometheus-community/ansible/pull/173)
 - feature: blackbox exporter user/group configurable (https://github.com/prometheus-community/ansible/pull/172)
+- minor: support fedora 38 (https://github.com/prometheus-community/ansible/pull/202)
 
 Removed Features (previously deprecated)
 ----------------------------------------
@@ -29,6 +64,7 @@ Bugfixes
 - fix(alertmanager): add routes before match_re (https://github.com/prometheus-community/ansible/pull/194)
 - fix(node_exporter): Fix ProtectHome for textfiles (https://github.com/prometheus-community/ansible/pull/184)
 - fix: Add test for argument_specs matching (https://github.com/prometheus-community/ansible/pull/177)
+- fix: Make binary installs consistent (https://github.com/prometheus-community/ansible/pull/204)
 - fix: mysqld_exporter should actually respect the mysqld_exporter_host variable (https://github.com/prometheus-community/ansible/pull/88)
 
 v0.5.2

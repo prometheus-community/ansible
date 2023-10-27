@@ -1,5 +1,5 @@
 ---
-prometheus_version: 2.46.0
+prometheus_version: 2.47.2
 prometheus_binary_local_dir: ''
 prometheus_binary_url: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/\
                         prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
@@ -24,6 +24,9 @@ prometheus_storage_retention: "30d"
 # [EXPERIMENTAL] Maximum number of bytes that can be stored for blocks. Units
 # supported: KB, MB, GB, TB, PB.
 prometheus_storage_retention_size: "0"
+
+# The Agent mode optimizes Prometheus for the remote write use case: https://prometheus.io/blog/2021/11/16/agent/
+prometheus_agent_mode: false
 
 prometheus_config_flags_extra: {}
 # prometheus_config_flags_extra:
@@ -223,3 +226,5 @@ prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
     labels:
       severity: warning
 # yamllint enable rule:line-length
+
+prometheus_stop_timeout: '600s'

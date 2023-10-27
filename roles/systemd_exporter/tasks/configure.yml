@@ -8,6 +8,23 @@
     mode: 0644
   notify: restart systemd_exporter
 
+- name: Create systemd_exporter config directory
+  ansible.builtin.file:
+    path: "/etc/systemd_exporter"
+    state: directory
+    owner: root
+    group: root
+    mode: u+rwX,g+rwX,o=rX
+
+- name: Copy the systemd_exporter config file
+  ansible.builtin.template:
+    src: config.yaml.j2
+    dest: /etc/systemd_exporter/config.yaml
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart systemd_exporter
+
 - name: Allow systemd_exporter port in SELinux on RedHat OS family
   community.general.seport:
     ports: "{{ systemd_exporter_web_listen_address.split(':')[-1] }}"

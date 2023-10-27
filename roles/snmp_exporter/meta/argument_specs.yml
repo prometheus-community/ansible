@@ -9,12 +9,17 @@ argument_specs:
       - "Prometheus Community"
     options:
       snmp_exporter_version:
-        description: "SNMP exporter package version"
-        default: "0.23.0"
+        description: "SNMP exporter package version. Also accepts latest as parameter."
+        default: "0.24.1"
       snmp_exporter_skip_install:
         description: "SNMP exporter installation tasks gets skipped when set to true."
         type: bool
         default: false
+      snmp_exporter_binary_local_dir:
+        description:
+          - "Enables the use of local packages instead of those distributed on github."
+          - "The parameter masnmp set to a directory where the C(snmp_exporter) binary is stored on the host where ansible is run."
+          - "This overrides the I(snmp_exporter_version) parameter"
       snmp_exporter_binary_url:
         description: "URL of the snmp exporter binaries .tar.gz file"
         default: "https://github.com/{{ _snmp_exporter_repo }}/releases/download/v{{ snmp_exporter_version }}/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
@@ -31,3 +36,8 @@ argument_specs:
         description:
           - "If this is empty, role will download snmp.yml file from U(https://github.com/prometheus/snmp_exporter)."
           - "Otherwise this should contain path to file with custom snmp exporter configuration"
+      snmp_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install snmp_exporter binary"
+        default: "/usr/local/bin"

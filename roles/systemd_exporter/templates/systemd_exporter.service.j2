@@ -10,13 +10,25 @@ User={{ systemd_exporter_system_user }}
 Group={{ systemd_exporter_system_group }}
 ExecStart={{ systemd_exporter_binary_install_dir }}/systemd_exporter \
 {% if systemd_exporter_enable_restart_count %}
+    {% if systemd_exporter_version is version('0.5.0', '>=') %}
     --systemd.collector.enable-restart-count \
+    {% else %}
+    --collector.enable-restart-count \
+    {% endif %}
 {% endif %}
 {% if systemd_exporter_enable_file_descriptor_size %}
+    {% if systemd_exporter_version is version('0.5.0', '>=') %}
     --systemd.collector.enable-file-descriptor-size \
+    {% else %}
+    --collector.enable-file-descriptor-size \
+    {% endif %}
 {% endif %}
 {% if systemd_exporter_enable_ip_accounting %}
+    {% if systemd_exporter_version is version('0.5.0', '>=') %}
     --systemd.collector.enable-ip-accounting \
+    {% else %}
+    --collector.enable-ip-accounting \
+    {% endif %}
 {% endif %}
 {% if systemd_exporter_unit_include != ""%}
     --systemd.collector.unit-include={{ systemd_exporter_unit_include }} \
@@ -24,6 +36,10 @@ ExecStart={{ systemd_exporter_binary_install_dir }}/systemd_exporter \
 {% if systemd_exporter_unit_exclude != "" %}
     --systemd.collector.unit-exclude={{ systemd_exporter_unit_exclude }} \
 {% endif %}
+{% if systemd_exporter_tls_server_config | length > 0 %}
+    --web.config.file=/etc/systemd_exporter/config.yaml \
+{% endif %}
+    --log.level={{ systemd_exporter_log_level }} \
     --web.listen-address={{ systemd_exporter_web_listen_address }}
 
 SyslogIdentifier=systemd_exporter
