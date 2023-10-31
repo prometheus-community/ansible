@@ -232,7 +232,13 @@ releases:
         - 'feat: add smartctl_exporter role (https://github.com/prometheus-community/ansible/pull/229)'
       trivial:
         - 'docs: fix alertmanager role name (https://github.com/prometheus-community/ansible/pull/240)'
-        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/232)'
         - 'docs: fix blackbox_exporter role name (https://github.com/prometheus-community/ansible/pull/239)'
+        - 'patch: New prometheus/prometheus upstream release! (https://github.com/prometheus-community/ansible/pull/232)'
         - 'patch: New prometheus/snmp_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/228)'
     release_date: '2023-10-27'
+  0.8.1:
+    changes:
+      trivial:
+        - 'patch: New prometheus-community/systemd_exporter upstream release 0.6.0!
+          (https://github.com/prometheus-community/ansible/pull/244)'
+    release_date: '2023-10-31'
