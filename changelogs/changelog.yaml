@@ -242,4 +242,5 @@ releases:
         - 'patch: New prometheus-community/systemd_exporter upstream release 0.6.0!
           (https://github.com/prometheus-community/ansible/pull/244)'
         - 'patch: New prometheus/prometheus upstream release 2.48.0! (https://github.com/prometheus-community/ansible/pull/246)'
+        - 'patch: New prometheus/node_exporter upstream release 1.7.0! (https://github.com/prometheus-community/ansible/pull/247)'
     release_date: '2023-10-31'
