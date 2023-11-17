@@ -13,11 +13,11 @@ apt -y install docker.io
 
 # Install test requirements from role
 if [ -f "$role_root/test-requirements.txt"  ]; then
-	python -m pip install -r "$role_root/test-requirements.txt"
+	python -m pip install --upgrade -r "$role_root/test-requirements.txt"
 fi
 # Install test requirements from collection
 if [ -f "$collection_root/test-requirements.txt"  ]; then
-	python -m pip install -r "$collection_root/test-requirements.txt"
+	python -m pip install --upgrade -r "$collection_root/test-requirements.txt"
 fi
 
 # Install ansible version specific requirements
