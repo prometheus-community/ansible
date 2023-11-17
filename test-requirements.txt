@@ -1,5 +1,6 @@
 molecule
 docker
+pytest
 pytest-testinfra
 selinux
 passlib
