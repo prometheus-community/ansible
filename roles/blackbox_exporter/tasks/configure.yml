@@ -2,7 +2,7 @@
 - name: Create systemd service unit
   ansible.builtin.template:
     src: blackbox_exporter.service.j2
-    dest: /etc/systemd/system/blackbox_exporter.service
+    dest: "/etc/systemd/system/{{ blackbox_exporter_service_name }}.service"
     owner: root
     group: root
     mode: '0644'
@@ -12,7 +12,7 @@
 - name: Configure blackbox exporter
   ansible.builtin.template:
     src: blackbox_exporter.yml.j2
-    dest: "{{ blackbox_exporter_config_dir }}/blackbox_exporter.yml"
+    dest: "{{ blackbox_exporter_config_dir }}/blackbox.yml"
     owner: root
     group: "{{ blackbox_exporter_group }}"
     mode: '0644'
