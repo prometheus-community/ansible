@@ -9,6 +9,14 @@
   notify:
     - restart blackbox_exporter
 
+- name: Create blackbox_exporter config directory
+  ansible.builtin.file:
+    path: "{{ blackbox_exporter_config_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: u+rwX,g+rwX,o=rX
+
 - name: Configure blackbox exporter
   ansible.builtin.template:
     src: blackbox_exporter.yml.j2
