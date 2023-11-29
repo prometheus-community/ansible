@@ -52,5 +52,9 @@ receivers:
 inhibit_rules:
 {{ alertmanager_inhibit_rules | to_nice_yaml(indent=2) }}
 {% endif %}
+{% if alertmanager_time_intervals | length %}
+time_intervals:
+{{ alertmanager_time_intervals | to_nice_yaml(indent=2) }}
+{% endif %}
 route:
   {{ alertmanager_route | to_nice_yaml(indent=2) | indent(2, False) }}
