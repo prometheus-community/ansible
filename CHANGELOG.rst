@@ -5,6 +5,14 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.9.0
+======
+
+Minor Changes
+-------------
+
+- feat(blackbox_exporter): Create config directory (https://github.com/prometheus-community/ansible/pull/250)
+
 v0.8.1
 ======
 
