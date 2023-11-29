@@ -64,7 +64,7 @@ alertmanager_receivers: []
 #     slack_configs:
 #       - send_resolved: true
 #         channel: '#alerts'
-alertmanager_time_intervals:: []
+alertmanager_time_intervals: []
 # alertmanager_time_intervals:
 #   - name: offhours
 #      time_intervals:
