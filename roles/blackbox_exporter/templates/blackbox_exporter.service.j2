@@ -16,7 +16,16 @@ ExecStart=/usr/local/bin/blackbox_exporter \
   {% for flag, flag_value in blackbox_exporter_cli_flags.items() -%}
   --{{ flag }}={{ flag_value }} \
   {% endfor -%}
+{% if blackbox_exporter_version is version('0.23.0', '>=') and
+      blackbox_exporter_web_listen_address is iterable and
+      blackbox_exporter_web_listen_address is not mapping and
+      blackbox_exporter_web_listen_address is not string %}
+{%   for address in blackbox_exporter_web_listen_address %}
+  --web.listen-address={{ address }}{{ " \\" if not loop.last else "" }}
+{%   endfor %}
+{% else %}
   --web.listen-address={{ blackbox_exporter_web_listen_address }}
+{% endif %}
 
 SyslogIdentifier=blackbox_exporter
 KillMode=process

@@ -86,5 +86,5 @@ provisioner:
                 target_label: instance
               - target_label: __address__
                 replacement: 127.0.0.1:9115  # Blackbox exporter.
-        version: 2.25.2
+        prometheus_version: 2.25.2
         prometheus_stop_timeout: 1min

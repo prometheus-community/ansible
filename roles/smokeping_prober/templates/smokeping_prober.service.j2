@@ -13,7 +13,16 @@ PermissionsStartOnly=true
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart={{ smokeping_prober_binary_install_dir }}/smokeping_prober \
   --config.file={{ smokeping_prober_config_dir }}//{{ smokeping_prober_config_file }} \
+{% if smokeping_prober_version is version('0.7.0', '>=') and
+      smokeping_prober_web_listen_address is iterable and
+      smokeping_prober_web_listen_address is not mapping and
+      smokeping_prober_web_listen_address is not string %}
+{%   for address in smokeping_prober_web_listen_address %}
+  --web.listen-address={{ address }}{{ " \\" if not loop.last else "" }}
+{%   endfor %}
+{% else %}
   --web.listen-address={{ smokeping_prober_web_listen_address }}
+{% endif %}
 
 SyslogIdentifier=smokeping_prober
 KillMode=process

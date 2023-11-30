@@ -16,7 +16,16 @@ ExecStart={{ pushgateway_binary_install_dir }}/pushgateway \
     '--web.config=/etc/pushgateway/web_config.yml' \
     {% endif %}
 {% endif %}
+{% if pushgateway_version is version('1.5.0', '>=') and
+      pushgateway_web_listen_address is iterable and
+      pushgateway_web_listen_address is not mapping and
+      pushgateway_web_listen_address is not string %}
+{%   for address in pushgateway_web_listen_address %}
+    '--web.listen-address={{ address }}' \
+{%   endfor %}
+{% else %}
     '--web.listen-address={{ pushgateway_web_listen_address }}' \
+{% endif %}
     '--web.telemetry-path={{ pushgateway_web_telemetry_path }}'
 
 SyslogIdentifier=pushgateway

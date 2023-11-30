@@ -6,9 +6,9 @@
     - name: Download prometheus binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus/prometheus/releases/download/v{{ version\
-          \ }}/prometheus-{{ version }}.linux-amd64.tar.gz"
-        dest: "/tmp/prometheus-{{ version }}.linux-amd64.tar.gz"
+        url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version\
+          \ }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
+        dest: "/tmp/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
         mode: 0644
       register: _download_archive
       until: _download_archive is succeeded
@@ -19,15 +19,15 @@
     - name: Unpack prometheus binaries
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/prometheus-{{ version }}.linux-amd64.tar.gz"
+        src: "/tmp/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
         dest: "/tmp"
-        creates: "/tmp/prometheus-{{ version }}.linux-amd64/prometheus"
+        creates: "/tmp/prometheus-{{ prometheus_version }}.linux-amd64/prometheus"
       check_mode: false
 
     - name: Link to prometheus binaries directory
       become: false
       ansible.builtin.file:
-        src: "/tmp/prometheus-{{ version }}.linux-amd64"
+        src: "/tmp/prometheus-{{ prometheus_version }}.linux-amd64"
         dest: "/tmp/prometheus-linux-amd64"
         state: link
       check_mode: false
