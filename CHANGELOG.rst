@@ -11,6 +11,7 @@ v0.9.0
 Minor Changes
 -------------
 
+- enhancement: allows using multiple web listen addresses (https://github.com/prometheus-community/ansible/pull/213)
 - feat(blackbox_exporter): Create config directory (https://github.com/prometheus-community/ansible/pull/250)
 
 v0.8.1
