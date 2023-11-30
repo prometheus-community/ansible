@@ -89,5 +89,5 @@
   when:
     - node_exporter_binary_local_dir | length == 0
     - not node_exporter_skip_install
-  ansible.builtin.include_tasks: 
+  ansible.builtin.include_tasks:
     file: get_checksum.yml
