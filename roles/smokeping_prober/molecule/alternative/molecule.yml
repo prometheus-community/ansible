@@ -4,7 +4,9 @@ provisioner:
     group_vars:
       all:
         smokeping_prober_binary_local_dir: "/tmp/smokeping_prober-linux-amd64"
-        smokeping_prober_web_listen_address: "127.0.0.1:8080"
+        smokeping_prober_web_listen_address:
+          - '127.0.0.1:8080'
+          - '127.0.1.1:8080'
         smokeping_prober_tls_server_config:
           cert_file: /etc/smokeping_prober/tls.cert
           key_file: /etc/smokeping_prober/tls.key
@@ -13,4 +15,4 @@ provisioner:
         smokeping_prober_basic_auth_users:
           randomuser: examplepassword
         go_arch: amd64
-        smokeping_prober_version: 0.6.1
+        smokeping_prober_version: 0.7.0

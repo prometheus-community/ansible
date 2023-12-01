@@ -1,4 +1,26 @@
 ---
+
+- name: Assert that used version supports listen address type
+  ansible.builtin.assert:
+    that:
+      - >-
+        snmp_exporter_web_listen_address is string
+        or
+        (
+          snmp_exporter_version is version('0.21.0', '>=') and
+          snmp_exporter_web_listen_address | type_debug == "list"
+        )
+
+- name: Naive assertion of proper listen address
+  ansible.builtin.assert:
+    that:
+      - >-
+        [snmp_exporter_web_listen_address] |
+          flatten |
+          reject('match', '.+:\\d+$') |
+          list |
+          length == 0
+
 - name: Discover latest version
   ansible.builtin.set_fact:
     snmp_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus/snmp_exporter/releases/latest', headers=_github_api_headers,

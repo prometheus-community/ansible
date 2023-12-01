@@ -3,5 +3,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        snmp_exporter_web_listen_address: "127.0.0.1:9116"
+        snmp_exporter_web_listen_address:
+          - '127.0.0.1:9116'
+          - '127.0.1.1:9116'
         snmp_exporter_config_file: ${MOLECULE_SCENARIO_DIRECTORY}/templates/snmp.yml

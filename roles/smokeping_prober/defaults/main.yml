@@ -6,7 +6,7 @@ smokeping_prober_binary_url: "https://github.com/{{ _smokeping_prober_repo }}/re
 smokeping_prober_checksums_url: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/sha256sums.txt"
 smokeping_prober_skip_install: false
 
-smokeping_prober_web_listen_address: ":9374"
+smokeping_prober_web_listen_address: "0.0.0.0:9374"
 smokeping_prober_web_telemetry_path: "/metrics"
 
 # List of smokeping_prober targets.

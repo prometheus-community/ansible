@@ -26,7 +26,16 @@ ExecStart={{ mysqld_exporter_binary_install_dir }}/mysqld_exporter \
 {% if mysqld_exporter_tls_server_config | length > 0 or mysqld_exporter_http_server_config | length > 0 or mysqld_exporter_basic_auth_users | length > 0 %}
     --web.config.file={{ mysqld_exporter_config_dir }}/web_config.yaml \
 {% endif %}
+{% if mysqld_exporter_version is version('0.15.0', '>=') and
+      mysqld_exporter_web_listen_address is iterable and
+      mysqld_exporter_web_listen_address is not mapping and
+      mysqld_exporter_web_listen_address is not string %}
+{%   for address in mysqld_exporter_web_listen_address %}
+    --web.listen-address={{ address }} \
+{%   endfor %}
+{% else %}
     --web.listen-address={{ mysqld_exporter_web_listen_address }} \
+{% endif %}
     --web.telemetry-path={{ mysqld_exporter_web_telemetry_path }} \
     --config.my-cnf={{ mysqld_exporter_config_dir }}/{{ mysqld_exporter_config_file }}
 
