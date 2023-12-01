@@ -134,3 +134,11 @@
     msg: "Please move content of `alertmanager_child_routes` to `alertmanager_route.routes` as the former variable is deprecated
           and will be removed in future versions."
   when: alertmanager_child_routes is defined
+
+- name: "`alertmanager_time_intervals` is only supported on version 0.22.0. Please upgrade to this version."
+  ansible.builtin.fail:
+    msg: "To use `alertmanager_time_intervals`,
+          Please upgrade to AlertManager 0.22.0 or newer."
+  when:
+    - alertmanager_version is version_compare('0.22.0', '<')
+    - alertmanager_time_intervals is defined
