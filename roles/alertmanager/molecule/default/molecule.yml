@@ -19,6 +19,6 @@ provisioner:
           - name: offhours
             time_intervals:
               - times:
-                  - end_time: "21:00"
-                    start_time: "24:00"
+                  - start_time: "21:00"
+                    end_time: "24:00"
                 location: "Africa/Johannesburg"
