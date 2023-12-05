@@ -13,6 +13,7 @@ Minor Changes
 
 - enhancement: allows using multiple web listen addresses (https://github.com/prometheus-community/ansible/pull/213)
 - feat(blackbox_exporter): Create config directory (https://github.com/prometheus-community/ansible/pull/250)
+- minor: Add ansible 2.16 support (https://github.com/prometheus-community/ansible/pull/255)
 
 v0.8.1
 ======
