@@ -91,7 +91,7 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    mysqld_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus/mysqld_exporter/releases/latest', headers=_github_api_headers,
+    mysqld_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _mysqld_exporter_repo }}/releases/latest', headers=_github_api_headers,
                               split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
   until: mysqld_exporter_version is version('0.0.0', '>=')
