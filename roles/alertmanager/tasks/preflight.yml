@@ -43,7 +43,7 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    alertmanager_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus/alertmanager/releases/latest', headers=_github_api_headers,
+    alertmanager_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _alertmanager_repo }}/releases/latest', headers=_github_api_headers,
                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
   until: alertmanager_version is version('0.0.0', '>=')
