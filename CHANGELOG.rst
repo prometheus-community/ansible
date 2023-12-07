@@ -15,6 +15,11 @@ Minor Changes
 - feat(blackbox_exporter): Create config directory (https://github.com/prometheus-community/ansible/pull/250)
 - minor: Add ansible 2.16 support (https://github.com/prometheus-community/ansible/pull/255)
 
+Bugfixes
+--------
+
+- fix: Use repo var for preflight (https://github.com/prometheus-community/ansible/pull/258)
+
 v0.8.1
 ======
 
