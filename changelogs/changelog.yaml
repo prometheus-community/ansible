@@ -250,6 +250,7 @@ releases:
         - 'feat(blackbox_exporter): Create config directory (https://github.com/prometheus-community/ansible/pull/250)'
         - 'minor: Add ansible 2.16 support (https://github.com/prometheus-community/ansible/pull/255)'
         - 'enhancement: allows using multiple web listen addresses (https://github.com/prometheus-community/ansible/pull/213)'
+        - 'feat: Add memcached_exporter role (https://github.com/prometheus-community/ansible/pull/256)'
       bugfixes:
         - 'fix: Use repo var for preflight (https://github.com/prometheus-community/ansible/pull/258)'
     release_date: '2023-11-29'
