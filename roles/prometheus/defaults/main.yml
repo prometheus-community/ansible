@@ -1,5 +1,5 @@
 ---
-prometheus_version: 2.48.0
+prometheus_version: 2.48.1
 prometheus_binary_local_dir: ''
 prometheus_binary_url: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/\
                         prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
