@@ -246,11 +246,16 @@ releases:
     release_date: '2023-10-31'
   0.9.0:
     changes:
-      minor_changes:
-        - 'feat(blackbox_exporter): Create config directory (https://github.com/prometheus-community/ansible/pull/250)'
-        - 'minor: Add ansible 2.16 support (https://github.com/prometheus-community/ansible/pull/255)'
-        - 'enhancement: allows using multiple web listen addresses (https://github.com/prometheus-community/ansible/pull/213)'
-        - 'feat: Add memcached_exporter role (https://github.com/prometheus-community/ansible/pull/256)'
       bugfixes:
         - 'fix: Use repo var for preflight (https://github.com/prometheus-community/ansible/pull/258)'
+      minor_changes:
+        - 'enhancement: allows using multiple web listen addresses (https://github.com/prometheus-community/ansible/pull/213)'
+        - 'feat(blackbox_exporter): Create config directory (https://github.com/prometheus-community/ansible/pull/250)'
+        - 'feat: Add memcached_exporter role (https://github.com/prometheus-community/ansible/pull/256)'
+        - 'minor: Add ansible 2.16 support (https://github.com/prometheus-community/ansible/pull/255)'
     release_date: '2023-11-29'
+  0.9.1:
+    changes:
+      trivial:
+        - 'patch: New prometheus/prometheus upstream release 2.48.1! (https://github.com/prometheus-community/ansible/pull/260)'
+    release_date: '2023-12-10'
