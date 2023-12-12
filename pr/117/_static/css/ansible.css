@@ -451,7 +451,7 @@ h6 {
 }
 /* ansibleOptionLink is adapted from h1 .headerlink in sphinx_rtd_theme */
 /* This definition lives in the antsibull Sphinx extension; we update it here to use the icon from FontAwesome */
-/* https://github.com/ansible-community/antsibull/blob/main/sphinx_antsibull_ext/css/antsibull-minimal.scss */
+/* https://github.com/ansible-community/antsibull-docs/blob/main/src/sphinx_antsibull_ext/css/antsibull-minimal.scss */
 tr .ansibleOptionLink::after {
     content: "" !important;
     font-family: FontAwesome;
