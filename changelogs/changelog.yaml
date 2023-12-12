@@ -258,4 +258,5 @@ releases:
     changes:
       trivial:
         - 'patch: New prometheus/prometheus upstream release 2.48.1! (https://github.com/prometheus-community/ansible/pull/260)'
+        - 'patch: New prometheus/memcached_exporter upstream release 0.14.1! (https://github.com/prometheus-community/ansible/pull/259)'
     release_date: '2023-12-10'
