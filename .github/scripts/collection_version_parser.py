@@ -5,6 +5,9 @@ This module provides functions for parsing PEP 440 compliant
 version ranges in Ansible collections.
 """
 
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
 import yaml
 from packaging.version import Version
 from packaging.specifiers import SpecifierSet
@@ -20,7 +23,8 @@ def increment_version(version):
     :rtype: packaging.version.Version
     """
     major, minor, patch = version.release
-    return Version(f"{major}.{minor+1}.0")
+    new_version = "{0}.{1}.0".format(major, minor + 1)
+    return Version(new_version)
 
 
 def parse_pep440_range(range_str):
@@ -51,9 +55,7 @@ def parse_pep440_range(range_str):
         if current_version in specifier_set:
             if (current_version < end_version or
                ("<=" in end_str and current_version == end_version)):
-                version_string = (
-                    f"stable-{current_version.major}.{current_version.minor}"
-                )
+                version_string = "stable-{0}.{1}".format(current_version.major, current_version.minor)
                 versions.append(version_string)
         current_version = increment_version(current_version)
 
