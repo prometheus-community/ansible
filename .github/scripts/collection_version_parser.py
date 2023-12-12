@@ -19,7 +19,7 @@ def increment_version(version):
     :return: The incremented version
     :rtype: packaging.version.Version
     """
-    major, minor, _ = version.release
+    major, minor, patch = version.release
     return Version(f"{major}.{minor+1}.0")
 
 
