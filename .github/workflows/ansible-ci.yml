@@ -47,13 +47,10 @@ jobs:
 
       - name: Get Ansible versions that the collection supports
         id: supported-ansible-versions
-        uses: mikefarah/yq@master
-        with:
-          cmd: yq -o json -I=0 '.requires_ansible | split(",") | .[] |= sub("(.*?)(\d+\.\d+)(.*)"; "stable-${2}")' meta/runtime.yml
+        run: |
+          echo "result=$(python ./.github/scripts/collection_version_parser.py)" >> $GITHUB_OUTPUT
 
   ansible-test-sanity:
-    if: |
-      !github.event.label
     uses: ./.github/workflows/ansible-test-sanity.yml
     needs:
       - ansible-lint
