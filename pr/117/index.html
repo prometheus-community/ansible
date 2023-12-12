@@ -78,10 +78,12 @@
 <li class="toctree-l1"><a class="reference internal" href="alertmanager_role.html">prometheus.prometheus.alertmanager role – Prometheus Alertmanager service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blackbox_exporter_role.html">prometheus.prometheus.blackbox_exporter role – Deploy and manage Prometheus blackbox exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chrony_exporter_role.html">prometheus.prometheus.chrony_exporter role – Prometheus Chrony Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memcached_exporter_role.html">prometheus.prometheus.memcached_exporter role – Prometheus memcached_exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mysqld_exporter_role.html">prometheus.prometheus.mysqld_exporter role – Prometheus MySQLd Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="node_exporter_role.html">prometheus.prometheus.node_exporter role – Prometheus Node Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prometheus_role.html">prometheus.prometheus.prometheus role – Installs and configures prometheus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pushgateway_role.html">prometheus.prometheus.pushgateway role – Prometheus Pushgateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smartctl_exporter_role.html">prometheus.prometheus.smartctl_exporter role – Prometheus Smartctl Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="smokeping_prober_role.html">prometheus.prometheus.smokeping_prober role – Prometheus Smokeping Prober</a></li>
 <li class="toctree-l1"><a class="reference internal" href="snmp_exporter_role.html">prometheus.prometheus.snmp_exporter role – Prometheus SNMP exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="systemd_exporter_role.html">prometheus.prometheus.systemd_exporter role – Prometheus Systemd Exporter</a></li>
@@ -115,7 +117,7 @@
              
   <section id="prometheus-prometheus">
 <span id="plugins-in-prometheus-prometheus"></span><h1>Prometheus.Prometheus<a class="headerlink" href="#prometheus-prometheus" title="Link to this heading"></a></h1>
-<p>Collection version 0.6.0</p>
+<p>Collection version 0.9.1</p>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#description" id="id1">Description</a></p></li>
@@ -135,7 +137,7 @@
 <p><strong>Supported ansible-core versions:</strong></p>
 <ul class="simple">
 <li><p>2.9.0 or newer</p></li>
-<li><p>2.15.0 or older</p></li>
+<li><p>older than 2.17.0</p></li>
 </ul>
 <ul class="ansible-links">
 <li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/prometheus-community/ansible/issues" rel="noopener external" target="_blank">Issue Tracker</a></span></li>
@@ -156,10 +158,12 @@
 <li><p><a class="reference internal" href="alertmanager_role.html#ansible-collections-prometheus-prometheus-alertmanager-role"><span class="std std-ref">alertmanager role</span></a> – Prometheus Alertmanager service</p></li>
 <li><p><a class="reference internal" href="blackbox_exporter_role.html#ansible-collections-prometheus-prometheus-blackbox-exporter-role"><span class="std std-ref">blackbox_exporter role</span></a> – Deploy and manage Prometheus blackbox exporter</p></li>
 <li><p><a class="reference internal" href="chrony_exporter_role.html#ansible-collections-prometheus-prometheus-chrony-exporter-role"><span class="std std-ref">chrony_exporter role</span></a> – Prometheus Chrony Exporter</p></li>
+<li><p><a class="reference internal" href="memcached_exporter_role.html#ansible-collections-prometheus-prometheus-memcached-exporter-role"><span class="std std-ref">memcached_exporter role</span></a> – Prometheus memcached_exporter</p></li>
 <li><p><a class="reference internal" href="mysqld_exporter_role.html#ansible-collections-prometheus-prometheus-mysqld-exporter-role"><span class="std std-ref">mysqld_exporter role</span></a> – Prometheus MySQLd Exporter</p></li>
 <li><p><a class="reference internal" href="node_exporter_role.html#ansible-collections-prometheus-prometheus-node-exporter-role"><span class="std std-ref">node_exporter role</span></a> – Prometheus Node Exporter</p></li>
 <li><p><a class="reference internal" href="prometheus_role.html#ansible-collections-prometheus-prometheus-prometheus-role"><span class="std std-ref">prometheus role</span></a> – Installs and configures prometheus</p></li>
 <li><p><a class="reference internal" href="pushgateway_role.html#ansible-collections-prometheus-prometheus-pushgateway-role"><span class="std std-ref">pushgateway role</span></a> – Prometheus Pushgateway</p></li>
+<li><p><a class="reference internal" href="smartctl_exporter_role.html#ansible-collections-prometheus-prometheus-smartctl-exporter-role"><span class="std std-ref">smartctl_exporter role</span></a> – Prometheus Smartctl Exporter</p></li>
 <li><p><a class="reference internal" href="smokeping_prober_role.html#ansible-collections-prometheus-prometheus-smokeping-prober-role"><span class="std std-ref">smokeping_prober role</span></a> – Prometheus Smokeping Prober</p></li>
 <li><p><a class="reference internal" href="snmp_exporter_role.html#ansible-collections-prometheus-prometheus-snmp-exporter-role"><span class="std std-ref">snmp_exporter role</span></a> – Prometheus SNMP exporter</p></li>
 <li><p><a class="reference internal" href="systemd_exporter_role.html#ansible-collections-prometheus-prometheus-systemd-exporter-role"><span class="std std-ref">systemd_exporter role</span></a> – Prometheus Systemd Exporter</p></li>
