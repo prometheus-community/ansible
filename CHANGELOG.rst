@@ -5,8 +5,19 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.10.1
+=======
+
+v0.10.0
+=======
+
 v0.9.1
 ======
+
+Minor Changes
+-------------
+
+- enhancement: Add time_intervals to AlertManager (https://github.com/prometheus-community/ansible/pull/251)
 
 v0.9.0
 ======
