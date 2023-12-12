@@ -55,6 +55,8 @@ releases:
           (https://github.com/prometheus-community/ansible/pull/44)'
         - 'refactor: move yamllint cfg to standard path (https://github.com/prometheus-community/ansible/pull/47)'
     release_date: '2023-03-05'
+  0.10.0:
+    release_date: '2023-12-12'
   0.2.0:
     changes:
       bugfixes:
@@ -256,6 +258,8 @@ releases:
     release_date: '2023-11-29'
   0.9.1:
     changes:
+      minor_changes:
+        - 'enhancement: Add time_intervals to AlertManager (https://github.com/prometheus-community/ansible/pull/251)'
       trivial:
         - 'patch: New prometheus/prometheus upstream release 2.48.1! (https://github.com/prometheus-community/ansible/pull/260)'
         - 'patch: New prometheus/memcached_exporter upstream release 0.14.1! (https://github.com/prometheus-community/ansible/pull/259)'
