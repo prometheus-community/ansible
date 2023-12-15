@@ -1,0 +1,27 @@
+---
+
+- name: 'Run `systemctl status {{ __service_name }}`'
+  ansible.builtin.command: 'systemctl status {{ __service_name }}.service'
+  changed_when: false
+  failed_when: false
+  register: __service_status
+
+- name: 'Show `systemctl status` output for {{ __service_name }}'
+  ansible.builtin.debug:
+    var: __service_status.stdout_lines
+  changed_when: false
+  failed_when: false
+
+- name: 'Run `journalctl -x -u {{ __service_name }}`'
+  ansible.builtin.command: 'journalctl -x -u {{ __service_name }}.service'
+  changed_when: false
+  failed_when: false
+  register: __service_journal
+
+- name: 'Show `journalctl -x` output for {{ __service_name }}'
+  ansible.builtin.debug:
+    var: __service_journal.stdout_lines
+  changed_when: false
+  failed_when: false
+
+...

@@ -61,3 +61,9 @@
     - not ansible_check_mode
   tags:
     - smokeping_prober_run
+
+- name: Display service errors
+  ansible.builtin.include_role:
+    name: service_debug
+  vars:
+    __service_name: smokeping_prober
