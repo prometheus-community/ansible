@@ -69,8 +69,8 @@
     - name: Assert that TLS key and cert are present
       ansible.builtin.assert:
         that:
-          - "{{ __chrony_exporter_cert_file.stat.exists }}"
-          - "{{ __chrony_exporter_key_file.stat.exists }}"
+          - "__chrony_exporter_cert_file.stat.exists"
+          - "__chrony_exporter_key_file.stat.exists"
 
 - name: Check if chrony_exporter is installed
   ansible.builtin.stat:

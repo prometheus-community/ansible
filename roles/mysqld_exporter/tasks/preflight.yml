@@ -69,8 +69,8 @@
     - name: Assert that TLS key and cert are present
       ansible.builtin.assert:
         that:
-          - "{{ __mysqld_exporter_cert_file.stat.exists }}"
-          - "{{ __mysqld_exporter_key_file.stat.exists }}"
+          - "__mysqld_exporter_cert_file.stat.exists"
+          - "__mysqld_exporter_key_file.stat.exists"
 
 - name: Check if mysqld_exporter is installed
   ansible.builtin.stat:

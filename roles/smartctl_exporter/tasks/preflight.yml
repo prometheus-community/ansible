@@ -58,8 +58,8 @@
     - name: Assert that TLS key and cert are present
       ansible.builtin.assert:
         that:
-          - "{{ __smartctl_exporter_cert_file.stat.exists }}"
-          - "{{ __smartctl_exporter_key_file.stat.exists }}"
+          - "__smartctl_exporter_cert_file.stat.exists"
+          - "__smartctl_exporter_key_file.stat.exists"
 
 - name: Check if smartctl_exporter is installed
   ansible.builtin.stat:

@@ -63,8 +63,8 @@
     - name: Assert that TLS key and cert are present
       ansible.builtin.assert:
         that:
-          - "{{ __systemd_exporter_cert_file.stat.exists }}"
-          - "{{ __systemd_exporter_key_file.stat.exists }}"
+          - "__systemd_exporter_cert_file.stat.exists"
+          - "__systemd_exporter_key_file.stat.exists"
 
 - name: Assert that systemd version is >= 235 when enabling ip accounting or measuring restart count
   ansible.builtin.assert:
