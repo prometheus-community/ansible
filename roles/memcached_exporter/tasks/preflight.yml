@@ -58,8 +58,8 @@
     - name: Assert that TLS key and cert are present
       ansible.builtin.assert:
         that:
-          - "{{ __memcached_exporter_cert_file.stat.exists }}"
-          - "{{ __memcached_exporter_key_file.stat.exists }}"
+          - "__memcached_exporter_cert_file.stat.exists"
+          - "__memcached_exporter_key_file.stat.exists"
 
 - name: Check if memcached_exporter is installed
   ansible.builtin.stat:
