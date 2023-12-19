@@ -21,6 +21,15 @@
   notify:
     - restart alertmanager
 
+- name: Configure alertmanager web
+  ansible.builtin.copy:
+    content: "{{ alertmanager_web_config | to_nice_yaml(indent=2, sort_keys=False) }}"
+    dest: "{{ alertmanager_config_dir }}/web.yml"
+    force: true
+    owner: alertmanager
+    group: alertmanager
+    mode: 0644
+
 - name: Create systemd service unit
   ansible.builtin.template:
     src: alertmanager.service.j2
