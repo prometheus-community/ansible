@@ -1,5 +1,5 @@
 ---
-chrony_exporter_version: 0.6.1
+chrony_exporter_version: 0.7.0
 chrony_exporter_binary_local_dir: ""
 chrony_exporter_binary_url: "https://github.com/{{ _chrony_exporter_repo }}/releases/download/v{{ chrony_exporter_version }}/\
                            chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch }}.tar.gz"
