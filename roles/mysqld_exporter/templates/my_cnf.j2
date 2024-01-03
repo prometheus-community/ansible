@@ -2,7 +2,7 @@
 [client]
 user={{ mysqld_exporter_username }}
 password={{ mysqld_exporter_password }}
-{% if mysqld_exporter_host is defined %}
+{% if mysqld_exporter_host %}
 host={{ mysqld_exporter_host }}
 port={{ mysqld_exporter_port }}
 {% elif mysqld_exporter_socket is defined %}
