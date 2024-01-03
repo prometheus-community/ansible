@@ -264,4 +264,5 @@ releases:
         - 'fix(mysqld_exporter): Change condition for mysqld_exporter_host check (https://github.com/prometheus-community/ansible/pull/270)'
       trivial:
         - 'refactor: use range for supported ansible versions (https://github.com/prometheus-community/ansible/pull/117)'
+        - 'patch: New superq/chrony_exporter upstream release 0.7.0! (https://github.com/prometheus-community/ansible/pull/268)'
     release_date: '2023-12-10'
