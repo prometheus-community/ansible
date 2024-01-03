@@ -14,10 +14,11 @@ v0.10.0
 v0.9.1
 ======
 
-Minor Changes
--------------
+Bugfixes
+--------
 
-- enhancement: Add time_intervals to AlertManager (https://github.com/prometheus-community/ansible/pull/251)
+- fix(mysqld_exporter): Change condition for mysqld_exporter_host check (https://github.com/prometheus-community/ansible/pull/270)
+- fix: conditional statement jinja2 templating warning (https://github.com/prometheus-community/ansible/pull/266)
 
 v0.9.0
 ======
@@ -145,7 +146,7 @@ Bugfixes
 --------
 
 - fix: add "become: true" to snmp_exporter handlers (https://github.com/prometheus-community/ansible/pull/99)
-- fix: node_exporter - Fix Systemd ProtectHome option in service unit (https://github.com/prometheus-community/ansible/pull/94)
+- fix: node_exporter   - Fix Systemd ProtectHome option in service unit (https://github.com/prometheus-community/ansible/pull/94)
 - fix: pass token to github api for higher ratelimit (https://github.com/prometheus-community/ansible/pull/91)
 - fix: replace eol platforms with current (https://github.com/prometheus-community/ansible/pull/53)
 - fix: tags support for included tasks (https://github.com/prometheus-community/ansible/pull/87)

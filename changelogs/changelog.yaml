@@ -4,7 +4,7 @@ releases:
   0.0.1:
     changes:
       major_changes:
-        - 'Initial Release'
+        - Initial Release
     release_date: '2023-02-17'
   0.0.3:
     release_date: '2023-03-02'
@@ -55,6 +55,10 @@ releases:
           (https://github.com/prometheus-community/ansible/pull/44)'
         - 'refactor: move yamllint cfg to standard path (https://github.com/prometheus-community/ansible/pull/47)'
     release_date: '2023-03-05'
+  0.10.0:
+    release_date: '2023-12-12'
+  0.10.1:
+    release_date: '2023-12-12'
   0.2.0:
     changes:
       bugfixes:
@@ -176,11 +180,11 @@ releases:
         - 'removed: Drop fedora 36 support as it is EOL (https://github.com/prometheus-community/ansible/pull/200)'
         - 'removed: Drop ubuntu 18.04 support as it is EOL (https://github.com/prometheus-community/ansible/pull/199)'
       trivial:
-        - 'fix: mysqld_exporter world-readable secrets (https://github.com/prometheus-community/ansible/pull/169)'
-        - 'fix: rename collector flags (https://github.com/prometheus-community/ansible/pull/167)'
         - 'docs(smokeping_prober): Update arguments specs (https://github.com/prometheus-community/ansible/pull/190)'
         - 'docs: Fix node_exporter 404 TLS auth links (https://github.com/prometheus-community/ansible/pull/154)'
         - 'fix ansible-lint: risky-octal & no-same-owner (https://github.com/prometheus-community/ansible/pull/171)'
+        - 'fix: mysqld_exporter world-readable secrets (https://github.com/prometheus-community/ansible/pull/169)'
+        - 'fix: rename collector flags (https://github.com/prometheus-community/ansible/pull/167)'
         - 'patch: New prometheus/alertmanager upstream release! (https://github.com/prometheus-community/ansible/pull/206)'
         - 'patch: New prometheus/mysqld_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/153)'
         - 'patch: New prometheus/node_exporter upstream release! (https://github.com/prometheus-community/ansible/pull/162)'
@@ -215,7 +219,7 @@ releases:
     changes:
       bugfixes:
         - "fix(molecule): don't contact galaxy api since requirements come from git
-           (https://github.com/prometheus-community/ansible/pull/241)"
+          (https://github.com/prometheus-community/ansible/pull/241)"
       trivial:
         - 'docs: fix alertmanager role name (https://github.com/prometheus-community/ansible/pull/240)'
         - 'docs: fix blackbox_exporter role name (https://github.com/prometheus-community/ansible/pull/239)'
@@ -255,14 +259,9 @@ releases:
     release_date: '2023-11-29'
   0.9.1:
     changes:
-      minor_changes:
-        - 'enhancement: Add time_intervals to AlertManager (https://github.com/prometheus-community/ansible/pull/251)'
+      bugfixes:
+        - 'fix: conditional statement jinja2 templating warning (https://github.com/prometheus-community/ansible/pull/266)'
+        - 'fix(mysqld_exporter): Change condition for mysqld_exporter_host check (https://github.com/prometheus-community/ansible/pull/270)'
       trivial:
-        - 'patch: New prometheus/memcached_exporter upstream release 0.14.1! (https://github.com/prometheus-community/ansible/pull/259)'
-        - 'patch: New prometheus/prometheus upstream release 2.48.1! (https://github.com/prometheus-community/ansible/pull/260)'
-        - 'patch: New prometheus/snmp_exporter upstream release 0.25.0! (https://github.com/prometheus-community/ansible/pull/261)'
+        - 'refactor: use range for supported ansible versions (https://github.com/prometheus-community/ansible/pull/117)'
     release_date: '2023-12-10'
-  0.10.0:
-    release_date: '2023-12-12'
-  0.10.1:
-    release_date: '2023-12-12'
