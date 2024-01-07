@@ -1,0 +1,47 @@
+---
+- name: Copy the ipmi_exporter systemd service file
+  ansible.builtin.template:
+    src: ipmi_exporter.service.j2
+    dest: /etc/systemd/system/ipmi_exporter.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart ipmi_exporter
+
+- name: Create ipmi_exporter config directory
+  ansible.builtin.file:
+    path: "/etc/ipmi_exporter"
+    state: directory
+    owner: root
+    group: root
+    mode: u+rwX,g+rwX,o=rX
+
+- name: Copy the ipmi_exporter web config file
+  ansible.builtin.template:
+    src: web_config.yaml.j2
+    dest: /etc/ipmi_exporter/web_config.yaml
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart ipmi_exporter
+
+- name: Copy the ipmi_exporter config file
+  ansible.builtin.template:
+    src: config.yaml.j2
+    dest: /etc/ipmi_exporter/config.yaml
+    owner: root
+    group: "{{ ipmi_exporter_system_group }}"
+    mode: 0640
+  no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
+  notify:
+    - restart ipmi_exporter
+
+- name: Allow ipmi_exporter port in SELinux on RedHat OS family
+  community.general.seport:
+    ports: "{{ ipmi_exporter_web_listen_address.split(':')[-1] }}"
+    proto: tcp
+    setype: http_port_t
+    state: present
+  when:
+    - ansible_version.full is version_compare('2.4', '>=')
+    - ansible_selinux.status == "enabled"

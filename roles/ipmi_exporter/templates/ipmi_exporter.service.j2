@@ -1,0 +1,38 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus ipmi_exporter
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ ipmi_exporter_system_user }}
+Group={{ ipmi_exporter_system_group }}
+ExecStart={{ ipmi_exporter_binary_install_dir }}/ipmi_exporter \
+    '--config.file=/etc/ipmi_exporter/config.yaml' \
+    '--web.listen-address={{ ipmi_exporter_web_listen_address }}' \
+{% if ipmi_exporter_tls_server_config | length > 0 or ipmi_exporter_http_server_config | length > 0 or ipmi_exporter_basic_auth_users | length > 0 %}
+    '--web.config.file=/etc/ipmi_exporter/web_config.yaml' \
+{% endif %}
+    '--log.level={{ ipmi_exporter_log_level }}' \
+    '--log.format={{ ipmi_exporter_log_format }}'
+
+SyslogIdentifier=ipmi_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+ProtectHome=yes
+NoNewPrivileges=yes
+
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target

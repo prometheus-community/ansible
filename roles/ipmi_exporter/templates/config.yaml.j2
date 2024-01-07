@@ -1,0 +1,4 @@
+---
+{{ ansible_managed | comment }}
+modules:
+{{ ipmi_exporter_modules | to_nice_yaml | indent(2, true) }}

@@ -1,0 +1,70 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus ipmi_exporter"
+    description:
+      - "Deploy prometheus L(ipmi exporter,https://github.com/prometheus-community/ipmi_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      ipmi_exporter_version:
+        description: "ipmi_exporter package version. Also accepts latest as parameter."
+        default: "0.14.2"
+      ipmi_exporter_skip_install:
+        description: "ipmi_exporter installation tasks gets skipped when set to true."
+        type: bool
+        default: false
+      ipmi_exporter_binary_local_dir:
+        description:
+          - "Enables the use of local packages instead of those distributed on github."
+          - "The parameter may be set to a directory where the C(ipmi_exporter) binary is stored on the host where ansible is run."
+          - "This overrides the I(ipmi_exporter_version) parameter"
+      ipmi_exporter_binary_url:
+        description: "URL of the ipmi_exporter binaries .tar.gz file"
+        default: "https://github.com/{{ _ipmi_exporter_repo }}/releases/download/v{{ ipmi_exporter_version }}/ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+      ipmi_exporter_checksums_url:
+        description: "URL of the ipmi_exporter checksums file"
+        default: "https://github.com/{{ _ipmi_exporter_repo }}/releases/download/v{{ ipmi_exporter_version }}/sha256sums.txt"
+      ipmi_exporter_modules:
+        description:
+          - "ipmi_exporter modules configuration"
+          - "https://github.com/prometheus-community/ipmi_exporter#configuration"
+        type: "dict"
+      ipmi_exporter_web_listen_address:
+        description: "Address on which ipmi exporter will listen"
+        default: "0.0.0.0:9290"
+      ipmi_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(ipmi_exporter docs,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)."
+        type: "dict"
+      ipmi_exporter_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(ipmi_exporter docs,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)."
+        type: "dict"
+      ipmi_exporter_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      ipmi_exporter_log_level:
+        description: "Only log messages with the given severity or above. One of: [debug, info, warn, error]"
+        default: "info"
+      ipmi_exporter_log_format:
+        description: "Output format of log messages. One of: [logfmt, json]"
+        default: "logfmt"
+      ipmi_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install ipmi_exporter binary"
+        default: "/usr/local/bin"
+      ipmi_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for ipmi_exporter"
+        default: "ipmi-exp"
+      ipmi_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "ipmi_exporter user"
+        default: "ipmi-exp"
