@@ -1,0 +1,34 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=cAdvisor cgroup/container metrics server
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ cadvisor_system_user }}
+Group={{ cadvisor_system_group }}
+ExecStart={{ cadvisor_binary_install_dir }}/cadvisor \
+    '--listen_ip={{ cadvisor_listen_ip }}' \
+    '--port={{ cadvisor_port }}' \
+    '--prometheus_endpoint={{ cadvisor_prometheus_endpoint }}'
+
+SyslogIdentifier=cadvisor
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+ProtectHome=yes
+NoNewPrivileges=yes
+
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target
