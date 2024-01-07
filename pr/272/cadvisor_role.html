@@ -188,19 +188,11 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <div class="ansibleOptionAnchor" id="parameter-main--cadvisor_binary_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-cadvisor-role-parameter-main-cadvisor-binary-url"><strong>cadvisor_binary_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--cadvisor_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>URL of the cadvisor binaries .tar.gz file</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_cadvisor_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">cadvisor_version</span> <span class="pre">}}/cadvisor-{{</span> <span class="pre">cadvisor_version</span> <span class="pre">}}.linux-{{</span> <span class="pre">go_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
+<td><div class="ansible-option-cell"><p>URL of the cadvisor binary file</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_cadvisor_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">cadvisor_version</span> <span class="pre">}}/cadvisor-{{</span> <span class="pre">cadvisor_version</span> <span class="pre">}}-linux-{{</span> <span class="pre">go_arch</span> <span class="pre">}}&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--cadvisor_checksums_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-cadvisor-role-parameter-main-cadvisor-checksums-url"><strong>cadvisor_checksums_url</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--cadvisor_checksums_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>URL of the cadvisor checksums file</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_cadvisor_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">cadvisor_version</span> <span class="pre">}}/sha256sums.txt&quot;</span></code></p>
-</div></td>
-</tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--cadvisor_listen_ip"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-cadvisor-role-parameter-main-cadvisor-listen-ip"><strong>cadvisor_listen_ip</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--cadvisor_listen_ip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -208,7 +200,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--cadvisor_port"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-cadvisor-role-parameter-main-cadvisor-port"><strong>cadvisor_port</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--cadvisor_port" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -216,7 +208,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;8080&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--cadvisor_prometheus_endpoint"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-cadvisor-role-parameter-main-cadvisor-prometheus-endpoint"><strong>cadvisor_prometheus_endpoint</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--cadvisor_prometheus_endpoint" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -224,7 +216,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/metrics&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--cadvisor_skip_install"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-cadvisor-role-parameter-main-cadvisor-skip-install"><strong>cadvisor_skip_install</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--cadvisor_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -236,7 +228,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--cadvisor_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-cadvisor-role-parameter-main-cadvisor-system-group"><strong>cadvisor_system_group</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--cadvisor_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -245,7 +237,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;root&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--cadvisor_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-cadvisor-role-parameter-main-cadvisor-system-user"><strong>cadvisor_system_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--cadvisor_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -254,7 +246,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;root&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--cadvisor_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-cadvisor-role-parameter-main-cadvisor-version"><strong>cadvisor_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--cadvisor_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
