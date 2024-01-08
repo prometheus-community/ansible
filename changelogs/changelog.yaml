@@ -57,8 +57,23 @@ releases:
     release_date: '2023-03-05'
   0.10.0:
     release_date: '2023-12-12'
+    changes:
+      minor_changes:
+        - 'enhancement: Add time_intervals to AlertManager (https://github.com/prometheus-community/ansible/pull/251)'
+      trivial:
+        - 'patch: New prometheus/snmp_exporter upstream release 0.25.0! (https://github.com/prometheus-community/ansible/pull/261)'
+        - 'patch: New prometheus/memcached_exporter upstream release 0.14.1! (https://github.com/prometheus-community/ansible/pull/259)'
+        - 'patch: New prometheus/prometheus upstream release 2.48.1! (https://github.com/prometheus-community/ansible/pull/260)'
   0.10.1:
     release_date: '2023-12-12'
+    changes:
+      bugfixes:
+        - 'fix(mysqld_exporter): Change condition for mysqld_exporter_host check (https://github.com/prometheus-community/ansible/pull/270)'
+        - 'fix: conditional statement jinja2 templating warning (https://github.com/prometheus-community/ansible/pull/266)'
+      trivial:
+        - 'refactor: use range for supported ansible versions (https://github.com/prometheus-community/ansible/pull/117)'
+        - 'patch: New prometheus/memcached_exporter upstream release 0.14.2! (https://github.com/prometheus-community/ansible/pull/269)'
+        - 'patch: New superq/chrony_exporter upstream release 0.7.0! (https://github.com/prometheus-community/ansible/pull/268)'
   0.2.0:
     changes:
       bugfixes:
