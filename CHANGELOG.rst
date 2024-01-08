@@ -5,11 +5,30 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.10.2
+=======
+
+Bugfixes
+--------
+
+- fix: empty changelog version `changes` sections (https://github.com/prometheus-community/ansible/pull/273)
+
 v0.10.1
 =======
 
+Bugfixes
+--------
+
+- fix(mysqld_exporter): Change condition for mysqld_exporter_host check (https://github.com/prometheus-community/ansible/pull/270)
+- fix: conditional statement jinja2 templating warning (https://github.com/prometheus-community/ansible/pull/266)
+
 v0.10.0
 =======
+
+Minor Changes
+-------------
+
+- enhancement: Add time_intervals to AlertManager (https://github.com/prometheus-community/ansible/pull/251)
 
 v0.9.1
 ======
