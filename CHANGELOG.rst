@@ -5,6 +5,19 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.11.0
+=======
+
+Minor Changes
+-------------
+
+- feat: Add cadvisor role (https://github.com/prometheus-community/ansible/pull/272)
+
+Bugfixes
+--------
+
+- fix: empty changelog version `changes` sections (https://github.com/prometheus-community/ansible/pull/273)
+
 v0.10.2
 =======
 
