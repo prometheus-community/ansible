@@ -1,0 +1,49 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "cAdvisor"
+    description:
+      - "Deploy L(cadvisor,https://github.com/google/cadvisor) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      cadvisor_version:
+        description: "cAdvisor package version. Also accepts latest as parameter."
+        default: "0.47.2"
+      cadvisor_skip_install:
+        description: "cAdvisor installation tasks gets skipped when set to true."
+        type: bool
+        default: false
+      cadvisor_binary_local_dir:
+        description:
+          - "Enables the use of local packages instead of those distributed on github."
+          - "The parameter may be set to a directory where the C(cadvisor) binary is stored on the host where ansible is run."
+          - "This overrides the I(cadvisor_version) parameter"
+      cadvisor_binary_url:
+        description: "URL of the cadvisor binary file"
+        default: "https://github.com/{{ _cadvisor_repo }}/releases/download/v{{ cadvisor_version }}/cadvisor-{{ cadvisor_version }}-linux-{{ go_arch }}"
+      cadvisor_listen_ip:
+        description: "Address on which cadvisor will listen"
+        default: "0.0.0.0"
+      cadvisor_port:
+        description: "Port on which cadvisor will listen"
+        default: "8080"
+      cadvisor_prometheus_endpoint:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      cadvisor_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install cadvisor binary"
+        default: "/usr/local/bin"
+      cadvisor_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for cadvisor"
+        default: "root"
+      cadvisor_system_user:
+        description:
+          - "I(Advanced)"
+          - "cAdvisor user"
+        default: "root"

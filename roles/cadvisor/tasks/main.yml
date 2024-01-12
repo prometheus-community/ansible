@@ -1,0 +1,63 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+    apply:
+      tags:
+        - cadvisor_install
+        - cadvisor_configure
+        - cadvisor_run
+  tags:
+    - cadvisor_install
+    - cadvisor_configure
+    - cadvisor_run
+
+- name: Install
+  ansible.builtin.include_tasks:
+    file: install.yml
+    apply:
+      become: true
+      tags:
+        - cadvisor_install
+  when:
+    ( not __cadvisor_is_installed.stat.exists ) or
+    ( (__cadvisor_current_version_output.stderr_lines | length > 0)
+      and ((__cadvisor_current_version_output.stderr_lines[0].split(" ")[2] | replace('v', '')) != cadvisor_version) ) or
+    ( (__cadvisor_current_version_output.stdout_lines | length > 0)
+      and ((__cadvisor_current_version_output.stdout_lines[0].split(" ")[2] | replace('v', '')) != cadvisor_version) ) or
+    ( cadvisor_binary_local_dir | length > 0 )
+  tags:
+    - cadvisor_install
+
+- name: SELinux
+  ansible.builtin.include_tasks:
+    file: selinux.yml
+    apply:
+      become: true
+      tags:
+        - cadvisor_configure
+  when: ansible_selinux.status == "enabled"
+  tags:
+    - cadvisor_configure
+
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yml
+    apply:
+      become: true
+      tags:
+        - cadvisor_configure
+  tags:
+    - cadvisor_configure
+
+- name: Ensure cAdvisor is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: cadvisor
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - cadvisor_run

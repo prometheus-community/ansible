@@ -1,0 +1,10 @@
+---
+- name: Restart cadvisor
+  listen: "restart cadvisor"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: cadvisor
+    state: restarted
+  when:
+    - not ansible_check_mode
