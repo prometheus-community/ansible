@@ -1,13 +1,18 @@
 ---
 ancestor:
 releases:
+  0.11.1:
+    changes:
+      trivial:
+        - 'patch: New prometheus/prometheus upstream release 2.49.0! (https://github.com/prometheus-community/ansible/pull/277)'
+    release_date: '2024-01-15'
   0.11.0:
     changes:
+      bugfixes:
+        - 'fix: empty changelog version `changes` sections (https://github.com/prometheus-community/ansible/pull/273)'
       minor_changes:
         - 'feat: Add cadvisor role (https://github.com/prometheus-community/ansible/pull/272)'
         - 'feat: Add ipmi_exporter role (https://github.com/prometheus-community/ansible/pull/271)'
-      bugfixes:
-        - 'fix: empty changelog version `changes` sections (https://github.com/prometheus-community/ansible/pull/273)'
       trivial:
         - 'patch: New superq/chrony_exporter upstream release 0.8.0! (https://github.com/prometheus-community/ansible/pull/275)'
     release_date: '2024-01-12'
