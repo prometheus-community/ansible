@@ -1,0 +1,10 @@
+---
+- name: Restart ipmi_exporter
+  listen: "restart ipmi_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: ipmi_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode
