@@ -12,6 +12,7 @@ Minor Changes
 -------------
 
 - feat: Add cadvisor role (https://github.com/prometheus-community/ansible/pull/272)
+- feat: Add ipmi_exporter role (https://github.com/prometheus-community/ansible/pull/271)
 
 Bugfixes
 --------
