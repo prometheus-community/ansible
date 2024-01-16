@@ -92,6 +92,9 @@ argument_specs:
       alertmanager_receivers:
         description: "A list of notification receivers. Configuration same as in L(official docs,https://prometheus.io/docs/alerting/configuration/#receiver)"
         type: "list"
+      alertmanager_time_intervals:
+        description: "A list of time intervals. Configuration same as in L(official docs,https://prometheus.io/docs/alerting/latest/configuration/#time_interval)"
+        type: "list"
       alertmanager_inhibit_rules:
         description: "List of inhibition rules. Same as in L(official docs,https://prometheus.io/docs/alerting/configuration/#inhibit_rule)"
         type: "list"

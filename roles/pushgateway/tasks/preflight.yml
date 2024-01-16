@@ -63,8 +63,8 @@
     - name: Assert that TLS key and cert are present
       ansible.builtin.assert:
         that:
-          - "{{ __pushgateway_cert_file.stat.exists }}"
-          - "{{ __pushgateway_key_file.stat.exists }}"
+          - "__pushgateway_cert_file.stat.exists"
+          - "__pushgateway_key_file.stat.exists"
 
 - name: Check if pushgateway is installed
   ansible.builtin.stat:
@@ -85,7 +85,7 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    pushgateway_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus/pushgateway/releases/latest', headers=_github_api_headers,
+    pushgateway_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _pushgateway_repo }}/releases/latest', headers=_github_api_headers,
                             split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
   until: pushgateway_version is version('0.0.0', '>=')

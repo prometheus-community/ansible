@@ -5,6 +5,57 @@ Prometheus.Prometheus Release Notes
 .. contents:: Topics
 
 
+v0.11.1
+=======
+
+v0.11.0
+=======
+
+Minor Changes
+-------------
+
+- feat: Add cadvisor role (https://github.com/prometheus-community/ansible/pull/272)
+- feat: Add ipmi_exporter role (https://github.com/prometheus-community/ansible/pull/271)
+
+Bugfixes
+--------
+
+- fix: empty changelog version `changes` sections (https://github.com/prometheus-community/ansible/pull/273)
+
+v0.10.2
+=======
+
+Bugfixes
+--------
+
+- fix: empty changelog version `changes` sections (https://github.com/prometheus-community/ansible/pull/273)
+
+v0.10.1
+=======
+
+Bugfixes
+--------
+
+- fix(mysqld_exporter): Change condition for mysqld_exporter_host check (https://github.com/prometheus-community/ansible/pull/270)
+- fix: conditional statement jinja2 templating warning (https://github.com/prometheus-community/ansible/pull/266)
+
+v0.10.0
+=======
+
+Minor Changes
+-------------
+
+- enhancement: Add time_intervals to AlertManager (https://github.com/prometheus-community/ansible/pull/251)
+
+v0.9.1
+======
+
+Bugfixes
+--------
+
+- fix(mysqld_exporter): Change condition for mysqld_exporter_host check (https://github.com/prometheus-community/ansible/pull/270)
+- fix: conditional statement jinja2 templating warning (https://github.com/prometheus-community/ansible/pull/266)
+
 v0.9.0
 ======
 
@@ -13,6 +64,13 @@ Minor Changes
 
 - enhancement: allows using multiple web listen addresses (https://github.com/prometheus-community/ansible/pull/213)
 - feat(blackbox_exporter): Create config directory (https://github.com/prometheus-community/ansible/pull/250)
+- feat: Add memcached_exporter role (https://github.com/prometheus-community/ansible/pull/256)
+- minor: Add ansible 2.16 support (https://github.com/prometheus-community/ansible/pull/255)
+
+Bugfixes
+--------
+
+- fix: Use repo var for preflight (https://github.com/prometheus-community/ansible/pull/258)
 
 v0.8.1
 ======
@@ -124,7 +182,7 @@ Bugfixes
 --------
 
 - fix: add "become: true" to snmp_exporter handlers (https://github.com/prometheus-community/ansible/pull/99)
-- fix: node_exporter - Fix Systemd ProtectHome option in service unit (https://github.com/prometheus-community/ansible/pull/94)
+- fix: node_exporter   - Fix Systemd ProtectHome option in service unit (https://github.com/prometheus-community/ansible/pull/94)
 - fix: pass token to github api for higher ratelimit (https://github.com/prometheus-community/ansible/pull/91)
 - fix: replace eol platforms with current (https://github.com/prometheus-community/ansible/pull/53)
 - fix: tags support for included tasks (https://github.com/prometheus-community/ansible/pull/87)

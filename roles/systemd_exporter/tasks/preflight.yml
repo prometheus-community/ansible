@@ -63,8 +63,8 @@
     - name: Assert that TLS key and cert are present
       ansible.builtin.assert:
         that:
-          - "{{ __systemd_exporter_cert_file.stat.exists }}"
-          - "{{ __systemd_exporter_key_file.stat.exists }}"
+          - "__systemd_exporter_cert_file.stat.exists"
+          - "__systemd_exporter_key_file.stat.exists"
 
 - name: Assert that systemd version is >= 235 when enabling ip accounting or measuring restart count
   ansible.builtin.assert:
@@ -98,7 +98,7 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    systemd_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus-community/systemd_exporter/releases/latest',
+    systemd_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _systemd_exporter_repo }}/releases/latest',
                                headers=_github_api_headers, split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
   until: systemd_exporter_version is version('0.0.0', '>=')

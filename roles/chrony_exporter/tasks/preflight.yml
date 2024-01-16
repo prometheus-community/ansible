@@ -69,8 +69,8 @@
     - name: Assert that TLS key and cert are present
       ansible.builtin.assert:
         that:
-          - "{{ __chrony_exporter_cert_file.stat.exists }}"
-          - "{{ __chrony_exporter_key_file.stat.exists }}"
+          - "__chrony_exporter_cert_file.stat.exists"
+          - "__chrony_exporter_key_file.stat.exists"
 
 - name: Check if chrony_exporter is installed
   ansible.builtin.stat:
@@ -91,7 +91,7 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    chrony_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/superq/chrony_exporter/releases/latest', headers=_github_api_headers,
+    chrony_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _chrony_exporter_repo }}/releases/latest', headers=_github_api_headers,
                             split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
   until: chrony_exporter_version is version('0.0.0', '>=')

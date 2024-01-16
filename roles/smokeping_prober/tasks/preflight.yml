@@ -63,8 +63,8 @@
     - name: Assert that TLS key and cert are present
       ansible.builtin.assert:
         that:
-          - "{{ __smokeping_prober_cert_file.stat.exists }}"
-          - "{{ __smokeping_prober_key_file.stat.exists }}"
+          - "__smokeping_prober_cert_file.stat.exists"
+          - "__smokeping_prober_key_file.stat.exists"
 
 - name: Check if smokeping_prober is installed
   ansible.builtin.stat:

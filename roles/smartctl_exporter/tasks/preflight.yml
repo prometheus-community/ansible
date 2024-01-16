@@ -58,8 +58,8 @@
     - name: Assert that TLS key and cert are present
       ansible.builtin.assert:
         that:
-          - "{{ __smartctl_exporter_cert_file.stat.exists }}"
-          - "{{ __smartctl_exporter_key_file.stat.exists }}"
+          - "__smartctl_exporter_cert_file.stat.exists"
+          - "__smartctl_exporter_key_file.stat.exists"
 
 - name: Check if smartctl_exporter is installed
   ansible.builtin.stat:
@@ -80,7 +80,7 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    smartctl_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus-community/smartctl_exporter/releases/latest', headers=_github_api_headers,
+    smartctl_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _smartctl_exporter_repo }}/releases/latest', headers=_github_api_headers,
                             split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
   until: smartctl_exporter_version is version('0.0.0', '>=')

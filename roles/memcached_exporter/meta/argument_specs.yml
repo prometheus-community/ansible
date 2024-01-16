@@ -1,0 +1,72 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus memcached_exporter"
+    description:
+      - "Deploy prometheus L(memcached exporter,https://github.com/prometheus/memcached_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      memcached_exporter_version:
+        description: "memcached_exporter package version. Also accepts latest as parameter."
+        default: "0.14.2"
+      memcached_exporter_skip_install:
+        description: "memcached_exporter installation tasks gets skipped when set to true."
+        type: bool
+        default: false
+      memcached_exporter_binary_local_dir:
+        description:
+          - "Enables the use of local packages instead of those distributed on github."
+          - "The parameter may be set to a directory where the C(memcached_exporter) binary is stored on the host where ansible is run."
+          - "This overrides the I(memcached_exporter_version) parameter"
+      memcached_exporter_binary_url:
+        description: "URL of the memcached_exporter binaries .tar.gz file"
+        default: "https://github.com/{{ _memcached_exporter_repo }}/releases/download/v{{ memcached_exporter_version }}/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+      memcached_exporter_checksums_url:
+        description: "URL of the memcached_exporter checksums file"
+        default: "https://github.com/{{ _memcached_exporter_repo }}/releases/download/v{{ memcached_exporter_version }}/sha256sums.txt"
+      memcached_exporter_web_listen_address:
+        description: "Address on which memcached exporter will listen"
+        default: "0.0.0.0:9150"
+      memcached_exporter_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      memcached_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(memcached_exporter docs,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)."
+        type: "dict"
+      memcached_exporter_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(memcached_exporter docs,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)."
+        type: "dict"
+      memcached_exporter_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      memcached_exporter_log_level:
+        description: "Only log messages with the given severity or above. One of: [debug, info, warn, error]"
+        default: "info"
+      memcached_exporter_log_format:
+        description: "Output format of log messages. One of: [logfmt, json]"
+        default: "logfmt"
+      memcached_exporter_memcached_pid_file:
+        description:
+          - "The path to the memcached PID file for process monitoring"
+        default: ""
+      memcached_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install memcached_exporter binary"
+        default: "/usr/local/bin"
+      memcached_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for memcached_exporter"
+        default: "memcached-exp"
+      memcached_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "memcached_exporter user"
+        default: "memcached-exp"

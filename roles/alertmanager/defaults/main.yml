@@ -64,7 +64,14 @@ alertmanager_receivers: []
 #     slack_configs:
 #       - send_resolved: true
 #         channel: '#alerts'
-
+alertmanager_time_intervals: []
+# alertmanager_time_intervals:
+#   - name: offhours
+#      time_intervals:
+#        - times:
+#            - start_time: "21:00"
+#              end_time: "24:00"
+#          location: "Africa/Johannesburg"
 alertmanager_inhibit_rules: []
 # alertmanager_inhibit_rules:
 #   - target_match:
