@@ -4,6 +4,7 @@ releases:
   0.11.2:
     changes:
       trivial:
+        - 'patch: New prometheus/pushgateway upstream release 1.7.0! (https://github.com/prometheus-community/ansible/pull/281)'
         - 'patch: New prometheus/prometheus upstream release 2.49.1! (https://github.com/prometheus-community/ansible/pull/278)'
     release_date: '2024-01-16'
   0.11.1:
