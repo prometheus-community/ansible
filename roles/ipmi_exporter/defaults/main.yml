@@ -1,5 +1,5 @@
 ---
-ipmi_exporter_version: 1.7.0
+ipmi_exporter_version: 1.8.0
 ipmi_exporter_binary_local_dir: ""
 ipmi_exporter_binary_url: "https://github.com/{{ _ipmi_exporter_repo }}/releases/download/v{{ ipmi_exporter_version }}/\
                            ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{ go_arch }}.tar.gz"
