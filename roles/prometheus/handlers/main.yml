@@ -6,6 +6,7 @@
     daemon_reload: true
     name: prometheus
     state: restarted
+  register: prometheus_restarted
 
 - name: Reload prometheus
   listen: "reload prometheus"
@@ -13,3 +14,4 @@
   ansible.builtin.systemd:
     name: prometheus
     state: reloaded
+  when: prometheus_restarted is not defined
