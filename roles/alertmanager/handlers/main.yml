@@ -6,6 +6,7 @@
     daemon_reload: true
     name: alertmanager
     state: restarted
+  register: alertmanager_restarted
 
 - name: Reload alertmanager
   listen: "reload alertmanager"
@@ -13,3 +14,4 @@
   ansible.builtin.systemd:
     name: alertmanager
     state: reloaded
+  when: alertmanager_restarted is not defined
