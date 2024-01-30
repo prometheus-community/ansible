@@ -8,6 +8,11 @@ Prometheus.Prometheus Release Notes
 v0.11.3
 =======
 
+Bugfixes
+--------
+
+- fix: Don't reload services when restarting (https://github.com/prometheus-community/ansible/pull/283)
+
 v0.11.2
 =======
 

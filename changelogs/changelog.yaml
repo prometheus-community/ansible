@@ -3,6 +3,8 @@ ancestor:
 releases:
   0.11.3:
     changes:
+      bugfixes:
+        - "fix: Don't reload services when restarting (https://github.com/prometheus-community/ansible/pull/283)"
       trivial:
         - 'patch: New prometheus-community/ipmi_exporter upstream release 1.8.0! (https://github.com/prometheus-community/ansible/pull/282)'
     release_date: '2024-01-24'
