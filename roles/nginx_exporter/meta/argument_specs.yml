@@ -10,7 +10,7 @@ argument_specs:
     options:
       nginx_exporter_version:
         description: "nginx_exporter package version. Also accepts latest as parameter."
-        default: "0.14.2"
+        default: "1.1.0"
       nginx_exporter_skip_install:
         description: "nginx_exporter installation tasks gets skipped when set to true."
         type: bool
