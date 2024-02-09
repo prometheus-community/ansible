@@ -15,6 +15,9 @@ ExecStart={{ nginx_exporter_binary_install_dir }}/nginx-prometheus-exporter \
 {% if nginx_exporter_tls_server_config | length > 0 or nginx_exporter_http_server_config | length > 0 or nginx_exporter_basic_auth_users | length > 0 %}
     '--web.config.file=/etc/nginx_exporter/web_config.yaml' \
 {% endif %}
+{% if nginx_exporter_plus %}
+    '--nginx.plus' \
+{% endif %}
     '--log.level={{ nginx_exporter_log_level }}' \
     '--log.format={{ nginx_exporter_log_format }}'
 

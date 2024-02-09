@@ -15,6 +15,10 @@ argument_specs:
         description: "nginx_exporter installation tasks gets skipped when set to true."
         type: bool
         default: false
+      nginx_exporter_plus:
+        description: "Start the exporter for NGINX Plus."
+        type: bool
+        default: false
       nginx_exporter_binary_local_dir:
         description:
           - "Enables the use of local packages instead of those distributed on github."
