@@ -30,10 +30,10 @@ def test_files(host):
 
 
 def test_user(host):
-    assert host.group("www-data").exists
-    assert "www-data" in host.user("www-data").groups
-    assert host.user("www-data").shell == "/usr/sbin/nologin"
-    assert host.user("www-data").home == "/"
+    assert host.group("nginx-exp").exists
+    assert "nginx-exp" in host.user("nginx-exp").groups
+    assert host.user("nginx-exp").shell == "/usr/sbin/nologin"
+    assert host.user("nginx-exp").home == "/"
 
 
 def test_service(host):

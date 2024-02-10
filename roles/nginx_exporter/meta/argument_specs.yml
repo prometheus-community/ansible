@@ -67,9 +67,9 @@ argument_specs:
         description:
           - "I(Advanced)"
           - "System group for nginx_exporter"
-        default: "nogroup"
+        default: "nginx-exp"
       nginx_exporter_system_user:
         description:
           - "I(Advanced)"
           - "nginx_exporter user"
-        default: "nobody"
+        default: "nginx-exp"
