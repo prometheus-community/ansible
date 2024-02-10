@@ -11,7 +11,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 @pytest.mark.parametrize("files", [
     "/etc/systemd/system/nginx_exporter.service",
-    "/usr/local/bin/nginx_exporter"
+    "/usr/local/bin/nginx-prometheus-exporter"
 ])
 def test_files(host, files):
     f = host.file(files)

@@ -3,7 +3,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        nginx_exporter_binary_local_dir: "/tmp/nginx_exporter-linux-amd64"
+        nginx_exporter_binary_local_dir: "/tmp/nginx_exporter-linux-amd64_local"
         nginx_exporter_web_listen_address: "127.0.0.1:9113"
 
         nginx_exporter_tls_server_config:

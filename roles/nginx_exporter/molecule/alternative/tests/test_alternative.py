@@ -39,7 +39,7 @@ def test_protecthome_property(host):
 
 def test_socket(host):
     sockets = [
-        "tcp://127.0.0.1:8080"
+        "tcp://127.0.0.1:9113"
     ]
     for socket in sockets:
         s = host.socket(socket)

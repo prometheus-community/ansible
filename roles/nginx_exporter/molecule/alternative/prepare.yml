@@ -6,9 +6,9 @@
     - name: Download nginx_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/{{ _nginx_exporter_repo }}/releases/download/v{{ nginx_exporter_version }}/\
-                nginx-prometheus-exporter-{{ nginx_exporter_version }}_linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp/nginx_exporter-{{ nginx_exporter_version }}_linux-{{ go_arch }}.tar.gz"
+        url: "https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v{{ nginx_exporter_version }}/\
+                nginx-prometheus-exporter_{{ nginx_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+        dest: "/tmp/nginx-prometheus-exporter_{{ nginx_exporter_version }}_linux_{{ go_arch }}.tar.gz"
         mode: 0644
       register: _download_binary
       until: _download_binary is succeeded
@@ -16,20 +16,18 @@
       delay: 2
       check_mode: false
 
+    - name: Create local directory for binary
+      ansible.builtin.file:
+        path: "{{ nginx_exporter_binary_local_dir }}"
+        state: directory
+        mode: '0755'
+
     - name: Unpack nginx_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/nginx_exporter-{{ nginx_exporter_version }}_linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp"
-        creates: "/tmp/nginx_exporter-{{ nginx_exporter_version }}_linux-{{ go_arch }}/nginx_exporter"
-      check_mode: false
-
-    - name: Link to nginx_exporter binaries directory
-      become: false
-      ansible.builtin.file:
-        src: "/tmp/nginx_exporter-{{ nginx_exporter_version }}_linux-amd64"
-        dest: "/tmp/nginx_exporter-linux-amd64"
-        state: link
+        src: "/tmp/nginx-prometheus-exporter_{{ nginx_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+        dest: "{{ nginx_exporter_binary_local_dir }}"
+        creates: "{{ nginx_exporter_binary_local_dir }}/nginx-prometheus-exporter"
       check_mode: false
 
     - name: Install pyOpenSSL for certificate generation
