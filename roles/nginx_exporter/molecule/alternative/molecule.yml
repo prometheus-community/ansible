@@ -1,0 +1,17 @@
+---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        nginx_exporter_binary_local_dir: "/tmp/nginx_exporter-linux-amd64_local"
+        nginx_exporter_web_listen_address: "127.0.0.1:9113"
+
+        nginx_exporter_tls_server_config:
+          cert_file: /etc/nginx_exporter/tls.cert
+          key_file: /etc/nginx_exporter/tls.key
+        nginx_exporter_http_server_config:
+          http2: true
+        nginx_exporter_basic_auth_users:
+          randomuser: examplepassword
+        go_arch: amd64
+        nginx_exporter_version: 1.1.0
