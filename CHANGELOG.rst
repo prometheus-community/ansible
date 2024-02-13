@@ -4,6 +4,24 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.12.0
+=======
+
+Minor Changes
+-------------
+
+- feat: Add nginx_exporter role (https://github.com/prometheus-community/ansible/pull/287)
+
+v0.11.3
+=======
+
+Bugfixes
+--------
+
+- fix: Don't reload services when restarting (https://github.com/prometheus-community/ansible/pull/283)
+
+v0.11.2
+=======
 
 v0.11.1
 =======
