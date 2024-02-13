@@ -1,0 +1,91 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus PostgreSQL Exporter"
+    description:
+      - "Deploy prometheus L(postgres_exporter,https://github.com/prometheus-community/postgres_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      postgres_exporter_version:
+        description: "PostgreSQL exporter package version. Also accepts latest as parameter."
+        default: "0.15.0"
+      postgres_exporter_skip_install:
+        description: "PostgreSQL installation tasks gets skipped when set to true."
+        type: bool
+        default: false
+      postgres_exporter_binary_local_dir:
+        description:
+          - "Enables the use of local packages instead of those distributed on github."
+          - "The parameter may be set to a directory where the C(postgres_exporter) binary is stored on the host where ansible is run."
+          - "This overrides the I(postgres_exporter_version) parameter"
+      postgres_exporter_binary_url:
+        description: "URL of the postgres_exporter binaries .tar.gz file"
+        default: "https://github.com/{{ _postgres_exporter_repo }}/download/v{{ postgres_exporter_version }}/postgres_exporter-{{ postgres_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+      postgres_exporter_checksums_url:
+        description: "URL of the postgres_exporter checksums file"
+        default: "https://github.com/{{ _postgres_exporter_repo }}/releases/download/v{{ postgres_exporter_version }}/sha256sums.txt"
+      postgres_exporter_web_listen_address:
+        description: "Address on which postgres_exporter will listen"
+        default: "0.0.0.0:9187"
+      postgres_exporter_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      postgres_exporter_config_dir:
+        description: "The path where exporter configuration is stored"
+        default: "/etc/postgres_exporter"
+      postgres_exporter_config_file:
+        description: "The filename of the postgres exporter config file"
+        default: "/etc/postgres_exporter/postgres_exporter.yml"
+      postgres_exporter_name:
+        description: "The target PostgreSQL L(URI, https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS)"
+        default: "postgresql:///postgres?host=/var/run/postgresql"
+      postgres_exporter_uri:
+        description: "The target PostgreSQL, alternative format, single target only is supported. You should set postgres_exporter_name to empty string to use it. Read more L(here,https://github.com/prometheus-community/postgres_exporter?tab=readme-ov-file#environment-variables)"
+      postgres_exporter_username:
+        description: "The username for PostgreSQL login, required for postgres_exporter_uri"
+        default: "exporter"
+      postgres_exporter_password:
+        description: "The password for PostgreSQL password, required for postgres_exporter_uri"
+        default: "secret"
+      postgres_exporter_enabled_collectors:
+        description:
+          - "List of dicts defining additionally enabled collectors and their configuration."
+          - "It adds collectors to L(those enabled by default,https://github.com/prometheus-community/postgres_exporter?tab=readme-ov-file#flags)."
+        type: "list"
+        default: []
+      postgres_exporter_disabled_collectors:
+        description:
+          - "List of disabled collectors."
+          - "By default postgres_exporter disables collectors listed L(here,https://github.com/prometheus-community/postgres_exporter?tab=readme-ov-file#flags)."
+        type: "list"
+        elements: "str"
+      postgres_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(prometheus docs,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)."
+        type: "dict"
+      postgres_exporter_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(prometheus docs,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)."
+        type: "dict"
+      postgres_exporter_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      postgres_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install postgres_exporter binary"
+        default: "/usr/local/bin"
+      postgres_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for PostgreSQL Exporter"
+        default: "postgres-exp"
+      postgres_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "PostgreSQL Exporter user"
+        default: "postgres-exp"

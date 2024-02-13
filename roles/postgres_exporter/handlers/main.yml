@@ -1,0 +1,10 @@
+---
+- name: Restart postgres_exporter
+  listen: "restart postgres_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: postgres_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode
