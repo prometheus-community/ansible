@@ -12,9 +12,9 @@ postgres_exporter_web_telemetry_path: "/metrics"
 postgres_exporter_config_file: "postgres_exporter.yml"
 
 postgres_exporter_name: "postgresql:///postgres?host=/var/run/postgresql"
-# postgres_exporter_uri: "localhost?sslmode=disable"
-# postgres_exporter_username: 
-# postgres_exporter_passpassword: 
+postgres_exporter_uri: ""
+postgres_exporter_username: ""
+postgres_exporter_password: ""
 
 postgres_exporter_tls_server_config: {}
 

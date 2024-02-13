@@ -25,24 +25,33 @@
     mode: '0640'
   # no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   notify: restart postgres_exporter
-- block:
+- name: Configure via URI
+  when: postgres_exporter_uri | length > 0
+  block:
     - name: Creating file postgres_exporter_uri
-      copy:
+      ansible.builtin.copy:
         dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_uri"
         content: "{{ postgres_exporter_uri }}"
+        owner: root
+        group: '{{ postgres_exporter_system_group }}'
+        mode: '0640'
       notify: restart postgres_exporter
     - name: Creating file postgres_exporter_user
-      copy:
+      ansible.builtin.copy:
         dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_user"
         content: "{{ postgres_exporter_username }}"
+        owner: root
+        group: '{{ postgres_exporter_system_group }}'
+        mode: '0640'
       notify: restart postgres_exporter
     - name: Creating file postgres_exporter_pass
-      copy:
+      ansible.builtin.copy:
         dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_pass"
         content: "{{ postgres_exporter_password }}"
+        owner: root
+        group: '{{ postgres_exporter_system_group }}'
+        mode: '0640'
       notify: restart postgres_exporter
-  when:
-    - postgres_exporter_uri is defined
 
 - name: Configure postgres_exporter web config
   when:

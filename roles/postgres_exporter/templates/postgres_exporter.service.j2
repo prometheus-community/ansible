@@ -8,7 +8,7 @@ After=network-online.target
 Type=simple
 User={{ postgres_exporter_system_user }}
 Group={{ postgres_exporter_system_group }}
-{% if postgres_exporter_name is defined and postgres_exporter_name !="" %}
+{% if postgres_exporter_name | length > 0 %}
 Environment=DATA_SOURCE_NAME={{ postgres_exporter_name}}
 {% elif postgres_exporter_uri is defined %}
 Environment=DATA_SOURCE_URI_FILE={{ postgres_exporter_config_dir }}/postgres_exporter_uri
