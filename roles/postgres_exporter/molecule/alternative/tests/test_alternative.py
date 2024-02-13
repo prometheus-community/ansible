@@ -23,8 +23,8 @@ def test_service(host):
 
 
 @pytest.mark.parametrize("sockets", [
-    "tcp://127.0.0.1:9187",
-    "tcp://127.0.1.1:9187",
+    "tcp://127.0.0.1:8080",
+    "tcp://127.0.1.1:8080",
 ])
 def test_socket(host, sockets):
     assert host.socket(sockets).is_listening
