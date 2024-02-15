@@ -33,6 +33,7 @@
     - "{{ prometheus_config_dir }}"
     - "{{ prometheus_config_dir }}/rules"
     - "{{ prometheus_config_dir }}/file_sd"
+    - "{{ prometheus_config_dir }}/scrapes"
 
 - name: Get prometheus binary
   when:
