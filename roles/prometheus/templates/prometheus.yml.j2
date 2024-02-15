@@ -34,3 +34,8 @@ alerting:
 
 scrape_configs:
   {{ prometheus_scrape_configs | to_nice_yaml(indent=2,sort_keys=False) | indent(2,False) }}
+
+{% if prometheus_scrape_config_files != [] %}
+scrape_config_files:
+  - scrapes/*
+{% endif %}

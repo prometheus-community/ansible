@@ -150,6 +150,14 @@ argument_specs:
         default:
           - "prometheus/targets/*.yml"
           - "prometheus/targets/*.json"
+      prometheus_scrape_config_files:
+        description:
+          - "List of folders where ansible will look for files containing custom scrape config configuration files which will be copied to C({{ prometheus_config_dir }}/scrapes/)."
+        type: "list"
+        elements: "str"
+        default:
+          - "prometheus/scrapes/*.yml"
+          - "prometheus/scrapes/*.json"
       prometheus_system_group:
         description:
           - "System group for Prometheus."

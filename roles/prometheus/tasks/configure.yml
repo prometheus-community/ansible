@@ -70,3 +70,13 @@
     group: "{{ prometheus_system_group }}"
     mode: 0640
   with_fileglob: "{{ prometheus_static_targets_files }}"
+
+- name: Copy prometheus scrape config files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ prometheus_config_dir }}/scrapes/"
+    force: true
+    owner: root
+    group: prometheus
+    mode: 0640
+  with_fileglob: "{{ prometheus_scrape_config_files }}"
