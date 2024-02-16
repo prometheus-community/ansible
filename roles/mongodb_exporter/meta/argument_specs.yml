@@ -22,7 +22,7 @@ argument_specs:
           - "This overrides the I(mongodb_exporter_version) parameter"
       mongodb_exporter_binary_url:
         description: "URL of the mongodb_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"                  
+        default: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
       mongodb_exporter_checksums_url:
         description: "URL of the mongodb_exporter checksums file"
         default: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/mongodb_exporter_{{ mongodb_exporter_version }}_checksums.txt"
@@ -57,8 +57,9 @@ argument_specs:
       mongodb_exporter_uri:
         description: "MongoDB connection URI"
         required: true
+        type: "str"
       mongodb_exporter_collectors:
-        description: 
+        description:
           - "List collectors from L(documantation, https://github.com/percona/mongodb_exporter/blob/main/REFERENCE.md)."
           - "You can specify 'all' to enable all collectors"
       mongodb_exporter_collstats_colls:
