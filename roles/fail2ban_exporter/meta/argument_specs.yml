@@ -1,0 +1,40 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus fail2ban_exporter"
+    description:
+      - "Deploy prometheus L(fail2ban exporter,https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      fail2ban_exporter_version:
+        description: "fail2ban_exporter package version. Also accepts latest as parameter."
+        default: "0.10.1"
+      fail2ban_exporter_skip_install:
+        description: "fail2ban_exporter installation tasks gets skipped when set to true."
+        type: bool
+        default: false
+      fail2ban_exporter_binary_local_dir:
+        description:
+          - "Enables the use of local packages instead of those distributed on gitlab."
+          - "The parameter may be set to a directory where the C(fail2ban_exporter) binary is stored on the host where ansible is run."
+          - "This overrides the I(fail2ban_exporter_version) parameter"
+      fail2ban_exporter_binary_url:
+        description: "URL of the fail2ban_exporter binaries .tar.gz file"
+        default: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+      fail2ban_exporter_checksums_url:
+        description: "URL of the fail2ban_exporter checksums file"
+        default: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/fail2ban_exporter_{{ fail2ban_exporter_version }}_checksums.txt"
+      fail2ban_exporter_web_listen_address:
+        description: "Address on which fail2ban exporter will listen"
+        default: "0.0.0.0:9191"
+      fail2ban_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install fail2ban_exporter binary"
+        default: "/usr/local/bin"
+      fail2ban_exporter_socket:
+        description:
+          - "Path to the fail2ban server socket"
+        default: "/var/run/fail2ban/fail2ban.sock"
