@@ -109,7 +109,7 @@ argument_specs:
         description:
           - "I(Advanced)"
           - "System group for mongodb_exporter"
-        default: "nogroup"
+        default: "mongodb-exp"
       mongodb_exporter_system_user:
         description:
           - "I(Advanced)"

@@ -6,7 +6,7 @@
     - name: Download mongodb_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/\
+        url: "https://github.com/percona/mongodb_exporter/releases/download/v{{ mongodb_exporter_version }}/\
               mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         mode: 0644
