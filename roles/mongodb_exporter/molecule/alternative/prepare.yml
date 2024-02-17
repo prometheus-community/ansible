@@ -23,7 +23,7 @@
         dest: "/tmp"
         creates: "/tmp/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}/mongodb_exporter"
       check_mode: false
-    
+
     - name: Link to mongodb_exporter binaries directory
       become: false
       ansible.builtin.file:
