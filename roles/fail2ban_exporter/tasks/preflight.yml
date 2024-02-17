@@ -56,7 +56,7 @@
 - name: Discover latest version
   ansible.builtin.set_fact:
     fail2ban_exporter_version: "{{ (lookup('url', 'https://gitlab.com/api/v4/projects/{{ _gitlab_projectid }}/releases',
-                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+                            split_lines=False) | from_json)[0].get('tag_name') | replace('v', '') }}"
   run_once: true
   until: fail2ban_exporter_version is version('0.0.0', '>=')
   retries: 10
