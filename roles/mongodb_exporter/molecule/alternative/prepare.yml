@@ -16,18 +16,20 @@
       delay: 2
       check_mode: false
 
-    - name: Create local directory for binary
-      ansible.builtin.file:
-        path: "{{ mongodb_exporter_binary_local_dir }}"
-        state: directory
-        mode: '0755'
-
     - name: Unpack mongodb_exporter binary
       become: false
       ansible.builtin.unarchive:
         src: "/tmp/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "/tmp"
+        creates: "/tmp/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}/mongodb_exporter"
+      check_mode: false
+    
+    - name: Link to mongodb_exporter binaries directory
+      become: false
+      ansible.builtin.file:
+        src: "/tmp/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}"
         dest: "{{ mongodb_exporter_binary_local_dir }}"
-        creates: "{{ mongodb_exporter_binary_local_dir }}/mongodb_exporter"
+        state: link
       check_mode: false
 
     - name: Install pyOpenSSL for certificate generation

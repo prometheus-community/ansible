@@ -30,8 +30,8 @@ def test_files(host):
 
 
 def test_user(host):
-    assert host.group("nogroup").exists
-    assert "nogroup" in host.user("mongodb-exp").groups
+    assert host.group("mongodb-exp").exists
+    assert "mongodb-exp" in host.user("mongodb-exp").groups
     assert host.user("mongodb-exp").shell == "/usr/sbin/nologin"
     assert host.user("mongodb-exp").home == "/"
 

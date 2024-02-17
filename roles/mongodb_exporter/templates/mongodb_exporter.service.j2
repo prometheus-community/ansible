@@ -62,8 +62,21 @@ ExecStart={{ mongodb_exporter_binary_install_dir }}/mongodb_exporter \
     --mongodb.uri={{ mongodb_exporter_uri }}
 
 SyslogIdentifier=mongodb_exporter
-
 Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+ProtectHome=yes
+NoNewPrivileges=yes
+
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
 
 [Install]
 WantedBy=multi-user.target
