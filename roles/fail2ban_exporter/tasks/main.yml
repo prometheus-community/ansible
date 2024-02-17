@@ -22,9 +22,9 @@
   when:
     ( not __fail2ban_exporter_is_installed.stat.exists ) or
     ( (__fail2ban_exporter_current_version_output.stderr_lines | length > 0)
-      and (__fail2ban_exporter_current_version_output.stderr_lines[0].split(" ")[2] != fail2ban_exporter_version) ) or
+      and (__fail2ban_exporter_current_version_output.stderr_lines[0] != fail2ban_exporter_version) ) or
     ( (__fail2ban_exporter_current_version_output.stdout_lines | length > 0)
-      and (__fail2ban_exporter_current_version_output.stdout_lines[0].split(" ")[2] != fail2ban_exporter_version) ) or
+      and (__fail2ban_exporter_current_version_output.stdout_lines[0] != fail2ban_exporter_version) ) or
     ( fail2ban_exporter_binary_local_dir | length > 0 )
   tags:
     - fail2ban_exporter_install
