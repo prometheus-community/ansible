@@ -38,3 +38,11 @@ argument_specs:
         description:
           - "Path to the fail2ban server socket"
         default: "/var/run/fail2ban/fail2ban.sock"
+      fail2ban_exporter_username:
+        description:
+          - "I(Advanced)"
+          - "Username to use to protect endpoints with basic auth"
+      fail2ban_exporter_password:
+        description:
+          - "I(Advanced)"
+          - "Password to use to protect endpoints with basic auth"
