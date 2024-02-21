@@ -17,9 +17,9 @@
     mode: u+rwX,g+rwX,o=rX
 
 - name: Copy the passwords file
-  ansible.builtin.template:
-    src: passwords.json.j2
+  ansible.builtin.copy:
     dest: /etc/redis_exporter/passwords.json
+    content: "{{ redis_exporter_passwords | to_json(indent=2, sort_keys=True) }}"
     owner: root
     group: root
     mode: 0644

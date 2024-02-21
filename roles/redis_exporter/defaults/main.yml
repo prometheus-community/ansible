@@ -10,7 +10,7 @@ redis_exporter_skip_install: false
 redis_exporter_addr: "redis://localhost:6379"
 redis_exporter_user: ""
 redis_exporter_password: ""
-redis_exporter_passwords: []
+redis_exporter_passwords: {}
 redis_exporter_check_keys: []
 redis_exporter_check_single_keys: []
 redis_exporter_check_streams: []
