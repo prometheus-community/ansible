@@ -60,7 +60,7 @@
   tasks:
     - name: Create redis_exporter cert dir
       ansible.builtin.file:
-        path: "{{ redis_exporter_tls_server_config.cert_file | dirname }}"
+        path: "{{ redis_exporter_tls_server_cert_file | dirname }}"
         state: directory
         owner: root
         group: root
@@ -73,6 +73,6 @@
         mode: "{{ item.mode | default('0644') }}"
       loop:
         - src: "/tmp/tls.cert"
-          dest: "{{ redis_exporter_tls_server_config.cert_file }}"
+          dest: "{{ redis_exporter_tls_server_cert_file }}"
         - src: "/tmp/tls.key"
-          dest: "{{ redis_exporter_tls_server_config.key_file }}"
+          dest: "{{ redis_exporter_tls_server_key_file }}"
