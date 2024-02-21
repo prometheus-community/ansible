@@ -6,7 +6,7 @@
     - name: Download redis_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus/redis_exporter/releases/download/v{{\
+        url: "https://github.com/oliver006/redis_exporter/releases/download/v{{\
           \ redis_exporter_version }}/redis_exporter-v{{ redis_exporter_version }}.linux-{{\
           \ go_arch }}.tar.gz"
         dest: "/tmp/redis_exporter-v{{ redis_exporter_version }}.linux-{{ go_arch }}.tar.gz"
