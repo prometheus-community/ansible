@@ -36,7 +36,7 @@ argument_specs:
         description: "Password of the Redis instance"
         default: ""
       redis_exporter_passwords:
-        description: 
+        description:
           - "List of dictionaries with 'addr' and 'password' values."
           - "Read more official (documentation, https://github.com/oliver006/redis_exporter?tab=readme-ov-file#authenticating-with-redis)"
         type: "list"
@@ -163,7 +163,7 @@ argument_specs:
         default: 100
       redis_exporter_config_command:
         description: "What to use for the CONFIG command"
-        default: "CONFIG"      
+        default: "CONFIG"
       redis_exporter_binary_install_dir:
         description:
           - "I(Advanced)"
