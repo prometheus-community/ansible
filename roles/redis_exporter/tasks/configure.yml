@@ -1,0 +1,37 @@
+---
+- name: Copy the redis_exporter systemd service file
+  ansible.builtin.template:
+    src: redis_exporter.service.j2
+    dest: /etc/systemd/system/redis_exporter.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart redis_exporter
+
+- name: Create redis_exporter config directory
+  ansible.builtin.file:
+    path: "/etc/redis_exporter"
+    state: directory
+    owner: root
+    group: root
+    mode: u+rwX,g+rwX,o=rX
+
+- name: Copy the passwords file
+  ansible.builtin.copy:
+    dest: /etc/redis_exporter/passwords.json
+    content: "{{ redis_exporter_passwords | to_json(indent=2, sort_keys=True) }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart redis_exporter
+  when: redis_exporter_passwords | length > 0
+
+- name: Allow redis_exporter port in SELinux on RedHat OS family
+  community.general.seport:
+    ports: "{{ redis_exporter_web_listen_address.split(':')[-1] }}"
+    proto: tcp
+    setype: http_port_t
+    state: present
+  when:
+    - ansible_version.full is version_compare('2.4', '>=')
+    - ansible_selinux.status == "enabled"

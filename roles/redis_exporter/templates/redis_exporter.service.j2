@@ -1,0 +1,73 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus redis_exporter
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ redis_exporter_system_user }}
+Group={{ redis_exporter_system_group }}
+
+Environment="REDIS_ADDR={{ redis_exporter_addr }}"
+Environment="REDIS_USER={{ redis_exporter_user }}"
+Environment="REDIS_PASSWORD={{ redis_exporter_password }}"
+{% if redis_exporter_passwords | length > 0 -%}
+Environment="REDIS_PASSWORD_FILE=/etc/redis_exporter/passwords.json"
+{% endif -%}
+Environment="REDIS_EXPORTER_CHECK_KEYS={{ redis_exporter_check_keys | join(',') }}"
+Environment="REDIS_EXPORTER_CHECK_SINGLE_KEYS={{ redis_exporter_check_single_keys | join(',') }}"
+Environment="REDIS_EXPORTER_CHECK_STREAMS={{ redis_exporter_check_streams | join(',') }}"
+Environment="REDIS_EXPORTER_CHECK_SINGLE_STREAMS={{ redis_exporter_check_single_streams | join(',') }}"
+Environment="REDIS_EXPORTER_CHECK_KEYS_BATCH_SIZE={{ redis_exporter_check_keys_batch_size }}"
+Environment="REDIS_EXPORTER_COUNT_KEYS={{ redis_exporter_count_keys | join(',') }}"
+Environment="REDIS_EXPORTER_SCRIPT={{ redis_exporter_script | join(',') }}"
+Environment="REDIS_EXPORTER_DEBUG={{ redis_exporter_debug }}"
+Environment="REDIS_EXPORTER_LOG_FORMAT={{ redis_exporter_log_format }}"
+Environment="REDIS_EXPORTER_NAMESPACE={{ redis_exporter_namespace }}"
+Environment="REDIS_EXPORTER_CONNECTION_TIMEOUT={{ redis_exporter_connection_timeout }}"
+Environment="REDIS_EXPORTER_WEB_LISTEN_ADDRESS={{ redis_exporter_web_listen_address }}"
+Environment="REDIS_EXPORTER_WEB_TELEMETRY_PATH={{ redis_exporter_web_telemetry_path }}"
+Environment="REDIS_EXPORTER_REDIS_ONLY_METRICS={{ redis_exporter_redis_only_metrics }}"
+Environment="REDIS_EXPORTER_INCL_CONFIG_METRICS={{ redis_exporter_incl_config_metrics }}"
+Environment="REDIS_EXPORTER_INCL_SYSTEM_METRICS={{ redis_exporter_incl_system_metrics }}"
+Environment="REDIS_EXPORTER_REDACT_CONFIG_METRICS={{ redis_exporter_redact_config_metrics }}"
+Environment="REDIS_EXPORTER_PING_ON_CONNECT={{ redis_exporter_ping_on_connect }}"
+Environment="REDIS_EXPORTER_IS_TILE38={{ redis_exporter_is_tile38 }}"
+Environment="REDIS_EXPORTER_IS_CLUSTER={{ redis_exporter_is_cluster }}"
+Environment="REDIS_EXPORTER_EXPORT_CLIENT_LIST={{ redis_exporter_export_client_list }}"
+Environment="REDIS_EXPORTER_EXPORT_CLIENT_PORT={{ redis_exporter_export_client_port }}"
+Environment="REDIS_EXPORTER_SKIP_TLS_VERIFICATION={{ redis_exporter_skip_tls_verification }}"
+Environment="REDIS_EXPORTER_TLS_CLIENT_KEY_FILE={{ redis_exporter_tls_client_key_file }}"
+Environment="REDIS_EXPORTER_TLS_CLIENT_CERT_FILE={{ redis_exporter_tls_client_cert_file }}"
+Environment="REDIS_EXPORTER_TLS_SERVER_KEY_FILE={{ redis_exporter_tls_server_key_file }}"
+Environment="REDIS_EXPORTER_TLS_SERVER_CERT_FILE={{ redis_exporter_tls_server_cert_file }}"
+Environment="REDIS_EXPORTER_TLS_SERVER_CA_CERT_FILE={{ redis_exporter_tls_server_ca_cert_file }}"
+Environment="REDIS_EXPORTER_TLS_SERVER_MIN_VERSION={{ redis_exporter_tls_server_min_version }}"
+Environment="REDIS_EXPORTER_TLS_CA_CERT_FILE={{ redis_exporter_tls_ca_cert_file }}"
+Environment="REDIS_EXPORTER_SET_CLIENT_NAME={{ redis_exporter_set_client_name }}"
+Environment="REDIS_EXPORTER_CHECK_KEY_GROUPS={{ redis_exporter_check_key_groups | join(',') }}"
+Environment="REDIS_EXPORTER_MAX_DISTINCT_KEY_GROUPS={{ redis_exporter_max_distinct_key_groups }}"
+Environment="REDIS_EXPORTER_CONFIG_COMMAND={{ redis_exporter_config_command }}"
+
+ExecStart={{ redis_exporter_binary_install_dir }}/redis_exporter
+
+SyslogIdentifier=redis_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+ProtectHome=yes
+NoNewPrivileges=yes
+
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target

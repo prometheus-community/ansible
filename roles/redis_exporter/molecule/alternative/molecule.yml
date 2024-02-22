@@ -1,0 +1,13 @@
+---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        redis_exporter_binary_local_dir: "/tmp/redis_exporter-linux-amd64"
+        redis_exporter_web_listen_address: "127.0.0.1:8080"
+
+        redis_exporter_tls_server_ca_cert_file: /etc/redis_exporter/tls.cert
+        redis_exporter_tls_server_cert_file: /etc/redis_exporter/tls.cert
+        redis_exporter_tls_server_key_file: /etc/redis_exporter/tls.key
+        go_arch: amd64
+        redis_exporter_version: 1.58.0
