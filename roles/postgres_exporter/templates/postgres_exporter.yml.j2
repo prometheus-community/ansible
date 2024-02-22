@@ -1,0 +1,15 @@
+{{ ansible_managed | comment }}
+
+{% if postgres_exporter_uri is defined %}
+auth_modules:
+  foo1: # Set this to any name you want
+    type: userpass
+    userpass:
+      username: {{ postgres_exporter_username }}
+      password: {{ postgres_exporter_password }}
+    options:
+      # options become key=value parameters of the DSN
+      sslmode: disable
+{% else %}
+auth_modules: {}
+{% endif %}

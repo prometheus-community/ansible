@@ -1,0 +1,79 @@
+---
+- name: Copy the postgres_exporter systemd service file
+  ansible.builtin.template:
+    src: postgres_exporter.service.j2
+    dest: /etc/systemd/system/postgres_exporter.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart postgres_exporter
+
+- name: Create postgres_exporter config directory
+  ansible.builtin.file:
+    path: "{{ postgres_exporter_config_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: u+rwX,g+rwX,o=rX
+
+- name: Create postgres_exporter.yml
+  ansible.builtin.template:
+    src: postgres_exporter.yml.j2
+    dest: "{{ postgres_exporter_config_dir }}/{{ postgres_exporter_config_file }}"
+    owner: root
+    group: '{{ postgres_exporter_system_group }}'
+    mode: '0640'
+  # no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
+  notify: restart postgres_exporter
+- name: Configure via URI
+  when: postgres_exporter_uri | length > 0
+  block:
+    - name: Creating file postgres_exporter_uri
+      ansible.builtin.copy:
+        dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_uri"
+        content: "{{ postgres_exporter_uri }}"
+        owner: root
+        group: '{{ postgres_exporter_system_group }}'
+        mode: '0640'
+      notify: restart postgres_exporter
+    - name: Creating file postgres_exporter_user
+      ansible.builtin.copy:
+        dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_user"
+        content: "{{ postgres_exporter_username }}"
+        owner: root
+        group: '{{ postgres_exporter_system_group }}'
+        mode: '0640'
+      notify: restart postgres_exporter
+    - name: Creating file postgres_exporter_pass
+      ansible.builtin.copy:
+        dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_pass"
+        content: "{{ postgres_exporter_password }}"
+        owner: root
+        group: '{{ postgres_exporter_system_group }}'
+        mode: '0640'
+      notify: restart postgres_exporter
+
+- name: Configure postgres_exporter web config
+  when:
+    ( postgres_exporter_tls_server_config | length > 0 ) or
+    ( postgres_exporter_http_server_config | length > 0 ) or
+    ( postgres_exporter_basic_auth_users | length > 0 )
+  block:
+    - name: Copy the postgres_exporter web config file
+      ansible.builtin.template:
+        src: web_config.yaml.j2
+        dest: "{{ postgres_exporter_config_dir }}/web_config.yaml"
+        owner: root
+        group: '{{ postgres_exporter_system_group }}'
+        mode: '0640'
+      notify: restart postgres_exporter
+
+- name: Allow postgres_exporter port in SELinux on RedHat OS family
+  community.general.seport:
+    ports: "{{ postgres_exporter_web_listen_address.split(':')[-1] }}"
+    proto: tcp
+    setype: http_port_t
+    state: present
+  when:
+    - ansible_version.full is version_compare('2.4', '>=')
+    - ansible_selinux.status == "enabled"

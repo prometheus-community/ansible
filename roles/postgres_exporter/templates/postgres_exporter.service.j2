@@ -1,0 +1,75 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus PostgreSQL Exporter
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ postgres_exporter_system_user }}
+Group={{ postgres_exporter_system_group }}
+{% if postgres_exporter_name | length > 0 %}
+Environment=DATA_SOURCE_NAME={{ postgres_exporter_name}}
+{% elif postgres_exporter_uri is defined %}
+Environment=DATA_SOURCE_URI_FILE={{ postgres_exporter_config_dir }}/postgres_exporter_uri
+{% if postgres_exporter_username is defined %}
+Environment=DATA_SOURCE_USER_FILE={{ postgres_exporter_config_dir }}/postgres_exporter_user
+{% endif %}
+{% if postgres_exporter_password is defined %}
+Environment=DATA_SOURCE_PASS_FILE={{ postgres_exporter_config_dir }}/postgres_exporter_pass
+{% endif %}{% endif %}
+ExecStart={{ postgres_exporter_binary_install_dir }}/postgres_exporter \
+{% for collector in postgres_exporter_enabled_collectors -%}
+{%   if not collector is mapping %}
+    --collector.{{ collector }} \
+{%   else -%}
+{%     set name, options = (collector.items()|list)[0] -%}
+    --collector.{{ name }} \
+{%     for k,v in options|dictsort %}
+    --collector.{{ name }}.{{ k }}={{ v | quote }} \
+{%     endfor -%}
+{%   endif -%}
+{% endfor -%}
+{% for collector in postgres_exporter_disabled_collectors %}
+    --no-collector.{{ collector }} \
+{% endfor %}
+{% if postgres_exporter_tls_server_config | length > 0 or postgres_exporter_http_server_config | length > 0 or postgres_exporter_basic_auth_users | length > 0 %}
+    --web.config.file={{ postgres_exporter_config_dir }}/web_config.yaml \
+{% endif %}
+{% if postgres_exporter_version is version('0.15.0', '>=') and
+      postgres_exporter_web_listen_address is iterable and
+      postgres_exporter_web_listen_address is not mapping and
+      postgres_exporter_web_listen_address is not string %}
+{%   for address in postgres_exporter_web_listen_address %}
+    --web.listen-address={{ address }} \
+{%   endfor %}
+{% else %}
+    --web.listen-address={{ postgres_exporter_web_listen_address }} \
+{% endif %}
+    --config.file={{ postgres_exporter_config_dir }}/{{ postgres_exporter_config_file }} \
+    --web.telemetry-path={{ postgres_exporter_web_telemetry_path }}
+
+
+SyslogIdentifier=postgres_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+{% set protect_home = 'yes' %}
+{% for m in ansible_mounts if m.mount.startswith('/home') %}
+{%   set protect_home = 'read-only' %}
+{% endfor %}
+ProtectHome={{ protect_home }}
+NoNewPrivileges=yes
+
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target
