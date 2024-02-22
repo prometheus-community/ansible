@@ -1,0 +1,9 @@
+---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        fail2ban_exporter_binary_local_dir: "/tmp/fail2ban_exporter-linux-amd64_local"
+        fail2ban_exporter_web_listen_address: "127.0.1.1:9191"
+        go_arch: amd64
+        fail2ban_exporter_version: 0.10.1

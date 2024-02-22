@@ -1,0 +1,31 @@
+---
+- name: Run local preparation
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Download fail2ban_exporter binary to local folder
+      become: false
+      ansible.builtin.get_url:
+        url: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/\
+              fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+        dest: "/tmp/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+        mode: 0644
+      register: _download_binary
+      until: _download_binary is succeeded
+      retries: 5
+      delay: 2
+      check_mode: false
+
+    - name: Create local directory for binary
+      ansible.builtin.file:
+        path: "{{ fail2ban_exporter_binary_local_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Unpack fail2ban_exporter binary
+      become: false
+      ansible.builtin.unarchive:
+        src: "/tmp/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+        dest: "{{ fail2ban_exporter_binary_local_dir }}"
+        creates: "{{ fail2ban_exporter_binary_local_dir }}/fail2ban_exporter"
+      check_mode: false
