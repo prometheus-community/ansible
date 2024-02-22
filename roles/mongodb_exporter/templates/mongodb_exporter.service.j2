@@ -1,0 +1,82 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus MongoDB Exporter
+Documentation=https://github.com/percona/mongodb_exporter
+After=network.target
+
+[Service]
+Type=simple
+
+User={{ mongodb_exporter_system_user }}
+Group={{ mongodb_exporter_system_group }}
+
+ExecStart={{ mongodb_exporter_binary_install_dir }}/mongodb_exporter \
+{% if mongodb_exporter_collectors is iterable %}
+{% for collector in mongodb_exporter_collectors -%}
+    --collector.{{ collector }} \
+{% endfor %}
+{% elif mongodb_exporter_collectors is string and mongodb_exporter_collectors == "all" %}
+    --collect-all \
+{% endif -%}
+{% if mongodb_exporter_collstats_colls | length > 0 -%}
+    --mongodb.collstats-colls={{ mongodb_exporter_collstats_colls | join(',') }} \
+{% endif -%}
+{% if mongodb_exporter_indexstats_colls | length > 0 -%}
+    --mongodb.indexstats-colls={{ mongodb_exporter_indexstats_colls | join(',') }} \
+{% endif -%}
+{% if mongodb_exporter_collstats_limit > 0 -%}
+    --collector.collstats-limit={{ mongodb_exporter_collstats_limit }} \
+{% endif -%}
+{% if mongodb_exporter_tls_server_config | length > 0 or mongodb_exporter_http_server_config | length > 0 or mongodb_exporter_basic_auth_users | length > 0 -%}
+    --web.config={{ mongodb_exporter_config_dir }}/web_config.yaml \
+{% endif -%}
+{% if mongodb_exporter_compatible_mode -%}
+    --compatible-mode \
+{% endif -%}
+{% if mongodb_exporter_discovering_mode -%}
+    --discovering-mode \
+{% endif -%}
+{% if mongodb_exporter_direct_connect -%}
+    --mongodb.direct-connect \
+{% endif -%}
+{% if mongodb_exporter_global_conn_pool -%}
+    --mongodb.global-conn-pool \
+{% endif -%}
+{% if mongodb_exporter_metrics_overridedescendingindex -%}
+    --metrics.overridedescendingindex \
+{% endif -%}
+{% if mongodb_exporter_profile_time_ts != 30 -%}
+    --collector.profile-time-ts={{ mongodb_exporter_profile_time_ts }} \
+{% endif -%}
+{% if mongodb_exporter_log_level != "error" -%}
+    --log.level="{{ mongodb_exporter_log_level }}" \
+{% endif -%}
+{% if mongodb_exporter_timeout_offset != 1 -%}
+    --web.timeout-offset= {{ mongodb_exporter_timeout_offset }} \
+{% endif -%}
+{% if mongodb_exporter_web_telemetry_path != "/metrics" -%}
+    --web.telemetry-path={{ mongodb_exporter_web_telemetry_path }} \
+{% endif %}
+    --web.listen-address={{ mongodb_exporter_web_listen_address }} \
+    --mongodb.uri={{ mongodb_exporter_uri }}
+
+SyslogIdentifier=mongodb_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+ProtectHome=yes
+NoNewPrivileges=yes
+
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target
