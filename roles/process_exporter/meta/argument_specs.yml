@@ -25,7 +25,7 @@ argument_specs:
         default: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/process_exporter-{{ process_exporter_version }}.linux-{{ go_arch }}.tar.gz"
       process_exporter_checksums_url:
         description: "URL of the Process exporter checksums file"
-        default: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/sha256sums.txt"
+        default: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/checksums.txt"
       process_exporter_web_listen_address:
         description: "Address on which Process exporter will listen"
         default: "0.0.0.0:9256"
