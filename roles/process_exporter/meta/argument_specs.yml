@@ -1,0 +1,52 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus Process exporter"
+    description:
+      - "Deploy prometheus L(Process exporter,https://github.com/ncabatoff/process_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      process_exporter_version:
+        description: "Process exporter package version. Also accepts latest as parameter."
+        default: "0.7.5"
+      process_exporter_skip_install:
+        description: "Process exporter installation tasks gets skipped when set to true."
+        type: bool
+        default: false
+      process_exporter_binary_local_dir:
+        description:
+          - "Enables the use of local packages instead of those distributed on github."
+          - "The parameter may be set to a directory where the C(process_exporter) binary is stored on the host where ansible is run."
+          - "This overrides the I(process_exporter_version) parameter"
+      process_exporter_binary_url:
+        description: "URL of the Process exporter binaries .tar.gz file"
+        default: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/process_exporter-{{ process_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+      process_exporter_checksums_url:
+        description: "URL of the Process exporter checksums file"
+        default: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/sha256sums.txt"
+      process_exporter_web_listen_address:
+        description: "Address on which Process exporter will listen"
+        default: "0.0.0.0:9256"
+      process_exporter_names:
+        description:
+          - "Processes which should be monitored."
+          - "Syntax is the same as in"
+          - "L(using-a-config-file Default is consistent with deb/rpm packages,https://github.com/ncabatoff/process-exporter#using-a-config-file Default is consistent with deb/rpm packages)"
+        default: "[{name: '{{.Comm}}', cmdline: [.+]}]"
+      process_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install process_exporter binary"
+        default: "/usr/local/bin"
+      process_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for Process exporter"
+        default: "process-exp"
+      process_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "Process exporter user"
+        default: "process-exp"
