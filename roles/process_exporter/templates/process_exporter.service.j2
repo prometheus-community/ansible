@@ -1,0 +1,23 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus Process Exporter
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ process_exporter_system_user }}
+Group={{ process_exporter_system_group }}
+ExecStart={{ process_exporter_binary_install_dir/process_exporter \
+{% if process_exporter_names != [] -%}
+    '--config.path=/etc/process_exporter/config.yml' \
+{% endif -%}
+    '--web.listen-address={{ process_exporter_web_listen_address }}'
+
+SyslogIdentifier=process_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+[Install]
+WantedBy=multi-user.target
