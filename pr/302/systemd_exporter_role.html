@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<meta content="2.7.0" name="antsibull-docs" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>prometheus.prometheus.systemd_exporter role – Prometheus Systemd Exporter &mdash; Prometheus.Prometheus Collection  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5707b69d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/ansible.css?v=c5b67dd2" />
+      <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd-ethical-ads.css?v=289b023e" />
+
+  
+    <link rel="shortcut icon" href="_static/images/Ansible-Mark-RGB_Black.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=7f41d439"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="prometheus.prometheus.snmp_exporter role – Prometheus SNMP exporter" href="snmp_exporter_role.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
+
+
+
+
+</head>
+
+<body class="wy-body-for-nav"><!-- extra body elements for Ansible beyond RTD Sphinx Theme -->
+
+<div class="DocSite-globalNav ansibleNav">
+  <ul>
+    <li><a href="https://www.ansible.com/blog" target="_blank">Blog</a></li>
+    <li><a href="https://forum.ansible.com/" target="_blank">Ansible community forum</a></li>
+    <li><a href="https://docs.ansible.com/" target="_blank">Documentation</a></li>
+  </ul>
+</div>
+
+<a class="DocSite-nav" href="https://prometheus-community.github.io/ansible/branch/main/" style="padding-bottom: 30px;">
+
+  <img class="DocSiteNav-logo"
+    src="_static/images/Ansible-Mark-RGB_White.png"
+    alt="Ansible Logo">
+  <div class="DocSiteNav-title">Prometheus.Prometheus Collection Docs</div>
+</a>
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Prometheus.Prometheus Collection
+          </a><!--- Based on https://github.com/rtfd/sphinx_rtd_theme/pull/438/files -->
+
+<div class="version">
+  
+    
+  
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <label class="sr-only" for="q">Search docs:</label>
+    <input type="text" class="st-default-search-input" id="q" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+  
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="alertmanager_role.html">prometheus.prometheus.alertmanager role – Prometheus Alertmanager service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackbox_exporter_role.html">prometheus.prometheus.blackbox_exporter role – Deploy and manage Prometheus blackbox exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cadvisor_role.html">prometheus.prometheus.cadvisor role – cAdvisor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chrony_exporter_role.html">prometheus.prometheus.chrony_exporter role – Prometheus Chrony Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fail2ban_exporter_role.html">prometheus.prometheus.fail2ban_exporter role – Prometheus fail2ban_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipmi_exporter_role.html">prometheus.prometheus.ipmi_exporter role – Prometheus ipmi_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memcached_exporter_role.html">prometheus.prometheus.memcached_exporter role – Prometheus memcached_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mongodb_exporter_role.html">prometheus.prometheus.mongodb_exporter role – Prometheus mongodb_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mysqld_exporter_role.html">prometheus.prometheus.mysqld_exporter role – Prometheus MySQLd Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nginx_exporter_role.html">prometheus.prometheus.nginx_exporter role – Prometheus nginx_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node_exporter_role.html">prometheus.prometheus.node_exporter role – Prometheus Node Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="postgres_exporter_role.html">prometheus.prometheus.postgres_exporter role – Prometheus PostgreSQL Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="process_exporter_role.html">prometheus.prometheus.process_exporter role – Prometheus Process exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prometheus_role.html">prometheus.prometheus.prometheus role – Installs and configures prometheus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pushgateway_role.html">prometheus.prometheus.pushgateway role – Prometheus Pushgateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redis_exporter_role.html">prometheus.prometheus.redis_exporter role – Prometheus redis_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smartctl_exporter_role.html">prometheus.prometheus.smartctl_exporter role – Prometheus Smartctl Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smokeping_prober_role.html">prometheus.prometheus.smokeping_prober role – Prometheus Smokeping Prober</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snmp_exporter_role.html">prometheus.prometheus.snmp_exporter role – Prometheus SNMP exporter</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">prometheus.prometheus.systemd_exporter role – Prometheus Systemd Exporter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#entry-point-main-prometheus-systemd-exporter">Entry point <code class="docutils literal notranslate"><span class="pre">main</span></code> – Prometheus Systemd Exporter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#authors">Authors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#collection-links">Collection links</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- extra nav elements for Ansible beyond RTD Sphinx Theme -->
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Prometheus.Prometheus Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">prometheus.prometheus.systemd_exporter role – Prometheus Systemd Exporter</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+  
+           <div itemprop="articleBody">
+             
+  <span class="target" id="ansible-collections-prometheus-prometheus-systemd-exporter-role"></span><section id="prometheus-prometheus-systemd-exporter-role-prometheus-systemd-exporter">
+<h1>prometheus.prometheus.systemd_exporter role – Prometheus Systemd Exporter<a class="headerlink" href="#prometheus-prometheus-systemd-exporter-role-prometheus-systemd-exporter" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/prometheus/prometheus/">prometheus.prometheus collection</a> (version 0.13.1).</p>
+<p>It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
+To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
+<p>To install it use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">prometheus.prometheus</span></code>.</p>
+<p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">prometheus.prometheus.systemd_exporter</span></code>.</p>
+</div>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#entry-point-main-prometheus-systemd-exporter" id="id1">Entry point <code class="docutils literal notranslate"><span class="pre">main</span></code> – Prometheus Systemd Exporter</a></p>
+<ul>
+<li><p><a class="reference internal" href="#synopsis" id="id2">Synopsis</a></p></li>
+<li><p><a class="reference internal" href="#parameters" id="id3">Parameters</a></p></li>
+<li><p><a class="reference internal" href="#authors" id="id4">Authors</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="entry-point-main-prometheus-systemd-exporter">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Entry point <code class="docutils literal notranslate"><span class="pre">main</span></code> – Prometheus Systemd Exporter</a><a class="headerlink" href="#entry-point-main-prometheus-systemd-exporter" title="Link to this heading"></a></h2>
+<section id="synopsis">
+<h3><a class="toc-backref" href="#id2" role="doc-backlink">Synopsis</a><a class="headerlink" href="#synopsis" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Deploy prometheus <a class="reference external" href="https://github.com/prometheus-community/systemd_exporter">systemd exporter</a> using ansible.</p></li>
+</ul>
+</section>
+<section id="parameters">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Parameters</a><a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<table class="longtable ansible-option-table docutils align-default" style="width: 100%">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_binary_install_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-binary-install-dir"><strong>systemd_exporter_binary_install_dir</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_binary_install_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p><em>Advanced</em></p>
+<p>Directory to install systemd_exporter binary</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/usr/local/bin&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_binary_local_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-binary-local-dir"><strong>systemd_exporter_binary_local_dir</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_binary_local_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Allows to use local packages instead of ones distributed on github.</p>
+<p>As parameter it takes a directory where <code class="docutils literal notranslate"><span class="pre">systemd_exporter</span></code> binary is stored on host on which ansible is run.</p>
+<p>This overrides <em>systemd_exporter_version</em> parameter</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_binary_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-binary-url"><strong>systemd_exporter_binary_url</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>URL of the systemd exporter binaries .tar.gz file”</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_systemd_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">systemd_exporter_version</span> <span class="pre">}}/systemd_exporter-{{</span> <span class="pre">systemd_exporter_version</span> <span class="pre">}}.linux-{{</span> <span class="pre">go_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_checksums_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-checksums-url"><strong>systemd_exporter_checksums_url</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_checksums_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>URL of the systemd exporter checksums file</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_systemd_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">systemd_exporter_version</span> <span class="pre">}}/sha256sums.txt&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_enable_file_descriptor_size"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-enable-file-descriptor-size"><strong>systemd_exporter_enable_file_descriptor_size</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_enable_file_descriptor_size" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Enables file descriptor size metrics. This feature will cause exporter to run as root as it needs access to /proc/X/fd”</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_enable_ip_accounting"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-enable-ip-accounting"><strong>systemd_exporter_enable_ip_accounting</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_enable_ip_accounting" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Enables service ip accounting metrics. This feature only works with systemd 235 and above”</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_enable_restart_count"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-enable-restart-count"><strong>systemd_exporter_enable_restart_count</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_enable_restart_count" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Enables service restart count metrics. This feature only works with systemd 235 and above”</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_log_level"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-log-level"><strong>systemd_exporter_log_level</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_log_level" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Only log messages with the given severity or above.</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_skip_install"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-skip-install"><strong>systemd_exporter_skip_install</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>SystemD exporter installation tasks gets skipped when set to true.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-system-group"><strong>systemd_exporter_system_group</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p><em>Advanced</em></p>
+<p>System group for systemd exporter</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;systemd-exporter&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-system-user"><strong>systemd_exporter_system_user</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p><em>Advanced</em></p>
+<p>Systemd exporter user</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;systemd-exporter&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_tls_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-tls-server-config"><strong>systemd_exporter_tls_server_config</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_tls_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Configuration for TLS authentication.</p>
+<p>Keys and values are the same as in <a class="reference external" href="https://prometheus.io/docs/prometheus/latest/configuration/https/">Prometheus docs</a>.</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_unit_exclude"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-unit-exclude"><strong>systemd_exporter_unit_exclude</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_unit_exclude" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Exclude some systemd units. Expects a regex. More in <a class="reference external" href="https://github.com/prometheus-community/systemd_exporter#configuration">systemd_exporter docs</a>.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_unit_include"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-unit-include"><strong>systemd_exporter_unit_include</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_unit_include" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Include some systemd units. Expects a regex. More in <a class="reference external" href="https://github.com/prometheus-community/systemd_exporter#configuration">systemd_exporter docs</a>.</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-version"><strong>systemd_exporter_version</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>SystemD exporter package version. Also accepts latest as parameter.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.6.0&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--systemd_exporter_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-systemd-exporter-role-parameter-main-systemd-exporter-web-listen-address"><strong>systemd_exporter_web_listen_address</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--systemd_exporter_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Address on which systemd exporter will listen”</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9558&quot;</span></code></p>
+</div></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="authors">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Authors</a><a class="headerlink" href="#authors" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Prometheus Community</p></li>
+</ul>
+<section id="collection-links">
+<h4>Collection links<a class="headerlink" href="#collection-links" title="Link to this heading"></a></h4>
+<ul class="ansible-links">
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/prometheus-community/ansible/issues" rel="noopener external" target="_blank">Issue Tracker</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://prometheus.io" rel="noopener external" target="_blank">Homepage</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/prometheus-community/ansible" rel="noopener external" target="_blank">Repository (Sources)</a></span></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+<footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="snmp_exporter_role.html" class="btn btn-neutral float-left" title="prometheus.prometheus.snmp_exporter role – Prometheus SNMP exporter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Prometheus.Prometheus Contributors.</p>
+  </div>
+
+  
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script><!-- extra footer elements for Ansible beyond RTD Sphinx Theme -->
+
+</body>
+</html>
