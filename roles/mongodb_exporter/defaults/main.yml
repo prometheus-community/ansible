@@ -1,0 +1,36 @@
+---
+mongodb_exporter_version: 0.40.0
+mongodb_exporter_binary_local_dir: ""
+mongodb_exporter_binary_url: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/\
+                          mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+mongodb_exporter_checksums_url: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/\
+                          mongodb_exporter_{{ mongodb_exporter_version }}_checksums.txt"
+mongodb_exporter_skip_install: false
+
+mongodb_exporter_web_listen_address: "0.0.0.0:9216"
+mongodb_exporter_web_telemetry_path: "/metrics"
+
+mongodb_exporter_uri: "mongodb://127.0.0.1:27017/admin?ssl=false"
+mongodb_exporter_collectors: []
+mongodb_exporter_collstats_colls: []
+mongodb_exporter_indexstats_colls: []
+mongodb_exporter_collstats_limit: 0
+mongodb_exporter_timeout_offset: 1
+mongodb_exporter_profile_time_ts: 30
+
+mongodb_exporter_compatible_mode: false
+mongodb_exporter_discovering_mode: false
+mongodb_exporter_direct_connect: false
+mongodb_exporter_global_conn_pool: false
+mongodb_exporter_metrics_overridedescendingindex: false
+
+mongodb_exporter_tls_server_config: {}
+mongodb_exporter_http_server_config: {}
+mongodb_exporter_basic_auth_users: {}
+
+mongodb_exporter_log_level: "error"
+
+mongodb_exporter_binary_install_dir: "/usr/local/bin"
+mongodb_exporter_system_group: "{{ mongodb_exporter_system_user }}"
+mongodb_exporter_system_user: "mongodb-exp"
+mongodb_exporter_config_dir: "/etc/mongodb_exporter"

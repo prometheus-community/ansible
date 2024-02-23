@@ -1,0 +1,63 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+    apply:
+      tags:
+        - fail2ban_exporter_install
+        - fail2ban_exporter_configure
+        - fail2ban_exporter_run
+  tags:
+    - fail2ban_exporter_install
+    - fail2ban_exporter_configure
+    - fail2ban_exporter_run
+
+- name: Install
+  ansible.builtin.include_tasks:
+    file: install.yml
+    apply:
+      become: true
+      tags:
+        - fail2ban_exporter_install
+  when:
+    ( not __fail2ban_exporter_is_installed.stat.exists ) or
+    ( (__fail2ban_exporter_current_version_output.stderr_lines | length > 0)
+      and (__fail2ban_exporter_current_version_output.stderr_lines[0] != fail2ban_exporter_version) ) or
+    ( (__fail2ban_exporter_current_version_output.stdout_lines | length > 0)
+      and (__fail2ban_exporter_current_version_output.stdout_lines[0] != fail2ban_exporter_version) ) or
+    ( fail2ban_exporter_binary_local_dir | length > 0 )
+  tags:
+    - fail2ban_exporter_install
+
+- name: SELinux
+  ansible.builtin.include_tasks:
+    file: selinux.yml
+    apply:
+      become: true
+      tags:
+        - fail2ban_exporter_configure
+  when: ansible_selinux.status == "enabled"
+  tags:
+    - fail2ban_exporter_configure
+
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yml
+    apply:
+      become: true
+      tags:
+        - fail2ban_exporter_configure
+  tags:
+    - fail2ban_exporter_configure
+
+- name: Ensure fail2ban_exporter is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: fail2ban_exporter
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - fail2ban_exporter_run

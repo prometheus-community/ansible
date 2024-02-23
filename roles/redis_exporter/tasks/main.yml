@@ -1,0 +1,63 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+    apply:
+      tags:
+        - redis_exporter_install
+        - redis_exporter_configure
+        - redis_exporter_run
+  tags:
+    - redis_exporter_install
+    - redis_exporter_configure
+    - redis_exporter_run
+
+- name: Install
+  ansible.builtin.include_tasks:
+    file: install.yml
+    apply:
+      become: true
+      tags:
+        - redis_exporter_install
+  when:
+    ( not __redis_exporter_is_installed.stat.exists ) or
+    ( (__redis_exporter_current_version_output.stderr_lines | length > 0)
+      and (__redis_exporter_current_version_output.stderr_lines[0].split(" ")[2] != redis_exporter_version) ) or
+    ( (__redis_exporter_current_version_output.stdout_lines | length > 0)
+      and (__redis_exporter_current_version_output.stdout_lines[0].split(" ")[2] != redis_exporter_version) ) or
+    ( redis_exporter_binary_local_dir | length > 0 )
+  tags:
+    - redis_exporter_install
+
+- name: SELinux
+  ansible.builtin.include_tasks:
+    file: selinux.yml
+    apply:
+      become: true
+      tags:
+        - redis_exporter_configure
+  when: ansible_selinux.status == "enabled"
+  tags:
+    - redis_exporter_configure
+
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yml
+    apply:
+      become: true
+      tags:
+        - redis_exporter_configure
+  tags:
+    - redis_exporter_configure
+
+- name: Ensure redis_exporter is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: redis_exporter
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - redis_exporter_run

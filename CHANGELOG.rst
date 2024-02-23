@@ -4,6 +4,28 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.13.1
+=======
+
+v0.13.0
+=======
+
+Minor Changes
+-------------
+
+- feat: Add fail2ban_exporter role (https://github.com/prometheus-community/ansible/pull/294)
+- feat: Add mongodb_exporter role (https://github.com/prometheus-community/ansible/pull/293)
+- feat: Add postgres_exporter role (https://github.com/prometheus-community/ansible/pull/291)
+- feat: Add redis_exporter role (https://github.com/prometheus-community/ansible/pull/299)
+
+Bugfixes
+--------
+
+- fix: changelog format screwup (https://github.com/prometheus-community/ansible/pull/303)
+
+v0.12.1
+=======
+
 v0.12.0
 =======
 
