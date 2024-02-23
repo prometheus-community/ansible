@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.12.2:
+    changes:
+      bugfixes:
+        - 'fix: changelog format screwup (https://github.com/prometheus-community/ansible/pull/303)'
+    release_date: '2024-02-23'
   0.12.1:
     changes:
       trivial:

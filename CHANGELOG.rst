@@ -7,6 +7,11 @@ Prometheus.Prometheus Release Notes
 v0.12.2
 =======
 
+Bugfixes
+--------
+
+- fix: changelog format screwup (https://github.com/prometheus-community/ansible/pull/303)
+
 v0.12.1
 =======
 
