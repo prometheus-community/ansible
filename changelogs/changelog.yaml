@@ -1,15 +1,20 @@
 ---
 ancestor:
 releases:
+  0.13.1:
+    changes:
+      trivial:
+        - 'patch: New prometheus/prometheus upstream release 2.50.0! (https://github.com/prometheus-community/ansible/pull/300)'
+    release_date: '2024-02-23'
   0.13.0:
     changes:
+      bugfixes:
+        - 'fix: changelog format screwup (https://github.com/prometheus-community/ansible/pull/303)'
       minor_changes:
         - 'feat: Add redis_exporter role (https://github.com/prometheus-community/ansible/pull/299)'
         - 'feat: Add fail2ban_exporter role (https://github.com/prometheus-community/ansible/pull/294)'
         - 'feat: Add mongodb_exporter role (https://github.com/prometheus-community/ansible/pull/293)'
         - 'feat: Add postgres_exporter role (https://github.com/prometheus-community/ansible/pull/291)'
-      bugfixes:
-        - 'fix: changelog format screwup (https://github.com/prometheus-community/ansible/pull/303)'
     release_date: '2024-02-23'
   0.12.1:
     changes:
