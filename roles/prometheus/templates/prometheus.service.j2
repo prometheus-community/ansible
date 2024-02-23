@@ -1,14 +1,12 @@
 {{ ansible_managed | comment }}
 
 [Unit]
-Description=Prometheus
-After=network-online.target
-Requires=local-fs.target
-After=local-fs.target
+Description=Monitoring system and time series database
+Documentation=https://prometheus.io/docs/introduction/overview/ man:prometheus(1)
+After=time-sync.target
 
 [Service]
-Type=simple
-Environment="GOMAXPROCS={{ ansible_processor_vcpus|default(ansible_processor_count) }}"
+Restart=on-failure
 User=prometheus
 Group=prometheus
 ExecReload=/bin/kill -HUP $MAINPID
@@ -44,31 +42,25 @@ ExecStart={{ _prometheus_binary_install_dir }}/prometheus \
 {% endif %}
 {% endfor %}
   --config.file={{ prometheus_config_dir }}/prometheus.yml
-
-CapabilityBoundingSet=CAP_SET_UID
-LimitNOFILE=65000
-LockPersonality=true
-NoNewPrivileges=true
-MemoryDenyWriteExecute=true
-PrivateDevices=true
-PrivateTmp=true
-ProtectHome=true
-RemoveIPC=true
-RestrictSUIDSGID=true
-#SystemCallFilter=@signal @timer
-
-{% if (ansible_facts.packages.systemd | first).version is version('231', '>=') %}
-ReadWritePaths={{ prometheus_db_dir }}
-{% for path in prometheus_read_only_dirs %}
-ReadOnlyPaths={{ path }}
-{% endfor %}
-{% else %}
-ReadWriteDirectories={{ prometheus_db_dir }}
-{% for path in prometheus_read_only_dirs %}
-ReadOnlyDirectories={{ path }}
-{% endfor %}
+{% if http_proxy is defined %}
+Environment="HTTP_PROXY={{ http_proxy }}"{% if https_proxy is defined %} "HTTPS_PROXY={{ https_proxy }}{% endif %}"
 {% endif %}
 
+SyslogIdentifier=prometheus
+TimeoutStopSec={{ prometheus_stop_timeout }}
+
+# systemd hardening-options
+AmbientCapabilities=
+CapabilityBoundingSet=
+DeviceAllow=/dev/null rw
+DevicePolicy=strict
+LimitMEMLOCK=0
+LimitNOFILE=65000
+LockPersonality=true
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
 {% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
 PrivateUsers=true
 ProtectControlGroups=true
@@ -78,14 +70,24 @@ ProtectSystem=strict
 {% else %}
 ProtectSystem=full
 {% endif %}
-
-{% if http_proxy is defined %}
-Environment="HTTP_PROXY={{ http_proxy }}"{% if https_proxy is defined %} "HTTPS_PROXY={{ https_proxy }}{% endif %}"
+ProtectHome=true
+{% if (ansible_facts.packages.systemd | first).version is version('231', '>=') %}
+{% for path in prometheus_read_only_dirs %}
+ReadOnlyPaths={{ path }}
+{% endfor %}
+ReadWritePaths={{ prometheus_db_dir }}
+{% else %}
+{% for path in prometheus_read_only_dirs %}
+ReadOnlyDirectories={{ path }}
+{% endfor %}
+ReadWriteDirectories={{ prometheus_db_dir }}
 {% endif %}
-
-SyslogIdentifier=prometheus
-Restart=always
-TimeoutStopSec={{ prometheus_stop_timeout }}
+RemoveIPC=true
+RestrictSUIDSGID=true
+RestrictNamespaces=true
+RestrictRealtime=true
+SystemCallArchitectures=native
+#SystemCallFilter=@signal @timer
 
 [Install]
 WantedBy=multi-user.target
