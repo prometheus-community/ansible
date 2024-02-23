@@ -20,17 +20,6 @@
   ansible.builtin.package_facts:
   when: "not 'packages' in ansible_facts"
 
-- name: Assert that used version supports listen address type
-  ansible.builtin.assert:
-    that:
-      - >-
-        bind_exporter_web_listen_address is string
-        or
-        (
-          bind_exporter_version is version('0.15.0', '>=') and
-          bind_exporter_web_listen_address | type_debug == "list"
-        )
-
 - name: Naive assertion of proper listen address
   ansible.builtin.assert:
     that:

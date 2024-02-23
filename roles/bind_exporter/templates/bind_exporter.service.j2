@@ -19,7 +19,15 @@ ExecStart={{ bind_exporter_binary_install_dir }}/bind_exporter \
     --bind.timeout="{{ bind_exporter_timeout }}" \
     --bind.pid-file="{{ bind_exporter_pid_file }}" \
     --bind.stats-version={{ bind_exporter_stats_version }} \
+{% if bind_exporter_web_listen_address is iterable and
+      bind_exporter_web_listen_address is not mapping and
+      bind_exporter_web_listen_address is not string %}
+{%   for address in bind_exporter_web_listen_address %}
+    --web.listen-address={{ address }} \
+{%   endfor %}
+{% else %}
     --web.listen-address={{ bind_exporter_web_listen_address }} \
+{% endif %}
     --web.telemetry-path={{ bind_exporter_web_telemetry_path }}
 
 
