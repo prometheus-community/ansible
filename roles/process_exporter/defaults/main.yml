@@ -2,7 +2,7 @@
 process_exporter_version: 0.7.5
 process_exporter_binary_local_dir: ""
 process_exporter_binary_url: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/\
-                           process_exporter-{{ process_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+                              process-exporter-{{ process_exporter_version }}.linux-{{ go_arch }}.tar.gz"
 process_exporter_checksums_url: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/sha256sums.txt"
 process_exporter_skip_install: false
 
