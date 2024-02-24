@@ -8,7 +8,7 @@ After=network-online.target
 Type=simple
 User={{ process_exporter_system_user }}
 Group={{ process_exporter_system_group }}
-ExecStart={{ process_exporter_binary_install_dir/process_exporter \
+ExecStart={{ process_exporter_binary_install_dir }}/process_exporter \
 {% if process_exporter_names != [] -%}
     '--config.path=/etc/process_exporter/config.yml' \
 {% endif -%}
