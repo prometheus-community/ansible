@@ -42,13 +42,14 @@
       ansible.builtin.unarchive:
         src: "/tmp/process_exporter-{{ process_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp"
-        creates: "/tmp/process_exporter-{{ process_exporter_version }}.linux-{{ go_arch }}/process-exporter"
+        creates: "/tmp/process-exporter-{{ process_exporter_version }}.linux-{{ go_arch }}/process-exporter"
+        include: process-exporter
       delegate_to: localhost
       check_mode: false
 
     - name: Propagate process_exporter binaries
       ansible.builtin.copy:
-        src: "/tmp/process_exporter-{{ process_exporter_version }}.linux-{{ go_arch }}/process-exporter"
+        src: "/tmp/process-exporter-{{ process_exporter_version }}.linux-{{ go_arch }}/process-exporter"
         dest: "{{ process_exporter_binary_install_dir }}/process_exporter"
         mode: 0755
         owner: root
