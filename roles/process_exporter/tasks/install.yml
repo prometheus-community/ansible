@@ -43,7 +43,6 @@
         src: "/tmp/process_exporter-{{ process_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp"
         creates: "/tmp/process-exporter-{{ process_exporter_version }}.linux-{{ go_arch }}/process-exporter"
-        include: process-exporter
       delegate_to: localhost
       check_mode: false
 
