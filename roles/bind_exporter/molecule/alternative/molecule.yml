@@ -1,0 +1,21 @@
+---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        bind_exporter_binary_local_dir: "/tmp/bind_exporter-linux-amd64"
+        bind_exporter_web_listen_address:
+          - '127.0.0.1:8080'
+          - '127.0.1.1:8080'
+        bind_exporter_stats_groups:
+          - server
+          - view
+        bind_exporter_tls_server_config:
+          cert_file: /etc/bind_exporter/tls.cert
+          key_file: /etc/bind_exporter/tls.key
+        bind_exporter_http_server_config:
+          http2: true
+        bind_exporter_basic_auth_users:
+          randomuser: examplepassword
+        go_arch: amd64
+        bind_exporter_version: 0.7.0

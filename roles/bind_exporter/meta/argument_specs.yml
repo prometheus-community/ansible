@@ -1,0 +1,90 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus BIND Exporter"
+    description:
+      - "Deploy prometheus L(bind_exporter,https://github.com/prometheus-community/bind_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      bind_exporter_version:
+        description: "BIND exporter package version. Also accepts latest as parameter."
+        default: "0.7.0"
+      bind_exporter_skip_install:
+        description: "BIND installation tasks gets skipped when set to true."
+        type: bool
+        default: false
+      bind_exporter_binary_local_dir:
+        description:
+          - "Enables the use of local packages instead of those distributed on github."
+          - "The parameter may be set to a directory where the C(bind_exporter) binary is stored on the host where ansible is run."
+          - "This overrides the I(bind_exporter_version) parameter"
+      bind_exporter_binary_url:
+        description: "URL of the bind_exporter binaries .tar.gz file"
+        default: "https://github.com/{{ _bind_exporter_repo }}/download/v{{ bind_exporter_version }}/bind_exporter-{{ bind_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+      bind_exporter_checksums_url:
+        description: "URL of the bind_exporter checksums file"
+        default: "https://github.com/{{ _bind_exporter_repo }}/releases/download/v{{ bind_exporter_version }}/sha256sums.txt"
+      bind_exporter_web_listen_address:
+        description: "Address on which bind_exporter will listen"
+        default: "0.0.0.0:9119"
+      bind_exporter_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      bind_exporter_config_dir:
+        description: "The path where exporter configuration is stored"
+        default: "/etc/bind_exporter"
+      bind_exporter_stats_url:
+        description: "HTTP XML API address of BIND server"
+        default: "http://localhost:8053/"
+      bind_exporter_timeout:
+        description: "Timeout for trying to get stats from BIND server"
+        default: "10s"
+      bind_exporter_pid_file:
+        description: "Path to BIND's pid file to export process information"
+        default: "/run/named/named.pid"
+      bind_exporter_stats_version:
+        description: "BIND statistics version."
+        default: "auto"
+        choices:
+          - "auto"
+          - "json"
+          - "xml"
+          - "xml.v3"
+      bind_exporter_stats_groups:
+        description: "List of statistics to collect"
+        default: []
+        type: "list"
+        choices:
+          - "server"
+          - "view"
+          - "tasks"
+      bind_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(prometheus docs,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)."
+        type: "dict"
+      bind_exporter_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(prometheus docs,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)."
+        type: "dict"
+      bind_exporter_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      bind_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install bind_exporter binary"
+        default: "/usr/local/bin"
+      bind_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for BIND Exporter"
+        default: "bind-exp"
+      bind_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "BIND Exporter user"
+        default: "bind-exp"
