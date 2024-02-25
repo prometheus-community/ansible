@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.14.0:
+    changes:
+      minor_changes:
+        - 'feat: Add bind_exporter role (https://github.com/prometheus-community/ansible/pull/305)'
+    release_date: '2024-02-25'
   0.13.1:
     changes:
       trivial:

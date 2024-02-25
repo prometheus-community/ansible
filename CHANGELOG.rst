@@ -4,6 +4,14 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.14.0
+=======
+
+Minor Changes
+-------------
+
+- feat: Add bind_exporter role (https://github.com/prometheus-community/ansible/pull/305)
+
 v0.13.1
 =======
 
