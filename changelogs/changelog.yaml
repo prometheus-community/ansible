@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.14.1:
+    changes:
+      trivial:
+        - 'patch: New prometheus/prometheus upstream release 2.50.1! (https://github.com/prometheus-community/ansible/pull/306)'
+    release_date: '2024-02-26'
   0.14.0:
     changes:
       minor_changes:
