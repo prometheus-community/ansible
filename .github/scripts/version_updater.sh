@@ -13,6 +13,7 @@ fi
 
 source_repo="$1"
 role="$2"
+type="$3"
 
 color_red='\e[31m'
 color_green='\e[32m'
@@ -67,7 +68,15 @@ if [[ -z "${role}" ]]; then
 fi
 
 # Get latest version.
-version="$(github_api "repos/${source_repo}/releases/latest" | jq '.tag_name' | tr -d '"v')"
+if [[ ${type} == "github" ]]
+then
+  version="$(github_api "repos/${source_repo}/releases/latest" | jq '.tag_name' | tr -d '"v')"
+elif [[ ${type} == "gitlab" ]]
+  version="$(curl https://gitlab.com/api/v4/projects/${source_repo}/releases|jq '.[0].tag_name'| tr -d '"v')"
+else
+  echo_red 'Unknown source type. Terminating.'
+  exit 128
+fi
 echo_green "New ${source_repo} version is: ${version}"
 
 # Download destination repository

@@ -37,4 +37,4 @@ jobs:
         include: ${{ fromJson(needs.discover-role-repos.outputs.role-repos) }}
     steps:
       - uses: actions/checkout@v3
-      - run: ./.github/scripts/version_updater.sh ${{ matrix.repo }} ${{ matrix.role }}
+      - run: ./.github/scripts/version_updater.sh ${{ matrix.repo }} ${{ matrix.role }} ${{ matrix.type }}
