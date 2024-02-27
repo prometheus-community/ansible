@@ -68,10 +68,11 @@ if [[ -z "${role}" ]]; then
 fi
 
 # Get latest version.
-if [[ ${type} == "github" ]]
+if [[ "${type}" == "github" ]]
 then
   version="$(github_api "repos/${source_repo}/releases/latest" | jq '.tag_name' | tr -d '"v')"
-elif [[ ${type} == "gitlab" ]]
+elif [[ "${type}" == "gitlab" ]]
+then
   version="$(curl https://gitlab.com/api/v4/projects/${source_repo}/releases|jq '.[0].tag_name'| tr -d '"v')"
 else
   echo_red 'Unknown source type. Terminating.'
