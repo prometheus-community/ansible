@@ -73,7 +73,7 @@ then
   version="$(github_api "repos/${source_repo}/releases/latest" | jq '.tag_name' | tr -d '"v')"
 elif [[ "${type}" == "gitlab" ]]
 then
-  version="$(curl https://gitlab.com/api/v4/projects/${source_repo}/releases|jq '.[0].tag_name'| tr -d '"v')"
+  version="$(curl --retry 5 --silent --fail "https://gitlab.com/api/v4/projects/${source_repo}/releases"|jq '.[0].tag_name'| tr -d '"v')"
 else
   echo_red 'Unknown source type. Terminating.'
   exit 128
