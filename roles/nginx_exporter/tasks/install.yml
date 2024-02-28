@@ -27,7 +27,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ nginx_exporter_binary_url }}"
-        dest: "/tmp/nginx-prometheus-exporter_{{ nginx_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+        dest: "{{ prometheus_archive_path | default('/tmp') }}/nginx-prometheus-exporter_{{ nginx_exporter_version }}_linux_{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __nginx_exporter_checksum }}"
         mode: '0644'
       register: _download_binary
@@ -40,15 +40,15 @@
     - name: Unpack nginx_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/nginx-prometheus-exporter_{{ nginx_exporter_version }}_linux_{{ go_arch }}.tar.gz"
-        dest: "/tmp"
-        creates: "/tmp/nginx-prometheus-exporter"
+        src: "{{ prometheus_archive_path | default('/tmp') }}/nginx-prometheus-exporter_{{ nginx_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+        dest: "{{ prometheus_archive_path | default('/tmp') }}"
+        creates: "{{ prometheus_archive_path | default('/tmp') }}/nginx-prometheus-exporter"
       delegate_to: localhost
       check_mode: false
 
     - name: Propagate nginx_exporter binaries
       ansible.builtin.copy:
-        src: "/tmp/nginx-prometheus-exporter"
+        src: "{{ prometheus_archive_path | default('/tmp') }}/nginx-prometheus-exporter"
         dest: "{{ nginx_exporter_binary_install_dir }}/nginx-prometheus-exporter"
         mode: 0755
         owner: root

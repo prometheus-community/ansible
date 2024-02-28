@@ -27,7 +27,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ smartctl_exporter_binary_url }}"
-        dest: "/tmp/smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ prometheus_archive_path | default('/tmp') }}/smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __smartctl_exporter_checksum }}"
         mode: '0644'
       register: _download_binary
@@ -40,15 +40,15 @@
     - name: Unpack smartctl_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp"
-        creates: "/tmp/smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{ go_arch }}/smartctl_exporter"
+        src: "{{ prometheus_archive_path | default('/tmp') }}/smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ prometheus_archive_path | default('/tmp') }}"
+        creates: "{{ prometheus_archive_path | default('/tmp') }}/smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{ go_arch }}/smartctl_exporter"
       delegate_to: localhost
       check_mode: false
 
     - name: Propagate smartctl_exporter binaries
       ansible.builtin.copy:
-        src: "/tmp/smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{ go_arch }}/smartctl_exporter"
+        src: "{{ prometheus_archive_path | default('/tmp') }}/smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{ go_arch }}/smartctl_exporter"
         dest: "{{ smartctl_exporter_binary_install_dir }}/smartctl_exporter"
         mode: 0755
         owner: root

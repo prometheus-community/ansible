@@ -27,7 +27,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ smokeping_prober_binary_url }}"
-        dest: "/tmp/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ prometheus_archive_path | default('/tmp') }}/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __smokeping_prober_checksum }}"
         mode: '0644'
       register: _download_binary
@@ -40,15 +40,15 @@
     - name: Unpack smokeping_prober binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp"
-        creates: "/tmp/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}/smokeping_prober"
+        src: "{{ prometheus_archive_path | default('/tmp') }}/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ prometheus_archive_path | default('/tmp') }}"
+        creates: "{{ prometheus_archive_path | default('/tmp') }}/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}/smokeping_prober"
       delegate_to: localhost
       check_mode: false
 
     - name: Propagate smokeping_prober binaries
       ansible.builtin.copy:
-        src: "/tmp/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}/smokeping_prober"
+        src: "{{ prometheus_archive_path | default('/tmp') }}/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}/smokeping_prober"
         dest: "{{ smokeping_prober_binary_install_dir }}/smokeping_prober"
         mode: 0755
         owner: root
