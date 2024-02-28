@@ -39,6 +39,13 @@ github_api() {
   curl --retry 5 --silent --fail -u "${GIT_USER}:${GITHUB_TOKEN}" "${url}" "$@"
 }
 
+gitlab_api() {
+  local url
+  url="https://gitlab.com/api/v4/${1}"
+  shift 1
+  curl --retry 5 --silent --fail "${url}" "$@"
+}
+
 post_pull_request() {
   local pr_title="$1"
   local default_branch="$2"
@@ -73,7 +80,7 @@ then
   version="$(github_api "repos/${source_repo}/releases/latest" | jq '.tag_name' | tr -d '"v')"
 elif [[ "${type}" == "gitlab" ]]
 then
-  version="$(curl --retry 5 --silent --fail "https://gitlab.com/api/v4/projects/${source_repo}/releases"|jq '.[0].tag_name'| tr -d '"v')"
+  version="$(gitlab_api "projects/${source_repo}/releases" | jq '.[0].tag_name' | tr -d '"v')"
 else
   echo_red 'Unknown source type. Terminating.'
   exit 128
