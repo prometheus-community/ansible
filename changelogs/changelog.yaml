@@ -4,6 +4,7 @@ releases:
   0.14.1:
     changes:
       trivial:
+        - 'patch: New prometheus/alertmanager upstream release 0.27.0! (https://github.com/prometheus-community/ansible/pull/309)'
         - 'patch: New prometheus/prometheus upstream release 2.50.1! (https://github.com/prometheus-community/ansible/pull/306)'
     release_date: '2024-02-26'
   0.14.0:
