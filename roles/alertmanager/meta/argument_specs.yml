@@ -110,3 +110,6 @@ argument_specs:
       alertmanager_amtool_config_output:
         description: 'Extended output, use C("") for simple output.'
         default: "extended"
+      alertmanager_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"

@@ -67,3 +67,6 @@ argument_specs:
         default: "systemd-exporter"
       systemd_exporter_log_level:
         description: Only log messages with the given severity or above.
+      systemd_exporter_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"

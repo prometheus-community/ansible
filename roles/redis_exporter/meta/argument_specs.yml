@@ -179,3 +179,6 @@ argument_specs:
           - "I(Advanced)"
           - "redis_exporter user"
         default: "redis-exp"
+      redis_exporter_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"

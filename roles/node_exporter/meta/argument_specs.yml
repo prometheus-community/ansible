@@ -81,3 +81,6 @@ argument_specs:
           - "I(Advanced)"
           - "Node exporter user"
         default: "node-exp"
+      node_exporter_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"

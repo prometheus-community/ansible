@@ -73,3 +73,6 @@ argument_specs:
           - "I(Advanced)"
           - "nginx_exporter user"
         default: "nginx-exp"
+      nginx_exporter_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"
