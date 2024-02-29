@@ -30,3 +30,6 @@ node_exporter_disabled_collectors: []
 node_exporter_binary_install_dir: "/usr/local/bin"
 node_exporter_system_group: "node-exp"
 node_exporter_system_user: "{{ node_exporter_system_group }}"
+
+# Local path to stash the archive and its extraction
+node_exporter_archive_path: /tmp

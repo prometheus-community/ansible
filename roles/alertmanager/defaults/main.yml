@@ -134,3 +134,6 @@ alertmanager_amtool_config_alertmanager_url: "{{ alertmanager_web_external_url }
 
 # Extended output of `amtool` commands, use '' for less verbosity
 alertmanager_amtool_config_output: 'extended'
+
+# Local path to stash the archive and its extraction
+alertmanager_archive_path: /tmp

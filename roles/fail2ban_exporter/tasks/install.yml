@@ -9,7 +9,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ fail2ban_exporter_binary_url }}"
-        dest: "{{ prometheus_archive_path | default('/tmp') }}/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+        dest: "{{ fail2ban_exporter_archive_path }}/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __fail2ban_exporter_checksum }}"
         mode: '0644'
       register: _download_binary
@@ -22,15 +22,15 @@
     - name: Unpack fail2ban_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "{{ prometheus_archive_path | default('/tmp') }}/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
-        dest: "{{ prometheus_archive_path | default('/tmp') }}"
-        creates: "{{ prometheus_archive_path | default('/tmp') }}/fail2ban_exporter"
+        src: "{{ fail2ban_exporter_archive_path }}/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+        dest: "{{ fail2ban_exporter_archive_path }}"
+        creates: "{{ fail2ban_exporter_archive_path }}/fail2ban_exporter"
       delegate_to: localhost
       check_mode: false
 
     - name: Propagate fail2ban_exporter binaries
       ansible.builtin.copy:
-        src: "{{ prometheus_archive_path | default('/tmp') }}/fail2ban_exporter"
+        src: "{{ fail2ban_exporter_archive_path }}/fail2ban_exporter"
         dest: "{{ fail2ban_exporter_binary_install_dir }}/fail2ban_exporter"
         mode: 0755
         owner: root

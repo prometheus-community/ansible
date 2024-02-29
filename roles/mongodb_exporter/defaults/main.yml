@@ -34,3 +34,6 @@ mongodb_exporter_binary_install_dir: "/usr/local/bin"
 mongodb_exporter_system_group: "{{ mongodb_exporter_system_user }}"
 mongodb_exporter_system_user: "mongodb-exp"
 mongodb_exporter_config_dir: "/etc/mongodb_exporter"
+
+# Local path to stash the archive and its extraction
+mongodb_exporter_archive_path: /tmp

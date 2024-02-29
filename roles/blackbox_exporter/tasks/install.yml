@@ -25,7 +25,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ blackbox_exporter_binary_url }}"
-        dest: "{{ prometheus_archive_path | default('/tmp') }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ blackbox_exporter_archive_path }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __blackbox_exporter_checksum }}"
         mode: '0644'
       register: _download_binary
@@ -38,15 +38,15 @@
     - name: Unpack blackbox_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "{{ prometheus_archive_path | default('/tmp') }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "{{ prometheus_archive_path | default('/tmp') }}"
-        creates: "{{ prometheus_archive_path | default('/tmp') }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch }}/blackbox_exporter"
+        src: "{{ blackbox_exporter_archive_path }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ blackbox_exporter_archive_path }}"
+        creates: "{{ blackbox_exporter_archive_path }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch }}/blackbox_exporter"
       delegate_to: localhost
       check_mode: false
 
     - name: Propagate blackbox_exporter binaries
       ansible.builtin.copy:
-        src: "{{ prometheus_archive_path | default('/tmp') }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch }}/blackbox_exporter"
+        src: "{{ blackbox_exporter_archive_path }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch }}/blackbox_exporter"
         dest: "{{ blackbox_exporter_binary_install_dir }}/blackbox_exporter"
         mode: 0755
         owner: root

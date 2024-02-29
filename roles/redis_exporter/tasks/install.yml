@@ -27,7 +27,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ redis_exporter_binary_url }}"
-        dest: "{{ prometheus_archive_path | default('/tmp') }}/redis_exporter-{{ redis_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ redis_exporter_archive_path }}/redis_exporter-{{ redis_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __redis_exporter_checksum }}"
         mode: '0644'
       register: _download_binary
@@ -40,15 +40,15 @@
     - name: Unpack redis_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "{{ prometheus_archive_path | default('/tmp') }}/redis_exporter-{{ redis_exporter_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "{{ prometheus_archive_path | default('/tmp') }}"
-        creates: "{{ prometheus_archive_path | default('/tmp') }}/redis_exporter-{{ redis_exporter_version }}.linux-{{ go_arch }}/redis_exporter"
+        src: "{{ redis_exporter_archive_path }}/redis_exporter-{{ redis_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ redis_exporter_archive_path }}"
+        creates: "{{ redis_exporter_archive_path }}/redis_exporter-{{ redis_exporter_version }}.linux-{{ go_arch }}/redis_exporter"
       delegate_to: localhost
       check_mode: false
 
     - name: Propagate redis_exporter binaries
       ansible.builtin.copy:
-        src: "{{ prometheus_archive_path | default('/tmp') }}/redis_exporter-v{{ redis_exporter_version }}.linux-{{ go_arch }}/redis_exporter"
+        src: "{{ redis_exporter_archive_path }}/redis_exporter-v{{ redis_exporter_version }}.linux-{{ go_arch }}/redis_exporter"
         dest: "{{ redis_exporter_binary_install_dir }}/redis_exporter"
         mode: 0755
         owner: root

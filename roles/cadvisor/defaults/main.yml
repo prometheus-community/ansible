@@ -12,3 +12,6 @@ cadvisor_prometheus_endpoint: "/metrics"
 cadvisor_binary_install_dir: "/usr/local/bin"
 cadvisor_system_group: "root"
 cadvisor_system_user: "{{ cadvisor_system_group }}"
+
+# Local path to stash the archive and its extraction
+cadvisor_archive_path: /tmp
