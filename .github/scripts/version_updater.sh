@@ -75,16 +75,18 @@ if [[ -z "${role}" ]]; then
 fi
 
 # Get latest version.
-if [[ "${type}" == "github" ]]
-then
-  version="$(github_api "repos/${source_repo}/releases/latest" | jq '.tag_name' | tr -d '"v')"
-elif [[ "${type}" == "gitlab" ]]
-then
-  version="$(gitlab_api "projects/${source_repo}/releases" | jq '.[0].tag_name' | tr -d '"v')"
-else
-  echo_red 'Unknown source type. Terminating.'
-  exit 128
-fi
+case "${type}" in
+  github)
+    version="$(github_api "repos/${source_repo}/releases/latest" | jq '.tag_name' | tr -d '"v')"
+    ;;
+  gitlab)
+    version="$(gitlab_api "projects/${source_repo}/releases" | jq '.[0].tag_name' | tr -d '"v')"
+    ;;
+  *)
+    echo_red 'Unknown source type. Terminating.'
+    exit 128
+    ;;
+esac
 echo_green "New ${source_repo} version is: ${version}"
 
 # Download destination repository
