@@ -198,6 +198,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--alertmanager_archive_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-archive-path"><strong>alertmanager_archive_path</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--alertmanager_archive_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_binary_local_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-binary-local-dir"><strong>alertmanager_binary_local_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_binary_local_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -206,7 +214,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>This overrides <em>alertmanager_version</em> parameter</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_binary_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-binary-url"><strong>alertmanager_binary_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -214,7 +222,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_alertmanager_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">alertmanager_version</span> <span class="pre">}}/alertmanager-{{</span> <span class="pre">alertmanager_version</span> <span class="pre">}}.linux-{{</span> <span class="pre">go_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_checksums_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-checksums-url"><strong>alertmanager_checksums_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_checksums_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -222,7 +230,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_alertmanager_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">alertmanager_version</span> <span class="pre">}}/sha256sums.txt&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_cluster"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-cluster"><strong>alertmanager_cluster</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_cluster" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -231,7 +239,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">{&quot;listen-address&quot;:</span> <span class="pre">&quot;&quot;}</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_config_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-config-dir"><strong>alertmanager_config_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_config_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -239,7 +247,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/etc/alertmanager&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_config_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-config-file"><strong>alertmanager_config_file</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_config_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -247,14 +255,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;alertmanager.yml.j2&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_config_flags_extra"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-config-flags-extra"><strong>alertmanager_config_flags_extra</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_config_flags_extra" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Additional configuration flags passed to prometheus binary at startup</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_db_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-db-dir"><strong>alertmanager_db_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_db_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -262,63 +270,63 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/var/lib/alertmanager&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_hipchat_api_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-hipchat-api-url"><strong>alertmanager_hipchat_api_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_hipchat_api_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Hipchat webhook url</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_hipchat_auth_token"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-hipchat-auth-token"><strong>alertmanager_hipchat_auth_token</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_hipchat_auth_token" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Hipchat authentication token</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_http_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-http-config"><strong>alertmanager_http_config</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_http_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Http config for using custom webhooks</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_inhibit_rules"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-inhibit-rules"><strong>alertmanager_inhibit_rules</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_inhibit_rules" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>List of inhibition rules. Same as in <a class="reference external" href="https://prometheus.io/docs/alerting/configuration/#inhibit_rule">official docs</a></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_opsgenie_api_key"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-opsgenie-api-key"><strong>alertmanager_opsgenie_api_key</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_opsgenie_api_key" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Opsgenie webhook key</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_opsgenie_api_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-opsgenie-api-url"><strong>alertmanager_opsgenie_api_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_opsgenie_api_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Opsgenie webhook url</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_pagerduty_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-pagerduty-url"><strong>alertmanager_pagerduty_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_pagerduty_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Pagerduty webhook url</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_receivers"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-receivers"><strong>alertmanager_receivers</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_receivers" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>A list of notification receivers. Configuration same as in <a class="reference external" href="https://prometheus.io/docs/alerting/configuration/#receiver">official docs</a></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_resolve_timeout"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-resolve-timeout"><strong>alertmanager_resolve_timeout</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_resolve_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -326,14 +334,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;3m&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_route"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-route"><strong>alertmanager_route</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_route" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Alert routing. More in <a class="reference external" href="https://prometheus.io/docs/alerting/configuration/#route">official docs</a></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_skip_install"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-skip-install"><strong>alertmanager_skip_install</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -345,21 +353,21 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_slack_api_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-slack-api-url"><strong>alertmanager_slack_api_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_slack_api_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Slack webhook url</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_smtp"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-smtp"><strong>alertmanager_smtp</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_smtp" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>SMTP (email) configuration</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_template_files"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-template-files"><strong>alertmanager_template_files</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_template_files" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
@@ -368,14 +376,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[&quot;alertmanager/templates/*.tmpl&quot;]</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_time_intervals"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-time-intervals"><strong>alertmanager_time_intervals</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_time_intervals" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>A list of time intervals. Configuration same as in <a class="reference external" href="https://prometheus.io/docs/alerting/latest/configuration/#time_interval">official docs</a></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-version"><strong>alertmanager_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -383,21 +391,21 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.27.0&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_victorops_api_key"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-victorops-api-key"><strong>alertmanager_victorops_api_key</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_victorops_api_key" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>VictorOps webhook key</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_victorops_api_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-victorops-api-url"><strong>alertmanager_victorops_api_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_victorops_api_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>VictorOps webhook url</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_web_external_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-web-external-url"><strong>alertmanager_web_external_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_web_external_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -405,7 +413,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;http://localhost:9093/&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-web-listen-address"><strong>alertmanager_web_listen_address</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -413,21 +421,21 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9093&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_wechat_corp_id"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-wechat-corp-id"><strong>alertmanager_wechat_corp_id</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_wechat_corp_id" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Enterprise WeChat corporation id</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_wechat_secret"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-wechat-secret"><strong>alertmanager_wechat_secret</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_wechat_secret" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Enterprise WeChat secret token</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--alertmanager_wechat_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-alertmanager-role-parameter-main-alertmanager-wechat-url"><strong>alertmanager_wechat_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--alertmanager_wechat_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>

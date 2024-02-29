@@ -174,6 +174,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_archive_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-archive-path"><strong>blackbox_exporter_archive_path</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_archive_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_binary_install_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-binary-install-dir"><strong>blackbox_exporter_binary_install_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_binary_install_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -182,7 +190,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/usr/local/bin&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_binary_local_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-binary-local-dir"><strong>blackbox_exporter_binary_local_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_binary_local_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -191,7 +199,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>This overrides the <em>blackbox_exporter_version</em> parameter</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_binary_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-binary-url"><strong>blackbox_exporter_binary_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -199,7 +207,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_blackbox_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">blackbox_exporter_version</span> <span class="pre">}}/blackbox_exporter-{{</span> <span class="pre">blackbox_exporter_version</span> <span class="pre">}}.linux-{{</span> <span class="pre">go_arch_map[ansible_architecture]</span> <span class="pre">|</span> <span class="pre">default(ansible_architecture)</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_checksums_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-checksums-url"><strong>blackbox_exporter_checksums_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_checksums_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -207,14 +215,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_blackbox_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">blackbox_exporter_version</span> <span class="pre">}}/sha256sums.txt&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_cli_flags"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-cli-flags"><strong>blackbox_exporter_cli_flags</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_cli_flags" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Additional configuration flags passed to blackbox exporter binary at startup</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_config_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-config-dir"><strong>blackbox_exporter_config_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_config_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -222,7 +230,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/etc&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_configuration_modules"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-configuration-modules"><strong>blackbox_exporter_configuration_modules</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_configuration_modules" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -230,7 +238,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">{&quot;http_2xx&quot;:</span> <span class="pre">{&quot;http&quot;:</span> <span class="pre">{&quot;method&quot;:</span> <span class="pre">&quot;GET&quot;,</span> <span class="pre">&quot;valid_status_codes&quot;:</span> <span class="pre">[]},</span> <span class="pre">&quot;prober&quot;:</span> <span class="pre">&quot;http&quot;,</span> <span class="pre">&quot;timeout&quot;:</span> <span class="pre">&quot;5s&quot;}}</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-group"><strong>blackbox_exporter_group</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -238,7 +246,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;blackbox-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_skip_install"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-skip-install"><strong>blackbox_exporter_skip_install</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -250,7 +258,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-user"><strong>blackbox_exporter_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -258,7 +266,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;blackbox-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-version"><strong>blackbox_exporter_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -266,7 +274,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.24.0&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--blackbox_exporter_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-blackbox-exporter-role-parameter-main-blackbox-exporter-web-listen-address"><strong>blackbox_exporter_web_listen_address</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--blackbox_exporter_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
