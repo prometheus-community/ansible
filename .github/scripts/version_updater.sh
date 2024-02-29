@@ -13,6 +13,7 @@ fi
 
 source_repo="$1"
 role="$2"
+type="$3"
 
 color_red='\e[31m'
 color_green='\e[32m'
@@ -36,6 +37,13 @@ github_api() {
   url="https://api.github.com/${1}"
   shift 1
   curl --retry 5 --silent --fail -u "${GIT_USER}:${GITHUB_TOKEN}" "${url}" "$@"
+}
+
+gitlab_api() {
+  local url
+  url="https://gitlab.com/api/v4/${1}"
+  shift 1
+  curl --retry 5 --silent --fail "${url}" "$@"
 }
 
 post_pull_request() {
@@ -67,7 +75,18 @@ if [[ -z "${role}" ]]; then
 fi
 
 # Get latest version.
-version="$(github_api "repos/${source_repo}/releases/latest" | jq '.tag_name' | tr -d '"v')"
+case "${type}" in
+  github)
+    version="$(github_api "repos/${source_repo}/releases/latest" | jq '.tag_name' | tr -d '"v')"
+    ;;
+  gitlab)
+    version="$(gitlab_api "projects/${source_repo}/releases" | jq '.[0].tag_name' | tr -d '"v')"
+    ;;
+  *)
+    echo_red 'Unknown source type. Terminating.'
+    exit 128
+    ;;
+esac
 echo_green "New ${source_repo} version is: ${version}"
 
 # Download destination repository
