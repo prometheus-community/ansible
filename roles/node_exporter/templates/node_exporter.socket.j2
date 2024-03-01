@@ -1,0 +1,8 @@
+[Unit]
+Description=Node Exporter
+
+[Socket]
+ListenStream={{ node_exporter_web_listen_address.split(':') | last }}
+
+[Install]
+WantedBy=socket.target

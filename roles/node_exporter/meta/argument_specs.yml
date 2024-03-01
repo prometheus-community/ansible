@@ -81,3 +81,7 @@ argument_specs:
           - "I(Advanced)"
           - "Node exporter user"
         default: "node-exp"
+      node_exporter_systemd_socket_activation:
+        description:
+          - "Node exporter systemd socket activation task is executed when set to true."
+        default: false
