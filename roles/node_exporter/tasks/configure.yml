@@ -16,6 +16,7 @@
     group: root
     mode: 0644
   notify: restart node_exporter
+  when: node_exporter_systemd_socket_activation
 
 - name: Create node_exporter config directory
   ansible.builtin.file:

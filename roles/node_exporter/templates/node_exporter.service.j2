@@ -3,13 +3,18 @@
 [Unit]
 Description=Prometheus Node Exporter
 After=network-online.target
+{%   if  node_exporter_systemd_socket_activation %}
 Requires=node_exporter.socket
+{%   endif -%}
 
 [Service]
 Type=simple
 User={{ node_exporter_system_user }}
 Group={{ node_exporter_system_group }}
-ExecStart={{ node_exporter_binary_install_dir }}/node_exporter --web.systemd-socket \
+ExecStart={{ node_exporter_binary_install_dir }}/node_exporter \
+{%   if  node_exporter_systemd_socket_activation %}
+--web.systemd-socket \
+{%   endif -%}
 {% for collector in node_exporter_enabled_collectors -%}
 {%   if not collector is mapping %}
     '--collector.{{ collector }}' \
