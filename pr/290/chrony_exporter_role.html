@@ -24,7 +24,7 @@
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="prometheus.prometheus.ipmi_exporter role – Prometheus ipmi_exporter" href="ipmi_exporter_role.html" />
+    <link rel="next" title="prometheus.prometheus.fail2ban_exporter role – Prometheus fail2ban_exporter" href="fail2ban_exporter_role.html" />
     <link rel="prev" title="prometheus.prometheus.cadvisor role – cAdvisor" href="cadvisor_role.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
 
 
@@ -77,6 +77,7 @@
   
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="alertmanager_role.html">prometheus.prometheus.alertmanager role – Prometheus Alertmanager service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bind_exporter_role.html">prometheus.prometheus.bind_exporter role – Prometheus BIND Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blackbox_exporter_role.html">prometheus.prometheus.blackbox_exporter role – Deploy and manage Prometheus blackbox exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cadvisor_role.html">prometheus.prometheus.cadvisor role – cAdvisor</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">prometheus.prometheus.chrony_exporter role – Prometheus Chrony Exporter</a><ul>
@@ -91,13 +92,17 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="fail2ban_exporter_role.html">prometheus.prometheus.fail2ban_exporter role – Prometheus fail2ban_exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ipmi_exporter_role.html">prometheus.prometheus.ipmi_exporter role – Prometheus ipmi_exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="memcached_exporter_role.html">prometheus.prometheus.memcached_exporter role – Prometheus memcached_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mongodb_exporter_role.html">prometheus.prometheus.mongodb_exporter role – Prometheus mongodb_exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mysqld_exporter_role.html">prometheus.prometheus.mysqld_exporter role – Prometheus MySQLd Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nginx_exporter_role.html">prometheus.prometheus.nginx_exporter role – Prometheus nginx_exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="node_exporter_role.html">prometheus.prometheus.node_exporter role – Prometheus Node Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="postgres_exporter_role.html">prometheus.prometheus.postgres_exporter role – Prometheus PostgreSQL Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prometheus_role.html">prometheus.prometheus.prometheus role – Installs and configures prometheus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pushgateway_role.html">prometheus.prometheus.pushgateway role – Prometheus Pushgateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redis_exporter_role.html">prometheus.prometheus.redis_exporter role – Prometheus redis_exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="smartctl_exporter_role.html">prometheus.prometheus.smartctl_exporter role – Prometheus Smartctl Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="smokeping_prober_role.html">prometheus.prometheus.smokeping_prober role – Prometheus Smokeping Prober</a></li>
 <li class="toctree-l1"><a class="reference internal" href="snmp_exporter_role.html">prometheus.prometheus.snmp_exporter role – Prometheus SNMP exporter</a></li>
@@ -134,7 +139,7 @@
 <h1>prometheus.prometheus.chrony_exporter role – Prometheus Chrony Exporter<a class="headerlink" href="#prometheus-prometheus-chrony-exporter-role-prometheus-chrony-exporter" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/prometheus/prometheus/">prometheus.prometheus collection</a> (version 0.12.1).</p>
+<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/prometheus/prometheus/">prometheus.prometheus collection</a> (version 0.14.1).</p>
 <p>It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
 To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
 <p>To install it use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">prometheus.prometheus</span></code>.</p>
@@ -323,7 +328,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 
 <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="cadvisor_role.html" class="btn btn-neutral float-left" title="prometheus.prometheus.cadvisor role – cAdvisor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ipmi_exporter_role.html" class="btn btn-neutral float-right" title="prometheus.prometheus.ipmi_exporter role – Prometheus ipmi_exporter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="fail2ban_exporter_role.html" class="btn btn-neutral float-right" title="prometheus.prometheus.fail2ban_exporter role – Prometheus fail2ban_exporter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
