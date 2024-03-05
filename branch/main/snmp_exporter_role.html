@@ -174,6 +174,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_archive_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-archive-path"><strong>snmp_exporter_archive_path</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_archive_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_binary_install_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-binary-install-dir"><strong>snmp_exporter_binary_install_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_binary_install_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -182,7 +190,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/usr/local/bin&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_binary_local_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-binary-local-dir"><strong>snmp_exporter_binary_local_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_binary_local_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -191,7 +199,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>This overrides the <em>snmp_exporter_version</em> parameter</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_binary_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-binary-url"><strong>snmp_exporter_binary_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -199,7 +207,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_snmp_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">snmp_exporter_version</span> <span class="pre">}}/snmp_exporter-{{</span> <span class="pre">snmp_exporter_version</span> <span class="pre">}}.linux-{{</span> <span class="pre">go_arch_map[ansible_architecture]</span> <span class="pre">|</span> <span class="pre">default(ansible_architecture)</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_checksums_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-checksums-url"><strong>snmp_exporter_checksums_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_checksums_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -207,7 +215,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_snmp_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">snmp_exporter_version</span> <span class="pre">}}/sha256sums.txt&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_config_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-config-file"><strong>snmp_exporter_config_file</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_config_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -215,7 +223,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>Otherwise this should contain path to file with custom snmp exporter configuration</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_log_level"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-log-level"><strong>snmp_exporter_log_level</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_log_level" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -223,7 +231,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;info&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_skip_install"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-skip-install"><strong>snmp_exporter_skip_install</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -235,7 +243,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-version"><strong>snmp_exporter_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -243,7 +251,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.25.0&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--snmp_exporter_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-snmp-exporter-role-parameter-main-snmp-exporter-web-listen-address"><strong>snmp_exporter_web_listen_address</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--snmp_exporter_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
