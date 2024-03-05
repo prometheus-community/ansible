@@ -1,6 +1,12 @@
 ---
 ancestor:
 releases:
+  0.14.2:
+    changes:
+      bugfixes:
+        - 'bugfix: use temporary directory to make compatible with multi-user controllers
+          (https://github.com/prometheus-community/ansible/pull/301)'
+    release_date: '2024-03-05'
   0.14.1:
     changes:
       trivial:

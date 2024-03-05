@@ -4,6 +4,14 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.14.2
+=======
+
+Bugfixes
+--------
+
+- bugfix: use temporary directory to make compatible with multi-user controllers (https://github.com/prometheus-community/ansible/pull/301)
+
 v0.14.1
 =======
 
