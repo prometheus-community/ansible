@@ -12,7 +12,7 @@ User={{ mongodb_exporter_system_user }}
 Group={{ mongodb_exporter_system_group }}
 
 ExecStart={{ mongodb_exporter_binary_install_dir }}/mongodb_exporter \
-{% if mongodb_exporter_collectors is iterable %}
+{% if mongodb_exporter_collectors | type_debug == "list" %}
 {% for collector in mongodb_exporter_collectors -%}
     --collector.{{ collector }} \
 {% endfor %}
