@@ -27,7 +27,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ postgres_exporter_binary_url }}"
-        dest: "/tmp/postgres_exporter-{{ postgres_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ postgres_exporter_archive_path }}/postgres_exporter-{{ postgres_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __postgres_exporter_checksum }}"
         mode: '0644'
       register: _download_binary
@@ -40,9 +40,9 @@
     - name: Unpack postgres_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/postgres_exporter-{{ postgres_exporter_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp"
-        creates: "/tmp/postgres_exporter-{{ postgres_exporter_version }}.linux-{{ go_arch }}/postgres_exporter"
+        src: "{{ postgres_exporter_archive_path }}/postgres_exporter-{{ postgres_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ postgres_exporter_archive_path }}"
+        creates: "{{ postgres_exporter_archive_path }}/postgres_exporter-{{ postgres_exporter_version }}.linux-{{ go_arch }}/postgres_exporter"
         extra_opts:
           - --no-same-owner
       delegate_to: localhost
@@ -50,7 +50,7 @@
 
     - name: Propagate postgres_exporter binaries
       ansible.builtin.copy:
-        src: "/tmp/postgres_exporter-{{ postgres_exporter_version }}.linux-{{ go_arch }}/postgres_exporter"
+        src: "{{ postgres_exporter_archive_path }}/postgres_exporter-{{ postgres_exporter_version }}.linux-{{ go_arch }}/postgres_exporter"
         dest: "{{ postgres_exporter_binary_install_dir }}/postgres_exporter"
         mode: '0755'
         owner: root

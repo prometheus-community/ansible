@@ -27,7 +27,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ memcached_exporter_binary_url }}"
-        dest: "/tmp/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ memcached_exporter_archive_path }}/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __memcached_exporter_checksum }}"
         mode: '0644'
       register: _download_binary
@@ -40,15 +40,15 @@
     - name: Unpack memcached_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp"
-        creates: "/tmp/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}/memcached_exporter"
+        src: "{{ memcached_exporter_archive_path }}/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ memcached_exporter_archive_path }}"
+        creates: "{{ memcached_exporter_archive_path }}/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}/memcached_exporter"
       delegate_to: localhost
       check_mode: false
 
     - name: Propagate memcached_exporter binaries
       ansible.builtin.copy:
-        src: "/tmp/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}/memcached_exporter"
+        src: "{{ memcached_exporter_archive_path }}/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}/memcached_exporter"
         dest: "{{ memcached_exporter_binary_install_dir }}/memcached_exporter"
         mode: 0755
         owner: root

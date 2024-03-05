@@ -21,3 +21,6 @@ systemd_exporter_system_group: "systemd-exporter"
 systemd_exporter_system_user: "{{ systemd_exporter_system_group }}"
 
 systemd_exporter_log_level: info
+
+# Local path to stash the archive and its extraction
+systemd_exporter_archive_path: /tmp

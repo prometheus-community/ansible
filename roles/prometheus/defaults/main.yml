@@ -231,3 +231,6 @@ prometheus_system_group: 'prometheus'
 prometheus_system_user: "{{ prometheus_system_group }}"
 
 prometheus_stop_timeout: '600s'
+
+# Local path to stash the archive and its extraction
+prometheus_archive_path: /tmp

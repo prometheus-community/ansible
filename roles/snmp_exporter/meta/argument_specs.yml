@@ -41,3 +41,6 @@ argument_specs:
           - "I(Advanced)"
           - "Directory to install snmp_exporter binary"
         default: "/usr/local/bin"
+      snmp_exporter_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"

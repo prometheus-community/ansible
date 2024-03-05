@@ -24,3 +24,6 @@ chrony_exporter_disabled_collectors: []
 chrony_exporter_binary_install_dir: "/usr/local/bin"
 chrony_exporter_system_group: "chrony-exp"
 chrony_exporter_system_user: "{{ chrony_exporter_system_group }}"
+
+# Local path to stash the archive and its extraction
+chrony_exporter_archive_path: /tmp

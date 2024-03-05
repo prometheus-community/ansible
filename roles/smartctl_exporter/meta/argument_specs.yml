@@ -90,3 +90,6 @@ argument_specs:
           - "I(Advanced)"
           - "Smartctl exporter user"
         default: "smartctl-exp"
+      smartctl_exporter_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"

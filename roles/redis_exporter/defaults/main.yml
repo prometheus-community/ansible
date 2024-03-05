@@ -49,3 +49,6 @@ redis_exporter_config_command: "CONFIG"
 redis_exporter_binary_install_dir: "/usr/local/bin"
 redis_exporter_system_group: "redis-exp"
 redis_exporter_system_user: "{{ redis_exporter_system_group }}"
+
+# Local path to stash the archive and its extraction
+redis_exporter_archive_path: /tmp

@@ -165,3 +165,6 @@ argument_specs:
           - "How long to wait for Prometheus to shutdown. This is passed as a systemd TimeoutStopSec time spec."
         type: "str"
         default: "600s"
+      prometheus_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"
