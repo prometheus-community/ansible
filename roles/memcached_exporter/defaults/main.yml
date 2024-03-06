@@ -23,3 +23,6 @@ memcached_exporter_log_format: "logfmt"
 memcached_exporter_binary_install_dir: "/usr/local/bin"
 memcached_exporter_system_group: "memcached-exp"
 memcached_exporter_system_user: "{{ memcached_exporter_system_group }}"
+
+# Local path to stash the archive and its extraction
+memcached_exporter_archive_path: /tmp

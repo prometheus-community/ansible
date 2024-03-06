@@ -12,3 +12,6 @@ snmp_exporter_log_level: info
 snmp_exporter_config_file: ""
 
 snmp_exporter_binary_install_dir: "/usr/local/bin"
+
+# Local path to stash the archive and its extraction
+snmp_exporter_archive_path: /tmp

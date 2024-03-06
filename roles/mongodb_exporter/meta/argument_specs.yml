@@ -118,3 +118,6 @@ argument_specs:
           - "I(Advanced)"
           - "mongodb_exporter user"
         default: "mongodb-exp"
+      mongodb_exporter_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"

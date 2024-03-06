@@ -18,3 +18,6 @@ pushgateway_basic_auth_users: {}
 pushgateway_binary_install_dir: "/usr/local/bin"
 pushgateway_system_group: "pushgateway"
 pushgateway_system_user: "{{ pushgateway_system_group }}"
+
+# Local path to stash the archive and its extraction
+pushgateway_archive_path: /tmp

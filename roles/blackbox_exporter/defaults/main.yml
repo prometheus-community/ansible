@@ -75,3 +75,6 @@ blackbox_exporter_configuration_modules:
 blackbox_exporter_config_dir: /etc/blackbox_exporter
 
 blackbox_exporter_binary_install_dir: "/usr/local/bin"
+
+# Local path to stash the archive and its extraction
+blackbox_exporter_archive_path: /tmp

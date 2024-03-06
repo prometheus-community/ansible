@@ -36,7 +36,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ alertmanager_binary_url }}"
-        dest: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ alertmanager_archive_path }}/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __alertmanager_checksum }}"
         mode: 0644
       register: _download_archive
@@ -50,16 +50,16 @@
     - name: Unpack alertmanager binaries
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp"
+        src: "{{ alertmanager_archive_path }}/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ alertmanager_archive_path }}"
         mode: 0755
-        creates: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}/alertmanager"
+        creates: "{{ alertmanager_archive_path }}/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}/alertmanager"
       delegate_to: localhost
       check_mode: false
 
     - name: Propagate official alertmanager and amtool binaries
       ansible.builtin.copy:
-        src: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}/{{ item }}"
+        src: "{{ alertmanager_archive_path }}/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}/{{ item }}"
         dest: "{{ _alertmanager_binary_install_dir }}/{{ item }}"
         mode: 0755
         owner: root

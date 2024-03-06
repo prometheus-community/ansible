@@ -27,7 +27,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ cadvisor_binary_url }}"
-        dest: "/tmp/cadvisor-v{{ cadvisor_version }}-linux-{{ go_arch }}"
+        dest: "{{ cadvisor_archive_path }}/cadvisor-v{{ cadvisor_version }}-linux-{{ go_arch }}"
         mode: '0644'
       register: _download_binary
       until: _download_binary is succeeded
@@ -38,7 +38,7 @@
 
     - name: Propagate cadvisor binaries
       ansible.builtin.copy:
-        src: "/tmp/cadvisor-v{{ cadvisor_version }}-linux-{{ go_arch }}"
+        src: "{{ cadvisor_archive_path }}/cadvisor-v{{ cadvisor_version }}-linux-{{ go_arch }}"
         dest: "{{ cadvisor_binary_install_dir }}/cadvisor"
         mode: 0755
         owner: root

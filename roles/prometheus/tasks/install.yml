@@ -1,16 +1,16 @@
 ---
 - name: Create prometheus system group
   ansible.builtin.group:
-    name: prometheus
+    name: "{{ prometheus_system_group }}"
     system: true
     state: present
 
 - name: Create prometheus system user
   ansible.builtin.user:
-    name: prometheus
+    name: "{{ prometheus_system_user }}"
     system: true
     shell: "/usr/sbin/nologin"
-    group: prometheus
+    group: "{{ prometheus_system_group }}"
     createhome: false
     home: "{{ prometheus_db_dir }}"
 
@@ -18,8 +18,8 @@
   ansible.builtin.file:
     path: "{{ prometheus_db_dir }}"
     state: directory
-    owner: prometheus
-    group: prometheus
+    owner: "{{ prometheus_system_user }}"
+    group: "{{ prometheus_system_group }}"
     mode: 0755
 
 - name: Create prometheus configuration directories
@@ -27,7 +27,7 @@
     path: "{{ item }}"
     state: directory
     owner: root
-    group: prometheus
+    group: "{{ prometheus_system_group }}"
     mode: 0770
   with_items:
     - "{{ prometheus_config_dir }}"
@@ -44,7 +44,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ prometheus_binary_url }}"
-        dest: "/tmp/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ prometheus_archive_path }}/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __prometheus_checksum }}"
         mode: 0644
       register: _download_archive
@@ -58,15 +58,15 @@
     - name: Unpack prometheus binaries
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp"
-        creates: "/tmp/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}/prometheus"
+        src: "{{ prometheus_archive_path }}/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ prometheus_archive_path }}"
+        creates: "{{ prometheus_archive_path }}/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}/prometheus"
       delegate_to: localhost
       check_mode: false
 
     - name: Propagate official prometheus and promtool binaries
       ansible.builtin.copy:
-        src: "/tmp/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}/{{ item }}"
+        src: "{{ prometheus_archive_path }}/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}/{{ item }}"
         dest: "{{ _prometheus_binary_install_dir }}/{{ item }}"
         mode: 0755
         owner: root
@@ -79,7 +79,7 @@
 
     - name: Propagate official console templates
       ansible.builtin.copy:
-        src: "/tmp/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}/{{ item }}/"
+        src: "{{ prometheus_archive_path }}/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}/{{ item }}/"
         dest: "{{ prometheus_config_dir }}/{{ item }}/"
         mode: 0644
         owner: root

@@ -89,3 +89,6 @@ argument_specs:
           - "I(Advanced)"
           - "PostgreSQL Exporter user"
         default: "postgres-exp"
+      postgres_exporter_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"

@@ -46,3 +46,6 @@ argument_specs:
         description:
           - "I(Advanced)"
           - "Password to use to protect endpoints with basic auth"
+      fail2ban_exporter_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"

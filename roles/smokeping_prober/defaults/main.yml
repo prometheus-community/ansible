@@ -33,3 +33,6 @@ smokeping_prober_binary_install_dir: "/usr/local/bin"
 smokeping_prober_config_dir: "/etc/smokeping_prober"
 smokeping_prober_system_group: "smokeping"
 smokeping_prober_system_user: "{{ smokeping_prober_system_group }}"
+
+# Local path to stash the archive and its extraction
+smokeping_archive_path: /tmp

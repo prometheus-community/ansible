@@ -70,3 +70,6 @@ argument_specs:
           - "I(Advanced)"
           - "memcached_exporter user"
         default: "memcached-exp"
+      memcached_exporter_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"

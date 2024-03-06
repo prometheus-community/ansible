@@ -27,7 +27,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ pushgateway_binary_url }}"
-        dest: "/tmp/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ pushgateway_archive_path }}/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ __pushgateway_checksum }}"
         mode: '0644'
       register: _download_binary
@@ -40,15 +40,15 @@
     - name: Unpack pushgateway binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp"
-        creates: "/tmp/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}/pushgateway"
+        src: "{{ pushgateway_archive_path }}/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ pushgateway_archive_path }}"
+        creates: "{{ pushgateway_archive_path }}/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}/pushgateway"
       delegate_to: localhost
       check_mode: false
 
     - name: Propagate pushgateway binaries
       ansible.builtin.copy:
-        src: "/tmp/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}/pushgateway"
+        src: "{{ pushgateway_archive_path }}/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}/pushgateway"
         dest: "{{ pushgateway_binary_install_dir }}/pushgateway"
         mode: 0755
         owner: root

@@ -23,3 +23,6 @@ nginx_exporter_log_format: "logfmt"
 nginx_exporter_binary_install_dir: "/usr/local/bin"
 nginx_exporter_system_group: "nginx-exp"
 nginx_exporter_system_user: "{{ nginx_exporter_system_group }}"
+
+# Local path to stash the archive and its extraction
+nginx_exporter_archive_path: /tmp

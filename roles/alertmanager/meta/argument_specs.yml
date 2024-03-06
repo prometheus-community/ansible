@@ -10,7 +10,7 @@ argument_specs:
     options:
       alertmanager_version:
         description: "Alertmanager package version. Also accepts `latest` as parameter."
-        default: 0.26.0
+        default: 0.27.0
       alertmanager_skip_install:
         description: "Alertmanager installation tasks gets skipped when set to true."
         type: bool
@@ -110,3 +110,6 @@ argument_specs:
       alertmanager_amtool_config_output:
         description: 'Extended output, use C("") for simple output.'
         default: "extended"
+      alertmanager_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"

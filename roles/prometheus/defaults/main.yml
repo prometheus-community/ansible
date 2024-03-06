@@ -227,4 +227,10 @@ prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
       severity: warning
 # yamllint enable rule:line-length
 
+prometheus_system_group: 'prometheus'
+prometheus_system_user: "{{ prometheus_system_group }}"
+
 prometheus_stop_timeout: '600s'
+
+# Local path to stash the archive and its extraction
+prometheus_archive_path: /tmp

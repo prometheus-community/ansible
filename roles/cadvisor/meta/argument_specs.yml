@@ -47,3 +47,6 @@ argument_specs:
           - "I(Advanced)"
           - "cAdvisor user"
         default: "root"
+      cadvisor_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"
