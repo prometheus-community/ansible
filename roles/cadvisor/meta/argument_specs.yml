@@ -33,7 +33,7 @@ argument_specs:
         description: "Path under which to expose metrics"
         default: "/metrics"
       cadvisor_disable_metrics:
-        description: 
+        description:
           - "comma-separated list of metrics to be disabled"
           - "(default advtcp,cpu_topology,cpuset,hugetlb,memory_numa,process,referenced_memory,resctrl,sched,tcp,udp)"
         type: "list"
