@@ -9,6 +9,15 @@ Type=simple
 User={{ cadvisor_system_user }}
 Group={{ cadvisor_system_group }}
 ExecStart={{ cadvisor_binary_install_dir }}/cadvisor \
+{% if cadvisor_disable_metrics | length > 0 %}
+    '--disable_metrics={{ cadvisor_disable_metrics | join(',') }}' \
+{% endif -%}
+{% if cadvisor_enable_metrics | length > 0 %}
+    '--enable_metrics={{ cadvisor_enable_metrics | join(',') }}' \
+{% endif -%}
+{% if cadvisor_docker_only %}
+    '--docker_only={{ cadvisor_docker_only | lower }}' \
+{% endif -%}
     '--listen_ip={{ cadvisor_listen_ip }}' \
     '--port={{ cadvisor_port }}' \
     '--prometheus_endpoint={{ cadvisor_prometheus_endpoint }}'
