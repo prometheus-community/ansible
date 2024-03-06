@@ -4,6 +4,14 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.14.3
+=======
+
+Bugfixes
+--------
+
+- fix(ipmi_exporter): add option to impi_exporter service to allow tmp file creation (https://github.com/prometheus-community/ansible/pull/311)
+
 v0.14.2
 =======
 
