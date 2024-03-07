@@ -11,6 +11,7 @@ mongodb_exporter_web_listen_address: "0.0.0.0:9216"
 mongodb_exporter_web_telemetry_path: "/metrics"
 
 mongodb_exporter_uri: "mongodb://127.0.0.1:27017/admin?ssl=false"
+# specify a list of collectors or "all"
 mongodb_exporter_collectors: []
 mongodb_exporter_collstats_colls: []
 mongodb_exporter_indexstats_colls: []
