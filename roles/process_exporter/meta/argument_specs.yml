@@ -20,6 +20,9 @@ argument_specs:
           - "Enables the use of local packages instead of those distributed on github."
           - "The parameter may be set to a directory where the C(process_exporter) binary is stored on the host where ansible is run."
           - "This overrides the I(process_exporter_version) parameter"
+      process_exporter_archive_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp"
       process_exporter_binary_url:
         description: "URL of the Process exporter binaries .tar.gz file"
         default: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/process_exporter-{{ process_exporter_version }}.linux-{{ go_arch }}.tar.gz"

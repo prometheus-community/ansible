@@ -5,6 +5,7 @@ process_exporter_binary_url: "https://github.com/{{ _process_exporter_repo }}/re
                               process-exporter-{{ process_exporter_version }}.linux-{{ go_arch }}.tar.gz"
 process_exporter_checksums_url: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/checksums.txt"
 process_exporter_skip_install: false
+process_exporter_archive_path: /tmp
 
 
 process_exporter_web_listen_address: "0.0.0.0:9256"
