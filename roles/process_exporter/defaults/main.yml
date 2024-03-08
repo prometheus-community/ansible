@@ -10,6 +10,12 @@ process_exporter_skip_install: false
 process_exporter_web_listen_address: "0.0.0.0:9256"
 process_exporter_web_telemetry_path: "/metrics"
 
+process_exporter_tls_server_config: {}
+
+process_exporter_http_server_config: {}
+
+process_exporter_basic_auth_users: {}
+
 # Process names
 # "raw" section is needed to avoid attempted interpretation
 # of process-exporter Template varables (like {{.Comm}})

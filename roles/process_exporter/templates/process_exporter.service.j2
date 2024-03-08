@@ -12,6 +12,9 @@ ExecStart={{ process_exporter_binary_install_dir }}/process_exporter \
 {% if process_exporter_names != [] -%}
     '--config.path=/etc/process_exporter/config.yml' \
 {% endif -%}
+{% if process_exporter_tls_server_config | length > 0 or process_exporter_http_server_config | length > 0 or process_exporter_basic_auth_users | length > 0 %}
+    '--web.config.file=/etc/process_exporter/web_config.yml' \
+{% endif %}
     '--web.listen-address={{ process_exporter_web_listen_address }}' \
     '--web.telemetry-path={{ process_exporter_web_telemetry_path }}'
 
@@ -24,9 +27,6 @@ StartLimitInterval=0
 {% for m in ansible_mounts if m.mount.startswith('/home') %}
 {%   set ns.protect_home = 'read-only' %}
 {% endfor %}
-{% if node_exporter_textfile_dir.startswith('/home') %}
-{%   set ns.protect_home = 'read-only' %}
-{% endif %}
 ProtectHome={{ ns.protect_home }}
 NoNewPrivileges=yes
 
