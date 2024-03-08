@@ -9,6 +9,10 @@ cadvisor_listen_ip: "0.0.0.0"
 cadvisor_port: "8080"
 cadvisor_prometheus_endpoint: "/metrics"
 
+cadvisor_enable_metrics: []
+cadvisor_disable_metrics: []
+cadvisor_docker_only: false
+
 cadvisor_binary_install_dir: "/usr/local/bin"
 cadvisor_system_group: "root"
 cadvisor_system_user: "{{ cadvisor_system_group }}"

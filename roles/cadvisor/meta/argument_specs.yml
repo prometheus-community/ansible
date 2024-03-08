@@ -32,6 +32,42 @@ argument_specs:
       cadvisor_prometheus_endpoint:
         description: "Path under which to expose metrics"
         default: "/metrics"
+      cadvisor_disable_metrics:
+        description:
+          - "comma-separated list of metrics to be disabled"
+          - "(default advtcp,cpu_topology,cpuset,hugetlb,memory_numa,process,referenced_memory,resctrl,sched,tcp,udp)"
+        type: "list"
+        default: []
+        choices: &metrics_choices
+          - advtcp
+          - app
+          - cpu
+          - cpuLoad
+          - cpu_topology
+          - cpuset
+          - disk
+          - diskIO
+          - hugetlb
+          - memory
+          - memory_numa
+          - network
+          - oom_event
+          - percpu
+          - perf_event
+          - process
+          - referenced_memory
+          - resctrl
+          - sched
+          - tcp
+      cadvisor_enable_metrics:
+        description: "comma-separated list of metrics to be enabled. If set, overrides 'cadvisor_disable_metrics'"
+        default: []
+        type: "list"
+        choices: *metrics_choices
+      cadvisor_docker_only:
+        description: "do not report raw cgroup metrics, except the root cgroup"
+        type: "bool"
+        default: false
       cadvisor_binary_install_dir:
         description:
           - "I(Advanced)"
