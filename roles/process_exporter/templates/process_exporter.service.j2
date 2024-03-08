@@ -12,7 +12,8 @@ ExecStart={{ process_exporter_binary_install_dir }}/process_exporter \
 {% if process_exporter_names != [] -%}
     '--config.path=/etc/process_exporter/config.yml' \
 {% endif -%}
-    '--web.listen-address={{ process_exporter_web_listen_address }}'
+    '--web.listen-address={{ process_exporter_web_listen_address }}' \
+    '--web.telemetry-path={{ process_exporter_web_telemetry_path }}'
 
 SyslogIdentifier=process_exporter
 Restart=always

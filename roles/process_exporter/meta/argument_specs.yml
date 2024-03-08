@@ -29,6 +29,9 @@ argument_specs:
       process_exporter_web_listen_address:
         description: "Address on which Process exporter will listen"
         default: "0.0.0.0:9256"
+      process_exporter_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
       process_exporter_names:
         description:
           - "Processes which should be monitored."

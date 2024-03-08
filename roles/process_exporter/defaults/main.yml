@@ -8,6 +8,7 @@ process_exporter_skip_install: false
 
 
 process_exporter_web_listen_address: "0.0.0.0:9256"
+process_exporter_web_telemetry_path: "/metrics"
 
 # Process names
 # "raw" section is needed to avoid attempted interpretation
