@@ -17,16 +17,12 @@
     mode: u+rwX,g+rwX,o=rX
 
 - name: Create/Update configuration file
-  ansible.builtin.copy:
+  ansible.builtin.template:
+    src: "config.yml.j2"
     dest: "/etc/process_exporter/config.yml"
-    content: |
-      process_names:
-      {{ process_exporter_names }}
     owner: root
     group: root
     mode: 0644
-  when:
-    - process_exporter_names != []
   notify: restart process_exporter
 
 - name: Allow process_exporter port in SELinux on RedHat OS family
