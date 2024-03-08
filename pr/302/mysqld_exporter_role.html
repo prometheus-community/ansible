@@ -140,7 +140,7 @@
 <h1>prometheus.prometheus.mysqld_exporter role – Prometheus MySQLd Exporter<a class="headerlink" href="#prometheus-prometheus-mysqld-exporter-role-prometheus-mysqld-exporter" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/prometheus/prometheus/">prometheus.prometheus collection</a> (version 0.14.0).</p>
+<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/prometheus/prometheus/">prometheus.prometheus collection</a> (version 0.14.3).</p>
 <p>It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
 To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
 <p>To install it use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">prometheus.prometheus</span></code>.</p>
@@ -175,13 +175,21 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_archive_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-archive-path"><strong>mysqld_exporter_archive_path</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_archive_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_basic_auth_users"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-basic-auth-users"><strong>mysqld_exporter_basic_auth_users</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_basic_auth_users" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_binary_install_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-binary-install-dir"><strong>mysqld_exporter_binary_install_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_binary_install_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -190,7 +198,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/usr/local/bin&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_binary_local_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-binary-local-dir"><strong>mysqld_exporter_binary_local_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_binary_local_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -199,7 +207,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>This overrides the <em>mysqld_exporter_version</em> parameter</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_binary_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-binary-url"><strong>mysqld_exporter_binary_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -207,7 +215,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/prometheus/{{</span> <span class="pre">_mysqld_exporter_repo</span> <span class="pre">}}/download/v{{</span> <span class="pre">mysqld_exporter_version</span> <span class="pre">}}/mysqld_exporter-{{</span> <span class="pre">mysqld_exporter_version</span> <span class="pre">}}.linux-{{</span> <span class="pre">go_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_checksums_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-checksums-url"><strong>mysqld_exporter_checksums_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_checksums_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -215,7 +223,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_mysqld_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">mysqld_exporter_version</span> <span class="pre">}}/sha256sums.txt&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_config_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-config-dir"><strong>mysqld_exporter_config_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_config_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -223,7 +231,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/etc/mysqld_exporter&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_config_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-config-file"><strong>mysqld_exporter_config_file</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_config_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -231,7 +239,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;mysqld_exporter.cnf&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_disabled_collectors"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-disabled-collectors"><strong>mysqld_exporter_disabled_collectors</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_disabled_collectors" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
@@ -239,7 +247,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>By default mysqld_exporter disables collectors listed <a class="reference external" href="https://github.com/prometheus/mysqld_exporter#disabled-by-default">here</a>.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_enabled_collectors"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-enabled-collectors"><strong>mysqld_exporter_enabled_collectors</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_enabled_collectors" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
@@ -248,14 +256,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_host"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-host"><strong>mysqld_exporter_host</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_host" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The target MySQL host</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_http_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-http-server-config"><strong>mysqld_exporter_http_server_config</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_http_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -263,7 +271,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>Keys and values are the same as in <a class="reference external" href="https://github.com/prometheus/mysqld_exporter/blob/master/https/README.md#sample-config">mysqld_exporter docs</a>.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_password"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-password"><strong>mysqld_exporter_password</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -271,14 +279,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;secret&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_port"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-port"><strong>mysqld_exporter_port</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_port" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The target MySQL port</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_skip_install"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-skip-install"><strong>mysqld_exporter_skip_install</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -290,7 +298,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_socket"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-socket"><strong>mysqld_exporter_socket</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_socket" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -298,7 +306,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/run/mysqld/mysqld.sock&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-system-group"><strong>mysqld_exporter_system_group</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -307,7 +315,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;mysqld-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-system-user"><strong>mysqld_exporter_system_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -316,7 +324,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;mysqld-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_tls_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-tls-server-config"><strong>mysqld_exporter_tls_server_config</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_tls_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -324,7 +332,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>Keys and values are the same as in <a class="reference external" href="https://github.com/prometheus/mysqld_exporter/blob/master/https/README.md#sample-config">mysqld_exporter docs</a>.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_username"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-username"><strong>mysqld_exporter_username</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_username" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -332,7 +340,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;exporter&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-version"><strong>mysqld_exporter_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -340,7 +348,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.15.1&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-web-listen-address"><strong>mysqld_exporter_web_listen_address</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -348,7 +356,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9104&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--mysqld_exporter_web_telemetry_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-mysqld-exporter-role-parameter-main-mysqld-exporter-web-telemetry-path"><strong>mysqld_exporter_web_telemetry_path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--mysqld_exporter_web_telemetry_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
