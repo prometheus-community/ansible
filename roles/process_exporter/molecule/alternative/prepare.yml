@@ -7,7 +7,7 @@
       become: false
       ansible.builtin.get_url:
         url: "https://github.com/ncabatoff/process-exporter/releases/download/v{{\
-          \ process_exporter_version }}/process_exporter-{{ process_exporter_version }}.linux-{{\
+          \ process_exporter_version }}/process-exporter-{{ process_exporter_version }}.linux-{{\
           \ go_arch }}.tar.gz"
         dest: "/tmp/process_exporter-{{ process_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         mode: 0644
