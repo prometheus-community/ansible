@@ -10,6 +10,7 @@ releases:
       minor_changes:
         - 'feat: cadvisor - options to enable\disable metrics and docker-only mode
           (https://github.com/prometheus-community/ansible/pull/312)'
+        - 'feat: add process_exporter role (https://github.com/prometheus-community/ansible/pull/302)'
     release_date: '2024-03-08'
   0.14.3:
     changes:

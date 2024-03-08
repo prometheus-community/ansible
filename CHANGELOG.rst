@@ -10,6 +10,7 @@ v0.15.0
 Minor Changes
 -------------
 
+- feat: add process_exporter role (https://github.com/prometheus-community/ansible/pull/302)
 - feat: cadvisor - options to enable\disable metrics and docker-only mode (https://github.com/prometheus-community/ansible/pull/312)
 
 Bugfixes
