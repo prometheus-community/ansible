@@ -1,0 +1,43 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus Process Exporter
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ process_exporter_system_user }}
+Group={{ process_exporter_system_group }}
+ExecStart={{ process_exporter_binary_install_dir }}/process_exporter \
+{% if process_exporter_names != [] -%}
+    '--config.path=/etc/process_exporter/config.yml' \
+{% endif -%}
+{% if process_exporter_tls_server_config | length > 0 or process_exporter_http_server_config | length > 0 or process_exporter_basic_auth_users | length > 0 %}
+    '--web.config.file=/etc/process_exporter/web_config.yml' \
+{% endif %}
+    '--web.listen-address={{ process_exporter_web_listen_address }}' \
+    '--web.telemetry-path={{ process_exporter_web_telemetry_path }}'
+
+SyslogIdentifier=process_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+{% set ns = namespace(protect_home = 'yes') %}
+{% for m in ansible_mounts if m.mount.startswith('/home') %}
+{%   set ns.protect_home = 'read-only' %}
+{% endfor %}
+ProtectHome={{ ns.protect_home }}
+NoNewPrivileges=yes
+
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target
