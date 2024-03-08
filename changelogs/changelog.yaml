@@ -1,6 +1,16 @@
 ---
 ancestor:
 releases:
+  0.15.0:
+    changes:
+      bugfixes:
+        - 'fix(ipmi_exporter): add option to impi_exporter service to allow tmp file
+          creation (https://github.com/prometheus-community/ansible/pull/311)'
+        - 'fix: change monogdb exporter collector check in service (https://github.com/prometheus-community/ansible/pull/310)'
+      minor_changes:
+        - 'feat: cadvisor - options to enable\disable metrics and docker-only mode
+          (https://github.com/prometheus-community/ansible/pull/312)'
+    release_date: '2024-03-08'
   0.14.3:
     changes:
       bugfixes:

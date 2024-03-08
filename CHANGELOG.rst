@@ -4,6 +4,20 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.15.0
+=======
+
+Minor Changes
+-------------
+
+- feat: cadvisor - options to enable\disable metrics and docker-only mode (https://github.com/prometheus-community/ansible/pull/312)
+
+Bugfixes
+--------
+
+- fix(ipmi_exporter): add option to impi_exporter service to allow tmp file creation (https://github.com/prometheus-community/ansible/pull/311)
+- fix: change monogdb exporter collector check in service (https://github.com/prometheus-community/ansible/pull/310)
+
 v0.14.3
 =======
 
