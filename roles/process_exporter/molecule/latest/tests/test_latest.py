@@ -35,7 +35,7 @@ def test_service(host):
 def test_protecthome_property(host):
     s = host.service("process_exporter")
     p = s.systemd_properties
-    assert p.get("ProtectHome") == "read-only"
+    assert p.get("ProtectHome") == "yes"
 
 
 def test_socket(host):
