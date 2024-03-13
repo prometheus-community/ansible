@@ -39,9 +39,13 @@ ExecStart={{ mongodb_exporter_binary_install_dir }}/mongodb_exporter \
 {% endif -%}
 {% if mongodb_exporter_direct_connect -%}
     --mongodb.direct-connect \
+{% else -%}
+    --no-mongodb.direct-connect \
 {% endif -%}
 {% if mongodb_exporter_global_conn_pool -%}
     --mongodb.global-conn-pool \
+{% else -%}
+    --no-mongodb.global-conn-pool \
 {% endif -%}
 {% if mongodb_exporter_metrics_overridedescendingindex -%}
     --metrics.overridedescendingindex \
