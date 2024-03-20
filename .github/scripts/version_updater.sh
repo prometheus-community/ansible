@@ -6,14 +6,14 @@ GIT_MAIL="prometheus-team@googlegroups.com"
 GIT_USER="prombot"
 GIT_REPO="prometheus-community/ansible"
 
-if [[ $# -ne 2 ]]; then
-  echo "usage: $(basename "$0") <source repo> <role>"
+if [[ $# -ne 3 ]]; then
+  echo "usage: $(basename "$0") <source repo> <role> <githost>"
   exit 1
 fi
 
 source_repo="$1"
 role="$2"
-type="$3"
+githost="$3"
 
 color_red='\e[31m'
 color_green='\e[32m'
@@ -75,7 +75,7 @@ if [[ -z "${role}" ]]; then
 fi
 
 # Get latest version.
-case "${type}" in
+case "${githost}" in
   github)
     version="$(github_api "repos/${source_repo}/releases/latest" | jq '.tag_name' | tr -d '"v')"
     ;;
@@ -83,7 +83,7 @@ case "${type}" in
     version="$(gitlab_api "projects/${source_repo}/releases" | jq '.[0].tag_name' | tr -d '"v')"
     ;;
   *)
-    echo_red 'Unknown source type. Terminating.'
+    echo_red 'Unknown source githost. Terminating.'
     exit 128
     ;;
 esac
