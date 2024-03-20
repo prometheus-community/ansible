@@ -10,7 +10,7 @@ argument_specs:
     options:
       cadvisor_version:
         description: "cAdvisor package version. Also accepts latest as parameter."
-        default: "0.47.2"
+        default: "0.49.1"
       cadvisor_skip_install:
         description: "cAdvisor installation tasks gets skipped when set to true."
         type: bool
