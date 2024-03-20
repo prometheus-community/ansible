@@ -87,6 +87,26 @@ prometheus_scrape_configs:
       - files:
           - "{{ prometheus_config_dir }}/file_sd/node.yml"
 
+prometheus_scrape_config_files:
+  - "prometheus/configs/*.yml"
+
+prometheus_scrape_config_custom: {}
+#  custom1:
+#   scrape_configs:
+#     - job_name: "custom1"
+#       metrics_path: "{{ prometheus_metrics_path }}"
+#       static_configs:
+#         - targets:
+#             - "{{ ansible_fqdn | default(ansible_host) | default('localhost') }}:9090"
+#  custom2:
+#    scrape_configs
+#     - job_name: "custom2"
+#       metrics_path: "{{ prometheus_metrics_path }}"
+#       static_configs:
+#         - targets:
+#             - "{{ ansible_fqdn | default(ansible_host) | default('localhost') }}:9090"
+
+
 # Alternative config file name, searched in ansible templates path.
 prometheus_config_file: 'prometheus.yml.j2'
 
