@@ -10,7 +10,7 @@ argument_specs:
     options:
       smartctl_exporter_version:
         description: "Smartctl exporter package version. Also accepts latest as parameter."
-        default: "0.11.0"
+        default: "0.12.0"
       smartctl_exporter_skip_install:
         description: "Smartctl exporter installation tasks gets skipped when set to true."
         type: bool

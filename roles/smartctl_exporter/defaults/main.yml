@@ -1,5 +1,5 @@
 ---
-smartctl_exporter_version: 0.11.0
+smartctl_exporter_version: 0.12.0
 smartctl_exporter_binary_local_dir: ""
 smartctl_exporter_binary_url: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/\
                            smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{ go_arch }}.tar.gz"
