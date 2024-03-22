@@ -1,0 +1,14 @@
+---
+- name: Get checksum list from github
+  ansible.builtin.set_fact:
+    __node_exporter_checksums: "{{ lookup('url', node_exporter_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
+  run_once: true
+  until: __node_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
+  retries: 10
+
+- name: "Get checksum for {{ go_arch }}"
+  ansible.builtin.set_fact:
+    __node_exporter_checksum: "{{ item.split(' ')[0] }}"
+  with_items: "{{ __node_exporter_checksums }}"
+  when:
+    - "('linux-' + go_arch + '.tar.gz') in item"
