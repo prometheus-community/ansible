@@ -7,6 +7,14 @@ pushgateway_checksums_url: "https://github.com/{{ _pushgateway_repo }}/releases/
 pushgateway_web_listen_address: "0.0.0.0:9091"
 pushgateway_web_telemetry_path: "/metrics"
 
+# External address on which pushgateway is available.
+# Useful when behind reverse proxy, e.g.: https://example.org/pushgateway
+pushgateway_web_external_url: ""
+
+# Optional extra flags to be passed to pushgateway binary, e.g.
+# ['--log.level=debug', '--log.format=json', '--web.enable-admin-api']
+pushgateway_cli_extra_flags: []
+
 pushgateway_tls_server_config: {}
 
 pushgateway_http_server_config: {}
