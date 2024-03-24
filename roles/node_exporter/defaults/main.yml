@@ -6,6 +6,7 @@ node_exporter_binary_url: "https://github.com/{{ _node_exporter_repo }}/releases
 node_exporter_checksums_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/sha256sums.txt"
 node_exporter_skip_install: false
 
+node_exporter_web_disable_exporter_metrics: false
 node_exporter_web_listen_address: "0.0.0.0:9100"
 node_exporter_web_telemetry_path: "/metrics"
 
