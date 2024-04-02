@@ -1,5 +1,5 @@
 ---
-smokeping_prober_version: 0.7.3
+smokeping_prober_version: 0.8.0
 smokeping_prober_binary_local_dir: ""
 smokeping_prober_binary_url: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/\
                            smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
