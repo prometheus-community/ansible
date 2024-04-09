@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.16.1:
+    changes:
+      trivial:
+        - 'patch: New prometheus/blackbox_exporter upstream release 0.25.0! (https://github.com/prometheus-community/ansible/pull/331)'
+    release_date: '2024-04-09'
   0.16.0:
     changes:
       trivial:
