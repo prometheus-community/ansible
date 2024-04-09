@@ -1,5 +1,5 @@
 ---
-blackbox_exporter_version: 0.24.0
+blackbox_exporter_version: 0.25.0
 blackbox_exporter_binary_local_dir: ""
 blackbox_exporter_binary_url: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/\
                                blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] |
