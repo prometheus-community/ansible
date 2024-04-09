@@ -10,7 +10,7 @@ argument_specs:
     options:
       chrony_exporter_version:
         description: "Chrony exporter package version. Also accepts latest as parameter."
-        default: "0.9.1"
+        default: "0.9.2"
       chrony_exporter_skip_install:
         description: "Chrony exporter installation tasks gets skipped when set to true."
         type: bool
