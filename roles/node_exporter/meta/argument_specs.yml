@@ -26,6 +26,10 @@ argument_specs:
       node_exporter_checksums_url:
         description: "URL of the node exporter checksums file"
         default: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/sha256sums.txt"
+      node_exporter_web_disable_exporter_metrics:
+        description: "Exclude metrics about the exporter itself (promhttp_*, process_*, go_*)."
+        type: bool
+        default: false
       node_exporter_web_listen_address:
         description: "Address on which node exporter will listen"
         default: "0.0.0.0:9100"
