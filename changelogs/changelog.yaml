@@ -4,6 +4,8 @@ releases:
   0.16.0:
     changes:
       trivial:
+        - 'patch: New prometheus/pushgateway upstream release 1.8.0! (https://github.com/prometheus-community/ansible/pull/329)'
+        - 'patch: New superq/smokeping_prober upstream release 0.8.1! (https://github.com/prometheus-community/ansible/pull/328)'
         - 'patch: New prometheus/prometheus upstream release 2.51.1! (https://github.com/prometheus-community/ansible/pull/326)'
         - 'patch: New superq/chrony_exporter upstream release 0.9.2! (https://github.com/prometheus-community/ansible/pull/325)'
         - 'patch: New prometheus/memcached_exporter upstream release 0.14.3! (https://github.com/prometheus-community/ansible/pull/322)'
