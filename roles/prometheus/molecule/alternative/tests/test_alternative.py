@@ -23,7 +23,7 @@ def test_directories(host, dirs):
 
 @pytest.mark.parametrize("files", [
     "/opt/prom/etc/prometheus.yml",
-    "/opt/prom/etc/rules/ansible_managed.rules",
+    "/opt/prom/etc/rules/ansible_managed.yml",
     "/opt/prom/etc/file_sd/node.yml",
     "/opt/prom/etc/file_sd/docker.yml",
     "/usr/local/bin/prometheus",

@@ -46,7 +46,7 @@ def test_files(host, files):
 
 
 @pytest.mark.parametrize("files", [
-    "/etc/prometheus/rules/ansible_managed.rules"
+    "/etc/prometheus/rules/ansible_managed.yml"
 ])
 def test_absent(host, files):
     f = host.file(files)
