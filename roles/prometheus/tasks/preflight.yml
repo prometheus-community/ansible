@@ -99,7 +99,6 @@
       If your rules are already in the YAML format but with the .rules extension, you can safely ignore this message,
       or rename the files to <filename>.yaml or <filename>.yml to get rid of it.
   when: prometheus_alert_rules_files | select('search', '.rules$') | list | length > 0
-  ignore_errors: true
 
 - name: Discover latest version
   ansible.builtin.set_fact:
