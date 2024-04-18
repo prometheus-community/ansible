@@ -199,8 +199,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_alert_rules"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-alert-rules"><strong>prometheus_alert_rules</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_alert_rules" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Full list of alerting rules which will be copied to <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">prometheus_config_dir</span> <span class="pre">}}/rules/ansible_managed.rules</span></code>.</p>
-<p>Alerting rules can be also provided by other files located in <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">prometheus_config_dir</span> <span class="pre">}}/rules/</span></code> which have a <code class="docutils literal notranslate"><span class="pre">*.yml</span></code> extension</p>
+<td><div class="ansible-option-cell"><p>Full list of alerting rules which will be copied to <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">prometheus_config_dir</span> <span class="pre">}}/rules/ansible_managed.yml</span></code>.</p>
+<p>Alerting rules can be also provided by other files located in <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">prometheus_config_dir</span> <span class="pre">}}/rules/</span></code> which have a <code class="docutils literal notranslate"><span class="pre">*.yml</span></code> or <code class="docutils literal notranslate"><span class="pre">*.yaml</span></code> extension</p>
 <p>Please see default values in role defaults/main.yml</p>
 </div></td>
 </tr>
@@ -209,8 +209,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_alert_rules_files" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>List of folders where ansible will look for files containing alerting rules which will be copied to <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">prometheus_config_dir</span> <span class="pre">}}/rules/</span></code>.</p>
-<p>Files must have a <code class="docutils literal notranslate"><span class="pre">*.yml</span></code> extension</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[&quot;prometheus/rules/*.rules&quot;]</span></code></p>
+<p>Files must have a <code class="docutils literal notranslate"><span class="pre">*.yml</span></code> or <code class="docutils literal notranslate"><span class="pre">*.yaml</span></code> extension</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[&quot;prometheus/rules/*.yml&quot;,</span> <span class="pre">&quot;prometheus/rules/*.yaml&quot;]</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
