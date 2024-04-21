@@ -10,7 +10,7 @@ argument_specs:
     options:
       redis_exporter_version:
         description: "redis_exporter package version. Also accepts latest as parameter."
-        default: "1.58.0"
+        default: "1.59.0"
       redis_exporter_skip_install:
         description: "redis_exporter installation tasks gets skipped when set to true."
         type: bool
