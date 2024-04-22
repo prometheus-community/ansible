@@ -4,7 +4,7 @@ argument_specs:
   main:
     short_description: "Prometheus Process exporter"
     description:
-      - "Deploy prometheus L(Process exporter,https://github.com/ncabatoff/process_exporter) using ansible"
+      - "Deploy prometheus L(Process exporter,https://github.com/ncabatoff/process-exporter) using ansible"
     author:
       - "Prometheus Community"
     options:
