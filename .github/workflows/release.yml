@@ -58,6 +58,6 @@ jobs:
 
       - name: "Publish release"
         id: release-publish
-        uses: release-drafter/release-drafter@v5
+        uses: release-drafter/release-drafter@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
