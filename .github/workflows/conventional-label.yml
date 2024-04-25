@@ -16,7 +16,10 @@ jobs:
       - name: "Confirm correct pull request title"
         uses: mmubeen/action-pr-title@master  # until PR gets merged https://github.com/deepakputhraya/action-pr-title/pull/29
         with:
-          allowed_prefixes: 'feat,feature,fix,major,breaking,minor,enhancement,deprecated,removed,security,bug,bugfix,docs,packaging,test,refactor,refactoring,skip-release,skip_changelog,patch'
+          allowed_prefixes: >-
+            breaking,chore,feat,feature,fix,major,minor,enhancement,
+            deprecated,removed,security,bug,bugfix,docs,packaging,
+            test,refactor,refactoring,skip-release,skip_changelog,patch
 
       - name: "Apply label"
         if: github.event.pull_request.labels.length == 0
@@ -43,7 +46,8 @@ jobs:
               "refactoring": "trivial",
               "skip-release": "skip_changelog",
               "skip_changelog": "skip_changelog",
-              "patch": "trivial"
+              "patch": "trivial",
+              "chore": "trivial"
               }
 
   role-label:
