@@ -12,7 +12,6 @@ releases:
         - 'patch: New ncabatoff/process-exporter upstream release 0.8.1! (https://github.com/prometheus-community/ansible/pull/336)'
     release_date: '2024-04-18'
   0.16.2:
-    changes: {}
     release_date: '2024-04-15'
   0.16.1:
     changes:
