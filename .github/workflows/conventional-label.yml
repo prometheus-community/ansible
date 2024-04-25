@@ -69,7 +69,7 @@ jobs:
           sha: ${{ github.event.pull_request.head.sha }}
 
       - name: Add changed roles labels
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: |
           steps.changed-roles.outputs.all_changed_and_modified_files
         with:
