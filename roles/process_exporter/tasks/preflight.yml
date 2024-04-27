@@ -9,6 +9,7 @@
   ansible.builtin.package:
     name: "{{ _pkg_fact_req }}"
     state: present
+    install_recommends: false
   when: (_pkg_fact_req)
   vars:
     _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
