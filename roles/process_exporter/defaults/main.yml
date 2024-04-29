@@ -1,5 +1,5 @@
 ---
-process_exporter_version: 0.8.1
+process_exporter_version: 0.8.2
 process_exporter_binary_local_dir: ""
 process_exporter_binary_url: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/\
                               process-exporter-{{ process_exporter_version }}.linux-{{ go_arch }}.tar.gz"
