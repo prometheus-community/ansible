@@ -7,6 +7,11 @@ Prometheus.Prometheus Release Notes
 v0.16.4
 =======
 
+Bugfixes
+--------
+
+- fix: process-exporter app url (https://github.com/prometheus-community/ansible/pull/338)
+
 v0.16.3
 =======
 
