@@ -53,7 +53,7 @@
         mode: 0755
         owner: root
         group: root
-      notify: restart smokeping_prober
+      notify: Restart smokeping_prober
       when: not ansible_check_mode
 
 - name: Propagate locally distributed smokeping_prober binary
@@ -66,4 +66,4 @@
   when:
     - smokeping_prober_binary_local_dir | length > 0
     - not smokeping_prober_skip_install
-  notify: restart smokeping_prober
+  notify: Restart smokeping_prober

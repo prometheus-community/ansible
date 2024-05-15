@@ -5,4 +5,3 @@
     name: systemd_exporter
     state: restarted
   become: true
-  listen: restart systemd_exporter

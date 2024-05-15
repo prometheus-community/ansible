@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart cadvisor
+  notify: Restart cadvisor
 
 - name: Allow cadvisor port in SELinux on RedHat OS family
   community.general.seport:

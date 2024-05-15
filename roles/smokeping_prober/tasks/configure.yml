@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart smokeping_prober
+  notify: Restart smokeping_prober
 
 - name: Create smokeping_prober config directory
   ansible.builtin.file:
@@ -24,7 +24,7 @@
     group: root
     mode: 0644
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
-  notify: restart smokeping_prober
+  notify: Restart smokeping_prober
 
 - name: Configure smokeping_prober web config
   when:
@@ -39,7 +39,7 @@
         owner: root
         group: root
         mode: 0644
-      notify: restart smokeping_prober
+      notify: Restart smokeping_prober
 
 - name: Allow smokeping_prober port in SELinux on RedHat OS family
   community.general.seport:

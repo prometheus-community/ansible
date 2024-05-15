@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart redis_exporter
+  notify: Restart redis_exporter
 
 - name: Create redis_exporter config directory
   ansible.builtin.file:
@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart redis_exporter
+  notify: Restart redis_exporter
   when: redis_exporter_passwords | length > 0
 
 - name: Allow redis_exporter port in SELinux on RedHat OS family

@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart systemd_exporter
+  notify: Restart systemd_exporter
 
 - name: Create systemd_exporter config directory
   ansible.builtin.file:
@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart systemd_exporter
+  notify: Restart systemd_exporter
 
 - name: Allow systemd_exporter port in SELinux on RedHat OS family
   community.general.seport:

@@ -18,8 +18,7 @@
     mode: 0644
     validate: "{{ _alertmanager_binary_install_dir }}/amtool check-config %s"
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
-  notify:
-    - restart alertmanager
+  notify: Restart alertmanager
 
 - name: Create systemd service unit
   ansible.builtin.template:
@@ -28,8 +27,7 @@
     owner: root
     group: root
     mode: 0644
-  notify:
-    - restart alertmanager
+  notify: Restart alertmanager
 
 - name: Copy alertmanager template files
   ansible.builtin.copy:
@@ -40,5 +38,4 @@
     group: alertmanager
     mode: 0644
   with_fileglob: "{{ alertmanager_template_files }}"
-  notify:
-    - restart alertmanager
+  notify: Restart alertmanager

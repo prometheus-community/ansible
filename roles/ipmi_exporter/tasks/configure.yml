@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart ipmi_exporter
+  notify: Restart ipmi_exporter
 
 - name: Create ipmi_exporter config directory
   ansible.builtin.file:
@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart ipmi_exporter
+  notify: Restart ipmi_exporter
 
 - name: Copy the ipmi_exporter config file
   ansible.builtin.template:
@@ -33,8 +33,7 @@
     group: "{{ ipmi_exporter_system_group }}"
     mode: 0640
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
-  notify:
-    - restart ipmi_exporter
+  notify: Restart ipmi_exporter
 
 - name: Allow ipmi_exporter port in SELinux on RedHat OS family
   community.general.seport:

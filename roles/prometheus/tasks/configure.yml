@@ -10,8 +10,7 @@
   when:
     - prometheus_alert_rules != []
     - not prometheus_agent_mode
-  notify:
-    - reload prometheus
+  notify: Reload prometheus
 
 - name: Copy custom alerting rule files
   ansible.builtin.copy:
@@ -24,8 +23,7 @@
   with_fileglob: "{{ prometheus_alert_rules_files }}"
   when:
     - not prometheus_agent_mode
-  notify:
-    - reload prometheus
+  notify: Reload prometheus
 
 - name: Configure prometheus
   ansible.builtin.template:
@@ -37,8 +35,7 @@
     mode: 0640
     validate: "{{ _prometheus_binary_install_dir }}/promtool check config %s"
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
-  notify:
-    - reload prometheus
+  notify: Reload prometheus
 
 - name: Configure Prometheus web
   ansible.builtin.copy:

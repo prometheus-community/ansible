@@ -1,6 +1,5 @@
 ---
 - name: Restart smartctl_exporter
-  listen: "restart smartctl_exporter"
   become: true
   ansible.builtin.systemd:
     daemon_reload: true

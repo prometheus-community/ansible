@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart chrony_exporter
+  notify: Restart chrony_exporter
 
 - name: Create chrony_exporter config directory
   ansible.builtin.file:
@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart chrony_exporter
+  notify: Restart chrony_exporter
 
 - name: Allow chrony_exporter port in SELinux on RedHat OS family
   community.general.seport:

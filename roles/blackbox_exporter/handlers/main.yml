@@ -1,6 +1,5 @@
 ---
 - name: Restart blackbox_exporter
-  listen: "restart blackbox_exporter"
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
@@ -9,7 +8,6 @@
   register: blackbox_exporter_restarted
 
 - name: Reload blackbox_exporter
-  listen: "reload blackbox_exporter"
   become: true
   ansible.builtin.systemd:
     name: blackbox_exporter

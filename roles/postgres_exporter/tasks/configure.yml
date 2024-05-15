@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: '0644'
-  notify: restart postgres_exporter
+  notify: Restart postgres_exporter
 
 - name: Create postgres_exporter config directory
   ansible.builtin.file:
@@ -24,7 +24,7 @@
     group: '{{ postgres_exporter_system_group }}'
     mode: '0640'
   # no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
-  notify: restart postgres_exporter
+  notify: Restart postgres_exporter
 - name: Configure via URI
   when: postgres_exporter_uri | length > 0
   block:
@@ -35,7 +35,7 @@
         owner: root
         group: '{{ postgres_exporter_system_group }}'
         mode: '0640'
-      notify: restart postgres_exporter
+      notify: Restart postgres_exporter
     - name: Creating file postgres_exporter_user
       ansible.builtin.copy:
         dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_user"
@@ -43,7 +43,7 @@
         owner: root
         group: '{{ postgres_exporter_system_group }}'
         mode: '0640'
-      notify: restart postgres_exporter
+      notify: Restart postgres_exporter
     - name: Creating file postgres_exporter_pass
       ansible.builtin.copy:
         dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_pass"
@@ -51,7 +51,7 @@
         owner: root
         group: '{{ postgres_exporter_system_group }}'
         mode: '0640'
-      notify: restart postgres_exporter
+      notify: Restart postgres_exporter
 
 - name: Configure postgres_exporter web config
   when:
@@ -66,7 +66,7 @@
         owner: root
         group: '{{ postgres_exporter_system_group }}'
         mode: '0640'
-      notify: restart postgres_exporter
+      notify: Restart postgres_exporter
 
 - name: Allow postgres_exporter port in SELinux on RedHat OS family
   community.general.seport:

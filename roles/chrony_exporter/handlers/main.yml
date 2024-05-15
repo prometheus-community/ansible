@@ -1,6 +1,5 @@
 ---
 - name: Restart chrony_exporter
-  listen: "restart chrony_exporter"
   become: true
   ansible.builtin.systemd:
     daemon_reload: true

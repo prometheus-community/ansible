@@ -1,6 +1,5 @@
 ---
 - name: Restart bind_exporter
-  listen: "restart bind_exporter"
   become: true
   ansible.builtin.systemd:
     daemon_reload: true

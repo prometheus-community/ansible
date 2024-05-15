@@ -67,8 +67,7 @@
       with_items:
         - alertmanager
         - amtool
-      notify:
-        - restart alertmanager
+      notify: Restart alertmanager
 
 - name: Propagate locally distributed alertmanager and amtool binaries
   ansible.builtin.copy:
@@ -83,5 +82,4 @@
   when:
     - alertmanager_binary_local_dir | length > 0
     - not alertmanager_skip_install
-  notify:
-    - restart alertmanager
+  notify: Restart alertmanager

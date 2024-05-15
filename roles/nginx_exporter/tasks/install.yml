@@ -53,7 +53,7 @@
         mode: 0755
         owner: root
         group: root
-      notify: restart nginx_exporter
+      notify: Restart nginx_exporter
       when: not ansible_check_mode
 
 - name: Propagate locally distributed nginx_exporter binary
@@ -66,4 +66,4 @@
   when:
     - nginx_exporter_binary_local_dir | length > 0
     - not nginx_exporter_skip_install
-  notify: restart nginx_exporter
+  notify: Restart nginx_exporter

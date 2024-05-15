@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart pushgateway
+  notify: Restart pushgateway
 
 - name: Create pushgateway config directory
   ansible.builtin.file:
@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart pushgateway
+  notify: Restart pushgateway
 
 - name: Allow pushgateway port in SELinux on RedHat OS family
   community.general.seport:

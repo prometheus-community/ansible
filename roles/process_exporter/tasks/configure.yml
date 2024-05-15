@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart process_exporter
+  notify: Restart process_exporter
 
 - name: Create process_exporter config directory
   ansible.builtin.file:
@@ -25,7 +25,7 @@
     mode: 0644
   when:
     - process_exporter_names != []
-  notify: restart process_exporter
+  notify: Restart process_exporter
 
 - name: Configure process_exporter web config
   ansible.builtin.template:
@@ -38,7 +38,7 @@
     ( process_exporter_tls_server_config | length > 0 ) or
     ( process_exporter_http_server_config | length > 0 ) or
     ( process_exporter_basic_auth_users | length > 0 )
-  notify: restart process_exporter
+  notify: Restart process_exporter
 
 - name: Allow process_exporter port in SELinux on RedHat OS family
   community.general.seport:

@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart fail2ban_exporter
+  notify: Restart fail2ban_exporter
 
 - name: Allow fail2ban_exporter port in SELinux on RedHat OS family
   community.general.seport:

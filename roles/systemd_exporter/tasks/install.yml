@@ -52,7 +52,7 @@
         mode: 0755
         owner: root
         group: root
-      notify: restart systemd_exporter
+      notify: Restart systemd_exporter
       when: not ansible_check_mode
 
 - name: Propagate locally distributed systemd_exporter binary
@@ -65,4 +65,4 @@
   when:
     - systemd_exporter_binary_local_dir | length > 0
     - not systemd_exporter_skip_install
-  notify: restart systemd_exporter
+  notify: Restart systemd_exporter

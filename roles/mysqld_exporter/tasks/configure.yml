@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: '0644'
-  notify: restart mysqld_exporter
+  notify: Restart mysqld_exporter
 
 - name: Create mysqld_exporter config directory
   ansible.builtin.file:
@@ -24,7 +24,7 @@
     group: '{{ mysqld_exporter_system_group }}'
     mode: '0640'
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
-  notify: restart mysqld_exporter
+  notify: Restart mysqld_exporter
 
 - name: Configure mysqld_exporter web config
   when:
@@ -39,7 +39,7 @@
         owner: root
         group: '{{ mysqld_exporter_system_group }}'
         mode: '0640'
-      notify: restart mysqld_exporter
+      notify: Restart mysqld_exporter
 
 - name: Allow mysqld_exporter port in SELinux on RedHat OS family
   community.general.seport:

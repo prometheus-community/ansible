@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart node_exporter
+  notify: Restart node_exporter
 
 - name: Create node_exporter config directory
   ansible.builtin.file:
@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart node_exporter
+  notify: Restart node_exporter
 
 - name: Create textfile collector dir
   ansible.builtin.file:

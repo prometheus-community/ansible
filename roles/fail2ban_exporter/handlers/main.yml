@@ -1,6 +1,5 @@
 ---
 - name: Restart fail2ban_exporter
-  listen: "restart fail2ban_exporter"
   become: true
   ansible.builtin.systemd:
     daemon_reload: true

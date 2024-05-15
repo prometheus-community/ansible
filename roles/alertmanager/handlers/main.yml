@@ -1,6 +1,5 @@
 ---
 - name: Restart alertmanager
-  listen: "restart alertmanager"
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
@@ -9,7 +8,6 @@
   register: alertmanager_restarted
 
 - name: Reload alertmanager
-  listen: "reload alertmanager"
   become: true
   ansible.builtin.systemd:
     name: alertmanager

@@ -35,7 +35,7 @@
         mode: 0755
         owner: root
         group: root
-      notify: restart fail2ban_exporter
+      notify: Restart fail2ban_exporter
       when: not ansible_check_mode
 
 - name: Propagate locally distributed fail2ban_exporter binary
@@ -48,4 +48,4 @@
   when:
     - fail2ban_exporter_binary_local_dir | length > 0
     - not fail2ban_exporter_skip_install
-  notify: restart fail2ban_exporter
+  notify: Restart fail2ban_exporter

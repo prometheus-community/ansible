@@ -6,8 +6,7 @@
     owner: root
     group: root
     mode: '0644'
-  notify:
-    - restart blackbox_exporter
+  notify: Restart blackbox_exporter
 
 - name: Create blackbox_exporter config directory
   ansible.builtin.file:
@@ -24,5 +23,4 @@
     owner: root
     group: "{{ blackbox_exporter_group }}"
     mode: '0644'
-  notify:
-    - reload blackbox_exporter
+  notify: Reload blackbox_exporter

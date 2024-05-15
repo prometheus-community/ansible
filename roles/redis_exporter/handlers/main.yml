@@ -1,6 +1,5 @@
 ---
 - name: Restart redis_exporter
-  listen: "restart redis_exporter"
   become: true
   ansible.builtin.systemd:
     daemon_reload: true

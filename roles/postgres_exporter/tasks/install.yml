@@ -55,7 +55,7 @@
         mode: '0755'
         owner: root
         group: root
-      notify: restart postgres_exporter
+      notify: Restart postgres_exporter
       when: not ansible_check_mode
 
 - name: Propagate locally distributed postgres_exporter binary
@@ -68,4 +68,4 @@
   when:
     - postgres_exporter_binary_local_dir | length > 0
     - not postgres_exporter_skip_install
-  notify: restart postgres_exporter
+  notify: Restart postgres_exporter

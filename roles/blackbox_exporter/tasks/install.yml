@@ -51,7 +51,7 @@
         mode: 0755
         owner: root
         group: root
-      notify: restart blackbox_exporter
+      notify: Restart blackbox_exporter
       when: not ansible_check_mode
 
 - name: Propagate locally distributed blackbox_exporter binary
@@ -64,7 +64,7 @@
   when:
     - blackbox_exporter_binary_local_dir | length > 0
     - not blackbox_exporter_skip_install
-  notify: restart blackbox_exporter
+  notify: Restart blackbox_exporter
 
 - name: Install libcap on Debian systems
   ansible.builtin.package:

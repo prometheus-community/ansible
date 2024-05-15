@@ -1,6 +1,5 @@
 ---
 - name: Restart snmp_exporter
-  listen: "restart snmp_exporter"
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
@@ -9,7 +8,6 @@
   register: snmp_exporter_restarted
 
 - name: Reload snmp_exporter
-  listen: "reload snmp_exporter"
   become: true
   ansible.builtin.systemd:
     daemon_reload: true

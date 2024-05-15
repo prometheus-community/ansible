@@ -55,7 +55,7 @@
         mode: '0755'
         owner: root
         group: root
-      notify: restart bind_exporter
+      notify: Restart bind_exporter
       when: not ansible_check_mode
 
 - name: Propagate locally distributed bind_exporter binary
@@ -68,4 +68,4 @@
   when:
     - bind_exporter_binary_local_dir | length > 0
     - not bind_exporter_skip_install
-  notify: restart bind_exporter
+  notify: Restart bind_exporter

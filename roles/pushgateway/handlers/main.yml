@@ -1,6 +1,5 @@
 ---
 - name: Restart pushgateway
-  listen: "restart pushgateway"
   become: true
   ansible.builtin.systemd:
     daemon_reload: true

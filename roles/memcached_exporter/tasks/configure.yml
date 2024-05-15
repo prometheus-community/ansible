@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart memcached_exporter
+  notify: Restart memcached_exporter
 
 - name: Create memcached_exporter config directory
   ansible.builtin.file:
@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart memcached_exporter
+  notify: Restart memcached_exporter
 
 - name: Allow memcached_exporter port in SELinux on RedHat OS family
   community.general.seport:

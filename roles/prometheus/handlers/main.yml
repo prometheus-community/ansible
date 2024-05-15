@@ -1,6 +1,5 @@
 ---
 - name: Restart prometheus
-  listen: "restart prometheus"
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
@@ -9,7 +8,6 @@
   register: prometheus_restarted
 
 - name: Reload prometheus
-  listen: "reload prometheus"
   become: true
   ansible.builtin.systemd:
     name: prometheus

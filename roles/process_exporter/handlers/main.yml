@@ -1,6 +1,5 @@
 ---
 - name: Restart process_exporter
-  listen: "restart process_exporter"
   become: true
   ansible.builtin.systemd:
     daemon_reload: true

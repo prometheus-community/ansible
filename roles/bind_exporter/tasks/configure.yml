@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: '0644'
-  notify: restart bind_exporter
+  notify: Restart bind_exporter
 
 - name: Create bind_exporter config directory
   ansible.builtin.file:
@@ -29,7 +29,7 @@
         owner: root
         group: '{{ bind_exporter_system_group }}'
         mode: '0640'
-      notify: restart bind_exporter
+      notify: Restart bind_exporter
 
 - name: Allow bind_exporter port in SELinux on RedHat OS family
   community.general.seport:

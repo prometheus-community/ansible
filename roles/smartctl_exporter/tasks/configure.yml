@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart smartctl_exporter
+  notify: Restart smartctl_exporter
 
 - name: Create smartctl_exporter config directory
   ansible.builtin.file:
@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart smartctl_exporter
+  notify: Restart smartctl_exporter
 
 - name: Allow smartctl_exporter port in SELinux on RedHat OS family
   community.general.seport:

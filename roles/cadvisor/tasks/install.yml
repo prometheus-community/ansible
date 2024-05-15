@@ -43,7 +43,7 @@
         mode: 0755
         owner: root
         group: root
-      notify: restart cadvisor
+      notify: Restart cadvisor
       when: not ansible_check_mode
 
 - name: Propagate locally distributed cadvisor binary
@@ -56,4 +56,4 @@
   when:
     - cadvisor_binary_local_dir | length > 0
     - not cadvisor_skip_install
-  notify: restart cadvisor
+  notify: Restart cadvisor

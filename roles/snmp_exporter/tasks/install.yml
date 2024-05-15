@@ -35,7 +35,7 @@
         mode: 0755
         owner: root
         group: root
-      notify: restart snmp_exporter
+      notify: Restart snmp_exporter
       when: not ansible_check_mode
 
 - name: Propagate locally distributed snmp_exporter binary
@@ -48,7 +48,7 @@
   when:
     - snmp_exporter_binary_local_dir | length > 0
     - not snmp_exporter_skip_install
-  notify: restart snmp_exporter
+  notify: Restart snmp_exporter
 
 - name: Create configuration directory
   ansible.builtin.file:

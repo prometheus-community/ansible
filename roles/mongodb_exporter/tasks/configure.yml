@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart mongodb_exporter
+  notify: Restart mongodb_exporter
 
 - name: Create mongodb_exporter config directory
   ansible.builtin.file:
@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart mongodb_exporter
+  notify: Restart mongodb_exporter
 
 - name: Allow mongodb_exporter port in SELinux on RedHat OS family
   community.general.seport:
