@@ -55,6 +55,10 @@ argument_specs:
         description:
           - "The path to the memcached PID file for process monitoring"
         default: ""
+      memcached_exporter_memcached_address:
+        description:
+          - "The ip to the memcached server to monitor"
+        default: ""
       memcached_exporter_binary_install_dir:
         description:
           - "I(Advanced)"
