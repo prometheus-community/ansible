@@ -59,7 +59,7 @@ jobs:
 
       - name: Get changed roles
         id: changed-roles
-        uses: tj-actions/changed-files@v35
+        uses: tj-actions/changed-files@v44
         with:
           path: "roles"
           diff_relative: "true"
