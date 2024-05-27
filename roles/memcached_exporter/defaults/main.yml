@@ -8,6 +8,8 @@ memcached_exporter_skip_install: false
 
 memcached_exporter_memcached_pid_file: ""
 
+memcached_exporter_memcached_address: ""
+
 memcached_exporter_web_listen_address: "0.0.0.0:9150"
 memcached_exporter_web_telemetry_path: "/metrics"
 
