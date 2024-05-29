@@ -77,6 +77,6 @@
     dest: "{{ prometheus_config_dir }}/scrapes/"
     force: true
     owner: root
-    group: prometheus
+    group: "{{ prometheus_system_group }}"
     mode: 0640
   with_fileglob: "{{ prometheus_scrape_config_files }}"
