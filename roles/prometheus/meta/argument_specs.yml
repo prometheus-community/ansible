@@ -153,6 +153,7 @@ argument_specs:
       prometheus_scrape_config_files:
         description:
           - "List of folders where ansible will look for files containing custom scrape config configuration files which will be copied to C({{ prometheus_config_dir }}/scrapes/)."
+          - "This feature is available starting from Prometheus v2.43.0."
         type: "list"
         elements: "str"
         default:
