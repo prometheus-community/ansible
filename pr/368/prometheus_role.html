@@ -336,6 +336,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_scrape_config_files" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>List of folders where ansible will look for files containing custom scrape config configuration files which will be copied to <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">prometheus_config_dir</span> <span class="pre">}}/scrapes/</span></code>.</p>
+<p>This feature is available starting from Prometheus v2.43.0.</p>
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[&quot;prometheus/scrapes/*.yml&quot;,</span> <span class="pre">&quot;prometheus/scrapes/*.json&quot;]</span></code></p>
 </div></td>
 </tr>
@@ -344,7 +345,6 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_scrape_configs" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Prometheus scrape jobs provided in same format as in the <a class="reference external" href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config">official docs</a></p>
-<p>This feature is available starting from Prometheus v2.43.0.</p>
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[{&quot;job_name&quot;:</span> <span class="pre">&quot;prometheus&quot;,</span> <span class="pre">&quot;metrics_path&quot;:</span> <span class="pre">&quot;{{</span> <span class="pre">prometheus_metrics_path</span> <span class="pre">}}&quot;,</span> <span class="pre">&quot;static_configs&quot;:</span> <span class="pre">[{&quot;targets&quot;:</span> <span class="pre">[&quot;{{</span> <span class="pre">ansible_fqdn</span> <span class="pre">|</span> <span class="pre">default(ansible_host)</span> <span class="pre">|</span> <span class="pre">default('localhost')</span> <span class="pre">}}:9090&quot;]}]},</span> <span class="pre">{&quot;file_sd_configs&quot;:</span> <span class="pre">[{&quot;files&quot;:</span> <span class="pre">[&quot;{{</span> <span class="pre">prometheus_config_dir</span> <span class="pre">}}/file_sd/node.yml&quot;]}],</span> <span class="pre">&quot;job_name&quot;:</span> <span class="pre">&quot;node&quot;}]</span></code></p>
 </div></td>
 </tr>
