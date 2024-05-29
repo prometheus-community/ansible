@@ -1,4 +1,3 @@
----
 objects: {}
 plugins:
   become: {}
@@ -14,4 +13,4 @@ plugins:
   shell: {}
   strategy: {}
   vars: {}
-version: 0.16.4
+version: 0.17.0
