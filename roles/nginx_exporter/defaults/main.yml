@@ -1,5 +1,5 @@
 ---
-nginx_exporter_version: 1.1.0
+nginx_exporter_version: 1.2.0
 nginx_exporter_binary_local_dir: ""
 nginx_exporter_binary_url: "https://github.com/{{ _nginx_exporter_repo }}/releases/download/v{{ nginx_exporter_version }}/\
                           nginx-prometheus-exporter_{{ nginx_exporter_version }}_linux_{{ go_arch }}.tar.gz"
