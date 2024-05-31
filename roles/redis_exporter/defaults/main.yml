@@ -1,5 +1,5 @@
 ---
-redis_exporter_version: 1.58.0
+redis_exporter_version: 1.60.0
 redis_exporter_binary_local_dir: ""
 redis_exporter_binary_url: "https://github.com/{{ _redis_exporter_repo }}/releases/download/v{{ redis_exporter_version }}/\
                            redis_exporter-v{{ redis_exporter_version }}.linux-{{ go_arch }}.tar.gz"
@@ -39,7 +39,7 @@ redis_exporter_tls_client_cert_file: ""
 redis_exporter_tls_server_key_file: ""
 redis_exporter_tls_server_cert_file: ""
 redis_exporter_tls_server_ca_cert_file: ""
-redis_exporter_tls_server_min_version: "TLS1.2"
+redis_exporter_tls_server_min_version: 1.60.0
 redis_exporter_tls_ca_cert_file: ""
 redis_exporter_set_client_name: true
 redis_exporter_check_key_groups: []
