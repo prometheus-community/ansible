@@ -22,8 +22,8 @@
     - restart alertmanager
 
 - name: Configure alertmanager web
-  ansible.builtin.copy:
-    content: "{{ alertmanager_web_config | to_nice_yaml(indent=2, sort_keys=False) }}"
+  ansible.builtin.template:
+    src: "{{ alertmanager_web_config }}"
     dest: "{{ alertmanager_config_dir }}/web.yml"
     force: true
     owner: alertmanager
