@@ -1,4 +1,5 @@
 ---
+# Una riga di commento
 - name: Preflight
   ansible.builtin.include_tasks:
     file: preflight.yml
@@ -51,7 +52,6 @@
     - cadvisor_configure
 
 - name: Ensure cAdvisor is enabled on boot
-  become: true
   ansible.builtin.systemd:
     daemon_reload: true
     name: cadvisor
