@@ -135,6 +135,8 @@
     - prometheus
     - configure
     - prometheus_configure
+  notify:
+    - reload prometheus
 
 - name: Copy prometheus custom static targets
   ansible.builtin.copy:
@@ -150,6 +152,8 @@
     - prometheus
     - configure
     - prometheus_configure
+  notify:
+    - reload prometheus
 
 - name: Copy prometheus scrape config files
   ansible.builtin.copy:
@@ -165,3 +169,5 @@
     - prometheus
     - configure
     - prometheus_configure
+  notify:
+    - reload prometheus
