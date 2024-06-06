@@ -68,7 +68,7 @@ argument_specs:
       prometheus_config_flags_extra:
         description:
           - "Additional configuration flags passed to prometheus binary at startup"
-          - "Example: prometheus_config_flags_extra: { storage.tsdb.retention: 15d, alertmanager.timeout: 10s }"
+          - "Example: prometheus_config_flags_extra: { alertmanager.timeout: 10s }"
         type: "dict"
       prometheus_alertmanager_config:
         description:
