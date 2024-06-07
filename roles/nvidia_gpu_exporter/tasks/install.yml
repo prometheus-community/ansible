@@ -1,0 +1,69 @@
+---
+- name: Create the nvidia_gpu_exporter group
+  ansible.builtin.group:
+    name: "{{ nvidia_gpu_exporter_system_group }}"
+    state: present
+    system: true
+  when: nvidia_gpu_exporter_system_group != "root"
+
+- name: Create the nvidia_gpu_exporter user
+  ansible.builtin.user:
+    name: "{{ nvidia_gpu_exporter_system_user }}"
+    groups: "{{ nvidia_gpu_exporter_system_group }}"
+    append: true
+    shell: /usr/sbin/nologin
+    system: true
+    create_home: false
+    home: /
+  when: nvidia_gpu_exporter_system_user != "root"
+
+- name: Get binary
+  when:
+    - nvidia_gpu_exporter_binary_local_dir | length == 0
+    - not nvidia_gpu_exporter_skip_install
+  block:
+
+    - name: Download nvidia_gpu_exporter binary to local folder
+      become: false
+      ansible.builtin.get_url:
+        url: "{{ nvidia_gpu_exporter_binary_url }}"
+        dest: "{{ nvidia_gpu_exporter_archive_path }}/nvidia_gpu_exporter-{{ nvidia_gpu_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        checksum: "sha256:{{ __nvidia_gpu_exporter_checksum }}"
+        mode: '0644'
+      register: _download_binary
+      until: _download_binary is succeeded
+      retries: 5
+      delay: 2
+      delegate_to: localhost
+      check_mode: false
+
+    - name: Unpack nvidia_gpu_exporter binary
+      become: false
+      ansible.builtin.unarchive:
+        src: "{{ nvidia_gpu_exporter_archive_path }}/nvidia_gpu_exporter-{{ nvidia_gpu_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "{{ nvidia_gpu_exporter_archive_path }}"
+        creates: "{{ nvidia_gpu_exporter_archive_path }}/nvidia_gpu_exporter-{{ nvidia_gpu_exporter_version }}.linux-{{ go_arch }}/nvidia_gpu_exporter"
+      delegate_to: localhost
+      check_mode: false
+
+    - name: Propagate nvidia_gpu_exporter binaries
+      ansible.builtin.copy:
+        src: "{{ nvidia_gpu_exporter_archive_path }}/nvidia_gpu_exporter-{{ nvidia_gpu_exporter_version }}.linux-{{ go_arch }}/nvidia_gpu_exporter"
+        dest: "{{ nvidia_gpu_exporter_binary_install_dir }}/nvidia_gpu_exporter"
+        mode: 0755
+        owner: root
+        group: root
+      notify: restart nvidia_gpu_exporter
+      when: not ansible_check_mode
+
+- name: Propagate locally distributed nvidia_gpu_exporter binary
+  ansible.builtin.copy:
+    src: "{{ nvidia_gpu_exporter_binary_local_dir }}/nvidia_gpu_exporter"
+    dest: "{{ nvidia_gpu_exporter_binary_install_dir }}/nvidia_gpu_exporter"
+    mode: 0755
+    owner: root
+    group: root
+  when:
+    - nvidia_gpu_exporter_binary_local_dir | length > 0
+    - not nvidia_gpu_exporter_skip_install
+  notify: restart nvidia_gpu_exporter

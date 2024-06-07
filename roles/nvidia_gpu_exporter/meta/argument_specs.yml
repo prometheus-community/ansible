@@ -1,0 +1,65 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus Nvidia GPU Exporter"
+    description:
+      - "Deploy prometheus L(Nvidia GPU exporter,https://github.com/utkuozdemir/nvidia_gpu_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      nvidia_gpu_exporter_version:
+        description: "Nvidia GPU exporter package version. Also accepts latest as parameter."
+        default: "1.2.0"
+      nvidia_gpu_exporter_skip_install:
+        description: "Nvidia GPU  exporter installation tasks gets skipped when set to true."
+        type: bool
+        default: false
+      nvidia_gpu_exporter_binary_local_dir:
+        description:
+          - "Enables the use of local packages instead of those distributed on github."
+          - "The parameter may be set to a directory where the C(nvidia_gpu_exporter) binary is stored on the host where ansible is run."
+          - "This overrides the I(nvidia_gpu_exporter_version) parameter"
+      nvidia_gpu_exporter_binary_url:
+        description: "URL of the Nvidia GPU exporter binaries .tar.gz file"
+        default: "https://github.com/{{ _nvidia_gpu_exporter_repo }}/releases/download/v{{ nvidia_gpu_exporter_version }}/nvidia_gpu_exporter-{{ nvidia_gpu_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+      nvidia_gpu_exporter_checksums_url:
+        description: "URL of the Nvidia GPU exporter checksums file"
+        default: "https://github.com/{{ _nvidia_gpu_exporter_repo }}/releases/download/v{{ nvidia_gpu_exporter_version }}/sha256sums.txt"
+      nvidia_gpu_exporter_web_listen_address:
+        description: "Address on which Nvidia GPU exporter will listen"
+        default: "0.0.0.0:9835"
+      nvidia_gpu_exporter_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      nvidia_gpu_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(nvidia_gpu_exporter docs,https://prometheus.io/docs/prometheus/latest/configuration/https/)."
+        type: "dict"
+      nvidia_gpu_exporter_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(nvidia_gpu_exporter docs,https://prometheus.io/docs/prometheus/latest/configuration/https/)."
+        type: "dict"
+      nvidia_gpu_exporter_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      nvidia_gpu_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install nvidia_gpu_exporter binary"
+        default: "/usr/local/bin"
+      nvidia_gpu_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for Nvidia GPU exporter"
+        default: "nvidia-gpu-exp"
+      nvidia_gpu_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "Nvidia GPU exporter user"
+        default: "nvidia-gpu-exp"
+      nvidia_gpu_exporter_archive_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp"
