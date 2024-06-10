@@ -21,6 +21,7 @@ def AnsibleDefaults():
     "/etc/prometheus/consoles",
     "/etc/prometheus/rules",
     "/etc/prometheus/file_sd",
+    "/etc/prometheus/scrapes",
     "/var/lib/prometheus"
 ])
 def test_directories(host, dirs):
@@ -29,14 +30,18 @@ def test_directories(host, dirs):
     assert d.exists
 
 
-@pytest.mark.parametrize("files", [
-    "/etc/prometheus/prometheus.yml",
-    "/etc/prometheus/console_libraries/prom.lib",
-    "/etc/prometheus/consoles/prometheus.html",
-    "/etc/systemd/system/prometheus.service",
-    "/usr/local/bin/prometheus",
-    "/usr/local/bin/promtool"
-])
+@pytest.mark.parametrize(
+    "files",
+    [
+        "/etc/prometheus/prometheus.yml",
+        "/etc/prometheus/console_libraries/prom.lib",
+        "/etc/prometheus/consoles/prometheus.html",
+        "/etc/prometheus/scrape_configs/empty_scrapes.yml",
+        "/etc/systemd/system/prometheus.service",
+        "/usr/local/bin/prometheus",
+        "/usr/local/bin/promtool",
+    ],
+)
 def test_files(host, files):
     f = host.file(files)
     assert f.exists

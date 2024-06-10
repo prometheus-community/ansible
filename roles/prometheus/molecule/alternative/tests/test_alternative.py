@@ -11,6 +11,7 @@ testinfra_hosts = get_target_hosts()
     "/opt/prom/etc",
     "/opt/prom/etc/rules",
     "/opt/prom/etc/file_sd",
+    "/opt/prom/etc/scrapes",
     "/opt/prom/lib"
 ])
 def test_directories(host, dirs):
@@ -24,6 +25,7 @@ def test_directories(host, dirs):
     "/opt/prom/etc/rules/ansible_managed.rules",
     "/opt/prom/etc/file_sd/node.yml",
     "/opt/prom/etc/file_sd/docker.yml",
+    "/opt/prom/etc/scrapes/empty_scrapes.yml",
     "/usr/local/bin/prometheus",
     "/usr/local/bin/promtool"
 ])
