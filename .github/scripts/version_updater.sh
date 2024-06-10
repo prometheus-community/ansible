@@ -90,12 +90,12 @@ esac
 echo_green "New ${source_repo} version is: ${version}"
 
 # Download destination repository
-if grep "_version: ${version}" "roles/${role}/defaults/main.yml"; then
+if grep "^${role}_version: ${version}" "roles/${role}/defaults/main.yml"; then
     echo_green "Newest version is used."
     exit 0
 fi
-sed -i "s/_version:.*$/_version: ${version}/" "roles/${role}/defaults/main.yml"
-sed -i -r "s/_version.*[0-9]+\.[0-9]+\.[0-9]+/_version\` | ${version}/" "roles/${role}/README.md"
+sed -i "s/${role}_version:.*$/${role}_version: ${version}/" "roles/${role}/defaults/main.yml"
+sed -i -r "s/${role}_version.*[0-9]+\.[0-9]+\.[0-9]+/${role}_version\` | ${version}/" "roles/${role}/README.md"
 yq eval -i ".argument_specs.main.options.${role}_version.default = \"${version}\"" "roles/${role}/meta/argument_specs.yml"
 
 update_branch="autoupdate/${role}/${version}"
