@@ -22,6 +22,7 @@ def AnsibleDefaults():
     "/etc/prometheus/consoles",
     "/etc/prometheus/rules",
     "/etc/prometheus/file_sd",
+    "/etc/prometheus/scrapes",
     "/var/lib/prometheus"
 ])
 def test_directories(host, dirs):
@@ -34,6 +35,7 @@ def test_directories(host, dirs):
     "/etc/prometheus/prometheus.yml",
     "/etc/prometheus/console_libraries/prom.lib",
     "/etc/prometheus/consoles/prometheus.html",
+    "/etc/prometheus/scrapes/empty_scrapes.yml",
     "/etc/prometheus/web.yml",
     "/etc/systemd/system/prometheus.service",
     "/usr/local/bin/prometheus",
