@@ -1,5 +1,5 @@
 ---
-redis_exporter_version: 1.58.0
+redis_exporter_version: 1.61.0
 redis_exporter_binary_local_dir: ""
 redis_exporter_binary_url: "https://github.com/{{ _redis_exporter_repo }}/releases/download/v{{ redis_exporter_version }}/\
                            redis_exporter-v{{ redis_exporter_version }}.linux-{{ go_arch }}.tar.gz"
