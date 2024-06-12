@@ -16,7 +16,11 @@ ExecStart={{ node_exporter_binary_install_dir }}/node_exporter \
 {%     set name, options = (collector.items()|list)[0] -%}
     '--collector.{{ name }}' \
 {%     for k,v in options|dictsort %}
+{%       if v %}
     '--collector.{{ name }}.{{ k }}={{ v }}' \
+{%       else %}
+    '--collector.{{ name }}.{{ k }}' \
+{%       endif -%}
 {%     endfor -%}
 {%   endif -%}
 {% endfor -%}
