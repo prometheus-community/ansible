@@ -6,11 +6,9 @@
     - name: Download mysqld_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus/mysqld_exporter/releases/download/v{{\
-          \ mysqld_exporter_version }}/mysqld_exporter-{{ mysqld_exporter_version\
-          \ }}.linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp/mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ go_arch\
-          \ }}.tar.gz"
+        url: "https://github.com/prometheus/mysqld_exporter/releases/download/v{{ mysqld_exporter_version }}/\
+              mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ _mysqld_exporter_go_arch }}.tar.gz"
+        dest: "/tmp/mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ _mysqld_exporter_go_arch }}.tar.gz"
         mode: 0644
       register: _download_binary
       until: _download_binary is succeeded
@@ -21,11 +19,9 @@
     - name: Unpack mysqld_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ go_arch\
-          \ }}.tar.gz"
+        src: "/tmp/mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ _mysqld_exporter_go_arch }}.tar.gz"
         dest: "/tmp"
-        creates: "/tmp/mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ go_arch\
-          \ }}/mysqld_exporter"
+        creates: "/tmp/mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ _mysqld_exporter_go_arch }}/mysqld_exporter"
       check_mode: false
 
     - name: Link to mysqld_exporter binaries directory

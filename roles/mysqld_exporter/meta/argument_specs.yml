@@ -22,7 +22,8 @@ argument_specs:
           - "This overrides the I(mysqld_exporter_version) parameter"
       mysqld_exporter_binary_url:
         description: "URL of the mysqld_exporter binaries .tar.gz file"
-        default: "https://github.com/prometheus/{{ _mysqld_exporter_repo }}/download/v{{ mysqld_exporter_version }}/mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/prometheus/{{ _mysqld_exporter_repo }}/download/v{{ mysqld_exporter_version }}/\
+                  mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ _mysqld_exporter_go_arch }}.tar.gz"
       mysqld_exporter_checksums_url:
         description: "URL of the mysqld_exporter checksums file"
         default: "https://github.com/{{ _mysqld_exporter_repo }}/releases/download/v{{ mysqld_exporter_version }}/sha256sums.txt"
