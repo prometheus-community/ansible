@@ -7,8 +7,8 @@
       become: false
       ansible.builtin.get_url:
         url: "https://github.com/percona/mongodb_exporter/releases/download/v{{ mongodb_exporter_version }}/\
-              mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+              mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ _mongodb_exporter_go_arch }}.tar.gz"
+        dest: "/tmp/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ _mongodb_exporter_go_arch }}.tar.gz"
         mode: 0644
       register: _download_binary
       until: _download_binary is succeeded
@@ -19,15 +19,15 @@
     - name: Unpack mongodb_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        src: "/tmp/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ _mongodb_exporter_go_arch }}.tar.gz"
         dest: "/tmp"
-        creates: "/tmp/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}/mongodb_exporter"
+        creates: "/tmp/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ _mongodb_exporter_go_arch }}/mongodb_exporter"
       check_mode: false
 
     - name: Link to mongodb_exporter binaries directory
       become: false
       ansible.builtin.file:
-        src: "/tmp/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}"
+        src: "/tmp/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ _mongodb_exporter_go_arch }}"
         dest: "{{ mongodb_exporter_binary_local_dir }}"
         state: link
       check_mode: false

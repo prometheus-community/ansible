@@ -13,5 +13,5 @@ provisioner:
           http2: true
         mongodb_exporter_basic_auth_users:
           randomuser: examplepassword
-        go_arch: amd64
+        _mongodb_exporter_go_arch: amd64
         mongodb_exporter_version: 0.40.0
