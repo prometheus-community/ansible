@@ -6,10 +6,9 @@
     - name: Download memcached_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus/memcached_exporter/releases/download/v{{\
-          \ memcached_exporter_version }}/memcached_exporter-{{ memcached_exporter_version }}.linux-{{\
-          \ go_arch }}.tar.gz"
-        dest: "/tmp/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        url: "https://github.com/prometheus/memcached_exporter/releases/download/v{{ memcached_exporter_version }}\
+              /memcached_exporter-{{ memcached_exporter_version }}.linux-{{ _memcached_exporter_go_arch }}.tar.gz"
+        dest: "/tmp/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ _memcached_exporter_go_arch }}.tar.gz"
         mode: 0644
       register: _download_binary
       until: _download_binary is succeeded
@@ -20,10 +19,9 @@
     - name: Unpack memcached_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        src: "/tmp/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ _memcached_exporter_go_arch }}.tar.gz"
         dest: "/tmp"
-        creates: "/tmp/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch\
-          \ }}/memcached_exporter"
+        creates: "/tmp/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ _memcached_exporter_go_arch }}/memcached_exporter"
       check_mode: false
 
     - name: Link to memcached_exporter binaries directory
