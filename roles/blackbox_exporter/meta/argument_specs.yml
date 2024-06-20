@@ -22,7 +22,8 @@ argument_specs:
           - "This overrides the I(blackbox_exporter_version) parameter"
       blackbox_exporter_binary_url:
         description: "URL of the blackbox_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
+        default: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/\
+                  blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ _blackbox_exporter_go_arch }}.tar.gz"
       blackbox_exporter_checksums_url:
         description: "URL of the blackbox exporter checksums file"
         default: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/sha256sums.txt"
