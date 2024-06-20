@@ -28,6 +28,7 @@
     owner: root
     group: root
     mode: 0644
+  when: not alertmanager_skip_service_install | bool
   notify:
     - restart alertmanager
 
