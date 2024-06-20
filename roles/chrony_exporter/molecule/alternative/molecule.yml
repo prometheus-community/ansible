@@ -19,5 +19,5 @@ provisioner:
           http2: true
         chrony_exporter_basic_auth_users:
           randomuser: examplepassword
-        go_arch: amd64
+        _chrony_exporter_go_arch: amd64
         chrony_exporter_version: 0.6.0
