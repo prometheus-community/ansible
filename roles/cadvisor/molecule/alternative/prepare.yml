@@ -6,8 +6,8 @@
     - name: Download cadvisor binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/google/cadvisor/releases/download/v{{ cadvisor_version }}/cadvisor-v{{ cadvisor_version }}-linux-{{ go_arch }}"
-        dest: "/tmp/cadvisor-v{{ cadvisor_version }}-linux-{{ go_arch }}"
+        url: "https://github.com/google/cadvisor/releases/download/v{{ cadvisor_version }}/cadvisor-v{{ cadvisor_version }}-linux-{{ _cadvisor_go_arch }}"
+        dest: "/tmp/cadvisor-v{{ cadvisor_version }}-linux-{{ _cadvisor_go_arch }}"
         mode: 0644
       register: _download_binary
       until: _download_binary is succeeded
@@ -18,7 +18,7 @@
     - name: Link to cadvisor binaries directory
       become: false
       ansible.builtin.file:
-        src: "/tmp/cadvisor-v{{ cadvisor_version }}-linux-{{ go_arch }}"
+        src: "/tmp/cadvisor-v{{ cadvisor_version }}-linux-{{ _cadvisor_go_arch }}"
         dest: "/tmp/cadvisor"
         state: link
       check_mode: false

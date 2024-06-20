@@ -22,7 +22,8 @@ argument_specs:
           - "This overrides the I(cadvisor_version) parameter"
       cadvisor_binary_url:
         description: "URL of the cadvisor binary file"
-        default: "https://github.com/{{ _cadvisor_repo }}/releases/download/v{{ cadvisor_version }}/cadvisor-{{ cadvisor_version }}-linux-{{ go_arch }}"
+        default: "https://github.com/{{ _cadvisor_repo }}/releases/download/v{{ cadvisor_version }}/\
+                  cadvisor-{{ cadvisor_version }}-linux-{{ _cadvisor_go_arch }}"
       cadvisor_listen_ip:
         description: "Address on which cadvisor will listen"
         default: "0.0.0.0"
