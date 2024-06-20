@@ -2,7 +2,7 @@
 alertmanager_version: 0.27.0
 alertmanager_binary_local_dir: ''
 alertmanager_binary_url: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/\
-                          alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
+                          alertmanager-{{ alertmanager_version }}.linux-{{ _alertmanager_go_arch }}.tar.gz"
 alertmanager_checksums_url: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/sha256sums.txt"
 alertmanager_skip_install: false
 
