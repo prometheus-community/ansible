@@ -7,8 +7,8 @@
       become: false
       ansible.builtin.get_url:
         url: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/\
-              fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
-        dest: "/tmp/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+              fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ _fail2ban_exporter_go_arch }}.tar.gz"
+        dest: "/tmp/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ _fail2ban_exporter_go_arch }}.tar.gz"
         mode: 0644
       register: _download_binary
       until: _download_binary is succeeded
@@ -25,7 +25,7 @@
     - name: Unpack fail2ban_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+        src: "/tmp/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ _fail2ban_exporter_go_arch }}.tar.gz"
         dest: "{{ fail2ban_exporter_binary_local_dir }}"
         creates: "{{ fail2ban_exporter_binary_local_dir }}/fail2ban_exporter"
       check_mode: false
