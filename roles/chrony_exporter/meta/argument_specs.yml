@@ -22,7 +22,8 @@ argument_specs:
           - "This overrides the I(chrony_exporter_version) parameter"
       chrony_exporter_binary_url:
         description: "URL of the chrony_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _chrony_exporter_repo }}/releases/download/v{{ chrony_exporter_version }}/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _chrony_exporter_repo }}/releases/download/v{{ chrony_exporter_version }}/\
+                  chrony_exporter-{{ chrony_exporter_version }}.linux-{{ _chrony_exporter_go_arch }}.tar.gz"
       chrony_exporter_checksums_url:
         description: "URL of the chrony_exporter checksums file"
         default: "https://github.com/{{ _chrony_exporter_repo }}/releases/download/v{{ chrony_exporter_version }}/sha256sums.txt"

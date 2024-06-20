@@ -9,7 +9,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ fail2ban_exporter_binary_url }}"
-        dest: "{{ fail2ban_exporter_archive_path }}/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+        dest: "{{ fail2ban_exporter_archive_path }}/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ _fail2ban_exporter_go_arch }}.tar.gz"
         checksum: "sha256:{{ __fail2ban_exporter_checksum }}"
         mode: '0644'
       register: _download_binary
@@ -22,7 +22,7 @@
     - name: Unpack fail2ban_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "{{ fail2ban_exporter_archive_path }}/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+        src: "{{ fail2ban_exporter_archive_path }}/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ _fail2ban_exporter_go_arch }}.tar.gz"
         dest: "{{ fail2ban_exporter_archive_path }}"
         creates: "{{ fail2ban_exporter_archive_path }}/fail2ban_exporter"
       delegate_to: localhost

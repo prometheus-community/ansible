@@ -13,5 +13,5 @@ provisioner:
           http2: true
         memcached_exporter_basic_auth_users:
           randomuser: examplepassword
-        go_arch: amd64
+        _memcached_exporter_go_arch: amd64
         memcached_exporter_version: 0.12.0

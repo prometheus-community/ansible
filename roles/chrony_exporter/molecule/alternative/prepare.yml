@@ -6,10 +6,9 @@
     - name: Download chrony_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/superq/chrony_exporter/releases/download/v{{ chrony_exporter_version\
-          \ }}/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch }}.tar.gz"
-        dest: "/tmp/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch\
-          \ }}.tar.gz"
+        url: "https://github.com/superq/chrony_exporter/releases/download/v{{ chrony_exporter_version }}/\
+              chrony_exporter-{{ chrony_exporter_version }}.linux-{{ _chrony_exporter_go_arch }}.tar.gz"
+        dest: "/tmp/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ _chrony_exporter_go_arch }}.tar.gz"
         mode: 0644
       register: _download_binary
       until: _download_binary is succeeded
@@ -20,11 +19,9 @@
     - name: Unpack chrony_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch\
-          \ }}.tar.gz"
+        src: "/tmp/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ _chrony_exporter_go_arch }}.tar.gz"
         dest: "/tmp"
-        creates: "/tmp/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch\
-          \ }}/chrony_exporter"
+        creates: "/tmp/chrony_exporter-{{ chrony_exporter_version }}.linux-{{ _chrony_exporter_go_arch }}/chrony_exporter"
       check_mode: false
 
     - name: Link to chrony_exporter binaries directory

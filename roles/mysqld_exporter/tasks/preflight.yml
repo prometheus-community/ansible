@@ -110,12 +110,12 @@
       ansible.builtin.set_fact:
         __mysqld_exporter_checksums: "{{ lookup('url', mysqld_exporter_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
       run_once: true
-      until: __mysqld_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
+      until: __mysqld_exporter_checksums is search('linux-' + _mysqld_exporter_go_arch + '.tar.gz')
       retries: 10
 
-    - name: "Get checksum for {{ go_arch }}"
+    - name: "Get checksum for {{ _mysqld_exporter_go_arch }}"
       ansible.builtin.set_fact:
         __mysqld_exporter_checksum: "{{ item.split(' ')[0] }}"
       with_items: "{{ __mysqld_exporter_checksums }}"
       when:
-        - "('linux-' + go_arch + '.tar.gz') in item"
+        - "('linux-' + _mysqld_exporter_go_arch + '.tar.gz') in item"

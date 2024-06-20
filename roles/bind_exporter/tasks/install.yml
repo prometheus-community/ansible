@@ -27,7 +27,7 @@
       become: false
       ansible.builtin.get_url:
         url: "{{ bind_exporter_binary_url }}"
-        dest: "/tmp/bind_exporter-{{ bind_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "/tmp/bind_exporter-{{ bind_exporter_version }}.linux-{{ _bind_exporter_go_arch }}.tar.gz"
         checksum: "sha256:{{ __bind_exporter_checksum }}"
         mode: '0644'
       register: _download_binary
@@ -40,9 +40,9 @@
     - name: Unpack bind_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/bind_exporter-{{ bind_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        src: "/tmp/bind_exporter-{{ bind_exporter_version }}.linux-{{ _bind_exporter_go_arch }}.tar.gz"
         dest: "/tmp"
-        creates: "/tmp/bind_exporter-{{ bind_exporter_version }}.linux-{{ go_arch }}/bind_exporter"
+        creates: "/tmp/bind_exporter-{{ bind_exporter_version }}.linux-{{ _bind_exporter_go_arch }}/bind_exporter"
         extra_opts:
           - --no-same-owner
       delegate_to: localhost
@@ -50,7 +50,7 @@
 
     - name: Propagate bind_exporter binaries
       ansible.builtin.copy:
-        src: "/tmp/bind_exporter-{{ bind_exporter_version }}.linux-{{ go_arch }}/bind_exporter"
+        src: "/tmp/bind_exporter-{{ bind_exporter_version }}.linux-{{ _bind_exporter_go_arch }}/bind_exporter"
         dest: "{{ bind_exporter_binary_install_dir }}/bind_exporter"
         mode: '0755'
         owner: root

@@ -22,10 +22,12 @@ argument_specs:
           - "This overrides the I(mongodb_exporter_version) parameter"
       mongodb_exporter_binary_url:
         description: "URL of the mongodb_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}\
+                  /mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ _mongodb_exporter_go_arch }}.tar.gz"
       mongodb_exporter_checksums_url:
         description: "URL of the mongodb_exporter checksums file"
-        default: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/mongodb_exporter_{{ mongodb_exporter_version }}_checksums.txt"
+        default: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/\
+                  mongodb_exporter_{{ mongodb_exporter_version }}_checksums.txt"
       mongodb_exporter_web_listen_address:
         description: "Address on which mongodb exporter will listen"
         default: "0.0.0.0:9216"

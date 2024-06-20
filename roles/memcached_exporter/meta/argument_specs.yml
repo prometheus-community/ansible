@@ -22,7 +22,8 @@ argument_specs:
           - "This overrides the I(memcached_exporter_version) parameter"
       memcached_exporter_binary_url:
         description: "URL of the memcached_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _memcached_exporter_repo }}/releases/download/v{{ memcached_exporter_version }}/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _memcached_exporter_repo }}/releases/download/v{{ memcached_exporter_version }}\
+                  /memcached_exporter-{{ memcached_exporter_version }}.linux-{{ _memcached_exporter_go_arch }}.tar.gz"
       memcached_exporter_checksums_url:
         description: "URL of the memcached_exporter checksums file"
         default: "https://github.com/{{ _memcached_exporter_repo }}/releases/download/v{{ memcached_exporter_version }}/sha256sums.txt"

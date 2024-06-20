@@ -19,5 +19,5 @@ provisioner:
           http2: true
         mysqld_exporter_basic_auth_users:
           randomuser: examplepassword
-        go_arch: amd64
+        _mysqld_exporter_go_arch: amd64
         mysqld_exporter_version: 0.15.0
