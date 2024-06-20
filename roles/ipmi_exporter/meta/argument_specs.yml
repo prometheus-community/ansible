@@ -22,7 +22,8 @@ argument_specs:
           - "This overrides the I(ipmi_exporter_version) parameter"
       ipmi_exporter_binary_url:
         description: "URL of the ipmi_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _ipmi_exporter_repo }}/releases/download/v{{ ipmi_exporter_version }}/ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _ipmi_exporter_repo }}/releases/download/v{{ ipmi_exporter_version }}/\
+                  ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{ _ipmi_exporter_go_arch }}.tar.gz"
       ipmi_exporter_checksums_url:
         description: "URL of the ipmi_exporter checksums file"
         default: "https://github.com/{{ _ipmi_exporter_repo }}/releases/download/v{{ ipmi_exporter_version }}/sha256sums.txt"

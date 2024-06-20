@@ -6,10 +6,9 @@
     - name: Download ipmi_exporter binary to local folder
       become: false
       ansible.builtin.get_url:
-        url: "https://github.com/prometheus-community/ipmi_exporter/releases/download/v{{\
-          \ ipmi_exporter_version }}/ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{\
-          \ go_arch }}.tar.gz"
-        dest: "/tmp/ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        url: "https://github.com/prometheus-community/ipmi_exporter/releases/download/v{{ ipmi_exporter_version }}/\
+              ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{ _ipmi_exporter_go_arch }}.tar.gz"
+        dest: "/tmp/ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{ _ipmi_exporter_go_arch }}.tar.gz"
         mode: 0644
       register: _download_binary
       until: _download_binary is succeeded
@@ -20,10 +19,9 @@
     - name: Unpack ipmi_exporter binary
       become: false
       ansible.builtin.unarchive:
-        src: "/tmp/ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        src: "/tmp/ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{ _ipmi_exporter_go_arch }}.tar.gz"
         dest: "/tmp"
-        creates: "/tmp/ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{ go_arch\
-          \ }}/ipmi_exporter"
+        creates: "/tmp/ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{ _ipmi_exporter_go_arch }}/ipmi_exporter"
       check_mode: false
 
     - name: Link to ipmi_exporter binaries directory
