@@ -1,0 +1,6 @@
+---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        nvidia_gpu_exporter_web_listen_address: "127.0.0.1:9835"
