@@ -10,7 +10,7 @@ argument_specs:
     options:
       memcached_exporter_version:
         description: "memcached_exporter package version. Also accepts latest as parameter."
-        default: "0.14.3"
+        default: "0.14.4"
       memcached_exporter_skip_install:
         description: "memcached_exporter installation tasks gets skipped when set to true."
         type: bool
