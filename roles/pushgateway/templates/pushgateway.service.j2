@@ -26,6 +26,17 @@ ExecStart={{ pushgateway_binary_install_dir }}/pushgateway \
 {% else %}
     '--web.listen-address={{ pushgateway_web_listen_address }}' \
 {% endif %}
+{% if pushgateway_web_external_url %}
+    '--web.external-url={{ pushgateway_web_external_url }}' \
+{% endif %}
+{% if pushgateway_cli_extra_flags and
+      pushgateway_cli_extra_flags is iterable and
+      pushgateway_cli_extra_flags is not mapping and
+      pushgateway_cli_extra_flags is not string %}
+{%   for extra_flag in pushgateway_cli_extra_flags %}
+    '{{ extra_flag }}' \
+{%   endfor %}
+{% endif %}
     '--web.telemetry-path={{ pushgateway_web_telemetry_path }}'
 
 SyslogIdentifier=pushgateway
