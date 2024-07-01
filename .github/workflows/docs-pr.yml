@@ -54,11 +54,14 @@ jobs:
     if: github.repository == 'prometheus-community/ansible'
     permissions:
       contents: write
+      pages: write
+      id-token: write
     needs: [build-docs]
     name: Publish Ansible Docs
     uses: ansible-community/github-docs-build/.github/workflows/_shared-docs-build-publish-gh-pages.yml@main
     with:
       artifact-name: ${{ needs.build-docs.outputs.artifact-name }}
+      publish-gh-pages-branch: true
       action: ${{ (github.event.action == 'closed' || needs.build-docs.outputs.changed != 'true') && 'teardown' || 'publish' }}
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
