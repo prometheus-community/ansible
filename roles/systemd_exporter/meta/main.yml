@@ -15,7 +15,6 @@ galaxy_info:
         - "bullseye"
     - name: "EL"
       versions:
-        - "7"
         - "8"
         - "9"
     - name: "Fedora"
