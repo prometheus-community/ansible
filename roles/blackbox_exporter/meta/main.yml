@@ -9,6 +9,7 @@ galaxy_info:
       versions:
         - "focal"
         - "jammy"
+        - "noble"
     - name: "Debian"
       versions:
         - "bullseye"
