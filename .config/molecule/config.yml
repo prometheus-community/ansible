@@ -53,6 +53,12 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
+  - name: ubuntu-24.04
+    image: dokken/ubuntu-24.04
+    pre_build_image: true
+    privileged: true
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
 verifier:
   name: testinfra
 provisioner:
