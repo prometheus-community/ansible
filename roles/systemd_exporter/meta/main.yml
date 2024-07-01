@@ -13,7 +13,6 @@ galaxy_info:
     - name: "Debian"
       versions:
         - "bullseye"
-        - "buster"
     - name: "EL"
       versions:
         - "7"
