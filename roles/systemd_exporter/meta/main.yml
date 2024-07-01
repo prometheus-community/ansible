@@ -19,8 +19,8 @@ galaxy_info:
         - "9"
     - name: "Fedora"
       versions:
-        - "37"
-        - '38'
+        - "39"
+        - "40"
   galaxy_tags:
     - "monitoring"
     - "prometheus"
