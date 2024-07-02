@@ -53,7 +53,6 @@ jobs:
   ansible-test-sanity:
     uses: ./.github/workflows/ansible-test-sanity.yml
     needs:
-      - ansible-lint
       - discover-ansible-versions
     with:
       ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}
