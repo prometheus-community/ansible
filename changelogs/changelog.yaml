@@ -1,8 +1,10 @@
 ---
 ancestor:
 releases:
-  0.17.0:
+  0.17.1:
     changes: {}
+    release_date: '2024-07-02'
+  0.17.0:
     release_date: '2024-05-29'
   0.16.4:
     release_date: '2024-04-22'
