@@ -23,3 +23,5 @@ jobs:
         with:
           ansible-core-version: ${{ matrix.ansible-core-versions }}
           testing-type: sanity
+          ansible-core-github-repository-slug: ${{ contains(fromJson('["stable-2.9", "stable-2.10", "stable-2.11"]'), matrix.ansible-core-versions) &&
+                                               'ansible-community/eol-ansible' || 'ansible/ansible' }}
