@@ -19,6 +19,8 @@ remote_read:
 
 {% if not prometheus_agent_mode and prometheus_alert_rules_files != [] %}
 rule_files:
+  - {{ prometheus_config_dir }}/rules/*.yml
+  - {{ prometheus_config_dir }}/rules/*.yaml
   - {{ prometheus_config_dir }}/rules/*.rules
 {% endif %}
 
