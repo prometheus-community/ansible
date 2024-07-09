@@ -1,0 +1,18 @@
+---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        nvidia_gpu_exporter_binary_local_dir: "/tmp/nvidia_gpu_exporter-linux-amd64"
+        nvidia_gpu_exporter_web_listen_address:
+          - '127.0.0.1:9835'
+
+        nvidia_gpu_exporter_tls_server_config:
+          cert_file: /etc/nvidia_gpu_exporter/tls.cert
+          key_file: /etc/nvidia_gpu_exporter/tls.key
+        nvidia_gpu_exporter_http_server_config:
+          http2: true
+        nvidia_gpu_exporter_basic_auth_users:
+          randomuser: examplepassword
+        go_arch: amd64
+        nvidia_gpu_exporter_version: 1.2.0
