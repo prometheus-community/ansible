@@ -43,6 +43,9 @@ ExecStart={{ _alertmanager_binary_install_dir }}/alertmanager \
 {% else %}
   {{ pre }}-web.listen-address={{ alertmanager_web_listen_address }} \
 {% endif %}
+{% if alertmanager_web_config is defined %}
+  {{ pre }}-web.config.file={{ alertmanager_config_dir }}/web.yml
+{% endif %}
   {{ pre }}-web.external-url={{ alertmanager_web_external_url }}{% for flag, flag_value in alertmanager_config_flags_extra.items() %} \
   {{ pre }}-{{ flag }}={{ flag_value }}{% endfor %}
 
