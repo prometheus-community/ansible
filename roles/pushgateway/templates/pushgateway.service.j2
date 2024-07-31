@@ -29,11 +29,11 @@ ExecStart={{ pushgateway_binary_install_dir }}/pushgateway \
 {% if pushgateway_web_external_url %}
     '--web.external-url={{ pushgateway_web_external_url }}' \
 {% endif %}
-{% if pushgateway_cli_extra_flags and
-      pushgateway_cli_extra_flags is iterable and
-      pushgateway_cli_extra_flags is not mapping and
-      pushgateway_cli_extra_flags is not string %}
-{%   for extra_flag in pushgateway_cli_extra_flags %}
+{% if pushgateway_config_flags_extra and
+      pushgateway_config_flags_extra is iterable and
+      pushgateway_config_flags_extra is not mapping and
+      pushgateway_config_flags_extra is not string %}
+{%   for extra_flag in pushgateway_config_flags_extra %}
     '{{ extra_flag }}' \
 {%   endfor %}
 {% endif %}
