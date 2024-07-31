@@ -13,7 +13,7 @@ pushgateway_web_external_url: ""
 
 # Optional extra flags to be passed to pushgateway binary, e.g.
 # ['--log.level=debug', '--log.format=json', '--web.enable-admin-api']
-pushgateway_cli_extra_flags: []
+pushgateway_config_flags_extra: []
 
 pushgateway_tls_server_config: {}
 

@@ -28,7 +28,7 @@ argument_specs:
           External address on which pushgateway is available.
           Useful when behind reverse proxy, e.g.: https://example.org/pushgateway
         default: ""
-      pushgateway_cli_extra_flags:
+      pushgateway_config_flags_extra:
         description: >
           Optional extra flags to be passed to pushgateway binary, e.g.
           ['--log.level=debug', '--log.format=json', '--web.enable-admin-api']
