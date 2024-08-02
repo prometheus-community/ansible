@@ -18,6 +18,13 @@ ExecStart={{ cadvisor_binary_install_dir }}/cadvisor \
 {% if cadvisor_docker_only %}
     '--docker_only={{ cadvisor_docker_only | lower }}' \
 {% endif -%}
+{% if cadvisor_whitelisted_container_labels | length > 0 %}
+    '--whitelisted_container_labels={{ cadvisor_whitelisted_container_labels | join(',') }}' \
+{% endif -%}
+{% if cadvisor_env_metadata_whitelist | length > 0 %}
+    '--env_metadata_whitelist={{ cadvisor_env_metadata_whitelist | join(',') }}' \
+{% endif %}
+    '--store_container_labels={{ cadvisor_store_container_labels | lower }}' \
     '--listen_ip={{ cadvisor_listen_ip }}' \
     '--port={{ cadvisor_port }}' \
     '--prometheus_endpoint={{ cadvisor_prometheus_endpoint }}'

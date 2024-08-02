@@ -11,6 +11,9 @@ cadvisor_prometheus_endpoint: "/metrics"
 
 cadvisor_enable_metrics: []
 cadvisor_disable_metrics: []
+cadvisor_env_metadata_whitelist: []
+cadvisor_whitelisted_container_labels: []
+cadvisor_store_container_labels: true
 cadvisor_docker_only: false
 
 cadvisor_binary_install_dir: "/usr/local/bin"
