@@ -1,0 +1,27 @@
+---
+- name: Copy the influxdb_exporter systemd service file
+  ansible.builtin.template:
+    src: influxdb_exporter.service.j2
+    dest: /etc/systemd/system/influxdb_exporter.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart influxdb_exporter
+
+- name: Create influxdb_exporter config directory
+  ansible.builtin.file:
+    path: "/etc/influxdb_exporter"
+    state: directory
+    owner: root
+    group: root
+    mode: u+rwX,g+rwX,o=rX
+
+- name: Allow influxdb_exporter port in SELinux on RedHat OS family
+  community.general.seport:
+    ports: "{{ influxdb_exporter_web_listen_address.split(':')[-1] }}"
+    proto: tcp
+    setype: http_port_t
+    state: present
+  when:
+    - ansible_version.full is version_compare('2.4', '>=')
+    - ansible_selinux.status == "enabled"

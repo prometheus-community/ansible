@@ -1,0 +1,59 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+    apply:
+      tags:
+        - influxdb_exporter_install
+        - influxdb_exporter_configure
+        - influxdb_exporter_run
+  tags:
+    - influxdb_exporter_install
+    - influxdb_exporter_configure
+    - influxdb_exporter_run
+
+- name: Install
+  ansible.builtin.include_tasks:
+    file: install.yml
+    apply:
+      become: true
+      tags:
+        - influxdb_exporter_install
+  when:
+    ( not __influxdb_exporter_is_installed.stat.exists ) or
+    ( influxdb_exporter_binary_local_dir | length > 0 )
+  tags:
+    - influxdb_exporter_install
+
+- name: SELinux
+  ansible.builtin.include_tasks:
+    file: selinux.yml
+    apply:
+      become: true
+      tags:
+        - influxdb_exporter_configure
+  when: ansible_selinux.status == "enabled"
+  tags:
+    - influxdb_exporter_configure
+
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yml
+    apply:
+      become: true
+      tags:
+        - influxdb_exporter_configure
+  tags:
+    - influxdb_exporter_configure
+
+- name: Ensure Influxdb Exporter is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: influxdb_exporter
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - influxdb_exporter_run

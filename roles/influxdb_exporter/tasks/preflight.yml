@@ -1,0 +1,54 @@
+---
+- name: Assert usage of systemd as an init system
+  ansible.builtin.assert:
+    that: ansible_service_mgr == 'systemd'
+    msg: "This role only works with systemd"
+
+- name: Naive assertion of proper listen address
+  ansible.builtin.assert:
+    that:
+      - >-
+        [influxdb_exporter_web_listen_address] |
+          flatten |
+          reject('match', '.+:\\d+$') |
+          list |
+          length == 0
+
+- name: Check if influxdb_exporter is installed
+  ansible.builtin.stat:
+    path: "{{ influxdb_exporter_binary_install_dir }}/influxdb_exporter"
+  register: __influxdb_exporter_is_installed
+  check_mode: false
+  tags:
+    - influxdb_exporter_install
+
+- name: Discover latest version
+  ansible.builtin.set_fact:
+    influxdb_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _influxdb_exporter_repo }}/releases/latest', headers=_influxdb_exporter_github_api_headers,
+                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+  run_once: true
+  until: influxdb_exporter_version is version('0.0.0', '>=')
+  retries: 10
+  when:
+    - influxdb_exporter_version == "latest"
+    - influxdb_exporter_binary_local_dir | length == 0
+    - not influxdb_exporter_skip_install
+
+- name: Get influxdb_exporter binary checksum
+  when:
+    - influxdb_exporter_binary_local_dir | length == 0
+    - not influxdb_exporter_skip_install
+  block:
+    - name: Get checksum list from github
+      ansible.builtin.set_fact:
+        __influxdb_exporter_checksums: "{{ lookup('url', influxdb_exporter_checksums_url, headers=_influxdb_exporter_github_api_headers, wantlist=True) | list }}"
+      run_once: true
+      until: __influxdb_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
+      retries: 10
+
+    - name: "Get checksum for {{ go_arch }}"
+      ansible.builtin.set_fact:
+        __influxdb_exporter_checksum: "{{ item.split(' ')[0] }}"
+      with_items: "{{ __influxdb_exporter_checksums }}"
+      when:
+        - "('linux-' + go_arch + '.tar.gz') in item"
