@@ -1,0 +1,23 @@
+---
+influxdb_exporter_version: "0.11.5"
+influxdb_exporter_binary_local_dir: ""
+influxdb_exporter_binary_url: "https://github.com/{{ _influxdb_exporter_repo }}/releases/download/v{{ influxdb_exporter_version }}/\
+                           influxdb_exporter-{{ influxdb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+influxdb_exporter_checksums_url: "https://github.com/{{ _influxdb_exporter_repo }}/releases/download/v{{ influxdb_exporter_version }}/sha256sums.txt"
+influxdb_exporter_skip_install: false
+
+influxdb_exporter_web_listen_address: "0.0.0.0:9122"
+influxdb_exporter_udp_bind_address: "{{ influxdb_exporter_web_listen_address }}"
+influxdb_exporter_web_telemetry_path: "/metrics"
+influxdb_exporter_exporter_web_telemetry_path: "/metrics/exporter"
+influxdb_exporter_influxdb_sample_expiry: "5m"
+influxdb_exporter_log_level: "info"
+influxdb_exporter_log_format: "logfmt"
+influxdb_exporter_export_timestamps: true
+
+influxdb_exporter_binary_install_dir: "/usr/local/bin"
+influxdb_exporter_system_group: "influxdb-exp"
+influxdb_exporter_system_user: "{{ influxdb_exporter_system_group }}"
+
+# Local path to stash the archive and its extraction
+influxdb_exporter_archive_path: /tmp
