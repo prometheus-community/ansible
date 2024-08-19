@@ -7,6 +7,11 @@ Prometheus.Prometheus Release Notes
 v0.17.1
 =======
 
+Bugfixes
+--------
+
+- fix(ci): limit number of parallel tests to avoid github api limits (https://github.com/prometheus-community/ansible/pull/397)
+
 v0.17.0
 =======
 
