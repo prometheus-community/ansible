@@ -8,7 +8,7 @@ Deploy prometheus [redis_exporter](https://github.com/oliver006/redis_exporter/)
 
 ## Requirements
 
-- Ansible >= 2.9 (It might work on previous versions, but we cannot guarantee it)
+- Ansible >= 2.12 (It might work on previous versions, but we cannot guarantee it)
 - gnu-tar on Mac deployer host (`brew install gnu-tar`)
 
 ## Role Variables

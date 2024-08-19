@@ -8,7 +8,7 @@ Note. This repository and role uses the name process_exporter to conform with an
 
 ## Requirements
 
-- Ansible >= 2.9 (It might work on previous versions, but we cannot guarantee it)
+- Ansible >= 2.12 (It might work on previous versions, but we cannot guarantee it)
 
 ## Role Variables
 

@@ -3,7 +3,7 @@ galaxy_info:
   author: "Prometheus Community"
   description: "Prometheus Alertmanager service"
   license: "Apache"
-  min_ansible_version: "2.9"
+  min_ansible_version: "2.12"
   platforms:
     - name: "Ubuntu"
       versions:
@@ -15,7 +15,6 @@ galaxy_info:
         - "buster"
     - name: "EL"
       versions:
-        - "7"
         - "8"
         - "9"
     - name: "Fedora"

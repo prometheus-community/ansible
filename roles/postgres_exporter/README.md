@@ -7,7 +7,7 @@ Deploy prometheus [postgresql exporter](https://github.com/prometheus-community/
 
 ## Requirements
 
-- Ansible >= 2.9 (It might work on previous versions, but we cannot guarantee it)
+- Ansible >= 2.12 (It might work on previous versions, but we cannot guarantee it)
 - gnu-tar on Mac deployer host (`brew install gnu-tar`)
 - Passlib is required when using the basic authentication feature (`pip install passlib[bcrypt]`)
 
