@@ -5,6 +5,8 @@ releases:
     changes:
       bugfixes:
         - 'fix: ansible-community/eol-ansible for 2.9/2.10/2.11 tests (https://github.com/prometheus-community/ansible/pull/416)'
+      trivial:
+        - 'chore(deps): update tj-actions/changed-files action to v45 (https://github.com/prometheus-community/ansible/pull/412)'
     release_date: '2024-09-13'
   0.17.1:
     changes:
