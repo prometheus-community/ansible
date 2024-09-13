@@ -13,3 +13,6 @@ provisioner:
           - network
           - cpu
         cadvisor_docker_only: true
+        whitelisted_container_labels: [ "com.docker.compose.image" ]
+        env_metadata_whitelist: [ "PATH" ]
+        store_container_labels: false
