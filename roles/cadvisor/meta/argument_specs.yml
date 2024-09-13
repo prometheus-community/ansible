@@ -64,6 +64,18 @@ argument_specs:
         default: []
         type: "list"
         choices: *metrics_choices
+      cadvisor_store_container_labels:
+        description: "store all container labels"
+        type: "bool"
+        default: true
+      cadvisor_whitelisted_container_labels:
+        description: "comma-separated list of container labels to be used as labels on prometheus metrics"
+        default: []
+        type: "list"
+      cadvisor_env_metadata_whitelist:
+        description: "comma-separated list of env variables to be used as labels on prometheus metrics"
+        default: []
+        type: "list"
       cadvisor_docker_only:
         description: "do not report raw cgroup metrics, except the root cgroup"
         type: "bool"
