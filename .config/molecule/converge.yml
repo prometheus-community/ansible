@@ -24,6 +24,7 @@
           )
         }}
       when: item not in groups['target_hosts']
+      changed_when: false
 
 - name: Converge
   hosts: target_hosts
