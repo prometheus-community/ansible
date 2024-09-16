@@ -1,6 +1,32 @@
 ---
+- name: Filter and add hosts to ansible_compatible_hosts
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Filter out incompatible distro/ansible version combos
+      ansible.builtin.add_host:
+        name: "{{ item }}"
+        groups: target_hosts
+      loop: >-
+        {{
+          groups['all']
+          | map('extract', hostvars)
+          | rejectattr('exclude_ansible_vers', 'defined')
+          | map(attribute='inventory_hostname')
+          | list
+          | union(
+            groups['all']
+            | map('extract', hostvars)
+            | selectattr('exclude_ansible_vers', 'defined')
+            | rejectattr('exclude_ansible_vers', 'search', ansible_version.major ~ '.' ~ ansible_version.minor)
+            | map(attribute='inventory_hostname')
+            | list
+          )
+        }}
+      when: item not in groups['target_hosts']
+
 - name: Converge
-  hosts: all
+  hosts: target_hosts
   any_errors_fatal: true
   tasks:
     - name: "Run role"

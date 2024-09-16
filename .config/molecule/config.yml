@@ -64,3 +64,23 @@ verifier:
 provisioner:
   playbooks:
     converge: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/converge.yml"
+  inventory:
+    hosts:
+      target_hosts:
+        hosts: {}
+    host_vars:
+      fedora-39:
+        exclude_ansible_vers:
+          - "2.9"
+          - "2.10"
+          - "2.11"
+      fedora-40:
+        exclude_ansible_vers:
+          - "2.9"
+          - "2.10"
+          - "2.11"
+      ubuntu-24.04:
+        exclude_ansible_vers:
+          - "2.9"
+          - "2.10"
+          - "2.11"
