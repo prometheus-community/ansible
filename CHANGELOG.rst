@@ -7,6 +7,16 @@ Prometheus.Prometheus Release Notes
 v0.18.0
 =======
 
+Minor Changes
+-------------
+
+- enhancement: adding env/container labels options (https://github.com/prometheus-community/ansible/pull/407)
+
+Bugfixes
+--------
+
+- fix: ansible-community/eol-ansible for 2.9/2.10/2.11 tests (https://github.com/prometheus-community/ansible/pull/416)
+
 v0.17.2
 =======
 
