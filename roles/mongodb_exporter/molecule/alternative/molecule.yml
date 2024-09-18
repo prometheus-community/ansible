@@ -1,11 +1,12 @@
 ---
 provisioner:
+  playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/alternative/prepare.yml"
   inventory:
     group_vars:
       all:
         mongodb_exporter_binary_local_dir: "/tmp/mongodb_exporter-linux-amd64_local"
         mongodb_exporter_web_listen_address: "127.0.1.1:9216"
-
         mongodb_exporter_tls_server_config:
           cert_file: /etc/mongodb_exporter/tls.cert
           key_file: /etc/mongodb_exporter/tls.key
@@ -15,3 +16,5 @@ provisioner:
           randomuser: examplepassword
         go_arch: amd64
         mongodb_exporter_version: 0.40.0
+        mongodb_exporter_binary_url: "https://github.com/percona/mongodb_exporter/releases/download/v{{ mongodb_exporter_version }}/\
+                                      mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"

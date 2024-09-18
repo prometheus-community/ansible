@@ -1,5 +1,7 @@
 ---
 provisioner:
+  playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/alternative/prepare.yml"
   inventory:
     group_vars:
       all:
@@ -26,3 +28,6 @@ provisioner:
               cmdline:
                 - crond
           {% endraw %}
+        process_exporter_binary_url: "https://github.com/ncabatoff/process-exporter/releases/download/v{{\
+                                      \ process_exporter_version }}/process-exporter-{{ process_exporter_version }}.linux-{{\
+                                      \ go_arch }}.tar.gz"

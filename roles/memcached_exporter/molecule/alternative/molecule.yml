@@ -1,11 +1,12 @@
 ---
 provisioner:
+  playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/alternative/prepare.yml"
   inventory:
     group_vars:
       all:
         memcached_exporter_binary_local_dir: "/tmp/memcached_exporter-linux-amd64"
         memcached_exporter_web_listen_address: "127.0.0.1:8080"
-
         memcached_exporter_tls_server_config:
           cert_file: /etc/memcached_exporter/tls.cert
           key_file: /etc/memcached_exporter/tls.key
@@ -15,3 +16,6 @@ provisioner:
           randomuser: examplepassword
         go_arch: amd64
         memcached_exporter_version: 0.12.0
+        memcached_exporter_binary_url: "https://github.com/prometheus/memcached_exporter/releases/download/v{{\
+                                        \ memcached_exporter_version }}/memcached_exporter-{{ memcached_exporter_version }}.linux-{{\
+                                        \ go_arch }}.tar.gz"

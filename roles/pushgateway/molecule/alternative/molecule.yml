@@ -1,5 +1,7 @@
 ---
 provisioner:
+  playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/alternative/prepare.yml"
   inventory:
     group_vars:
       all:
@@ -16,3 +18,5 @@ provisioner:
           randomuser: examplepassword
         go_arch: amd64
         pushgateway_version: 1.5.1
+        pushgateway_binary_url: "https://github.com/prometheus/pushgateway/releases/download/v{{ pushgateway_version\
+                                 \ }}/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"

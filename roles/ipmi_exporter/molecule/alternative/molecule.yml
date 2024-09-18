@@ -1,11 +1,12 @@
 ---
 provisioner:
+  playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/alternative/prepare.yml"
   inventory:
     group_vars:
       all:
         ipmi_exporter_binary_local_dir: "/tmp/ipmi_exporter-linux-amd64"
         ipmi_exporter_web_listen_address: "127.0.0.1:8080"
-
         ipmi_exporter_tls_server_config:
           cert_file: /etc/ipmi_exporter/tls.cert
           key_file: /etc/ipmi_exporter/tls.key
@@ -15,3 +16,6 @@ provisioner:
           randomuser: examplepassword
         go_arch: amd64
         ipmi_exporter_version: 1.6.1
+        ipmi_exporter_binary_url: "https://github.com/prometheus-community/ipmi_exporter/releases/download/v{{\
+                                   \ ipmi_exporter_version }}/ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{\
+                                   \ go_arch }}.tar.gz"

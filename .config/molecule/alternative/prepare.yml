@@ -1,0 +1,104 @@
+---
+- name: Run local preparation
+  hosts: localhost
+  gather_facts: false
+  vars:
+    __role_name: "{{ lookup('ansible.builtin.env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+    __binary_name: "{{ __role_name }}"
+    __binary_url: "{{ lookup('ansible.builtin.vars', __role_name ~ '_binary_url') }}"
+    __binary_local_dir: "{{ lookup('ansible.builtin.vars', __role_name ~ '_binary_local_dir') }}"
+    __tls_server_config: "{{ lookup('ansible.builtin.vars', __role_name ~ '_tls_server_config', default={}) }}"
+  tasks:
+    - name: "Create local binary directory"
+      ansible.builtin.file:
+        path: "{{ __binary_local_dir }}"
+        state: directory
+        mode: 0755
+
+    - name: "Fetch binary"
+      become: false
+      ansible.builtin.unarchive:
+        src: "{{ __binary_url }}"
+        dest: "{{ __binary_local_dir }}"
+        remote_src: true
+        list_files: true
+        extra_opts:
+          - "--strip-components=1"
+        creates: "{{ __binary_local_dir }}/{{ __binary_name }}"
+      check_mode: false
+      register: __download_binary
+
+    - name: Generate self signed certificates
+      when: "'cert_file' in __tls_server_config"
+      block:
+        - name: Install pyOpenSSL for certificate generation
+          ansible.builtin.pip:
+            name: "pyOpenSSL"
+
+        - name: Create private key
+          community.crypto.openssl_privatekey:
+            path: "/tmp/tls.key"
+
+        - name: Create CSR
+          community.crypto.openssl_csr:
+            path: "/tmp/tls.csr"
+            privatekey_path: "/tmp/tls.key"
+
+        - name: Create certificate
+          community.crypto.x509_certificate:
+            path: "/tmp/tls.cert"
+            csr_path: "/tmp/tls.csr"
+            privatekey_path: "/tmp/tls.key"
+            provider: selfsigned
+
+    - name: Filter out incompatible distro/ansible version combos
+      ansible.builtin.add_host:
+        name: "{{ item }}"
+        groups: target_hosts
+      loop: >-
+        {{
+          groups['all']
+          | map('extract', hostvars)
+          | rejectattr('exclude_ansible_vers', 'defined')
+          | map(attribute='inventory_hostname')
+          | list
+          | union(
+            groups['all']
+            | map('extract', hostvars)
+            | selectattr('exclude_ansible_vers', 'defined')
+            | rejectattr('exclude_ansible_vers', 'search', ansible_version.major ~ '.' ~ ansible_version.minor)
+            | map(attribute='inventory_hostname')
+            | list
+          )
+        }}
+      when: item not in groups['target_hosts']
+      changed_when: false
+
+- name: Run target preparation
+  hosts: target_hosts
+  any_errors_fatal: true
+  vars:
+    __role_name: "{{ lookup('ansible.builtin.env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+    __tls_server_config: "{{ lookup('ansible.builtin.vars', __role_name ~ '_tls_server_config', default={}) }}"
+  tasks:
+    - name: Copy self signed certificates
+      when: "'cert_file' in __tls_server_config"
+      block:
+        - name: "Create cert dir"
+          ansible.builtin.file:
+            path: "{{ __tls_server_config.cert_file | dirname }}"
+            state: directory
+            owner: root
+            group: root
+            mode: u+rwX,g+rwX,o=rX
+
+        - name: "Copy cert and key"
+          ansible.builtin.copy:
+            src: "{{ item.src }}"
+            dest: "{{ item.dest }}"
+            mode: "{{ item.mode | default('0644') }}"
+          loop:
+            - src: "/tmp/tls.cert"
+              dest: "{{ __tls_server_config.cert_file }}"
+            - src: "/tmp/tls.key"
+              dest: "{{ __tls_server_config.key_file }}"
