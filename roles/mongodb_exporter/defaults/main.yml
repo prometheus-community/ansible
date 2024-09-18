@@ -1,5 +1,5 @@
 ---
-mongodb_exporter_version: 0.40.0
+mongodb_exporter_version: 0.41.0
 mongodb_exporter_binary_local_dir: ""
 mongodb_exporter_binary_url: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/\
                           mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
