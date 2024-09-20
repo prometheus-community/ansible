@@ -61,6 +61,8 @@ platforms:
     command: /lib/systemd/systemd
 verifier:
   name: testinfra
+  additional_files_or_dirs:
+    - "../../../../../.testinfra/testinfra_helpers.py"
 provisioner:
   playbooks:
     converge: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/converge.yml"
