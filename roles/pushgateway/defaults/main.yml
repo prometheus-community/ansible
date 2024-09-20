@@ -1,5 +1,5 @@
 ---
-pushgateway_version: 1.9.0
+pushgateway_version: 1.10.0
 pushgateway_binary_local_dir: ""
 pushgateway_binary_url: "https://github.com/{{ _pushgateway_repo }}/releases/download/v{{ pushgateway_version }}/\
                            pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"
