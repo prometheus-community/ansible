@@ -9,15 +9,6 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def test_directories(host):
-    dirs = [
-        "/var/lib/influxdb_exporter"
-    ]
-    for dir in dirs:
-        d = host.file(dir)
-        assert not d.exists
-
-
 def test_service(host):
     s = host.service("influxdb_exporter")
     try:

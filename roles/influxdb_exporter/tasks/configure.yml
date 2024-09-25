@@ -8,14 +8,6 @@
     mode: 0644
   notify: restart influxdb_exporter
 
-- name: Create influxdb_exporter config directory
-  ansible.builtin.file:
-    path: "/etc/influxdb_exporter"
-    state: directory
-    owner: root
-    group: root
-    mode: u+rwX,g+rwX,o=rX
-
 - name: Allow influxdb_exporter port in SELinux on RedHat OS family
   community.general.seport:
     ports: "{{ influxdb_exporter_web_listen_address.split(':')[-1] }}"
