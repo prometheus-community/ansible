@@ -3,6 +3,7 @@ __metaclass__ = type
 
 import yaml
 from testinfra_helpers import get_target_hosts
+import os
 import pytest
 
 testinfra_hosts = get_target_hosts()
