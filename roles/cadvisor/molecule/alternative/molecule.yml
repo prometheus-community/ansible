@@ -5,10 +5,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        cadvisor_binary_url: "https://github.com/google/cadvisor/releases/download/v{{ cadvisor_version }}/cadvisor-v{{ cadvisor_version }}-linux-{{ go_arch }}"
-        cadvisor_binary_local_dir: "/tmp"
         cadvisor_port: "8000"
-        go_arch: amd64
         cadvisor_version: 0.47.0
         cadvisor_enable_metrics:
           - tcp
