@@ -7,6 +7,11 @@ Prometheus.Prometheus Release Notes
 v0.18.1
 =======
 
+Bugfixes
+--------
+
+- fix: remove EOL platforms for current ones (https://github.com/prometheus-community/ansible/pull/395)
+
 v0.18.0
 =======
 
