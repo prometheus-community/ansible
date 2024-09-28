@@ -17,20 +17,8 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
-  - name: centos-7
-    image: dokken/centos-7
-    pre_build_image: true
-    privileged: true
-    cgroup_parent: docker.slice
-    command: /usr/lib/systemd/systemd
   - name: centos-stream-9
     image: dokken/centos-stream-9
-    pre_build_image: true
-    privileged: true
-    cgroup_parent: docker.slice
-    command: /lib/systemd/systemd
-  - name: debian-10
-    image: dokken/debian-10
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
@@ -41,14 +29,14 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
-  - name: fedora-37
-    image: dokken/fedora-37
+  - name: fedora-39
+    image: dokken/fedora-39
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
-  - name: fedora-38
-    image: dokken/fedora-38
+  - name: fedora-40
+    image: dokken/fedora-40
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
@@ -65,8 +53,38 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
+  - name: ubuntu-24.04
+    image: dokken/ubuntu-24.04
+    pre_build_image: true
+    privileged: true
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
 verifier:
   name: testinfra
+  additional_files_or_dirs:
+    - "../../../../../.testinfra/testinfra_helpers.py"
+  env:
+    PYTHONPATH: "${MOLECULE_PROJECT_DIRECTORY}/../../.testinfra:${PYTHONPATH}"
 provisioner:
   playbooks:
     converge: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/converge.yml"
+  inventory:
+    hosts:
+      target_hosts:
+        hosts: {}
+    host_vars:
+      fedora-39:
+        exclude_ansible_vers:
+          - "2.9"
+          - "2.10"
+          - "2.11"
+      fedora-40:
+        exclude_ansible_vers:
+          - "2.9"
+          - "2.10"
+          - "2.11"
+      ubuntu-24.04:
+        exclude_ansible_vers:
+          - "2.9"
+          - "2.10"
+          - "2.11"
