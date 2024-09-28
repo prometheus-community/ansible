@@ -49,11 +49,3 @@
     - snmp_exporter_binary_local_dir | length > 0
     - not snmp_exporter_skip_install
   notify: restart snmp_exporter
-
-- name: Create configuration directory
-  ansible.builtin.file:
-    path: "/etc/snmp_exporter"
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
