@@ -88,3 +88,6 @@ provisioner:
           - "2.9"
           - "2.10"
           - "2.11"
+      almalinux-8:
+        exclude_ansible_vers:
+          - "2.17"
