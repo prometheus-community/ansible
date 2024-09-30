@@ -51,5 +51,5 @@ unset _ANSIBLE_COVERAGE_CONFIG
 unset ANSIBLE_PYTHON_INTERPRETER
 
 # Run molecule test
-cd "$role_root"
+cd "$role_root" || { echo "Fail to change directory into $role_root"; exit 1; }
 molecule -c "$collection_root/.config/molecule/config.yml" test -s "$scenario"
