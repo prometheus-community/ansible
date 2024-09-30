@@ -29,9 +29,6 @@ argument_specs:
       smokeping_prober_web_listen_address:
         description: "Address on which Smokeping Prober will listen"
         default: "0.0.0.0:9374"
-      smokeping_prober_web_telemetry_path:
-        description: "Path under which to expose metrics"
-        default: "/metrics"
       smokeping_prober_config_dir:
         description: "The directory of the smokeping_prober probes config files"
         default: "/etc/smokeping_prober"
