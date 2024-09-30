@@ -1,6 +1,16 @@
 ---
 ancestor:
 releases:
+  0.19.0:
+    changes:
+      bugfixes:
+        - 'fix: remove EOL platforms for current ones (https://github.com/prometheus-community/ansible/pull/395)'
+      minor_changes:
+        - 'minor: bump support for ansible from v2.16.* to v2.17.* (https://github.com/prometheus-community/ansible/pull/414)'
+      trivial:
+        - 'patch: New percona/mongodb_exporter upstream release 0.41.1! (https://github.com/prometheus-community/ansible/pull/420)'
+        - 'patch: New prometheus/pushgateway upstream release 1.10.0! (https://github.com/prometheus-community/ansible/pull/418)'
+    release_date: '2024-09-30'
   0.18.1:
     changes:
       bugfixes:

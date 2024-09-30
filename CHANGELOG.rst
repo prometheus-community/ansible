@@ -4,6 +4,19 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.19.0
+=======
+
+Minor Changes
+-------------
+
+- minor: bump support for ansible from v2.16.* to v2.17.* (https://github.com/prometheus-community/ansible/pull/414)
+
+Bugfixes
+--------
+
+- fix: remove EOL platforms for current ones (https://github.com/prometheus-community/ansible/pull/395)
+
 v0.18.1
 =======
 
