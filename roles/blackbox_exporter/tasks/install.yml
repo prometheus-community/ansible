@@ -15,6 +15,16 @@
     createhome: false
   when: blackbox_exporter_user != 'root'
 
+- name: Create blackbox_exporter configuration directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: "{{ blackbox_exporter_group }}"
+    mode: 0770
+  with_items:
+    - "{{ blackbox_exporter_config_dir }}"
+
 - name: Get binary
   when:
     - blackbox_exporter_binary_local_dir | length == 0
