@@ -5,6 +5,8 @@ alertmanager_binary_url: "https://github.com/{{ _alertmanager_repo }}/releases/d
                           alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
 alertmanager_checksums_url: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/sha256sums.txt"
 alertmanager_skip_install: false
+# Setting this to 'true' helps when running alertmanager in a container
+alertmanager_skip_service_install: false
 
 alertmanager_config_dir: /etc/alertmanager
 alertmanager_db_dir: /var/lib/alertmanager
