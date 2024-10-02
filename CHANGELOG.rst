@@ -4,6 +4,14 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.20.0
+=======
+
+Minor Changes
+-------------
+
+- minor(ci): detect unused ansible variables (https://github.com/prometheus-community/ansible/pull/422)
+
 v0.19.0
 =======
 

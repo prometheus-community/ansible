@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.20.0:
+    changes:
+      minor_changes:
+        - 'minor(ci): detect unused ansible variables (https://github.com/prometheus-community/ansible/pull/422)'
+    release_date: '2024-10-02'
   0.19.0:
     changes:
       bugfixes:
