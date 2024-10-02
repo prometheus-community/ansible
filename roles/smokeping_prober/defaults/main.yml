@@ -7,7 +7,6 @@ smokeping_prober_checksums_url: "https://github.com/{{ _smokeping_prober_repo }}
 smokeping_prober_skip_install: false
 
 smokeping_prober_web_listen_address: "0.0.0.0:9374"
-smokeping_prober_web_telemetry_path: "/metrics"
 
 # List of smokeping_prober targets.
 # See: https://github.com/SuperQ/smokeping_prober/#configuration
