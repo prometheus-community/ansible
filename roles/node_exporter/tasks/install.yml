@@ -17,6 +17,11 @@
     home: /
   when: node_exporter_system_user != "root"
 
+- name: Ensure node_exporter_binary_install_dir
+  ansible.builtin.file:
+    path: "{{ node_exporter_binary_install_dir }}"
+    state: directory
+
 - name: Get binary
   when:
     - node_exporter_binary_local_dir | length == 0
