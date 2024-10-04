@@ -38,7 +38,7 @@
   loop:
     - "{{ prometheus_config_dir }}/rules"
     - "{{ prometheus_config_dir }}/file_sd"
-    - "{{ prometheus_config_dir }}/scrapes"
+    - "{{ prometheus_config_dir }}/scrape_configs"
   become: true
   tags:
     - prometheus
@@ -158,7 +158,7 @@
 - name: Copy prometheus scrape config files
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ prometheus_config_dir }}/scrapes/"
+    dest: "{{ prometheus_config_dir }}/scrape_configs/"
     force: true
     owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"

@@ -15,15 +15,18 @@ def AnsibleDefaults():
         return yaml.full_load(stream)
 
 
-@pytest.mark.parametrize("dirs", [
-    "/etc/prometheus",
-    "/etc/prometheus/console_libraries",
-    "/etc/prometheus/consoles",
-    "/etc/prometheus/rules",
-    "/etc/prometheus/file_sd",
-    "/etc/prometheus/scrapes",
-    "/var/lib/prometheus"
-])
+@pytest.mark.parametrize(
+    "dirs",
+    [
+        "/etc/prometheus",
+        "/etc/prometheus/console_libraries",
+        "/etc/prometheus/consoles",
+        "/etc/prometheus/rules",
+        "/etc/prometheus/file_sd",
+        "/etc/prometheus/scrape_configs",
+        "/var/lib/prometheus",
+    ],
+)
 def test_directories(host, dirs):
     d = host.file(dirs)
     assert d.is_directory

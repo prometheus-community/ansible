@@ -97,8 +97,8 @@ prometheus_static_targets_files:
   - prometheus/targets/*.json
 
 prometheus_scrape_config_files:
-  - prometheus/scrapes/*.yml
-  - prometheus/scrapes/*.json
+  - prometheus/scrape_configs/*.yml
+  - prometheus/scrape_configs/*.json
 
 # yamllint disable rule:line-length
 prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
