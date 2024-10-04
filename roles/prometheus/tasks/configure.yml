@@ -80,7 +80,7 @@
 - name: Copy prometheus scrape config files
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ prometheus_config_dir }}/scrapes/"
+    dest: "{{ prometheus_config_dir }}/scrape_configs/"
     force: true
     owner: root
     group: "{{ prometheus_system_group }}"

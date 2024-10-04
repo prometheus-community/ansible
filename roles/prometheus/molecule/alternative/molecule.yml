@@ -57,7 +57,7 @@ provisioner:
               labels:
                 env: demo
         prometheus_scrape_config_files:
-          - /tmp/prometheus/scrapes/*.yml
+          - /tmp/prometheus/scrape_configs/*.yml
         prometheus_scrape_configs:
           - job_name: "prometheus"
             metrics_path: "{{ prometheus_metrics_path }}"

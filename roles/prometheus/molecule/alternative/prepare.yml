@@ -3,15 +3,15 @@
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: Create scrapes directory
+    - name: Create scrape_configs directory
       ansible.builtin.file:
-        name: /tmp/prometheus/scrapes
+        name: /tmp/prometheus/scrape_configs
         state: directory
         recurse: true
       check_mode: false
     - name: Create empty scrape config file
       ansible.builtin.file:
-        name: /tmp/prometheus/scrapes/empty_scrapes.yml
+        name: /tmp/prometheus/scrape_configs/empty_scrapes.yml
         state: touch
         mode: 0664
       check_mode: false
