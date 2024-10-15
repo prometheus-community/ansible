@@ -20,7 +20,8 @@
 - name: Get binary
   when:
     - redis_exporter_binary_local_dir | length == 0
-    - not redis_exporter_skip_install
+  tags:
+    - redis_exporter_install
   block:
 
     - name: Download redis_exporter binary to local folder
@@ -65,5 +66,6 @@
     group: root
   when:
     - redis_exporter_binary_local_dir | length > 0
-    - not redis_exporter_skip_install
   notify: restart redis_exporter
+  tags:
+    - redis_exporter_install

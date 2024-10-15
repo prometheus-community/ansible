@@ -2,7 +2,8 @@
 - name: Get binary
   when:
     - fail2ban_exporter_binary_local_dir | length == 0
-    - not fail2ban_exporter_skip_install
+  tags:
+    - fail2ban_exporter_install
   block:
 
     - name: Download fail2ban_exporter binary to local folder
@@ -47,5 +48,6 @@
     group: root
   when:
     - fail2ban_exporter_binary_local_dir | length > 0
-    - not fail2ban_exporter_skip_install
   notify: restart fail2ban_exporter
+  tags:
+    - fail2ban_exporter_install

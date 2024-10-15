@@ -20,6 +20,13 @@
   ansible.builtin.package_facts:
   when: "not 'packages' in ansible_facts"
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - prometheus_skip_install is not defined
+    fail_msg: "The variable 'prometheus_skip_install' is deprecated.
+               Please use '--skip-tags prometheus_install' instead to skip the installation."
+
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
     that:
@@ -99,12 +106,14 @@
   when:
     - prometheus_version == "latest"
     - prometheus_binary_local_dir | length == 0
-    - not prometheus_skip_install
+  tags:
+    - prometheus_install
 
 - name: Get prometheus binary checksum
   when:
     - prometheus_binary_local_dir | length == 0
-    - not prometheus_skip_install
+  tags:
+    - prometheus_install
   block:
     - name: "Get checksum list"
       ansible.builtin.set_fact:

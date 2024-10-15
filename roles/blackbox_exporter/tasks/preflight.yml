@@ -41,6 +41,13 @@
           list |
           length == 0
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - blackbox_exporter_skip_install is not defined
+    fail_msg: "The variable 'blackbox_exporter_skip_install' is deprecated.
+               Please use '--skip-tags blackbox_exporter_install' instead to skip the installation."
+
 - name: Discover latest version
   ansible.builtin.set_fact:
     blackbox_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _blackbox_exporter_repo }}/releases/latest', headers=_github_api_headers,
@@ -51,12 +58,14 @@
   when:
     - blackbox_exporter_version == "latest"
     - blackbox_exporter_binary_local_dir | length == 0
-    - not blackbox_exporter_skip_install
+  tags:
+    - blackbox_exporter_install
 
 - name: Get blackbox_exporter binary checksum
   when:
     - blackbox_exporter_binary_local_dir | length == 0
-    - not blackbox_exporter_skip_install
+  tags:
+    - blackbox_exporter_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

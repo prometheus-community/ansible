@@ -61,6 +61,13 @@
           - "__smartctl_exporter_cert_file.stat.exists"
           - "__smartctl_exporter_key_file.stat.exists"
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - smartctl_exporter_skip_install is not defined
+    fail_msg: "The variable 'smartctl_exporter_skip_install' is deprecated.
+               Please use '--skip-tags smartctl_exporter_install' instead to skip the installation."
+
 - name: Check if smartctl_exporter is installed
   ansible.builtin.stat:
     path: "{{ smartctl_exporter_binary_install_dir }}/smartctl_exporter"
@@ -88,12 +95,14 @@
   when:
     - smartctl_exporter_version == "latest"
     - smartctl_exporter_binary_local_dir | length == 0
-    - not smartctl_exporter_skip_install
+  tags:
+    - smartctl_exporter_install
 
 - name: Get smartctl_exporter binary checksum
   when:
     - smartctl_exporter_binary_local_dir | length == 0
-    - not smartctl_exporter_skip_install
+  tags:
+    - smartctl_exporter_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

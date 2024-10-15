@@ -20,6 +20,13 @@
   ansible.builtin.package_facts:
   when: "not 'packages' in ansible_facts"
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - cadvisor_skip_install is not defined
+    fail_msg: "The variable 'cadvisor_skip_install' is deprecated.
+               Please use '--skip-tags cadvisor_install' instead to skip the installation."
+
 - name: Check if cadvisor is installed
   ansible.builtin.stat:
     path: "{{ cadvisor_binary_install_dir }}/cadvisor"
@@ -47,4 +54,5 @@
   when:
     - cadvisor_version == "latest"
     - cadvisor_binary_local_dir | length == 0
-    - not cadvisor_skip_install
+  tags:
+    - cadvisor_install

@@ -66,6 +66,13 @@
           - "__smokeping_prober_cert_file.stat.exists"
           - "__smokeping_prober_key_file.stat.exists"
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - smokeping_prober_skip_install is not defined
+    fail_msg: "The variable 'smokeping_prober_skip_install' is deprecated.
+               Please use '--skip-tags smokeping_prober_install' instead to skip the installation."
+
 - name: Check if smokeping_prober is installed
   ansible.builtin.stat:
     path: "{{ smokeping_prober_binary_install_dir }}/smokeping_prober"
@@ -93,12 +100,14 @@
   when:
     - smokeping_prober_version == "latest"
     - smokeping_prober_binary_local_dir | length == 0
-    - not smokeping_prober_skip_install
+  tags:
+    - smokeping_prober_install
 
 - name: Get smokeping_prober binary checksum
   when:
     - smokeping_prober_binary_local_dir | length == 0
-    - not smokeping_prober_skip_install
+  tags:
+    - smokeping_prober_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

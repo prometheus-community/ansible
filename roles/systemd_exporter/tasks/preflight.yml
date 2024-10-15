@@ -78,6 +78,13 @@
     systemd_exporter_system_user: "root"
   when: systemd_exporter_enable_file_descriptor_size
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - systemd_exporter_skip_install is not defined
+    fail_msg: "The variable 'systemd_exporter_skip_install' is deprecated.
+               Please use '--skip-tags systemd_exporter_install' instead to skip the installation."
+
 - name: Check if systemd_exporter is installed
   ansible.builtin.stat:
     path: "{{ systemd_exporter_binary_install_dir }}/systemd_exporter"
@@ -87,14 +94,14 @@
     - systemd_exporter_install
 
 - name: Gather currently installed systemd_exporter version (if any)
-  command: "{{ systemd_exporter_binary_install_dir }}/systemd_exporter --version"
+  ansible.builtin.command:
+    cmd: "{{ systemd_exporter_binary_install_dir }}/systemd_exporter --version"
   changed_when: false
   register: __systemd_exporter_current_version_output
   check_mode: false
   when: __systemd_exporter_is_installed.stat.exists
   tags:
     - systemd_exporter_install
-    - skip_ansible_lint
 
 - name: Discover latest version
   ansible.builtin.set_fact:
@@ -106,12 +113,14 @@
   when:
     - systemd_exporter_version == "latest"
     - systemd_exporter_binary_local_dir | length == 0
-    - not systemd_exporter_skip_install
+  tags:
+    - systemd_exporter_install
 
 - name: Get systemd exporter binary checksum
   when:
     - systemd_exporter_binary_local_dir | length == 0
-    - not systemd_exporter_skip_install
+  tags:
+    - systemd_exporter_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

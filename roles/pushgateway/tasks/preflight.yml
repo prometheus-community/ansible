@@ -66,6 +66,13 @@
           - "__pushgateway_cert_file.stat.exists"
           - "__pushgateway_key_file.stat.exists"
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - pushgateway_skip_install is not defined
+    fail_msg: "The variable 'pushgateway_skip_install' is deprecated.
+               Please use '--skip-tags pushgateway_install' instead to skip the installation."
+
 - name: Check if pushgateway is installed
   ansible.builtin.stat:
     path: "{{ pushgateway_binary_install_dir }}/pushgateway"
@@ -93,12 +100,14 @@
   when:
     - pushgateway_version == "latest"
     - pushgateway_binary_local_dir | length == 0
-    - not pushgateway_skip_install
+  tags:
+    - pushgateway_install
 
 - name: Get pushgateway binary checksum
   when:
     - pushgateway_binary_local_dir | length == 0
-    - not pushgateway_skip_install
+  tags:
+    - pushgateway_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

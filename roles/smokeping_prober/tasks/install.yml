@@ -20,7 +20,8 @@
 - name: Get binary
   when:
     - smokeping_prober_binary_local_dir | length == 0
-    - not smokeping_prober_skip_install
+  tags:
+    - smokeping_prober_install
   block:
 
     - name: Download smokeping_prober binary to local folder
@@ -65,5 +66,6 @@
     group: root
   when:
     - smokeping_prober_binary_local_dir | length > 0
-    - not smokeping_prober_skip_install
   notify: restart smokeping_prober
+  tags:
+    - smokeping_prober_install

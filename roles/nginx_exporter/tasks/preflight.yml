@@ -61,6 +61,13 @@
           - "__nginx_exporter_cert_file.stat.exists"
           - "__nginx_exporter_key_file.stat.exists"
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - nginx_exporter_skip_install is not defined
+    fail_msg: "The variable 'nginx_exporter_skip_install' is deprecated.
+               Please use '--skip-tags nginx_exporter_install' instead to skip the installation."
+
 - name: Check if nginx_exporter is installed
   ansible.builtin.stat:
     path: "{{ nginx_exporter_binary_install_dir }}/nginx_exporter"
@@ -88,12 +95,14 @@
   when:
     - nginx_exporter_version == "latest"
     - nginx_exporter_binary_local_dir | length == 0
-    - not nginx_exporter_skip_install
+  tags:
+    - nginx_exporter_install
 
 - name: Get nginx_exporter binary checksum
   when:
     - nginx_exporter_binary_local_dir | length == 0
-    - not nginx_exporter_skip_install
+  tags:
+    - nginx_exporter_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

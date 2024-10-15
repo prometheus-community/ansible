@@ -18,7 +18,8 @@
 - name: Get binary
   when:
     - blackbox_exporter_binary_local_dir | length == 0
-    - not blackbox_exporter_skip_install
+  tags:
+    - blackbox_exporter_install
   block:
 
     - name: Download blackbox_exporter binary to local folder
@@ -63,8 +64,9 @@
     group: root
   when:
     - blackbox_exporter_binary_local_dir | length > 0
-    - not blackbox_exporter_skip_install
   notify: restart blackbox_exporter
+  tags:
+    - blackbox_exporter_install
 
 - name: Install libcap on Debian systems
   ansible.builtin.package:

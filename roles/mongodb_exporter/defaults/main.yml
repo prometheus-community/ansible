@@ -5,7 +5,6 @@ mongodb_exporter_binary_url: "https://github.com/{{ _mongodb_exporter_repo }}/re
                           mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
 mongodb_exporter_checksums_url: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/\
                           mongodb_exporter_{{ mongodb_exporter_version }}_checksums.txt"
-mongodb_exporter_skip_install: false
 
 mongodb_exporter_web_listen_address: "0.0.0.0:9216"
 mongodb_exporter_web_telemetry_path: "/metrics"

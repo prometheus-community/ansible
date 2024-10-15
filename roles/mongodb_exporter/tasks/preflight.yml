@@ -61,6 +61,13 @@
           - "__mongodb_exporter_cert_file.stat.exists"
           - "__mongodb_exporter_key_file.stat.exists"
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - mongodb_exporter_skip_install is not defined
+    fail_msg: "The variable 'mongodb_exporter_skip_install' is deprecated.
+               Please use '--skip-tags mongodb_exporter_install' instead to skip the installation."
+
 - name: Check if mongodb_exporter is installed
   ansible.builtin.stat:
     path: "{{ mongodb_exporter_binary_install_dir }}/mongodb_exporter"
@@ -88,12 +95,14 @@
   when:
     - mongodb_exporter_version == "latest"
     - mongodb_exporter_binary_local_dir | length == 0
-    - not mongodb_exporter_skip_install
+  tags:
+    - mongodb_exporter_install
 
 - name: Get mongodb_exporter binary checksum
   when:
     - mongodb_exporter_binary_local_dir | length == 0
-    - not mongodb_exporter_skip_install
+  tags:
+    - mongodb_exporter_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

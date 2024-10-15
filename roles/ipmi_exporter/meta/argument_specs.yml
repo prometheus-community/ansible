@@ -11,10 +11,6 @@ argument_specs:
       ipmi_exporter_version:
         description: "ipmi_exporter package version. Also accepts latest as parameter."
         default: "1.8.0"
-      ipmi_exporter_skip_install:
-        description: "ipmi_exporter installation tasks gets skipped when set to true."
-        type: bool
-        default: false
       ipmi_exporter_binary_local_dir:
         description:
           - "Enables the use of local packages instead of those distributed on github."

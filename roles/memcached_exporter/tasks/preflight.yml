@@ -61,6 +61,13 @@
           - "__memcached_exporter_cert_file.stat.exists"
           - "__memcached_exporter_key_file.stat.exists"
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - memcached_exporter_skip_install is not defined
+    fail_msg: "The variable 'memcached_exporter_skip_install' is deprecated.
+               Please use '--skip-tags memcached_exporter_install' instead to skip the installation."
+
 - name: Check if memcached_exporter is installed
   ansible.builtin.stat:
     path: "{{ memcached_exporter_binary_install_dir }}/memcached_exporter"
@@ -88,12 +95,14 @@
   when:
     - memcached_exporter_version == "latest"
     - memcached_exporter_binary_local_dir | length == 0
-    - not memcached_exporter_skip_install
+  tags:
+    - memcached_exporter_install
 
 - name: Get memcached_exporter binary checksum
   when:
     - memcached_exporter_binary_local_dir | length == 0
-    - not memcached_exporter_skip_install
+  tags:
+    - memcached_exporter_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

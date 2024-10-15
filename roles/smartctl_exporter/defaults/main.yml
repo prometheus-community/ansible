@@ -4,7 +4,6 @@ smartctl_exporter_binary_local_dir: ""
 smartctl_exporter_binary_url: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/\
                            smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{ go_arch }}.tar.gz"
 smartctl_exporter_checksums_url: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/sha256sums.txt"
-smartctl_exporter_skip_install: false
 
 smartctl_exporter_smartctl_path: "/usr/sbin/smartctl"
 smartctl_exporter_smartctl_interval: "60s"

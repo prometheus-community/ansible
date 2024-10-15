@@ -4,7 +4,6 @@ smokeping_prober_binary_local_dir: ""
 smokeping_prober_binary_url: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/\
                            smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
 smokeping_prober_checksums_url: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/sha256sums.txt"
-smokeping_prober_skip_install: false
 
 smokeping_prober_web_listen_address: "0.0.0.0:9374"
 

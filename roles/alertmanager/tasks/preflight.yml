@@ -41,6 +41,13 @@
           list |
           length == 0
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - alertmanager_skip_install is not defined
+    fail_msg: "The variable 'alertmanager_skip_install' is deprecated.
+               Please use '--skip-tags alertmanager_install' instead to skip the installation."
+
 - name: Discover latest version
   ansible.builtin.set_fact:
     alertmanager_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _alertmanager_repo }}/releases/latest', headers=_github_api_headers,
@@ -51,12 +58,14 @@
   when:
     - alertmanager_version == "latest"
     - alertmanager_binary_local_dir | length == 0
-    - not alertmanager_skip_install
+  tags:
+    - alertmanager_install
 
 - name: Get alertmanager binary checksum
   when:
     - alertmanager_binary_local_dir | length == 0
-    - not alertmanager_skip_install
+  tags:
+    - alertmanager_install
   block:
     - name: "Get checksum list"
       ansible.builtin.set_fact:

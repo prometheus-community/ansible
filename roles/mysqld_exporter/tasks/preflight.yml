@@ -20,6 +20,13 @@
   ansible.builtin.package_facts:
   when: "not 'packages' in ansible_facts"
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - mysqld_exporter_skip_install is not defined
+    fail_msg: "The variable 'mysqld_exporter_skip_install' is deprecated.
+               Please use '--skip-tags mysqld_exporter_install' instead to skip the installation."
+
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
     that:
@@ -99,12 +106,14 @@
   when:
     - mysqld_exporter_version == "latest"
     - mysqld_exporter_binary_local_dir | length == 0
-    - not mysqld_exporter_skip_install
+  tags:
+    - mysqld_exporter_install
 
 - name: Get mysqld_exporter binary checksum
   when:
     - mysqld_exporter_binary_local_dir | length == 0
-    - not mysqld_exporter_skip_install
+  tags:
+    - mysqld_exporter_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

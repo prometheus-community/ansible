@@ -20,6 +20,13 @@
   ansible.builtin.package_facts:
   when: "not 'packages' in ansible_facts"
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - postgres_exporter_skip_install is not defined
+    fail_msg: "The variable 'postgres_exporter_skip_install' is deprecated.
+               Please use '--skip-tags postgres_exporter_install' instead to skip the installation."
+
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
     that:
@@ -99,12 +106,14 @@
   when:
     - postgres_exporter_version == "latest"
     - postgres_exporter_binary_local_dir | length == 0
-    - not postgres_exporter_skip_install
+  tags:
+    - postgres_exporter_install
 
 - name: Get postgres_exporter binary checksum
   when:
     - postgres_exporter_binary_local_dir | length == 0
-    - not postgres_exporter_skip_install
+  tags:
+    - postgres_exporter_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

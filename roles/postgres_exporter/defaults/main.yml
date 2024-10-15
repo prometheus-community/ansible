@@ -4,7 +4,6 @@ postgres_exporter_binary_local_dir: ""
 postgres_exporter_binary_url: "https://github.com/{{ _postgres_exporter_repo }}/releases/download/v{{ postgres_exporter_version }}/\
                            postgres_exporter-{{ postgres_exporter_version }}.linux-{{ go_arch }}.tar.gz"
 postgres_exporter_checksums_url: "https://github.com/{{ _postgres_exporter_repo }}/releases/download/v{{ postgres_exporter_version }}/sha256sums.txt"
-postgres_exporter_skip_install: false
 
 postgres_exporter_web_listen_address: "0.0.0.0:9187"
 postgres_exporter_web_telemetry_path: "/metrics"

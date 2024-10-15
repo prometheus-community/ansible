@@ -4,7 +4,6 @@ ipmi_exporter_binary_local_dir: ""
 ipmi_exporter_binary_url: "https://github.com/{{ _ipmi_exporter_repo }}/releases/download/v{{ ipmi_exporter_version }}/\
                            ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{ go_arch }}.tar.gz"
 ipmi_exporter_checksums_url: "https://github.com/{{ _ipmi_exporter_repo }}/releases/download/v{{ ipmi_exporter_version }}/sha256sums.txt"
-ipmi_exporter_skip_install: false
 
 ipmi_exporter_modules:
   default:

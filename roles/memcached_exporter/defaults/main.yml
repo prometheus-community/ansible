@@ -4,7 +4,6 @@ memcached_exporter_binary_local_dir: ""
 memcached_exporter_binary_url: "https://github.com/{{ _memcached_exporter_repo }}/releases/download/v{{ memcached_exporter_version }}/\
                            memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}.tar.gz"
 memcached_exporter_checksums_url: "https://github.com/{{ _memcached_exporter_repo }}/releases/download/v{{ memcached_exporter_version }}/sha256sums.txt"
-memcached_exporter_skip_install: false
 
 memcached_exporter_memcached_pid_file: ""
 

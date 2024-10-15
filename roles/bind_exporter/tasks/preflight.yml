@@ -20,6 +20,13 @@
   ansible.builtin.package_facts:
   when: "not 'packages' in ansible_facts"
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - bind_exporter_skip_install is not defined
+    fail_msg: "The variable 'bind_exporter_skip_install' is deprecated.
+               Please use '--skip-tags bind_exporter_install' instead to skip the installation."
+
 - name: Naive assertion of proper listen address
   ansible.builtin.assert:
     that:
@@ -82,12 +89,14 @@
   when:
     - bind_exporter_version == "latest"
     - bind_exporter_binary_local_dir | length == 0
-    - not bind_exporter_skip_install
+  tags:
+    - bind_exporter_install
 
 - name: Get bind_exporter binary checksum
   when:
     - bind_exporter_binary_local_dir | length == 0
-    - not bind_exporter_skip_install
+  tags:
+    - bind_exporter_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

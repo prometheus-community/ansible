@@ -20,6 +20,13 @@
   ansible.builtin.package_facts:
   when: "not 'packages' in ansible_facts"
 
+- name: "Check for deprecated skip_install variable"
+  ansible.builtin.assert:
+    that:
+      - process_exporter_skip_install is not defined
+    fail_msg: "The variable 'process_exporter_skip_install' is deprecated.
+               Please use '--skip-tags process_exporter_install' instead to skip the installation."
+
 - name: Naive assertion of proper listen address
   ansible.builtin.assert:
     that:
@@ -52,12 +59,14 @@
   when:
     - process_exporter_version == "latest"
     - process_exporter_binary_local_dir | length == 0
-    - not process_exporter_skip_install
+  tags:
+    - process_exporter_install
 
 - name: Get process_exporter binary checksum
   when:
     - process_exporter_binary_local_dir | length == 0
-    - not process_exporter_skip_install
+  tags:
+    - process_exporter_install
   block:
     - name: Get checksum list from github
       ansible.builtin.set_fact:

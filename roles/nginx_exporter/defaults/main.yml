@@ -5,7 +5,6 @@ nginx_exporter_binary_url: "https://github.com/{{ _nginx_exporter_repo }}/releas
                           nginx-prometheus-exporter_{{ nginx_exporter_version }}_linux_{{ go_arch }}.tar.gz"
 nginx_exporter_checksums_url: "https://github.com/{{ _nginx_exporter_repo }}/releases/download/v{{ nginx_exporter_version }}/\
                           nginx-prometheus-exporter_{{ nginx_exporter_version }}_checksums.txt"
-nginx_exporter_skip_install: false
 nginx_exporter_plus: false
 nginx_exporter_scrape_uri: "http://127.0.0.1/stub_status"
 nginx_exporter_web_listen_address: "0.0.0.0:9113"

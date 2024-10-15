@@ -11,10 +11,6 @@ argument_specs:
       smartctl_exporter_version:
         description: "Smartctl exporter package version. Also accepts latest as parameter."
         default: "0.12.0"
-      smartctl_exporter_skip_install:
-        description: "Smartctl exporter installation tasks gets skipped when set to true."
-        type: bool
-        default: false
       smartctl_exporter_binary_local_dir:
         description:
           - "Enables the use of local packages instead of those distributed on github."

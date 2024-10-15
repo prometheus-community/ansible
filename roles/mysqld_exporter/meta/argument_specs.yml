@@ -11,10 +11,6 @@ argument_specs:
       mysqld_exporter_version:
         description: "MySQLd exporter package version. Also accepts latest as parameter."
         default: "0.15.1"
-      mysqld_exporter_skip_install:
-        description: "MySQLd installation tasks gets skipped when set to true."
-        type: bool
-        default: false
       mysqld_exporter_binary_local_dir:
         description:
           - "Enables the use of local packages instead of those distributed on github."

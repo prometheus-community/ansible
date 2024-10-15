@@ -4,7 +4,6 @@ redis_exporter_binary_local_dir: ""
 redis_exporter_binary_url: "https://github.com/{{ _redis_exporter_repo }}/releases/download/v{{ redis_exporter_version }}/\
                            redis_exporter-v{{ redis_exporter_version }}.linux-{{ go_arch }}.tar.gz"
 redis_exporter_checksums_url: "https://github.com/{{ _redis_exporter_repo }}/releases/download/v{{ redis_exporter_version }}/sha256sums.txt"
-redis_exporter_skip_install: false
 
 # https://github.com/oliver006/redis_exporter?tab=readme-ov-file#command-line-flags
 redis_exporter_addr: "redis://localhost:6379"

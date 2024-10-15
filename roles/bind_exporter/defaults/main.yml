@@ -4,7 +4,6 @@ bind_exporter_binary_local_dir: ""
 bind_exporter_binary_url: "https://github.com/{{ _bind_exporter_repo }}/releases/download/v{{ bind_exporter_version }}/\
                            bind_exporter-{{ bind_exporter_version }}.linux-{{ go_arch }}.tar.gz"
 bind_exporter_checksums_url: "https://github.com/{{ _bind_exporter_repo }}/releases/download/v{{ bind_exporter_version }}/sha256sums.txt"
-bind_exporter_skip_install: false
 
 bind_exporter_web_listen_address: "0.0.0.0:9119"
 bind_exporter_web_telemetry_path: "/metrics"

@@ -2,7 +2,8 @@
 - name: Get binary
   when:
     - snmp_exporter_binary_local_dir | length == 0
-    - not snmp_exporter_skip_install
+  tags:
+    - snmp_exporter_install
   block:
 
     - name: Download snmp_exporter binary to local folder
@@ -47,5 +48,6 @@
     group: root
   when:
     - snmp_exporter_binary_local_dir | length > 0
-    - not snmp_exporter_skip_install
   notify: restart snmp_exporter
+  tags:
+    - snmp_exporter_install

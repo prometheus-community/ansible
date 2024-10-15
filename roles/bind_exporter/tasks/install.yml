@@ -20,7 +20,8 @@
 - name: Get binary
   when:
     - bind_exporter_binary_local_dir | length == 0
-    - not bind_exporter_skip_install
+  tags:
+    - bind_exporter_install
   block:
 
     - name: Download bind_exporter binary to local folder
@@ -67,5 +68,6 @@
     group: root
   when:
     - bind_exporter_binary_local_dir | length > 0
-    - not bind_exporter_skip_install
   notify: restart bind_exporter
+  tags:
+    - bind_exporter_install

@@ -11,10 +11,6 @@ argument_specs:
       bind_exporter_version:
         description: "BIND exporter package version. Also accepts latest as parameter."
         default: "0.7.0"
-      bind_exporter_skip_install:
-        description: "BIND installation tasks gets skipped when set to true."
-        type: bool
-        default: false
       bind_exporter_binary_local_dir:
         description:
           - "Enables the use of local packages instead of those distributed on github."
