@@ -9,10 +9,10 @@ Type=simple
 User={{ ipmi_exporter_system_user }}
 Group={{ ipmi_exporter_system_group }}
 ExecStart={{ ipmi_exporter_binary_install_dir }}/ipmi_exporter \
-    '--config.file=/etc/ipmi_exporter/config.yaml' \
+    '--config.file={{ ipmi_exporter_config_dir }}/config.yaml' \
     '--web.listen-address={{ ipmi_exporter_web_listen_address }}' \
 {% if ipmi_exporter_tls_server_config | length > 0 or ipmi_exporter_http_server_config | length > 0 or ipmi_exporter_basic_auth_users | length > 0 %}
-    '--web.config.file=/etc/ipmi_exporter/web_config.yaml' \
+    '--web.config.file={{ ipmi_exporter_config_dir }}/web_config.yml' \
 {% endif %}
     '--log.level={{ ipmi_exporter_log_level }}' \
     '--log.format={{ ipmi_exporter_log_format }}'

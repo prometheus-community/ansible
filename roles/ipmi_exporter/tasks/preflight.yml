@@ -1,24 +1,10 @@
 ---
-- name: Assert usage of systemd as an init system
-  ansible.builtin.assert:
-    that: ansible_service_mgr == 'systemd'
-    msg: "This role only works with systemd"
-
-- name: Install package fact dependencies
-  become: true
-  ansible.builtin.package:
-    name: "{{ _pkg_fact_req }}"
-    state: present
-  when: (_pkg_fact_req)
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
   vars:
-    _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
-      {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
-      {% else %}\
-      {% endif %}"
-
-- name: Gather package facts
-  ansible.builtin.package_facts:
-  when: "not 'packages' in ansible_facts"
+    _common_dependencies: "{{ _ipmi_exporter_dependencies }}"
 
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
@@ -61,23 +47,6 @@
           - "__ipmi_exporter_cert_file.stat.exists"
           - "__ipmi_exporter_key_file.stat.exists"
 
-- name: Check if ipmi_exporter is installed
-  ansible.builtin.stat:
-    path: "{{ ipmi_exporter_binary_install_dir }}/ipmi_exporter"
-  register: __ipmi_exporter_is_installed
-  check_mode: false
-  tags:
-    - ipmi_exporter_install
-
-- name: Gather currently installed ipmi_exporter version (if any)
-  ansible.builtin.command: "{{ ipmi_exporter_binary_install_dir }}/ipmi_exporter --version"
-  changed_when: false
-  register: __ipmi_exporter_current_version_output
-  check_mode: false
-  when: __ipmi_exporter_is_installed.stat.exists
-  tags:
-    - ipmi_exporter_install
-
 - name: Discover latest version
   ansible.builtin.set_fact:
     ipmi_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _ipmi_exporter_repo }}/releases/latest', headers=_github_api_headers,
@@ -87,24 +56,9 @@
   retries: 10
   when:
     - ipmi_exporter_version == "latest"
-    - ipmi_exporter_binary_local_dir | length == 0
-    - not ipmi_exporter_skip_install
-
-- name: Get ipmi_exporter binary checksum
-  when:
-    - ipmi_exporter_binary_local_dir | length == 0
-    - not ipmi_exporter_skip_install
-  block:
-    - name: Get checksum list from github
-      ansible.builtin.set_fact:
-        __ipmi_exporter_checksums: "{{ lookup('url', ipmi_exporter_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
-      run_once: true
-      until: __ipmi_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
-      retries: 10
-
-    - name: "Get checksum for {{ go_arch }}"
-      ansible.builtin.set_fact:
-        __ipmi_exporter_checksum: "{{ item.split(' ')[0] }}"
-      with_items: "{{ __ipmi_exporter_checksums }}"
-      when:
-        - "('linux-' + go_arch + '.tar.gz') in item"
+  tags:
+    - ipmi_exporter
+    - install
+    - ipmi_exporter_install
+    - download
+    - ipmi_exporter_download
