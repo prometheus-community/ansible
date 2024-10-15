@@ -1,0 +1,70 @@
+---
+- name: "Validate invocation of _common role"
+  ansible.builtin.assert:
+    that:
+      - "ansible_parent_role_names is defined"
+      - "ansible_parent_role_names | default() | length > 0"
+    fail_msg: "Error: The '_common' role is a internal role and cannot be invoked directly."
+  tags:
+    - always
+
+- name: "Create systemd service unit {{ _common_service_name }}"
+  ansible.builtin.template:
+    src: "{{ _common_service_name }}.service.j2"
+    dest: "/etc/systemd/system/{{ _common_service_name }}.service"
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+  notify:
+    - "{{ ansible_parent_role_names | first }} : Restart {{ _common_service_name }}"
+  tags:
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
+    - configure
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_configure"
+
+- name: "Create config dir {{ _common_config_dir }}"
+  ansible.builtin.file:
+    path: "{{ _common_config_dir }}"
+    state: directory
+    owner: "{{ _common_system_user }}"
+    group: "{{ _common_system_group }}"
+    mode: u+rwX,g+rwX,o=rX
+  become: true
+  notify:
+    - "{{ ansible_parent_role_names | first }} : Restart {{ _common_service_name }}"
+  when: (_common_config_dir)
+  tags:
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
+    - configure
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_configure"
+
+- name: "Install web config for {{ _common_service_name }}"
+  ansible.builtin.template:
+    src: "web_config.yml.j2"
+    dest: "{{ _common_config_dir }}/web_config.yml"
+    owner: "{{ _common_system_user }}"
+    group: "{{ _common_system_group }}"
+    mode: 0644
+  become: true
+  notify:
+    - "{{ ansible_parent_role_names | first }} : Restart {{ _common_service_name }}"
+  when: "[_common_tls_server_config, _common_http_server_config, _common_basic_auth_users] | map('length') | select('>', 0) | list is any"
+  tags:
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
+    - configure
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_configure"
+
+#
+# - name: "Configure {{ _common_service_name }}"
+#   ansible.builtin.template:
+#     # src: "{{ ansible_parent_role_paths | first }}/templates/{{ _common_service_name }}.yml.j2"
+#     src: "{{ _config_template | default(ansible_parent_role_paths | first ~ '/templates/' ~ _common_service_name ~ '.yml.j2') }}"
+#     # dest: "/etc/{{ _common_service_name }}.yml"
+#     dest: "{{ _config_dest | default('/etc/' ~ _common_service_name ~ '.yml') }}"
+#     owner: "{{ _system_user }}"
+#     group: "{{ _system_group }}"
+#     mode: 0644
+#   notify:
+#     - reload_service
+#   when: (ansible_parent_role_paths | first '/templates/' _common_service_name '.yml.j2')
