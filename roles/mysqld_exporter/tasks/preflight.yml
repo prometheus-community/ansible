@@ -1,24 +1,8 @@
 ---
-- name: Assert usage of systemd as an init system
-  ansible.builtin.assert:
-    that: ansible_service_mgr == 'systemd'
-    msg: "This role only works with systemd"
-
-- name: Install package fact dependencies
-  become: true
-  ansible.builtin.package:
-    name: "{{ _pkg_fact_req }}"
-    state: present
-  when: (_pkg_fact_req)
-  vars:
-    _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
-                    {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
-                    {% else %}\
-                    {% endif %}"
-
-- name: Gather package facts
-  ansible.builtin.package_facts:
-  when: "not 'packages' in ansible_facts"
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
 
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
@@ -72,23 +56,6 @@
           - "__mysqld_exporter_cert_file.stat.exists"
           - "__mysqld_exporter_key_file.stat.exists"
 
-- name: Check if mysqld_exporter is installed
-  ansible.builtin.stat:
-    path: "{{ mysqld_exporter_binary_install_dir }}/mysqld_exporter"
-  register: __mysqld_exporter_is_installed
-  check_mode: false
-  tags:
-    - mysqld_exporter_install
-
-- name: Gather currently installed mysqld_exporter version (if any)
-  ansible.builtin.command: "{{ mysqld_exporter_binary_install_dir }}/mysqld_exporter --version"
-  changed_when: false
-  register: __mysqld_exporter_current_version_output
-  check_mode: false
-  when: __mysqld_exporter_is_installed.stat.exists
-  tags:
-    - mysqld_exporter_install
-
 - name: Discover latest version
   ansible.builtin.set_fact:
     mysqld_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _mysqld_exporter_repo }}/releases/latest', headers=_github_api_headers,
@@ -98,24 +65,9 @@
   retries: 10
   when:
     - mysqld_exporter_version == "latest"
-    - mysqld_exporter_binary_local_dir | length == 0
-    - not mysqld_exporter_skip_install
-
-- name: Get mysqld_exporter binary checksum
-  when:
-    - mysqld_exporter_binary_local_dir | length == 0
-    - not mysqld_exporter_skip_install
-  block:
-    - name: Get checksum list from github
-      ansible.builtin.set_fact:
-        __mysqld_exporter_checksums: "{{ lookup('url', mysqld_exporter_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
-      run_once: true
-      until: __mysqld_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
-      retries: 10
-
-    - name: "Get checksum for {{ go_arch }}"
-      ansible.builtin.set_fact:
-        __mysqld_exporter_checksum: "{{ item.split(' ')[0] }}"
-      with_items: "{{ __mysqld_exporter_checksums }}"
-      when:
-        - "('linux-' + go_arch + '.tar.gz') in item"
+  tags:
+    - mysqld_exporter
+    - install
+    - mysqld_exporter_install
+    - download
+    - mysqld_exporter_download

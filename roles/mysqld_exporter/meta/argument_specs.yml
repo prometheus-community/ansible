@@ -11,18 +11,9 @@ argument_specs:
       mysqld_exporter_version:
         description: "MySQLd exporter package version. Also accepts latest as parameter."
         default: "0.15.1"
-      mysqld_exporter_skip_install:
-        description: "MySQLd installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      mysqld_exporter_binary_local_dir:
-        description:
-          - "Enables the use of local packages instead of those distributed on github."
-          - "The parameter may be set to a directory where the C(mysqld_exporter) binary is stored on the host where ansible is run."
-          - "This overrides the I(mysqld_exporter_version) parameter"
       mysqld_exporter_binary_url:
         description: "URL of the mysqld_exporter binaries .tar.gz file"
-        default: "https://github.com/prometheus/{{ _mysqld_exporter_repo }}/download/v{{ mysqld_exporter_version }}/mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _mysqld_exporter_repo }}/releases/download/v{{ mysqld_exporter_version }}/mysqld_exporter-{{ mysqld_exporter_version }}.{{ ansible_system | lower }}-{{ _mysqld_exporter_go_ansible_arch }}.tar.gz"
       mysqld_exporter_checksums_url:
         description: "URL of the mysqld_exporter checksums file"
         default: "https://github.com/{{ _mysqld_exporter_repo }}/releases/download/v{{ mysqld_exporter_version }}/sha256sums.txt"
@@ -33,7 +24,7 @@ argument_specs:
         description: "Path under which to expose metrics"
         default: "/metrics"
       mysqld_exporter_config_dir:
-        description: "The path where exporter configuration is stored"
+        description: "Path to directory with mysqld_exporter configuration"
         default: "/etc/mysqld_exporter"
       mysqld_exporter_config_file:
         description: "The filename of the exporter mysql config file"
@@ -91,6 +82,6 @@ argument_specs:
           - "I(Advanced)"
           - "MySQLd Exporter user"
         default: "mysqld-exp"
-      mysqld_exporter_archive_path:
-        description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+      mysqld_exporter_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/mysqld_exporter-{{ ansible_system | lower }}-{{ _mysqld_exporter_go_ansible_arch }}/{{ mysqld_exporter_version }}"

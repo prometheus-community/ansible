@@ -46,7 +46,6 @@ def test_user(host):
     assert host.group("mysqld-exp").exists
     assert "mysqld-exp" in host.user("mysqld-exp").groups
     assert host.user("mysqld-exp").shell == "/usr/sbin/nologin"
-    assert host.user("mysqld-exp").home == "/"
 
 
 def test_service(host):
