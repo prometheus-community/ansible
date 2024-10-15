@@ -2,56 +2,48 @@
 - name: Preflight
   ansible.builtin.include_tasks:
     file: preflight.yml
-    apply:
-      tags:
-        - alertmanager_install
-        - alertmanager_configure
-        - alertmanager_run
   tags:
+    - alertmanager
+    - install
+    - configure
     - alertmanager_install
     - alertmanager_configure
-    - alertmanager_run
 
 - name: Install
-  ansible.builtin.include_tasks:
-    file: install.yml
-    apply:
-      become: true
-      tags:
-        - alertmanager_install
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: install.yml
+  vars:
+    _common_local_cache_path: "{{ alertmanager_local_cache_path }}"
+    _common_binaries: "{{ _alertmanager_binaries }}"
+    _common_binary_install_dir: "{{ alertmanager_binary_install_dir }}"
+    _common_binary_url: "{{ alertmanager_binary_url }}"
+    _common_checksums_url: "{{ alertmanager_checksums_url }}"
+    _common_system_group: "{{ alertmanager_system_group }}"
+    _common_system_user: "{{ alertmanager_system_user }}"
+    _common_config_dir: "{{ alertmanager_config_dir }}"
+    _common_binary_unarchive_opts: ['--strip-components=1']
   tags:
+    - alertmanager
+    - install
     - alertmanager_install
 
 - name: SELinux
-  ansible.builtin.include_tasks:
-    file: selinux.yml
-    apply:
-      become: true
-      tags:
-        - alertmanager_configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ alertmanager_web_listen_address | urlsplit('port') }}"
   when: ansible_selinux.status == "enabled"
   tags:
+    - alertmanager
+    - configure
     - alertmanager_configure
 
 - name: Configure
   ansible.builtin.include_tasks:
     file: configure.yml
-    apply:
-      become: true
-      tags:
-        - alertmanager_configure
   tags:
+    - alertmanager
+    - configure
     - alertmanager_configure
-
-- name: Ensure alertmanager service is started and enabled
-  become: true
-  ansible.builtin.systemd:
-    daemon_reload: true
-    name: alertmanager
-    state: started
-    enabled: true
-  tags:
-    - alertmanager_run
-
-- name: Flush alertmangaer handlers after run.
-  ansible.builtin.meta: flush_handlers

@@ -21,7 +21,7 @@ PIDFile=/var/run/alertmanager.pid
 User=alertmanager
 Group=alertmanager
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStart={{ _alertmanager_binary_install_dir }}/alertmanager \
+ExecStart={{ alertmanager_binary_install_dir }}/alertmanager \
 {% for option, value in (alertmanager_cluster.items() | sort) %}
 {%   if option == "peers" %}
 {%     for peer in value %}

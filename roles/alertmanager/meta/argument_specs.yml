@@ -11,18 +11,9 @@ argument_specs:
       alertmanager_version:
         description: "Alertmanager package version. Also accepts `latest` as parameter."
         default: 0.27.0
-      alertmanager_skip_install:
-        description: "Alertmanager installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      alertmanager_binary_local_dir:
-        description:
-          - "Allows to use local packages instead of ones distributed on github."
-          - "As parameter it takes a directory where C(alertmanager) AND C(amtool) binaries are stored on host on which ansible is ran."
-          - "This overrides I(alertmanager_version) parameter"
       alertmanager_binary_url:
         description: "URL of the alertmanager binaries .tar.gz file"
-        default: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/alertmanager-{{ alertmanager_version }}.{{ ansible_system | lower }}-{{ _alertmanager_go_ansible_arch }}.tar.gz"
       alertmanager_checksums_url:
         description: "URL of the alertmanager checksums file"
         default: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/sha256sums.txt"
@@ -32,6 +23,11 @@ argument_specs:
       alertmanager_web_external_url:
         description: "External address on which alertmanager is available. Useful when behind reverse proxy. Ex. example.org/alertmanager"
         default: "http://localhost:9093/"
+      alertmanager_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install binaries"
+        default: "/usr/local/bin"
       alertmanager_config_dir:
         description: "Path to directory with alertmanager configuration"
         default: "/etc/alertmanager"
@@ -110,6 +106,16 @@ argument_specs:
       alertmanager_amtool_config_output:
         description: 'Extended output, use C("") for simple output.'
         default: "extended"
-      alertmanager_archive_path:
+      alertmanager_local_cache_path:
         description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+        default: "/tmp/alertmanager-{{ ansible_system | lower }}-{{ _alertmanager_go_ansible_arch }}/{{ alertmanager_version }}"
+      alertmanager_system_user:
+        description:
+          - "I(Advanced)"
+          - "alertmanager system user"
+        default: alertmanager
+      alertmanager_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for alertmanager"
+        default: alertmanager
