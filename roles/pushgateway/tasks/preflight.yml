@@ -1,24 +1,8 @@
 ---
-- name: Assert usage of systemd as an init system
-  ansible.builtin.assert:
-    that: ansible_service_mgr == 'systemd'
-    msg: "This role only works with systemd"
-
-- name: Install package fact dependencies
-  become: true
-  ansible.builtin.package:
-    name: "{{ _pkg_fact_req }}"
-    state: present
-  when: (_pkg_fact_req)
-  vars:
-    _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
-      {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
-      {% else %}\
-      {% endif %}"
-
-- name: Gather package facts
-  ansible.builtin.package_facts:
-  when: "not 'packages' in ansible_facts"
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
 
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
@@ -66,23 +50,6 @@
           - "__pushgateway_cert_file.stat.exists"
           - "__pushgateway_key_file.stat.exists"
 
-- name: Check if pushgateway is installed
-  ansible.builtin.stat:
-    path: "{{ pushgateway_binary_install_dir }}/pushgateway"
-  register: __pushgateway_is_installed
-  check_mode: false
-  tags:
-    - pushgateway_install
-
-- name: Gather currently installed pushgateway version (if any)
-  ansible.builtin.command: "{{ pushgateway_binary_install_dir }}/pushgateway --version"
-  changed_when: false
-  register: __pushgateway_current_version_output
-  check_mode: false
-  when: __pushgateway_is_installed.stat.exists
-  tags:
-    - pushgateway_install
-
 - name: Discover latest version
   ansible.builtin.set_fact:
     pushgateway_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _pushgateway_repo }}/releases/latest', headers=_github_api_headers,
@@ -92,24 +59,9 @@
   retries: 10
   when:
     - pushgateway_version == "latest"
-    - pushgateway_binary_local_dir | length == 0
-    - not pushgateway_skip_install
-
-- name: Get pushgateway binary checksum
-  when:
-    - pushgateway_binary_local_dir | length == 0
-    - not pushgateway_skip_install
-  block:
-    - name: Get checksum list from github
-      ansible.builtin.set_fact:
-        __pushgateway_checksums: "{{ lookup('url', pushgateway_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
-      run_once: true
-      until: __pushgateway_checksums is search('linux-' + go_arch + '.tar.gz')
-      retries: 10
-
-    - name: "Get checksum for {{ go_arch }}"
-      ansible.builtin.set_fact:
-        __pushgateway_checksum: "{{ item.split(' ')[0] }}"
-      with_items: "{{ __pushgateway_checksums }}"
-      when:
-        - "('linux-' + go_arch + '.tar.gz') in item"
+  tags:
+    - pushgateway
+    - install
+    - pushgateway_install
+    - download
+    - pushgateway_download

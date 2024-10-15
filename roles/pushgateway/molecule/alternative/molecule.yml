@@ -5,7 +5,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        pushgateway_binary_local_dir: "/tmp/pushgateway-linux-amd64"
+        pushgateway_local_cache_path: "/tmp/pushgateway-linux-amd64"
         pushgateway_web_listen_address:
           - '127.0.0.1:8080'
           - '127.0.1.1:8080'
@@ -16,7 +16,6 @@ provisioner:
           http2: true
         pushgateway_basic_auth_users:
           randomuser: examplepassword
-        go_arch: amd64
         pushgateway_version: 1.5.1
         pushgateway_binary_url: "https://github.com/prometheus/pushgateway/releases/download/v{{ pushgateway_version\
-                                 \ }}/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"
+                                 \ }}/pushgateway-{{ pushgateway_version }}.linux-amd64.tar.gz"

@@ -46,7 +46,6 @@ def test_user(host):
     assert host.group("pushgateway").exists
     assert "pushgateway" in host.user("pushgateway").groups
     assert host.user("pushgateway").shell == "/usr/sbin/nologin"
-    assert host.user("pushgateway").home == "/"
 
 
 def test_service(host):

@@ -11,18 +11,9 @@ argument_specs:
       pushgateway_version:
         description: "Pushgateway package version. Also accepts latest as parameter."
         default: "1.10.0"
-      pushgateway_skip_install:
-        description: "Pushgateway installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      pushgateway_binary_local_dir:
-        description:
-          - "Enables the use of local packages instead of those distributed on github."
-          - "The parameter may be set to a directory where the C(pushgateway) binary is stored on the host where ansible is run."
-          - "This overrides the I(pushgateway_version) parameter"
       pushgateway_binary_url:
         description: "URL of the Pushgateway binaries .tar.gz file"
-        default: "https://github.com/{{ _pushgateway_repo }}/releases/download/v{{ pushgateway_version }}/pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _pushgateway_repo }}/releases/download/v{{ pushgateway_version }}/pushgateway-{{ pushgateway_version }}.{{ ansible_system | lower }}-{{ _pushgateway_go_ansible_arch }}.tar.gz"
       pushgateway_checksums_url:
         description: "URL of the Pushgateway checksums file"
         default: "https://github.com/{{ _pushgateway_repo }}/releases/download/v{{ pushgateway_version }}/sha256sums.txt"
@@ -60,6 +51,9 @@ argument_specs:
           - "I(Advanced)"
           - "Pushgateway user"
         default: "pushgateway"
-      pushgateway_archive_path:
-        description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+      pushgateway_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/pushgateway-{{ ansible_system | lower }}-{{ _pushgateway_go_ansible_arch }}/{{ pushgateway_version }}"
+      pushgateway_config_dir:
+        description: "Path to directory with pushgateway configuration"
+        default: "/etc/pushgateway"
