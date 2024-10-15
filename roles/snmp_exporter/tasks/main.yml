@@ -2,33 +2,41 @@
 - name: Preflight
   ansible.builtin.include_tasks:
     file: preflight.yml
-    apply:
-      tags:
-        - snmp_exporter_install
-        - snmp_exporter_configure
-        - snmp_exporter_run
   tags:
     - snmp_exporter_install
     - snmp_exporter_configure
     - snmp_exporter_run
 
 - name: Install
-  ansible.builtin.include_tasks:
-    file: install.yml
-    apply:
-      become: true
-      tags:
-        - snmp_exporter_install
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: install.yml
+  vars:
+    _common_local_cache_path: "{{ snmp_exporter_local_cache_path }}"
+    _common_binaries: "{{ _snmp_exporter_binaries }}"
+    _common_binary_install_dir: "{{ snmp_exporter_binary_install_dir }}"
+    _common_binary_url: "{{ snmp_exporter_binary_url }}"
+    _common_checksums_url: "{{ snmp_exporter_checksums_url }}"
+    _common_system_group: "{{ snmp_exporter_system_group }}"
+    _common_system_user: "{{ snmp_exporter_system_user }}"
+    _common_config_dir: "{{ snmp_exporter_config_dir }}"
+    _common_binary_unarchive_opts: ['--strip-components=1']
   tags:
     - snmp_exporter_install
+
+- name: SELinux
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ snmp_exporter_web_listen_address | urlsplit('port') }}"
+  when: ansible_selinux.status == "enabled"
+  tags:
+    - snmp_exporter_configure
 
 - name: Configure
   ansible.builtin.include_tasks:
     file: configure.yml
-    apply:
-      become: true
-      tags:
-        - snmp_exporter_configure
   tags:
     - snmp_exporter_configure
 

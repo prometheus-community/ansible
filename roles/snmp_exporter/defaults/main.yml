@@ -1,10 +1,8 @@
 ---
 snmp_exporter_version: 0.26.0
-snmp_exporter_binary_local_dir: ""
 snmp_exporter_binary_url: "https://github.com/{{ _snmp_exporter_repo }}/releases/download/v{{ snmp_exporter_version }}/\
-                           snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
+                           snmp_exporter-{{ snmp_exporter_version }}.{{ ansible_system | lower }}-{{ _snmp_exporter_go_ansible_arch }}.tar.gz"
 snmp_exporter_checksums_url: "https://github.com/{{ _snmp_exporter_repo }}/releases/download/v{{ snmp_exporter_version }}/sha256sums.txt"
-snmp_exporter_skip_install: false
 snmp_exporter_web_listen_address: "0.0.0.0:9116"
 snmp_exporter_log_level: info
 
@@ -12,6 +10,9 @@ snmp_exporter_log_level: info
 snmp_exporter_config_file: ""
 
 snmp_exporter_binary_install_dir: "/usr/local/bin"
+snmp_exporter_config_dir: "/etc/snmp_exporter"
 
 # Local path to stash the archive and its extraction
-snmp_exporter_archive_path: /tmp
+snmp_exporter_local_cache_path: "/tmp/snmp_exporter-{{ ansible_system | lower }}-{{ _snmp_exporter_go_ansible_arch }}/{{ snmp_exporter_version }}"
+snmp_exporter_system_user: snmp-exp
+snmp_exporter_system_group: "{{ snmp_exporter_system_user }}"
