@@ -1,15 +1,12 @@
 ---
 mongodb_exporter_version: 0.41.1
-mongodb_exporter_binary_local_dir: ""
 mongodb_exporter_binary_url: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/\
-                          mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+                          mongodb_exporter-{{ mongodb_exporter_version }}.{{ ansible_system | lower }}-{{ _mongodb_exporter_go_ansible_arch }}.tar.gz"
 mongodb_exporter_checksums_url: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/\
                           mongodb_exporter_{{ mongodb_exporter_version }}_checksums.txt"
-mongodb_exporter_skip_install: false
 
 mongodb_exporter_web_listen_address: "0.0.0.0:9216"
 mongodb_exporter_web_telemetry_path: "/metrics"
-
 mongodb_exporter_uri: "mongodb://127.0.0.1:27017/admin?ssl=false"
 # specify a list of collectors or "all"
 mongodb_exporter_collectors: []
@@ -32,9 +29,9 @@ mongodb_exporter_basic_auth_users: {}
 mongodb_exporter_log_level: "error"
 
 mongodb_exporter_binary_install_dir: "/usr/local/bin"
-mongodb_exporter_system_group: "{{ mongodb_exporter_system_user }}"
 mongodb_exporter_system_user: "mongodb-exp"
+mongodb_exporter_system_group: "{{ mongodb_exporter_system_user }}"
 mongodb_exporter_config_dir: "/etc/mongodb_exporter"
 
 # Local path to stash the archive and its extraction
-mongodb_exporter_archive_path: /tmp
+mongodb_exporter_local_cache_path: "/tmp/mongodb_exporter-{{ ansible_system | lower }}-{{ _mongodb_exporter_go_ansible_arch }}/{{ mongodb_exporter_version }}"

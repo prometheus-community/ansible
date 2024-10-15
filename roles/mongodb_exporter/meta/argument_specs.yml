@@ -11,18 +11,9 @@ argument_specs:
       mongodb_exporter_version:
         description: "mongodb_exporter package version. Also accepts latest as parameter."
         default: "0.41.1"
-      mongodb_exporter_skip_install:
-        description: "mongodb_exporter installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      mongodb_exporter_binary_local_dir:
-        description:
-          - "Enables the use of local packages instead of those distributed on github."
-          - "The parameter may be set to a directory where the C(mongodb_exporter) binary is stored on the host where ansible is run."
-          - "This overrides the I(mongodb_exporter_version) parameter"
       mongodb_exporter_binary_url:
         description: "URL of the mongodb_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/mongodb_exporter-{{ mongodb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/mongodb_exporter-{{ mongodb_exporter_version }}.{{ ansible_system | lower }}-{{ _mongodb_exporter_go_ansible_arch }}.tar.gz"
       mongodb_exporter_checksums_url:
         description: "URL of the mongodb_exporter checksums file"
         default: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/mongodb_exporter_{{ mongodb_exporter_version }}_checksums.txt"
@@ -33,7 +24,7 @@ argument_specs:
         description: "Path under which to expose metrics"
         default: "/metrics"
       mongodb_exporter_config_dir:
-        description: "The path where exporter configuration is stored"
+        description: "Path to directory with mongodb_exporter configuration"
         default: "/etc/mongodb_exporter"
       mongodb_exporter_tls_server_config:
         description:
@@ -118,6 +109,6 @@ argument_specs:
           - "I(Advanced)"
           - "mongodb_exporter user"
         default: "mongodb-exp"
-      mongodb_exporter_archive_path:
-        description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+      mongodb_exporter_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/mongodb_exporter-{{ ansible_system | lower }}-{{ _mongodb_exporter_go_ansible_arch }}/{{ mongodb_exporter_version }}"
