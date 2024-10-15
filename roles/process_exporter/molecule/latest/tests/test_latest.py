@@ -9,7 +9,7 @@ testinfra_hosts = get_target_hosts()
 
 @pytest.mark.parametrize("files", [
     "/etc/systemd/system/process_exporter.service",
-    "/usr/local/bin/process_exporter"
+    "/usr/local/bin/process-exporter"
 ])
 def test_files(host, files):
     f = host.file(files)

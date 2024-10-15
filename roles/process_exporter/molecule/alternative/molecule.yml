@@ -5,7 +5,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        process_exporter_binary_local_dir: "/tmp/process_exporter-linux-amd64"
+        process_exporter_local_cache_path: "/tmp/process_exporter-linux-amd64"
         process_exporter_web_listen_address: "127.0.0.1:8080"
         process_exporter_tls_server_config:
           cert_file: /etc/process_exporter/tls.cert
@@ -14,7 +14,6 @@ provisioner:
           http2: true
         process_exporter_basic_auth_users:
           randomuser: examplepassword
-        go_arch: amd64
         process_exporter_version: 0.7.10
         process_exporter_names: |
           {% raw %}
@@ -29,5 +28,4 @@ provisioner:
                 - crond
           {% endraw %}
         process_exporter_binary_url: "https://github.com/ncabatoff/process-exporter/releases/download/v{{\
-                                      \ process_exporter_version }}/process-exporter-{{ process_exporter_version }}.linux-{{\
-                                      \ go_arch }}.tar.gz"
+                                      \ process_exporter_version }}/process-exporter-{{ process_exporter_version }}.linux-amd64.tar.gz"

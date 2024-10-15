@@ -1,11 +1,9 @@
 ---
 process_exporter_version: 0.8.3
-process_exporter_binary_local_dir: ""
 process_exporter_binary_url: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/\
-                              process-exporter-{{ process_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+                              process-exporter-{{ process_exporter_version }}.{{ ansible_system | lower }}-{{ _process_exporter_go_ansible_arch }}.tar.gz"
 process_exporter_checksums_url: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/checksums.txt"
-process_exporter_skip_install: false
-process_exporter_archive_path: /tmp
+process_exporter_local_cache_path: "/tmp/process_exporter-{{ ansible_system | lower }}-{{ _process_exporter_go_ansible_arch }}/{{ process_exporter_version }}"
 
 
 process_exporter_web_listen_address: "0.0.0.0:9256"
@@ -30,3 +28,4 @@ process_exporter_names: |
 process_exporter_binary_install_dir: "/usr/local/bin"
 process_exporter_system_group: "process-exp"
 process_exporter_system_user: "{{ process_exporter_system_group }}"
+process_exporter_config_dir: "/etc/process_exporter"
