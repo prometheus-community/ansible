@@ -24,7 +24,7 @@ ExecStart={{ chrony_exporter_binary_install_dir }}/chrony_exporter \
     '--no-collector.{{ collector }}' \
 {% endfor %}
 {% if chrony_exporter_tls_server_config | length > 0 or chrony_exporter_http_server_config | length > 0 or chrony_exporter_basic_auth_users | length > 0 %}
-    '--web.config.file=/etc/chrony_exporter/web_config.yaml' \
+    '--web.config.file={{ chrony_exporter_config_dir }}/web_config.yml' \
 {% endif %}
 {% if chrony_exporter_version is version('0.5.0', '>=') and
       chrony_exporter_web_listen_address is iterable and
