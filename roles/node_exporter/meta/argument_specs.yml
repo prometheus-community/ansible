@@ -11,18 +11,9 @@ argument_specs:
       node_exporter_version:
         description: "Node exporter package version. Also accepts latest as parameter."
         default: "1.8.2"
-      node_exporter_skip_install:
-        description: "Node exporter installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      node_exporter_binary_local_dir:
-        description:
-          - "Enables the use of local packages instead of those distributed on github."
-          - "The parameter may be set to a directory where the C(node_exporter) binary is stored on the host where ansible is run."
-          - "This overrides the I(node_exporter_version) parameter"
       node_exporter_binary_url:
         description: "URL of the node exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.{{ ansible_system | lower }}-{{ _node_exporter_go_ansible_arch }}.tar.gz"
       node_exporter_checksums_url:
         description: "URL of the node exporter checksums file"
         default: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/sha256sums.txt"
@@ -85,6 +76,9 @@ argument_specs:
           - "I(Advanced)"
           - "Node exporter user"
         default: "node-exp"
-      node_exporter_archive_path:
-        description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+      node_exporter_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/node_exporter-{{ ansible_system | lower }}-{{ _node_exporter_go_ansible_arch }}/{{ node_exporter_version }}"
+      node_exporter_config_dir:
+        description: "Path to directory with node_exporter configuration"
+        default: "/etc/node_exporter"
