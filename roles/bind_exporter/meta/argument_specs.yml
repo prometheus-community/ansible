@@ -11,18 +11,9 @@ argument_specs:
       bind_exporter_version:
         description: "BIND exporter package version. Also accepts latest as parameter."
         default: "0.7.0"
-      bind_exporter_skip_install:
-        description: "BIND installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      bind_exporter_binary_local_dir:
-        description:
-          - "Enables the use of local packages instead of those distributed on github."
-          - "The parameter may be set to a directory where the C(bind_exporter) binary is stored on the host where ansible is run."
-          - "This overrides the I(bind_exporter_version) parameter"
       bind_exporter_binary_url:
         description: "URL of the bind_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _bind_exporter_repo }}/download/v{{ bind_exporter_version }}/bind_exporter-{{ bind_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _bind_exporter_repo }}/releases/download/v{{ bind_exporter_version }}/bind_exporter-{{ bind_exporter_version }}.{{ ansible_system | lower }}-{{ _bind_exporter_go_ansible_arch }}.tar.gz"
       bind_exporter_checksums_url:
         description: "URL of the bind_exporter checksums file"
         default: "https://github.com/{{ _bind_exporter_repo }}/releases/download/v{{ bind_exporter_version }}/sha256sums.txt"
@@ -33,7 +24,7 @@ argument_specs:
         description: "Path under which to expose metrics"
         default: "/metrics"
       bind_exporter_config_dir:
-        description: "The path where exporter configuration is stored"
+        description: "Path to directory with bind_exporter configuration"
         default: "/etc/bind_exporter"
       bind_exporter_stats_url:
         description: "HTTP XML API address of BIND server"
@@ -88,3 +79,6 @@ argument_specs:
           - "I(Advanced)"
           - "BIND Exporter user"
         default: "bind-exp"
+      bind_exporter_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/bind_exporter-{{ ansible_system | lower }}-{{ _bind_exporter_go_ansible_arch }}/{{ bind_exporter_version }}"
