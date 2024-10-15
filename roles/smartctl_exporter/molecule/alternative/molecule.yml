@@ -5,7 +5,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        smartctl_exporter_binary_local_dir: "/tmp/smartctl_exporter-linux-amd64"
+        smartctl_exporter_local_cache_path: "/tmp/smartctl_exporter-linux-amd64"
         smartctl_exporter_web_listen_address: "127.0.0.1:8080"
         smartctl_exporter_smartctl_interval: "30s"
         smartctl_exporter_smartctl_rescan: "5m"
@@ -18,8 +18,6 @@ provisioner:
           http2: true
         smartctl_exporter_basic_auth_users:
           randomuser: examplepassword
-        go_arch: amd64
         smartctl_exporter_version: 0.11.0
         smartctl_exporter_binary_url: "https://github.com/prometheus-community/smartctl_exporter/releases/download/v{{\
-                                       \ smartctl_exporter_version }}/smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{\
-                                       \ go_arch }}.tar.gz"
+                                       \ smartctl_exporter_version }}/smartctl_exporter-{{ smartctl_exporter_version }}.linux-amd64.tar.gz"
