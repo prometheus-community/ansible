@@ -6,26 +6,26 @@
     __role_name: "{{ lookup('ansible.builtin.env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
     __binary_name: "{{ __role_name }}"
     __binary_url: "{{ lookup('ansible.builtin.vars', __role_name ~ '_binary_url', default='') }}"
-    __binary_local_dir: "{{ lookup('ansible.builtin.vars', __role_name ~ '_binary_local_dir', default='') }}"
+    __cache_path: "{{ lookup('ansible.builtin.vars', __role_name ~ '_local_cache_path', default='') }}"
     __tls_server_config: "{{ lookup('ansible.builtin.vars', __role_name ~ '_tls_server_config', default={}) }}"
   tasks:
     - name: "Create local binary directory"
       ansible.builtin.file:
-        path: "{{ __binary_local_dir }}"
+        path: "{{ __cache_path }}"
         state: directory
         mode: 0755
-      when: (__binary_local_dir)
+      when: (__cache_path)
 
     - name: "Fetch binary"
       become: false
       ansible.builtin.unarchive:
         src: "{{ __binary_url }}"
-        dest: "{{ __binary_local_dir }}"
+        dest: "{{ __cache_path }}"
         remote_src: true
         list_files: true
         extra_opts:
           - "--strip-components=1"
-        creates: "{{ __binary_local_dir }}/{{ __binary_name }}"
+        creates: "{{ __cache_path }}/{{ __binary_name }}"
       check_mode: false
       register: __download_binary
       when: (__binary_url)
