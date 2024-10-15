@@ -1,10 +1,8 @@
 ---
 memcached_exporter_version: 0.14.4
-memcached_exporter_binary_local_dir: ""
 memcached_exporter_binary_url: "https://github.com/{{ _memcached_exporter_repo }}/releases/download/v{{ memcached_exporter_version }}/\
-                           memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+                             memcached_exporter-{{ memcached_exporter_version }}.{{ ansible_system | lower }}-{{ _memcached_exporter_go_ansible_arch }}.tar.gz"
 memcached_exporter_checksums_url: "https://github.com/{{ _memcached_exporter_repo }}/releases/download/v{{ memcached_exporter_version }}/sha256sums.txt"
-memcached_exporter_skip_install: false
 
 memcached_exporter_memcached_pid_file: ""
 
@@ -14,17 +12,17 @@ memcached_exporter_web_listen_address: "0.0.0.0:9150"
 memcached_exporter_web_telemetry_path: "/metrics"
 
 memcached_exporter_tls_server_config: {}
-
 memcached_exporter_http_server_config: {}
-
 memcached_exporter_basic_auth_users: {}
 
 memcached_exporter_log_level: "info"
 memcached_exporter_log_format: "logfmt"
 
 memcached_exporter_binary_install_dir: "/usr/local/bin"
-memcached_exporter_system_group: "memcached-exp"
-memcached_exporter_system_user: "{{ memcached_exporter_system_group }}"
+memcached_exporter_system_user: "memcached-exp"
+memcached_exporter_system_group: "{{ memcached_exporter_system_user }}"
 
 # Local path to stash the archive and its extraction
-memcached_exporter_archive_path: /tmp
+memcached_exporter_local_cache_path: "/tmp/memcached_exporter-{{ ansible_system | lower }}-{{ _memcached_exporter_go_ansible_arch }}/\
+                                      {{ memcached_exporter_version }}"
+memcached_exporter_config_dir: "/etc/memcached_exporter"

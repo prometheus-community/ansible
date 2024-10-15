@@ -11,18 +11,9 @@ argument_specs:
       memcached_exporter_version:
         description: "memcached_exporter package version. Also accepts latest as parameter."
         default: "0.14.4"
-      memcached_exporter_skip_install:
-        description: "memcached_exporter installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      memcached_exporter_binary_local_dir:
-        description:
-          - "Enables the use of local packages instead of those distributed on github."
-          - "The parameter may be set to a directory where the C(memcached_exporter) binary is stored on the host where ansible is run."
-          - "This overrides the I(memcached_exporter_version) parameter"
       memcached_exporter_binary_url:
         description: "URL of the memcached_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _memcached_exporter_repo }}/releases/download/v{{ memcached_exporter_version }}/memcached_exporter-{{ memcached_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _memcached_exporter_repo }}/releases/download/v{{ memcached_exporter_version }}/memcached_exporter-{{ memcached_exporter_version }}.{{ ansible_system | lower }}-{{ _memcached_exporter_go_ansible_arch }}.tar.gz"
       memcached_exporter_checksums_url:
         description: "URL of the memcached_exporter checksums file"
         default: "https://github.com/{{ _memcached_exporter_repo }}/releases/download/v{{ memcached_exporter_version }}/sha256sums.txt"
@@ -74,6 +65,9 @@ argument_specs:
           - "I(Advanced)"
           - "memcached_exporter user"
         default: "memcached-exp"
-      memcached_exporter_archive_path:
-        description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+      memcached_exporter_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/memcached_exporter-{{ ansible_system | lower }}-{{ _memcached_exporter_go_ansible_arch }}/{{ memcached_exporter_version }}"
+      memcached_exporter_config_dir:
+        description: "Path to directory with memcached_exporter configuration"
+        default: "/etc/memcached_exporter"

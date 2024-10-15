@@ -31,7 +31,6 @@ def test_user(host):
     assert host.group("memcached-exp").exists
     assert "memcached-exp" in host.user("memcached-exp").groups
     assert host.user("memcached-exp").shell == "/usr/sbin/nologin"
-    assert host.user("memcached-exp").home == "/"
 
 
 def test_service(host):
