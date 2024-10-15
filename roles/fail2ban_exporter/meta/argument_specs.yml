@@ -11,18 +11,9 @@ argument_specs:
       fail2ban_exporter_version:
         description: "fail2ban_exporter package version. Also accepts latest as parameter."
         default: "0.10.1"
-      fail2ban_exporter_skip_install:
-        description: "fail2ban_exporter installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      fail2ban_exporter_binary_local_dir:
-        description:
-          - "Enables the use of local packages instead of those distributed on gitlab."
-          - "The parameter may be set to a directory where the C(fail2ban_exporter) binary is stored on the host where ansible is run."
-          - "This overrides the I(fail2ban_exporter_version) parameter"
       fail2ban_exporter_binary_url:
         description: "URL of the fail2ban_exporter binaries .tar.gz file"
-        default: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/fail2ban_exporter_{{ fail2ban_exporter_version }}_linux_{{ go_arch }}.tar.gz"
+        default: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/fail2ban_exporter_{{ fail2ban_exporter_version }}_{{ ansible_system | lower }}_{{ _fail2ban_exporter_go_ansible_arch }}.tar.gz"
       fail2ban_exporter_checksums_url:
         description: "URL of the fail2ban_exporter checksums file"
         default: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/fail2ban_exporter_{{ fail2ban_exporter_version }}_checksums.txt"
@@ -46,6 +37,16 @@ argument_specs:
         description:
           - "I(Advanced)"
           - "Password to use to protect endpoints with basic auth"
-      fail2ban_exporter_archive_path:
+      fail2ban_exporter_local_cache_path:
         description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+        default: "/tmp/fail2ban_exporter-{{ ansible_system | lower }}-{{ _fail2ban_exporter_go_ansible_arch }}/{{ fail2ban_exporter_version }}"
+      fail2ban_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "fail2ban exporter system user"
+        default: root
+      fail2ban_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for fail2ban exporter"
+        default: root
