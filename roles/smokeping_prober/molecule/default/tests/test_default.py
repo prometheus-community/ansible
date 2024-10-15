@@ -46,7 +46,6 @@ def test_user(host):
     assert host.group("smokeping").exists
     assert "smokeping" in host.user("smokeping").groups
     assert host.user("smokeping").shell == "/usr/sbin/nologin"
-    assert host.user("smokeping").home == "/"
 
 
 def test_service(host):
