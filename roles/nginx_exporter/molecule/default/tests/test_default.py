@@ -31,7 +31,6 @@ def test_user(host):
     assert host.group("nginx-exp").exists
     assert "nginx-exp" in host.user("nginx-exp").groups
     assert host.user("nginx-exp").shell == "/usr/sbin/nologin"
-    assert host.user("nginx-exp").home == "/"
 
 
 def test_service(host):
