@@ -1,16 +1,13 @@
 ---
 blackbox_exporter_version: 0.25.0
-blackbox_exporter_binary_local_dir: ""
 blackbox_exporter_binary_url: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/\
-                               blackbox_exporter-{{ blackbox_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] |
-                               default(ansible_architecture) }}.tar.gz"
+                               blackbox_exporter-{{ blackbox_exporter_version }}.{{ ansible_system | lower }}-{{ _blackbox_exporter_go_ansible_arch }}.tar.gz"
 blackbox_exporter_checksums_url: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/sha256sums.txt"
-blackbox_exporter_skip_install: false
 
 blackbox_exporter_web_listen_address: "0.0.0.0:9115"
 
-blackbox_exporter_user: blackbox-exp
-blackbox_exporter_group: "{{ blackbox_exporter_user }}"
+blackbox_exporter_system_user: blackbox-exp
+blackbox_exporter_system_group: "{{ blackbox_exporter_system_user }}"
 
 blackbox_exporter_cli_flags: {}
 # blackbox_exporter_cli_flags:
@@ -74,7 +71,8 @@ blackbox_exporter_configuration_modules:
 # Where to put the blackbox_exporter.yml main configuration file
 blackbox_exporter_config_dir: /etc/blackbox_exporter
 
-blackbox_exporter_binary_install_dir: "/usr/local/bin"
-
 # Local path to stash the archive and its extraction
-blackbox_exporter_archive_path: /tmp
+blackbox_exporter_local_cache_path: "/tmp/blackbox_exporter-{{ ansible_system | lower }}-{{ _blackbox_exporter_go_ansible_arch }}/\
+                                     {{ blackbox_exporter_version }}"
+
+blackbox_exporter_binary_install_dir: "/usr/local/bin"

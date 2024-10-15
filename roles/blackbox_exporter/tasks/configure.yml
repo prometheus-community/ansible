@@ -1,28 +1,50 @@
 ---
-- name: Create systemd service unit
-  ansible.builtin.template:
-    src: blackbox_exporter.service.j2
-    dest: /etc/systemd/system/blackbox_exporter.service
-    owner: root
-    group: root
-    mode: '0644'
-  notify:
-    - restart blackbox_exporter
+- name: "Common configure"
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ blackbox_exporter_system_user }}"
+    _common_system_group: "{{ blackbox_exporter_system_group }}"
+    _common_config_dir: "{{ blackbox_exporter_config_dir }}"
+  tags:
+    - blackbox_exporter
+    - configure
+    - blackbox_exporter_configure
 
-- name: Create blackbox_exporter config directory
-  ansible.builtin.file:
-    path: "{{ blackbox_exporter_config_dir }}"
-    state: directory
-    owner: root
-    group: root
-    mode: u+rwX,g+rwX,o=rX
+- name: Ensure blackbox exporter binary has cap_net_raw capability
+  community.general.capabilities:
+    path: "{{ blackbox_exporter_binary_install_dir }}/blackbox_exporter"
+    capability: cap_net_raw+ep
+    state: present
+  become: true
+  when: not ansible_check_mode
+  changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"
+  tags:
+    - blackbox_exporter
+    - configure
+    - blackbox_exporter_configure
+
+- name: Check Debug Message
+  ansible.builtin.debug:
+    msg: "The capabilities module is skipped during check mode, as the file may not exist, causing execution to fail."
+  when: ansible_check_mode
+  tags:
+    - blackbox_exporter
+    - configure
+    - blackbox_exporter_configure
 
 - name: Configure blackbox exporter
   ansible.builtin.template:
     src: blackbox_exporter.yml.j2
     dest: "{{ blackbox_exporter_config_dir }}/blackbox_exporter.yml"
-    owner: root
-    group: "{{ blackbox_exporter_group }}"
+    owner: "{{ blackbox_exporter_system_user }}"
+    group: "{{ blackbox_exporter_system_group }}"
     mode: '0644'
+  become: true
   notify:
     - reload blackbox_exporter
+  tags:
+    - blackbox_exporter
+    - configure
+    - blackbox_exporter_configure

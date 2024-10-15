@@ -1,24 +1,10 @@
 ---
-- name: Assert usage of systemd as an init system
-  ansible.builtin.assert:
-    that: ansible_service_mgr == 'systemd'
-    msg: "This role only works with systemd"
-
-- name: Install package fact dependencies
-  become: true
-  ansible.builtin.package:
-    name: "{{ _pkg_fact_req }}"
-    state: present
-  when: (_pkg_fact_req)
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
   vars:
-    _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
-                    {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
-                    {% else %}\
-                    {% endif %}"
-
-- name: Gather package facts
-  ansible.builtin.package_facts:
-  when: "not 'packages' in ansible_facts"
+    _common_dependencies: "{{ _blackbox_exporter_dependencies }}"
 
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
@@ -44,30 +30,15 @@
 - name: Discover latest version
   ansible.builtin.set_fact:
     blackbox_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _blackbox_exporter_repo }}/releases/latest', headers=_github_api_headers,
-                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+                                split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
   until: blackbox_exporter_version is version('0.0.0', '>=')
   retries: 10
   when:
     - blackbox_exporter_version == "latest"
-    - blackbox_exporter_binary_local_dir | length == 0
-    - not blackbox_exporter_skip_install
-
-- name: Get blackbox_exporter binary checksum
-  when:
-    - blackbox_exporter_binary_local_dir | length == 0
-    - not blackbox_exporter_skip_install
-  block:
-    - name: Get checksum list from github
-      ansible.builtin.set_fact:
-        __blackbox_exporter_checksums: "{{ lookup('url', blackbox_exporter_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
-      run_once: true
-      until: __blackbox_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
-      retries: 10
-
-    - name: "Get checksum for {{ go_arch }}"
-      ansible.builtin.set_fact:
-        __blackbox_exporter_checksum: "{{ item.split(' ')[0] }}"
-      with_items: "{{ __blackbox_exporter_checksums }}"
-      when:
-        - "('linux-' + go_arch + '.tar.gz') in item"
+  tags:
+    - blackbox_exporter
+    - install
+    - blackbox_exporter_install
+    - download
+    - blackbox_exporter_download
