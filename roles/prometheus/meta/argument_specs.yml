@@ -13,18 +13,9 @@ argument_specs:
           - "Prometheus package version. Also accepts C(latest) as parameter."
           - "Only prometheus 2.x is supported"
         default: "2.54.1"
-      prometheus_skip_install:
-        description: "Prometheus installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      prometheus_binary_local_dir:
-        description:
-          - "Allows to use local packages instead of ones distributed on github."
-          - "As parameter it takes a directory where I(prometheus) AND I(promtool) binaries are stored on host on which ansible is ran."
-          - "This overrides I(prometheus_version) parameter"
       prometheus_binary_url:
         description: "URL of the prometheus binaries .tar.gz file"
-        default: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/ prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.{{ ansible_system | lower }}-{{ _prometheus_go_ansible_arch }}.tar.gz"
       prometheus_checksums_url:
         description: URL of the prometheus checksums file
         default: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/sha256sums.txt"
@@ -38,6 +29,11 @@ argument_specs:
         description: "Additional paths that Prometheus is allowed to read (useful for SSL certs outside of the config directory)"
         type: "list"
         elements: "str"
+      prometheus_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install binaries"
+        default: "/usr/local/bin"
       prometheus_web_listen_address:
         description: "Address on which prometheus will be listening"
         default: "0.0.0.0:9090"
@@ -174,6 +170,6 @@ argument_specs:
           - "How long to wait for Prometheus to shutdown. This is passed as a systemd TimeoutStopSec time spec."
         type: "str"
         default: "600s"
-      prometheus_archive_path:
-        description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+      prometheus_local_cache_path:
+        description: Local path to stash the archive and its extraction
+        default: /tmp/prometheus-{{ ansible_system | lower }}-{{ _prometheus_go_ansible_arch }}/{{ prometheus_version }}

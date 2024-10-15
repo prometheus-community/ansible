@@ -1,9 +1,73 @@
 ---
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ prometheus_system_user }}"
+    _common_system_group: "{{ prometheus_system_group }}"
+    _common_config_dir: "{{ prometheus_config_dir }}"
+    _common_tls_server_config: "{{ prometheus_web_config.tls_server_config }}"
+    _common_http_server_config: "{{ prometheus_web_config.http_server_config }}"
+    _common_basic_auth_users: "{{ prometheus_web_config.basic_auth_users }}"
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure
+
+- name: Create prometheus data directory
+  ansible.builtin.file:
+    path: "{{ prometheus_db_dir }}"
+    state: directory
+    owner: "{{ prometheus_system_user }}"
+    group: "{{ prometheus_system_group }}"
+    mode: 0755
+  become: true
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure
+
+- name: Create additional prometheus configuration directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ prometheus_system_user }}"
+    group: "{{ prometheus_system_group }}"
+    mode: 0775
+  loop:
+    - "{{ prometheus_config_dir }}/rules"
+    - "{{ prometheus_config_dir }}/file_sd"
+    - "{{ prometheus_config_dir }}/scrapes"
+  become: true
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure
+
+- name: Propagate official console templates
+  ansible.builtin.copy:
+    src: "{{ prometheus_local_cache_path }}/{{ item }}"
+    dest: "{{ prometheus_config_dir }}"
+    mode: 0644
+    owner: "{{ prometheus_system_user }}"
+    group: "{{ prometheus_system_group }}"
+  loop:
+    - console_libraries
+    - consoles
+  notify:
+    - restart prometheus
+  become: true
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure
+
 - name: Alerting rules file
   ansible.builtin.template:
     src: "alert.rules.j2"
     dest: "{{ prometheus_config_dir }}/rules/ansible_managed.rules"
-    owner: root
+    owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
     validate: "{{ _prometheus_binary_install_dir }}/promtool check rules %s"
@@ -12,42 +76,48 @@
     - not prometheus_agent_mode
   notify:
     - reload prometheus
+  become: true
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure
 
 - name: Copy custom alerting rule files
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ prometheus_config_dir }}/rules/"
-    owner: root
+    owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
     validate: "{{ _prometheus_binary_install_dir }}/promtool check rules %s"
-  with_fileglob: "{{ prometheus_alert_rules_files }}"
+  loop: "{{ prometheus_alert_rules_files | map('ansible.builtin.fileglob') | flatten }}"
   when:
     - not prometheus_agent_mode
   notify:
     - reload prometheus
+  become: true
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure
 
 - name: Configure prometheus
   ansible.builtin.template:
     src: "{{ prometheus_config_file }}"
     dest: "{{ prometheus_config_dir }}/prometheus.yml"
     force: true
-    owner: root
+    owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
     validate: "{{ _prometheus_binary_install_dir }}/promtool check config %s"
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   notify:
     - reload prometheus
-
-- name: Configure Prometheus web
-  ansible.builtin.copy:
-    content: "{{ prometheus_web_config | to_nice_yaml(indent=2, sort_keys=False) }}"
-    dest: "{{ prometheus_config_dir }}/web.yml"
-    force: true
-    owner: root
-    group: "{{ prometheus_system_group }}"
-    mode: 0640
+  become: true
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure
 
 - name: Configure prometheus static targets
   ansible.builtin.copy:
@@ -55,28 +125,43 @@
       {{ item.value | to_nice_yaml(indent=2, sort_keys=False) }}
     dest: "{{ prometheus_config_dir }}/file_sd/{{ item.key }}.yml"
     force: true
-    owner: root
+    owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
-  with_dict: "{{ prometheus_targets }}"
+  loop: "{{ prometheus_targets | dict2items }}"
   when: prometheus_targets != {}
+  become: true
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure
 
 - name: Copy prometheus custom static targets
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ prometheus_config_dir }}/file_sd/"
     force: true
-    owner: root
+    owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
-  with_fileglob: "{{ prometheus_static_targets_files }}"
+  loop: "{{ prometheus_static_targets_files | map('ansible.builtin.fileglob') | flatten }}"
+  become: true
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure
 
 - name: Copy prometheus scrape config files
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ prometheus_config_dir }}/scrapes/"
     force: true
-    owner: root
+    owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
-  with_fileglob: "{{ prometheus_scrape_config_files }}"
+  loop: "{{ prometheus_scrape_config_files | map('ansible.builtin.fileglob') | flatten }}"
+  become: true
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure

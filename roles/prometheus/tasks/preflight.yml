@@ -1,24 +1,8 @@
 ---
-- name: Assert usage of systemd as an init system
-  ansible.builtin.assert:
-    that: ansible_service_mgr == 'systemd'
-    msg: "This module only works with systemd"
-
-- name: Install package fact dependencies
-  become: true
-  ansible.builtin.package:
-    name: "{{ _pkg_fact_req }}"
-    state: present
-  when: (_pkg_fact_req)
-  vars:
-    _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
-                    {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
-                    {% else %}\
-                    {% endif %}"
-
-- name: Gather package facts
-  ansible.builtin.package_facts:
-  when: "not 'packages' in ansible_facts"
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
 
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
@@ -98,24 +82,9 @@
   retries: 10
   when:
     - prometheus_version == "latest"
-    - prometheus_binary_local_dir | length == 0
-    - not prometheus_skip_install
-
-- name: Get prometheus binary checksum
-  when:
-    - prometheus_binary_local_dir | length == 0
-    - not prometheus_skip_install
-  block:
-    - name: "Get checksum list"
-      ansible.builtin.set_fact:
-        __prometheus_checksums: "{{ lookup('url', prometheus_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
-      run_once: true
-      until: __prometheus_checksums is search('linux-' + go_arch + '.tar.gz')
-      retries: 10
-
-    - name: "Get checksum for {{ go_arch }}"
-      ansible.builtin.set_fact:
-        __prometheus_checksum: "{{ item.split(' ')[0] }}"
-      with_items: "{{ __prometheus_checksums }}"
-      when:
-        - "('linux-' + go_arch + '.tar.gz') in item"
+  tags:
+    - prometheus
+    - install
+    - prometheus_install
+    - download
+    - prometheus_download

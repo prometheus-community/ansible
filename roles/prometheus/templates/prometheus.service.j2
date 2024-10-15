@@ -25,8 +25,8 @@ ExecStart={{ _prometheus_binary_install_dir }}/prometheus \
   --enable-feature=agent \
   --storage.agent.path={{ prometheus_db_dir }} \
 {% endif %}
-{% if prometheus_version is version('2.24.0', '>=') %}
-  --web.config.file={{ prometheus_config_dir }}/web.yml \
+{% if (prometheus_version is version('2.24.0', '>=')) and (prometheus_web_config.values() | map('length') | select('gt', 0) | list is any) %}
+    --web.config.file={{ prometheus_config_dir }}/web_config.yml \
 {% endif %}
   --web.console.libraries={{ prometheus_config_dir }}/console_libraries \
   --web.console.templates={{ prometheus_config_dir }}/consoles \
