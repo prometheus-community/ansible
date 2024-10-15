@@ -1,41 +1,8 @@
 ---
-- name: Assert usage of systemd as an init system
-  ansible.builtin.assert:
-    that: ansible_service_mgr == 'systemd'
-    msg: "This role only works with systemd"
-
-- name: Install package fact dependencies
-  become: true
-  ansible.builtin.package:
-    name: "{{ _pkg_fact_req }}"
-    state: present
-  when: (_pkg_fact_req)
-  vars:
-    _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
-      {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
-      {% else %}\
-      {% endif %}"
-
-- name: Gather package facts
-  ansible.builtin.package_facts:
-  when: "not 'packages' in ansible_facts"
-
-- name: Check if cadvisor is installed
-  ansible.builtin.stat:
-    path: "{{ cadvisor_binary_install_dir }}/cadvisor"
-  register: __cadvisor_is_installed
-  check_mode: false
-  tags:
-    - cadvisor_install
-
-- name: Gather currently installed cadvisor version (if any)
-  ansible.builtin.command: "{{ cadvisor_binary_install_dir }}/cadvisor --version"
-  changed_when: false
-  register: __cadvisor_current_version_output
-  check_mode: false
-  when: __cadvisor_is_installed.stat.exists
-  tags:
-    - cadvisor_install
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
 
 - name: Discover latest version
   ansible.builtin.set_fact:
@@ -46,5 +13,9 @@
   retries: 10
   when:
     - cadvisor_version == "latest"
-    - cadvisor_binary_local_dir | length == 0
-    - not cadvisor_skip_install
+  tags:
+    - cadvisor
+    - install
+    - cadvisor_install
+    - download
+    - cadvisor_download

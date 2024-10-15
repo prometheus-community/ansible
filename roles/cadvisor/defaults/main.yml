@@ -1,9 +1,7 @@
 ---
 cadvisor_version: 0.49.1
-cadvisor_binary_local_dir: ""
 cadvisor_binary_url: "https://github.com/{{ _cadvisor_repo }}/releases/download/v{{ cadvisor_version }}/\
-                      cadvisor-v{{ cadvisor_version }}-linux-{{ go_arch }}"
-cadvisor_skip_install: false
+                      cadvisor-v{{ cadvisor_version }}-{{ ansible_system | lower }}-{{ _cadvisor_go_ansible_arch }}"
 
 cadvisor_listen_ip: "0.0.0.0"
 cadvisor_port: "8080"
@@ -16,9 +14,10 @@ cadvisor_whitelisted_container_labels: []
 cadvisor_store_container_labels: true
 cadvisor_docker_only: false
 
-cadvisor_binary_install_dir: "/usr/local/bin"
 cadvisor_system_group: "root"
 cadvisor_system_user: "{{ cadvisor_system_group }}"
 
 # Local path to stash the archive and its extraction
-cadvisor_archive_path: /tmp
+cadvisor_local_cache_path: "/tmp/cadvisor-{{ ansible_system | lower }}-{{ _cadvisor_go_ansible_arch }}/{{ cadvisor_version }}"
+
+cadvisor_binary_install_dir: "/usr/local/bin"
