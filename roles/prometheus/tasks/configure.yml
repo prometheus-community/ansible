@@ -171,3 +171,8 @@
     - prometheus_configure
   notify:
     - reload prometheus
+
+- name: Remove "scrapes" folder replaced by "scrape_configs"
+  ansible.builtin.file:
+    path: "{{ prometheus_config_dir }}/scrapes"
+    state: absent
