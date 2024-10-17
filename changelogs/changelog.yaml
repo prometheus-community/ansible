@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.20.1:
+    changes:
+      bugfixes:
+        - 'fix: alertmanager deprecated PIDFile= path warning (https://github.com/prometheus-community/ansible/pull/155)'
+    release_date: '2024-10-17'
   0.20.0:
     changes:
       minor_changes:

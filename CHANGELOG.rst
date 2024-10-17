@@ -4,6 +4,14 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.20.1
+=======
+
+Bugfixes
+--------
+
+- fix: alertmanager deprecated PIDFile= path warning (https://github.com/prometheus-community/ansible/pull/155)
+
 v0.20.0
 =======
 
