@@ -17,7 +17,11 @@ StartLimitIntervalSec=0
 
 [Service]
 Type=simple
+{% if (ansible_facts.packages.systemd | first).version is version('239', '>=') %}
+PIDFile=/run/alertmanager.pid
+{% else %}
 PIDFile=/var/run/alertmanager.pid
+{% endif %}
 User=alertmanager
 Group=alertmanager
 ExecReload=/bin/kill -HUP $MAINPID
