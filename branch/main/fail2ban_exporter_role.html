@@ -74,6 +74,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
   
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="_common_role.html">prometheus.prometheus._common role</a></li>
 <li class="toctree-l1"><a class="reference internal" href="alertmanager_role.html">prometheus.prometheus.alertmanager role – Prometheus Alertmanager service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bind_exporter_role.html">prometheus.prometheus.bind_exporter role – Prometheus BIND Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blackbox_exporter_role.html">prometheus.prometheus.blackbox_exporter role – Deploy and manage Prometheus blackbox exporter</a></li>
@@ -173,14 +174,6 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--fail2ban_exporter_archive_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-fail2ban-exporter-role-parameter-main-fail2ban-exporter-archive-path"><strong>fail2ban_exporter_archive_path</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--fail2ban_exporter_archive_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp&quot;</span></code></p>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--fail2ban_exporter_binary_install_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-fail2ban-exporter-role-parameter-main-fail2ban-exporter-binary-install-dir"><strong>fail2ban_exporter_binary_install_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--fail2ban_exporter_binary_install_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -189,21 +182,12 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/usr/local/bin&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--fail2ban_exporter_binary_local_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-fail2ban-exporter-role-parameter-main-fail2ban-exporter-binary-local-dir"><strong>fail2ban_exporter_binary_local_dir</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--fail2ban_exporter_binary_local_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Enables the use of local packages instead of those distributed on gitlab.</p>
-<p>The parameter may be set to a directory where the <code class="docutils literal notranslate"><span class="pre">fail2ban_exporter</span></code> binary is stored on the host where ansible is run.</p>
-<p>This overrides the <em>fail2ban_exporter_version</em> parameter</p>
-</div></td>
-</tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--fail2ban_exporter_binary_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-fail2ban-exporter-role-parameter-main-fail2ban-exporter-binary-url"><strong>fail2ban_exporter_binary_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--fail2ban_exporter_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>URL of the fail2ban_exporter binaries .tar.gz file</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{</span> <span class="pre">fail2ban_exporter_version</span> <span class="pre">}}/downloads/fail2ban_exporter_{{</span> <span class="pre">fail2ban_exporter_version</span> <span class="pre">}}_linux_{{</span> <span class="pre">go_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{</span> <span class="pre">fail2ban_exporter_version</span> <span class="pre">}}/downloads/fail2ban_exporter_{{</span> <span class="pre">fail2ban_exporter_version</span> <span class="pre">}}_{{</span> <span class="pre">ansible_system</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}_{{</span> <span class="pre">_fail2ban_exporter_go_ansible_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -215,23 +199,19 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--fail2ban_exporter_local_cache_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-fail2ban-exporter-role-parameter-main-fail2ban-exporter-local-cache-path"><strong>fail2ban_exporter_local_cache_path</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--fail2ban_exporter_local_cache_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp/fail2ban_exporter-{{</span> <span class="pre">ansible_system</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_fail2ban_exporter_go_ansible_arch</span> <span class="pre">}}/{{</span> <span class="pre">fail2ban_exporter_version</span> <span class="pre">}}&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--fail2ban_exporter_password"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-fail2ban-exporter-role-parameter-main-fail2ban-exporter-password"><strong>fail2ban_exporter_password</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--fail2ban_exporter_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p><em>Advanced</em></p>
 <p>Password to use to protect endpoints with basic auth</p>
-</div></td>
-</tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--fail2ban_exporter_skip_install"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-fail2ban-exporter-role-parameter-main-fail2ban-exporter-skip-install"><strong>fail2ban_exporter_skip_install</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--fail2ban_exporter_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>fail2ban_exporter installation tasks gets skipped when set to true.</p>
-<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
-<ul class="simple">
-<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
-</ul>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -240,6 +220,24 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-cell"><p>Path to the fail2ban server socket</p>
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/var/run/fail2ban/fail2ban.sock&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--fail2ban_exporter_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-fail2ban-exporter-role-parameter-main-fail2ban-exporter-system-group"><strong>fail2ban_exporter_system_group</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--fail2ban_exporter_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p><em>Advanced</em></p>
+<p>System group for fail2ban exporter</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;root&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--fail2ban_exporter_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-fail2ban-exporter-role-parameter-main-fail2ban-exporter-system-user"><strong>fail2ban_exporter_system_user</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--fail2ban_exporter_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p><em>Advanced</em></p>
+<p>fail2ban exporter system user</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;root&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">

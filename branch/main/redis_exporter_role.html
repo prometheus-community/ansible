@@ -74,6 +74,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
   
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="_common_role.html">prometheus.prometheus._common role</a></li>
 <li class="toctree-l1"><a class="reference internal" href="alertmanager_role.html">prometheus.prometheus.alertmanager role – Prometheus Alertmanager service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bind_exporter_role.html">prometheus.prometheus.bind_exporter role – Prometheus BIND Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blackbox_exporter_role.html">prometheus.prometheus.blackbox_exporter role – Deploy and manage Prometheus blackbox exporter</a></li>
@@ -181,14 +182,6 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_archive_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-archive-path"><strong>redis_exporter_archive_path</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_archive_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp&quot;</span></code></p>
-</div></td>
-</tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_binary_install_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-binary-install-dir"><strong>redis_exporter_binary_install_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_binary_install_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -197,21 +190,12 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/usr/local/bin&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_binary_local_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-binary-local-dir"><strong>redis_exporter_binary_local_dir</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_binary_local_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Enables the use of local packages instead of those distributed on github.</p>
-<p>The parameter may be set to a directory where the <code class="docutils literal notranslate"><span class="pre">redis_exporter</span></code> binary is stored on the host where ansible is run.</p>
-<p>This overrides the <em>redis_exporter_version</em> parameter</p>
-</div></td>
-</tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_binary_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-binary-url"><strong>redis_exporter_binary_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>URL of the redis_exporter binaries .tar.gz file</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_redis_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">redis_exporter_version</span> <span class="pre">}}/redis_exporter-v{{</span> <span class="pre">redis_exporter_version</span> <span class="pre">}}.linux-{{</span> <span class="pre">go_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_redis_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">redis_exporter_version</span> <span class="pre">}}/redis_exporter-v{{</span> <span class="pre">redis_exporter_version</span> <span class="pre">}}.{{</span> <span class="pre">ansible_system</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_redis_exporter_go_ansible_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -279,6 +263,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_config_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-config-dir"><strong>redis_exporter_config_dir</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_config_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Path to directory with redis_exporter configuration</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/etc/redis_exporter&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_connection_timeout"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-connection-timeout"><strong>redis_exporter_connection_timeout</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_connection_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -286,7 +278,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;15s&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_count_keys"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-count-keys"><strong>redis_exporter_count_keys</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_count_keys" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
@@ -294,7 +286,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_debug"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-debug"><strong>redis_exporter_debug</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_debug" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -306,7 +298,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_export_client_list"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-export-client-list"><strong>redis_exporter_export_client_list</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_export_client_list" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -318,7 +310,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_export_client_port"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-export-client-port"><strong>redis_exporter_export_client_port</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_export_client_port" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -330,7 +322,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_incl_config_metrics"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-incl-config-metrics"><strong>redis_exporter_incl_config_metrics</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_incl_config_metrics" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -342,7 +334,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_incl_system_metrics"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-incl-system-metrics"><strong>redis_exporter_incl_system_metrics</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_incl_system_metrics" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -354,7 +346,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_is_cluster"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-is-cluster"><strong>redis_exporter_is_cluster</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_is_cluster" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -366,7 +358,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_is_tile38"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-is-tile38"><strong>redis_exporter_is_tile38</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_is_tile38" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -376,6 +368,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
 </ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_local_cache_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-local-cache-path"><strong>redis_exporter_local_cache_path</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_local_cache_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp/redis_exporter-{{</span> <span class="pre">ansible_system</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_redis_exporter_go_ansible_arch</span> <span class="pre">}}/{{</span> <span class="pre">redis_exporter_version</span> <span class="pre">}}&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -476,18 +476,6 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_skip_install"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-skip-install"><strong>redis_exporter_skip_install</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>redis_exporter installation tasks gets skipped when set to true.</p>
-<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
-<ul class="simple">
-<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
-</ul>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_skip_tls_verification"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-skip-tls-verification"><strong>redis_exporter_skip_tls_verification</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_skip_tls_verification" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -499,7 +487,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-system-group"><strong>redis_exporter_system_group</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -508,7 +496,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;redis-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-system-user"><strong>redis_exporter_system_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -517,7 +505,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;redis-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_ca_cert_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-ca-cert-file"><strong>redis_exporter_tls_ca_cert_file</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_ca_cert_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -525,7 +513,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_client_cert_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-client-cert-file"><strong>redis_exporter_tls_client_cert_file</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_client_cert_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -533,7 +521,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_client_key_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-client-key-file"><strong>redis_exporter_tls_client_key_file</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_client_key_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -541,7 +529,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_server_ca_cert_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-server-ca-cert-file"><strong>redis_exporter_tls_server_ca_cert_file</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_server_ca_cert_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -549,7 +537,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_server_cert_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-server-cert-file"><strong>redis_exporter_tls_server_cert_file</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_server_cert_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -557,7 +545,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_server_key_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-server-key-file"><strong>redis_exporter_tls_server_key_file</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_server_key_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -565,7 +553,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_server_min_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-server-min-version"><strong>redis_exporter_tls_server_min_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_server_min_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -573,7 +561,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;TLS1.2&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-user"><strong>redis_exporter_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -581,7 +569,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-version"><strong>redis_exporter_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -589,7 +577,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;1.63.0&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-web-listen-address"><strong>redis_exporter_web_listen_address</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -597,7 +585,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9121&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_web_telemetry_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-web-telemetry-path"><strong>redis_exporter_web_telemetry_path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--redis_exporter_web_telemetry_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>

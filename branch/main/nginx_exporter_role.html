@@ -74,6 +74,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
   
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="_common_role.html">prometheus.prometheus._common role</a></li>
 <li class="toctree-l1"><a class="reference internal" href="alertmanager_role.html">prometheus.prometheus.alertmanager role – Prometheus Alertmanager service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bind_exporter_role.html">prometheus.prometheus.bind_exporter role – Prometheus BIND Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blackbox_exporter_role.html">prometheus.prometheus.blackbox_exporter role – Deploy and manage Prometheus blackbox exporter</a></li>
@@ -173,21 +174,13 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_archive_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-archive-path"><strong>nginx_exporter_archive_path</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_archive_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp&quot;</span></code></p>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_basic_auth_users"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-basic-auth-users"><strong>nginx_exporter_basic_auth_users</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_basic_auth_users" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_binary_install_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-binary-install-dir"><strong>nginx_exporter_binary_install_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_binary_install_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -196,21 +189,12 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/usr/local/bin&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_binary_local_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-binary-local-dir"><strong>nginx_exporter_binary_local_dir</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_binary_local_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Enables the use of local packages instead of those distributed on github.</p>
-<p>The parameter may be set to a directory where the <code class="docutils literal notranslate"><span class="pre">nginx_exporter</span></code> binary is stored on the host where ansible is run.</p>
-<p>This overrides the <em>nginx_exporter_version</em> parameter</p>
-</div></td>
-</tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_binary_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-binary-url"><strong>nginx_exporter_binary_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>URL of the nginx_exporter binaries .tar.gz file</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_nginx_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">nginx_exporter_version</span> <span class="pre">}}/nginx_exporter-{{</span> <span class="pre">nginx_exporter_version</span> <span class="pre">}}.linux-{{</span> <span class="pre">go_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_nginx_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">nginx_exporter_version</span> <span class="pre">}}/nginx-prometheus-exporter_{{</span> <span class="pre">nginx_exporter_version</span> <span class="pre">}}_{{</span> <span class="pre">ansible_system</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}_{{</span> <span class="pre">_nginx_exporter_go_ansible_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -222,11 +206,27 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_config_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-config-dir"><strong>nginx_exporter_config_dir</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_config_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Path to directory with nginx_exporter configuration</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/etc/nginx_exporter&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_http_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-http-server-config"><strong>nginx_exporter_http_server_config</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_http_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Config for HTTP/2 support.</p>
 <p>Keys and values are the same as in <a class="reference external" href="https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md">nginx_exporter docs</a>.</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_local_cache_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-local-cache-path"><strong>nginx_exporter_local_cache_path</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_local_cache_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp/nginx_exporter-{{</span> <span class="pre">ansible_system</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_nginx_exporter_go_ansible_arch</span> <span class="pre">}}/{{</span> <span class="pre">nginx_exporter_version</span> <span class="pre">}}&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -266,18 +266,6 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_skip_install"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-skip-install"><strong>nginx_exporter_skip_install</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>nginx_exporter installation tasks gets skipped when set to true.</p>
-<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
-<ul class="simple">
-<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
-</ul>
-</div></td>
-</tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-system-group"><strong>nginx_exporter_system_group</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -286,7 +274,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;nginx-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-system-user"><strong>nginx_exporter_system_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -295,7 +283,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;nginx-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_tls_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-tls-server-config"><strong>nginx_exporter_tls_server_config</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_tls_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -303,7 +291,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>Keys and values are the same as in <a class="reference external" href="https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md">nginx_exporter docs</a>.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-version"><strong>nginx_exporter_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -311,7 +299,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;1.3.0&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-web-listen-address"><strong>nginx_exporter_web_listen_address</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -319,7 +307,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9113&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nginx_exporter_web_telemetry_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nginx-exporter-role-parameter-main-nginx-exporter-web-telemetry-path"><strong>nginx_exporter_web_telemetry_path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nginx_exporter_web_telemetry_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
