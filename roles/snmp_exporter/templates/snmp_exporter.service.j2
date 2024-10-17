@@ -8,7 +8,7 @@ Type=simple
 User=nobody
 Group={{ 'nogroup' if ansible_os_family == 'Debian' else 'nobody' }}
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/snmp_exporter \
+ExecStart={{ snmp_exporter_binary_install_dir }}/snmp_exporter \
 {% if snmp_exporter_version is version('0.21.0', '>=') and
       snmp_exporter_web_listen_address is iterable and
       snmp_exporter_web_listen_address is not mapping and
@@ -20,7 +20,7 @@ ExecStart=/usr/local/bin/snmp_exporter \
   --web.listen-address={{ snmp_exporter_web_listen_address }} \
 {% endif %}
   --log.level={{ snmp_exporter_log_level }} \
-  --config.file=/etc/snmp_exporter/snmp.yml
+  --config.file={{ snmp_exporter_config_dir }}/snmp.yml
 
 KillMode=process
 

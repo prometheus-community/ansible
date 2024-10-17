@@ -1,0 +1,58 @@
+---
+- name: "Validate invocation of _common role"
+  ansible.builtin.assert:
+    that:
+      - "ansible_parent_role_names is defined"
+      - "ansible_parent_role_names | default() | length > 0"
+    fail_msg: "Error: The '_common' role is a internal role and cannot be invoked directly."
+  tags:
+    - always
+
+- name: Install selinux python packages [RedHat]
+  ansible.builtin.package:
+    name: "{{ ['libselinux-python', 'policycoreutils-python']
+           if ansible_python_version is version('3', '<') else
+           ['python3-libselinux', 'python3-policycoreutils'] }}"
+    state: present
+  register: __common_install_selinux_packages
+  until: __common_install_selinux_packages is success
+  retries: 5
+  delay: 2
+  become: true
+  when: ansible_os_family | lower == "redhat"
+  tags:
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
+    - configure
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_configure"
+
+- name: Install selinux python packages [clearlinux]
+  ansible.builtin.package:
+    name: sysadmin-basic
+    state: present
+  register: __common_install_selinux_packages
+  until: __common_install_selinux_packages is success
+  retries: 5
+  delay: 2
+  become: true
+  when:
+    - ansible_distribution | lower == "clearlinux"
+  tags:
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
+    - configure
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_configure"
+
+- name: Allow port in SELinux
+  community.general.seport:
+    ports: "{{ _common_selinux_port }}"
+    proto: tcp
+    setype: http_port_t
+    state: present
+  become: true
+  when:
+    - ansible_version.full is version_compare('2.4', '>=')
+    - ansible_selinux.status == "enabled"
+    - (_common_selinux_port)
+  tags:
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
+    - configure
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_configure"

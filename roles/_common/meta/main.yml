@@ -1,0 +1,6 @@
+---
+galaxy_info:
+  author: "Prometheus Community"
+  description: "Internal role for common tasks shared between roles"
+  license: "Apache"
+  min_ansible_version: "2.9"

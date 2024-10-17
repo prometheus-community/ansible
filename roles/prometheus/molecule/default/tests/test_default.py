@@ -33,7 +33,6 @@ def test_directories(host, dirs):
     "/etc/prometheus/prometheus.yml",
     "/etc/prometheus/console_libraries/prom.lib",
     "/etc/prometheus/consoles/prometheus.html",
-    "/etc/prometheus/web.yml",
     "/etc/systemd/system/prometheus.service",
     "/usr/local/bin/prometheus",
     "/usr/local/bin/promtool"

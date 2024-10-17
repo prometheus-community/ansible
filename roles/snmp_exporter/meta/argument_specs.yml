@@ -11,18 +11,9 @@ argument_specs:
       snmp_exporter_version:
         description: "SNMP exporter package version. Also accepts latest as parameter."
         default: "0.26.0"
-      snmp_exporter_skip_install:
-        description: "SNMP exporter installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      snmp_exporter_binary_local_dir:
-        description:
-          - "Enables the use of local packages instead of those distributed on github."
-          - "The parameter masnmp set to a directory where the C(snmp_exporter) binary is stored on the host where ansible is run."
-          - "This overrides the I(snmp_exporter_version) parameter"
       snmp_exporter_binary_url:
         description: "URL of the snmp exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _snmp_exporter_repo }}/releases/download/v{{ snmp_exporter_version }}/snmp_exporter-{{ snmp_exporter_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
+        default: "https://github.com/{{ _snmp_exporter_repo }}/releases/download/v{{ snmp_exporter_version }}/snmp_exporter-{{ snmp_exporter_version }}.{{ ansible_system | lower }}-{{ _snmp_exporter_go_ansible_arch }}.tar.gz"
       snmp_exporter_checksums_url:
         description: "URL of the snmp exporter checksums file"
         default: "https://github.com/{{ _snmp_exporter_repo }}/releases/download/v{{ snmp_exporter_version }}/sha256sums.txt"
@@ -41,6 +32,19 @@ argument_specs:
           - "I(Advanced)"
           - "Directory to install snmp_exporter binary"
         default: "/usr/local/bin"
-      snmp_exporter_archive_path:
-        description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+      snmp_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "snmp_exporter system user"
+        default: snmp-exp
+      snmp_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for snmp_exporter"
+        default: snmp-exp
+      snmp_exporter_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/snmp_exporter-{{ ansible_system | lower }}-{{ _snmp_exporter_go_ansible_arch }}/{{ snmp_exporter_version }}"
+      snmp_exporter_config_dir:
+        description: "Path to directory with snmp_exporter configuration"
+        default: "/etc/snmp_exporter"

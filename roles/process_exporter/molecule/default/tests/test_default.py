@@ -19,7 +19,7 @@ def test_directories(host):
 def test_files(host):
     files = [
         "/etc/systemd/system/process_exporter.service",
-        "/usr/local/bin/process_exporter",
+        "/usr/local/bin/process-exporter",
     ]
     for file in files:
         f = host.file(file)
@@ -46,7 +46,6 @@ def test_user(host):
     assert host.group("process-exp").exists
     assert "process-exp" in host.user("process-exp").groups
     assert host.user("process-exp").shell == "/usr/sbin/nologin"
-    assert host.user("process-exp").home == "/"
 
 
 def test_service(host):

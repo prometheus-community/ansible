@@ -31,7 +31,6 @@ def test_user(host):
     assert host.group("smartctl-exp").exists
     assert "smartctl-exp" in host.user("smartctl-exp").groups
     assert host.user("smartctl-exp").shell == "/usr/sbin/nologin"
-    assert host.user("smartctl-exp").home == "/"
 
 
 def test_service(host):

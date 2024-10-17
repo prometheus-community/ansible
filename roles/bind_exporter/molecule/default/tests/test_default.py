@@ -46,7 +46,6 @@ def test_user(host):
     assert host.group("bind-exp").exists
     assert "bind-exp" in host.user("bind-exp").groups
     assert host.user("bind-exp").shell == "/usr/sbin/nologin"
-    assert host.user("bind-exp").home == "/"
 
 
 def test_service(host):

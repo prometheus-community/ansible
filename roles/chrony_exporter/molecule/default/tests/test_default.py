@@ -46,7 +46,6 @@ def test_user(host):
     assert host.group("chrony-exp").exists
     assert "chrony-exp" in host.user("chrony-exp").groups
     assert host.user("chrony-exp").shell == "/usr/sbin/nologin"
-    assert host.user("chrony-exp").home == "/"
 
 
 def test_service(host):

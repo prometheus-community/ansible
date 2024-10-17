@@ -1,10 +1,8 @@
 ---
 chrony_exporter_version: 0.10.1
-chrony_exporter_binary_local_dir: ""
 chrony_exporter_binary_url: "https://github.com/{{ _chrony_exporter_repo }}/releases/download/v{{ chrony_exporter_version }}/\
-                           chrony_exporter-{{ chrony_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+                             chrony_exporter-{{ chrony_exporter_version }}.{{ ansible_system | lower }}-{{ _chrony_exporter_go_ansible_arch }}.tar.gz"
 chrony_exporter_checksums_url: "https://github.com/{{ _chrony_exporter_repo }}/releases/download/v{{ chrony_exporter_version }}/sha256sums.txt"
-chrony_exporter_skip_install: false
 
 chrony_exporter_web_listen_address: "0.0.0.0:9123"
 chrony_exporter_web_telemetry_path: "/metrics"
@@ -21,9 +19,12 @@ chrony_exporter_enabled_collectors: []
 
 chrony_exporter_disabled_collectors: []
 
-chrony_exporter_binary_install_dir: "/usr/local/bin"
-chrony_exporter_system_group: "chrony-exp"
-chrony_exporter_system_user: "{{ chrony_exporter_system_group }}"
+chrony_exporter_system_user: "chrony-exp"
+chrony_exporter_system_group: "{{ chrony_exporter_system_user }}"
+
 
 # Local path to stash the archive and its extraction
-chrony_exporter_archive_path: /tmp
+chrony_exporter_local_cache_path: "/tmp/chrony_exporter-{{ ansible_system | lower }}-{{ _chrony_exporter_go_ansible_arch }}/{{ chrony_exporter_version }}"
+
+chrony_exporter_binary_install_dir: "/usr/local/bin"
+chrony_exporter_config_dir: "/etc/chrony_exporter"

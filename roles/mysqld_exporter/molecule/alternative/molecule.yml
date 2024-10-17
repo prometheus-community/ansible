@@ -5,7 +5,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        mysqld_exporter_binary_local_dir: "/tmp/mysqld_exporter-linux-amd64"
+        mysqld_exporter_local_cache_path: "/tmp/mysqld_exporter-linux-amd64"
         mysqld_exporter_web_listen_address:
           - '127.0.0.1:8080'
           - '127.0.1.1:8080'
@@ -20,8 +20,7 @@ provisioner:
           http2: true
         mysqld_exporter_basic_auth_users:
           randomuser: examplepassword
-        go_arch: amd64
         mysqld_exporter_version: 0.15.0
         mysqld_exporter_binary_url: "https://github.com/prometheus/mysqld_exporter/releases/download/v{{\
                                      \ mysqld_exporter_version }}/mysqld_exporter-{{ mysqld_exporter_version\
-                                     \ }}.linux-{{ go_arch }}.tar.gz"
+                                     \ }}.linux-amd64.tar.gz"

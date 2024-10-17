@@ -1,10 +1,8 @@
 ---
 pushgateway_version: 1.10.0
-pushgateway_binary_local_dir: ""
 pushgateway_binary_url: "https://github.com/{{ _pushgateway_repo }}/releases/download/v{{ pushgateway_version }}/\
-                           pushgateway-{{ pushgateway_version }}.linux-{{ go_arch }}.tar.gz"
+                         pushgateway-{{ pushgateway_version }}.{{ ansible_system | lower }}-{{ _pushgateway_go_ansible_arch }}.tar.gz"
 pushgateway_checksums_url: "https://github.com/{{ _pushgateway_repo }}/releases/download/v{{ pushgateway_version }}/sha256sums.txt"
-pushgateway_skip_install: false
 
 pushgateway_web_listen_address: "0.0.0.0:9091"
 pushgateway_web_telemetry_path: "/metrics"
@@ -18,6 +16,7 @@ pushgateway_basic_auth_users: {}
 pushgateway_binary_install_dir: "/usr/local/bin"
 pushgateway_system_group: "pushgateway"
 pushgateway_system_user: "{{ pushgateway_system_group }}"
+pushgateway_config_dir: "/etc/pushgateway"
 
 # Local path to stash the archive and its extraction
-pushgateway_archive_path: /tmp
+pushgateway_local_cache_path: "/tmp/pushgateway-{{ ansible_system | lower }}-{{ _pushgateway_go_ansible_arch }}/{{ pushgateway_version }}"

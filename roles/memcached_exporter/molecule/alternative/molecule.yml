@@ -5,7 +5,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        memcached_exporter_binary_local_dir: "/tmp/memcached_exporter-linux-amd64"
+        memcached_exporter_local_cache_path: "/tmp/memcached_exporter-linux-amd64"
         memcached_exporter_web_listen_address: "127.0.0.1:8080"
         memcached_exporter_tls_server_config:
           cert_file: /etc/memcached_exporter/tls.cert
@@ -14,8 +14,6 @@ provisioner:
           http2: true
         memcached_exporter_basic_auth_users:
           randomuser: examplepassword
-        go_arch: amd64
         memcached_exporter_version: 0.12.0
         memcached_exporter_binary_url: "https://github.com/prometheus/memcached_exporter/releases/download/v{{\
-                                        \ memcached_exporter_version }}/memcached_exporter-{{ memcached_exporter_version }}.linux-{{\
-                                        \ go_arch }}.tar.gz"
+                                        \ memcached_exporter_version }}/memcached_exporter-{{ memcached_exporter_version }}.linux-amd64.tar.gz"

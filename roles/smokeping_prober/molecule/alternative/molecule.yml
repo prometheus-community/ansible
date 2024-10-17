@@ -5,7 +5,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        smokeping_prober_binary_local_dir: "/tmp/smokeping_prober-linux-amd64"
+        smokeping_prober_local_cache_path: "/tmp/smokeping_prober-linux-amd64"
         smokeping_prober_web_listen_address:
           - '127.0.0.1:8080'
           - '127.0.1.1:8080'
@@ -16,9 +16,6 @@ provisioner:
           http2: true
         smokeping_prober_basic_auth_users:
           randomuser: examplepassword
-        go_arch: amd64
         smokeping_prober_version: 0.7.0
-        smokeping_prober_archive_path: /tmp
-        smokeping_archive_path: /tmp
         smokeping_prober_binary_url: "https://github.com/superq/smokeping_prober/releases/download/v{{ smokeping_prober_version\
-                                      \ }}/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
+                                      \ }}/smokeping_prober-{{ smokeping_prober_version }}.linux-amd64.tar.gz"

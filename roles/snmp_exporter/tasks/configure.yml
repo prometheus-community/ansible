@@ -1,33 +1,29 @@
 ---
-- name: Create configuration directory
-  ansible.builtin.file:
-    path: "/etc/snmp_exporter"
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-
-- name: Copy the SNMP Exporter systemd service file
-  ansible.builtin.template:
-    src: snmp_exporter.service.j2
-    dest: /etc/systemd/system/snmp_exporter.service
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - restart snmp_exporter
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ snmp_exporter_system_user }}"
+    _common_system_group: "{{ snmp_exporter_system_group }}"
+    _common_config_dir: "{{ snmp_exporter_config_dir }}"
+  tags:
+    - snmp_exporter
+    - configure
+    - snmp_exporter_configure
 
 - name: Copy configuration file
   ansible.builtin.template:
-    src: "{{ snmp_exporter_config_file | default(__snmp_exporter_config_file, true) }}"
-    dest: /etc/snmp_exporter/snmp.yml
+    src: "{{ snmp_exporter_config_file | default(snmp_exporter_local_cache_path ~ '/snmp.yml', true) }}"
+    dest: "{{ snmp_exporter_config_dir }}/snmp.yml"
     owner: root
     group: root
     mode: 0644
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   notify:
     - reload snmp_exporter
-  vars:
-    __snmp_exporter_config_file: "{{ (snmp_exporter_binary_local_dir) |
-                                  ternary(snmp_exporter_binary_local_dir ~ '/snmp.yml',
-                                  snmp_exporter_archive_path ~ '/snmp_exporter-' ~ snmp_exporter_version ~ '.linux-' ~  go_arch ~ '/snmp.yml') }}"
+  become: true
+  tags:
+    - snmp_exporter
+    - configure
+    - snmp_exporter_configure

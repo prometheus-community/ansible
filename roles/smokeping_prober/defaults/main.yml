@@ -1,10 +1,8 @@
 ---
 smokeping_prober_version: 0.8.1
-smokeping_prober_binary_local_dir: ""
 smokeping_prober_binary_url: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/\
-                           smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
+                           smokeping_prober-{{ smokeping_prober_version }}.{{ ansible_system | lower }}-{{ _smokeping_prober_go_ansible_arch }}.tar.gz"
 smokeping_prober_checksums_url: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/sha256sums.txt"
-smokeping_prober_skip_install: false
 
 smokeping_prober_web_listen_address: "0.0.0.0:9374"
 
@@ -34,4 +32,4 @@ smokeping_prober_system_group: "smokeping"
 smokeping_prober_system_user: "{{ smokeping_prober_system_group }}"
 
 # Local path to stash the archive and its extraction
-smokeping_archive_path: /tmp
+smokeping_prober_local_cache_path: "/tmp/smokeping_prober-{{ ansible_system | lower }}-{{ _smokeping_prober_go_ansible_arch }}/{{ smokeping_prober_version }}"

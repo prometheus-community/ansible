@@ -37,7 +37,7 @@ ExecStart={{ systemd_exporter_binary_install_dir }}/systemd_exporter \
     --systemd.collector.unit-exclude={{ systemd_exporter_unit_exclude }} \
 {% endif %}
 {% if systemd_exporter_tls_server_config | length > 0 %}
-    --web.config.file=/etc/systemd_exporter/config.yaml \
+    --web.config.file={{ systemd_exporter_config_dir }}/web_config.yml \
 {% endif %}
     --log.level={{ systemd_exporter_log_level }} \
     --web.listen-address={{ systemd_exporter_web_listen_address }}

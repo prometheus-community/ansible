@@ -11,22 +11,13 @@ argument_specs:
       nginx_exporter_version:
         description: "nginx_exporter package version. Also accepts latest as parameter."
         default: "1.3.0"
-      nginx_exporter_skip_install:
-        description: "nginx_exporter installation tasks gets skipped when set to true."
-        type: bool
-        default: false
       nginx_exporter_plus:
         description: "Start the exporter for NGINX Plus."
         type: bool
         default: false
-      nginx_exporter_binary_local_dir:
-        description:
-          - "Enables the use of local packages instead of those distributed on github."
-          - "The parameter may be set to a directory where the C(nginx_exporter) binary is stored on the host where ansible is run."
-          - "This overrides the I(nginx_exporter_version) parameter"
       nginx_exporter_binary_url:
         description: "URL of the nginx_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _nginx_exporter_repo }}/releases/download/v{{ nginx_exporter_version }}/nginx_exporter-{{ nginx_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _nginx_exporter_repo }}/releases/download/v{{ nginx_exporter_version }}/nginx-prometheus-exporter_{{ nginx_exporter_version }}_{{ ansible_system | lower }}_{{ _nginx_exporter_go_ansible_arch }}.tar.gz"
       nginx_exporter_checksums_url:
         description: "URL of the nginx_exporter checksums file"
         default: "https://github.com/{{ _nginx_exporter_repo }}/releases/download/v{{ nginx_exporter_version }}/nginx-prometheus-exporter_{{ nginx_exporter_version }}_checksums.txt"
@@ -73,6 +64,9 @@ argument_specs:
           - "I(Advanced)"
           - "nginx_exporter user"
         default: "nginx-exp"
-      nginx_exporter_archive_path:
-        description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+      nginx_exporter_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/nginx_exporter-{{ ansible_system | lower }}-{{ _nginx_exporter_go_ansible_arch }}/{{ nginx_exporter_version }}"
+      nginx_exporter_config_dir:
+        description: "Path to directory with nginx_exporter configuration"
+        default: "/etc/nginx_exporter"

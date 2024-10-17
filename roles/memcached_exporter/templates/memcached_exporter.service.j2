@@ -18,7 +18,7 @@ ExecStart={{ memcached_exporter_binary_install_dir }}/memcached_exporter \
     '--web.listen-address={{ memcached_exporter_web_listen_address }}' \
     '--web.telemetry-path={{ memcached_exporter_web_telemetry_path }}' \
 {% if memcached_exporter_tls_server_config | length > 0 or memcached_exporter_http_server_config | length > 0 or memcached_exporter_basic_auth_users | length > 0 %}
-    '--web.config.file=/etc/memcached_exporter/web_config.yaml' \
+    '--web.config.file={{ memcached_exporter_config_dir }}/web_config.yml' \
 {% endif %}
     '--log.level={{ memcached_exporter_log_level }}' \
     '--log.format={{ memcached_exporter_log_format }}'

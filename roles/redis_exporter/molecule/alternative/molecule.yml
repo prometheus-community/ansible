@@ -5,15 +5,13 @@ provisioner:
   inventory:
     group_vars:
       all:
-        redis_exporter_binary_local_dir: "/tmp/redis_exporter-linux-amd64"
+        redis_exporter_local_cache_path: "/tmp/redis_exporter-linux-amd64"
         redis_exporter_web_listen_address: "127.0.0.1:8080"
         redis_exporter_tls_server_config:
           cert_file: /etc/redis_exporter/tls.cert
           key_file: /etc/redis_exporter/tls.key
         redis_exporter_tls_server_cert_file: "{{ redis_exporter_tls_server_config.cert_file }}"
         redis_exporter_tls_server_key_file: "{{ redis_exporter_tls_server_config.key_file }}"
-        go_arch: amd64
         redis_exporter_version: 1.58.0
         redis_exporter_binary_url: "https://github.com/oliver006/redis_exporter/releases/download/v{{\
-                                    \ redis_exporter_version }}/redis_exporter-v{{ redis_exporter_version }}.linux-{{\
-                                    \ go_arch }}.tar.gz"
+                                    \ redis_exporter_version }}/redis_exporter-v{{ redis_exporter_version }}.linux-amd64.tar.gz"

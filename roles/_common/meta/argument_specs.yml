@@ -1,0 +1,91 @@
+---
+argument_specs:
+  configure:
+    short_description: "Internal only - common configuration tasks"
+    description: "Internal only - selinux requirements"
+    author:
+      - "Prometheus Community"
+    options:
+      _common_service_name:
+        description:
+          - "Name of the system service (systemd)"
+          - "Usually matches the role name"
+        default: "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
+      _common_config_dir:
+        description: "Path to directory to install configuration."
+        default: ""
+      _common_system_user:
+        description: "System user for running the service."
+        default: ""
+      _common_system_group:
+        description: "User group for the system user."
+        default: ""
+      _common_tls_server_config:
+        description: "Configuration for TLS authentication."
+        default: ""
+      _common_http_server_config:
+        description: "Configuration for HTTP/2 support."
+        default: ""
+      _common_common_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        default: ""
+  install:
+    short_description: "Internal only - common installation tasks"
+    description: "Internal only - selinux requirements"
+    author:
+      - "Prometheus Community"
+    options:
+      _common_binaries:
+        description: "List of binaries to install"
+        default: []
+        type: "list"
+        elements: "str"
+      _common_binary_install_dir:
+        description: "Directory to install binaries"
+        default: ""
+      _common_binary_name:
+        description: "Name of main binary"
+        default: "{{ __common_binary_basename }}"
+      _common_binary_unarchive_opts:
+        description: "Extra options to pass to binary unarchive task"
+        default: []
+        type: "list"
+        elements: "str"
+      _common_binary_url:
+        description: "URL of the binaries to install"
+        default: ""
+      _common_checksums_url:
+        description: "URL of the checksums file for the binaries"
+        default: ""
+      _common_config_dir:
+        description: "Path to the configuration dir"
+        default: ""
+      _common_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: ""
+      _common_system_user:
+        description: "System user for running the service."
+        default: ""
+      _common_system_group:
+        description: "User group for the system user."
+        default: ""
+  preflight:
+    short_description: "Internal only - common preflight tasks"
+    description: "Internal only - selinux requirements"
+    author:
+      - "Prometheus Community"
+    options:
+      _common_dependencies:
+        description: "Package dependencies to install"
+        default: "{% if (ansible_pkg_mgr == 'apt') %}\
+                  {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
+                  {% else %}\
+                  {% endif %}"
+  selinux:
+    short_description: "Internal only - common selinux configuration tasks"
+    description: "Internal only - selinux requirements"
+    author:
+      - "Prometheus Community"
+    options:
+      _common_selinux_port:
+        description: "Port to allow in SELinux"

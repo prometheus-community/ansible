@@ -1,10 +1,8 @@
 ---
 node_exporter_version: 1.8.2
-node_exporter_binary_local_dir: ""
 node_exporter_binary_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/\
-                           node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+                           node_exporter-{{ node_exporter_version }}.{{ ansible_system | lower }}-{{ _node_exporter_go_ansible_arch }}.tar.gz"
 node_exporter_checksums_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/sha256sums.txt"
-node_exporter_skip_install: false
 
 node_exporter_web_disable_exporter_metrics: false
 node_exporter_web_listen_address: "0.0.0.0:9100"
@@ -32,5 +30,6 @@ node_exporter_binary_install_dir: "/usr/local/bin"
 node_exporter_system_group: "node-exp"
 node_exporter_system_user: "{{ node_exporter_system_group }}"
 
+node_exporter_config_dir: "/etc/node_exporter"
 # Local path to stash the archive and its extraction
-node_exporter_archive_path: /tmp
+node_exporter_local_cache_path: "/tmp/node_exporter-{{ ansible_system | lower }}-{{ _node_exporter_go_ansible_arch }}/{{ node_exporter_version }}"

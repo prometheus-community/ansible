@@ -11,18 +11,9 @@ argument_specs:
       cadvisor_version:
         description: "cAdvisor package version. Also accepts latest as parameter."
         default: "0.49.1"
-      cadvisor_skip_install:
-        description: "cAdvisor installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      cadvisor_binary_local_dir:
-        description:
-          - "Enables the use of local packages instead of those distributed on github."
-          - "The parameter may be set to a directory where the C(cadvisor) binary is stored on the host where ansible is run."
-          - "This overrides the I(cadvisor_version) parameter"
       cadvisor_binary_url:
         description: "URL of the cadvisor binary file"
-        default: "https://github.com/{{ _cadvisor_repo }}/releases/download/v{{ cadvisor_version }}/cadvisor-{{ cadvisor_version }}-linux-{{ go_arch }}"
+        default: "https://github.com/{{ _cadvisor_repo }}/releases/download/v{{ cadvisor_version }}/cadvisor-v{{ cadvisor_version }}-{{ ansible_system | lower }}-{{ _cadvisor_go_ansible_arch }}"
       cadvisor_listen_ip:
         description: "Address on which cadvisor will listen"
         default: "0.0.0.0"
@@ -80,11 +71,6 @@ argument_specs:
         description: "do not report raw cgroup metrics, except the root cgroup"
         type: "bool"
         default: false
-      cadvisor_binary_install_dir:
-        description:
-          - "I(Advanced)"
-          - "Directory to install cadvisor binary"
-        default: "/usr/local/bin"
       cadvisor_system_group:
         description:
           - "I(Advanced)"
@@ -95,6 +81,11 @@ argument_specs:
           - "I(Advanced)"
           - "cAdvisor user"
         default: "root"
-      cadvisor_archive_path:
+      cadvisor_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install binaries"
+        default: "/usr/local/bin"
+      cadvisor_local_cache_path:
         description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+        default: "/tmp/cadvisor-{{ ansible_system | lower }}-{{ _cadvisor_go_ansible_arch }}/{{ cadvisor_version }}"

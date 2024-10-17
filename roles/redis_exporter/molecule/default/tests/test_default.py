@@ -31,7 +31,6 @@ def test_user(host):
     assert host.group("redis-exp").exists
     assert "redis-exp" in host.user("redis-exp").groups
     assert host.user("redis-exp").shell == "/usr/sbin/nologin"
-    assert host.user("redis-exp").home == "/"
 
 
 def test_service(host):

@@ -1,10 +1,8 @@
 ---
 redis_exporter_version: 1.63.0
-redis_exporter_binary_local_dir: ""
 redis_exporter_binary_url: "https://github.com/{{ _redis_exporter_repo }}/releases/download/v{{ redis_exporter_version }}/\
-                           redis_exporter-v{{ redis_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+                           redis_exporter-v{{ redis_exporter_version }}.{{ ansible_system | lower }}-{{ _redis_exporter_go_ansible_arch }}.tar.gz"
 redis_exporter_checksums_url: "https://github.com/{{ _redis_exporter_repo }}/releases/download/v{{ redis_exporter_version }}/sha256sums.txt"
-redis_exporter_skip_install: false
 
 # https://github.com/oliver006/redis_exporter?tab=readme-ov-file#command-line-flags
 redis_exporter_addr: "redis://localhost:6379"
@@ -49,6 +47,7 @@ redis_exporter_config_command: "CONFIG"
 redis_exporter_binary_install_dir: "/usr/local/bin"
 redis_exporter_system_group: "redis-exp"
 redis_exporter_system_user: "{{ redis_exporter_system_group }}"
+redis_exporter_config_dir: "/etc/redis_exporter"
 
 # Local path to stash the archive and its extraction
-redis_exporter_archive_path: /tmp
+redis_exporter_local_cache_path: "/tmp/redis_exporter-{{ ansible_system | lower }}-{{ _redis_exporter_go_ansible_arch }}/{{ redis_exporter_version }}"

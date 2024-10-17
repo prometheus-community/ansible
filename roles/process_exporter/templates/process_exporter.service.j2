@@ -8,12 +8,12 @@ After=network-online.target
 Type=simple
 User={{ process_exporter_system_user }}
 Group={{ process_exporter_system_group }}
-ExecStart={{ process_exporter_binary_install_dir }}/process_exporter \
+ExecStart={{ process_exporter_binary_install_dir }}/process-exporter \
 {% if process_exporter_names != [] -%}
-    '--config.path=/etc/process_exporter/config.yml' \
+    '--config.path={{ process_exporter_config_dir }}/config.yml' \
 {% endif -%}
 {% if process_exporter_tls_server_config | length > 0 or process_exporter_http_server_config | length > 0 or process_exporter_basic_auth_users | length > 0 %}
-    '--web.config.file=/etc/process_exporter/web_config.yml' \
+    '--web.config.file={{ process_exporter_config_dir }}/web_config.yml' \
 {% endif %}
     '--web.listen-address={{ process_exporter_web_listen_address }}' \
     '--web.telemetry-path={{ process_exporter_web_telemetry_path }}'

@@ -11,18 +11,9 @@ argument_specs:
       smokeping_prober_version:
         description: "Smokeping Prober package version. Also accepts latest as parameter."
         default: "0.8.1"
-      smokeping_prober_skip_install:
-        description: "Smokeping Prober installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      smokeping_prober_binary_local_dir:
-        description:
-          - "Enables the use of local packages instead of those distributed on github."
-          - "The parameter may be set to a directory where the C(smokeping_prober) binary is stored on the host where ansible is run."
-          - "This overrides the I(smokeping_prober_version) parameter"
       smokeping_prober_binary_url:
         description: "URL of the Smokeping Prober binaries .tar.gz file"
-        default: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/smokeping_prober-{{ smokeping_prober_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/smokeping_prober-{{ smokeping_prober_version }}.{{ ansible_system | lower }}-{{ _smokeping_prober_go_ansible_arch }}.tar.gz"
       smokeping_prober_checksums_url:
         description: "URL of the Smokeping Prober checksums file"
         default: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/sha256sums.txt"
@@ -30,7 +21,7 @@ argument_specs:
         description: "Address on which Smokeping Prober will listen"
         default: "0.0.0.0:9374"
       smokeping_prober_config_dir:
-        description: "The directory of the smokeping_prober probes config files"
+        description: "Path to directory with smokeping_prober configuration"
         default: "/etc/smokeping_prober"
       smokeping_prober_config_file:
         description: "The filename of the smokeping_prober probes config file"
@@ -66,6 +57,6 @@ argument_specs:
           - "I(Advanced)"
           - "Smokeping Prober user"
         default: "smokeping"
-      smokeping_archive_path:
-        description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+      smokeping_prober_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/smokeping_prober-{{ ansible_system | lower }}-{{ _smokeping_prober_go_ansible_arch }}/{{ smokeping_prober_version }}"

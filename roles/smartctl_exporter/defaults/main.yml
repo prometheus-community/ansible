@@ -1,10 +1,8 @@
 ---
 smartctl_exporter_version: 0.12.0
-smartctl_exporter_binary_local_dir: ""
 smartctl_exporter_binary_url: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/\
-                           smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+                           smartctl_exporter-{{ smartctl_exporter_version }}.{{ ansible_system | lower }}-{{ _smartctl_exporter_go_ansible_arch }}.tar.gz"
 smartctl_exporter_checksums_url: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/sha256sums.txt"
-smartctl_exporter_skip_install: false
 
 smartctl_exporter_smartctl_path: "/usr/sbin/smartctl"
 smartctl_exporter_smartctl_interval: "60s"
@@ -28,6 +26,7 @@ smartctl_exporter_log_format: "logfmt"
 smartctl_exporter_binary_install_dir: "/usr/local/bin"
 smartctl_exporter_system_group: "smartctl-exp"
 smartctl_exporter_system_user: "{{ smartctl_exporter_system_group }}"
+smartctl_exporter_config_dir: "/etc/smartctl_exporter"
 
 # Local path to stash the archive and its extraction
-smartctl_exporter_archive_path: /tmp
+smartctl_exporter_local_cache_path: "/tmp/smartctl_exporter-{{ ansible_system | lower }}-{{ _smartctl_exporter_go_ansible_arch }}/{{ smartctl_exporter_version }}"

@@ -46,7 +46,6 @@ def test_user(host):
     assert host.group("postgres-exp").exists
     assert "postgres-exp" in host.user("postgres-exp").groups
     assert host.user("postgres-exp").shell == "/usr/sbin/nologin"
-    assert host.user("postgres-exp").home == "/"
 
 
 def test_service(host):

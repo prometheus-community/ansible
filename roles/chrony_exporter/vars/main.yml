@@ -1,11 +1,10 @@
 ---
-go_arch_map:
-  i386: '386'
-  x86_64: 'amd64'
-  aarch64: 'arm64'
-  armv7l: 'armv7'
-  armv6l: 'armv6'
-
-go_arch: "{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
+_chrony_exporter_go_ansible_arch: "{{ {'i386': '386',
+                                   'x86_64': 'amd64',
+                                   'aarch64': 'arm64',
+                                   'armv7l': 'armv7',
+                                   'armv6l': 'armv6'}.get(ansible_architecture, ansible_architecture) }}"
 _chrony_exporter_repo: "superq/chrony_exporter"
 _github_api_headers: "{{ {'GITHUB_TOKEN': lookup('ansible.builtin.env', 'GITHUB_TOKEN')} if (lookup('ansible.builtin.env', 'GITHUB_TOKEN')) else {} }}"
+chrony_exporter_binary_install_dir: "/usr/local/bin"
+_chrony_exporter_binaries: ['chrony_exporter']

@@ -5,7 +5,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        ipmi_exporter_binary_local_dir: "/tmp/ipmi_exporter-linux-amd64"
+        ipmi_exporter_local_cache_path: "/tmp/ipmi_exporter-linux-amd64"
         ipmi_exporter_web_listen_address: "127.0.0.1:8080"
         ipmi_exporter_tls_server_config:
           cert_file: /etc/ipmi_exporter/tls.cert
@@ -14,8 +14,6 @@ provisioner:
           http2: true
         ipmi_exporter_basic_auth_users:
           randomuser: examplepassword
-        go_arch: amd64
         ipmi_exporter_version: 1.6.1
         ipmi_exporter_binary_url: "https://github.com/prometheus-community/ipmi_exporter/releases/download/v{{\
-                                   \ ipmi_exporter_version }}/ipmi_exporter-{{ ipmi_exporter_version }}.linux-{{\
-                                   \ go_arch }}.tar.gz"
+                                   \ ipmi_exporter_version }}/ipmi_exporter-{{ ipmi_exporter_version }}.linux-amd64.tar.gz"

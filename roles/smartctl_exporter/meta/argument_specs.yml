@@ -11,18 +11,9 @@ argument_specs:
       smartctl_exporter_version:
         description: "Smartctl exporter package version. Also accepts latest as parameter."
         default: "0.12.0"
-      smartctl_exporter_skip_install:
-        description: "Smartctl exporter installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      smartctl_exporter_binary_local_dir:
-        description:
-          - "Enables the use of local packages instead of those distributed on github."
-          - "The parameter may be set to a directory where the C(smartctl_exporter) binary is stored on the host where ansible is run."
-          - "This overrides the I(smartctl_exporter_version) parameter"
       smartctl_exporter_binary_url:
         description: "URL of the Smartctl exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/smartctl_exporter-{{ smartctl_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/smartctl_exporter-{{ smartctl_exporter_version }}.{{ ansible_system | lower }}-{{ _smartctl_exporter_go_ansible_arch }}.tar.gz"
       smartctl_exporter_checksums_url:
         description: "URL of the Smartctl exporter checksums file"
         default: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/sha256sums.txt"
@@ -90,6 +81,9 @@ argument_specs:
           - "I(Advanced)"
           - "Smartctl exporter user"
         default: "smartctl-exp"
-      smartctl_exporter_archive_path:
-        description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+      smartctl_exporter_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/smartctl_exporter-{{ ansible_system | lower }}-{{ _smartctl_exporter_go_ansible_arch }}/{{ smartctl_exporter_version }}"
+      smartctl_exporter_config_dir:
+        description: "Path to directory with smartctl_exporter configuration"
+        default: "/etc/smartctl_exporter"

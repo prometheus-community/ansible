@@ -5,9 +5,8 @@ provisioner:
   inventory:
     group_vars:
       all:
-        systemd_exporter_binary_local_dir: "/tmp/systemd_exporter-linux-amd64"
+        systemd_exporter_local_cache_path: "/tmp/systemd_exporter-linux-amd64"
         systemd_exporter_web_listen_address: "127.0.0.1:9000"
-        go_arch: amd64
         systemd_exporter_version: 0.5.0
         systemd_exporter_tls_server_config:
           cert_file: /etc/systemd_exporter/tls.cert
@@ -15,4 +14,4 @@ provisioner:
         systemd_exporter_enable_file_descriptor_size: true
         systemd_exporter_binary_url: "https://github.com/prometheus-community/systemd_exporter/releases/download/v{{\
                                       \ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version\
-                                      \ }}.linux-{{ go_arch }}.tar.gz"
+                                      \ }}.linux-amd64.tar.gz"

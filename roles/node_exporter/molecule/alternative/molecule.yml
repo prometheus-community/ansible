@@ -5,7 +5,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        node_exporter_binary_local_dir: "/tmp/node_exporter-linux-amd64"
+        node_exporter_local_cache_path: "/tmp/node_exporter-linux-amd64"
         node_exporter_web_listen_address:
           - '127.0.0.1:8080'
           - '127.0.1.1:8080'
@@ -21,8 +21,6 @@ provisioner:
           http2: true
         node_exporter_basic_auth_users:
           randomuser: examplepassword
-        go_arch: amd64
         node_exporter_version: 1.5.0
         node_exporter_binary_url: "https://github.com/prometheus/node_exporter/releases/download/v{{\
-                                   \ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-{{\
-                                   \ go_arch }}.tar.gz"
+                                   \ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz"

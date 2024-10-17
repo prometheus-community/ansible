@@ -7,8 +7,8 @@ StartLimitIntervalSec=0
 
 [Service]
 Type=simple
-User={{ blackbox_exporter_user }}
-Group={{ blackbox_exporter_group }}
+User={{ blackbox_exporter_system_user }}
+Group={{ blackbox_exporter_system_group }}
 PermissionsStartOnly=true
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart={{ blackbox_exporter_binary_install_dir }}/blackbox_exporter \

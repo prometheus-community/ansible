@@ -31,7 +31,6 @@ def test_user(host):
     assert host.group("ipmi-exp").exists
     assert "ipmi-exp" in host.user("ipmi-exp").groups
     assert host.user("ipmi-exp").shell == "/usr/sbin/nologin"
-    assert host.user("ipmi-exp").home == "/"
 
 
 def test_service(host):

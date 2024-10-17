@@ -1,10 +1,8 @@
 ---
 mysqld_exporter_version: 0.15.1
-mysqld_exporter_binary_local_dir: ""
 mysqld_exporter_binary_url: "https://github.com/{{ _mysqld_exporter_repo }}/releases/download/v{{ mysqld_exporter_version }}/\
-                           mysqld_exporter-{{ mysqld_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+                           mysqld_exporter-{{ mysqld_exporter_version }}.{{ ansible_system | lower }}-{{ _mysqld_exporter_go_ansible_arch }}.tar.gz"
 mysqld_exporter_checksums_url: "https://github.com/{{ _mysqld_exporter_repo }}/releases/download/v{{ mysqld_exporter_version }}/sha256sums.txt"
-mysqld_exporter_skip_install: false
 
 mysqld_exporter_web_listen_address: "0.0.0.0:9104"
 mysqld_exporter_web_telemetry_path: "/metrics"
@@ -36,4 +34,4 @@ mysqld_exporter_system_group: "mysqld-exp"
 mysqld_exporter_system_user: "{{ mysqld_exporter_system_group }}"
 
 # Local path to stash the archive and its extraction
-mysqld_exporter_archive_path: /tmp
+mysqld_exporter_local_cache_path: "/tmp/mysqld_exporter-{{ ansible_system | lower }}-{{ _mysqld_exporter_go_ansible_arch }}/{{ mysqld_exporter_version }}"

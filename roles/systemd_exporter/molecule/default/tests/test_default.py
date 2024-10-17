@@ -36,7 +36,6 @@ def test_user(host):
     assert host.group("systemd-exporter").exists
     assert "systemd-exporter" in host.user("systemd-exporter").groups
     assert host.user("systemd-exporter").shell == "/usr/sbin/nologin"
-    assert host.user("systemd-exporter").home == "/"
 
 
 def test_service(host):

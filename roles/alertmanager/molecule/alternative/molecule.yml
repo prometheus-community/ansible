@@ -5,7 +5,8 @@ provisioner:
   inventory:
     group_vars:
       all:
-        alertmanager_binary_local_dir: '/tmp/alertmanager-linux-amd64'
+        alertmanager_version: 0.25.0
+        alertmanager_local_cache_path: "/tmp/alertmanager-linux-amd64/{{ alertmanager_version }}"
         alertmanager_config_dir: /opt/am/etc
         alertmanager_db_dir: /opt/am/lib
         alertmanager_web_listen_address:
@@ -35,6 +36,5 @@ provisioner:
           peers:
             - "127.0.0.1:6783"
             - "alertmanager.demo.do.prometheus.io:6783"
-        alertmanager_version: 0.25.0
         alertmanager_binary_url: "https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version\
                                   \ }}/alertmanager-{{ alertmanager_version }}.linux-amd64.tar.gz"

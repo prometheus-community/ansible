@@ -1,16 +1,13 @@
 ---
-go_arch_map:
-  i386: '386'
-  x86_64: 'amd64'
-  aarch64: 'arm64'
-  armv7l: 'armv7'
-  armv6l: 'armv6'
-
-go_arch: "{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
+_prometheus_go_ansible_arch: "{{ {'i386': '386',
+                              'x86_64': 'amd64',
+                              'aarch64': 'arm64',
+                              'armv7l': 'armv7',
+                              'armv6l': 'armv6'}.get(ansible_architecture, ansible_architecture) }}"
 _prometheus_binary_install_dir: '/usr/local/bin'
 
-_prometheus_selinux_packages: "{{ ['libselinux-python', 'policycoreutils-python']
-                               if ansible_python_version is version('3', '<') else
-                               ['python3-libselinux', 'python3-policycoreutils'] }}"
 _prometheus_repo: "prometheus/prometheus"
 _github_api_headers: "{{ {'GITHUB_TOKEN': lookup('ansible.builtin.env', 'GITHUB_TOKEN')} if (lookup('ansible.builtin.env', 'GITHUB_TOKEN')) else {} }}"
+_prometheus_binaries:
+  - prometheus
+  - promtool
