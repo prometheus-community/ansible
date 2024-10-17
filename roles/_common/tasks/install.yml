@@ -8,13 +8,24 @@
   tags:
     - always
 
+- name: "Gather system user and group facts"
+  ansible.builtin.getent:
+    database: "{{ item }}"
+  loop:
+    - passwd
+    - group
+  tags:
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
+    - install
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_install"
+
 - name: "Create system group {{ _common_system_group }}"
   ansible.builtin.group:
     name: "{{ _common_system_group }}"
     system: true
     state: present
   become: true
-  when: _common_system_group != "root"
+  when: _common_system_group not in ansible_facts.getent_group
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - install
@@ -29,7 +40,7 @@
     home: "{{ _common_config_dir | default('/') }}"
     create_home: false
   become: true
-  when: _common_system_user != "root"
+  when: _common_system_user not in ansible_facts.getent_passwd
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - install
