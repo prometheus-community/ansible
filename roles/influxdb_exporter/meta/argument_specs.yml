@@ -11,10 +11,6 @@ argument_specs:
       influxdb_exporter_version:
         description: "influxdb exporter package version. Also accepts latest as parameter."
         default: "0.11.5"
-      influxdb_exporter_skip_install:
-        description: "influxdb exporter installation tasks gets skipped when set to true."
-        type: bool
-        default: false
       influxdb_exporter_binary_url:
         description: "URL of the influxdb exporter binaries .tar.gz file"
         default: "https://github.com/{{ _influxdb_exporter_repo }}/releases/download/v{{ influxdb_exporter_version }}/influxdb_exporter-{{ influxdb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
