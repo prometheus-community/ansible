@@ -36,7 +36,7 @@ def test_user(host):
     assert host.group("influxdb-exp").exists
     assert "influxdb-exp" in host.user("influxdb-exp").groups
     assert host.user("influxdb-exp").shell == "/usr/sbin/nologin"
-    assert host.user("influxdb-exp").home == "/"
+    assert host.user("influxdb-exp").home == "/etc/influxdb_exporter"
 
 
 def test_service(host):
