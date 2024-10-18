@@ -1,0 +1,19 @@
+---
+nvidia_gpu_exporter_version: 1.2.0
+
+nvidia_gpu_exporter_binary_url: "https://github.com/{{ _nvidia_gpu_exporter_repo }}/releases/download/v{{ nvidia_gpu_exporter_version }}/\
+                           nvidia_gpu_exporter_{{ nvidia_gpu_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+nvidia_gpu_exporter_checksums_url: "https://github.com/{{ _nvidia_gpu_exporter_repo }}/releases/download/v{{ nvidia_gpu_exporter_version }}/checksums.txt"
+
+nvidia_gpu_exporter_skip_install: false
+
+nvidia_gpu_exporter_web_disable_exporter_metrics: false
+nvidia_gpu_exporter_web_listen_address: "0.0.0.0:9100"
+nvidia_gpu_exporter_web_telemetry_path: "/metrics"
+
+nvidia_gpu_exporter_binary_install_dir: "/usr/local/bin"
+nvidia_gpu_exporter_system_group: "nvidia-gpu-exp"
+nvidia_gpu_exporter_system_user: "{{ nvidia_gpu_exporter_system_group }}"
+
+# Local path to stash the archive and its extraction
+nvidia_gpu_exporter_archive_path: /tmp
