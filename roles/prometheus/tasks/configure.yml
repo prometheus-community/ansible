@@ -38,7 +38,7 @@
   loop:
     - "{{ prometheus_config_dir }}/rules"
     - "{{ prometheus_config_dir }}/file_sd"
-    - "{{ prometheus_config_dir }}/scrapes"
+    - "{{ prometheus_config_dir }}/scrape_configs"
   become: true
   tags:
     - prometheus
@@ -135,6 +135,8 @@
     - prometheus
     - configure
     - prometheus_configure
+  notify:
+    - reload prometheus
 
 - name: Copy prometheus custom static targets
   ansible.builtin.copy:
@@ -150,11 +152,13 @@
     - prometheus
     - configure
     - prometheus_configure
+  notify:
+    - reload prometheus
 
 - name: Copy prometheus scrape config files
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ prometheus_config_dir }}/scrapes/"
+    dest: "{{ prometheus_config_dir }}/scrape_configs/"
     force: true
     owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
@@ -165,3 +169,10 @@
     - prometheus
     - configure
     - prometheus_configure
+  notify:
+    - reload prometheus
+
+- name: Remove "scrapes" folder replaced by "scrape_configs"
+  ansible.builtin.file:
+    path: "{{ prometheus_config_dir }}/scrapes"
+    state: absent
