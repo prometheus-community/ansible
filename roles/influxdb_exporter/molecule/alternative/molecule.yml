@@ -5,7 +5,6 @@ provisioner:
   inventory:
     group_vars:
       all:
-        influxdb_exporter_binary_local_dir: "/tmp/influxdb_exporter-linux-amd64"
         influxdb_exporter_web_listen_address: '127.0.0.1:8080'
 
         go_arch: amd64

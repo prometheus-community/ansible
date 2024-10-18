@@ -15,11 +15,6 @@ argument_specs:
         description: "influxdb exporter installation tasks gets skipped when set to true."
         type: bool
         default: false
-      influxdb_exporter_binary_local_dir:
-        description:
-          - "Enables the use of local packages instead of those distributed on github."
-          - "The parameter may be set to a directory where the C(influxdb_exporter) binary is stored on the host where ansible is run."
-          - "This overrides the I(influxdb_exporter_version) parameter"
       influxdb_exporter_binary_url:
         description: "URL of the influxdb exporter binaries .tar.gz file"
         default: "https://github.com/{{ _influxdb_exporter_repo }}/releases/download/v{{ influxdb_exporter_version }}/influxdb_exporter-{{ influxdb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
