@@ -12,6 +12,11 @@ Removed Features (previously deprecated)
 
 - removed: CentOS Stream and Fedora from being officially supported (https://github.com/prometheus-community/ansible/pull/432)
 
+Bugfixes
+--------
+
+- fix: add check_mode in localhost binary cache task (https://github.com/prometheus-community/ansible/pull/431)
+
 v0.20.1
 =======
 
