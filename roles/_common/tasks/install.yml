@@ -53,6 +53,7 @@
     mode: 0755
   delegate_to: localhost
   check_mode: false
+  become: false
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - install
@@ -67,6 +68,7 @@
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_install"
     - download
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_download"
+  become: false
   block:
     - name: "Get checksum list for {{ __common_binary_basename }}"
       ansible.builtin.set_fact:
