@@ -53,6 +53,7 @@
     mode: 0755
   delegate_to: localhost
   check_mode: false
+  changed_when: false
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - install
@@ -90,6 +91,7 @@
       # run_once: true  # <-- this can't be set due to multi-arch support
       delegate_to: localhost
       check_mode: false
+      changed_when: false
 
     - name: "Unpack binary archive {{ __common_binary_basename }}"
       ansible.builtin.unarchive:
@@ -101,6 +103,7 @@
       register: __common_unpack
       delegate_to: localhost
       check_mode: false
+      changed_when: false
       when: __common_binary_basename is search('\.zip$|\.tar\.gz$')
 
 - name: "Propagate binaries"
