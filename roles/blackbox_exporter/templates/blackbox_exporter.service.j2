@@ -13,6 +13,9 @@ PermissionsStartOnly=true
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart={{ blackbox_exporter_binary_install_dir }}/blackbox_exporter \
   --config.file={{ blackbox_exporter_config_dir }}/blackbox_exporter.yml \
+{% if blackbox_exporter_web_config.values() | map('length') | select('gt', 0) | list is any %}
+  --web.config.file={{ blackbox_exporter_config_dir }}/web_config.yml \
+{% endif %}
   {% for flag, flag_value in blackbox_exporter_cli_flags.items() -%}
   --{{ flag }}={{ flag_value }} \
   {% endfor -%}
