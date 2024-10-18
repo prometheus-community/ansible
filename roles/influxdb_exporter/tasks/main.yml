@@ -23,6 +23,7 @@
     _common_checksums_url: "{{ influxdb_exporter_checksums_url }}"
     _common_system_group: "{{ influxdb_exporter_system_group }}"
     _common_system_user: "{{ influxdb_exporter_system_user }}"
+    _common_config_dir: "{{ influxdb_exporter_config_dir }}"
     _common_binary_unarchive_opts: ['--strip-components=1']
   tags:
     - influxdb_exporter
