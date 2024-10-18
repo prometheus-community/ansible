@@ -1,0 +1,69 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+  tags:
+    - influxdb_exporter
+    - install
+    - configure
+    - run
+    - influxdb_exporter_install
+    - influxdb_exporter_configure
+    - influxdb_exporter_run
+
+- name: Install
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: install.yml
+  vars:
+    _common_local_cache_path: "{{ influxdb_exporter_local_cache_path }}"
+    _common_binaries: "{{ _influxdb_exporter_binaries }}"
+    _common_binary_install_dir: "{{ influxdb_exporter_binary_install_dir }}"
+    _common_binary_url: "{{ influxdb_exporter_binary_url }}"
+    _common_checksums_url: "{{ influxdb_exporter_checksums_url }}"
+    _common_system_group: "{{ influxdb_exporter_system_group }}"
+    _common_system_user: "{{ influxdb_exporter_system_user }}"
+    _common_config_dir: "{{ influxdb_exporter_config_dir }}"
+    _common_binary_unarchive_opts: ['--strip-components=1']
+  tags:
+    - influxdb_exporter
+    - install
+    - influxdb_exporter_install
+
+- name: SELinux
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ influxdb_exporter_web_listen_address | urlsplit('port') }}"
+  when: ansible_selinux.status == "enabled"
+  tags:
+    - influxdb_exporter
+    - configure
+    - influxdb_exporter_configure
+
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ influxdb_exporter_system_user }}"
+    _common_system_group: "{{ influxdb_exporter_system_group }}"
+  tags:
+    - influxdb_exporter
+    - configure
+    - influxdb_exporter_configure
+
+- name: Ensure Influxdb Exporter is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: influxdb_exporter
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - influxdb_exporter
+    - run
+    - influxdb_exporter_run

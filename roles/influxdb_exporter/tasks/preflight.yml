@@ -1,0 +1,48 @@
+---
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
+  tags:
+    - influxdb_exporter
+    - preflight
+    - influxdb_exporter_preflight
+
+- name: Assert usage of systemd as an init system
+  ansible.builtin.assert:
+    that: ansible_service_mgr == 'systemd'
+    msg: "This role only works with systemd"
+  tags:
+    - influxdb_exporter
+    - preflight
+    - influxdb_exporter_preflight
+
+- name: Naive assertion of proper listen address
+  ansible.builtin.assert:
+    that:
+      - >-
+        [influxdb_exporter_web_listen_address] |
+          flatten |
+          reject('match', '.+:\\d+$') |
+          list |
+          length == 0
+  tags:
+    - influxdb_exporter
+    - preflight
+    - influxdb_exporter_preflight
+
+- name: Discover latest version
+  ansible.builtin.set_fact:
+    influxdb_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _influxdb_exporter_repo }}/releases/latest', headers=_influxdb_exporter_github_api_headers,
+                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+  run_once: true
+  until: influxdb_exporter_version is version('0.0.0', '>=')
+  retries: 10
+  when:
+    - influxdb_exporter_version == "latest"
+  tags:
+    - influxdb_exporter
+    - install
+    - influxdb_exporter_install
+    - download
+    - influxdb_exporter_download
