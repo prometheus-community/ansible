@@ -13,7 +13,7 @@ argument_specs:
         default: "0.11.5"
       influxdb_exporter_binary_url:
         description: "URL of the influxdb exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _influxdb_exporter_repo }}/releases/download/v{{ influxdb_exporter_version }}/influxdb_exporter-{{ influxdb_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _influxdb_exporter_repo }}/releases/download/v{{ influxdb_exporter_version }}/influxdb_exporter-{{ influxdb_exporter_version }}.{{ ansible_system | lower }}-{{ _influxdb_exporter_go_ansible_arch }}.tar.gz"
       influxdb_exporter_checksums_url:
         description: "URL of the influxdb exporter checksums file"
         default: "https://github.com/{{ _influxdb_exporter_repo }}/releases/download/v{{ influxdb_exporter_version }}/sha256sums.txt"
