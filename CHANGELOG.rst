@@ -15,6 +15,7 @@ Removed Features (previously deprecated)
 Bugfixes
 --------
 
+- fix:  prevent local binary cache creation with elevated privileges (https://github.com/prometheus-community/ansible/pull/434)
 - fix: add check_mode in localhost binary cache task (https://github.com/prometheus-community/ansible/pull/431)
 
 v0.20.1
