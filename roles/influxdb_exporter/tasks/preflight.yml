@@ -31,16 +31,6 @@
     - preflight
     - influxdb_exporter_preflight
 
-- name: Check if influxdb_exporter is installed
-  ansible.builtin.stat:
-    path: "{{ influxdb_exporter_binary_install_dir }}/influxdb_exporter"
-  register: __influxdb_exporter_is_installed
-  check_mode: false
-  tags:
-    - influxdb_exporter
-    - install
-    - influxdb_exporter_install
-
 - name: Discover latest version
   ansible.builtin.set_fact:
     influxdb_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _influxdb_exporter_repo }}/releases/latest', headers=_influxdb_exporter_github_api_headers,
