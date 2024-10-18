@@ -20,4 +20,4 @@ influxdb_exporter_system_group: "influxdb-exp"
 influxdb_exporter_system_user: "{{ influxdb_exporter_system_group }}"
 
 # Local path to stash the archive and its extraction
-influxdb_exporter_local_cache_path: /tmp
+influxdb_exporter_local_cache_path: "/tmp/influxdb_exporter-{{ ansible_system | lower }}-{{ _influxdb_exporter_go_ansible_arch }}/{{ influxdb_exporter_version }}"
