@@ -1,4 +1,9 @@
 ---
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
+
 - name: Assert usage of systemd as an init system
   ansible.builtin.assert:
     that: ansible_service_mgr == 'systemd'
