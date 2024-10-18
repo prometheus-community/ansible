@@ -66,4 +66,3 @@
     - influxdb_exporter
     - run
     - influxdb_exporter_run
-
