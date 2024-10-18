@@ -17,26 +17,8 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
-  - name: centos-stream-9
-    image: dokken/centos-stream-9
-    pre_build_image: true
-    privileged: true
-    cgroup_parent: docker.slice
-    command: /lib/systemd/systemd
   - name: debian-11
     image: dokken/debian-11
-    pre_build_image: true
-    privileged: true
-    cgroup_parent: docker.slice
-    command: /lib/systemd/systemd
-  - name: fedora-39
-    image: dokken/fedora-39
-    pre_build_image: true
-    privileged: true
-    cgroup_parent: docker.slice
-    command: /lib/systemd/systemd
-  - name: fedora-40
-    image: dokken/fedora-40
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
@@ -73,21 +55,11 @@ provisioner:
       target_hosts:
         hosts: {}
     host_vars:
-      fedora-39:
+      almalinux-8:
         exclude_ansible_vers:
-          - "2.9"
-          - "2.10"
-          - "2.11"
-      fedora-40:
-        exclude_ansible_vers:
-          - "2.9"
-          - "2.10"
-          - "2.11"
+          - "2.17"
       ubuntu-24.04:
         exclude_ansible_vers:
           - "2.9"
           - "2.10"
           - "2.11"
-      almalinux-8:
-        exclude_ansible_vers:
-          - "2.17"

@@ -93,4 +93,4 @@ To accomplish this all roles need to support:
 
 - current and at least one previous ansible version
 - systemd as the only available process manager
-- at least latest debian and CentOS distributions
+- at least latest Debian/Ubuntu and EL distributions

@@ -17,10 +17,6 @@ galaxy_info:
       versions:
         - "8"
         - "9"
-    - name: "Fedora"
-      versions:
-        - "39"
-        - "40"
   galaxy_tags:
     - "exporter"
     - "monitoring"
