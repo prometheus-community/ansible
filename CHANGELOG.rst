@@ -4,6 +4,14 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.21.0
+=======
+
+Removed Features (previously deprecated)
+----------------------------------------
+
+- removed: CentOS Stream and Fedora from being officially supported (https://github.com/prometheus-community/ansible/pull/432)
+
 v0.20.1
 =======
 
