@@ -4,4 +4,3 @@ warn_list:
   - galaxy[version-incorrect]  # until collection gets bumped to 1.x.x
 skip_list:
   - role-name  # Allow underscore prefix in role name for internal role
-  - var-naming[no-role-prefix]  # https://github.com/ansible/ansible-lint/pull/3422#issuecomment-1549584988
