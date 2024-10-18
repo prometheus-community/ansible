@@ -3,11 +3,19 @@
   ansible.builtin.include_role:
     name: prometheus.prometheus._common
     tasks_from: preflight.yml
+  tags:
+    - influxdb_exporter
+    - preflight
+    - influxdb_exporter_preflight
 
 - name: Assert usage of systemd as an init system
   ansible.builtin.assert:
     that: ansible_service_mgr == 'systemd'
     msg: "This role only works with systemd"
+  tags:
+    - influxdb_exporter
+    - preflight
+    - influxdb_exporter_preflight
 
 - name: Naive assertion of proper listen address
   ansible.builtin.assert:
@@ -18,6 +26,10 @@
           reject('match', '.+:\\d+$') |
           list |
           length == 0
+  tags:
+    - influxdb_exporter
+    - preflight
+    - influxdb_exporter_preflight
 
 - name: Check if influxdb_exporter is installed
   ansible.builtin.stat:
@@ -25,6 +37,8 @@
   register: __influxdb_exporter_is_installed
   check_mode: false
   tags:
+    - influxdb_exporter
+    - install
     - influxdb_exporter_install
 
 - name: Discover latest version
@@ -36,12 +50,16 @@
   retries: 10
   when:
     - influxdb_exporter_version == "latest"
-    - influxdb_exporter_binary_local_dir | length == 0
     - not influxdb_exporter_skip_install
+  tags:
+    - influxdb_exporter
+    - install
+    - influxdb_exporter_install
+    - download
+    - influxdb_exporter_download
 
 - name: Get influxdb_exporter binary checksum
   when:
-    - influxdb_exporter_binary_local_dir | length == 0
     - not influxdb_exporter_skip_install
   block:
     - name: Get checksum list from github
@@ -57,3 +75,9 @@
       with_items: "{{ __influxdb_exporter_checksums }}"
       when:
         - "('linux-' + go_arch + '.tar.gz') in item"
+  tags:
+    - influxdb_exporter
+    - install
+    - influxdb_exporter_install
+    - download
+    - influxdb_exporter_download
