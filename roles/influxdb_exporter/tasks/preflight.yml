@@ -50,7 +50,6 @@
   retries: 10
   when:
     - influxdb_exporter_version == "latest"
-    - not influxdb_exporter_skip_install
   tags:
     - influxdb_exporter
     - install
