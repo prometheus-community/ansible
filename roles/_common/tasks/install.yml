@@ -52,6 +52,7 @@
     state: directory
     mode: 0755
   delegate_to: localhost
+  check_mode: false
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - install
