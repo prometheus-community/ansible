@@ -2,7 +2,7 @@
 
 ## Description
 
-Deploy prometheus [influxdb exporter](https://github.com/prometheus/influxdb_exporter) using ansible.
+Deploy prometheus [Influxdb exporter](https://github.com/prometheus/influxdb_exporter) using ansible.
 
 ## Requirements
 
