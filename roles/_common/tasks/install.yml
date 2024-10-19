@@ -104,6 +104,24 @@
       check_mode: false
       when: __common_binary_basename is search('\.zip$|\.tar\.gz$')
 
+- name: "Check existence of binary install dir"
+  ansible.builtin.stat:
+    path: "{{ _common_binary_install_dir }}"
+  register: __common_binary_install_dir
+
+- name: "Make sure binary install dir exists"
+  ansible.builtin.file:
+    path: "{{ _common_binary_install_dir }}"
+    mode: 0755
+    owner: root
+    group: root
+  become: true
+  tags:
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
+    - install
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_install"
+  when: not __common_binary_install_dir.stat.exists
+
 - name: "Propagate binaries"
   ansible.builtin.copy:
     src: "{{ _common_local_cache_path }}/{{ item }}"
