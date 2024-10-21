@@ -100,7 +100,6 @@
         mode: 0755
         list_files: true
         extra_opts: "{{ _common_binary_unarchive_opts | default(omit, true) }}"
-      register: __common_unpack
       delegate_to: localhost
       check_mode: false
       when: __common_binary_basename is search('\.zip$|\.tar\.gz$')
