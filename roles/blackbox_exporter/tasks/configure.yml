@@ -15,15 +15,15 @@
 - name: Ensure blackbox exporter binary has cap_net_raw capability
   community.general.capabilities:
     path: "{{ blackbox_exporter_binary_install_dir }}/blackbox_exporter"
-    capability: cap_net_raw+ep
+    capability: cap_net_raw=ep
     state: present
   become: true
   when: not ansible_check_mode
-  changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"
   tags:
     - blackbox_exporter
     - configure
     - blackbox_exporter_configure
+    - molecule-idempotence-notest
 
 - name: Check Debug Message
   ansible.builtin.debug:
