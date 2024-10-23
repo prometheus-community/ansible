@@ -1,0 +1,10 @@
+---
+- name: Restart influxdb_exporter
+  listen: "restart influxdb_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: influxdb_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode
