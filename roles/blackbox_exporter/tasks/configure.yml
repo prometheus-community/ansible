@@ -23,6 +23,7 @@
     - blackbox_exporter
     - configure
     - blackbox_exporter_configure
+    - molecule-idempotence-notest
 
 - name: Check Debug Message
   ansible.builtin.debug:
