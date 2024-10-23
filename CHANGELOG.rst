@@ -7,16 +7,10 @@ Prometheus.Prometheus Release Notes
 v0.21.0
 =======
 
-Removed Features (previously deprecated)
-----------------------------------------
-
-- removed: CentOS Stream and Fedora from being officially supported (https://github.com/prometheus-community/ansible/pull/432)
-
 Bugfixes
 --------
 
-- fix:  prevent local binary cache creation with elevated privileges (https://github.com/prometheus-community/ansible/pull/434)
-- fix: add check_mode in localhost binary cache task (https://github.com/prometheus-community/ansible/pull/431)
+- fix: remove unused variable (https://github.com/prometheus-community/ansible/pull/437)
 
 v0.20.3
 =======
