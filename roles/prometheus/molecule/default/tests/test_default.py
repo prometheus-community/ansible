@@ -15,28 +15,36 @@ def AnsibleDefaults():
         return yaml.full_load(stream)
 
 
-@pytest.mark.parametrize("dirs", [
-    "/etc/prometheus",
-    "/etc/prometheus/console_libraries",
-    "/etc/prometheus/consoles",
-    "/etc/prometheus/rules",
-    "/etc/prometheus/file_sd",
-    "/var/lib/prometheus"
-])
+@pytest.mark.parametrize(
+    "dirs",
+    [
+        "/etc/prometheus",
+        "/etc/prometheus/console_libraries",
+        "/etc/prometheus/consoles",
+        "/etc/prometheus/rules",
+        "/etc/prometheus/file_sd",
+        "/etc/prometheus/scrape_configs",
+        "/var/lib/prometheus",
+    ],
+)
 def test_directories(host, dirs):
     d = host.file(dirs)
     assert d.is_directory
     assert d.exists
 
 
-@pytest.mark.parametrize("files", [
-    "/etc/prometheus/prometheus.yml",
-    "/etc/prometheus/console_libraries/prom.lib",
-    "/etc/prometheus/consoles/prometheus.html",
-    "/etc/systemd/system/prometheus.service",
-    "/usr/local/bin/prometheus",
-    "/usr/local/bin/promtool"
-])
+@pytest.mark.parametrize(
+    "files",
+    [
+        "/etc/prometheus/prometheus.yml",
+        "/etc/prometheus/console_libraries/prom.lib",
+        "/etc/prometheus/consoles/prometheus.html",
+        "/etc/prometheus/scrape_configs/empty_scrapes.yml",
+        "/etc/systemd/system/prometheus.service",
+        "/usr/local/bin/prometheus",
+        "/usr/local/bin/promtool",
+    ],
+)
 def test_files(host, files):
     f = host.file(files)
     assert f.exists
