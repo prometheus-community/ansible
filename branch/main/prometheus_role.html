@@ -335,9 +335,9 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_scrape_config_files"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-scrape-config-files"><strong>prometheus_scrape_config_files</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_scrape_config_files" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>List of folders where ansible will look for files containing custom scrape config configuration files which will be copied to <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">prometheus_config_dir</span> <span class="pre">}}/scrapes/</span></code>.</p>
+<td><div class="ansible-option-cell"><p>List of folders where ansible will look for files containing custom scrape config configuration files which will be copied to <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">prometheus_config_dir</span> <span class="pre">}}/scrape_configs/</span></code>.</p>
 <p>This feature is available starting from Prometheus v2.43.0.</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[&quot;prometheus/scrapes/*.yml&quot;,</span> <span class="pre">&quot;prometheus/scrapes/*.json&quot;]</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[&quot;prometheus/scrape_configs/*.yml&quot;,</span> <span class="pre">&quot;prometheus/scrape_configs/*.json&quot;]</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
