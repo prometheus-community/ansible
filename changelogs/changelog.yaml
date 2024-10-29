@@ -1,6 +1,13 @@
 ---
 ancestor:
 releases:
+  0.22.0:
+    changes:
+      bugfixes:
+        - 'bugfix: update default home directory (https://github.com/prometheus-community/ansible/pull/442)'
+      minor_changes:
+        - 'feat: Add nvidia_gpu_exporter (https://github.com/prometheus-community/ansible/pull/441)'
+    release_date: '2024-10-29'
   0.21.0:
     changes:
       bugfixes:

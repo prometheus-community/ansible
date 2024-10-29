@@ -4,6 +4,19 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.22.0
+=======
+
+Minor Changes
+-------------
+
+- feat: Add nvidia_gpu_exporter (https://github.com/prometheus-community/ansible/pull/441)
+
+Bugfixes
+--------
+
+- bugfix: update default home directory (https://github.com/prometheus-community/ansible/pull/442)
+
 v0.21.0
 =======
 
