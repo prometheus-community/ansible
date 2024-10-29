@@ -81,6 +81,9 @@ argument_specs:
                   {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
                   {% else %}\
                   {% endif %}"
+      _common_web_listen_address:
+        description: "Address on which to listen"
+        default: ""
   selinux:
     short_description: "Internal only - common selinux configuration tasks"
     description: "Internal only - selinux requirements"
