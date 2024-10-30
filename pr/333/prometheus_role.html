@@ -1,8 +1,10 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta content="2.10.0" name="antsibull-docs" />
+<meta content="2.15.0" name="antsibull-docs" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>prometheus.prometheus.prometheus role – Installs and configures prometheus &mdash; Prometheus.Prometheus Collection  documentation</title>
@@ -13,15 +15,11 @@
 
   
     <link rel="shortcut icon" href="_static/images/Ansible-Mark-RGB_Black.png"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=7f41d439"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7f41d439"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="prometheus.prometheus.pushgateway role – Prometheus Pushgateway" href="pushgateway_role.html" />
@@ -42,7 +40,7 @@
   </ul>
 </div>
 
-<a class="DocSite-nav" href="https://prometheus-community.github.io/ansible/branch/main/" style="padding-bottom: 30px;">
+<a class="DocSite-nav" href="https://prometheus-community.github.io/ansible/tag/v0.0.1" style="padding-bottom: 30px;">
 
   <img class="DocSiteNav-logo"
     src="_static/images/Ansible-Mark-RGB_White.png"
@@ -76,18 +74,21 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
   
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="_common_role.html">prometheus.prometheus._common role</a></li>
 <li class="toctree-l1"><a class="reference internal" href="alertmanager_role.html">prometheus.prometheus.alertmanager role – Prometheus Alertmanager service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bind_exporter_role.html">prometheus.prometheus.bind_exporter role – Prometheus BIND Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blackbox_exporter_role.html">prometheus.prometheus.blackbox_exporter role – Deploy and manage Prometheus blackbox exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cadvisor_role.html">prometheus.prometheus.cadvisor role – cAdvisor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chrony_exporter_role.html">prometheus.prometheus.chrony_exporter role – Prometheus Chrony Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fail2ban_exporter_role.html">prometheus.prometheus.fail2ban_exporter role – Prometheus fail2ban_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="influxdb_exporter_role.html">prometheus.prometheus.influxdb_exporter role – Prometheus Influxdb Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ipmi_exporter_role.html">prometheus.prometheus.ipmi_exporter role – Prometheus ipmi_exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="memcached_exporter_role.html">prometheus.prometheus.memcached_exporter role – Prometheus memcached_exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mongodb_exporter_role.html">prometheus.prometheus.mongodb_exporter role – Prometheus mongodb_exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mysqld_exporter_role.html">prometheus.prometheus.mysqld_exporter role – Prometheus MySQLd Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nginx_exporter_role.html">prometheus.prometheus.nginx_exporter role – Prometheus nginx_exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="node_exporter_role.html">prometheus.prometheus.node_exporter role – Prometheus Node Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nvidia_gpu_exporter_role.html">prometheus.prometheus.nvidia_gpu_exporter role – Prometheus Nvidia GPU Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="postgres_exporter_role.html">prometheus.prometheus.postgres_exporter role – Prometheus PostgreSQL Exporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="process_exporter_role.html">prometheus.prometheus.process_exporter role – Prometheus Process exporter</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">prometheus.prometheus.prometheus role – Installs and configures prometheus</a><ul>
@@ -140,7 +141,7 @@
 <h1>prometheus.prometheus.prometheus role – Installs and configures prometheus<a class="headerlink" href="#prometheus-prometheus-prometheus-role-installs-and-configures-prometheus" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/prometheus/prometheus/">prometheus.prometheus collection</a> (version 0.16.2).</p>
+<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/prometheus/prometheus/">prometheus.prometheus collection</a> (version 0.22.0).</p>
 <p>It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
 To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
 <p>To install it use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">prometheus.prometheus</span></code>.</p>
@@ -222,31 +223,23 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--prometheus_archive_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-archive-path"><strong>prometheus_archive_path</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--prometheus_archive_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="parameter-main--prometheus_binary_install_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-binary-install-dir"><strong>prometheus_binary_install_dir</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--prometheus_binary_install_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp&quot;</span></code></p>
+<td><div class="ansible-option-cell"><p><em>Advanced</em></p>
+<p>Directory to install binaries</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/usr/local/bin&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--prometheus_binary_local_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-binary-local-dir"><strong>prometheus_binary_local_dir</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--prometheus_binary_local_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Allows to use local packages instead of ones distributed on github.</p>
-<p>As parameter it takes a directory where <em>prometheus</em> AND <em>promtool</em> binaries are stored on host on which ansible is ran.</p>
-<p>This overrides <em>prometheus_version</em> parameter</p>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_binary_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-binary-url"><strong>prometheus_binary_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>URL of the prometheus binaries .tar.gz file</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_prometheus_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">prometheus_version</span> <span class="pre">}}/</span> <span class="pre">prometheus-{{</span> <span class="pre">prometheus_version</span> <span class="pre">}}.linux-{{</span> <span class="pre">go_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_prometheus_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">prometheus_version</span> <span class="pre">}}/prometheus-{{</span> <span class="pre">prometheus_version</span> <span class="pre">}}.{{</span> <span class="pre">ansible_system</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_prometheus_go_ansible_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_checksums_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-checksums-url"><strong>prometheus_checksums_url</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_checksums_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -254,7 +247,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_prometheus_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">prometheus_version</span> <span class="pre">}}/sha256sums.txt&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_config_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-config-dir"><strong>prometheus_config_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_config_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -262,7 +255,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/etc/prometheus&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_config_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-config-file"><strong>prometheus_config_file</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_config_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -270,15 +263,15 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;prometheus.yml.j2&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_config_flags_extra"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-config-flags-extra"><strong>prometheus_config_flags_extra</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_config_flags_extra" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Additional configuration flags passed to prometheus binary at startup</p>
-<p>Example: prometheus_config_flags_extra: { storage.tsdb.retention: 15d, alertmanager.timeout: 10s }</p>
+<p>Example: prometheus_config_flags_extra: { alertmanager.timeout: 10s }</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_db_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-db-dir"><strong>prometheus_db_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_db_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -286,7 +279,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/var/lib/prometheus&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_external_labels"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-external-labels"><strong>prometheus_external_labels</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_external_labels" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -294,12 +287,20 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">{&quot;environment&quot;:</span> <span class="pre">&quot;{{</span> <span class="pre">ansible_fqdn</span> <span class="pre">|</span> <span class="pre">default(ansible_host)</span> <span class="pre">|</span> <span class="pre">default(inventory_hostname)</span> <span class="pre">}}&quot;}</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_global"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-global"><strong>prometheus_global</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_global" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Prometheus global config. It is compatible with the <a class="reference external" href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file">official configuration</a></p>
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">{&quot;evaluation_interval&quot;:</span> <span class="pre">&quot;15s&quot;,</span> <span class="pre">&quot;scrape_interval&quot;:</span> <span class="pre">&quot;60s&quot;,</span> <span class="pre">&quot;scrape_timeout&quot;:</span> <span class="pre">&quot;15s&quot;}</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--prometheus_local_cache_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-local-cache-path"><strong>prometheus_local_cache_path</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--prometheus_local_cache_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp/prometheus-{{</span> <span class="pre">ansible_system</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_prometheus_go_ansible_arch</span> <span class="pre">}}/{{</span> <span class="pre">prometheus_version</span> <span class="pre">}}&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -332,23 +333,20 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--prometheus_scrape_config_files"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-scrape-config-files"><strong>prometheus_scrape_config_files</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--prometheus_scrape_config_files" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>List of folders where ansible will look for files containing custom scrape config configuration files which will be copied to <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">prometheus_config_dir</span> <span class="pre">}}/scrape_configs/</span></code>.</p>
+<p>This feature is available starting from Prometheus v2.43.0.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[&quot;prometheus/scrape_configs/*.yml&quot;,</span> <span class="pre">&quot;prometheus/scrape_configs/*.json&quot;]</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--prometheus_scrape_configs"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-scrape-configs"><strong>prometheus_scrape_configs</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--prometheus_scrape_configs" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Prometheus scrape jobs provided in same format as in the <a class="reference external" href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config">official docs</a></p>
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[{&quot;job_name&quot;:</span> <span class="pre">&quot;prometheus&quot;,</span> <span class="pre">&quot;metrics_path&quot;:</span> <span class="pre">&quot;{{</span> <span class="pre">prometheus_metrics_path</span> <span class="pre">}}&quot;,</span> <span class="pre">&quot;static_configs&quot;:</span> <span class="pre">[{&quot;targets&quot;:</span> <span class="pre">[&quot;{{</span> <span class="pre">ansible_fqdn</span> <span class="pre">|</span> <span class="pre">default(ansible_host)</span> <span class="pre">|</span> <span class="pre">default('localhost')</span> <span class="pre">}}:9090&quot;]}]},</span> <span class="pre">{&quot;file_sd_configs&quot;:</span> <span class="pre">[{&quot;files&quot;:</span> <span class="pre">[&quot;{{</span> <span class="pre">prometheus_config_dir</span> <span class="pre">}}/file_sd/node.yml&quot;]}],</span> <span class="pre">&quot;job_name&quot;:</span> <span class="pre">&quot;node&quot;}]</span></code></p>
-</div></td>
-</tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-main--prometheus_skip_install"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-prometheus-role-parameter-main-prometheus-skip-install"><strong>prometheus_skip_install</strong></p>
-<a class="ansibleOptionLink" href="#parameter-main--prometheus_skip_install" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Prometheus installation tasks gets skipped when set to true.</p>
-<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
-<ul class="simple">
-<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
-</ul>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -414,7 +412,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-cell"><p>Prometheus package version. Also accepts <code class="docutils literal notranslate"><span class="pre">latest</span></code> as parameter.</p>
 <p>Only prometheus 2.x is supported</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;2.51.2&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;2.54.1&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
