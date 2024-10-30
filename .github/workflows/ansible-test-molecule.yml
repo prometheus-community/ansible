@@ -1,0 +1,43 @@
+---
+name: Ansible Molecule
+on:
+  workflow_call:
+    inputs:
+      role:
+        required: true
+        type: string
+      ansible-core-versions:
+        required: false
+        default: '["stable-2.14"]'
+        type: string
+
+jobs:
+  discover-molecule-scenarios:
+    runs-on: ubuntu-latest
+    outputs:
+      molecule-tests: ${{ steps.set-molecule-tests.outputs.tests }}
+
+    name: "${{ inputs.role }}-discover-molecule-scenarios"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: "Discover ${{ inputs.role }} molecule scenarios"
+        id: set-molecule-tests
+        run: |
+          role=${{ inputs.role }}
+          echo tests="[`for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -iname "molecule-${role}-*" -printf "%f\n"); do
+              echo '{"test":\"'"${test}"'\","name":\"'"${test#*-}\"'"}';
+          done | tr '\n' ',' | sed '$s/,$//'`]" >> $GITHUB_OUTPUT
+
+  ansible-test-integration-molecule:
+    uses: ./.github/workflows/ansible-test-integration.yml
+    needs:
+      - discover-molecule-scenarios
+    if: needs.discover-molecule-scenarios.outputs.molecule-tests != '[]' &&
+        needs.discover-molecule-scenarios.outputs.molecule-tests != ''
+    with:
+      targets: ${{ needs.discover-molecule-scenarios.outputs.molecule-tests }}
+      ansible-core-versions: ${{ inputs.ansible-core-versions }}
+      coverage: never

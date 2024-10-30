@@ -1,34 +1,40 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-import os
-import testinfra.utils.ansible_runner
+from testinfra_helpers import get_target_hosts
 import pytest
 
-testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
+testinfra_hosts = get_target_hosts()
 
 
-@pytest.mark.parametrize("dirs", [
-    "/opt/prom/etc",
-    "/opt/prom/etc/rules",
-    "/opt/prom/etc/file_sd",
-    "/opt/prom/lib"
-])
+@pytest.mark.parametrize(
+    "dirs",
+    [
+        "/opt/prom/etc",
+        "/opt/prom/etc/rules",
+        "/opt/prom/etc/file_sd",
+        "/opt/prom/etc/scrape_configs",
+        "/opt/prom/lib",
+    ],
+)
 def test_directories(host, dirs):
     d = host.file(dirs)
     assert d.is_directory
     assert d.exists
 
 
-@pytest.mark.parametrize("files", [
-    "/opt/prom/etc/prometheus.yml",
-    "/opt/prom/etc/rules/ansible_managed.yml",
-    "/opt/prom/etc/file_sd/node.yml",
-    "/opt/prom/etc/file_sd/docker.yml",
-    "/usr/local/bin/prometheus",
-    "/usr/local/bin/promtool"
-])
+@pytest.mark.parametrize(
+    "files",
+    [
+        "/opt/prom/etc/prometheus.yml",
+        "/opt/prom/etc/rules/ansible_managed.yml",
+        "/opt/prom/etc/file_sd/node.yml",
+        "/opt/prom/etc/file_sd/docker.yml",
+        "/opt/prom/etc/scrape_configs/empty_scrapes.yml",
+        "/usr/local/bin/prometheus",
+        "/usr/local/bin/promtool",
+    ],
+)
 def test_files(host, files):
     f = host.file(files)
     assert f.exists

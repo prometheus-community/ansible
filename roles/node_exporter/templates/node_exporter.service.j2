@@ -25,9 +25,9 @@ ExecStart={{ node_exporter_binary_install_dir }}/node_exporter \
 {% endfor %}
 {% if node_exporter_tls_server_config | length > 0 or node_exporter_http_server_config | length > 0 or node_exporter_basic_auth_users | length > 0 %}
     {% if node_exporter_version is version('1.5.0', '>=') %}
-    '--web.config.file=/etc/node_exporter/config.yaml' \
+    '--web.config.file={{ node_exporter_config_dir }}/web_config.yml' \
     {% else %}
-    '--web.config=/etc/node_exporter/config.yaml' \
+    '--web.config={{ node_exporter_config_dir }}/web_config.yml' \
     {% endif %}
 {% endif %}
 {% if node_exporter_web_disable_exporter_metrics %}

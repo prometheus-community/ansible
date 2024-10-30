@@ -1,24 +1,8 @@
 ---
-- name: Assert usage of systemd as an init system
-  ansible.builtin.assert:
-    that: ansible_service_mgr == 'systemd'
-    msg: "This role only works with systemd"
-
-- name: Install package fact dependencies
-  become: true
-  ansible.builtin.package:
-    name: "{{ _pkg_fact_req }}"
-    state: present
-  when: (_pkg_fact_req)
-  vars:
-    _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
-      {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
-      {% else %}\
-      {% endif %}"
-
-- name: Gather package facts
-  ansible.builtin.package_facts:
-  when: "not 'packages' in ansible_facts"
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
 
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
@@ -61,23 +45,6 @@
           - "__mongodb_exporter_cert_file.stat.exists"
           - "__mongodb_exporter_key_file.stat.exists"
 
-- name: Check if mongodb_exporter is installed
-  ansible.builtin.stat:
-    path: "{{ mongodb_exporter_binary_install_dir }}/mongodb_exporter"
-  register: __mongodb_exporter_is_installed
-  check_mode: false
-  tags:
-    - mongodb_exporter_install
-
-- name: Gather currently installed mongodb_exporter version (if any)
-  ansible.builtin.command: "{{ mongodb_exporter_binary_install_dir }}/mongodb_exporter --version"
-  changed_when: false
-  register: __mongodb_exporter_current_version_output
-  check_mode: false
-  when: __mongodb_exporter_is_installed.stat.exists
-  tags:
-    - mongodb_exporter_install
-
 - name: Discover latest version
   ansible.builtin.set_fact:
     mongodb_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _mongodb_exporter_repo }}/releases/latest', headers=_github_api_headers,
@@ -87,24 +54,9 @@
   retries: 10
   when:
     - mongodb_exporter_version == "latest"
-    - mongodb_exporter_binary_local_dir | length == 0
-    - not mongodb_exporter_skip_install
-
-- name: Get mongodb_exporter binary checksum
-  when:
-    - mongodb_exporter_binary_local_dir | length == 0
-    - not mongodb_exporter_skip_install
-  block:
-    - name: Get checksum list from github
-      ansible.builtin.set_fact:
-        __mongodb_exporter_checksums: "{{ lookup('url', mongodb_exporter_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
-      run_once: true
-      until: __mongodb_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
-      retries: 3
-
-    - name: "Get checksum for {{ go_arch }}"
-      ansible.builtin.set_fact:
-        __mongodb_exporter_checksum: "{{ item.split(' ')[0] }}"
-      with_items: "{{ __mongodb_exporter_checksums }}"
-      when:
-        - "item.endswith('mongodb_exporter-' + mongodb_exporter_version + '.linux-' + go_arch + '.tar.gz')"
+  tags:
+    - mongodb_exporter
+    - install
+    - mongodb_exporter_install
+    - download
+    - mongodb_exporter_download

@@ -1,0 +1,10 @@
+---
+provisioner:
+  playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/alternative/prepare.yml"
+  inventory:
+    group_vars:
+      all:
+        influxdb_exporter_web_listen_address: '127.0.0.1:8080'
+
+        influxdb_exporter_version: 0.11.2

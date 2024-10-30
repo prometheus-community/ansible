@@ -2,33 +2,34 @@
 - name: Preflight
   ansible.builtin.include_tasks:
     file: preflight.yml
-    apply:
-      tags:
-        - process_exporter_install
-        - process_exporter_configure
-        - process_exporter_run
   tags:
     - process_exporter_install
     - process_exporter_configure
     - process_exporter_run
 
 - name: Install
-  ansible.builtin.include_tasks:
-    file: install.yml
-    apply:
-      become: true
-      tags:
-        - process_exporter_install
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: install.yml
+  vars:
+    _common_local_cache_path: "{{ process_exporter_local_cache_path }}"
+    _common_binaries: "{{ _process_exporter_binaries }}"
+    _common_binary_install_dir: "{{ process_exporter_binary_install_dir }}"
+    _common_binary_url: "{{ process_exporter_binary_url }}"
+    _common_checksums_url: "{{ process_exporter_checksums_url }}"
+    _common_system_group: "{{ process_exporter_system_group }}"
+    _common_system_user: "{{ process_exporter_system_user }}"
+    _common_config_dir: "{{ process_exporter_config_dir }}"
+    _common_binary_unarchive_opts: ['--strip-components=1']
   tags:
     - process_exporter_install
 
 - name: SELinux
-  ansible.builtin.include_tasks:
-    file: selinux.yml
-    apply:
-      become: true
-      tags:
-        - process_exporter_configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ process_exporter_web_listen_address | urlsplit('port') }}"
   when: ansible_selinux.status == "enabled"
   tags:
     - process_exporter_configure
@@ -36,10 +37,6 @@
 - name: Configure
   ansible.builtin.include_tasks:
     file: configure.yml
-    apply:
-      become: true
-      tags:
-        - process_exporter_configure
   tags:
     - process_exporter_configure
 

@@ -13,7 +13,7 @@ ExecStart={{ bind_exporter_binary_install_dir }}/bind_exporter \
     --bind.stats-groups="{{ bind_exporter_stats_groups | join(',') }}" \
 {% endif %}
 {% if bind_exporter_tls_server_config | length > 0 or bind_exporter_http_server_config | length > 0 or bind_exporter_basic_auth_users | length > 0 %}
-    --web.config.file={{ bind_exporter_config_dir }}/web_config.yaml \
+    --web.config.file={{ bind_exporter_config_dir }}/web_config.yml \
 {% endif %}
     --bind.stats-url="{{ bind_exporter_stats_url }}" \
     --bind.timeout="{{ bind_exporter_timeout }}" \

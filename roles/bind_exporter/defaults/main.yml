@@ -1,10 +1,8 @@
 ---
 bind_exporter_version: 0.7.0
-bind_exporter_binary_local_dir: ""
 bind_exporter_binary_url: "https://github.com/{{ _bind_exporter_repo }}/releases/download/v{{ bind_exporter_version }}/\
-                           bind_exporter-{{ bind_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+                           bind_exporter-{{ bind_exporter_version }}.{{ ansible_system | lower }}-{{ _bind_exporter_go_ansible_arch }}.tar.gz"
 bind_exporter_checksums_url: "https://github.com/{{ _bind_exporter_repo }}/releases/download/v{{ bind_exporter_version }}/sha256sums.txt"
-bind_exporter_skip_install: false
 
 bind_exporter_web_listen_address: "0.0.0.0:9119"
 bind_exporter_web_telemetry_path: "/metrics"
@@ -20,7 +18,9 @@ bind_exporter_http_server_config: {}
 bind_exporter_basic_auth_users: {}
 
 # Internal variables.
-bind_exporter_binary_install_dir: "/usr/local/bin"
-bind_exporter_config_dir: "/etc/bind_exporter"
 bind_exporter_system_group: "bind-exp"
 bind_exporter_system_user: "{{ bind_exporter_system_group }}"
+bind_exporter_binary_install_dir: "/usr/local/bin"
+
+bind_exporter_config_dir: "/etc/bind_exporter"
+bind_exporter_local_cache_path: "/tmp/bind_exporter-{{ ansible_system | lower }}-{{ _bind_exporter_go_ansible_arch }}/{{ bind_exporter_version }}"

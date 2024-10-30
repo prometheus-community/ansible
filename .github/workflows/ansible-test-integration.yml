@@ -24,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      max-parallel: 10
       matrix:
         targets: ${{ fromJson(inputs.targets) }}
         ansible-core-versions: ${{ fromJson(inputs.ansible-core-versions) }}
@@ -41,5 +42,7 @@ jobs:
           testing-type: integration
           target: ${{ matrix.targets.test }}
           coverage: ${{ inputs.coverage }}
+          ansible-core-github-repository-slug: ${{ contains(fromJson('["stable-2.9", "stable-2.10", "stable-2.11"]'), matrix.ansible-core-versions) &&
+                                               'ansible-community/eol-ansible' || 'ansible/ansible' }}
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

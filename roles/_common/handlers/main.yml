@@ -1,0 +1,15 @@
+---
+- name: "Restart {{ _common_service_name }}"
+  # listen: "restart_service"
+  become: true
+  ansible.builtin.service:
+    daemon_reload: true
+    name: "{{ _common_service_name }}"
+    state: restarted
+
+- name: "Reload {{ _common_service_name }}"
+  # listen: "reload_service"
+  become: true
+  ansible.builtin.service:
+    name: "{{ _common_service_name }}"
+    state: reloaded

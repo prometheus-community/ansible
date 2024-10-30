@@ -1,11 +1,9 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-import os
-import testinfra.utils.ansible_runner
+from testinfra_helpers import get_target_hosts
 
-testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
+testinfra_hosts = get_target_hosts()
 
 
 def test_directories(host):
@@ -48,7 +46,6 @@ def test_user(host):
     assert host.group("node-exp").exists
     assert "node-exp" in host.user("node-exp").groups
     assert host.user("node-exp").shell == "/usr/sbin/nologin"
-    assert host.user("node-exp").home == "/"
 
 
 def test_service(host):

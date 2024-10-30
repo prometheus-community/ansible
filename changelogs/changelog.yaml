@@ -1,8 +1,98 @@
 ---
 ancestor:
 releases:
+  0.22.0:
+    changes:
+      bugfixes:
+        - 'bugfix: update default home directory (https://github.com/prometheus-community/ansible/pull/442)'
+      minor_changes:
+        - 'feat: Add nvidia_gpu_exporter (https://github.com/prometheus-community/ansible/pull/441)'
+    release_date: '2024-10-29'
+  0.21.0:
+    changes:
+      bugfixes:
+        - 'fix: remove unused variable (https://github.com/prometheus-community/ansible/pull/437)'
+      trivial:
+        - 'chore(deps): update hoo29/little-timmy action to v2 (https://github.com/prometheus-community/ansible/pull/436)'
+    release_date: '2024-10-18'
+  0.20.3:
+    release_date: '2024-10-21'
+  0.20.1:
+    changes:
+      bugfixes:
+        - 'fix: alertmanager deprecated PIDFile= path warning (https://github.com/prometheus-community/ansible/pull/155)'
+    release_date: '2024-10-17'
+  0.20.0:
+    changes:
+      minor_changes:
+        - 'minor(ci): detect unused ansible variables (https://github.com/prometheus-community/ansible/pull/422)'
+      trivial:
+        - 'refactor: consolidate common tasks (https://github.com/prometheus-community/ansible/pull/425)'
+    release_date: '2024-10-02'
+  0.19.0:
+    changes:
+      bugfixes:
+        - 'fix: remove EOL platforms for current ones (https://github.com/prometheus-community/ansible/pull/395)'
+      minor_changes:
+        - 'minor: bump support for ansible from v2.16.* to v2.17.* (https://github.com/prometheus-community/ansible/pull/414)'
+      trivial:
+        - 'patch: New percona/mongodb_exporter upstream release 0.41.1! (https://github.com/prometheus-community/ansible/pull/420)'
+        - 'patch: New prometheus/pushgateway upstream release 1.10.0! (https://github.com/prometheus-community/ansible/pull/418)'
+    release_date: '2024-09-30'
+  0.18.1:
+    changes:
+      bugfixes:
+        - 'fix: remove EOL platforms for current ones (https://github.com/prometheus-community/ansible/pull/395)'
+      trivial:
+        - 'patch: New percona/mongodb_exporter upstream release 0.41.1! (https://github.com/prometheus-community/ansible/pull/420)'
+        - 'patch: New prometheus/pushgateway upstream release 1.10.0! (https://github.com/prometheus-community/ansible/pull/418)'
+    release_date: '2024-09-20'
+  0.18.0:
+    changes:
+      bugfixes:
+        - 'fix: ansible-community/eol-ansible for 2.9/2.10/2.11 tests (https://github.com/prometheus-community/ansible/pull/416)'
+      minor_changes:
+        - 'enhancement: adding env/container labels options (https://github.com/prometheus-community/ansible/pull/407)'
+      trivial:
+        - 'patch: New percona/mongodb_exporter upstream release 0.41.0! (https://github.com/prometheus-community/ansible/pull/417)'
+        - 'patch: New oliver006/redis_exporter upstream release 1.63.0! (https://github.com/prometheus-community/ansible/pull/415)'
+        - 'patch: New prometheus/prometheus upstream release 2.54.1! (https://github.com/prometheus-community/ansible/pull/413)'
+        - 'chore(deps): update tj-actions/changed-files action to v45 (https://github.com/prometheus-community/ansible/pull/412)'
+        - 'patch: New nginxinc/nginx-prometheus-exporter upstream release 1.3.0! (https://github.com/prometheus-community/ansible/pull/405)'
+        - 'patch: New ncabatoff/process-exporter upstream release 0.8.3! (https://github.com/prometheus-community/ansible/pull/404)'
+        - 'patch: New prometheus/node_exporter upstream release 1.8.2! (https://github.com/prometheus-community/ansible/pull/401)'
+        - 'patch: New prometheus/memcached_exporter upstream release 0.14.4! (https://github.com/prometheus-community/ansible/pull/388)'
+    release_date: '2024-09-13'
+  0.17.2:
+    changes:
+      bugfixes:
+        - 'fix: ansible-community/eol-ansible for 2.9/2.10/2.11 tests (https://github.com/prometheus-community/ansible/pull/416)'
+      trivial:
+        - 'patch: New oliver006/redis_exporter upstream release 1.63.0! (https://github.com/prometheus-community/ansible/pull/415)'
+        - 'patch: New prometheus/prometheus upstream release 2.54.1! (https://github.com/prometheus-community/ansible/pull/413)'
+        - 'chore(deps): update tj-actions/changed-files action to v45 (https://github.com/prometheus-community/ansible/pull/412)'
+        - 'patch: New nginxinc/nginx-prometheus-exporter upstream release 1.3.0! (https://github.com/prometheus-community/ansible/pull/405)'
+        - 'patch: New ncabatoff/process-exporter upstream release 0.8.3! (https://github.com/prometheus-community/ansible/pull/404)'
+        - 'patch: New prometheus/node_exporter upstream release 1.8.2! (https://github.com/prometheus-community/ansible/pull/401)'
+        - 'patch: New prometheus/memcached_exporter upstream release 0.14.4! (https://github.com/prometheus-community/ansible/pull/388)'
+    release_date: '2024-09-13'
+  0.17.1:
+    changes:
+      bugfixes:
+        - 'fix(ci): limit number of parallel tests to avoid github api limits (https://github.com/prometheus-community/ansible/pull/397)'
+      trivial:
+        - 'refactor(ci): split up molecule matrices to avoid job limit  (https://github.com/prometheus-community/ansible/pull/396)'
+    release_date: '2024-07-02'
+  0.17.0:
+    release_date: '2024-05-29'
+  0.16.4:
+    release_date: '2024-04-22'
+  0.16.3:
+    changes:
+      trivial:
+        - 'patch: New ncabatoff/process-exporter upstream release 0.8.1! (https://github.com/prometheus-community/ansible/pull/336)'
+    release_date: '2024-04-18'
   0.16.2:
-    changes: {}
     release_date: '2024-04-15'
   0.16.1:
     changes:

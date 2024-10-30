@@ -1,24 +1,8 @@
 ---
-- name: Assert usage of systemd as an init system
-  ansible.builtin.assert:
-    that: ansible_service_mgr == 'systemd'
-    msg: "This role only works with systemd"
-
-- name: Install package fact dependencies
-  become: true
-  ansible.builtin.package:
-    name: "{{ _pkg_fact_req }}"
-    state: present
-  when: (_pkg_fact_req)
-  vars:
-    _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
-                    {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
-                    {% else %}\
-                    {% endif %}"
-
-- name: Gather package facts
-  ansible.builtin.package_facts:
-  when: "not 'packages' in ansible_facts"
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
 
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
@@ -66,23 +50,6 @@
           - "__smokeping_prober_cert_file.stat.exists"
           - "__smokeping_prober_key_file.stat.exists"
 
-- name: Check if smokeping_prober is installed
-  ansible.builtin.stat:
-    path: "{{ smokeping_prober_binary_install_dir }}/smokeping_prober"
-  register: __smokeping_prober_is_installed
-  check_mode: false
-  tags:
-    - smokeping_prober_install
-
-- name: Gather currently installed smokeping_prober version (if any)
-  ansible.builtin.command: "{{ smokeping_prober_binary_install_dir }}/smokeping_prober --version"
-  changed_when: false
-  register: __smokeping_prober_current_version_output
-  check_mode: false
-  when: __smokeping_prober_is_installed.stat.exists
-  tags:
-    - smokeping_prober_install
-
 - name: Discover latest version
   ansible.builtin.set_fact:
     smokeping_prober_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _smokeping_prober_repo }}/releases/latest', headers=_github_api_headers,
@@ -92,24 +59,9 @@
   retries: 10
   when:
     - smokeping_prober_version == "latest"
-    - smokeping_prober_binary_local_dir | length == 0
-    - not smokeping_prober_skip_install
-
-- name: Get smokeping_prober binary checksum
-  when:
-    - smokeping_prober_binary_local_dir | length == 0
-    - not smokeping_prober_skip_install
-  block:
-    - name: Get checksum list from github
-      ansible.builtin.set_fact:
-        __smokeping_prober_checksums: "{{ lookup('url', smokeping_prober_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
-      run_once: true
-      until: __smokeping_prober_checksums is search('linux-' + go_arch + '.tar.gz')
-      retries: 10
-
-    - name: "Get checksum for {{ go_arch }}"
-      ansible.builtin.set_fact:
-        __smokeping_prober_checksum: "{{ item.split(' ')[0] }}"
-      with_items: "{{ __smokeping_prober_checksums }}"
-      when:
-        - "('linux-' + go_arch + '.tar.gz') in item"
+  tags:
+    - smokeping_prober
+    - install
+    - smokeping_prober_install
+    - download
+    - smokeping_prober_download

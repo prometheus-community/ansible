@@ -9,19 +9,14 @@ galaxy_info:
       versions:
         - "focal"
         - "jammy"
+        - "noble"
     - name: "Debian"
       versions:
         - "bullseye"
-        - "buster"
     - name: "EL"
       versions:
-        - "7"
         - "8"
         - "9"
-    - name: "Fedora"
-      versions:
-        - "37"
-        - '38'
   galaxy_tags:
     - "monitoring"
     - "prometheus"

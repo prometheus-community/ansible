@@ -13,6 +13,9 @@ PermissionsStartOnly=true
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart={{ smokeping_prober_binary_install_dir }}/smokeping_prober \
   --config.file={{ smokeping_prober_config_dir }}//{{ smokeping_prober_config_file }} \
+{% if smokeping_prober_tls_server_config | length > 0 or smokeping_prober_http_server_config | length > 0 or smokeping_prober_basic_auth_users | length > 0 %}
+     '--web.config.file={{ smokeping_prober_config_dir }}/web_config.yml' \
+{% endif %}
 {% if smokeping_prober_version is version('0.7.0', '>=') and
       smokeping_prober_web_listen_address is iterable and
       smokeping_prober_web_listen_address is not mapping and

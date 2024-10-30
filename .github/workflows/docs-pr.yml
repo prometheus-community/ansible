@@ -1,5 +1,5 @@
 ---
-name: Collection Docs
+name: Collection Docs (PR)
 concurrency:
   group: docs-pr-${{ github.head_ref }}
   cancel-in-progress: true
@@ -11,10 +11,28 @@ env:
   GHP_BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
 
 jobs:
+  get-tags:
+    runs-on: ubuntu-latest
+    outputs:
+      latest: ${{ steps.get-latest-tag.outputs.latest_tag }}
+    steps:
+      - name: Get the latest tag
+        id: get-latest-tag
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const latestTag = await github.rest.repos.listTags({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 1
+            });
+            core.setOutput('latest_tag', latestTag.data[0].name);
+
   build-docs:
+    name: Build Ansible Docs
+    needs: get-tags
     permissions:
       contents: read
-    name: Build Ansible Docs
     uses: ansible-community/github-docs-build/.github/workflows/_shared-docs-build-pr.yml@main
     with:
       collection-name: prometheus.prometheus
@@ -26,7 +44,7 @@ jobs:
       init-title: Prometheus.Prometheus Collection Documentation
       init-html-short-title: Prometheus.Prometheus Collection Docs
       init-extra-html-theme-options: |
-        documentation_home_url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/branch/main/
+        documentation_home_url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/tag/${{ needs.get-tags.outputs.latest }}
       render-file-line:
         '> * `$<status>`
          [$<path_tail>](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr/${{ github.event.number }}/$<path_tail>)'
@@ -36,11 +54,14 @@ jobs:
     if: github.repository == 'prometheus-community/ansible'
     permissions:
       contents: write
+      pages: write
+      id-token: write
     needs: [build-docs]
     name: Publish Ansible Docs
     uses: ansible-community/github-docs-build/.github/workflows/_shared-docs-build-publish-gh-pages.yml@main
     with:
       artifact-name: ${{ needs.build-docs.outputs.artifact-name }}
+      publish-gh-pages-branch: true
       action: ${{ (github.event.action == 'closed' || needs.build-docs.outputs.changed != 'true') && 'teardown' || 'publish' }}
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -56,7 +77,6 @@ jobs:
         uses: ansible-community/github-docs-build/actions/ansible-docs-build-comment@main
         with:
           body-includes: '## Docs Build'
-          reactions: heart
           action: ${{ needs.build-docs.outputs.changed != 'true' && 'remove' || '' }}
           on-closed-body: |
             ## Docs Build 📝

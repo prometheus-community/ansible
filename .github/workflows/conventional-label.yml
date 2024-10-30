@@ -16,7 +16,9 @@ jobs:
       - name: "Confirm correct pull request title"
         uses: mmubeen/action-pr-title@master  # until PR gets merged https://github.com/deepakputhraya/action-pr-title/pull/29
         with:
-          allowed_prefixes: 'feat,feature,fix,major,breaking,minor,enhancement,deprecated,removed,security,bug,bugfix,docs,packaging,test,refactor,refactoring,skip-release,skip_changelog,patch'
+          allowed_prefixes: "breaking,chore,feat,feature,fix,major,minor,enhancement,\
+           deprecated,removed,security,bug,bugfix,docs,packaging,\
+           test,refactor,refactoring,skip-release,skip_changelog,patch"
 
       - name: "Apply label"
         if: github.event.pull_request.labels.length == 0
@@ -43,7 +45,8 @@ jobs:
               "refactoring": "trivial",
               "skip-release": "skip_changelog",
               "skip_changelog": "skip_changelog",
-              "patch": "trivial"
+              "patch": "trivial",
+              "chore": "trivial"
               }
 
   role-label:
@@ -51,11 +54,11 @@ jobs:
     needs: pr-label
     if: github.event.pull_request.labels.length == 0
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Get changed roles
         id: changed-roles
-        uses: tj-actions/changed-files@v35
+        uses: tj-actions/changed-files@v45
         with:
           path: "roles"
           diff_relative: "true"
@@ -65,12 +68,23 @@ jobs:
           sha: ${{ github.event.pull_request.head.sha }}
 
       - name: Add changed roles labels
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: |
           steps.changed-roles.outputs.all_changed_and_modified_files
         with:
           script: |
-            const labels = '${{ steps.changed-roles.outputs.all_changed_and_modified_files }}'.split(' ').map(i => 'roles/' + i);
+            const changedRoles = '${{ steps.changed-roles.outputs.all_changed_and_modified_files }}'.split(' ');
+            let labels = changedRoles.map(i => 'roles/' + i);
+
+            if (changedRoles.includes('_common')) {
+              const allLabels = await github.paginate(github.rest.issues.listLabelsForRepo, {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              });
+              const roleLabels = allLabels.map(label => label.name).filter(name => name.startsWith('roles/'));
+              labels = [...new Set([...labels, ...roleLabels])];
+            }
+
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,

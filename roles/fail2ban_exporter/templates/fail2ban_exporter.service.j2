@@ -6,8 +6,8 @@ After=network-online.target
 
 [Service]
 Type=simple
-User=root
-Group=root
+User={{ fail2ban_exporter_system_user }}
+Group={{ fail2ban_exporter_system_group }}
 ExecStart={{ fail2ban_exporter_binary_install_dir }}/fail2ban_exporter \
     --web.listen-address={{ fail2ban_exporter_web_listen_address }} \
 {% if fail2ban_exporter_username | length > 0 -%}

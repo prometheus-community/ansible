@@ -1,0 +1,17 @@
+---
+- name: Run local preparation
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create scrape_configs directory
+      ansible.builtin.file:
+        name: "{{ playbook_dir }}/../../prometheus/scrape_configs"
+        state: directory
+        recurse: true
+      check_mode: false
+    - name: Create empty scrape config file
+      ansible.builtin.file:
+        name: "{{ playbook_dir }}/../../prometheus/scrape_configs/empty_scrapes.yml"
+        state: touch
+        mode: 0664
+      check_mode: false

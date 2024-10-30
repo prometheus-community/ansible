@@ -2,51 +2,49 @@
 - name: Preflight
   ansible.builtin.include_tasks:
     file: preflight.yml
-    apply:
-      tags:
-        - smartctl_exporter_install
-        - smartctl_exporter_configure
-        - smartctl_exporter_run
   tags:
     - smartctl_exporter_install
     - smartctl_exporter_configure
     - smartctl_exporter_run
 
 - name: Install
-  ansible.builtin.include_tasks:
-    file: install.yml
-    apply:
-      become: true
-      tags:
-        - smartctl_exporter_install
-  when:
-    ( not __smartctl_exporter_is_installed.stat.exists ) or
-    ( (__smartctl_exporter_current_version_output.stderr_lines | length > 0)
-      and (__smartctl_exporter_current_version_output.stderr_lines[0].split(" ")[2] != smartctl_exporter_version) ) or
-    ( (__smartctl_exporter_current_version_output.stdout_lines | length > 0)
-      and (__smartctl_exporter_current_version_output.stdout_lines[0].split(" ")[2] != smartctl_exporter_version) ) or
-    ( smartctl_exporter_binary_local_dir | length > 0 )
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: install.yml
+  vars:
+    _common_local_cache_path: "{{ smartctl_exporter_local_cache_path }}"
+    _common_binaries: "{{ _smartctl_exporter_binaries }}"
+    _common_binary_install_dir: "{{ smartctl_exporter_binary_install_dir }}"
+    _common_binary_url: "{{ smartctl_exporter_binary_url }}"
+    _common_checksums_url: "{{ smartctl_exporter_checksums_url }}"
+    _common_system_group: "{{ smartctl_exporter_system_group }}"
+    _common_system_user: "{{ smartctl_exporter_system_user }}"
+    _common_config_dir: "{{ smartctl_exporter_config_dir }}"
+    _common_binary_unarchive_opts: ['--strip-components=1']
   tags:
     - smartctl_exporter_install
 
 - name: SELinux
-  ansible.builtin.include_tasks:
-    file: selinux.yml
-    apply:
-      become: true
-      tags:
-        - smartctl_exporter_configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ smartctl_exporter_web_listen_address | urlsplit('port') }}"
   when: ansible_selinux.status == "enabled"
   tags:
     - smartctl_exporter_configure
 
 - name: Configure
-  ansible.builtin.include_tasks:
-    file: configure.yml
-    apply:
-      become: true
-      tags:
-        - smartctl_exporter_configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ smartctl_exporter_system_user }}"
+    _common_system_group: "{{ smartctl_exporter_system_group }}"
+    _common_config_dir: "{{ smartctl_exporter_config_dir }}"
+    _common_tls_server_config: "{{ smartctl_exporter_tls_server_config }}"
+    _common_http_server_config: "{{ smartctl_exporter_http_server_config }}"
+    _common_basic_auth_users: "{{ smartctl_exporter_basic_auth_users }}"
   tags:
     - smartctl_exporter_configure
 

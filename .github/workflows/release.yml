@@ -14,12 +14,12 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: "Install tools"
-        run: "python -m pip install ansible-base antsibull-changelog --disable-pip-version-check"
+        run: "python -m pip install --upgrade ansible-base antsibull-changelog --disable-pip-version-check"
 
       - name: "Calculate next version"
         id: version
@@ -31,7 +31,7 @@ jobs:
         run: antsibull-changelog release -v --version "${{ steps.version.outputs.next-version }}"
 
       - name: "Run antsichaut"
-        uses: ansible-community/antsichaut@main
+        uses: gardar/antsichaut@fix-missing-changes
         with:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           since_version: "${{ steps.version.outputs.current-version }}"
@@ -45,19 +45,19 @@ jobs:
           cmd: yq -i '.version = "${{ steps.version.outputs.next-version }}"' 'galaxy.yml'
 
       - name: "Write changelog and version"
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: ${{ github.event.pull_request.base.ref }}
           commit_message: "chore: update version"
           push_options: --force
 
       - name: "Checkout updated branch"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.base.ref }}
 
       - name: "Publish release"
         id: release-publish
-        uses: release-drafter/release-drafter@v5
+        uses: release-drafter/release-drafter@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

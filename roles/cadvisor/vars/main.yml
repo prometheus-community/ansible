@@ -1,10 +1,9 @@
 ---
-go_arch_map:
-  x86_64: 'amd64'
-  aarch64: 'arm64'
-  armv7l: 'arm'
-  armv6l: 'arm'
-
-go_arch: "{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
+_cadvisor_go_ansible_arch: "{{ {'i386': '386',
+                            'x86_64': 'amd64',
+                            'aarch64': 'arm64',
+                            'armv7l': 'armv7',
+                            'armv6l': 'armv6'}.get(ansible_architecture, ansible_architecture) }}"
 _cadvisor_repo: "google/cadvisor"
 _github_api_headers: "{{ {'GITHUB_TOKEN': lookup('ansible.builtin.env', 'GITHUB_TOKEN')} if (lookup('ansible.builtin.env', 'GITHUB_TOKEN')) else {} }}"
+_cadvisor_binaries: ['cadvisor']

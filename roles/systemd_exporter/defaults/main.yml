@@ -1,10 +1,8 @@
 ---
 systemd_exporter_version: 0.6.0
-systemd_exporter_binary_local_dir: ""
 systemd_exporter_binary_url: "https://github.com/{{ _systemd_exporter_repo }}/releases/download/v{{ systemd_exporter_version }}/\
-                                    systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+                                    systemd_exporter-{{ systemd_exporter_version }}.{{ ansible_system | lower }}-{{ _systemd_exporter_go_ansible_arch }}.tar.gz"
 systemd_exporter_checksums_url: "https://github.com/{{ _systemd_exporter_repo }}/releases/download/v{{ systemd_exporter_version }}/sha256sums.txt"
-systemd_exporter_skip_install: false
 systemd_exporter_web_listen_address: "0.0.0.0:9558"
 
 systemd_exporter_tls_server_config: {}
@@ -19,8 +17,9 @@ systemd_exporter_unit_exclude: ""
 systemd_exporter_binary_install_dir: "/usr/local/bin"
 systemd_exporter_system_group: "systemd-exporter"
 systemd_exporter_system_user: "{{ systemd_exporter_system_group }}"
+systemd_exporter_config_dir: "/etc/systemd_exporter"
 
 systemd_exporter_log_level: info
 
 # Local path to stash the archive and its extraction
-systemd_exporter_archive_path: /tmp
+systemd_exporter_local_cache_path: "/tmp/systemd_exporter-{{ ansible_system | lower }}-{{ _systemd_exporter_go_ansible_arch }}/{{ systemd_exporter_version }}"

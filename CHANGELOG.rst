@@ -4,6 +4,105 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.22.0
+=======
+
+Minor Changes
+-------------
+
+- feat: Add nvidia_gpu_exporter (https://github.com/prometheus-community/ansible/pull/441)
+
+Bugfixes
+--------
+
+- bugfix: update default home directory (https://github.com/prometheus-community/ansible/pull/442)
+
+v0.21.0
+=======
+
+Bugfixes
+--------
+
+- fix: remove unused variable (https://github.com/prometheus-community/ansible/pull/437)
+
+v0.20.3
+=======
+
+v0.20.1
+=======
+
+Bugfixes
+--------
+
+- fix: alertmanager deprecated PIDFile= path warning (https://github.com/prometheus-community/ansible/pull/155)
+
+v0.20.0
+=======
+
+Minor Changes
+-------------
+
+- minor(ci): detect unused ansible variables (https://github.com/prometheus-community/ansible/pull/422)
+
+v0.19.0
+=======
+
+Minor Changes
+-------------
+
+- minor: bump support for ansible from v2.16.* to v2.17.* (https://github.com/prometheus-community/ansible/pull/414)
+
+Bugfixes
+--------
+
+- fix: remove EOL platforms for current ones (https://github.com/prometheus-community/ansible/pull/395)
+
+v0.18.1
+=======
+
+Bugfixes
+--------
+
+- fix: remove EOL platforms for current ones (https://github.com/prometheus-community/ansible/pull/395)
+
+v0.18.0
+=======
+
+Minor Changes
+-------------
+
+- enhancement: adding env/container labels options (https://github.com/prometheus-community/ansible/pull/407)
+
+Bugfixes
+--------
+
+- fix: ansible-community/eol-ansible for 2.9/2.10/2.11 tests (https://github.com/prometheus-community/ansible/pull/416)
+
+v0.17.2
+=======
+
+Bugfixes
+--------
+
+- fix: ansible-community/eol-ansible for 2.9/2.10/2.11 tests (https://github.com/prometheus-community/ansible/pull/416)
+
+v0.17.1
+=======
+
+Bugfixes
+--------
+
+- fix(ci): limit number of parallel tests to avoid github api limits (https://github.com/prometheus-community/ansible/pull/397)
+
+v0.17.0
+=======
+
+v0.16.4
+=======
+
+v0.16.3
+=======
+
 v0.16.2
 =======
 

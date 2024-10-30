@@ -2,40 +2,34 @@
 - name: Preflight
   ansible.builtin.include_tasks:
     file: preflight.yml
-    apply:
-      tags:
-        - redis_exporter_install
-        - redis_exporter_configure
-        - redis_exporter_run
   tags:
     - redis_exporter_install
     - redis_exporter_configure
     - redis_exporter_run
 
 - name: Install
-  ansible.builtin.include_tasks:
-    file: install.yml
-    apply:
-      become: true
-      tags:
-        - redis_exporter_install
-  when:
-    ( not __redis_exporter_is_installed.stat.exists ) or
-    ( (__redis_exporter_current_version_output.stderr_lines | length > 0)
-      and (__redis_exporter_current_version_output.stderr_lines[0].split(" ")[2] != redis_exporter_version) ) or
-    ( (__redis_exporter_current_version_output.stdout_lines | length > 0)
-      and (__redis_exporter_current_version_output.stdout_lines[0].split(" ")[2] != redis_exporter_version) ) or
-    ( redis_exporter_binary_local_dir | length > 0 )
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: install.yml
+  vars:
+    _common_local_cache_path: "{{ redis_exporter_local_cache_path }}"
+    _common_binaries: "{{ _redis_exporter_binaries }}"
+    _common_binary_install_dir: "{{ redis_exporter_binary_install_dir }}"
+    _common_binary_url: "{{ redis_exporter_binary_url }}"
+    _common_checksums_url: "{{ redis_exporter_checksums_url }}"
+    _common_system_group: "{{ redis_exporter_system_group }}"
+    _common_system_user: "{{ redis_exporter_system_user }}"
+    _common_config_dir: "{{ redis_exporter_config_dir }}"
+    _common_binary_unarchive_opts: ['--strip-components=1']
   tags:
     - redis_exporter_install
 
 - name: SELinux
-  ansible.builtin.include_tasks:
-    file: selinux.yml
-    apply:
-      become: true
-      tags:
-        - redis_exporter_configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ redis_exporter_web_listen_address | urlsplit('port') }}"
   when: ansible_selinux.status == "enabled"
   tags:
     - redis_exporter_configure
@@ -43,10 +37,6 @@
 - name: Configure
   ansible.builtin.include_tasks:
     file: configure.yml
-    apply:
-      become: true
-      tags:
-        - redis_exporter_configure
   tags:
     - redis_exporter_configure
 
