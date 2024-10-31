@@ -10,6 +10,7 @@ v0.22.0
 Minor Changes
 -------------
 
+- enhancement(prometheus): support prometheus2 .yml rule file format (https://github.com/prometheus-community/ansible/pull/333)
 - feat: Add nvidia_gpu_exporter (https://github.com/prometheus-community/ansible/pull/441)
 
 Bugfixes

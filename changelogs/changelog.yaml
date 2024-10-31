@@ -7,6 +7,7 @@ releases:
         - 'bugfix: update default home directory (https://github.com/prometheus-community/ansible/pull/442)'
       minor_changes:
         - 'feat: Add nvidia_gpu_exporter (https://github.com/prometheus-community/ansible/pull/441)'
+        - 'enhancement(prometheus): support prometheus2 .yml rule file format (https://github.com/prometheus-community/ansible/pull/333)'
       trivial:
         - 'refactor: use molecule containers from ghcr to avoid rate limit (https://github.com/prometheus-community/ansible/pull/450)'
         - 'refactor: move naive assertion to common role (https://github.com/prometheus-community/ansible/pull/443)'
