@@ -413,6 +413,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;{%</span> <span class="pre">if</span> <span class="pre">(ansible_pkg_mgr</span> <span class="pre">==</span> <span class="pre">'apt')</span> <span class="pre">%}{{</span> <span class="pre">('python-apt'</span> <span class="pre">if</span> <span class="pre">ansible_python_version</span> <span class="pre">is</span> <span class="pre">version('3',</span> <span class="pre">'&lt;')</span> <span class="pre">else</span> <span class="pre">'python3-apt')</span> <span class="pre">}}</span> <span class="pre">{%</span> <span class="pre">else</span> <span class="pre">%}{%</span> <span class="pre">endif</span> <span class="pre">%}&quot;</span></code></p>
 </div></td>
 </tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-preflight--_common_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-preflight-common-web-listen-address"><strong>_common_web_listen_address</strong></p>
+<a class="ansibleOptionLink" href="#parameter-preflight--_common_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Address on which to listen</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
 </tbody>
 </table>
 </section>
