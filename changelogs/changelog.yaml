@@ -10,6 +10,7 @@ releases:
         - 'enhancement(prometheus): support prometheus2 .yml rule file format (https://github.com/prometheus-community/ansible/pull/333)'
       trivial:
         - 'refactor: use molecule containers from ghcr to avoid rate limit (https://github.com/prometheus-community/ansible/pull/450)'
+        - 'refactor(nvidia_gpu_exporter): move naive assertion to common role (https://github.com/prometheus-community/ansible/pull/448)'
         - 'refactor: move naive assertion to common role (https://github.com/prometheus-community/ansible/pull/443)'
     release_date: '2024-10-29'
   0.21.0:
