@@ -3,22 +3,14 @@
   ansible.builtin.include_role:
     name: prometheus.prometheus._common
     tasks_from: preflight.yml
+  vars:
+    _common_web_listen_address: "{{ smartctl_exporter_web_listen_address }}"
 
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
     that:
       - >-
         smartctl_exporter_web_listen_address is string
-
-- name: Naive assertion of proper listen address
-  ansible.builtin.assert:
-    that:
-      - >-
-        [smartctl_exporter_web_listen_address] |
-          flatten |
-          reject('match', '.+:\\d+$') |
-          list |
-          length == 0
 
 - name: Assert that TLS config is correct
   when: smartctl_exporter_tls_server_config | length > 0
