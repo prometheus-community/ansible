@@ -176,3 +176,4 @@
   ansible.builtin.file:
     path: "{{ prometheus_config_dir }}/scrapes"
     state: absent
+  become: true
