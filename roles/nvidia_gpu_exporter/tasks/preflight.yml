@@ -8,8 +8,8 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    nvidia_gpu_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _nvidia_gpu_exporter_repo }}/releases/latest', headers=_nvidia_gpu_exporter_github_api_headers,
-                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+    nvidia_gpu_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _nvidia_gpu_exporter_repo }}/releases/latest',
+                                  headers=_nvidia_gpu_exporter_github_api_headers, split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
   until: nvidia_gpu_exporter_version is version('0.0.0', '>=')
   retries: 10
