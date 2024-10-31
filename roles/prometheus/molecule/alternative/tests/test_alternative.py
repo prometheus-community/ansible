@@ -27,7 +27,7 @@ def test_directories(host, dirs):
     "files",
     [
         "/opt/prom/etc/prometheus.yml",
-        "/opt/prom/etc/rules/ansible_managed.rules",
+        "/opt/prom/etc/rules/ansible_managed.yml",
         "/opt/prom/etc/file_sd/node.yml",
         "/opt/prom/etc/file_sd/docker.yml",
         "/opt/prom/etc/scrape_configs/empty_scrapes.yml",

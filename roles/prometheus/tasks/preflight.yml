@@ -65,6 +65,17 @@
     - prometheus_alertmanager_config == []
     - prometheus_alert_rules != []
 
+- name: Alert when alert rules files are found in the old .rules format
+  ansible.builtin.debug:
+    msg: >
+      prometheus_alert_rules_files contains rules in the old .rules file format.
+      This format has been deprecated in favour of the new YAML format since Prometheus v2.x.
+      You can update your rules using promtool: promtool update rules <filenames>
+
+      If your rules are already in the YAML format but with the .rules extension, you can safely ignore this message,
+      or rename the files to <filename>.yaml or <filename>.yml to get rid of it.
+  when: prometheus_alert_rules_files | select('search', '.rules$') | list | length > 0
+
 - name: Discover latest version
   ansible.builtin.set_fact:
     prometheus_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _prometheus_repo}}/releases/latest', headers=_github_api_headers,

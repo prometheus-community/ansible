@@ -125,19 +125,20 @@ argument_specs:
         default: "prometheus.yml.j2"
       prometheus_alert_rules:
         description:
-          - "Full list of alerting rules which will be copied to C({{ prometheus_config_dir }}/rules/ansible_managed.rules)."
-          - "Alerting rules can be also provided by other files located in C({{ prometheus_config_dir }}/rules/) which have C(*.rules) extension"
+          - "Full list of alerting rules which will be copied to C({{ prometheus_config_dir }}/rules/ansible_managed.yml)."
+          - "Alerting rules can be also provided by other files located in C({{ prometheus_config_dir }}/rules/) which have a C(*.yml) or C(*.yaml) extension"
           - "Please see default values in role defaults/main.yml"
         type: "list"
         elements: "dict"
       prometheus_alert_rules_files:
         description:
           - "List of folders where ansible will look for files containing alerting rules which will be copied to C({{ prometheus_config_dir }}/rules/)."
-          - "Files must have C(*.rules) extension"
+          - "Files must have a C(*.yml) or C(*.yaml) extension"
         type: "list"
         elements: "str"
         default:
-          - "prometheus/rules/*.rules"
+          - "prometheus/rules/*.yml"
+          - "prometheus/rules/*.yaml"
       prometheus_static_targets_files:
         description:
           - "List of folders where ansible will look for files containing custom static target configuration files which will be copied to C({{ prometheus_config_dir }}/file_sd/)."
