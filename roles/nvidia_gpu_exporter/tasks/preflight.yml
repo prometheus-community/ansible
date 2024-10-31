@@ -3,16 +3,8 @@
   ansible.builtin.include_role:
     name: prometheus.prometheus._common
     tasks_from: preflight.yml
-
-- name: Naive assertion of proper listen address
-  ansible.builtin.assert:
-    that:
-      - >-
-        [nvidia_gpu_exporter_web_listen_address] |
-          flatten |
-          reject('match', '.+:\\d+$') |
-          list |
-          length == 0
+  vars:
+    _common_web_listen_address: "{{ nvidia_gpu_exporter_web_listen_address }}"
 
 - name: Discover latest version
   ansible.builtin.set_fact:
