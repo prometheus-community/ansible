@@ -74,9 +74,20 @@
   when:
     - prometheus_alert_rules != []
     - not prometheus_agent_mode
+  register: __rules_managed_copied
   notify:
     - reload prometheus
   become: true
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure
+
+- name: Register previously copied rules
+  ansible.builtin.find:
+    paths: "{{ prometheus_config_dir }}/rules/"
+  when: prometheus_provisioning_synced
+  register: __rules_present
   tags:
     - prometheus
     - configure
@@ -96,6 +107,30 @@
   notify:
     - reload prometheus
   become: true
+  register: __rules_copied
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure
+
+- name: Register present and copied rules
+  ansible.builtin.set_fact:
+    __rules_present_list: "{{ __rules_present | json_query('files[*].path') | default([]) }}"
+    __rules_copied_list: "{{ __rules_copied | json_query('results[*].dest') | default([]) }}"
+    __rules_managed_copied_list: "{{ [__rules_managed_copied | json_query('dest')] | default([]) }}"
+  when: prometheus_provisioning_synced
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure
+
+- name: "Remove rules not present on deployer machine (synchronize)"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop: "{{ __rules_present_list | difference(__rules_copied_list) | difference(__rules_managed_copied_list) }}"
+  become: true
+  when: prometheus_provisioning_synced and not ansible_check_mode
   tags:
     - prometheus
     - configure

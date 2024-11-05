@@ -139,6 +139,11 @@ argument_specs:
         default:
           - "prometheus/rules/*.yml"
           - "prometheus/rules/*.yaml"
+      prometheus_provisioning_synced:
+        description:
+          - "Should the provisioning of alert rule files be kept synced. If true, previous provisioned files will be removed if not referenced anymore."
+        type: bool
+        default: false
       prometheus_static_targets_files:
         description:
           - "List of folders where ansible will look for files containing custom static target configuration files which will be copied to C({{ prometheus_config_dir }}/file_sd/)."
