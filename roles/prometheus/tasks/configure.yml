@@ -70,7 +70,7 @@
     owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
-    validate: "{{ _prometheus_binary_install_dir }}/promtool check rules %s"
+    validate: "{{ prometheus_binary_install_dir }}/promtool check rules %s"
   when:
     - prometheus_alert_rules != []
     - not prometheus_agent_mode
@@ -89,7 +89,7 @@
     owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
-    validate: "{{ _prometheus_binary_install_dir }}/promtool check rules %s"
+    validate: "{{ prometheus_binary_install_dir }}/promtool check rules %s"
   loop: "{{ prometheus_alert_rules_files | map('ansible.builtin.fileglob') | flatten }}"
   when:
     - not prometheus_agent_mode
@@ -109,7 +109,7 @@
     owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
-    validate: "{{ _prometheus_binary_install_dir }}/promtool check config %s"
+    validate: "{{ prometheus_binary_install_dir }}/promtool check config %s"
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   notify:
     - reload prometheus

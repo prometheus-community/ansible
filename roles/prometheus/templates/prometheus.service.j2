@@ -12,7 +12,7 @@ Environment="GOMAXPROCS={{ ansible_processor_vcpus|default(ansible_processor_cou
 User={{ prometheus_system_user }}
 Group={{ prometheus_system_group }}
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStart={{ _prometheus_binary_install_dir }}/prometheus \
+ExecStart={{ prometheus_binary_install_dir }}/prometheus \
 {% if not prometheus_agent_mode %}
   --storage.tsdb.path={{ prometheus_db_dir }} \
 {% if prometheus_version is version('2.7.0', '>=') %}
