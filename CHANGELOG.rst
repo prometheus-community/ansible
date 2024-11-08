@@ -4,6 +4,14 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.22.1
+=======
+
+Bugfixes
+--------
+
+- fix(prometheus): remove old internal variable remnants (https://github.com/prometheus-community/ansible/pull/456)
+
 v0.22.0
 =======
 
