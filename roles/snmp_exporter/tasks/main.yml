@@ -47,5 +47,10 @@
     name: snmp_exporter
     state: started
     enabled: true
+  register: snmp_exporter_service_result
   tags:
     - snmp_exporter_run
+  failed_when:
+    - snmp_exporter_service_result.failed
+    - not ansible_check_mode
+    - snmp_exporter_service_result.msg != 'Could not find the requested service snmp_exporter: host'
