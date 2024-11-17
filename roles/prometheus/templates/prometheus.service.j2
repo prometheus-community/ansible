@@ -22,7 +22,11 @@ ExecStart={{ prometheus_binary_install_dir }}/prometheus \
   --storage.tsdb.retention={{ prometheus_storage_retention }} \
 {% endif %}
 {% else %}
+{% if prometheus_version is version('3.0.0', '>=') %}
+  --agent \
+{% else %}
   --enable-feature=agent \
+{% endif %}
   --storage.agent.path={{ prometheus_db_dir }} \
 {% endif %}
 {% if (prometheus_version is version('2.24.0', '>=')) and (prometheus_web_config.values() | map('length') | select('gt', 0) | list is any) %}

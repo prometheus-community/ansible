@@ -36,6 +36,8 @@
     group: "{{ prometheus_system_group }}"
     mode: 0775
   loop:
+    - "{{ prometheus_config_dir }}/consoles"
+    - "{{ prometheus_config_dir }}/console_libraries"
     - "{{ prometheus_config_dir }}/rules"
     - "{{ prometheus_config_dir }}/file_sd"
     - "{{ prometheus_config_dir }}/scrape_configs"
@@ -58,6 +60,7 @@
   notify:
     - restart prometheus
   become: true
+  when: prometheus_version is version('3.0.0', '<')
   tags:
     - prometheus
     - configure
