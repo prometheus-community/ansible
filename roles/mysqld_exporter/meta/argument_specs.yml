@@ -10,7 +10,7 @@ argument_specs:
     options:
       mysqld_exporter_version:
         description: "MySQLd exporter package version. Also accepts latest as parameter."
-        default: "0.15.1"
+        default: "0.16.0"
       mysqld_exporter_binary_url:
         description: "URL of the mysqld_exporter binaries .tar.gz file"
         default: "https://github.com/{{ _mysqld_exporter_repo }}/releases/download/v{{ mysqld_exporter_version }}/mysqld_exporter-{{ mysqld_exporter_version }}.{{ ansible_system | lower }}-{{ _mysqld_exporter_go_ansible_arch }}.tar.gz"
