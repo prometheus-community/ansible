@@ -1,5 +1,5 @@
 ---
-bind_exporter_version: 0.7.0
+bind_exporter_version: 0.8.0
 bind_exporter_binary_url: "https://github.com/{{ _bind_exporter_repo }}/releases/download/v{{ bind_exporter_version }}/\
                            bind_exporter-{{ bind_exporter_version }}.{{ ansible_system | lower }}-{{ _bind_exporter_go_ansible_arch }}.tar.gz"
 bind_exporter_checksums_url: "https://github.com/{{ _bind_exporter_repo }}/releases/download/v{{ bind_exporter_version }}/sha256sums.txt"
