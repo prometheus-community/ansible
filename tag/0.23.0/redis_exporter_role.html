@@ -1,0 +1,649 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="2.16.0" name="antsibull-docs" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>prometheus.prometheus.redis_exporter role – Prometheus redis_exporter &mdash; Prometheus.Prometheus Collection  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5707b69d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/ansible.css?v=c5b67dd2" />
+      <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd-ethical-ads.css?v=289b023e" />
+
+  
+    <link rel="shortcut icon" href="_static/images/Ansible-Mark-RGB_Black.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7f41d439"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="prometheus.prometheus.smartctl_exporter role – Prometheus Smartctl Exporter" href="smartctl_exporter_role.html" />
+    <link rel="prev" title="prometheus.prometheus.pushgateway role – Prometheus Pushgateway" href="pushgateway_role.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
+
+
+
+
+</head>
+
+<body class="wy-body-for-nav"><!-- extra body elements for Ansible beyond RTD Sphinx Theme -->
+
+<div class="DocSite-globalNav ansibleNav">
+  <ul>
+    <li><a href="https://www.ansible.com/blog" target="_blank">Blog</a></li>
+    <li><a href="https://forum.ansible.com/" target="_blank">Ansible community forum</a></li>
+    <li><a href="https://docs.ansible.com/" target="_blank">Documentation</a></li>
+  </ul>
+</div>
+
+<a class="DocSite-nav" href="https://prometheus-community.github.io/ansible/tag/v0.0.1" style="padding-bottom: 30px;">
+
+  <img class="DocSiteNav-logo"
+    src="_static/images/Ansible-Mark-RGB_White.png"
+    alt="Ansible Logo">
+  <div class="DocSiteNav-title">Prometheus.Prometheus Collection Docs</div>
+</a>
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Prometheus.Prometheus Collection
+          </a><!--- Based on https://github.com/rtfd/sphinx_rtd_theme/pull/438/files -->
+
+<div class="version">
+  
+    
+  
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <label class="sr-only" for="q">Search docs:</label>
+    <input type="text" class="st-default-search-input" id="q" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+  
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="_common_role.html">prometheus.prometheus._common role</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alertmanager_role.html">prometheus.prometheus.alertmanager role – Prometheus Alertmanager service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bind_exporter_role.html">prometheus.prometheus.bind_exporter role – Prometheus BIND Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackbox_exporter_role.html">prometheus.prometheus.blackbox_exporter role – Deploy and manage Prometheus blackbox exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cadvisor_role.html">prometheus.prometheus.cadvisor role – cAdvisor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chrony_exporter_role.html">prometheus.prometheus.chrony_exporter role – Prometheus Chrony Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fail2ban_exporter_role.html">prometheus.prometheus.fail2ban_exporter role – Prometheus fail2ban_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="influxdb_exporter_role.html">prometheus.prometheus.influxdb_exporter role – Prometheus Influxdb Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipmi_exporter_role.html">prometheus.prometheus.ipmi_exporter role – Prometheus ipmi_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memcached_exporter_role.html">prometheus.prometheus.memcached_exporter role – Prometheus memcached_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mongodb_exporter_role.html">prometheus.prometheus.mongodb_exporter role – Prometheus mongodb_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mysqld_exporter_role.html">prometheus.prometheus.mysqld_exporter role – Prometheus MySQLd Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nginx_exporter_role.html">prometheus.prometheus.nginx_exporter role – Prometheus nginx_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node_exporter_role.html">prometheus.prometheus.node_exporter role – Prometheus Node Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nvidia_gpu_exporter_role.html">prometheus.prometheus.nvidia_gpu_exporter role – Prometheus Nvidia GPU Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="postgres_exporter_role.html">prometheus.prometheus.postgres_exporter role – Prometheus PostgreSQL Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="process_exporter_role.html">prometheus.prometheus.process_exporter role – Prometheus Process exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prometheus_role.html">prometheus.prometheus.prometheus role – Installs and configures prometheus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pushgateway_role.html">prometheus.prometheus.pushgateway role – Prometheus Pushgateway</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">prometheus.prometheus.redis_exporter role – Prometheus redis_exporter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#entry-point-main-prometheus-redis-exporter">Entry point <code class="docutils literal notranslate"><span class="pre">main</span></code> – Prometheus redis_exporter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#authors">Authors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#collection-links">Collection links</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="smartctl_exporter_role.html">prometheus.prometheus.smartctl_exporter role – Prometheus Smartctl Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smokeping_prober_role.html">prometheus.prometheus.smokeping_prober role – Prometheus Smokeping Prober</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snmp_exporter_role.html">prometheus.prometheus.snmp_exporter role – Prometheus SNMP exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="systemd_exporter_role.html">prometheus.prometheus.systemd_exporter role – Prometheus Systemd Exporter</a></li>
+</ul>
+<!-- extra nav elements for Ansible beyond RTD Sphinx Theme -->
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Prometheus.Prometheus Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">prometheus.prometheus.redis_exporter role – Prometheus redis_exporter</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+  
+           <div itemprop="articleBody">
+             
+  <span class="target" id="ansible-collections-prometheus-prometheus-redis-exporter-role"></span><section id="prometheus-prometheus-redis-exporter-role-prometheus-redis-exporter">
+<h1>prometheus.prometheus.redis_exporter role – Prometheus redis_exporter<a class="headerlink" href="#prometheus-prometheus-redis-exporter-role-prometheus-redis-exporter" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/prometheus/prometheus/">prometheus.prometheus collection</a> (version 0.23.0).</p>
+<p>It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
+To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
+<p>To install it use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">prometheus.prometheus</span></code>.</p>
+<p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">prometheus.prometheus.redis_exporter</span></code>.</p>
+</div>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#entry-point-main-prometheus-redis-exporter" id="id1">Entry point <code class="docutils literal notranslate"><span class="pre">main</span></code> – Prometheus redis_exporter</a></p>
+<ul>
+<li><p><a class="reference internal" href="#synopsis" id="id2">Synopsis</a></p></li>
+<li><p><a class="reference internal" href="#parameters" id="id3">Parameters</a></p></li>
+<li><p><a class="reference internal" href="#authors" id="id4">Authors</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="entry-point-main-prometheus-redis-exporter">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Entry point <code class="docutils literal notranslate"><span class="pre">main</span></code> – Prometheus redis_exporter</a><a class="headerlink" href="#entry-point-main-prometheus-redis-exporter" title="Link to this heading"></a></h2>
+<section id="synopsis">
+<h3><a class="toc-backref" href="#id2" role="doc-backlink">Synopsis</a><a class="headerlink" href="#synopsis" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Deploy prometheus <a class="reference external" href="https://github.com/oliver006/redis_exporter">redis exporter</a> using ansible</p></li>
+</ul>
+</section>
+<section id="parameters">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Parameters</a><a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<table class="longtable ansible-option-table docutils align-default" style="width: 100%">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_addr"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-addr"><strong>redis_exporter_addr</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_addr" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Address of the Redis instance</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;redis://localhost:6379&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_binary_install_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-binary-install-dir"><strong>redis_exporter_binary_install_dir</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_binary_install_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p><em>Advanced</em></p>
+<p>Directory to install redis_exporter binary</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/usr/local/bin&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_binary_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-binary-url"><strong>redis_exporter_binary_url</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>URL of the redis_exporter binaries .tar.gz file</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_redis_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">redis_exporter_version</span> <span class="pre">}}/redis_exporter-v{{</span> <span class="pre">redis_exporter_version</span> <span class="pre">}}.{{</span> <span class="pre">ansible_system</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_redis_exporter_go_ansible_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_check_key_groups"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-check-key-groups"><strong>redis_exporter_check_key_groups</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_check_key_groups" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>List of LUA regexes for classifying keys into groups. The regexes are applied in specified order to individual keys, and the group name is generated by concatenating all capture groups of the first regex that matches a key. A key will be tracked under the unclassified group if none of the specified regexes matches it.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_check_keys"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-check-keys"><strong>redis_exporter_check_keys</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_check_keys" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>List of key patterns to export value and length/size, eg: db3=user_count will export key user_count from db 3. db defaults to 0 if omitted. The key patterns specified with this flag will be found using SCAN. Use this option if you need glob pattern matching; check-single-keys is faster for non-pattern keys. Warning: using –check-keys to match a very large number of keys can slow down the exporter to the point where it doesn’t finish scraping the redis instance.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_check_keys_batch_size"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-check-keys-batch-size"><strong>redis_exporter_check_keys_batch_size</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_check_keys_batch_size" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Approximate number of keys to process in each execution. This is basically the COUNT option that will be passed into the SCAN command as part of the execution of the key or key group metrics, see COUNT option. Larger value speeds up scanning. Still Redis is a single-threaded app, huge COUNT can affect production environment.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">1000</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_check_single_keys"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-check-single-keys"><strong>redis_exporter_check_single_keys</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_check_single_keys" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>List of keys to export value and length/size, eg: db3=user_count will export key user_count from db 3. db defaults to 0 if omitted. The keys specified with this flag will be looked up directly without any glob pattern matching. Use this option if you don’t need glob pattern matching; it is faster than check-keys.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_check_single_streams"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-check-single-streams"><strong>redis_exporter_check_single_streams</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_check_single_streams" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>List of streams to export info about streams, groups and consumers. The streams specified with this flag will be looked up directly without any glob pattern matching. Use this option if you don’t need glob pattern matching; it is faster than check-streams.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_check_streams"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-check-streams"><strong>redis_exporter_check_streams</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_check_streams" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>List of stream-patterns to export info about streams, groups and consumers. Syntax is the same as check-keys.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_checksums_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-checksums-url"><strong>redis_exporter_checksums_url</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_checksums_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>URL of the redis_exporter checksums file</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_redis_exporter_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">redis_exporter_version</span> <span class="pre">}}/sha256sums.txt&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_config_command"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-config-command"><strong>redis_exporter_config_command</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_config_command" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>What to use for the CONFIG command</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;CONFIG&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_config_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-config-dir"><strong>redis_exporter_config_dir</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_config_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Path to directory with redis_exporter configuration</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/etc/redis_exporter&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_connection_timeout"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-connection-timeout"><strong>redis_exporter_connection_timeout</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_connection_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Timeout for connection to Redis instance</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;15s&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_count_keys"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-count-keys"><strong>redis_exporter_count_keys</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_count_keys" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>List of patterns to count, eg: db3=sessions:* will count all keys with prefix sessions: from db 3. db defaults to 0 if omitted. Warning: The exporter runs SCAN to count the keys. This might not perform well on large databases.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_debug"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-debug"><strong>redis_exporter_debug</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_debug" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Verbose debug output</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_export_client_list"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-export-client-list"><strong>redis_exporter_export_client_list</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_export_client_list" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether to scrape Client List specific metrics</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_export_client_port"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-export-client-port"><strong>redis_exporter_export_client_port</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_export_client_port" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether to include the client’s port when exporting the client list. Warning: including the port increases the number of metrics generated and will make your Prometheus server take up more memory</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_incl_config_metrics"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-incl-config-metrics"><strong>redis_exporter_incl_config_metrics</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_incl_config_metrics" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether to include all config settings as metrics</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_incl_system_metrics"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-incl-system-metrics"><strong>redis_exporter_incl_system_metrics</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_incl_system_metrics" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether to include system metrics like total_system_memory_bytes</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_is_cluster"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-is-cluster"><strong>redis_exporter_is_cluster</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_is_cluster" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether this is a redis cluster (Enable this if you need to fetch key level data on a Redis Cluster).</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_is_tile38"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-is-tile38"><strong>redis_exporter_is_tile38</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_is_tile38" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether to scrape Tile38 specific metrics</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_local_cache_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-local-cache-path"><strong>redis_exporter_local_cache_path</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_local_cache_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp/redis_exporter-{{</span> <span class="pre">ansible_system</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_redis_exporter_go_ansible_arch</span> <span class="pre">}}/{{</span> <span class="pre">redis_exporter_version</span> <span class="pre">}}&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_log_format"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-log-format"><strong>redis_exporter_log_format</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_log_format" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Output format of log messages. One of: [txt, json]</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;txt&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_max_distinct_key_groups"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-max-distinct-key-groups"><strong>redis_exporter_max_distinct_key_groups</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_max_distinct_key_groups" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Maximum number of distinct key groups that can be tracked independently per Redis database. If exceeded, only key groups with the highest memory consumption within the limit will be tracked separately, all remaining key groups will be tracked under a single overflow key group.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">100</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_namespace"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-namespace"><strong>redis_exporter_namespace</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_namespace" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Namespace for the metrics</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;redis&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_password"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-password"><strong>redis_exporter_password</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Password of the Redis instance</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_passwords"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-passwords"><strong>redis_exporter_passwords</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_passwords" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Dictionary with passwords for instances.</p>
+<p>Read more official <a class="reference external" href="https://github.com/oliver006/redis_exporter?tab=readme-ov-file#authenticating-with-redis">documentation</a></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">{}</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_ping_on_connect"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-ping-on-connect"><strong>redis_exporter_ping_on_connect</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_ping_on_connect" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether to ping the redis instance after connecting and record the duration as a metric.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_redact_config_metrics"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-redact-config-metrics"><strong>redis_exporter_redact_config_metrics</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_redact_config_metrics" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether to redact config settings that include potentially sensitive information like passwords.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_redis_only_metrics"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-redis-only-metrics"><strong>redis_exporter_redis_only_metrics</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_redis_only_metrics" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether to also export go runtime metrics</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_script"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-script"><strong>redis_exporter_script</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_script" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>List of path(s) to Redis Lua script(s) for gathering extra metrics.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_set_client_name"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-set-client-name"><strong>redis_exporter_set_client_name</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_set_client_name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether to set client name to redis_exporter</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">false</span></code></p></li>
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">true</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_skip_tls_verification"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-skip-tls-verification"><strong>redis_exporter_skip_tls_verification</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_skip_tls_verification" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether to to skip TLS verification when the exporter connects to a Redis instance</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-system-group"><strong>redis_exporter_system_group</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p><em>Advanced</em></p>
+<p>System group for redis_exporter</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;redis-exp&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-system-user"><strong>redis_exporter_system_user</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p><em>Advanced</em></p>
+<p>redis_exporter user</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;redis-exp&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_ca_cert_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-ca-cert-file"><strong>redis_exporter_tls_ca_cert_file</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_ca_cert_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Name of the CA certificate file (including full path) if the server requires TLS client authentication</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_client_cert_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-client-cert-file"><strong>redis_exporter_tls_client_cert_file</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_client_cert_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Name the client cert file (including full path) if the server requires TLS client authentication</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_client_key_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-client-key-file"><strong>redis_exporter_tls_client_key_file</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_client_key_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Name of the client key file (including full path) if the server requires TLS client authentication</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_server_ca_cert_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-server-ca-cert-file"><strong>redis_exporter_tls_server_ca_cert_file</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_server_ca_cert_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Name of the CA certificate file (including full path) if the web interface and telemetry should use TLS</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_server_cert_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-server-cert-file"><strong>redis_exporter_tls_server_cert_file</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_server_cert_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Name of the server certificate file (including full path) if the web interface and telemetry should use TLS</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_server_key_file"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-server-key-file"><strong>redis_exporter_tls_server_key_file</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_server_key_file" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Name of the server key file (including full path) if the web interface and telemetry should use TLS</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_tls_server_min_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-tls-server-min-version"><strong>redis_exporter_tls_server_min_version</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_tls_server_min_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Minimum TLS version that is acceptable by the web interface and telemetry when using TLS</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;TLS1.2&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-user"><strong>redis_exporter_user</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>User name to use for authentication (Redis ACL for Redis 6.0 and newer)</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-version"><strong>redis_exporter_version</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>redis_exporter package version. Also accepts latest as parameter.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;1.66.0&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-web-listen-address"><strong>redis_exporter_web_listen_address</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Address to listen on for web interface and telemetry</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9121&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--redis_exporter_web_telemetry_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-redis-exporter-role-parameter-main-redis-exporter-web-telemetry-path"><strong>redis_exporter_web_telemetry_path</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--redis_exporter_web_telemetry_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Path under which to expose metrics</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/metrics&quot;</span></code></p>
+</div></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="authors">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Authors</a><a class="headerlink" href="#authors" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Prometheus Community</p></li>
+</ul>
+<section id="collection-links">
+<h4>Collection links<a class="headerlink" href="#collection-links" title="Link to this heading"></a></h4>
+<ul class="ansible-links">
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/prometheus-community/ansible/issues" rel="noopener external" target="_blank">Issue Tracker</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://prometheus.io" rel="noopener external" target="_blank">Homepage</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/prometheus-community/ansible" rel="noopener external" target="_blank">Repository (Sources)</a></span></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+<footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pushgateway_role.html" class="btn btn-neutral float-left" title="prometheus.prometheus.pushgateway role – Prometheus Pushgateway" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="smartctl_exporter_role.html" class="btn btn-neutral float-right" title="prometheus.prometheus.smartctl_exporter role – Prometheus Smartctl Exporter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Prometheus.Prometheus Contributors.</p>
+  </div>
+
+  
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script><!-- extra footer elements for Ansible beyond RTD Sphinx Theme -->
+
+</body>
+</html>
