@@ -56,3 +56,5 @@
   until: "__service_status.ansible_facts.services['prometheus.service'].state == 'running'"
   retries: 10
   delay: 5
+  tags:
+    - prometheus_run
