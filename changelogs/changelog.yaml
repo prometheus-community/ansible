@@ -2,7 +2,9 @@
 ancestor:
 releases:
   0.23.0:
-    changes: {}
+    changes:
+      minor_changes:
+        - 'feat: Support Prometheus 3.0 (https://github.com/prometheus-community/ansible/pull/462)'
     release_date: '2024-11-18'
   0.22.1:
     changes:

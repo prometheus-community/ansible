@@ -7,6 +7,11 @@ Prometheus.Prometheus Release Notes
 v0.23.0
 =======
 
+Minor Changes
+-------------
+
+- feat: Support Prometheus 3.0 (https://github.com/prometheus-community/ansible/pull/462)
+
 v0.22.1
 =======
 
