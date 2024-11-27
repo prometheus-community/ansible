@@ -60,7 +60,7 @@
   notify:
     - restart prometheus
   become: true
-  when: prometheus_version is version('3.0.0', '<')
+  when: "lookup('ansible.builtin.fileglob', {{ prometheus_local_cache_path }}/consoles) != []"
   tags:
     - prometheus
     - configure
