@@ -48,6 +48,8 @@ verifier:
   env:
     PYTHONPATH: "${MOLECULE_PROJECT_DIRECTORY}/../../.testinfra:${PYTHONPATH}"
 provisioner:
+  env:
+    ANSIBLE_INJECT_FACT_VARS: false
   playbooks:
     converge: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/converge.yml"
   inventory:

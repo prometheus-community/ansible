@@ -13,7 +13,7 @@ argument_specs:
         default: "0.49.2"
       cadvisor_binary_url:
         description: "URL of the cadvisor binary file"
-        default: "https://github.com/{{ _cadvisor_repo }}/releases/download/v{{ cadvisor_version }}/cadvisor-v{{ cadvisor_version }}-{{ ansible_system | lower }}-{{ _cadvisor_go_ansible_arch }}"
+        default: "https://github.com/{{ _cadvisor_repo }}/releases/download/v{{ cadvisor_version }}/cadvisor-v{{ cadvisor_version }}-{{ ansible_facts['system'] | lower }}-{{ _cadvisor_go_ansible_arch }}"
       cadvisor_listen_ip:
         description: "Address on which cadvisor will listen"
         default: "0.0.0.0"
@@ -88,4 +88,4 @@ argument_specs:
         default: "/usr/local/bin"
       cadvisor_local_cache_path:
         description: 'Local path to stash the archive and its extraction'
-        default: "/tmp/cadvisor-{{ ansible_system | lower }}-{{ _cadvisor_go_ansible_arch }}/{{ cadvisor_version }}"
+        default: "/tmp/cadvisor-{{ ansible_facts['system'] | lower }}-{{ _cadvisor_go_ansible_arch }}/{{ cadvisor_version }}"
