@@ -1,7 +1,7 @@
 ---
 influxdb_exporter_version: 0.12.0
 influxdb_exporter_binary_url: "https://github.com/{{ _influxdb_exporter_repo }}/releases/download/v{{ influxdb_exporter_version }}/\
-                           influxdb_exporter-{{ influxdb_exporter_version }}.{{ ansible_system | lower }}-{{ _influxdb_exporter_go_ansible_arch }}.tar.gz"
+                           influxdb_exporter-{{ influxdb_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _influxdb_exporter_go_ansible_arch }}.tar.gz"
 influxdb_exporter_checksums_url: "https://github.com/{{ _influxdb_exporter_repo }}/releases/download/v{{ influxdb_exporter_version }}/sha256sums.txt"
 
 influxdb_exporter_web_listen_address: "0.0.0.0:9122"
@@ -19,4 +19,4 @@ influxdb_exporter_system_user: "{{ influxdb_exporter_system_group }}"
 
 influxdb_exporter_config_dir: "/etc/influxdb_exporter"
 # Local path to stash the archive and its extraction
-influxdb_exporter_local_cache_path: "/tmp/influxdb_exporter-{{ ansible_system | lower }}-{{ _influxdb_exporter_go_ansible_arch }}/{{ influxdb_exporter_version }}"
+influxdb_exporter_local_cache_path: "/tmp/influxdb_exporter-{{ ansible_facts['system'] | lower }}-{{ _influxdb_exporter_go_ansible_arch }}/{{ influxdb_exporter_version }}"

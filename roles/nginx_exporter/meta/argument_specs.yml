@@ -17,7 +17,7 @@ argument_specs:
         default: false
       nginx_exporter_binary_url:
         description: "URL of the nginx_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _nginx_exporter_repo }}/releases/download/v{{ nginx_exporter_version }}/nginx-prometheus-exporter_{{ nginx_exporter_version }}_{{ ansible_system | lower }}_{{ _nginx_exporter_go_ansible_arch }}.tar.gz"
+        default: "https://github.com/{{ _nginx_exporter_repo }}/releases/download/v{{ nginx_exporter_version }}/nginx-prometheus-exporter_{{ nginx_exporter_version }}_{{ ansible_facts['system'] | lower }}_{{ _nginx_exporter_go_ansible_arch }}.tar.gz"
       nginx_exporter_checksums_url:
         description: "URL of the nginx_exporter checksums file"
         default: "https://github.com/{{ _nginx_exporter_repo }}/releases/download/v{{ nginx_exporter_version }}/nginx-prometheus-exporter_{{ nginx_exporter_version }}_checksums.txt"
@@ -66,7 +66,7 @@ argument_specs:
         default: "nginx-exp"
       nginx_exporter_local_cache_path:
         description: "Local path to stash the archive and its extraction"
-        default: "/tmp/nginx_exporter-{{ ansible_system | lower }}-{{ _nginx_exporter_go_ansible_arch }}/{{ nginx_exporter_version }}"
+        default: "/tmp/nginx_exporter-{{ ansible_facts['system'] | lower }}-{{ _nginx_exporter_go_ansible_arch }}/{{ nginx_exporter_version }}"
       nginx_exporter_config_dir:
         description: "Path to directory with nginx_exporter configuration"
         default: "/etc/nginx_exporter"

@@ -13,7 +13,7 @@ argument_specs:
         default: "0.8.0"
       bind_exporter_binary_url:
         description: "URL of the bind_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _bind_exporter_repo }}/releases/download/v{{ bind_exporter_version }}/bind_exporter-{{ bind_exporter_version }}.{{ ansible_system | lower }}-{{ _bind_exporter_go_ansible_arch }}.tar.gz"
+        default: "https://github.com/{{ _bind_exporter_repo }}/releases/download/v{{ bind_exporter_version }}/bind_exporter-{{ bind_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _bind_exporter_go_ansible_arch }}.tar.gz"
       bind_exporter_checksums_url:
         description: "URL of the bind_exporter checksums file"
         default: "https://github.com/{{ _bind_exporter_repo }}/releases/download/v{{ bind_exporter_version }}/sha256sums.txt"
@@ -81,4 +81,4 @@ argument_specs:
         default: "bind-exp"
       bind_exporter_local_cache_path:
         description: "Local path to stash the archive and its extraction"
-        default: "/tmp/bind_exporter-{{ ansible_system | lower }}-{{ _bind_exporter_go_ansible_arch }}/{{ bind_exporter_version }}"
+        default: "/tmp/bind_exporter-{{ ansible_facts['system'] | lower }}-{{ _bind_exporter_go_ansible_arch }}/{{ bind_exporter_version }}"

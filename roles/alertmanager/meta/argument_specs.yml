@@ -13,7 +13,7 @@ argument_specs:
         default: 0.27.0
       alertmanager_binary_url:
         description: "URL of the alertmanager binaries .tar.gz file"
-        default: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/alertmanager-{{ alertmanager_version }}.{{ ansible_system | lower }}-{{ _alertmanager_go_ansible_arch }}.tar.gz"
+        default: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/alertmanager-{{ alertmanager_version }}.{{ ansible_facts['system'] | lower }}-{{ _alertmanager_go_ansible_arch }}.tar.gz"
       alertmanager_checksums_url:
         description: "URL of the alertmanager checksums file"
         default: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/sha256sums.txt"
@@ -108,7 +108,7 @@ argument_specs:
         default: "extended"
       alertmanager_local_cache_path:
         description: 'Local path to stash the archive and its extraction'
-        default: "/tmp/alertmanager-{{ ansible_system | lower }}-{{ _alertmanager_go_ansible_arch }}/{{ alertmanager_version }}"
+        default: "/tmp/alertmanager-{{ ansible_facts['system'] | lower }}-{{ _alertmanager_go_ansible_arch }}/{{ alertmanager_version }}"
       alertmanager_system_user:
         description:
           - "I(Advanced)"

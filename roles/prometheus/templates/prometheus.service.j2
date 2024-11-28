@@ -8,7 +8,7 @@ After=local-fs.target
 
 [Service]
 Type=simple
-Environment="GOMAXPROCS={{ ansible_processor_vcpus|default(ansible_processor_count) }}"
+Environment="GOMAXPROCS={{ ansible_facts['processor_vcpus']|default(ansible_facts['processor_count']) }}"
 User={{ prometheus_system_user }}
 Group={{ prometheus_system_group }}
 ExecReload=/bin/kill -HUP $MAINPID
