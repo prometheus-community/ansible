@@ -5,6 +5,11 @@ blackbox_exporter_binary_url: "https://github.com/{{ _blackbox_exporter_repo }}/
 blackbox_exporter_checksums_url: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/sha256sums.txt"
 
 blackbox_exporter_web_listen_address: "0.0.0.0:9115"
+blackbox_exporter_web_config:
+  tls_server_config: {}
+  http_server_config: {}
+  basic_auth_users: {}
+
 
 blackbox_exporter_system_user: blackbox-exp
 blackbox_exporter_system_group: "{{ blackbox_exporter_system_user }}"
