@@ -49,3 +49,9 @@
     enabled: true
   tags:
     - blackbox_exporter_run
+
+- name: Display service errors
+  ansible.builtin.include_role:
+    name: service_debug
+  vars:
+    __service_name: blackbox_exporter
