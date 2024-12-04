@@ -3,7 +3,7 @@ _nvidia_gpu_exporter_go_ansible_arch: "{{ {'i386': 'i386',
                                  'x86_64': 'x86_64',
                                  'aarch64': 'arm64',
                                  'armv7l': 'armv7',
-                                 'armv6l': 'armv6'}.get(ansible_architecture, ansible_architecture) }}"
+                                 'armv6l': 'armv6'}.get(ansible_facts['architecture'], ansible_facts['architecture']) }}"
 _nvidia_gpu_exporter_repo: "utkuozdemir/nvidia_gpu_exporter"
 _nvidia_gpu_exporter_github_api_headers: "{{ {'GITHUB_TOKEN': lookup('ansible.builtin.env', 'GITHUB_TOKEN')} if (lookup('ansible.builtin.env', 'GITHUB_TOKEN')) else {} }}"
 _nvidia_gpu_exporter_binaries: ['nvidia_gpu_exporter']

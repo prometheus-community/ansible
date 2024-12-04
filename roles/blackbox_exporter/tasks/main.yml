@@ -30,7 +30,7 @@
     tasks_from: selinux.yml
   vars:
     _common_selinux_port: "{{ blackbox_exporter_web_listen_address | urlsplit('port') }}"
-  when: ansible_selinux.status == "enabled"
+  when: ansible_facts['selinux'].status == "enabled"
   tags:
     - blackbox_exporter_configure
 

@@ -43,7 +43,7 @@
 
 - name: Assert usage of systemd as an init system
   ansible.builtin.assert:
-    that: ansible_service_mgr == 'systemd'
+    that: ansible_facts['service_mgr'] == 'systemd'
     msg: "This module only works with systemd"
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
