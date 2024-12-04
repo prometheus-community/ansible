@@ -4,6 +4,7 @@ releases:
   0.23.1:
     changes:
       trivial:
+        - 'patch: New nginxinc/nginx-prometheus-exporter upstream release 1.4.0!  (https://github.com/prometheus-community/ansible/pull/485)'
         - 'patch: New prometheus/prometheus upstream release 3.0.1! (https://github.com/prometheus-community/ansible/pull/482)'
     release_date: '2024-12-03'
   0.23.0:
