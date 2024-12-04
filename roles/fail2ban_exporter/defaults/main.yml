@@ -1,5 +1,5 @@
 ---
-fail2ban_exporter_version: 0.10.1
+fail2ban_exporter_version: 0.10.2
 fail2ban_exporter_binary_url: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/\
                                fail2ban_exporter_{{ fail2ban_exporter_version }}_{{ ansible_system | lower }}_{{ _fail2ban_exporter_go_ansible_arch }}.tar.gz"
 fail2ban_exporter_checksums_url: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/\

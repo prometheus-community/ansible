@@ -10,7 +10,7 @@ argument_specs:
     options:
       fail2ban_exporter_version:
         description: "fail2ban_exporter package version. Also accepts latest as parameter."
-        default: "0.10.1"
+        default: "0.10.2"
       fail2ban_exporter_binary_url:
         description: "URL of the fail2ban_exporter binaries .tar.gz file"
         default: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/fail2ban_exporter_{{ fail2ban_exporter_version }}_{{ ansible_system | lower }}_{{ _fail2ban_exporter_go_ansible_arch }}.tar.gz"
