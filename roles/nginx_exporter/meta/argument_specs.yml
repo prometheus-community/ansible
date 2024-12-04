@@ -10,7 +10,7 @@ argument_specs:
     options:
       nginx_exporter_version:
         description: "nginx_exporter package version. Also accepts latest as parameter."
-        default: "1.3.0"
+        default: "1.4.0"
       nginx_exporter_plus:
         description: "Start the exporter for NGINX Plus."
         type: bool
