@@ -93,7 +93,7 @@
     group: "{{ prometheus_system_group }}"
     mode: 0640
     validate: "{{ prometheus_binary_install_dir }}/promtool check rules %s"
-  loop: "{{ prometheus_alert_rules_files | map('ansible.builtin.fileglob') | flatten }}"
+  with_fileglob: "{{ prometheus_alert_rules_files }}"
   when:
     - not prometheus_agent_mode
   notify:
