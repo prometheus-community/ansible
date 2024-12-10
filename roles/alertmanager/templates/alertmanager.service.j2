@@ -22,8 +22,8 @@ PIDFile=/run/alertmanager.pid
 {% else %}
 PIDFile=/var/run/alertmanager.pid
 {% endif %}
-User=alertmanager
-Group=alertmanager
+User={{ alertmanager_system_user }}
+Group={{ alertmanager_system_group }}
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart={{ alertmanager_binary_install_dir }}/alertmanager \
 {% for option, value in (alertmanager_cluster.items() | sort) %}
