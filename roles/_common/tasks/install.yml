@@ -119,6 +119,7 @@
         list_files: true
         extra_opts: "{{ _common_binary_unarchive_opts | default(omit, true) }}"
       check_mode: false
+      throttle: 1  # see prometheus-community/ansible#457
       when: __common_binary_basename is search('\.zip$|\.tar\.gz$')
 
 - name: "Check existence of binary install dir"
