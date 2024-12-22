@@ -1,5 +1,5 @@
 ---
-smartctl_exporter_version: 0.12.0
+smartctl_exporter_version: 0.13.0
 smartctl_exporter_binary_url: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/\
                            smartctl_exporter-{{ smartctl_exporter_version }}.{{ ansible_system | lower }}-{{ _smartctl_exporter_go_ansible_arch }}.tar.gz"
 smartctl_exporter_checksums_url: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/sha256sums.txt"
