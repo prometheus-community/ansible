@@ -6,13 +6,13 @@ driver:
   name: docker
 platforms:
   - name: almalinux-8
-    image: ghcr.io/test-kitchen/dokken/almalinux-8
+    image: ghcr.io/test-kitchen/dokken/almalinux-8:sha-f9f79cb
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
   - name: almalinux-9
-    image: ghcr.io/test-kitchen/dokken/almalinux-9
+    image: ghcr.io/test-kitchen/dokken/almalinux-9:sha-f9f79cb
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
