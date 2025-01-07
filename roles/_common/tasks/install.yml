@@ -78,20 +78,44 @@
       run_once: true
       when: (_common_checksums_url)
 
-    - name: "Download {{ __common_binary_basename }}"
-      ansible.builtin.get_url:
-        url: "{{ _common_binary_url }}"
-        dest: "{{ _common_local_cache_path }}/{{ _common_binary_name | default(__common_binary_basename) }}"
-        headers: "{{ __common_github_api_headers }}"
-        checksum: "{{ __common_binary_checksums[__common_binary_basename] | default(omit) }}"
-        mode: 0644
-      register: __common_download
-      until: __common_download is succeeded
-      retries: 5
-      delay: 2
-      # run_once: true  # <-- this can't be set due to multi-arch support
-      delegate_to: localhost
-      check_mode: false
+    - name: "Download binary"
+      block:
+        - name: "Download {{ __common_binary_basename }}"
+          ansible.builtin.get_url:
+            url: "{{ _common_binary_url }}"
+            dest: "{{ _common_local_cache_path }}/{{ _common_binary_name | default(__common_binary_basename) }}"
+            headers: "{{ __common_github_api_headers }}"
+            checksum: "{{ __common_binary_checksums[__common_binary_basename] | default(omit) }}"
+            mode: 0644
+          register: __common_download
+          until: __common_download is succeeded
+          retries: 5
+          delay: 2
+          # run_once: true  # <-- this can't be set due to multi-arch support
+          delegate_to: localhost
+          check_mode: false
+      rescue:
+        - name: "Fallback download without checksum verification {{ __common_binary_basename }}"
+          ansible.builtin.uri:
+            url: "{{ _common_binary_url }}"
+            dest: "{{ _common_local_cache_path }}/{{ _common_binary_name | default(__common_binary_basename) }}"
+            headers: "{{ __common_github_api_headers }}"
+            mode: 0644
+            status_code: [200, 304, 308]
+            follow_redirects: all
+          register: __common_download
+          until: __common_download is succeeded
+          retries: 5
+          delay: 2
+          # run_once: true  # <-- this can't be set due to multi-arch support
+          delegate_to: localhost
+          check_mode: false
+          when: ansible_failed_result.status_code == 308
+
+        - name: "Re-evaluate download failure"
+          ansible.builtin.fail:
+            msg: "{{ ansible_failed_result }}"
+          when: ansible_failed_result.status_code != 308
 
     - name: "Unpack binary archive {{ __common_binary_basename }}"
       ansible.builtin.unarchive:
