@@ -46,12 +46,12 @@
     - install
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_install"
 
-- name: "Create localhost binary cache path"
+- name: "Create binary cache path on {{ 'remote host' if (_common_remote_download | bool) else 'localhost' }}"
   ansible.builtin.file:
     path: "{{ _common_local_cache_path }}"
     state: directory
     mode: 0755
-  delegate_to: localhost
+  delegate_to: "{{ omit if (_common_remote_download | bool) else 'localhost' }}"
   check_mode: false
   become: false
   tags:
@@ -78,7 +78,7 @@
       run_once: true
       when: (_common_checksums_url)
 
-    - name: "Download {{ __common_binary_basename }}"
+    - name: "Download {{ __common_binary_basename }} from {{ _common_binary_url }} on {{ 'remote host' if (_common_remote_download | bool) else 'localhost' }}"  # noqa: name[template]
       ansible.builtin.get_url:
         url: "{{ _common_binary_url }}"
         dest: "{{ _common_local_cache_path }}/{{ _common_binary_name | default(__common_binary_basename) }}"
@@ -90,17 +90,18 @@
       retries: 5
       delay: 2
       # run_once: true  # <-- this can't be set due to multi-arch support
-      delegate_to: localhost
+      delegate_to: "{{ omit if (_common_remote_download | bool) else 'localhost' }}"
       check_mode: false
 
-    - name: "Unpack binary archive {{ __common_binary_basename }}"
+    - name: "Unpack binary archive {{ __common_binary_basename }} on {{ 'remote host' if (_common_remote_download | bool) else 'localhost' }}"  # noqa: name[template]
       ansible.builtin.unarchive:
         src: "{{ _common_local_cache_path }}/{{ __common_binary_basename }}"
         dest: "{{ _common_local_cache_path }}"
         mode: 0755
         list_files: true
         extra_opts: "{{ _common_binary_unarchive_opts | default(omit, true) }}"
-      delegate_to: localhost
+        remote_src: "{{ _common_remote_download | bool }}"
+      delegate_to: "{{ omit if (_common_remote_download | bool) else 'localhost' }}"
       check_mode: false
       when: __common_binary_basename is search('\.zip$|\.tar\.gz$')
 
@@ -129,6 +130,7 @@
     mode: 0755
     owner: root
     group: root
+    remote_src: "{{ _common_remote_download | bool }}"
   loop: "{{ _common_binaries }}"
   become: true
   notify:

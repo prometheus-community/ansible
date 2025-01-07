@@ -33,3 +33,8 @@ node_exporter_system_user: "{{ node_exporter_system_group }}"
 node_exporter_config_dir: "/etc/node_exporter"
 # Local path to stash the archive and its extraction
 node_exporter_local_cache_path: "/tmp/node_exporter-{{ ansible_system | lower }}-{{ _node_exporter_go_ansible_arch }}/{{ node_exporter_version }}"
+# If true (the default) we download node exporter archive and unpack it on localhost, before
+# uploading it to the remote host(s). If false we download and unpack the archive on the remote
+# host directly, which may be useful if the ansible controller host is slower (network-wise)
+# than the remote host.
+node_exporter_remote_download: false
