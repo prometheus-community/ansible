@@ -5,8 +5,8 @@ StartLimitInterval=0
 
 [Service]
 Type=simple
-User=nobody
-Group={{ 'nogroup' if ansible_os_family == 'Debian' else 'nobody' }}
+User={{ snmp_exporter_system_user }}
+Group={{ snmp_exporter_system_group }}
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart={{ snmp_exporter_binary_install_dir }}/snmp_exporter \
 {% if snmp_exporter_version is version('0.21.0', '>=') and
