@@ -46,21 +46,6 @@
     - install
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_install"
 
-- name: "Create localhost binary cache path"
-  ansible.builtin.file:
-    path: "{{ _common_local_cache_path }}"
-    state: directory
-    mode: 0755
-  delegate_to: localhost
-  check_mode: false
-  become: false
-  tags:
-    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
-    - install
-    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_install"
-    - download
-    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_download"
-
 - name: "Download binary {{ __common_binary_basename }}"
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
@@ -69,53 +54,61 @@
     - download
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_download"
   become: false
+  delegate_to: localhost
   block:
-    - name: "Get checksum list for {{ __common_binary_basename }}"
-      ansible.builtin.set_fact:
-        __common_binary_checksums: "{{ dict(lookup('url', _common_checksums_url, headers=__common_github_api_headers, wantlist=True, errors='warn')
-                                    | map('regex_replace', '^([a-fA-F0-9]+)\\s+', 'sha256:\\1 ')
-                                    | map('regex_findall', '^(sha256:[a-fA-F0-9]+)\\s+(.+)$') | map('flatten') | map('reverse')) }}"
+    - name: "Create localhost binary cache path"
+      ansible.builtin.file:
+        path: "{{ _common_local_cache_path }}"
+        state: directory
+        mode: 0755
+      check_mode: false
+
+    - name: "Download {{ __common_binary_basename }}"
+      ansible.builtin.uri:
+        url: "{{ _common_binary_url }}"
+        dest: "{{ _common_local_cache_path }}/{{ _common_binary_name | default(__common_binary_basename) }}"
+        headers: "{{ __common_github_api_headers }}"
+        mode: 0644
+        status_code: [200, 203, 204, 206, 300, 301, 302, 303, 304, 307, 308]
+        follow_redirects: all
+      register: __common_download
+      until: __common_download is succeeded
+      retries: 5
+      delay: 2
+      # run_once: true  # <-- this can't be set due to multi-arch support
+      check_mode: false
+
+    - name: "Verify checksum of {{ __common_binary_basename }}"
       run_once: true
       when: (_common_checksums_url)
-
-    - name: "Download binary"
       block:
-        - name: "Download {{ __common_binary_basename }}"
-          ansible.builtin.get_url:
-            url: "{{ _common_binary_url }}"
-            dest: "{{ _common_local_cache_path }}/{{ _common_binary_name | default(__common_binary_basename) }}"
-            headers: "{{ __common_github_api_headers }}"
-            checksum: "{{ __common_binary_checksums[__common_binary_basename] | default(omit) }}"
-            mode: 0644
-          register: __common_download
-          until: __common_download is succeeded
-          retries: 5
-          delay: 2
-          # run_once: true  # <-- this can't be set due to multi-arch support
-          delegate_to: localhost
-          check_mode: false
-      rescue:
-        - name: "Fallback download without checksum verification {{ __common_binary_basename }}"
+        - name: "Fetch checksum list for {{ __common_binary_basename }}"
           ansible.builtin.uri:
-            url: "{{ _common_binary_url }}"
-            dest: "{{ _common_local_cache_path }}/{{ _common_binary_name | default(__common_binary_basename) }}"
+            url: "{{ _common_checksums_url }}"
             headers: "{{ __common_github_api_headers }}"
-            mode: 0644
-            status_code: [200, 304, 308]
+            method: GET
+            return_content: true
+            status_code: [200, 203, 204, 206, 300, 301, 302, 303, 304, 307, 308]
             follow_redirects: all
-          register: __common_download
-          until: __common_download is succeeded
-          retries: 5
-          delay: 2
-          # run_once: true  # <-- this can't be set due to multi-arch support
-          delegate_to: localhost
-          check_mode: false
-          when: ansible_failed_result.status_code == 308
+          register: __common_binary_checksums_raw
 
-        - name: "Re-evaluate download failure"
-          ansible.builtin.fail:
-            msg: "{{ ansible_failed_result }}"
-          when: ansible_failed_result.status_code != 308
+        - name: "Parse checksum list for {{ __common_binary_basename }}"
+          ansible.builtin.set_fact:
+            __common_binary_checksums: "{{ dict(__common_binary_checksums_raw.content.splitlines()
+                                        | map('regex_findall', '^([a-fA-F0-9]+)\\s+(.+)$') | map('flatten') | map('reverse')) }}"
+
+        - name: "Calculate checksum of {{ __common_binary_basename }}"
+          ansible.builtin.stat:
+            path: "{{ _common_local_cache_path }}/{{ _common_binary_name | default(__common_binary_basename) }}"
+            checksum_algorithm: sha256
+            get_checksum: true
+          register: __common_binary_checksum
+
+        - name: "Verify correct checksum of {{ __common_binary_basename }}"
+          ansible.builtin.assert:
+            that: __common_binary_checksum.stat.checksum == __common_binary_checksums[__common_binary_basename]
+            success_msg: "{{ __common_binary_basename }} checksum verified successfully"
+            fail_msg: "{{ __common_binary_basename }} checksum mismatch"
 
     - name: "Unpack binary archive {{ __common_binary_basename }}"
       ansible.builtin.unarchive:
@@ -124,7 +117,6 @@
         mode: 0755
         list_files: true
         extra_opts: "{{ _common_binary_unarchive_opts | default(omit, true) }}"
-      delegate_to: localhost
       check_mode: false
       when: __common_binary_basename is search('\.zip$|\.tar\.gz$')
 
