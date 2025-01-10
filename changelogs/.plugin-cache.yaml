@@ -13,4 +13,4 @@ plugins:
   shell: {}
   strategy: {}
   vars: {}
-version: 0.18.0
+version: 0.23.2

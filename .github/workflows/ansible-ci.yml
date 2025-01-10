@@ -38,6 +38,13 @@ jobs:
       - name: Lint arguments spec
         run: ./.github/scripts/lint_arguments_spec.sh
 
+  check-unused-variables:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run action
+        uses: hoo29/little-timmy@v2-action
+
   discover-ansible-versions:
     runs-on: ubuntu-latest
     outputs:

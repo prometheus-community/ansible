@@ -1,0 +1,10 @@
+---
+- name: Restart nvidia_gpu_exporter
+  listen: "restart nvidia_gpu_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: nvidia_gpu_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode

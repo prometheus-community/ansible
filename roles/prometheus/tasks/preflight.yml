@@ -1,40 +1,16 @@
 ---
-- name: Assert usage of systemd as an init system
-  ansible.builtin.assert:
-    that: ansible_service_mgr == 'systemd'
-    msg: "This module only works with systemd"
-
-- name: Install package fact dependencies
-  become: true
-  ansible.builtin.package:
-    name: "{{ _pkg_fact_req }}"
-    state: present
-  when: (_pkg_fact_req)
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
   vars:
-    _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
-                    {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
-                    {% else %}\
-                    {% endif %}"
-
-- name: Gather package facts
-  ansible.builtin.package_facts:
-  when: "not 'packages' in ansible_facts"
+    _common_web_listen_address: "{{ prometheus_web_listen_address }}"
 
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
     that:
       - >-
         prometheus_web_listen_address is string
-
-- name: Naive assertion of proper listen address
-  ansible.builtin.assert:
-    that:
-      - >-
-        [prometheus_web_listen_address] |
-          flatten |
-          reject('match', '.+:\\d+$') |
-          list |
-          length == 0
 
 - name: Assert no duplicate config flags
   ansible.builtin.assert:
@@ -89,6 +65,17 @@
     - prometheus_alertmanager_config == []
     - prometheus_alert_rules != []
 
+- name: Alert when alert rules files are found in the old .rules format
+  ansible.builtin.debug:
+    msg: >
+      prometheus_alert_rules_files contains rules in the old .rules file format.
+      This format has been deprecated in favour of the new YAML format since Prometheus v2.x.
+      You can update your rules using promtool: promtool update rules <filenames>
+
+      If your rules are already in the YAML format but with the .rules extension, you can safely ignore this message,
+      or rename the files to <filename>.yaml or <filename>.yml to get rid of it.
+  when: prometheus_alert_rules_files | select('search', '.rules$') | list | length > 0
+
 - name: Discover latest version
   ansible.builtin.set_fact:
     prometheus_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _prometheus_repo}}/releases/latest', headers=_github_api_headers,
@@ -98,24 +85,9 @@
   retries: 10
   when:
     - prometheus_version == "latest"
-    - prometheus_binary_local_dir | length == 0
-    - not prometheus_skip_install
-
-- name: Get prometheus binary checksum
-  when:
-    - prometheus_binary_local_dir | length == 0
-    - not prometheus_skip_install
-  block:
-    - name: "Get checksum list"
-      ansible.builtin.set_fact:
-        __prometheus_checksums: "{{ lookup('url', prometheus_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
-      run_once: true
-      until: __prometheus_checksums is search('linux-' + go_arch + '.tar.gz')
-      retries: 10
-
-    - name: "Get checksum for {{ go_arch }}"
-      ansible.builtin.set_fact:
-        __prometheus_checksum: "{{ item.split(' ')[0] }}"
-      with_items: "{{ __prometheus_checksums }}"
-      when:
-        - "('linux-' + go_arch + '.tar.gz') in item"
+  tags:
+    - prometheus
+    - install
+    - prometheus_install
+    - download
+    - prometheus_download

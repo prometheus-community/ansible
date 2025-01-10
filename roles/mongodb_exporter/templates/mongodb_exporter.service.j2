@@ -29,7 +29,7 @@ ExecStart={{ mongodb_exporter_binary_install_dir }}/mongodb_exporter \
     --collector.collstats-limit={{ mongodb_exporter_collstats_limit }} \
 {% endif -%}
 {% if mongodb_exporter_tls_server_config | length > 0 or mongodb_exporter_http_server_config | length > 0 or mongodb_exporter_basic_auth_users | length > 0 -%}
-    --web.config={{ mongodb_exporter_config_dir }}/web_config.yaml \
+    --web.config={{ mongodb_exporter_config_dir }}/web_config.yml \
 {% endif -%}
 {% if mongodb_exporter_compatible_mode -%}
     --compatible-mode \

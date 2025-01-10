@@ -1,6 +1,0 @@
----
-{{ ansible_managed | comment }}
-{% if systemd_exporter_tls_server_config | length > 0 %}
-tls_server_config:
-{{ systemd_exporter_tls_server_config | to_nice_yaml | indent(2, true) }}
-{% endif %}

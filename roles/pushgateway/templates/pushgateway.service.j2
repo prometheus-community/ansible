@@ -11,9 +11,9 @@ Group={{ pushgateway_system_group }}
 ExecStart={{ pushgateway_binary_install_dir }}/pushgateway \
 {% if pushgateway_tls_server_config | length > 0 or pushgateway_http_server_config | length > 0 or pushgateway_basic_auth_users | length > 0 %}
     {% if pushgateway_version is version('1.5.0', '>=') %}
-    '--web.config.file=/etc/pushgateway/web_config.yml' \
+    '--web.config.file={{ pushgateway_config_dir }}/web_config.yml' \
     {% else %}
-    '--web.config=/etc/pushgateway/web_config.yml' \
+    '--web.config={{ pushgateway_config_dir }}/web_config.yml' \
     {% endif %}
 {% endif %}
 {% if pushgateway_version is version('1.5.0', '>=') and

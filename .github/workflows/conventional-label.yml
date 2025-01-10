@@ -73,7 +73,18 @@ jobs:
           steps.changed-roles.outputs.all_changed_and_modified_files
         with:
           script: |
-            const labels = '${{ steps.changed-roles.outputs.all_changed_and_modified_files }}'.split(' ').map(i => 'roles/' + i);
+            const changedRoles = '${{ steps.changed-roles.outputs.all_changed_and_modified_files }}'.split(' ');
+            let labels = changedRoles.map(i => 'roles/' + i);
+
+            if (changedRoles.includes('_common')) {
+              const allLabels = await github.paginate(github.rest.issues.listLabelsForRepo, {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              });
+              const roleLabels = allLabels.map(label => label.name).filter(name => name.startsWith('roles/'));
+              labels = [...new Set([...labels, ...roleLabels])];
+            }
+
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,

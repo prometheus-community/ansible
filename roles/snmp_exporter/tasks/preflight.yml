@@ -1,4 +1,10 @@
 ---
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
+  vars:
+    _common_web_listen_address: "{{ snmp_exporter_web_listen_address }}"
 
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
@@ -11,16 +17,6 @@
           snmp_exporter_web_listen_address | type_debug == "list"
         )
 
-- name: Naive assertion of proper listen address
-  ansible.builtin.assert:
-    that:
-      - >-
-        [snmp_exporter_web_listen_address] |
-          flatten |
-          reject('match', '.+:\\d+$') |
-          list |
-          length == 0
-
 - name: Discover latest version
   ansible.builtin.set_fact:
     snmp_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _snmp_exporter_repo }}/releases/latest', headers=_github_api_headers,
@@ -30,24 +26,9 @@
   retries: 10
   when:
     - snmp_exporter_version == "latest"
-    - snmp_exporter_binary_local_dir | length == 0
-    - not snmp_exporter_skip_install
-
-- name: Get snmp_exporter binary checksum
-  when:
-    - snmp_exporter_binary_local_dir | length == 0
-    - not snmp_exporter_skip_install
-  block:
-    - name: Get checksum list from github
-      ansible.builtin.set_fact:
-        __snmp_exporter_checksums: "{{ lookup('url', snmp_exporter_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
-      run_once: true
-      until: __snmp_exporter_checksums is search('linux-' + go_arch + '.tar.gz')
-      retries: 10
-
-    - name: "Get checksum for {{ go_arch }}"
-      ansible.builtin.set_fact:
-        __snmp_exporter_checksum: "{{ item.split(' ')[0] }}"
-      with_items: "{{ __snmp_exporter_checksums }}"
-      when:
-        - "('linux-' + go_arch + '.tar.gz') in item"
+  tags:
+    - snmp_exporter
+    - install
+    - snmp_exporter_install
+    - download
+    - snmp_exporter_download

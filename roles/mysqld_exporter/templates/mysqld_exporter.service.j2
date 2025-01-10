@@ -24,7 +24,7 @@ ExecStart={{ mysqld_exporter_binary_install_dir }}/mysqld_exporter \
     --no-collect.{{ collector }} \
 {% endfor %}
 {% if mysqld_exporter_tls_server_config | length > 0 or mysqld_exporter_http_server_config | length > 0 or mysqld_exporter_basic_auth_users | length > 0 %}
-    --web.config.file={{ mysqld_exporter_config_dir }}/web_config.yaml \
+    --web.config.file={{ mysqld_exporter_config_dir }}/web_config.yml \
 {% endif %}
 {% if mysqld_exporter_version is version('0.15.0', '>=') and
       mysqld_exporter_web_listen_address is iterable and

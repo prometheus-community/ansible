@@ -11,18 +11,9 @@ argument_specs:
       systemd_exporter_version:
         description: "SystemD exporter package version. Also accepts latest as parameter."
         default: "0.6.0"
-      systemd_exporter_skip_install:
-        description: "SystemD exporter installation tasks gets skipped when set to true."
-        type: bool
-        default: false
-      systemd_exporter_binary_local_dir:
-        description:
-          - "Allows to use local packages instead of ones distributed on github."
-          - "As parameter it takes a directory where C(systemd_exporter) binary is stored on host on which ansible is run."
-          - "This overrides I(systemd_exporter_version) parameter"
       systemd_exporter_binary_url:
         description: URL of the systemd exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _systemd_exporter_repo }}/releases/download/v{{ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        default: "https://github.com/{{ _systemd_exporter_repo }}/releases/download/v{{ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version }}.{{ ansible_system | lower }}-{{ _systemd_exporter_go_ansible_arch }}.tar.gz"
       systemd_exporter_checksums_url:
         description: "URL of the systemd exporter checksums file"
         default: "https://github.com/{{ _systemd_exporter_repo }}/releases/download/v{{ systemd_exporter_version }}/sha256sums.txt"
@@ -67,6 +58,9 @@ argument_specs:
         default: "systemd-exporter"
       systemd_exporter_log_level:
         description: Only log messages with the given severity or above.
-      systemd_exporter_archive_path:
-        description: 'Local path to stash the archive and its extraction'
-        default: "/tmp"
+      systemd_exporter_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/systemd_exporter-{{ ansible_system | lower }}-{{ _systemd_exporter_go_ansible_arch }}/{{ systemd_exporter_version }}"
+      systemd_exporter_config_dir:
+        description: "Path to directory with systemd_exporter configuration"
+        default: "/etc/systemd_exporter"
