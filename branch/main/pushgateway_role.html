@@ -216,6 +216,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--pushgateway_config_flags_extra"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-pushgateway-role-parameter-main-pushgateway-config-flags-extra"><strong>pushgateway_config_flags_extra</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--pushgateway_config_flags_extra" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Optional extra flags to be passed to pushgateway binary, e.g. [’–log.level=debug’, ‘–log.format=json’, ‘–web.enable-admin-api’]</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--pushgateway_http_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-pushgateway-role-parameter-main-pushgateway-http-server-config"><strong>pushgateway_http_server_config</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--pushgateway_http_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -223,7 +231,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>Keys and values are the same as in <a class="reference external" href="https://github.com/prometheus/pushgateway/blob/master/https/README.md#sample-config">pushgateway docs</a>.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--pushgateway_local_cache_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-pushgateway-role-parameter-main-pushgateway-local-cache-path"><strong>pushgateway_local_cache_path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--pushgateway_local_cache_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -231,7 +239,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp/pushgateway-{{</span> <span class="pre">ansible_system</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_pushgateway_go_ansible_arch</span> <span class="pre">}}/{{</span> <span class="pre">pushgateway_version</span> <span class="pre">}}&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--pushgateway_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-pushgateway-role-parameter-main-pushgateway-system-group"><strong>pushgateway_system_group</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--pushgateway_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -240,7 +248,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;pushgateway&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--pushgateway_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-pushgateway-role-parameter-main-pushgateway-system-user"><strong>pushgateway_system_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--pushgateway_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -249,7 +257,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;pushgateway&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--pushgateway_tls_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-pushgateway-role-parameter-main-pushgateway-tls-server-config"><strong>pushgateway_tls_server_config</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--pushgateway_tls_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -257,12 +265,20 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>Keys and values are the same as in <a class="reference external" href="https://github.com/prometheus/pushgateway/blob/master/https/README.md#sample-config">pushgateway docs</a>.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--pushgateway_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-pushgateway-role-parameter-main-pushgateway-version"><strong>pushgateway_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--pushgateway_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Pushgateway package version. Also accepts latest as parameter.</p>
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;1.11.0&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--pushgateway_web_external_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-pushgateway-role-parameter-main-pushgateway-web-external-url"><strong>pushgateway_web_external_url</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--pushgateway_web_external_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>External address on which pushgateway is available. Useful when behind reverse proxy, e.g.: <a class="reference external" href="https://example.org/pushgateway">https://example.org/pushgateway</a></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
