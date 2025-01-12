@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.24.0:
+    changes:
+      trivial:
+        - 'patch: New prometheus/pushgateway upstream release 1.11.0! (https://github.com/prometheus-community/ansible/pull/510)'
+    release_date: '2025-01-12'
   0.23.2:
     changes:
       trivial:
