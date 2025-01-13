@@ -196,7 +196,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#parameter-main--smokeping_prober_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>URL of the Smokeping Prober binaries .tar.gz file</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_smokeping_prober_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">smokeping_prober_version</span> <span class="pre">}}/smokeping_prober-{{</span> <span class="pre">smokeping_prober_version</span> <span class="pre">}}.{{</span> <span class="pre">ansible_system</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_smokeping_prober_go_ansible_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;https://github.com/{{</span> <span class="pre">_smokeping_prober_repo</span> <span class="pre">}}/releases/download/v{{</span> <span class="pre">smokeping_prober_version</span> <span class="pre">}}/smokeping_prober-{{</span> <span class="pre">smokeping_prober_version</span> <span class="pre">}}.{{</span> <span class="pre">ansible_facts['system']</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_smokeping_prober_go_ansible_arch</span> <span class="pre">}}.tar.gz&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -236,7 +236,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#parameter-main--smokeping_prober_local_cache_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp/smokeping_prober-{{</span> <span class="pre">ansible_system</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_smokeping_prober_go_ansible_arch</span> <span class="pre">}}/{{</span> <span class="pre">smokeping_prober_version</span> <span class="pre">}}&quot;</span></code></p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp/smokeping_prober-{{</span> <span class="pre">ansible_facts['system']</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_smokeping_prober_go_ansible_arch</span> <span class="pre">}}/{{</span> <span class="pre">smokeping_prober_version</span> <span class="pre">}}&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
