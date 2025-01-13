@@ -13,7 +13,7 @@
 
 - name: Assert usage of systemd as an init system
   ansible.builtin.assert:
-    that: ansible_service_mgr == 'systemd'
+    that: ansible_facts['service_mgr'] == 'systemd'
     msg: "This role only works with systemd"
   tags:
     - influxdb_exporter

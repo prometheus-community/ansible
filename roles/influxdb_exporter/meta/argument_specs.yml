@@ -13,7 +13,7 @@ argument_specs:
         default: "0.12.0"
       influxdb_exporter_binary_url:
         description: "URL of the influxdb exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _influxdb_exporter_repo }}/releases/download/v{{ influxdb_exporter_version }}/influxdb_exporter-{{ influxdb_exporter_version }}.{{ ansible_system | lower }}-{{ _influxdb_exporter_go_ansible_arch }}.tar.gz"
+        default: "https://github.com/{{ _influxdb_exporter_repo }}/releases/download/v{{ influxdb_exporter_version }}/influxdb_exporter-{{ influxdb_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _influxdb_exporter_go_ansible_arch }}.tar.gz"
       influxdb_exporter_checksums_url:
         description: "URL of the influxdb exporter checksums file"
         default: "https://github.com/{{ _influxdb_exporter_repo }}/releases/download/v{{ influxdb_exporter_version }}/sha256sums.txt"
@@ -60,7 +60,7 @@ argument_specs:
         default: "influxdb-exp"
       influxdb_exporter_local_cache_path:
         description: 'Local path to stash the archive and its extraction'
-        default: "/tmp/influxdb_exporter-{{ ansible_system | lower }}-{{ _influxdb_exporter_go_ansible_arch }}/{{ influxdb_exporter_version }}"
+        default: "/tmp/influxdb_exporter-{{ ansible_facts['system'] | lower }}-{{ _influxdb_exporter_go_ansible_arch }}/{{ influxdb_exporter_version }}"
       influxdb_exporter_config_dir:
         description: "Path to directory with influxdb_exporter configuration"
         default: "/etc/influxdb_exporter"

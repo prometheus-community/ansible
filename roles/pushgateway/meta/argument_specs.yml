@@ -13,7 +13,7 @@ argument_specs:
         default: "1.11.0"
       pushgateway_binary_url:
         description: "URL of the Pushgateway binaries .tar.gz file"
-        default: "https://github.com/{{ _pushgateway_repo }}/releases/download/v{{ pushgateway_version }}/pushgateway-{{ pushgateway_version }}.{{ ansible_system | lower }}-{{ _pushgateway_go_ansible_arch }}.tar.gz"
+        default: "https://github.com/{{ _pushgateway_repo }}/releases/download/v{{ pushgateway_version }}/pushgateway-{{ pushgateway_version }}.{{ ansible_facts['system'] | lower }}-{{ _pushgateway_go_ansible_arch }}.tar.gz"
       pushgateway_checksums_url:
         description: "URL of the Pushgateway checksums file"
         default: "https://github.com/{{ _pushgateway_repo }}/releases/download/v{{ pushgateway_version }}/sha256sums.txt"
@@ -63,7 +63,7 @@ argument_specs:
         default: "pushgateway"
       pushgateway_local_cache_path:
         description: "Local path to stash the archive and its extraction"
-        default: "/tmp/pushgateway-{{ ansible_system | lower }}-{{ _pushgateway_go_ansible_arch }}/{{ pushgateway_version }}"
+        default: "/tmp/pushgateway-{{ ansible_facts['system'] | lower }}-{{ _pushgateway_go_ansible_arch }}/{{ pushgateway_version }}"
       pushgateway_config_dir:
         description: "Path to directory with pushgateway configuration"
         default: "/etc/pushgateway"

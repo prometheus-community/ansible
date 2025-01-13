@@ -45,7 +45,7 @@ RestartSec=1
 StartLimitInterval=0
 
 {% set protect_home = 'yes' %}
-{% for m in ansible_mounts if m.mount.startswith('/home') %}
+{% for m in ansible_facts['mounts'] if m.mount.startswith('/home') %}
 {%   set protect_home = 'read-only' %}
 {% endfor %}
 ProtectHome={{ protect_home }}
