@@ -1,0 +1,62 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus Consul Exporter
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ consul_exporter_system_user }}
+Group={{ consul_exporter_system_group }}
+ExecStart={{ consul_exporter_binary_install_dir }}/consul_exporter \
+{% if consul_exporter_tls_server_config | length > 0 or consul_exporter_http_server_config | length > 0 or consul_exporter_basic_auth_users | length > 0 %}
+    '--web.config.file={{ consul_exporter_config_dir }}/web_config.yml' \
+{% endif %}
+    '--consul.server={{ consul_exporter_server }}' \
+    '--consul.timeout={{ consul_exporter_timeout }}' \
+    '--consul.request-limit={{ consul_exporter_request_limit }}' \
+{% if consul_exporter_kv_prefix | length > 0 %}
+    '--kv.prefix={{ consul_exporter_kv_prefix }}' \
+{% endif %}
+{% if consul_exporter_kv_filter | length > 0 %}
+    '--kv.filter={{ consul_exporter_kv_filter }}' \
+{% endif %}
+{% if consul_exporter_meta_filter | length > 0 %}
+    '--meta.filter={{ consul_exporter_meta_filter }}' \
+{% endif %}
+{% if consul_exporter_health_summary %}
+    --consul.health-summary \
+{% endif %}
+{% if consul_exporter_agent_only %}
+    --consul.agent-only \
+{% endif %}
+{% if consul_exporter_allow_stale %}
+    --consul.allow_stale \
+{% endif %}
+{% if consul_exporter_require_consistent %}
+    --consul.require_consistent \
+{% endif %}
+    '--web.listen-address={{ consul_exporter_web_listen_address }}' \
+    '--web.telemetry-path={{ consul_exporter_web_telemetry_path }}' \
+    '--log.level={{ consul_exporter_log_level }}' \
+    '--log.format={{ consul_exporter_log_format }}'
+
+SyslogIdentifier=consul_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+ProtectHome=yes
+NoNewPrivileges=yes
+
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target
