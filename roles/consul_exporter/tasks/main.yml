@@ -26,6 +26,8 @@
     _common_config_dir: "{{ consul_exporter_config_dir }}"
     _common_binary_unarchive_opts: ['--strip-components=1']
   tags:
+    - consul_exporter
+    - install
     - consul_exporter_install
 
 - name: SELinux
