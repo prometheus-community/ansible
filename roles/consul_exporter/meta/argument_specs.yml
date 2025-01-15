@@ -1,0 +1,106 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus consul Exporter"
+    description:
+      - "Deploy prometheus L(consul_exporter,https://github.com/prometheus/consul_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      consul_exporter_version:
+        description: "consul exporter package version. Also accepts latest as parameter."
+        default: "0.11.0"
+      consul_exporter_binary_url:
+        description: "URL of the consul_exporter binaries .tar.gz file"
+        default: "https://github.com/{{ _consul_exporter_repo }}/releases/download/v{{ consul_exporter_version }}/consul_exporter-{{ consul_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _consul_exporter_go_ansible_arch }}.tar.gz"
+      consul_exporter_checksums_url:
+        description: "URL of the consul_exporter checksums file"
+        default: "https://github.com/{{ _consul_exporter_repo }}/releases/download/v{{ consul_exporter_version }}/sha256sums.txt"
+      consul_exporter_web_listen_address:
+        description: "Address on which consul_exporter will listen"
+        default: "0.0.0.0:9107"
+      consul_exporter_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      consul_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(consul_exporter docs,https://github.com/superq/consul_exporter/blob/master/https/README.md#sample-config)."
+        type: "dict"
+      consul_exporter_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(consul_exporter docs,https://github.com/superq/consul_exporter/blob/master/https/README.md#sample-config)."
+        type: "dict"
+      consul_exporter_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      consul_exporter_log_level:
+        description: "Only log messages with the given severity or above"
+        default: "info"
+        choices:
+          - "debug"
+          - "info"
+          - "warn"
+          - "error"
+      consul_exporter_log_format:
+        description: "Output format of log messages"
+        default: "logfmt"
+        choices:
+          - "logfmt"
+          - "json"
+
+      consul_exporter_server:
+        description: "HTTP API address of a Consul server or agent."
+        default: "http://localhost:8500"
+      consul_exporter_timeout:
+        description: "Timeout on HTTP requests to the Consul API"
+        default: "500ms"
+      consul_exporter_request_limit:
+        description: "Limit the maximum number of concurrent requests to consul, 0 means no limit"
+        default: 0
+      consul_exporter_kv_prefix:
+        description: "Prefix from which to expose key/value pairs"
+      consul_exporter_kv_filter:
+        description: "Regex that determines which keys to expose"
+      consul_exporter_meta_filter:
+        description: "Regex that determines which meta keys to expose"
+      consul_exporter_health_summary:
+        description: "Generate a health summary for each service instance. Needs n+1 queries to collect all information."
+        type: bool
+        default: false
+      consul_exporter_agent_only:
+        description: "Only export metrics about services registered on local agent"
+        type: bool
+        default: false
+      consul_exporter_allow_stale:
+        description: "Allows any Consul server (non-leader) to service a read"
+        type: bool
+        default: false
+      consul_exporter_require_consistent:
+        description: "Forces the read to be fully consistent"
+        type: bool
+        default: false
+
+      consul_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for consul_exporter"
+        default: "consul-exp"
+      consul_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "consul exporter user"
+        default: "consul-exp"
+      consul_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install binaries"
+        default: "/usr/local/bin"
+      consul_exporter_local_cache_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp/consul_exporter-{{ ansible_facts['system'] | lower }}-{{ _consul_exporter_go_ansible_arch }}/{{ consul_exporter_version }}"
+      consul_exporter_config_dir:
+        description: "Path to directory with consul_exporter configuration"
+        default: "/etc/consul_exporter"
