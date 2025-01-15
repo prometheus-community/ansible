@@ -3,6 +3,10 @@
   ansible.builtin.include_tasks:
     file: preflight.yml
   tags:
+    - consul_exporter
+    - install
+    - configure
+    - run
     - consul_exporter_install
     - consul_exporter_configure
     - consul_exporter_run
