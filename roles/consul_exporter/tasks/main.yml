@@ -38,6 +38,8 @@
     _common_selinux_port: "{{ consul_exporter_web_listen_address | urlsplit('port') }}"
   when: ansible_facts['selinux'].status == "enabled"
   tags:
+    - consul_exporter
+    - configure
     - consul_exporter_configure
 
 - name: Configure
