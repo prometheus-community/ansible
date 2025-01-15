@@ -54,6 +54,8 @@
     _common_http_server_config: "{{ consul_exporter_http_server_config }}"
     _common_basic_auth_users: "{{ consul_exporter_basic_auth_users }}"
   tags:
+    - consul_exporter
+    - configure
     - consul_exporter_configure
 
 - name: Ensure consul Exporter is enabled on boot
