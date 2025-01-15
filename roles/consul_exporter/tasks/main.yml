@@ -68,4 +68,6 @@
   when:
     - not ansible_check_mode
   tags:
+    - consul_exporter
+    - run
     - consul_exporter_run
