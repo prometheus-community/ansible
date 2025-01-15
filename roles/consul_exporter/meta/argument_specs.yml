@@ -10,7 +10,7 @@ argument_specs:
     options:
       consul_exporter_version:
         description: "consul exporter package version. Also accepts latest as parameter."
-        default: "0.11.0"
+        default: "0.13.0"
       consul_exporter_binary_url:
         description: "URL of the consul_exporter binaries .tar.gz file"
         default: "https://github.com/{{ _consul_exporter_repo }}/releases/download/v{{ consul_exporter_version }}/consul_exporter-{{ consul_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _consul_exporter_go_ansible_arch }}.tar.gz"
