@@ -80,6 +80,7 @@
 
     - name: "Verify checksum of {{ __common_binary_basename }}"
       run_once: true
+      check_mode: false
       when: (_common_checksums_url)
       block:
         - name: "Fetch checksum list for {{ __common_binary_basename }}"
