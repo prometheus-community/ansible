@@ -1,0 +1,84 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus Elasticsearch Exporter"
+    description:
+      - "Deploy prometheus L(elasticsearch exporter,https://github.com/prometheus-community/elasticsearch_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      elasticsearch_exporter_version:
+        description: "Elasticsearch exporter package version. Also accepts latest as parameter."
+        default: "1.8.0"
+      elasticsearch_exporter_binary_url:
+        description: "URL of the elasticsearch exporter binaries .tar.gz file"
+        default: "https://github.com/{{ _elasticsearch_exporter_repo }}/releases/download/v{{ elasticsearch_exporter_version }}/elasticsearch_exporter-{{ elasticsearch_exporter_version }}.{{ ansible_system | lower }}-{{ _elasticsearch_exporter_go_ansible_arch }}.tar.gz"
+      elasticsearch_exporter_checksums_url:
+        description: "URL of the elasticsearch exporter checksums file"
+        default: "https://github.com/{{ _elasticsearch_exporter_repo }}/releases/download/v{{ elasticsearch_exporter_version }}/sha256sums.txt"
+      elasticsearch_exporter_web_disable_exporter_metrics:
+        description: "Exclude metrics about the exporter itself (promhttp_*, process_*, go_*)."
+        type: bool
+        default: false
+      elasticsearch_exporter_web_listen_address:
+        description: "Address on which elasticsearch exporter will listen"
+        default: "0.0.0.0:9114"
+      elasticsearch_exporter_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      elasticsearch_exporter_enabled_collectors:
+        description:
+          - "List of dicts defining additionally enabled collectors and their configuration."
+          - "It adds collectors to L(those enabled by default,https://github.com/prometheus/elasticsearch_exporter#enabled-by-default)."
+        type: "list"
+        default:
+          - systemd
+          - textfile:
+              directory: "{{ elasticsearch_exporter_textfile_dir }}"
+      elasticsearch_exporter_disabled_collectors:
+        description:
+          - "List of disabled collectors."
+          - "By default elasticsearch_exporter disables collectors listed L(here,https://github.com/prometheus/elasticsearch_exporter#disabled-by-default)."
+        type: "list"
+        elements: "str"
+      elasticsearch_exporter_textfile_dir:
+        description:
+          - "Directory used by the L(Textfile Collector,https://github.com/prometheus/elasticsearch_exporter#textfile-collector)."
+          - "To get permissions to write metrics in this directory, users must be in C(elastic-exp) system group."
+          - "B(Note:) More information in TROUBLESHOOTING.md guide."
+        default: "/var/lib/elasticsearch_exporter"
+      elasticsearch_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(elasticsearch_exporter docs,https://prometheus.io/docs/prometheus/latest/configuration/https/)."
+        type: "dict"
+      elasticsearch_exporter_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(elasticsearch_exporter docs,https://prometheus.io/docs/prometheus/latest/configuration/https/)."
+        type: "dict"
+      elasticsearch_exporter_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      elasticsearch_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install elasticsearch_exporter binary"
+        default: "/usr/local/bin"
+      elasticsearch_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for elasticsearch exporter"
+        default: "elastic-exp"
+      elasticsearch_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "Elasticsearch exporter user"
+        default: "elastic-exp"
+      elasticsearch_exporter_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/elasticsearch_exporter-{{ ansible_system | lower }}-{{ _elasticsearch_exporter_go_ansible_arch }}/{{ elasticsearch_exporter_version }}"
+      elasticsearch_exporter_config_dir:
+        description: "Path to directory with elasticsearch_exporter configuration"
+        default: "/etc/elasticsearch_exporter"
