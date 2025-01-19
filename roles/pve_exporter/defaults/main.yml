@@ -21,8 +21,6 @@ pve_exporter_enabled_collectors: []
 #   - resources
 pve_exporter_disabled_collectors: []
 
-pve_exporter_debug_enable: false
-
 pve_exporter_home: "/var/lib/pve_exporter"
 pve_exporter_virtualenv: "/var/lib/pve_exporter/venv"
 
