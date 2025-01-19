@@ -8,6 +8,25 @@ argument_specs:
     author:
       - "Prometheus Community"
     options:
+      dns_exporter_web_listen_ip:
+        description: "IP address for dns_exporter to listen to"
+        default: "127.0.0.1"
+      dns_exporter_web_listen_port:
+        description: "Port for dns_exporter to listen to"
+        default: "15353"
+      dns_exporter_debug_enable:
+        description: "Enable or not daemon debug"
+        type: bool
+        default: false
+      dns_exporter_home:
+        description: "Home of dns_exporter user and base file locations"
+        default: "/var/lib/dns_exporter"
+      dns_exporter_virtualenv:
+        description: "Python virtualenv filepath for dns_exporter"
+        default: "/var/lib/dns_exporter/venv"
+      dns_exporter_config_template:
+        description: "Configuration template for dns_exporter"
+        default: "dns_exporter.yml.j2"
       dns_exporter_version:
         description: "DNS exporter package version. Also accepts latest as parameter."
         default: "1.0.0"
@@ -61,11 +80,6 @@ argument_specs:
       dns_exporter_basic_auth_users:
         description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
         type: "dict"
-      dns_exporter_binary_install_dir:
-        description:
-          - "I(Advanced)"
-          - "Directory to install dns_exporter binary"
-        default: "/usr/local/bin"
       dns_exporter_system_group:
         description:
           - "I(Advanced)"
