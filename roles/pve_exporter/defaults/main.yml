@@ -8,9 +8,6 @@ pve_exporter_basic_auth_users: {}
 # just for "prometheus.prometheus._common : Naive assertion of proper listen address" else not used
 pve_exporter_web_listen_address: "127.0.0.1:9221"
 
-pve_exporter_web_disable_exporter_metrics: false
-pve_exporter_web_telemetry_path: "/metrics"
-
 # cluster collectors
 pve_exporter_enabled_collectors: []
 # pve_exporter_enabled_collectors:

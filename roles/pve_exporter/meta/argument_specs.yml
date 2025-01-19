@@ -34,16 +34,9 @@ argument_specs:
       pve_exporter_version:
         description: "Proxmox VE Exporter package version. Also accepts latest as parameter."
         default: "1.0.0"
-      pve_exporter_web_disable_exporter_metrics:
-        description: "Exclude metrics about the exporter itself (promhttp_*, process_*, go_*)."
-        type: bool
-        default: false
       pve_exporter_web_listen_address:
         description: "Address on which pve exporter will listen"
         default: "0.0.0.0:15353"
-      pve_exporter_web_telemetry_path:
-        description: "Path under which to expose metrics"
-        default: "/metrics"
       pve_exporter_enabled_collectors:
         description:
           - "List of dicts defining additionally enabled collectors and their configuration."
