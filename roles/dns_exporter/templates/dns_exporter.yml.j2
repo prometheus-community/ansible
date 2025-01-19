@@ -235,10 +235,42 @@ modules:
     query_type: "MX"
     server: "dns.quad9.net:53"
     family: "ipv4"
+  quad9_a_v4:
+    query_type: "A"
+    server: "dns.quad9.net:53"
+    family: "ipv4"
+  quad9_aaaa_v6:
+    query_type: "AAAA"
+    server: "dns.quad9.net:53"
+    family: "ipv6"
   gmail_mx_v4:
     query_type: "MX"
     query_name: "gmail.com"
     family: "ipv4"
+  google_a_v4:
+    query_type: "A"
+    server: "dns.google:53"
+    family: "ipv4"
+  google_aaaa_v6:
+    query_type: "AAAA"
+    server: "dns.google:53"
+    family: "ipv6"
+  cloudflare_a_v4:
+    query_type: "A"
+    server: "one.one.one.one:53"
+    family: "ipv4"
+  cloudflare_aaaa_v6:
+    query_type: "AAAA"
+    server: "one.one.one.one:53"
+    family: "ipv6"
+  opendns_a_v4:
+    query_type: "A"
+    server: "208.67.222.222:53"
+    family: "ipv4"
+  opendns_aaaa_v6:
+    query_type: "AAAA"
+    server: "208.67.222.222:53"
+    family: "ipv6"
   internalbind_a_v4:
     query_type: "A"
     family: "ipv4"
