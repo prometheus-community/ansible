@@ -1,8 +1,6 @@
 ---
 dns_exporter_version: 1.0.0
 # not go, but python pip. placeholders for _common
-dns_exporter_binary_url: ""
-dns_exporter_checksums_url: ""
 dns_exporter_textfile_dir: ""
 dns_exporter_enabled_collectors: []
 dns_exporter_disabled_collectors: []
@@ -12,10 +10,8 @@ dns_exporter_basic_auth_users: {}
 # just for "prometheus.prometheus._common : Naive assertion of proper listen address" else not used
 dns_exporter_web_listen_address: "127.0.0.1:15353"
 
-dns_exporter_web_disable_exporter_metrics: false
 dns_exporter_web_listen_ip: "127.0.0.1"
 dns_exporter_web_listen_port: "15353"
-dns_exporter_web_telemetry_path: "/metrics"
 
 dns_exporter_debug_enable: false
 
@@ -28,5 +24,3 @@ dns_exporter_system_group: "dns-exp"
 dns_exporter_system_user: "{{ dns_exporter_system_group }}"
 
 dns_exporter_config_dir: "/etc/dns_exporter"
-# Local path to stash the archive and its extraction
-dns_exporter_local_cache_path: "/tmp/dns_exporter-{{ ansible_system | lower }}-{{ _dns_exporter_go_ansible_arch }}/{{ dns_exporter_version }}"

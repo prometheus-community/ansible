@@ -5,7 +5,6 @@ provisioner:
   inventory:
     group_vars:
       all:
-        dns_exporter_local_cache_path: "/tmp/dns_exporter-linux-amd64"
         dns_exporter_web_listen_address:
           - '127.0.0.1:8080'
           - '127.0.1.1:8080'
@@ -22,5 +21,3 @@ provisioner:
         dns_exporter_basic_auth_users:
           randomuser: examplepassword
         dns_exporter_version: 1.5.0
-        dns_exporter_binary_url: "https://github.com/prometheus/dns_exporter/releases/download/v{{\
-                                   \ dns_exporter_version }}/dns_exporter-{{ dns_exporter_version }}.linux-amd64.tar.gz"

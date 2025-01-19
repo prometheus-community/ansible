@@ -30,22 +30,9 @@ argument_specs:
       dns_exporter_version:
         description: "DNS exporter package version. Also accepts latest as parameter."
         default: "1.0.0"
-      dns_exporter_binary_url:
-        description: "URL of the dns exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _dns_exporter_repo }}/releases/download/v{{ dns_exporter_version }}/dns_exporter-{{ dns_exporter_version }}.{{ ansible_system | lower }}-{{ _dns_exporter_go_ansible_arch }}.tar.gz"
-      dns_exporter_checksums_url:
-        description: "URL of the dns exporter checksums file"
-        default: "https://github.com/{{ _dns_exporter_repo }}/releases/download/v{{ dns_exporter_version }}/sha256sums.txt"
-      dns_exporter_web_disable_exporter_metrics:
-        description: "Exclude metrics about the exporter itself (promhttp_*, process_*, go_*)."
-        type: bool
-        default: false
       dns_exporter_web_listen_address:
         description: "Address on which dns exporter will listen"
         default: "0.0.0.0:15353"
-      dns_exporter_web_telemetry_path:
-        description: "Path under which to expose metrics"
-        default: "/metrics"
       dns_exporter_enabled_collectors:
         description:
           - "List of dicts defining additionally enabled collectors and their configuration."
@@ -90,9 +77,6 @@ argument_specs:
           - "I(Advanced)"
           - "DNS exporter user"
         default: "dns-exp"
-      dns_exporter_local_cache_path:
-        description: "Local path to stash the archive and its extraction"
-        default: "/tmp/dns_exporter-{{ ansible_system | lower }}-{{ _dns_exporter_go_ansible_arch }}/{{ dns_exporter_version }}"
       dns_exporter_config_dir:
         description: "Path to directory with dns_exporter configuration"
         default: "/etc/dns_exporter"
