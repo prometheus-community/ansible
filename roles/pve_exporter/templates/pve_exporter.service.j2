@@ -26,8 +26,7 @@ ExecStart={{ pve_exporter_virtualenv }}/bin/pve_exporter \
     '--no-collector.{{ collector }}' \
 {% endfor %}
     --web.listen-address {{ pve_exporter_web_listen_address }} \
-    --config.file {{ pve_exporter_config_dir }}/pve_exporter.yml \
-   {% if pve_exporter_debug_enable | bool %}-d{% endif %}
+    --config.file {{ pve_exporter_config_dir }}/pve_exporter.yml
 
 
 SyslogIdentifier=pve_exporter
