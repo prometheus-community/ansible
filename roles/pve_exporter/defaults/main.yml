@@ -1,0 +1,40 @@
+---
+pve_exporter_version: 3.5.0
+# not go, but python pip. placeholders for _common
+pve_exporter_textfile_dir: ""
+pve_exporter_tls_server_config: {}
+pve_exporter_http_server_config: {}
+pve_exporter_basic_auth_users: {}
+# just for "prometheus.prometheus._common : Naive assertion of proper listen address" else not used
+pve_exporter_web_listen_address: "127.0.0.1:9221"
+
+pve_exporter_web_disable_exporter_metrics: false
+pve_exporter_web_telemetry_path: "/metrics"
+
+# cluster collectors
+pve_exporter_enabled_collectors: []
+# pve_exporter_enabled_collectors:
+#   - status
+#   - version
+#   - node
+#   - cluster
+#   - resources
+pve_exporter_disabled_collectors: []
+
+pve_exporter_debug_enable: false
+
+pve_exporter_home: "/var/lib/pve_exporter"
+pve_exporter_virtualenv: "/var/lib/pve_exporter/venv"
+
+pve_exporter_auth_user: prometheus@pve
+pve_exporter_auth_pass:
+pve_exporter_auth_verify_ssl: true
+pve_exporter_auth_token_name: your-token-id
+pve_exporter_auth_token_value:
+
+pve_exporter_config_template: pve_exporter.yml.j2
+
+pve_exporter_system_group: "pve-exp"
+pve_exporter_system_user: "{{ pve_exporter_system_group }}"
+
+pve_exporter_config_dir: "/etc/pve_exporter"

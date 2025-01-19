@@ -1,0 +1,83 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+  tags:
+    - pve_exporter_install
+    - pve_exporter_configure
+    - pve_exporter_run
+
+- name: Install
+  tags:
+    - pve_exporter_install
+  block:
+    - name: Install packages dependencies
+      ansible.builtin.package:
+        name:
+          - python3
+          - python3-pip
+          - python3-virtualenv
+        state: present
+    - name: "Create system group {{ pve_exporter_system_group }}"
+      ansible.builtin.group:
+        name: "{{ pve_exporter_system_group }}"
+        state: present
+    - name: "Create system user {{ pve_exporter_system_user }}"
+      ansible.builtin.user:
+        name: "{{ pve_exporter_system_user }}"
+        system: true
+        shell: "/usr/sbin/nologin"
+        group: "{{ pve_exporter_system_group }}"
+        home: "{{ pve_exporter_home }}"
+        create_home: true
+      become: true
+    - name: Install pve_exporter from pip
+      ansible.builtin.pip:
+        name: prometheus-pve-exporter
+        version: "{{ pve_exporter_version }}"
+        state: present
+        virtualenv: "{{ pve_exporter_virtualenv }}"
+      become: true
+      become_user: "{{ pve_exporter_system_user }}"
+    - name: Ensure config dir exists
+      ansible.builtin.file:
+        path: "{{ pve_exporter_config_dir }}"
+        state: directory
+        mode: '0775'  # like _common
+        owner: root
+    - name: Configure pve_exporter
+      ansible.builtin.template:
+        src: "{{ pve_exporter_config_template }}"
+        dest: "{{ pve_exporter_config_dir }}/pve_exporter.yml"
+        mode: '0644'
+        owner: root
+      notify:
+        - Restart pve_exporter
+
+- name: SELinux
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ pve_exporter_web_listen_address | urlsplit('port') }}"
+  when: ansible_selinux.status == "enabled"
+  tags:
+    - pve_exporter_configure
+
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yml
+  tags:
+    - pve_exporter_configure
+
+- name: Ensure Proxmox VE Exporter is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: pve_exporter
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - pve_exporter_run
