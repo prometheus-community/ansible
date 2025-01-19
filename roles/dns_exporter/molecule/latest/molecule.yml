@@ -1,0 +1,7 @@
+---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        dns_exporter_version: latest
+        dns_exporter_textfile_dir: /home/dns_exporter
