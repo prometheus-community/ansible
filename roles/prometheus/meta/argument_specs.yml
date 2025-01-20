@@ -83,9 +83,9 @@ argument_specs:
           - "Prometheus global config. It is compatible with the L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file)"
         type: "dict"
         default:
-          scrape_interval: "60s"
-          scrape_timeout: "15s"
-          evaluation_interval: "15s"
+          scrape_interval: "1m"
+          scrape_timeout: "10s"
+          evaluation_interval: "1m"
       prometheus_remote_write:
         description:
           - "Remote write. Compatible with the L(official configuration,https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)"

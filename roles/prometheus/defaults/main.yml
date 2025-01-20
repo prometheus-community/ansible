@@ -49,9 +49,9 @@ prometheus_alert_relabel_configs: []
 #     regex: replica
 
 prometheus_global:
-  scrape_interval: 15s
+  scrape_interval: 1m
   scrape_timeout: 10s
-  evaluation_interval: 15s
+  evaluation_interval: 1m
 
 prometheus_remote_write: []
 # prometheus_remote_write:
