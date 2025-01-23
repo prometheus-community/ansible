@@ -7,13 +7,7 @@ provisioner:
       all:
         consul_exporter_version: 0.13.0
         consul_exporter_local_cache_path: "/tmp/consul_exporter-linux-amd64/{{ consul_exporter_version }}"
-        consul_exporter_web_listen_address:
-          - '127.0.0.1:8080'
-          - '127.0.1.1:8080'
-        consul_exporter_enabled_collectors:
-          - sources
-        consul_exporter_disabled_collectors:
-          - tracking
+        consul_exporter_web_listen_address: '127.0.1.1:8080'
         consul_exporter_tls_server_config:
           cert_file: /etc/consul_exporter/tls.cert
           key_file: /etc/consul_exporter/tls.key
