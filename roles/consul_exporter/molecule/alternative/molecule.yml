@@ -5,7 +5,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        consul_exporter_version: 0.6.0
+        consul_exporter_version: 0.13.0
         consul_exporter_local_cache_path: "/tmp/consul_exporter-linux-amd64/{{ consul_exporter_version }}"
         consul_exporter_web_listen_address:
           - '127.0.0.1:8080'
