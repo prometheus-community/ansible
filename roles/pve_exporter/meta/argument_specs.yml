@@ -84,3 +84,15 @@ argument_specs:
       pve_exporter_config_dir:
         description: "Path to directory with pve_exporter configuration"
         default: "/etc/pve_exporter"
+      pve_exporter_set_credential:
+        description:
+          - "I(Advanced)"
+          - "Create pve_exporter user in proxmox"
+        type: bool
+        default: false
+      pve_exporter_no_log:
+        description:
+          - "I(Advanced)"
+          - "Display/Log ansible tasks containing secrets"
+        type: bool
+        default: true

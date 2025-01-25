@@ -33,3 +33,5 @@ pve_exporter_system_group: "pve-exp"
 pve_exporter_system_user: "{{ pve_exporter_system_group }}"
 
 pve_exporter_config_dir: "/etc/pve_exporter"
+pve_exporter_set_credential: false
+pve_exporter_no_log: true

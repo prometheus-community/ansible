@@ -7,6 +7,10 @@
     - pve_exporter_configure
     - pve_exporter_run
 
+- name: Credentials
+  ansible.builtin.import_tasks: credentials.yml
+  when: pve_exporter_set_credential | bool
+
 - name: Install
   tags:
     - pve_exporter_install
