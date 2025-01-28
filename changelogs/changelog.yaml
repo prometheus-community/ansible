@@ -1,6 +1,9 @@
 ---
 ancestor:
 releases:
+  0.24.1:
+    changes: {}
+    release_date: '2025-01-28'
   0.24.0:
     changes:
       trivial:
