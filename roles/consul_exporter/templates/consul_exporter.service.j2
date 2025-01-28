@@ -25,24 +25,24 @@ ExecStart={{ consul_exporter_binary_install_dir }}/consul_exporter \
     '--meta.filter={{ consul_exporter_meta_filter }}' \
 {% endif %}
 {% if consul_exporter_health_summary %}
-    --consul.health-summary \
+    '--consul.health-summary' \
 {% else %}
-    --no-consul.health-summary
+    '--no-consul.health-summary' \
 {% endif %}
 {% if consul_exporter_agent_only %}
-    --consul.agent-only \
+    '--consul.agent-only' \
 {% else %}
-    --no-consul.agent-only \
+    '--no-consul.agent-only' \
 {% endif %}
 {% if consul_exporter_allow_stale %}
-    --consul.allow_stale \
+    '--consul.allow_stale' \
 {% else %}
-    --no-consul.allow_stale \
+    '--no-consul.allow_stale' \
 {% endif %}
 {% if consul_exporter_require_consistent %}
-    --consul.require_consistent \
+    '--consul.require_consistent' \
 {% else %}
-    --no-consul.require_consistent \
+    '--no-consul.require_consistent' \
 {% endif %}
     '--web.listen-address={{ consul_exporter_web_listen_address }}' \
     '--web.telemetry-path={{ consul_exporter_web_telemetry_path }}' \
