@@ -1,0 +1,61 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+  tags:
+    - apache_exporter_install
+    - apache_exporter_configure
+    - apache_exporter_run
+
+- name: Install
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: install.yml
+  vars:
+    _common_local_cache_path: "{{ apache_exporter_local_cache_path }}"
+    _common_binaries: "{{ _apache_exporter_binaries }}"
+    _common_binary_install_dir: "{{ apache_exporter_binary_install_dir }}"
+    _common_binary_url: "{{ apache_exporter_binary_url }}"
+    _common_checksums_url: "{{ apache_exporter_checksums_url }}"
+    _common_system_group: "{{ apache_exporter_system_group }}"
+    _common_system_user: "{{ apache_exporter_system_user }}"
+    _common_config_dir: "{{ apache_exporter_config_dir }}"
+    _common_binary_unarchive_opts: ['--strip-components=1']
+  tags:
+    - apache_exporter_install
+
+- name: SELinux
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ apache_exporter_web_listen_address | urlsplit('port') }}"
+  when: ansible_facts['selinux'].status == "enabled"
+  tags:
+    - apache_exporter_configure
+
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ apache_exporter_system_user }}"
+    _common_system_group: "{{ apache_exporter_system_group }}"
+    _common_config_dir: "{{ apache_exporter_config_dir }}"
+    _common_tls_server_config: "{{ apache_exporter_tls_server_config }}"
+    _common_http_server_config: "{{ apache_exporter_http_server_config }}"
+    _common_basic_auth_users: "{{ apache_exporter_basic_auth_users }}"
+  tags:
+    - apache_exporter_configure
+
+- name: Ensure apache_exporter is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: apache_exporter
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - apache_exporter_run
