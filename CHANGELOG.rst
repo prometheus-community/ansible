@@ -12,6 +12,11 @@ Minor Changes
 
 - feat: Add consul_exporter role (https://github.com/prometheus-community/ansible/pull/514)
 
+Bugfixes
+--------
+
+- fix: identation in service file (https://github.com/prometheus-community/ansible/pull/528)
+
 v0.24.2
 =======
 
