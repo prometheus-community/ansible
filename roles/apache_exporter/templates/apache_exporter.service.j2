@@ -1,0 +1,48 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus Apache Exporter
+Documentation=https://github.com/Lusitaniae/apache_exporter
+After=network.target
+
+[Service]
+Type=simple
+
+User={{ apache_exporter_system_user }}
+Group={{ apache_exporter_system_group }}
+
+ExecStart={{ apache_exporter_binary_install_dir }}/apache_exporter \
+{% if apache_exporter_tls_server_config | length > 0 or apache_exporter_http_server_config | length > 0 or apache_exporter_basic_auth_users | length > 0 -%}
+  --web.config.file={{ apache_exporter_config_dir }}/web_config.yml \
+{% endif -%}
+{% if apache_exporter_log_level != "error" -%}
+  --log.level="{{ apache_exporter_log_level }}" \
+{% endif -%}
+{% if apache_exporter_timeout_offset != 1 -%}
+  --web.timeout-offset= {{ apache_exporter_timeout_offset }} \
+{% endif -%}
+{% if apache_exporter_web_telemetry_path != "/metrics" -%}
+  --web.telemetry-path={{ apache_exporter_web_telemetry_path }} \
+{% endif %}
+  --web.listen-address={{ apache_exporter_web_listen_address }} \
+  --scrape_uri={{ apache_exporter_uri }}
+
+SyslogIdentifier=apache_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+ProtectHome=yes
+NoNewPrivileges=yes
+
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target
