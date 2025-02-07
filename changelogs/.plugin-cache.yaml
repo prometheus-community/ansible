@@ -24,6 +24,10 @@ objects:
       description: Prometheus Chrony Exporter
       name: chrony_exporter
       version_added: null
+    consul_exporter:
+      description: Prometheus consul Exporter
+      name: consul_exporter
+      version_added: null
     fail2ban_exporter:
       description: Prometheus fail2ban_exporter
       name: fail2ban_exporter
@@ -112,4 +116,4 @@ plugins:
   strategy: {}
   test: {}
   vars: {}
-version: 0.24.2
+version: 0.25.0
