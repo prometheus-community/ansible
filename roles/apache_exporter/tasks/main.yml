@@ -3,9 +3,13 @@
   ansible.builtin.include_tasks:
     file: preflight.yml
   tags:
+    - apache_exporter
+    - install
     - apache_exporter_install
+    - configure
     - apache_exporter_configure
-    - apache_exporter_run
+    - run
+    - apache_exporter_r
 
 - name: Install
   ansible.builtin.include_role:
@@ -22,6 +26,8 @@
     _common_config_dir: "{{ apache_exporter_config_dir }}"
     _common_binary_unarchive_opts: ['--strip-components=1']
   tags:
+    - apache_exporter
+    - install
     - apache_exporter_install
 
 - name: SELinux
@@ -32,6 +38,8 @@
     _common_selinux_port: "{{ apache_exporter_web_listen_address | urlsplit('port') }}"
   when: ansible_facts['selinux'].status == "enabled"
   tags:
+    - apache_exporter
+    - configure
     - apache_exporter_configure
 
 - name: Configure
@@ -46,6 +54,8 @@
     _common_http_server_config: "{{ apache_exporter_http_server_config }}"
     _common_basic_auth_users: "{{ apache_exporter_basic_auth_users }}"
   tags:
+    - apache_exporter
+    - configure
     - apache_exporter_configure
 
 - name: Ensure apache_exporter is enabled on boot
@@ -58,4 +68,6 @@
   when:
     - not ansible_check_mode
   tags:
+    - apache_exporter
+    - run
     - apache_exporter_run
