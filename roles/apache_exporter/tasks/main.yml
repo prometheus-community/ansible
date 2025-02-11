@@ -9,7 +9,7 @@
     - configure
     - apache_exporter_configure
     - run
-    - apache_exporter_r
+    - apache_exporter_run
 
 - name: Install
   ansible.builtin.include_role:
