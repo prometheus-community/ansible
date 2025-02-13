@@ -1,5 +1,5 @@
 ---
-ipmi_exporter_version: 1.9.0
+ipmi_exporter_version: 1.10.0
 ipmi_exporter_binary_url: "https://github.com/{{ _ipmi_exporter_repo }}/releases/download/v{{ ipmi_exporter_version }}/\
                            ipmi_exporter-{{ ipmi_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _ipmi_exporter_go_ansible_arch }}.tar.gz"
 ipmi_exporter_checksums_url: "https://github.com/{{ _ipmi_exporter_repo }}/releases/download/v{{ ipmi_exporter_version }}/sha256sums.txt"
