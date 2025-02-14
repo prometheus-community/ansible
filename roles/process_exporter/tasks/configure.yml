@@ -18,7 +18,7 @@
 - name: Create/Update configuration file
   ansible.builtin.template:
     src: "config.yml.j2"
-    dest: "/etc/process_exporter/config.yml"
+    dest: "{{ process_exporter_config_dir }}/config.yml"
     owner: "{{ process_exporter_system_user }}"
     group: "{{ process_exporter_system_group }}"
     mode: 0644
