@@ -1,6 +1,24 @@
 ---
 ancestor:
 releases:
+  0.25.0:
+    changes:
+      minor_changes:
+        - 'feat: Add consul_exporter role (https://github.com/prometheus-community/ansible/pull/514)'
+      bugfixes:
+        - 'fix: identation in service file (https://github.com/prometheus-community/ansible/pull/528)'
+      trivial:
+        - 'patch: New prometheus-community/ipmi_exporter upstream release 1.10.0!
+          (https://github.com/prometheus-community/ansible/pull/531)'
+        - 'patch: New prometheus/snmp_exporter upstream release 0.28.0! (https://github.com/prometheus-community/ansible/pull/529)'
+    release_date: '2025-02-07'
+  0.24.2:
+    changes:
+      trivial:
+        - 'patch: New prometheus/snmp_exporter upstream release 0.28.0! (https://github.com/prometheus-community/ansible/pull/529)'
+    release_date: '2025-02-07'
+  0.24.1:
+    release_date: '2025-01-28'
   0.24.0:
     changes:
       trivial:

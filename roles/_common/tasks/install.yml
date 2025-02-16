@@ -80,6 +80,7 @@
 
     - name: "Verify checksum of {{ __common_binary_basename }}"
       run_once: true
+      check_mode: false
       when: (_common_checksums_url)
       block:
         - name: "Fetch checksum list for {{ __common_binary_basename }}"
@@ -118,6 +119,7 @@
         list_files: true
         extra_opts: "{{ _common_binary_unarchive_opts | default(omit, true) }}"
       check_mode: false
+      throttle: 1  # see prometheus-community/ansible#457
       when: __common_binary_basename is search('\.zip$|\.tar\.gz$')
 
 - name: "Check existence of binary install dir"

@@ -1,10 +1,112 @@
-objects: {}
+objects:
+  role:
+    _common:
+      description: null
+      name: _common
+      version_added: null
+    alertmanager:
+      description: Prometheus Alertmanager service
+      name: alertmanager
+      version_added: null
+    bind_exporter:
+      description: Prometheus BIND Exporter
+      name: bind_exporter
+      version_added: null
+    blackbox_exporter:
+      description: Deploy and manage Prometheus blackbox exporter
+      name: blackbox_exporter
+      version_added: null
+    cadvisor:
+      description: cAdvisor
+      name: cadvisor
+      version_added: null
+    chrony_exporter:
+      description: Prometheus Chrony Exporter
+      name: chrony_exporter
+      version_added: null
+    consul_exporter:
+      description: Prometheus consul Exporter
+      name: consul_exporter
+      version_added: null
+    fail2ban_exporter:
+      description: Prometheus fail2ban_exporter
+      name: fail2ban_exporter
+      version_added: null
+    influxdb_exporter:
+      description: Prometheus Influxdb Exporter
+      name: influxdb_exporter
+      version_added: null
+    ipmi_exporter:
+      description: Prometheus ipmi_exporter
+      name: ipmi_exporter
+      version_added: null
+    memcached_exporter:
+      description: Prometheus memcached_exporter
+      name: memcached_exporter
+      version_added: null
+    mongodb_exporter:
+      description: Prometheus mongodb_exporter
+      name: mongodb_exporter
+      version_added: null
+    mysqld_exporter:
+      description: Prometheus MySQLd Exporter
+      name: mysqld_exporter
+      version_added: null
+    nginx_exporter:
+      description: Prometheus nginx_exporter
+      name: nginx_exporter
+      version_added: null
+    node_exporter:
+      description: Prometheus Node Exporter
+      name: node_exporter
+      version_added: null
+    nvidia_gpu_exporter:
+      description: Prometheus Nvidia GPU Exporter
+      name: nvidia_gpu_exporter
+      version_added: null
+    postgres_exporter:
+      description: Prometheus PostgreSQL Exporter
+      name: postgres_exporter
+      version_added: null
+    process_exporter:
+      description: Prometheus Process exporter
+      name: process_exporter
+      version_added: null
+    prometheus:
+      description: Installs and configures prometheus
+      name: prometheus
+      version_added: null
+    pushgateway:
+      description: Prometheus Pushgateway
+      name: pushgateway
+      version_added: null
+    redis_exporter:
+      description: Prometheus redis_exporter
+      name: redis_exporter
+      version_added: null
+    smartctl_exporter:
+      description: Prometheus Smartctl Exporter
+      name: smartctl_exporter
+      version_added: null
+    smokeping_prober:
+      description: Prometheus Smokeping Prober
+      name: smokeping_prober
+      version_added: null
+    snmp_exporter:
+      description: Prometheus SNMP exporter
+      name: snmp_exporter
+      version_added: null
+    systemd_exporter:
+      description: Prometheus Systemd Exporter
+      name: systemd_exporter
+      version_added: null
 plugins:
   become: {}
   cache: {}
   callback: {}
   cliconf: {}
   connection: {}
+  filter: {}
   httpapi: {}
   inventory: {}
   lookup: {}
@@ -12,5 +114,6 @@ plugins:
   netconf: {}
   shell: {}
   strategy: {}
+  test: {}
   vars: {}
-version: 0.24.0
+version: 0.25.0
