@@ -6,6 +6,7 @@ releases:
       minor_changes:
         - 'feat: Add consul_exporter role (https://github.com/prometheus-community/ansible/pull/514)'
       bugfixes:
+        - 'fix: add `enabled: true` to alertmanager (https://github.com/prometheus-community/ansible/pull/530)'
         - 'fix: identation in service file (https://github.com/prometheus-community/ansible/pull/528)'
       trivial:
         - 'patch: New prometheus-community/ipmi_exporter upstream release 1.10.0!
