@@ -4,6 +4,33 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.25.0
+=======
+
+Minor Changes
+-------------
+
+- feat: Add consul_exporter role (https://github.com/prometheus-community/ansible/pull/514)
+- feature: Add apache exporter (https://github.com/prometheus-community/ansible/pull/527)
+
+Bugfixes
+--------
+
+- fix: add `enabled: true` to alertmanager (https://github.com/prometheus-community/ansible/pull/530)
+- fix: identation in service file (https://github.com/prometheus-community/ansible/pull/528)
+
+v0.24.2
+=======
+
+v0.24.1
+=======
+
+v0.24.0
+=======
+
+v0.23.2
+=======
+
 v0.23.1
 =======
 

@@ -29,7 +29,7 @@
     tasks_from: selinux.yml
   vars:
     _common_selinux_port: "{{ cadvisor_port }}"
-  when: ansible_selinux.status == "enabled"
+  when: ansible_facts['selinux'].status == "enabled"
   tags:
     - cadvisor_configure
 

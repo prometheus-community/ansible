@@ -1,0 +1,10 @@
+---
+- name: Restart apache_exporter
+  listen: "restart apache_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: apache_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode

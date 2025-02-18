@@ -1,6 +1,38 @@
 ---
 ancestor:
 releases:
+  0.25.0:
+    changes:
+      minor_changes:
+        - 'feature: Add apache exporter (https://github.com/prometheus-community/ansible/pull/527)'
+        - 'feat: Add consul_exporter role (https://github.com/prometheus-community/ansible/pull/514)'
+      bugfixes:
+        - 'fix: add `enabled: true` to alertmanager (https://github.com/prometheus-community/ansible/pull/530)'
+        - 'fix: identation in service file (https://github.com/prometheus-community/ansible/pull/528)'
+      trivial:
+        - 'patch: New prometheus/prometheus upstream release 3.2.0! (https://github.com/prometheus-community/ansible/pull/534)'
+        - 'patch: New prometheus/node_exporter upstream release 1.9.0! (https://github.com/prometheus-community/ansible/pull/533)'
+        - 'patch: New prometheus-community/ipmi_exporter upstream release 1.10.0!
+          (https://github.com/prometheus-community/ansible/pull/531)'
+        - 'patch: New prometheus/snmp_exporter upstream release 0.28.0! (https://github.com/prometheus-community/ansible/pull/529)'
+    release_date: '2025-02-07'
+  0.24.2:
+    changes:
+      trivial:
+        - 'patch: New prometheus/snmp_exporter upstream release 0.28.0! (https://github.com/prometheus-community/ansible/pull/529)'
+    release_date: '2025-02-07'
+  0.24.1:
+    release_date: '2025-01-28'
+  0.24.0:
+    changes:
+      trivial:
+        - 'patch: New prometheus/pushgateway upstream release 1.11.0! (https://github.com/prometheus-community/ansible/pull/510)'
+    release_date: '2025-01-12'
+  0.23.2:
+    changes:
+      trivial:
+        - 'patch: New prometheus/pushgateway upstream release 1.11.0! (https://github.com/prometheus-community/ansible/pull/510)'
+    release_date: '2025-01-10'
   0.23.1:
     changes:
       trivial:

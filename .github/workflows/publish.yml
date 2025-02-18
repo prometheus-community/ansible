@@ -12,17 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: "Install tools"
-        run: "python -m pip install ansible-base --disable-pip-version-check"
-
       - name: "Build the collection"
-        run: ansible-galaxy collection build
+        id: build-collection
+        uses: ansible-community/github-action-build-collection@main
 
       - name: "Upload built collection to release"
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: prometheus-prometheus-*.tar.gz
+          file: ${{ steps.build-collection.outputs.artifact-filename }}
           file_glob: true
           tag: ${{ github.ref }}
           overwrite: true
