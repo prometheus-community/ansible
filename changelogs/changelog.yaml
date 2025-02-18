@@ -10,6 +10,8 @@ releases:
         - 'fix: add `enabled: true` to alertmanager (https://github.com/prometheus-community/ansible/pull/530)'
         - 'fix: identation in service file (https://github.com/prometheus-community/ansible/pull/528)'
       trivial:
+        - 'patch: New prometheus/prometheus upstream release 3.2.0! (https://github.com/prometheus-community/ansible/pull/534)'
+        - 'patch: New prometheus/node_exporter upstream release 1.9.0! (https://github.com/prometheus-community/ansible/pull/533)'
         - 'patch: New prometheus-community/ipmi_exporter upstream release 1.10.0!
           (https://github.com/prometheus-community/ansible/pull/531)'
         - 'patch: New prometheus/snmp_exporter upstream release 0.28.0! (https://github.com/prometheus-community/ansible/pull/529)'
