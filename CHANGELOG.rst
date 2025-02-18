@@ -15,6 +15,7 @@ Minor Changes
 Bugfixes
 --------
 
+- fix: add `enabled: true` to alertmanager (https://github.com/prometheus-community/ansible/pull/530)
 - fix: identation in service file (https://github.com/prometheus-community/ansible/pull/528)
 
 v0.24.2
