@@ -4,6 +4,7 @@ releases:
   0.25.0:
     changes:
       minor_changes:
+        - 'feature: Add apache exporter (https://github.com/prometheus-community/ansible/pull/527)'
         - 'feat: Add consul_exporter role (https://github.com/prometheus-community/ansible/pull/514)'
       bugfixes:
         - 'fix: add `enabled: true` to alertmanager (https://github.com/prometheus-community/ansible/pull/530)'

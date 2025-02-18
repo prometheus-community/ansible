@@ -11,6 +11,7 @@ Minor Changes
 -------------
 
 - feat: Add consul_exporter role (https://github.com/prometheus-community/ansible/pull/514)
+- feature: Add apache exporter (https://github.com/prometheus-community/ansible/pull/527)
 
 Bugfixes
 --------
