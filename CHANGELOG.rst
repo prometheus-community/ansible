@@ -4,6 +4,14 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.26.0
+=======
+
+Minor Changes
+-------------
+
+- minor: bump support for ansible from v2.17.* to v2.18.* (https://github.com/prometheus-community/ansible/pull/535)
+
 v0.25.0
 =======
 
