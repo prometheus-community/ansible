@@ -13,7 +13,7 @@ argument_specs:
         default: "1.8.0"
       elasticsearch_exporter_binary_url:
         description: "URL of the elasticsearch exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _elasticsearch_exporter_repo }}/releases/download/v{{ elasticsearch_exporter_version }}/elasticsearch_exporter-{{ elasticsearch_exporter_version }}.{{ ansible_system | lower }}-{{ _elasticsearch_exporter_go_ansible_arch }}.tar.gz"
+        default: "https://github.com/{{ _elasticsearch_exporter_repo }}/releases/download/v{{ elasticsearch_exporter_version }}/elasticsearch_exporter-{{ elasticsearch_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _elasticsearch_exporter_go_ansible_arch }}.tar.gz"
       elasticsearch_exporter_checksums_url:
         description: "URL of the elasticsearch exporter checksums file"
         default: "https://github.com/{{ _elasticsearch_exporter_repo }}/releases/download/v{{ elasticsearch_exporter_version }}/sha256sums.txt"
@@ -83,7 +83,7 @@ argument_specs:
         default: []
       elasticsearch_exporter_local_cache_path:
         description: "Local path to stash the archive and its extraction"
-        default: "/tmp/elasticsearch_exporter-{{ ansible_system | lower }}-{{ _elasticsearch_exporter_go_ansible_arch }}/{{ elasticsearch_exporter_version }}"
+        default: "/tmp/elasticsearch_exporter-{{ ansible_facts['system'] | lower }}-{{ _elasticsearch_exporter_go_ansible_arch }}/{{ elasticsearch_exporter_version }}"
       elasticsearch_exporter_config_dir:
         description: "Path to directory with elasticsearch_exporter configuration"
         default: "/etc/elasticsearch_exporter"
