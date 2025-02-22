@@ -1,7 +1,7 @@
 ---
 elasticsearch_exporter_version: 1.8.0
 elasticsearch_exporter_binary_url: "https://github.com/{{ _elasticsearch_exporter_repo }}/releases/download/v{{ elasticsearch_exporter_version }}/\
-                           elasticsearch_exporter-{{ elasticsearch_exporter_version }}.{{ ansible_system | lower }}-{{ _elasticsearch_exporter_go_ansible_arch }}.tar.gz"
+                           elasticsearch_exporter-{{ elasticsearch_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _elasticsearch_exporter_go_ansible_arch }}.tar.gz"
 elasticsearch_exporter_checksums_url: "https://github.com/{{ _elasticsearch_exporter_repo }}/releases/download/v{{ elasticsearch_exporter_version }}/sha256sums.txt"
 
 elasticsearch_exporter_web_disable_exporter_metrics: false
@@ -34,4 +34,4 @@ elasticsearch_exporter_extra_args: []
 
 elasticsearch_exporter_config_dir: "/etc/elasticsearch_exporter"
 # Local path to stash the archive and its extraction
-elasticsearch_exporter_local_cache_path: "/tmp/elasticsearch_exporter-{{ ansible_system | lower }}-{{ _elasticsearch_exporter_go_ansible_arch }}/{{ elasticsearch_exporter_version }}"
+elasticsearch_exporter_local_cache_path: "/tmp/elasticsearch_exporter-{{ ansible_facts['system'] | lower }}-{{ _elasticsearch_exporter_go_ansible_arch }}/{{ elasticsearch_exporter_version }}"
