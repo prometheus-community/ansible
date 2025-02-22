@@ -12,61 +12,9 @@
   when: pve_exporter_set_credential | bool
 
 - name: Install
+  ansible.builtin.import_tasks: install.yml
   tags:
     - pve_exporter_install
-  block:
-    - name: Gather python facts
-      ansible.builtin.setup:
-        gather_subset:
-          - "!all"
-          - "python"
-      when:
-        "('python' not in ansible_facts) or
-         ('discovered_interpreter_python' not in ansible_facts)
-
-    - name: Install packages dependencies
-      ansible.builtin.package:
-        name:
-          - "python{{ ansible_facts['ansible_python']['version']['major'] }}-setuptools"
-          - "python{{ ansible_facts['ansible_python']['version']['major'] }}-venv"
-        state: present
-      become: true
-    - name: "Create system group {{ pve_exporter_system_group }}"
-      ansible.builtin.group:
-        name: "{{ pve_exporter_system_group }}"
-        state: present
-    - name: "Create system user {{ pve_exporter_system_user }}"
-      ansible.builtin.user:
-        name: "{{ pve_exporter_system_user }}"
-        system: true
-        shell: "/usr/sbin/nologin"
-        group: "{{ pve_exporter_system_group }}"
-        home: "{{ pve_exporter_home }}"
-        create_home: true
-      become: true
-    - name: Install pve_exporter from pip
-      ansible.builtin.pip:
-        name: prometheus-pve-exporter
-        version: "{{ pve_exporter_version }}"
-        state: present
-        virtualenv: "{{ pve_exporter_virtualenv }}"
-        virtualenv_command: "{{ ansible_facts['discovered_interpreter_python'] }} -m venv"
-      become: true
-      become_user: "{{ pve_exporter_system_user }}"
-    - name: Ensure config dir exists
-      ansible.builtin.file:
-        path: "{{ pve_exporter_config_dir }}"
-        state: directory
-        mode: '0775'  # like _common
-        owner: root
-    - name: Configure pve_exporter
-      ansible.builtin.template:
-        src: "{{ pve_exporter_config_template }}"
-        dest: "{{ pve_exporter_config_dir }}/pve_exporter.yml"
-        mode: '0644'
-        owner: root
-      notify:
-        - Restart pve_exporter
 
 - name: SELinux
   ansible.builtin.include_role:
