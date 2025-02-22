@@ -41,6 +41,7 @@
         version: "{{ pve_exporter_version }}"
         state: present
         virtualenv: "{{ pve_exporter_virtualenv }}"
+        virtualenv_command: "{{ ansible_facts['discovered_interpreter_python'] }} -m venv"
       become: true
       become_user: "{{ pve_exporter_system_user }}"
     - name: Ensure config dir exists
