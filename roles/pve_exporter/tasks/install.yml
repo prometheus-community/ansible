@@ -7,7 +7,7 @@
       - "python"
   when:
     "('python' not in ansible_facts) or
-     ('discovered_interpreter_python' not in ansible_facts)
+     ('discovered_interpreter_python' not in ansible_facts)"
 
 - name: Install packages dependencies
   ansible.builtin.package:
