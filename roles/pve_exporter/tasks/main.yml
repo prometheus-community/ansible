@@ -1,0 +1,45 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+  tags:
+    - pve_exporter_install
+    - pve_exporter_configure
+    - pve_exporter_run
+
+- name: Credentials
+  ansible.builtin.import_tasks: credentials.yml
+  when: pve_exporter_set_credential | bool
+
+- name: Install
+  ansible.builtin.import_tasks: install.yml
+  tags:
+    - pve_exporter_install
+
+- name: SELinux
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ pve_exporter_web_listen_address | urlsplit('port') }}"
+  when: ansible_selinux.status == "enabled"
+  tags:
+    - pve_exporter_configure
+
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yml
+  tags:
+    - pve_exporter_configure
+
+- name: Ensure Proxmox VE Exporter is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: pve_exporter
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - pve_exporter_run
