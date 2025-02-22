@@ -27,7 +27,7 @@ elasticsearch_exporter_enabled_collectors:
 elasticsearch_exporter_disabled_collectors: []
 
 elasticsearch_exporter_binary_install_dir: "/usr/local/bin"
-elasticsearch_exporter_system_group: "elasticsearch-exp"
+elasticsearch_exporter_system_group: "elastic-exp"
 elasticsearch_exporter_system_user: "{{ elasticsearch_exporter_system_group }}"
 # systemd cli extra arguments
 elasticsearch_exporter_extra_args: []
