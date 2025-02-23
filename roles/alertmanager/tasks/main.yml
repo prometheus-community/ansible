@@ -47,3 +47,15 @@
     - alertmanager
     - configure
     - alertmanager_configure
+
+- name: Ensure alertmanager is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: alertmanager
+    enabled: true
+    state: started
+  tags:
+    - alertmanager
+    - run
+    - alertmanager_run

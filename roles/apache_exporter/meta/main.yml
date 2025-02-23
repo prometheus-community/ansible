@@ -1,0 +1,26 @@
+---
+galaxy_info:
+  author: "Prometheus Community"
+  description: "Prometheus apache_exporter"
+  license: "Apache"
+  min_ansible_version: "2.9"
+  platforms:
+    - name: "Ubuntu"
+      versions:
+        - "focal"
+        - "jammy"
+        - "noble"
+    - name: "Debian"
+      versions:
+        - "bullseye"
+    - name: "EL"
+      versions:
+        - "8"
+        - "9"
+  galaxy_tags:
+    - "monitoring"
+    - "prometheus"
+    - "exporter"
+    - "metrics"
+    - "system"
+    - "apache"
