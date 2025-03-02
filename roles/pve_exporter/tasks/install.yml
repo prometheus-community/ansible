@@ -12,8 +12,8 @@
 - name: Install packages dependencies
   ansible.builtin.package:
     name:
-      - "python{{ ansible_facts['ansible_python']['version']['major'] }}-setuptools"
-      - "python{{ ansible_facts['ansible_python']['version']['major'] }}-venv"
+      - "python{{ ansible_facts['python']['version']['major'] }}-setuptools"
+      - "python{{ ansible_facts['python']['version']['major'] }}-venv"
     state: present
   become: true
 - name: "Create system group {{ pve_exporter_system_group }}"
