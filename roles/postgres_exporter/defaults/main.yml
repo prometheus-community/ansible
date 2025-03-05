@@ -1,5 +1,5 @@
 ---
-postgres_exporter_version: 0.17.0
+postgres_exporter_version: 0.17.1
 postgres_exporter_binary_url: "https://github.com/{{ _postgres_exporter_repo }}/releases/download/v{{ postgres_exporter_version }}/\
                            postgres_exporter-{{ postgres_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _postgres_exporter_go_ansible_arch }}.tar.gz"
 postgres_exporter_checksums_url: "https://github.com/{{ _postgres_exporter_repo }}/releases/download/v{{ postgres_exporter_version }}/sha256sums.txt"
