@@ -5,6 +5,11 @@ releases:
     changes:
       minor_changes:
         - 'minor: bump support for ansible from v2.17.* to v2.18.* (https://github.com/prometheus-community/ansible/pull/535)'
+      trivial:
+        - 'patch: New prometheus/blackbox_exporter upstream release 0.26.0! (https://github.com/prometheus-community/ansible/pull/540)'
+        - 'patch: New prometheus-community/postgres_exporter upstream release 0.17.0!
+          (https://github.com/prometheus-community/ansible/pull/539)'
+        - 'patch: New prometheus/mysqld_exporter upstream release 0.17.1! (https://github.com/prometheus-community/ansible/pull/538)'
     release_date: '2025-02-19'
   0.25.0:
     changes:
