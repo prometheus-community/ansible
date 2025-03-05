@@ -8,6 +8,7 @@ releases:
       trivial:
         - 'patch: New superq/chrony_exporter upstream release 0.12.0! (https://github.com/prometheus-community/ansible/pull/544)'
         - 'patch: New prometheus/prometheus upstream release 3.2.1! (https://github.com/prometheus-community/ansible/pull/542)'
+        - 'patch: New prometheus/mysqld_exporter upstream release 0.17.2! (https://github.com/prometheus-community/ansible/pull/541)'
         - 'patch: New prometheus/blackbox_exporter upstream release 0.26.0! (https://github.com/prometheus-community/ansible/pull/540)'
         - 'patch: New prometheus-community/postgres_exporter upstream release 0.17.0!
           (https://github.com/prometheus-community/ansible/pull/539)'
