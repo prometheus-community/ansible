@@ -27,5 +27,6 @@ provisioner:
               cmdline:
                 - crond
           {% endraw %}
+        process_exporter_recheck_time_limit: 180s
         process_exporter_binary_url: "https://github.com/ncabatoff/process-exporter/releases/download/v{{\
                                       \ process_exporter_version }}/process-exporter-{{ process_exporter_version }}.linux-amd64.tar.gz"
