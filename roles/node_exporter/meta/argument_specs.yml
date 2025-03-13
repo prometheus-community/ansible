@@ -82,3 +82,6 @@ argument_specs:
       node_exporter_config_dir:
         description: "Path to directory with node_exporter configuration"
         default: "/etc/node_exporter"
+      node_exporter_log_level:
+        description: "Only log messages with the given severity or above."
+        default: "info"
