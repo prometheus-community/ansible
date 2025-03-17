@@ -10,14 +10,14 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
 
       - name: "Build the collection"
         id: build-collection
         uses: ansible-community/github-action-build-collection@main
 
       - name: "Upload built collection to release"
-        uses: svenstaro/upload-release-action@v2
+        uses: svenstaro/upload-release-action@2b4adf59f26ea3ed6ddecb8e00f80acc6bc16bd4  # 2.9.0
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.build-collection.outputs.artifact-filename }}
@@ -26,6 +26,6 @@ jobs:
           overwrite: true
 
       - name: "Publish collection on galaxy"
-        uses: ansible/ansible-publish-action@v1.0.0
+        uses: ansible/ansible-publish-action@a56a0328c92c1d4feedf5bd7f7cf7ec7a4ae3f09  # v1.0.0
         with:
           api_key: ${{ secrets.ANSIBLE_GALAXY_API_KEY }}

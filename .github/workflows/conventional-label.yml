@@ -14,7 +14,7 @@ jobs:
       pull-requests: write
     steps:
       - name: "Confirm correct pull request title"
-        uses: mmubeen/action-pr-title@master  # until PR gets merged https://github.com/deepakputhraya/action-pr-title/pull/29
+        uses: deepakputhraya/action-pr-title@077bddd7bdabd0d2b1b25ed0754c7e62e184d7ee
         with:
           allowed_prefixes: "breaking,chore,feat,feature,fix,major,minor,enhancement,\
            deprecated,removed,security,bug,bugfix,docs,packaging,\
@@ -22,7 +22,7 @@ jobs:
 
       - name: "Apply label"
         if: github.event.pull_request.labels.length == 0
-        uses: bcoe/conventional-release-labels@v1
+        uses: bcoe/conventional-release-labels@886f696738527c7be444262c327c89436dfb95a8  # v1.3.1
         with:
           type_labels: |
               {
@@ -54,21 +54,14 @@ jobs:
     needs: pr-label
     if: github.event.pull_request.labels.length == 0
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
 
       - name: Get changed roles
         id: changed-roles
-        uses: tj-actions/changed-files@v46
-        with:
-          path: "roles"
-          diff_relative: "true"
-          files: "**"
-          dir_names: "true"
-          dir_names_max_depth: "1"
-          sha: ${{ github.event.pull_request.head.sha }}
+        run: git diff --name-only ${{ github.event.pull_request.head.sha }} -r | grep -E '^roles/' | cut -f 1-2 -d'/' | sort -u >> "$GITHUB_OUTPUT"
 
       - name: Add changed roles labels
-        uses: actions/github-script@v7
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7.0.1
         if: |
           steps.changed-roles.outputs.all_changed_and_modified_files
         with:

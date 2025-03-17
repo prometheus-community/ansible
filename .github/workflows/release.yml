@@ -14,7 +14,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
         with:
           fetch-depth: 0
 
@@ -45,19 +45,19 @@ jobs:
           cmd: yq -i '.version = "${{ steps.version.outputs.next-version }}"' 'galaxy.yml'
 
       - name: "Write changelog and version"
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79  # v5.1.0
         with:
           branch: ${{ github.event.pull_request.base.ref }}
           commit_message: "chore: update version"
           push_options: --force
 
       - name: "Checkout updated branch"
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
         with:
           ref: ${{ github.event.pull_request.base.ref }}
 
       - name: "Publish release"
         id: release-publish
-        uses: release-drafter/release-drafter@v6
+        uses: release-drafter/release-drafter@7cf306f56b79636bb76931494ccf29fc893763bd  # v6.1.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
