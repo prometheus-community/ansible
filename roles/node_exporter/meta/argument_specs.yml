@@ -36,7 +36,7 @@ argument_specs:
           - "error"
         default: "info"
       node_exporter_log_format:
-      description: "Format for node exporter logs"
+        description: "Format for node exporter logs"
         choices:
           - "logfmt"
           - "json"
