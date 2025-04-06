@@ -8,6 +8,10 @@ objects:
       description: Prometheus Alertmanager service
       name: alertmanager
       version_added: null
+    apache_exporter:
+      description: Prometheus apache_exporter
+      name: apache_exporter
+      version_added: null
     bind_exporter:
       description: Prometheus BIND Exporter
       name: bind_exporter
@@ -116,4 +120,4 @@ plugins:
   strategy: {}
   test: {}
   vars: {}
-version: 0.25.0
+version: 0.26.1
