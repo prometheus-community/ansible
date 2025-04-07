@@ -8,6 +8,8 @@ releases:
         - 'chore(deps): update ansible/ansible-lint action to v25.2.0 (https://github.com/prometheus-community/ansible/pull/569)'
         - 'patch: New Lusitaniae/apache_exporter upstream release 1.0.10! (https://github.com/prometheus-community/ansible/pull/561)'
         - 'chore(deps): update svenstaro/upload-release-action digest to 04733e0 (https://github.com/prometheus-community/ansible/pull/560)'
+        - 'chore(deps): update ansible-community/ansible-test-gh-action digest to
+          b416b6e (https://github.com/prometheus-community/ansible/pull/558)'
     release_date: '2025-04-02'
   0.26.0:
     changes:
