@@ -33,7 +33,7 @@ jobs:
     name: "${{ matrix.targets.name }}-${{ matrix.ansible-core-versions }}"
     steps:
       - name: "Perform ${{ matrix.targets.test }} integration test with ansible-test"
-        uses: ansible-community/ansible-test-gh-action@release/v1
+        uses: ansible-community/ansible-test-gh-action@b416b6ecf7ddb0ea3b0a51c1d198d715eba52c9d  # v1.16.0
         with:
           ansible-core-version: ${{ matrix.ansible-core-versions }}
           target-python-version: ${{ matrix.target-python-versions }}
