@@ -4,6 +4,7 @@ releases:
   0.26.1:
     changes:
       trivial:
+        - 'chore(deps): update ansible/ansible-lint action to v25.2.1 (https://github.com/prometheus-community/ansible/pull/570)'
         - 'chore(deps): update ansible/ansible-lint action to v25.2.0 (https://github.com/prometheus-community/ansible/pull/569)'
         - 'patch: New Lusitaniae/apache_exporter upstream release 1.0.10! (https://github.com/prometheus-community/ansible/pull/561)'
         - 'chore(deps): update svenstaro/upload-release-action digest to 04733e0 (https://github.com/prometheus-community/ansible/pull/560)'
