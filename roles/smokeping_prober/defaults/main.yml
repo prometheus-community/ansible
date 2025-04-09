@@ -1,5 +1,5 @@
 ---
-smokeping_prober_version: 0.9.0
+smokeping_prober_version: 0.10.0
 smokeping_prober_binary_url: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/\
                            smokeping_prober-{{ smokeping_prober_version }}.{{ ansible_facts['system'] | lower }}-{{ _smokeping_prober_go_ansible_arch }}.tar.gz"
 smokeping_prober_checksums_url: "https://github.com/{{ _smokeping_prober_repo }}/releases/download/v{{ smokeping_prober_version }}/sha256sums.txt"
