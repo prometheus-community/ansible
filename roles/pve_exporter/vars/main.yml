@@ -1,0 +1,3 @@
+---
+_pve_exporter_repo: "prometheus-pve/prometheus-pve-exporter"
+_github_api_headers: "{{ {'GITHUB_TOKEN': lookup('ansible.builtin.env', 'GITHUB_TOKEN')} if (lookup('ansible.builtin.env', 'GITHUB_TOKEN')) else {} }}"
