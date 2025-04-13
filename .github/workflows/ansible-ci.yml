@@ -45,7 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
       - name: Run action
-        uses: hoo29/little-timmy@v2-action
+        uses: hoo29/little-timmy@v3-action
 
   discover-ansible-versions:
     runs-on: ubuntu-latest
