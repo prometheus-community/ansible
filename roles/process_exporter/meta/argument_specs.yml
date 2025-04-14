@@ -40,6 +40,13 @@ argument_specs:
           - "Syntax is the same as in"
           - "L(using-a-config-file Default is consistent with deb/rpm packages,https://github.com/ncabatoff/process-exporter#using-a-config-file Default is consistent with deb/rpm packages)"
         default: !unsafe "[{name: '{{.Comm}}', cmdline: [.+]}]"
+      process_exporter_recheck_time_limit:
+        description:
+          - "Enable process rechecking: process names are re-evaluated only this much time after their start, but no longer."
+          - "See L(the time.ParseDuration documentation,https://pkg.go.dev/time#ParseDuration) for the supported duration formats."
+          - "This setting can be useful to make sure processes are grouped correctly if their name changes shortly after they start."
+          - "The default value leaves this feature disabled."
+        default: "0"
       process_exporter_binary_install_dir:
         description:
           - "I(Advanced)"
