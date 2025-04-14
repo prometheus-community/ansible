@@ -7,6 +7,10 @@
     name: snmp_exporter
     state: restarted
   register: snmp_exporter_restarted
+  failed_when:
+    - snmp_exporter_service_result.failed
+    - not ansible_check_mode
+    - snmp_exporter_service_result.msg != 'Could not find the requested service snmp_exporter: host'
 
 - name: Reload snmp_exporter
   listen: "reload snmp_exporter"
@@ -16,3 +20,7 @@
     name: snmp_exporter
     state: reloaded
   when: snmp_exporter_restarted is not defined
+  failed_when:
+    - snmp_exporter_service_result.failed
+    - not ansible_check_mode
+    - snmp_exporter_service_result.msg != 'Could not find the requested service snmp_exporter: host'
