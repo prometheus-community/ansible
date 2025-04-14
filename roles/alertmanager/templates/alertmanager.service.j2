@@ -50,7 +50,7 @@ ExecStart={{ alertmanager_binary_install_dir }}/alertmanager \
   {{ pre }}-web.external-url={{ alertmanager_web_external_url }}{% for flag, flag_value in alertmanager_config_flags_extra.items() %} \
   {{ pre }}-{{ flag }}={{ flag_value }}{% endfor %}
   {% if alertmanager_web_config.values() | map('length') | select('gt', 0) | list is any %}
-    --web.config.file={{ alertmanager_config_dir }}//web_config.yml \
+    --web.config.file={{ alertmanager_config_dir }}/web_config.yml \
   {% endif %}
 
 SyslogIdentifier=alertmanager
