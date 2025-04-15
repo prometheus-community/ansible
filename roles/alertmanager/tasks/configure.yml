@@ -7,6 +7,9 @@
     _common_system_user: "{{ alertmanager_system_user }}"
     _common_system_group: "{{ alertmanager_system_group }}"
     _common_config_dir: "{{ alertmanager_config_dir }}"
+    _common_tls_server_config: "{{ alertmanager_web_config.tls_server_config }}"
+    _common_http_server_config: "{{ alertmanager_web_config.http_server_config }}"
+    _common_basic_auth_users: "{{ alertmanager_web_config.basic_auth_users }}"
   tags:
     - alertmanager
     - configure
