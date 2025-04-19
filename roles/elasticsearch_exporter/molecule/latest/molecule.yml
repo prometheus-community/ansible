@@ -1,0 +1,7 @@
+---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        elasticsearch_exporter_version: latest
+        elasticsearch_exporter_textfile_dir: /home/elasticsearch_exporter

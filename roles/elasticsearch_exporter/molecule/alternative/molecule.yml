@@ -1,0 +1,26 @@
+---
+provisioner:
+  playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/alternative/prepare.yml"
+  inventory:
+    group_vars:
+      all:
+        elasticsearch_exporter_local_cache_path: "/tmp/elasticsearch_exporter-linux-amd64"
+        elasticsearch_exporter_web_listen_address:
+          - '127.0.0.1:8080'
+          - '127.0.1.1:8080'
+        elasticsearch_exporter_textfile_dir: ""
+        elasticsearch_exporter_enabled_collectors:
+          - entropy
+        elasticsearch_exporter_disabled_collectors:
+          - diskstats
+        elasticsearch_exporter_tls_server_config:
+          cert_file: /etc/elasticsearch_exporter/tls.cert
+          key_file: /etc/elasticsearch_exporter/tls.key
+        elasticsearch_exporter_http_server_config:
+          http2: true
+        elasticsearch_exporter_basic_auth_users:
+          randomuser: examplepassword
+        elasticsearch_exporter_version: 1.8.0
+        elasticsearch_exporter_binary_url: "https://github.com/prometheus-community/elasticsearch_exporter/releases/download/v{{\
+                                   \ elasticsearch_exporter_version }}/elasticsearch_exporter-{{ elasticsearch_exporter_version }}.linux-amd64.tar.gz"
