@@ -1,0 +1,13 @@
+---
+{{ ansible_managed | comment }}
+
+default:
+    user: {{ pve_exporter_auth_user }}
+{% if pve_exporter_auth_pass != None %}
+    password: "{{ pve_exporter_auth_pass }}"
+{% elif pve_exporter_auth_token_name != None and pve_exporter_auth_token_value != None %}
+    token_name: {{ pve_exporter_auth_token_name }}
+    token_value: {{ pve_exporter_auth_token_value }}
+{% endif %}
+    # Optional: set to false to skip SSL/TLS verification
+    verify_ssl: {{ pve_exporter_auth_verify_ssl | bool | lower }}
