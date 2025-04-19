@@ -1,0 +1,83 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+  tags:
+    - dns_exporter_install
+    - dns_exporter_configure
+    - dns_exporter_run
+
+- name: Install
+  tags:
+    - dns_exporter_install
+  block:
+    - name: Install packages dependencies
+      ansible.builtin.package:
+        name:
+          - python3
+          - python3-pip
+          - python3-virtualenv
+        state: present
+    - name: "Create system group {{ dns_exporter_system_group }}"
+      ansible.builtin.group:
+        name: "{{ dns_exporter_system_group }}"
+        state: present
+    - name: "Create system user {{ dns_exporter_system_user }}"
+      ansible.builtin.user:
+        name: "{{ dns_exporter_system_user }}"
+        system: true
+        shell: "/usr/sbin/nologin"
+        group: "{{ dns_exporter_system_group }}"
+        home: "{{ dns_exporter_home }}"
+        create_home: true
+      become: true
+    - name: Install dns_exporter from pip
+      ansible.builtin.pip:
+        name: dns_exporter
+        version: "{{ dns_exporter_version }}"
+        state: present
+        virtualenv: "{{ dns_exporter_virtualenv }}"
+      become: true
+      become_user: "{{ dns_exporter_system_user }}"
+    - name: Ensure config dir exists
+      ansible.builtin.file:
+        path: "{{ dns_exporter_config_dir }}"
+        state: directory
+        mode: '0775'  # like _common
+        owner: root
+    - name: Configure dns_exporter
+      ansible.builtin.template:
+        src: "{{ dns_exporter_config_template }}"
+        dest: "{{ dns_exporter_config_dir }}/dns_exporter.yml"
+        mode: '0644'
+        owner: root
+      notify:
+        - Restart dns_exporter
+
+- name: SELinux
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ dns_exporter_web_listen_address | urlsplit('port') }}"
+  when: ansible_selinux.status == "enabled"
+  tags:
+    - dns_exporter_configure
+
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yml
+  tags:
+    - dns_exporter_configure
+
+- name: Ensure DNS Exporter is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: dns_exporter
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - dns_exporter_run
