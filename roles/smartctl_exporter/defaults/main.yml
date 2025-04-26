@@ -24,7 +24,7 @@ smartctl_exporter_log_level: "info"
 smartctl_exporter_log_format: "logfmt"
 
 smartctl_exporter_binary_install_dir: "/usr/local/bin"
-smartctl_exporter_system_group: "smartctl-exp"
+smartctl_exporter_system_group: "root"
 smartctl_exporter_system_user: "{{ smartctl_exporter_system_group }}"
 smartctl_exporter_config_dir: "/etc/smartctl_exporter"
 
