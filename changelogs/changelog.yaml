@@ -4,6 +4,7 @@ releases:
   0.26.3:
     changes:
       trivial:
+        - 'patch: New prometheus/prometheus upstream release 3.3.1! (https://github.com/prometheus-community/ansible/pull/588)'
         - 'chore(deps): update ansible/ansible-lint action to v25.4.0 (https://github.com/prometheus-community/ansible/pull/587)'
     release_date: '2025-05-04'
   0.26.2:
