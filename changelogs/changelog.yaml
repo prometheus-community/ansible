@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.26.3:
+    changes:
+      trivial:
+        - 'chore(deps): update ansible/ansible-lint action to v25.4.0 (https://github.com/prometheus-community/ansible/pull/587)'
+    release_date: '2025-05-04'
   0.26.2:
     changes:
       trivial:
