@@ -28,9 +28,9 @@ def test_files(host):
 
 
 def test_user(host):
-    assert host.group("smartctl-exp").exists
-    assert "smartctl-exp" in host.user("smartctl-exp").groups
-    assert host.user("smartctl-exp").shell == "/usr/sbin/nologin"
+    assert host.group("root").exists
+    assert "root" in host.user("root").groups
+    assert host.user("root").shell == "/usr/sbin/nologin"
 
 
 def test_service(host):
