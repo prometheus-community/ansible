@@ -17,6 +17,11 @@ alertmanager_web_external_url: 'http://localhost:9093/'
 
 alertmanager_http_config: {}
 
+alertmanager_web_config:
+  tls_server_config: {}
+  http_server_config: {}
+  basic_auth_users: {}
+
 alertmanager_resolve_timeout: 3m
 
 alertmanager_config_flags_extra: {}
