@@ -12,6 +12,8 @@ releases:
         - 'patch: New prometheus/prometheus upstream release 3.3.1! (https://github.com/prometheus-community/ansible/pull/588)'
         - 'chore(deps): update ansible/ansible-lint action to v25.4.0 (https://github.com/prometheus-community/ansible/pull/587)'
         - 'patch: New prometheus/snmp_exporter upstream release 0.29.0! (https://github.com/prometheus-community/ansible/pull/585)'
+        - 'patch: New prometheus-community/smartctl_exporter upstream release 0.14.0!
+          (https://github.com/prometheus-community/ansible/pull/584)'
         - 'patch: New ncabatoff/process-exporter upstream release 0.8.7! (https://github.com/prometheus-community/ansible/pull/583)'
         - 'patch: New utkuozdemir/nvidia_gpu_exporter upstream release 1.3.1! (https://github.com/prometheus-community/ansible/pull/582)'
     release_date: '2025-05-23'
