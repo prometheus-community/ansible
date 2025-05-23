@@ -23,12 +23,6 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
-  - name: ubuntu-20.04
-    image: ghcr.io/test-kitchen/dokken/ubuntu-20.04
-    pre_build_image: true
-    privileged: true
-    cgroup_parent: docker.slice
-    command: /lib/systemd/systemd
   - name: ubuntu-22.04
     image: ghcr.io/test-kitchen/dokken/ubuntu-22.04
     pre_build_image: true
@@ -61,11 +55,3 @@ provisioner:
         exclude_ansible_vers:
           - "2.17"
           - "2.18"
-      ubuntu-20.04:
-        exclude_ansible_vers:
-          - "2.18"
-      ubuntu-24.04:
-        exclude_ansible_vers:
-          - "2.9"
-          - "2.10"
-          - "2.11"
