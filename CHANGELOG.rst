@@ -4,6 +4,17 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.27.0
+=======
+
+Removed Features (previously deprecated)
+----------------------------------------
+
+- removed: drop Ubuntu 20.04 (Focal Fossa) support as it is EOL (https://github.com/prometheus-community/ansible/pull/596)
+
+v0.26.3
+=======
+
 v0.26.2
 =======
 
