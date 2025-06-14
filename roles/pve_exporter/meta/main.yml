@@ -23,5 +23,3 @@ galaxy_info:
     - "exporter"
     - "metrics"
     - "system"
-dependencies:
-  - role: juju4.redhat_epel
