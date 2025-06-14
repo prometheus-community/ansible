@@ -1,4 +1,9 @@
 ---
+
+- name: RedHat | Import redhat-epel
+  ansible.builtin.import_tasks: redhat-epel.yml
+  when: ansible_os_family == "RedHat"
+
 - name: Preflight
   ansible.builtin.include_tasks:
     file: preflight.yml

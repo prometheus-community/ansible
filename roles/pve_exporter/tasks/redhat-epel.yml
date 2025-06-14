@@ -1,0 +1,66 @@
+---
+
+- name: Include version-specific variables for RedHat
+  ansible.builtin.include_vars: "RedHat-{{ ansible_distribution_version.split('.')[0] }}.yml"
+
+- name: RedHat | Install dependencies packages
+  ansible.builtin.package:
+    name: "{{ redhat_epel_pkgs | default([]) }}"
+    state: present
+
+- name: Check if epel key already retrieved
+  ansible.builtin.stat:
+    path: "/var/tmp/{{ epel_rpm_key | basename }}"
+  register: epelkey
+- name: Download epel rpm key
+  ansible.builtin.get_url:
+    url: "{{ epel_rpm_key }}"
+    dest: "/var/tmp/{{ epel_rpm_key | basename }}"
+    mode: '0600'
+    checksum: "sha256:{{ epel_rpm_key_hash }}"
+    validate_certs: false
+  register: dl_result
+  until: dl_result is success
+  when: not epelkey.stat.exists and epel_rpm_key
+- name: Installing epel rpm key
+  # rpm_key: key={{ epel_rpm_key }}
+  ansible.builtin.rpm_key:
+    key: "/var/tmp/{{ epel_rpm_key | basename }}"
+    state: present
+  when: epel_rpm_key | string
+  register: pkg_result
+  until: pkg_result is success
+  become: true
+
+- name: Gather package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: RedHat | Install Fedora epel
+  ansible.builtin.package:
+    name: "{{ redhat_epel_rpm }}"
+    state: present
+  when: "'epel-release' not in ansible_facts.packages"
+  register: pkg_result
+  until: pkg_result is success
+  become: true
+
+- name: RedHat | Ensure dnf config-manager is present
+  ansible.builtin.package:
+    name: 'dnf-command(config-manager)'
+    state: present
+  register: pkg_result
+  until: pkg_result is success
+  become: true
+  when:
+    - ansible_distribution_major_version | int >= 9
+
+- name: RedHat9 | Enable CRB repo
+  community.general.ini_file:
+    path: "/etc/yum.repos.d/{{ ansible_distribution | lower }}.repo"
+    section: crb
+    option: enabled
+    value: '1'
+    mode: '0644'
+  when:
+    - ansible_distribution_major_version | int == 9

@@ -1,0 +1,6 @@
+---
+
+epel_rpm_key: 'https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8'
+epel_rpm_key_hash: cd1db21a863185127f2e3b264c97fb1c6c44c316385707999041ea475c110d1c
+
+redhat_epel_rpm: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
