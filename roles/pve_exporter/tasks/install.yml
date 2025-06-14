@@ -11,9 +11,7 @@
 
 - name: Install packages dependencies
   ansible.builtin.package:
-    name:
-      - "python{{ ansible_facts['python']['version']['major'] }}-setuptools"
-      - "python{{ ansible_facts['python']['version']['major'] }}-venv"
+    name: "{{ _pve_exporter_pkgs }}"
     state: present
   become: true
 - name: "Create system group {{ pve_exporter_system_group }}"
@@ -36,7 +34,7 @@
     version: "{{ pve_exporter_version }}"
     state: present
     virtualenv: "{{ pve_exporter_virtualenv }}"
-    virtualenv_command: "{{ ansible_facts['discovered_interpreter_python'] }} -m venv"
+    virtualenv_command: "{% if ansible_facts['os_family'] != 'RedHat' %}{{ ansible_facts['discovered_interpreter_python'] }} -m venv{% endif %}"
   become: true
   become_user: "{{ pve_exporter_system_user }}"
 - name: Ensure config dir exists
