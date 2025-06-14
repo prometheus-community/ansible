@@ -4,3 +4,8 @@ collections:
     type: git
   - name: https://github.com/ansible-collections/community.crypto.git
     type: git
+
+roles:
+  - src: https://github.com/juju4/ansible-redhat-epel/
+    version: main
+    name: juju4.redhat_epel
