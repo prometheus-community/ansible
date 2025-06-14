@@ -1,7 +1,7 @@
 ---
 
 - name: Include version-specific variables for RedHat
-  ansible.builtin.include_vars: "RedHat-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  ansible.builtin.include_vars: "RedHat-{{ ansible_facts['distribution_major_version'] }}.yml"
 
 - name: RedHat | Install dependencies packages
   ansible.builtin.package:
@@ -53,14 +53,14 @@
   until: pkg_result is success
   become: true
   when:
-    - ansible_distribution_major_version | int >= 9
+    - ansible_facts['distribution_major_version'] | int >= 9
 
 - name: RedHat9 | Enable CRB repo
   community.general.ini_file:
-    path: "/etc/yum.repos.d/{{ ansible_distribution | lower }}.repo"
+    path: "/etc/yum.repos.d/{{ ansible_facts['distribution'] | lower }}.repo"
     section: crb
     option: enabled
     value: '1'
     mode: '0644'
   when:
-    - ansible_distribution_major_version | int == 9
+    - ansible_facts['distribution_major_version'] | int == 9
