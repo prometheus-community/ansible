@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="2.17.1" name="antsibull-docs" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>prometheus.prometheus._common role &mdash; Prometheus.Prometheus Collection  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=41de9001" />
+      <link rel="stylesheet" type="text/css" href="_static/css/ansible.css?v=c5b67dd2" />
+      <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd-ethical-ads.css?v=289b023e" />
+
+  
+    <link rel="shortcut icon" href="_static/images/Ansible-Mark-RGB_Black.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7f41d439"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="prometheus.prometheus.alertmanager role – Prometheus Alertmanager service" href="alertmanager_role.html" />
+    <link rel="prev" title="Prometheus.Prometheus" href="index.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
+
+
+
+
+</head>
+
+<body class="wy-body-for-nav"><!-- extra body elements for Ansible beyond RTD Sphinx Theme -->
+
+<div class="DocSite-globalNav ansibleNav">
+  <ul>
+    <li><a href="https://www.ansible.com/blog" target="_blank">Blog</a></li>
+    <li><a href="https://forum.ansible.com/" target="_blank">Ansible community forum</a></li>
+    <li><a href="https://docs.ansible.com/" target="_blank">Documentation</a></li>
+  </ul>
+</div>
+
+<a class="DocSite-nav" href="https://prometheus-community.github.io/ansible/tag/v0.0.1" style="padding-bottom: 30px;">
+
+  <img class="DocSiteNav-logo"
+    src="_static/images/Ansible-Mark-RGB_White.png"
+    alt="Ansible Logo">
+  <div class="DocSiteNav-title">Prometheus.Prometheus Collection Docs</div>
+</a>
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Prometheus.Prometheus Collection
+          </a><!--- Based on https://github.com/rtfd/sphinx_rtd_theme/pull/438/files -->
+
+<div class="version">
+  
+    
+  
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <label class="sr-only" for="q">Search docs:</label>
+    <input type="text" class="st-default-search-input" id="q" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+  
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">prometheus.prometheus._common role</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#entry-point-configure-internal-only-common-configuration-tasks">Entry point <code class="docutils literal notranslate"><span class="pre">configure</span></code> – Internal only - common configuration tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#authors">Authors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#entry-point-install-internal-only-common-installation-tasks">Entry point <code class="docutils literal notranslate"><span class="pre">install</span></code> – Internal only - common installation tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Synopsis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Authors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#entry-point-preflight-internal-only-common-preflight-tasks">Entry point <code class="docutils literal notranslate"><span class="pre">preflight</span></code> – Internal only - common preflight tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Synopsis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Authors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#entry-point-selinux-internal-only-common-selinux-configuration-tasks">Entry point <code class="docutils literal notranslate"><span class="pre">selinux</span></code> – Internal only - common selinux configuration tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Synopsis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Authors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#collection-links">Collection links</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="alertmanager_role.html">prometheus.prometheus.alertmanager role – Prometheus Alertmanager service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apache_exporter_role.html">prometheus.prometheus.apache_exporter role – Prometheus apache_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bind_exporter_role.html">prometheus.prometheus.bind_exporter role – Prometheus BIND Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackbox_exporter_role.html">prometheus.prometheus.blackbox_exporter role – Deploy and manage Prometheus blackbox exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cadvisor_role.html">prometheus.prometheus.cadvisor role – cAdvisor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chrony_exporter_role.html">prometheus.prometheus.chrony_exporter role – Prometheus Chrony Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="consul_exporter_role.html">prometheus.prometheus.consul_exporter role – Prometheus consul Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elasticsearch_exporter_role.html">prometheus.prometheus.elasticsearch_exporter role – Prometheus Elasticsearch Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fail2ban_exporter_role.html">prometheus.prometheus.fail2ban_exporter role – Prometheus fail2ban_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="influxdb_exporter_role.html">prometheus.prometheus.influxdb_exporter role – Prometheus Influxdb Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipmi_exporter_role.html">prometheus.prometheus.ipmi_exporter role – Prometheus ipmi_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memcached_exporter_role.html">prometheus.prometheus.memcached_exporter role – Prometheus memcached_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mongodb_exporter_role.html">prometheus.prometheus.mongodb_exporter role – Prometheus mongodb_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mysqld_exporter_role.html">prometheus.prometheus.mysqld_exporter role – Prometheus MySQLd Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nginx_exporter_role.html">prometheus.prometheus.nginx_exporter role – Prometheus nginx_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node_exporter_role.html">prometheus.prometheus.node_exporter role – Prometheus Node Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nvidia_gpu_exporter_role.html">prometheus.prometheus.nvidia_gpu_exporter role – Prometheus Nvidia GPU Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="postgres_exporter_role.html">prometheus.prometheus.postgres_exporter role – Prometheus PostgreSQL Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="process_exporter_role.html">prometheus.prometheus.process_exporter role – Prometheus Process exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prometheus_role.html">prometheus.prometheus.prometheus role – Installs and configures prometheus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pushgateway_role.html">prometheus.prometheus.pushgateway role – Prometheus Pushgateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redis_exporter_role.html">prometheus.prometheus.redis_exporter role – Prometheus redis_exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smartctl_exporter_role.html">prometheus.prometheus.smartctl_exporter role – Prometheus Smartctl Exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smokeping_prober_role.html">prometheus.prometheus.smokeping_prober role – Prometheus Smokeping Prober</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snmp_exporter_role.html">prometheus.prometheus.snmp_exporter role – Prometheus SNMP exporter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="systemd_exporter_role.html">prometheus.prometheus.systemd_exporter role – Prometheus Systemd Exporter</a></li>
+</ul>
+<!-- extra nav elements for Ansible beyond RTD Sphinx Theme -->
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Prometheus.Prometheus Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">prometheus.prometheus._common role</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+  
+           <div itemprop="articleBody">
+             
+  <span class="target" id="ansible-collections-prometheus-prometheus-common-role"></span><section id="prometheus-prometheus-common-role">
+<h1>prometheus.prometheus._common role<a class="headerlink" href="#prometheus-prometheus-common-role" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/prometheus/prometheus/">prometheus.prometheus collection</a> (version 0.27.0).</p>
+<p>It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
+To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
+<p>To install it use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">prometheus.prometheus</span></code>.</p>
+<p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">prometheus.prometheus._common</span></code>.</p>
+</div>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#entry-point-configure-internal-only-common-configuration-tasks" id="id10">Entry point <code class="docutils literal notranslate"><span class="pre">configure</span></code> – Internal only - common configuration tasks</a></p>
+<ul>
+<li><p><a class="reference internal" href="#synopsis" id="id11">Synopsis</a></p></li>
+<li><p><a class="reference internal" href="#parameters" id="id12">Parameters</a></p></li>
+<li><p><a class="reference internal" href="#authors" id="id13">Authors</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#entry-point-install-internal-only-common-installation-tasks" id="id14">Entry point <code class="docutils literal notranslate"><span class="pre">install</span></code> – Internal only - common installation tasks</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id15">Synopsis</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id16">Parameters</a></p></li>
+<li><p><a class="reference internal" href="#id3" id="id17">Authors</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#entry-point-preflight-internal-only-common-preflight-tasks" id="id18">Entry point <code class="docutils literal notranslate"><span class="pre">preflight</span></code> – Internal only - common preflight tasks</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id4" id="id19">Synopsis</a></p></li>
+<li><p><a class="reference internal" href="#id5" id="id20">Parameters</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id21">Authors</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#entry-point-selinux-internal-only-common-selinux-configuration-tasks" id="id22">Entry point <code class="docutils literal notranslate"><span class="pre">selinux</span></code> – Internal only - common selinux configuration tasks</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id7" id="id23">Synopsis</a></p></li>
+<li><p><a class="reference internal" href="#id8" id="id24">Parameters</a></p></li>
+<li><p><a class="reference internal" href="#id9" id="id25">Authors</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="entry-point-configure-internal-only-common-configuration-tasks">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Entry point <code class="docutils literal notranslate"><span class="pre">configure</span></code> – Internal only - common configuration tasks</a><a class="headerlink" href="#entry-point-configure-internal-only-common-configuration-tasks" title="Link to this heading"></a></h2>
+<section id="synopsis">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Synopsis</a><a class="headerlink" href="#synopsis" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Internal only - selinux requirements</p></li>
+</ul>
+</section>
+<section id="parameters">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Parameters</a><a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<table class="longtable ansible-option-table docutils align-default" style="width: 100%">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-configure--_common_common_basic_auth_users"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-configure-common-common-basic-auth-users"><strong>_common_common_basic_auth_users</strong></p>
+<a class="ansibleOptionLink" href="#parameter-configure--_common_common_basic_auth_users" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-configure--_common_config_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-configure-common-config-dir"><strong>_common_config_dir</strong></p>
+<a class="ansibleOptionLink" href="#parameter-configure--_common_config_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Path to directory to install configuration.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-configure--_common_http_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-configure-common-http-server-config"><strong>_common_http_server_config</strong></p>
+<a class="ansibleOptionLink" href="#parameter-configure--_common_http_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Configuration for HTTP/2 support.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-configure--_common_service_name"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-configure-common-service-name"><strong>_common_service_name</strong></p>
+<a class="ansibleOptionLink" href="#parameter-configure--_common_service_name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Name of the system service (systemd)</p>
+<p>Usually matches the role name</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;{{</span> <span class="pre">ansible_parent_role_names</span> <span class="pre">|</span> <span class="pre">first</span> <span class="pre">|</span> <span class="pre">regex_replace(ansible_collection_name</span> <span class="pre">~</span> <span class="pre">'.',</span> <span class="pre">'')</span> <span class="pre">}}&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-configure--_common_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-configure-common-system-group"><strong>_common_system_group</strong></p>
+<a class="ansibleOptionLink" href="#parameter-configure--_common_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>User group for the system user.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-configure--_common_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-configure-common-system-user"><strong>_common_system_user</strong></p>
+<a class="ansibleOptionLink" href="#parameter-configure--_common_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>System user for running the service.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-configure--_common_tls_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-configure-common-tls-server-config"><strong>_common_tls_server_config</strong></p>
+<a class="ansibleOptionLink" href="#parameter-configure--_common_tls_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Configuration for TLS authentication.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="authors">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Authors</a><a class="headerlink" href="#authors" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Prometheus Community</p></li>
+</ul>
+</section>
+</section>
+<section id="entry-point-install-internal-only-common-installation-tasks">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Entry point <code class="docutils literal notranslate"><span class="pre">install</span></code> – Internal only - common installation tasks</a><a class="headerlink" href="#entry-point-install-internal-only-common-installation-tasks" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">Synopsis</a><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Internal only - selinux requirements</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">Parameters</a><a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<table class="longtable ansible-option-table docutils align-default" style="width: 100%">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-install--_common_binaries"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-install-common-binaries"><strong>_common_binaries</strong></p>
+<a class="ansibleOptionLink" href="#parameter-install--_common_binaries" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>List of binaries to install</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-install--_common_binary_install_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-install-common-binary-install-dir"><strong>_common_binary_install_dir</strong></p>
+<a class="ansibleOptionLink" href="#parameter-install--_common_binary_install_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Directory to install binaries</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-install--_common_binary_name"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-install-common-binary-name"><strong>_common_binary_name</strong></p>
+<a class="ansibleOptionLink" href="#parameter-install--_common_binary_name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Name of main binary</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;{{</span> <span class="pre">__common_binary_basename</span> <span class="pre">}}&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-install--_common_binary_unarchive_opts"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-install-common-binary-unarchive-opts"><strong>_common_binary_unarchive_opts</strong></p>
+<a class="ansibleOptionLink" href="#parameter-install--_common_binary_unarchive_opts" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Extra options to pass to binary unarchive task</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-install--_common_binary_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-install-common-binary-url"><strong>_common_binary_url</strong></p>
+<a class="ansibleOptionLink" href="#parameter-install--_common_binary_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>URL of the binaries to install</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-install--_common_checksums_url"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-install-common-checksums-url"><strong>_common_checksums_url</strong></p>
+<a class="ansibleOptionLink" href="#parameter-install--_common_checksums_url" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>URL of the checksums file for the binaries</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-install--_common_config_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-install-common-config-dir"><strong>_common_config_dir</strong></p>
+<a class="ansibleOptionLink" href="#parameter-install--_common_config_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Path to the configuration dir</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-install--_common_local_cache_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-install-common-local-cache-path"><strong>_common_local_cache_path</strong></p>
+<a class="ansibleOptionLink" href="#parameter-install--_common_local_cache_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-install--_common_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-install-common-system-group"><strong>_common_system_group</strong></p>
+<a class="ansibleOptionLink" href="#parameter-install--_common_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>User group for the system user.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-install--_common_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-install-common-system-user"><strong>_common_system_user</strong></p>
+<a class="ansibleOptionLink" href="#parameter-install--_common_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>System user for running the service.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id3">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">Authors</a><a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Prometheus Community</p></li>
+</ul>
+</section>
+</section>
+<section id="entry-point-preflight-internal-only-common-preflight-tasks">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">Entry point <code class="docutils literal notranslate"><span class="pre">preflight</span></code> – Internal only - common preflight tasks</a><a class="headerlink" href="#entry-point-preflight-internal-only-common-preflight-tasks" title="Link to this heading"></a></h2>
+<section id="id4">
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">Synopsis</a><a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Internal only - selinux requirements</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">Parameters</a><a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<table class="longtable ansible-option-table docutils align-default" style="width: 100%">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-preflight--_common_dependencies"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-preflight-common-dependencies"><strong>_common_dependencies</strong></p>
+<a class="ansibleOptionLink" href="#parameter-preflight--_common_dependencies" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Package dependencies to install</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;{%</span> <span class="pre">if</span> <span class="pre">(ansible_facts['pkg_mgr']</span> <span class="pre">==</span> <span class="pre">'apt')</span> <span class="pre">%}{{</span> <span class="pre">('python-apt'</span> <span class="pre">if</span> <span class="pre">ansible_facts['python_version']</span> <span class="pre">is</span> <span class="pre">version('3',</span> <span class="pre">'&lt;')</span> <span class="pre">else</span> <span class="pre">'python3-apt')</span> <span class="pre">}}</span> <span class="pre">{%</span> <span class="pre">else</span> <span class="pre">%}{%</span> <span class="pre">endif</span> <span class="pre">%}&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-preflight--_common_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-preflight-common-web-listen-address"><strong>_common_web_listen_address</strong></p>
+<a class="ansibleOptionLink" href="#parameter-preflight--_common_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Address on which to listen</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id6">
+<h3><a class="toc-backref" href="#id21" role="doc-backlink">Authors</a><a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Prometheus Community</p></li>
+</ul>
+</section>
+</section>
+<section id="entry-point-selinux-internal-only-common-selinux-configuration-tasks">
+<h2><a class="toc-backref" href="#id22" role="doc-backlink">Entry point <code class="docutils literal notranslate"><span class="pre">selinux</span></code> – Internal only - common selinux configuration tasks</a><a class="headerlink" href="#entry-point-selinux-internal-only-common-selinux-configuration-tasks" title="Link to this heading"></a></h2>
+<section id="id7">
+<h3><a class="toc-backref" href="#id23" role="doc-backlink">Synopsis</a><a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Internal only - selinux requirements</p></li>
+</ul>
+</section>
+<section id="id8">
+<h3><a class="toc-backref" href="#id24" role="doc-backlink">Parameters</a><a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<table class="longtable ansible-option-table docutils align-default" style="width: 100%">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-selinux--_common_selinux_port"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-common-role-parameter-selinux-common-selinux-port"><strong>_common_selinux_port</strong></p>
+<a class="ansibleOptionLink" href="#parameter-selinux--_common_selinux_port" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Port to allow in SELinux</p>
+</div></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id9">
+<h3><a class="toc-backref" href="#id25" role="doc-backlink">Authors</a><a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Prometheus Community</p></li>
+</ul>
+<section id="collection-links">
+<h4>Collection links<a class="headerlink" href="#collection-links" title="Link to this heading"></a></h4>
+<ul class="ansible-links">
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/prometheus-community/ansible/issues" rel="noopener external" target="_blank">Issue Tracker</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://prometheus.io" rel="noopener external" target="_blank">Homepage</a></span></li>
+<li><span><a aria-role="button" class="ansible-link reference external" href="https://github.com/prometheus-community/ansible" rel="noopener external" target="_blank">Repository (Sources)</a></span></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+<footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Prometheus.Prometheus" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="alertmanager_role.html" class="btn btn-neutral float-right" title="prometheus.prometheus.alertmanager role – Prometheus Alertmanager service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Prometheus.Prometheus Contributors.</p>
+  </div>
+
+  
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script><!-- extra footer elements for Ansible beyond RTD Sphinx Theme -->
+
+</body>
+</html>
