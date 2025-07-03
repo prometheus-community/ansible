@@ -1,6 +1,18 @@
 ---
 ancestor:
 releases:
+  0.27.0:
+    changes:
+      bugfixes:
+        - 'fix(snmp_exporter): Added when clause to snmp_exporter role (https://github.com/prometheus-community/ansible/pull/610)'
+      minor_changes:
+        - 'minor: Bump for release (https://github.com/prometheus-community/ansible/pull/614)'
+      trivial:
+        - 'patch: New prometheus/blackbox_exporter upstream release 0.27.0! (https://github.com/prometheus-community/ansible/pull/613)'
+        - 'patch: New prometheus/prometheus upstream release 3.4.2! (https://github.com/prometheus-community/ansible/pull/612)'
+        - 'chore(deps): update svenstaro/upload-release-action action to v2.10.0 (https://github.com/prometheus-community/ansible/pull/608)'
+        - 'chore(deps): update ansible/ansible-lint action to v25.6.1 (https://github.com/prometheus-community/ansible/pull/605)'
+    release_date: '2025-07-03'
   0.26.4:
     changes:
       bugfixes:
