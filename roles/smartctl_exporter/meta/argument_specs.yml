@@ -75,12 +75,12 @@ argument_specs:
         description:
           - "I(Advanced)"
           - "System group for Smartctl exporter"
-        default: "smartctl-exp"
+        default: "root"
       smartctl_exporter_system_user:
         description:
           - "I(Advanced)"
           - "Smartctl exporter user"
-        default: "smartctl-exp"
+        default: "root"
       smartctl_exporter_local_cache_path:
         description: "Local path to stash the archive and its extraction"
         default: "/tmp/smartctl_exporter-{{ ansible_facts['system'] | lower }}-{{ _smartctl_exporter_go_ansible_arch }}/{{ smartctl_exporter_version }}"
