@@ -17,7 +17,7 @@ jobs:
         uses: ansible-community/github-action-build-collection@main
 
       - name: "Upload built collection to release"
-        uses: svenstaro/upload-release-action@ebd922b779f285dafcac6410a0710daee9c12b82  # 2.10.0
+        uses: svenstaro/upload-release-action@81c65b7cd4de9b2570615ce3aad67a41de5b1a13  # 2.11.2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.build-collection.outputs.artifact-filename }}
