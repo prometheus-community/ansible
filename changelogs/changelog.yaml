@@ -5,8 +5,11 @@ releases:
     changes:
       trivial:
         - 'chore(deps): update actions/checkout action to v4.3.0 (https://github.com/prometheus-community/ansible/pull/626)'
+        - 'patch: New oliver006/redis_exporter upstream release 1.75.0! (https://github.com/prometheus-community/ansible/pull/625)'
         - 'chore(deps): update ansible/ansible-lint action to v25.7.0 (https://github.com/prometheus-community/ansible/pull/620)'
         - 'patch: New prometheus/prometheus upstream release 3.5.0! (https://github.com/prometheus-community/ansible/pull/618)'
+        - 'patch: New prometheus-community/ipmi_exporter upstream release 1.10.1!
+          (https://github.com/prometheus-community/ansible/pull/617)'
     release_date: '2025-07-17'
   0.27.0:
     changes:
