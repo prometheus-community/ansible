@@ -24,39 +24,44 @@ jobs:
   ansible-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
 
       - name: Lint collection
-        uses: ansible/ansible-lint@main
+        uses: ansible/ansible-lint@9765b8704b2c3f4ab782815b528e0393662e1c04  # v25.7.0
+        with:
+          requirements_file: requirements.yml
 
   arguments-spec-lint:
     runs-on: ubuntu-latest
     container:
       image: quay.io/prometheus/golang-builder:base
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
       - name: Lint arguments spec
         run: ./.github/scripts/lint_arguments_spec.sh
+
+  check-unused-variables:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - name: Run action
+        uses: hoo29/little-timmy@c8ca5086db961499fc3d4e37637f566c3d0ec6d6  # v3-action
 
   discover-ansible-versions:
     runs-on: ubuntu-latest
     outputs:
       versions: ${{ steps.supported-ansible-versions.outputs.result }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
 
       - name: Get Ansible versions that the collection supports
         id: supported-ansible-versions
-        uses: mikefarah/yq@master
-        with:
-          cmd: yq -o json -I=0 '.requires_ansible | split(",") | .[] |= sub("(.*?)(\d+\.\d+)(.*)"; "stable-${2}")' meta/runtime.yml
+        run: |
+          echo "result=$(python ./.github/scripts/collection_version_parser.py)" >> $GITHUB_OUTPUT
 
   ansible-test-sanity:
-    if: |
-      !github.event.label
     uses: ./.github/workflows/ansible-test-sanity.yml
     needs:
-      - ansible-lint
       - discover-ansible-versions
     with:
       ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}
@@ -66,24 +71,21 @@ jobs:
     needs:
       - ansible-lint
     outputs:
-      molecule-tests: ${{ steps.set-molecule-tests.outputs.tests }}
       integration-tests: ${{ steps.set-integration-tests.outputs.tests }}
+      ansible-roles: ${{ steps.set-ansible-roles.outputs.roles }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
         with:
           fetch-depth: 0
 
-      - name: Discover role tests
-        id: set-molecule-tests
+      - name: Discover ansible roles
+        id: set-ansible-roles
         env:
           LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
         run: |
-          roles=$(echo $LABELS | jq -r '.[]' | grep '^roles/' | sed 's|^roles/||')
-          echo tests="[`for role in $roles; do
-            for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -iname "molecule-${role}-*" -printf "%f\n"); do
-              echo '{"test":\"'"${test}"'\","name":\"'"${test#*-}\"'"}';
-            done
-          done | tr '\n' ',' | sed '$s/,$//'`]" >> $GITHUB_OUTPUT
+          roles=$(echo $LABELS | jq -c '[.[] | select(startswith("roles/")) | ltrimstr("roles/")]')
+          echo $roles
+          echo "roles=$roles" >> $GITHUB_OUTPUT
 
       - name: Discover integration tests
         id: set-integration-tests
@@ -92,17 +94,20 @@ jobs:
             echo '{"test":\"'"${test}"'\","name":\"'"${test}\"'"}';
           done | tr '\n' ',' | sed '$s/,$//'`]" >> $GITHUB_OUTPUT
 
-  ansible-test-molecule:
-    uses: ./.github/workflows/ansible-test-integration.yml
+  molecule:
+    uses: ./.github/workflows/ansible-test-molecule.yml
     needs:
       - discover-ansible-tests
       - discover-ansible-versions
-    if: needs.discover-ansible-tests.outputs.molecule-tests != '[]' &&
-        needs.discover-ansible-tests.outputs.molecule-tests != ''
+    if: needs.discover-ansible-tests.outputs.ansible-roles != '[]' &&
+        needs.discover-ansible-tests.outputs.ansible-roles != ''
     with:
-      targets: ${{ needs.discover-ansible-tests.outputs.molecule-tests }}
+      role: ${{ matrix.role }}
       ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}
-      coverage: never
+    strategy:
+      fail-fast: false
+      matrix:
+        role: ${{ fromJson(needs.discover-ansible-tests.outputs.ansible-roles) }}
 
   ansible-test-integration:
     uses: ./.github/workflows/ansible-test-integration.yml

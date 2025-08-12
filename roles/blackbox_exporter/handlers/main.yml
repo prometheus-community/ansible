@@ -6,6 +6,7 @@
     daemon_reload: true
     name: blackbox_exporter
     state: restarted
+  register: blackbox_exporter_restarted
 
 - name: Reload blackbox_exporter
   listen: "reload blackbox_exporter"
@@ -13,3 +14,4 @@
   ansible.builtin.systemd:
     name: blackbox_exporter
     state: reloaded
+  when: blackbox_exporter_restarted is not defined

@@ -1,0 +1,9 @@
+---
+provisioner:
+  playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/alternative/prepare.yml"
+  inventory:
+    group_vars:
+      all:
+        fail2ban_exporter_web_listen_address: "127.0.1.1:9191"
+        fail2ban_exporter_version: 0.10.1

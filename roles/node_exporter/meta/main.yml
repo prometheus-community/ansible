@@ -3,26 +3,20 @@ galaxy_info:
   author: "Prometheus Community"
   description: "Prometheus Node Exporter"
   license: "Apache"
-  min_ansible_version: "2.9"
+  min_ansible_version: "2.12"
   platforms:
     - name: "Ubuntu"
       versions:
-        - "focal"
         - "jammy"
+        - "noble"
     - name: "Debian"
       versions:
         - "bullseye"
-        - "buster"
         - "bookworm"
     - name: "EL"
       versions:
-        - "7"
         - "8"
         - "9"
-    - name: "Fedora"
-      versions:
-        - "37"
-        - '38'
   galaxy_tags:
     - "monitoring"
     - "prometheus"

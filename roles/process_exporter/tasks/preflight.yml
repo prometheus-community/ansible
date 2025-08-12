@@ -1,0 +1,23 @@
+---
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
+  vars:
+    _common_web_listen_address: "{{ process_exporter_web_listen_address }}"
+
+- name: Discover latest version
+  ansible.builtin.set_fact:
+    process_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _process_exporter_repo }}/releases/latest', headers=_github_api_headers,
+                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+  run_once: true
+  until: process_exporter_version is version('0.0.0', '>=')
+  retries: 10
+  when:
+    - process_exporter_version == "latest"
+  tags:
+    - process_exporter
+    - install
+    - process_exporter_install
+    - download
+    - process_exporter_download

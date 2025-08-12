@@ -10,24 +10,22 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - name: "Install tools"
-        run: "python -m pip install ansible-base --disable-pip-version-check"
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
 
       - name: "Build the collection"
-        run: ansible-galaxy collection build
+        id: build-collection
+        uses: ansible-community/github-action-build-collection@main
 
       - name: "Upload built collection to release"
-        uses: svenstaro/upload-release-action@v2
+        uses: svenstaro/upload-release-action@81c65b7cd4de9b2570615ce3aad67a41de5b1a13  # 2.11.2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: prometheus-prometheus-*.tar.gz
+          file: ${{ steps.build-collection.outputs.artifact-filename }}
           file_glob: true
           tag: ${{ github.ref }}
           overwrite: true
 
       - name: "Publish collection on galaxy"
-        uses: ansible/ansible-publish-action@v1.0.0
+        uses: ansible/ansible-publish-action@a56a0328c92c1d4feedf5bd7f7cf7ec7a4ae3f09  # v1.0.0
         with:
           api_key: ${{ secrets.ANSIBLE_GALAXY_API_KEY }}

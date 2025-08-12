@@ -1,0 +1,66 @@
+---
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ postgres_exporter_system_user }}"
+    _common_system_group: "{{ postgres_exporter_system_group }}"
+    _common_config_dir: "{{ postgres_exporter_config_dir }}"
+    _common_tls_server_config: "{{ postgres_exporter_tls_server_config }}"
+    _common_http_server_config: "{{ postgres_exporter_http_server_config }}"
+    _common_basic_auth_users: "{{ postgres_exporter_basic_auth_users }}"
+  tags:
+    - postgres_exporter
+    - configure
+    - postgres_exporter_configure
+
+- name: Create postgres_exporter.yml
+  ansible.builtin.template:
+    src: postgres_exporter.yml.j2
+    dest: "{{ postgres_exporter_config_dir }}/{{ postgres_exporter_config_file }}"
+    owner: root
+    group: '{{ postgres_exporter_system_group }}'
+    mode: '0640'
+  no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
+  notify: restart postgres_exporter
+  become: true
+  tags:
+    - postgres_exporter
+    - configure
+    - postgres_exporter_configure
+
+- name: Configure via URI
+  when: postgres_exporter_uri | length > 0
+  become: true
+  tags:
+    - postgres_exporter
+    - configure
+    - postgres_exporter_configure
+  block:
+    - name: Creating file postgres_exporter_uri
+      ansible.builtin.copy:
+        dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_uri"
+        content: "{{ postgres_exporter_uri }}"
+        owner: root
+        group: '{{ postgres_exporter_system_group }}'
+        mode: '0640'
+      notify: restart postgres_exporter
+
+    - name: Creating file postgres_exporter_user
+      ansible.builtin.copy:
+        dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_user"
+        content: "{{ postgres_exporter_username }}"
+        owner: root
+        group: '{{ postgres_exporter_system_group }}'
+        mode: '0640'
+      notify: restart postgres_exporter
+
+    - name: Creating file postgres_exporter_pass
+      ansible.builtin.copy:
+        dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_pass"
+        content: "{{ postgres_exporter_password }}"
+        owner: root
+        group: '{{ postgres_exporter_system_group }}'
+        mode: '0640'
+      notify: restart postgres_exporter

@@ -1,0 +1,34 @@
+---
+postgres_exporter_version: 0.17.1
+postgres_exporter_binary_url: "https://github.com/{{ _postgres_exporter_repo }}/releases/download/v{{ postgres_exporter_version }}/\
+                           postgres_exporter-{{ postgres_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _postgres_exporter_go_ansible_arch }}.tar.gz"
+postgres_exporter_checksums_url: "https://github.com/{{ _postgres_exporter_repo }}/releases/download/v{{ postgres_exporter_version }}/sha256sums.txt"
+
+postgres_exporter_web_listen_address: "0.0.0.0:9187"
+postgres_exporter_web_telemetry_path: "/metrics"
+
+postgres_exporter_config_file: "postgres_exporter.yml"
+
+postgres_exporter_name: "postgresql:///postgres?host=/var/run/postgresql"
+postgres_exporter_uri: ""
+postgres_exporter_username: ""
+postgres_exporter_password: ""
+
+postgres_exporter_tls_server_config: {}
+
+postgres_exporter_http_server_config: {}
+
+postgres_exporter_basic_auth_users: {}
+
+postgres_exporter_enabled_collectors: []
+
+postgres_exporter_disabled_collectors: []
+
+# Internal variables.
+postgres_exporter_binary_install_dir: "/usr/local/bin"
+postgres_exporter_config_dir: "/etc/postgres_exporter"
+postgres_exporter_system_group: "postgres-exp"
+postgres_exporter_system_user: "{{ postgres_exporter_system_group }}"
+
+# Local path to stash the archive and its extraction
+postgres_exporter_local_cache_path: "/tmp/postgres_exporter-{{ ansible_facts['system'] | lower }}-{{ _postgres_exporter_go_ansible_arch }}/{{ postgres_exporter_version }}"

@@ -1,0 +1,21 @@
+---
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
+
+- name: Discover latest version
+  ansible.builtin.set_fact:
+    cadvisor_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _cadvisor_repo }}/releases/latest', headers=_github_api_headers,
+                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+  run_once: true
+  until: cadvisor_version is version('0.0.0', '>=')
+  retries: 10
+  when:
+    - cadvisor_version == "latest"
+  tags:
+    - cadvisor
+    - install
+    - cadvisor_install
+    - download
+    - cadvisor_download

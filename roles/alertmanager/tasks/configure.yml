@@ -1,44 +1,79 @@
 ---
+- name: "Common configure"
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ alertmanager_system_user }}"
+    _common_system_group: "{{ alertmanager_system_group }}"
+    _common_config_dir: "{{ alertmanager_config_dir }}"
+  tags:
+    - alertmanager
+    - configure
+    - alertmanager_configure
+
+- name: Create alertmanager directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ alertmanager_system_user }}"
+    group: "{{ alertmanager_system_group }}"
+    mode: 0755
+  loop:
+    - "{{ alertmanager_config_dir }}/templates"
+    - "{{ alertmanager_db_dir }}"
+    - "{{ _alertmanager_amtool_config_dir }}"
+  become: true
+  tags:
+    - alertmanager
+    - configure
+    - alertmanager_configure
+
 - name: Copy amtool config
   ansible.builtin.template:
     force: true
     src: "{{ alertmanager_amtool_config_file }}"
     dest: "{{ _alertmanager_amtool_config_dir }}/config.yml"
-    owner: alertmanager
-    group: alertmanager
+    owner: "{{ alertmanager_system_user }}"
+    group: "{{ alertmanager_system_group }}"
     mode: 0644
+  become: true
+  tags:
+    - alertmanager
+    - configure
+    - alertmanager_configure
 
 - name: Copy alertmanager config
   ansible.builtin.template:
     force: true
     src: "{{ alertmanager_config_file }}"
     dest: "{{ alertmanager_config_dir }}/alertmanager.yml"
-    owner: alertmanager
-    group: alertmanager
+    owner: "{{ alertmanager_system_user }}"
+    group: "{{ alertmanager_system_group }}"
     mode: 0644
-    validate: "{{ _alertmanager_binary_install_dir }}/amtool check-config %s"
+    validate: "{{ alertmanager_binary_install_dir }}/amtool check-config %s"
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
+  become: true
   notify:
     - restart alertmanager
-
-- name: Create systemd service unit
-  ansible.builtin.template:
-    src: alertmanager.service.j2
-    dest: /etc/systemd/system/alertmanager.service
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - restart alertmanager
+  tags:
+    - alertmanager
+    - configure
+    - alertmanager_configure
 
 - name: Copy alertmanager template files
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ alertmanager_config_dir }}/templates/"
     force: true
-    owner: alertmanager
-    group: alertmanager
+    owner: "{{ alertmanager_system_user }}"
+    group: "{{ alertmanager_system_group }}"
     mode: 0644
   with_fileglob: "{{ alertmanager_template_files }}"
+  become: true
   notify:
     - restart alertmanager
+  tags:
+    - alertmanager
+    - configure
+    - alertmanager_configure

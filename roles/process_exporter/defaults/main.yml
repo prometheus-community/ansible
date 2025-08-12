@@ -1,0 +1,31 @@
+---
+process_exporter_version: 0.8.7
+process_exporter_binary_url: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/\
+                              process-exporter-{{ process_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _process_exporter_go_ansible_arch }}.tar.gz"
+process_exporter_checksums_url: "https://github.com/{{ _process_exporter_repo }}/releases/download/v{{ process_exporter_version }}/checksums.txt"
+process_exporter_local_cache_path: "/tmp/process_exporter-{{ ansible_facts['system'] | lower }}-{{ _process_exporter_go_ansible_arch }}/{{ process_exporter_version }}"
+
+
+process_exporter_web_listen_address: "0.0.0.0:9256"
+process_exporter_web_telemetry_path: "/metrics"
+
+process_exporter_tls_server_config: {}
+
+process_exporter_http_server_config: {}
+
+process_exporter_basic_auth_users: {}
+
+# Process names
+# "raw" section is needed to avoid attempted interpretation
+# of process-exporter Template varables (like {{.Comm}})
+process_exporter_names: |
+  {% raw %}
+    - name: "{{.Comm}}"
+      cmdline:
+        - '.+'
+  {% endraw %}
+
+process_exporter_binary_install_dir: "/usr/local/bin"
+process_exporter_system_group: "process-exp"
+process_exporter_system_user: "{{ process_exporter_system_group }}"
+process_exporter_config_dir: "/etc/process_exporter"

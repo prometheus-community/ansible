@@ -1,0 +1,32 @@
+---
+- name: "Common configure"
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ ipmi_exporter_system_user }}"
+    _common_system_group: "{{ ipmi_exporter_system_group }}"
+    _common_config_dir: "{{ ipmi_exporter_config_dir }}"
+    _common_tls_server_config: "{{ ipmi_exporter_tls_server_config }}"
+    _common_http_server_config: "{{ ipmi_exporter_http_server_config }}"
+    _common_basic_auth_users: "{{ ipmi_exporter_basic_auth_users }}"
+  tags:
+    - ipmi_exporter
+    - configure
+    - ipmi_exporter_configure
+
+- name: Copy the ipmi_exporter config file
+  ansible.builtin.template:
+    src: config.yaml.j2
+    dest: /etc/ipmi_exporter/config.yaml
+    owner: "{{ ipmi_exporter_system_user }}"
+    group: "{{ ipmi_exporter_system_group }}"
+    mode: 0640
+  become: true
+  no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
+  notify:
+    - restart ipmi_exporter
+  tags:
+    - ipmi_exporter
+    - configure
+    - ipmi_exporter_configure

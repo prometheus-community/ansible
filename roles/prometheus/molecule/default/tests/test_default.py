@@ -1,13 +1,12 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-import os
 import yaml
-import testinfra.utils.ansible_runner
+from testinfra_helpers import get_target_hosts
+import os
 import pytest
 
-testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
+testinfra_hosts = get_target_hosts()
 
 
 @pytest.fixture()
@@ -16,29 +15,34 @@ def AnsibleDefaults():
         return yaml.full_load(stream)
 
 
-@pytest.mark.parametrize("dirs", [
-    "/etc/prometheus",
-    "/etc/prometheus/console_libraries",
-    "/etc/prometheus/consoles",
-    "/etc/prometheus/rules",
-    "/etc/prometheus/file_sd",
-    "/var/lib/prometheus"
-])
+@pytest.mark.parametrize(
+    "dirs",
+    [
+        "/etc/prometheus",
+        "/etc/prometheus/console_libraries",
+        "/etc/prometheus/consoles",
+        "/etc/prometheus/rules",
+        "/etc/prometheus/file_sd",
+        "/etc/prometheus/scrape_configs",
+        "/var/lib/prometheus",
+    ],
+)
 def test_directories(host, dirs):
     d = host.file(dirs)
     assert d.is_directory
     assert d.exists
 
 
-@pytest.mark.parametrize("files", [
-    "/etc/prometheus/prometheus.yml",
-    "/etc/prometheus/console_libraries/prom.lib",
-    "/etc/prometheus/consoles/prometheus.html",
-    "/etc/prometheus/web.yml",
-    "/etc/systemd/system/prometheus.service",
-    "/usr/local/bin/prometheus",
-    "/usr/local/bin/promtool"
-])
+@pytest.mark.parametrize(
+    "files",
+    [
+        "/etc/prometheus/prometheus.yml",
+        "/etc/prometheus/scrape_configs/empty_scrapes.yml",
+        "/etc/systemd/system/prometheus.service",
+        "/usr/local/bin/prometheus",
+        "/usr/local/bin/promtool",
+    ],
+)
 def test_files(host, files):
     f = host.file(files)
     assert f.exists
@@ -46,7 +50,7 @@ def test_files(host, files):
 
 
 @pytest.mark.parametrize("files", [
-    "/etc/prometheus/rules/ansible_managed.rules"
+    "/etc/prometheus/rules/ansible_managed.yml"
 ])
 def test_absent(host, files):
     f = host.file(files)

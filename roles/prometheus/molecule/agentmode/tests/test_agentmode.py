@@ -1,13 +1,11 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-import os
 import yaml
-import testinfra.utils.ansible_runner
+from testinfra_helpers import get_target_hosts
 import pytest
 
-testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
+testinfra_hosts = get_target_hosts()
 
 
 @pytest.fixture()
@@ -20,7 +18,7 @@ def AnsibleDefaults():
     ("/etc/systemd/system/prometheus.service",
      "storage.agent.path=/var/lib/prometheus"),
     ("/etc/systemd/system/prometheus.service",
-     "enable-feature=agent"),
+     "agent"),
 ])
 def test_file_contents(host, file, content):
     f = host.file(file)

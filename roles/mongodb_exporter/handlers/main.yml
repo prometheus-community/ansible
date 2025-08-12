@@ -1,0 +1,10 @@
+---
+- name: Restart mongodb_exporter
+  listen: "restart mongodb_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: mongodb_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode

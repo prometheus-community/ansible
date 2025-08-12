@@ -1,0 +1,178 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus redis_exporter"
+    description:
+      - "Deploy prometheus L(redis exporter,https://github.com/oliver006/redis_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      redis_exporter_version:
+        description: "redis_exporter package version. Also accepts latest as parameter."
+        default: "1.75.0"
+      redis_exporter_binary_url:
+        description: "URL of the redis_exporter binaries .tar.gz file"
+        default: "https://github.com/{{ _redis_exporter_repo }}/releases/download/v{{ redis_exporter_version }}/redis_exporter-v{{ redis_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _redis_exporter_go_ansible_arch }}.tar.gz"
+      redis_exporter_checksums_url:
+        description: "URL of the redis_exporter checksums file"
+        default: "https://github.com/{{ _redis_exporter_repo }}/releases/download/v{{ redis_exporter_version }}/sha256sums.txt"
+      redis_exporter_addr:
+        description: "Address of the Redis instance"
+        default: "redis://localhost:6379"
+      redis_exporter_user:
+        description: "User name to use for authentication (Redis ACL for Redis 6.0 and newer)"
+        default: ""
+      redis_exporter_password:
+        description: "Password of the Redis instance"
+        default: ""
+      redis_exporter_passwords:
+        description:
+          - "Dictionary with passwords for instances."
+          - "Read more official L(documentation, https://github.com/oliver006/redis_exporter?tab=readme-ov-file#authenticating-with-redis)"
+        type: "dict"
+        default: {}
+      redis_exporter_check_keys:
+        description: "List of key patterns to export value and length/size, eg: db3=user_count will export key user_count from db 3. db defaults to 0 if omitted. The key patterns specified with this flag will be found using SCAN. Use this option if you need glob pattern matching; check-single-keys is faster for non-pattern keys. Warning: using --check-keys to match a very large number of keys can slow down the exporter to the point where it doesn't finish scraping the redis instance."
+        type: "list"
+        default: []
+      redis_exporter_check_single_keys:
+        description: "List of keys to export value and length/size, eg: db3=user_count will export key user_count from db 3. db defaults to 0 if omitted. The keys specified with this flag will be looked up directly without any glob pattern matching. Use this option if you don't need glob pattern matching; it is faster than check-keys."
+        type: "list"
+        default: []
+      redis_exporter_check_streams:
+        description: "List of stream-patterns to export info about streams, groups and consumers. Syntax is the same as check-keys."
+        type: "list"
+        default: []
+      redis_exporter_check_single_streams:
+        description: "List of streams to export info about streams, groups and consumers. The streams specified with this flag will be looked up directly without any glob pattern matching. Use this option if you don't need glob pattern matching; it is faster than check-streams."
+        type: "list"
+        default: []
+      redis_exporter_check_keys_batch_size:
+        description: "Approximate number of keys to process in each execution. This is basically the COUNT option that will be passed into the SCAN command as part of the execution of the key or key group metrics, see COUNT option. Larger value speeds up scanning. Still Redis is a single-threaded app, huge COUNT can affect production environment."
+        type: "int"
+        default: 1000
+      redis_exporter_count_keys:
+        description: "List of patterns to count, eg: db3=sessions:* will count all keys with prefix sessions: from db 3. db defaults to 0 if omitted. Warning: The exporter runs SCAN to count the keys. This might not perform well on large databases."
+        type: "list"
+        default: []
+      redis_exporter_script:
+        description: "List of path(s) to Redis Lua script(s) for gathering extra metrics."
+        type: "list"
+        default: []
+      redis_exporter_debug:
+        description: "Verbose debug output"
+        type: bool
+        default: false
+      redis_exporter_log_format:
+        description: "Output format of log messages. One of: [txt, json]"
+        default: "txt"
+      redis_exporter_namespace:
+        description: "Namespace for the metrics"
+        default: "redis"
+      redis_exporter_connection_timeout:
+        description: "Timeout for connection to Redis instance"
+        default: "15s"
+      redis_exporter_web_listen_address:
+        description: "Address to listen on for web interface and telemetry"
+        default: "0.0.0.0:9121"
+      redis_exporter_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      redis_exporter_redis_only_metrics:
+        description: "Whether to also export go runtime metrics"
+        type: bool
+        default: false
+      redis_exporter_incl_config_metrics:
+        description: "Whether to include all config settings as metrics"
+        type: bool
+        default: false
+      redis_exporter_incl_system_metrics:
+        description: "Whether to include system metrics like total_system_memory_bytes"
+        type: bool
+        default: false
+      redis_exporter_redact_config_metrics:
+        description: "Whether to redact config settings that include potentially sensitive information like passwords."
+        type: bool
+        default: false
+      redis_exporter_ping_on_connect:
+        description: "Whether to ping the redis instance after connecting and record the duration as a metric."
+        type: bool
+        default: false
+      redis_exporter_is_tile38:
+        description: "Whether to scrape Tile38 specific metrics"
+        type: bool
+        default: false
+      redis_exporter_is_cluster:
+        description: "Whether this is a redis cluster (Enable this if you need to fetch key level data on a Redis Cluster)."
+        type: bool
+        default: false
+      redis_exporter_export_client_list:
+        description: "Whether to scrape Client List specific metrics"
+        type: bool
+        default: false
+      redis_exporter_export_client_port:
+        description: "Whether to include the client's port when exporting the client list. Warning: including the port increases the number of metrics generated and will make your Prometheus server take up more memory"
+        type: bool
+        default: false
+      redis_exporter_skip_tls_verification:
+        description: "Whether to to skip TLS verification when the exporter connects to a Redis instance"
+        type: bool
+        default: false
+      redis_exporter_tls_client_key_file:
+        description: "Name of the client key file (including full path) if the server requires TLS client authentication"
+        default: ""
+      redis_exporter_tls_client_cert_file:
+        description: "Name the client cert file (including full path) if the server requires TLS client authentication"
+        default: ""
+      redis_exporter_tls_server_key_file:
+        description: "Name of the server key file (including full path) if the web interface and telemetry should use TLS"
+        default: ""
+      redis_exporter_tls_server_cert_file:
+        description: "Name of the server certificate file (including full path) if the web interface and telemetry should use TLS"
+        default: ""
+      redis_exporter_tls_server_ca_cert_file:
+        description: "Name of the CA certificate file (including full path) if the web interface and telemetry should use TLS"
+        default: ""
+      redis_exporter_tls_server_min_version:
+        description: "Minimum TLS version that is acceptable by the web interface and telemetry when using TLS"
+        default: "TLS1.2"
+      redis_exporter_tls_ca_cert_file:
+        description: "Name of the CA certificate file (including full path) if the server requires TLS client authentication"
+        default: ""
+      redis_exporter_set_client_name:
+        description: "Whether to set client name to redis_exporter"
+        type: bool
+        default: true
+      redis_exporter_check_key_groups:
+        description: "List of LUA regexes for classifying keys into groups. The regexes are applied in specified order to individual keys, and the group name is generated by concatenating all capture groups of the first regex that matches a key. A key will be tracked under the unclassified group if none of the specified regexes matches it."
+        type: "list"
+        default: []
+      redis_exporter_max_distinct_key_groups:
+        description: "Maximum number of distinct key groups that can be tracked independently per Redis database. If exceeded, only key groups with the highest memory consumption within the limit will be tracked separately, all remaining key groups will be tracked under a single overflow key group."
+        type: "int"
+        default: 100
+      redis_exporter_config_command:
+        description: "What to use for the CONFIG command"
+        default: "CONFIG"
+      redis_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install redis_exporter binary"
+        default: "/usr/local/bin"
+      redis_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for redis_exporter"
+        default: "redis-exp"
+      redis_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "redis_exporter user"
+        default: "redis-exp"
+      redis_exporter_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/redis_exporter-{{ ansible_facts['system'] | lower }}-{{ _redis_exporter_go_ansible_arch }}/{{ redis_exporter_version }}"
+      redis_exporter_config_dir:
+        description: "Path to directory with redis_exporter configuration"
+        default: "/etc/redis_exporter"

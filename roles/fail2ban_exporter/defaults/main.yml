@@ -1,0 +1,19 @@
+---
+fail2ban_exporter_version: 0.10.3
+fail2ban_exporter_binary_url: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/\
+                               fail2ban_exporter_{{ fail2ban_exporter_version }}_{{ ansible_facts['system'] | lower }}_{{ _fail2ban_exporter_go_ansible_arch }}.tar.gz"
+fail2ban_exporter_checksums_url: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/\
+                               fail2ban_exporter_{{ fail2ban_exporter_version }}_checksums.txt"
+
+fail2ban_exporter_web_listen_address: "0.0.0.0:9191"
+fail2ban_exporter_socket: "/var/run/fail2ban/fail2ban.sock"
+fail2ban_exporter_binary_install_dir: "/usr/local/bin"
+
+fail2ban_exporter_username: ""
+fail2ban_exporter_password: ""
+fail2ban_exporter_system_user: "root"
+fail2ban_exporter_system_group: "{{ fail2ban_exporter_system_user }}"
+
+# Local path to stash the archive and its extraction
+fail2ban_exporter_local_cache_path: "/tmp/fail2ban_exporter-{{ ansible_facts['system'] | lower }}-{{ _fail2ban_exporter_go_ansible_arch }}/\
+                                     {{ fail2ban_exporter_version }}"

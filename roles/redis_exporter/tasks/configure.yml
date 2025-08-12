@@ -1,0 +1,28 @@
+---
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ redis_exporter_system_user }}"
+    _common_system_group: "{{ redis_exporter_system_group }}"
+    _common_config_dir: "{{ redis_exporter_config_dir }}"
+  tags:
+    - redis_exporter
+    - configure
+    - redis_exporter_configure
+
+- name: Copy the passwords file
+  ansible.builtin.copy:
+    content: "{{ redis_exporter_passwords | to_json(indent=2, sort_keys=True) }}"
+    dest: "{{ redis_exporter_config_dir }}/passwords.json"
+    owner: "{{ redis_exporter_system_user }}"
+    group: "{{ redis_exporter_system_group }}"
+    mode: 0644
+  notify: restart redis_exporter
+  when: redis_exporter_passwords | length > 0
+  become: true
+  tags:
+    - redis_exporter
+    - configure
+    - redis_exporter_configure

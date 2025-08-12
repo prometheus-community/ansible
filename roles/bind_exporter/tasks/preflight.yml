@@ -1,0 +1,48 @@
+---
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
+  vars:
+    _common_web_listen_address: "{{ bind_exporter_web_listen_address }}"
+
+- name: Assert that TLS config is correct
+  when: bind_exporter_tls_server_config | length > 0
+  block:
+    - name: Assert that TLS key and cert path are set
+      ansible.builtin.assert:
+        that:
+          - "bind_exporter_tls_server_config.cert_file is defined"
+          - "bind_exporter_tls_server_config.key_file is defined"
+
+    - name: Check existence of TLS cert file
+      ansible.builtin.stat:
+        path: "{{ bind_exporter_tls_server_config.cert_file }}"
+      register: __bind_exporter_cert_file
+
+    - name: Check existence of TLS key file
+      ansible.builtin.stat:
+        path: "{{ bind_exporter_tls_server_config.key_file }}"
+      register: __bind_exporter_key_file
+
+    - name: Assert that TLS key and cert are present
+      ansible.builtin.assert:
+        that:
+          - "__bind_exporter_cert_file.stat.exists"
+          - "__bind_exporter_key_file.stat.exists"
+
+- name: Discover latest version
+  ansible.builtin.set_fact:
+    bind_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _bind_exporter_repo }}/releases/latest', headers=_github_api_headers,
+                              split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+  run_once: true
+  until: bind_exporter_version is version('0.0.0', '>=')
+  retries: 10
+  when:
+    - bind_exporter_version == "latest"
+  tags:
+    - bind_exporter
+    - install
+    - bind_exporter_install
+    - download
+    - bind_exporter_download

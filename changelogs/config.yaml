@@ -31,3 +31,5 @@ sections:
 title: Prometheus.Prometheus
 trivial_section_name: trivial
 use_fqcn: true
+changelog_nice_yaml: true
+changelog_sort: "version_reversed"

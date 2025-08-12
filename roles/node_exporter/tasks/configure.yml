@@ -1,29 +1,19 @@
 ---
-- name: Copy the node_exporter systemd service file
-  ansible.builtin.template:
-    src: node_exporter.service.j2
-    dest: /etc/systemd/system/node_exporter.service
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart node_exporter
-
-- name: Create node_exporter config directory
-  ansible.builtin.file:
-    path: "/etc/node_exporter"
-    state: directory
-    owner: root
-    group: root
-    mode: u+rwX,g+rwX,o=rX
-
-- name: Copy the node_exporter config file
-  ansible.builtin.template:
-    src: config.yaml.j2
-    dest: /etc/node_exporter/config.yaml
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart node_exporter
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ node_exporter_system_user }}"
+    _common_system_group: "{{ node_exporter_system_group }}"
+    _common_config_dir: "{{ node_exporter_config_dir }}"
+    _common_tls_server_config: "{{ node_exporter_tls_server_config }}"
+    _common_http_server_config: "{{ node_exporter_http_server_config }}"
+    _common_basic_auth_users: "{{ node_exporter_basic_auth_users }}"
+  tags:
+    - node_exporter
+    - configure
+    - node_exporter_configure
 
 - name: Create textfile collector dir
   ansible.builtin.file:
@@ -32,14 +22,9 @@
     owner: "{{ node_exporter_system_user }}"
     group: "{{ node_exporter_system_group }}"
     mode: u+rwX,g+rwX,o=rX
+  become: true
   when: node_exporter_textfile_dir | length > 0
-
-- name: Allow node_exporter port in SELinux on RedHat OS family
-  community.general.seport:
-    ports: "{{ node_exporter_web_listen_address.split(':')[-1] }}"
-    proto: tcp
-    setype: http_port_t
-    state: present
-  when:
-    - ansible_version.full is version_compare('2.4', '>=')
-    - ansible_selinux.status == "enabled"
+  tags:
+    - node_exporter
+    - configure
+    - node_exporter_configure

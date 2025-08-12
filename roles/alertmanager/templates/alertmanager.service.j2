@@ -17,11 +17,15 @@ StartLimitIntervalSec=0
 
 [Service]
 Type=simple
+{% if (ansible_facts.packages.systemd | first).version is version('239', '>=') %}
+PIDFile=/run/alertmanager.pid
+{% else %}
 PIDFile=/var/run/alertmanager.pid
-User=alertmanager
-Group=alertmanager
+{% endif %}
+User={{ alertmanager_system_user }}
+Group={{ alertmanager_system_group }}
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStart={{ _alertmanager_binary_install_dir }}/alertmanager \
+ExecStart={{ alertmanager_binary_install_dir }}/alertmanager \
 {% for option, value in (alertmanager_cluster.items() | sort) %}
 {%   if option == "peers" %}
 {%     for peer in value %}
@@ -33,7 +37,16 @@ ExecStart={{ _alertmanager_binary_install_dir }}/alertmanager \
 {% endfor %}
   {{ pre }}-config.file={{ alertmanager_config_dir }}/alertmanager.yml \
   {{ pre }}-storage.path={{ alertmanager_db_dir }} \
+{% if alertmanager_version is version('0.25.0', '>=') and
+      alertmanager_web_listen_address is iterable and
+      alertmanager_web_listen_address is not mapping and
+      alertmanager_web_listen_address is not string %}
+{%   for address in alertmanager_web_listen_address %}
+  {{ pre }}-web.listen-address={{ address }} \
+{%   endfor %}
+{% else %}
   {{ pre }}-web.listen-address={{ alertmanager_web_listen_address }} \
+{% endif %}
   {{ pre }}-web.external-url={{ alertmanager_web_external_url }}{% for flag, flag_value in alertmanager_config_flags_extra.items() %} \
   {{ pre }}-{{ flag }}={{ flag_value }}{% endfor %}
 

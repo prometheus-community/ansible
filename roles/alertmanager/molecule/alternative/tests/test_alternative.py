@@ -1,12 +1,10 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-import os
-import testinfra.utils.ansible_runner
+from testinfra_helpers import get_target_hosts
 import pytest
 
-testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
+testinfra_hosts = get_target_hosts()
 
 
 @pytest.mark.parametrize("dirs", [
@@ -47,7 +45,8 @@ def test_service(host):
 
 @pytest.mark.parametrize("sockets", [
     "tcp://127.0.0.1:9093",
-    "tcp://127.0.0.1:6783"
+    "tcp://127.0.1.1:9093",
+    "tcp://127.0.0.1:6783",
 ])
 def test_socket(host, sockets):
     assert host.socket(sockets).is_listening

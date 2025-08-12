@@ -1,0 +1,10 @@
+---
+- name: Restart bind_exporter
+  listen: "restart bind_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: bind_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode

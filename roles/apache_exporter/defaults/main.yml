@@ -1,0 +1,24 @@
+---
+apache_exporter_version: 1.0.10
+apache_exporter_binary_url: "https://github.com/{{ _apache_exporter_repo }}/releases/download/v{{ apache_exporter_version }}/\
+                          apache_exporter-{{ apache_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _apache_exporter_go_ansible_arch }}.tar.gz"
+apache_exporter_checksums_url: "https://github.com/{{ _apache_exporter_repo }}/releases/download/v{{ apache_exporter_version }}/sha256sums.txt"
+
+apache_exporter_web_listen_address: "0.0.0.0:9117"
+apache_exporter_web_telemetry_path: "/metrics"
+apache_exporter_uri: "http://localhost/server-status/?auto"
+apache_exporter_timeout_offset: 1
+
+apache_exporter_tls_server_config: {}
+apache_exporter_http_server_config: {}
+apache_exporter_basic_auth_users: {}
+
+apache_exporter_log_level: "error"
+
+apache_exporter_binary_install_dir: "/usr/local/bin"
+apache_exporter_system_user: "apache-exp"
+apache_exporter_system_group: "{{ apache_exporter_system_user }}"
+apache_exporter_config_dir: "/etc/apache_exporter"
+
+# Local path to stash the archive and its extraction
+apache_exporter_local_cache_path: "/tmp/apache_exporter-{{ ansible_facts['system'] | lower }}-{{ _apache_exporter_go_ansible_arch }}/{{ apache_exporter_version }}"

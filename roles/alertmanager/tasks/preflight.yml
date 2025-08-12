@@ -1,56 +1,37 @@
 ---
-- name: Assert usage of systemd as an init system
-  ansible.builtin.assert:
-    that: ansible_service_mgr == 'systemd'
-    msg: "This module only works with systemd"
-
-- name: Install package fact dependencies
-  become: true
-  ansible.builtin.package:
-    name: "{{ _pkg_fact_req }}"
-    state: present
-  when: (_pkg_fact_req)
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
   vars:
-    _pkg_fact_req: "{% if (ansible_pkg_mgr == 'apt') %}\
-                    {{ ('python-apt' if ansible_python_version is version('3', '<') else 'python3-apt') }}
-                    {% else %}\
-                    {% endif %}"
+    _common_web_listen_address: "{{ alertmanager_web_listen_address }}"
 
-- name: Gather package facts
-  ansible.builtin.package_facts:
-  when: "not 'packages' in ansible_facts"
+- name: Assert that used version supports listen address type
+  ansible.builtin.assert:
+    that:
+      - >-
+        alertmanager_web_listen_address is string
+        or
+        (
+          alertmanager_version is version('0.25.0', '>=') and
+          alertmanager_web_listen_address | type_debug == "list"
+        )
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    alertmanager_version: "{{ (lookup('url', 'https://api.github.com/repos/prometheus/alertmanager/releases/latest', headers=_github_api_headers,
+    alertmanager_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _alertmanager_repo }}/releases/latest', headers=_github_api_headers,
                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
   until: alertmanager_version is version('0.0.0', '>=')
   retries: 10
   when:
     - alertmanager_version == "latest"
-    - alertmanager_binary_local_dir | length == 0
-    - not alertmanager_skip_install
-
-- name: Get alertmanager binary checksum
-  when:
-    - alertmanager_binary_local_dir | length == 0
-    - not alertmanager_skip_install
-  block:
-    - name: "Get checksum list"
-      ansible.builtin.set_fact:
-        __alertmanager_checksums: "{{ lookup('url', alertmanager_checksums_url, headers=_github_api_headers, wantlist=True) | list }}"
-      run_once: true
-      until: __alertmanager_checksums is search('linux-' + go_arch + '.tar.gz')
-      retries: 10
-
-    - name: "Get checksum for {{ go_arch }}"
-      ansible.builtin.set_fact:
-        __alertmanager_checksum: "{{ item.split(' ')[0] }}"
-      with_items: "{{ __alertmanager_checksums }}"
-      when:
-        - "('linux-' + go_arch + '.tar.gz') in item"
-
+  tags:
+    - alertmanager
+    - install
+    - alertmanager_install
+    - download
+    - alertmanager_download
 
 - name: Fail when extra config flags are duplicating ansible variables
   ansible.builtin.fail:
@@ -134,3 +115,11 @@
     msg: "Please move content of `alertmanager_child_routes` to `alertmanager_route.routes` as the former variable is deprecated
           and will be removed in future versions."
   when: alertmanager_child_routes is defined
+
+- name: "`alertmanager_time_intervals` is only supported on version 0.22.0. Please upgrade to this version."
+  ansible.builtin.fail:
+    msg: "To use `alertmanager_time_intervals`,
+          Please upgrade to AlertManager 0.22.0 or newer."
+  when:
+    - alertmanager_version is version_compare('0.22.0', '<')
+    - alertmanager_time_intervals is defined

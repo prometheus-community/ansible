@@ -1,0 +1,10 @@
+---
+- name: Restart nginx_exporter
+  listen: "restart nginx_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: nginx_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode

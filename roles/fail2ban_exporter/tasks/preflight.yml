@@ -1,0 +1,29 @@
+---
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
+  vars:
+    _common_web_listen_address: "{{ fail2ban_exporter_web_listen_address }}"
+
+- name: Assert that used version supports listen address type
+  ansible.builtin.assert:
+    that:
+      - >-
+        fail2ban_exporter_web_listen_address is string
+
+- name: Discover latest version
+  ansible.builtin.set_fact:
+    fail2ban_exporter_version: "{{ (lookup('url', 'https://gitlab.com/api/v4/projects/{{ _fail2ban_exporter_repo }}/releases',
+                                split_lines=False) | from_json)[0].get('tag_name') | replace('v', '') }}"
+  run_once: true
+  until: fail2ban_exporter_version is version('0.0.0', '>=')
+  retries: 10
+  when:
+    - fail2ban_exporter_version == "latest"
+  tags:
+    - fail2ban_exporter
+    - install
+    - fail2ban_exporter_install
+    - download
+    - fail2ban_exporter_download

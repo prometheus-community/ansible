@@ -1,0 +1,10 @@
+---
+- name: Restart memcached_exporter
+  listen: "restart memcached_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: memcached_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode

@@ -3,31 +3,18 @@
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: Download prometheus binary to local folder
-      become: false
-      ansible.builtin.get_url:
-        url: "https://github.com/prometheus/prometheus/releases/download/v{{ version\
-          \ }}/prometheus-{{ version }}.linux-amd64.tar.gz"
-        dest: "/tmp/prometheus-{{ version }}.linux-amd64.tar.gz"
-        mode: 0644
-      register: _download_archive
-      until: _download_archive is succeeded
-      retries: 5
-      delay: 2
-      check_mode: false
-
-    - name: Unpack prometheus binaries
-      become: false
-      ansible.builtin.unarchive:
-        src: "/tmp/prometheus-{{ version }}.linux-amd64.tar.gz"
-        dest: "/tmp"
-        creates: "/tmp/prometheus-{{ version }}.linux-amd64/prometheus"
-      check_mode: false
-
-    - name: Link to prometheus binaries directory
-      become: false
+    - name: Create scrape_configs directory
       ansible.builtin.file:
-        src: "/tmp/prometheus-{{ version }}.linux-amd64"
-        dest: "/tmp/prometheus-linux-amd64"
-        state: link
+        name: /tmp/prometheus/scrape_configs
+        state: directory
+        recurse: true
       check_mode: false
+    - name: Create empty scrape config file
+      ansible.builtin.file:
+        name: /tmp/prometheus/scrape_configs/empty_scrapes.yml
+        state: touch
+        mode: 0664
+      check_mode: false
+
+- name: Import shared preparation playbook
+  import_playbook: "../../../../.config/molecule/alternative/prepare.yml"

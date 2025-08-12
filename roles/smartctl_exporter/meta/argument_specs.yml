@@ -1,0 +1,89 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus Smartctl Exporter"
+    description:
+      - "Deploy prometheus L(smartctl exporter,https://github.com/prometheus-community/smartctl_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      smartctl_exporter_version:
+        description: "Smartctl exporter package version. Also accepts latest as parameter."
+        default: "0.14.0"
+      smartctl_exporter_binary_url:
+        description: "URL of the Smartctl exporter binaries .tar.gz file"
+        default: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/smartctl_exporter-{{ smartctl_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _smartctl_exporter_go_ansible_arch }}.tar.gz"
+      smartctl_exporter_checksums_url:
+        description: "URL of the Smartctl exporter checksums file"
+        default: "https://github.com/{{ _smartctl_exporter_repo }}/releases/download/v{{ smartctl_exporter_version }}/sha256sums.txt"
+      smartctl_exporter_smartctl_interval:
+        description: "The interval between smartctl polls"
+        default: "60s"
+      smartctl_exporter_smartctl_rescan:
+        description:
+          - "The interval between rescanning for new/disappeared devices."
+          - "If the interval is smaller than 1s norescanning takes place."
+          - "If any devices are configured with smartctl_exporter_smartctl_device also no rescanning takes place."
+        default: "10m"
+      smartctl_exporter_smartctl_devices:
+        description: "List of devices to be monitored by smartctl_exporter. Disables auto scan for available devices."
+        type: "list"
+        elements: "str"
+      smartctl_exporter_smartctl_device_exclude:
+        description: "Regexp of devices to exclude from automatic scanning. (mutually exclusive to smartctl_exporter_smartctl_device_include)"
+        default: ""
+      smartctl_exporter_smartctl_device_include:
+        description: "Regexp of devices to include in automatic scanning. (mutually exclusive to smartctl_exporter_smartctl_device_exclude)"
+        default: ""
+      smartctl_exporter_web_listen_address:
+        description: "Address on which smartctl exporter will listen"
+        default: "0.0.0.0:9633"
+      smartctl_exporter_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      smartctl_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(smartctl_exporter docs,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)."
+        type: "dict"
+      smartctl_exporter_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(smartctl_exporter docs,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)."
+        type: "dict"
+      smartctl_exporter_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      smartctl_exporter_log_level:
+        description: "Only log messages with the given severity or above. One of: [debug, info, warn, error]"
+        default: "info"
+      smartctl_exporter_log_format:
+        description: "Output format of log messages. One of: [logfmt, json]"
+        default: "logfmt"
+      smartctl_exporter_smartctl_path:
+        description:
+          - "I(Advanced)"
+          - "The path to the smartctl binary"
+        default: "/usr/sbin/smartctl"
+      smartctl_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install smartctl_exporter binary"
+        default: "/usr/local/bin"
+      smartctl_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for Smartctl exporter"
+        default: "smartctl-exp"
+      smartctl_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "Smartctl exporter user"
+        default: "smartctl-exp"
+      smartctl_exporter_local_cache_path:
+        description: "Local path to stash the archive and its extraction"
+        default: "/tmp/smartctl_exporter-{{ ansible_facts['system'] | lower }}-{{ _smartctl_exporter_go_ansible_arch }}/{{ smartctl_exporter_version }}"
+      smartctl_exporter_config_dir:
+        description: "Path to directory with smartctl_exporter configuration"
+        default: "/etc/smartctl_exporter"

@@ -1,0 +1,91 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "cAdvisor"
+    description:
+      - "Deploy L(cadvisor,https://github.com/google/cadvisor) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      cadvisor_version:
+        description: "cAdvisor package version. Also accepts latest as parameter."
+        default: "0.52.1"
+      cadvisor_binary_url:
+        description: "URL of the cadvisor binary file"
+        default: "https://github.com/{{ _cadvisor_repo }}/releases/download/v{{ cadvisor_version }}/cadvisor-v{{ cadvisor_version }}-{{ ansible_facts['system'] | lower }}-{{ _cadvisor_go_ansible_arch }}"
+      cadvisor_listen_ip:
+        description: "Address on which cadvisor will listen"
+        default: "0.0.0.0"
+      cadvisor_port:
+        description: "Port on which cadvisor will listen"
+        default: "8080"
+      cadvisor_prometheus_endpoint:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      cadvisor_disable_metrics:
+        description:
+          - "comma-separated list of metrics to be disabled"
+          - "(default advtcp,cpu_topology,cpuset,hugetlb,memory_numa,process,referenced_memory,resctrl,sched,tcp,udp)"
+        type: "list"
+        default: []
+        choices: &metrics_choices
+          - advtcp
+          - app
+          - cpu
+          - cpuLoad
+          - cpu_topology
+          - cpuset
+          - disk
+          - diskIO
+          - hugetlb
+          - memory
+          - memory_numa
+          - network
+          - oom_event
+          - percpu
+          - perf_event
+          - process
+          - referenced_memory
+          - resctrl
+          - sched
+          - tcp
+      cadvisor_enable_metrics:
+        description: "comma-separated list of metrics to be enabled. If set, overrides 'cadvisor_disable_metrics'"
+        default: []
+        type: "list"
+        choices: *metrics_choices
+      cadvisor_store_container_labels:
+        description: "store all container labels"
+        type: "bool"
+        default: true
+      cadvisor_whitelisted_container_labels:
+        description: "comma-separated list of container labels to be used as labels on prometheus metrics"
+        default: []
+        type: "list"
+      cadvisor_env_metadata_whitelist:
+        description: "comma-separated list of env variables to be used as labels on prometheus metrics"
+        default: []
+        type: "list"
+      cadvisor_docker_only:
+        description: "do not report raw cgroup metrics, except the root cgroup"
+        type: "bool"
+        default: false
+      cadvisor_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for cadvisor"
+        default: "root"
+      cadvisor_system_user:
+        description:
+          - "I(Advanced)"
+          - "cAdvisor user"
+        default: "root"
+      cadvisor_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install binaries"
+        default: "/usr/local/bin"
+      cadvisor_local_cache_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp/cadvisor-{{ ansible_facts['system'] | lower }}-{{ _cadvisor_go_ansible_arch }}/{{ cadvisor_version }}"

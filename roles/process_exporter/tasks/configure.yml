@@ -1,0 +1,32 @@
+---
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ process_exporter_system_user }}"
+    _common_system_group: "{{ process_exporter_system_group }}"
+    _common_config_dir: "{{ process_exporter_config_dir }}"
+    _common_tls_server_config: "{{ process_exporter_tls_server_config }}"
+    _common_http_server_config: "{{ process_exporter_http_server_config }}"
+    _common_basic_auth_users: "{{ process_exporter_basic_auth_users }}"
+  tags:
+    - process_exporter
+    - configure
+    - process_exporter_configure
+
+- name: Create/Update configuration file
+  ansible.builtin.template:
+    src: "config.yml.j2"
+    dest: "/etc/process_exporter/config.yml"
+    owner: "{{ process_exporter_system_user }}"
+    group: "{{ process_exporter_system_group }}"
+    mode: 0644
+  when:
+    - process_exporter_names != []
+  notify: restart process_exporter
+  become: true
+  tags:
+    - process_exporter
+    - configure
+    - process_exporter_configure

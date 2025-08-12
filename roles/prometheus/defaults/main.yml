@@ -1,11 +1,10 @@
 ---
-prometheus_version: 2.47.2
-prometheus_binary_local_dir: ''
+prometheus_version: 3.5.0
 prometheus_binary_url: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/\
-                        prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
+                        prometheus-{{ prometheus_version }}.{{ ansible_facts['system'] | lower }}-{{ _prometheus_go_ansible_arch }}.tar.gz"
 prometheus_checksums_url: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/sha256sums.txt"
-prometheus_skip_install: false
 
+prometheus_binary_install_dir: /usr/local/bin
 prometheus_config_dir: /etc/prometheus
 prometheus_db_dir: /var/lib/prometheus
 prometheus_read_only_dirs: []
@@ -91,11 +90,16 @@ prometheus_scrape_configs:
 prometheus_config_file: 'prometheus.yml.j2'
 
 prometheus_alert_rules_files:
-  - prometheus/rules/*.rules
+  - prometheus/rules/*.yml
+  - prometheus/rules/*.yaml
 
 prometheus_static_targets_files:
   - prometheus/targets/*.yml
   - prometheus/targets/*.json
+
+prometheus_scrape_config_files:
+  - prometheus/scrape_configs/*.yml
+  - prometheus/scrape_configs/*.json
 
 # yamllint disable rule:line-length
 prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
@@ -227,4 +231,10 @@ prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
       severity: warning
 # yamllint enable rule:line-length
 
+prometheus_system_group: 'prometheus'
+prometheus_system_user: "{{ prometheus_system_group }}"
+
 prometheus_stop_timeout: '600s'
+
+# Local path to stash the archive and its extraction
+prometheus_local_cache_path: "/tmp/prometheus-{{ ansible_facts['system'] | lower }}-{{ _prometheus_go_ansible_arch }}/{{ prometheus_version }}"

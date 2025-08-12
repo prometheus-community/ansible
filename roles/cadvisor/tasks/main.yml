@@ -1,0 +1,53 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+  tags:
+    - cadvisor_install
+    - cadvisor_configure
+    - cadvisor_run
+
+- name: Install
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: install.yml
+  vars:
+    _common_local_cache_path: "{{ cadvisor_local_cache_path }}"
+    _common_binary_name: "{{ _cadvisor_binaries | first }}"
+    _common_binaries: "{{ _cadvisor_binaries }}"
+    _common_binary_install_dir: "{{ cadvisor_binary_install_dir }}"
+    _common_binary_url: "{{ cadvisor_binary_url }}"
+    _common_system_group: "{{ cadvisor_system_group }}"
+    _common_system_user: "{{ cadvisor_system_user }}"
+    _common_config_dir: "{{ cadvisor_config_dir }}"
+  tags:
+    - cadvisor_install
+
+- name: SELinux
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ cadvisor_port }}"
+  when: ansible_facts['selinux'].status == "enabled"
+  tags:
+    - cadvisor_configure
+
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  tags:
+    - cadvisor_configure
+
+- name: Ensure cAdvisor is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: cadvisor
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - cadvisor_run

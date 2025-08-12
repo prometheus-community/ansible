@@ -1,0 +1,52 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus fail2ban_exporter"
+    description:
+      - "Deploy prometheus L(fail2ban exporter,https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      fail2ban_exporter_version:
+        description: "fail2ban_exporter package version. Also accepts latest as parameter."
+        default: "0.10.3"
+      fail2ban_exporter_binary_url:
+        description: "URL of the fail2ban_exporter binaries .tar.gz file"
+        default: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/fail2ban_exporter_{{ fail2ban_exporter_version }}_{{ ansible_facts['system'] | lower }}_{{ _fail2ban_exporter_go_ansible_arch }}.tar.gz"
+      fail2ban_exporter_checksums_url:
+        description: "URL of the fail2ban_exporter checksums file"
+        default: "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/releases/v{{ fail2ban_exporter_version }}/downloads/fail2ban_exporter_{{ fail2ban_exporter_version }}_checksums.txt"
+      fail2ban_exporter_web_listen_address:
+        description: "Address on which fail2ban exporter will listen"
+        default: "0.0.0.0:9191"
+      fail2ban_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install fail2ban_exporter binary"
+        default: "/usr/local/bin"
+      fail2ban_exporter_socket:
+        description:
+          - "Path to the fail2ban server socket"
+        default: "/var/run/fail2ban/fail2ban.sock"
+      fail2ban_exporter_username:
+        description:
+          - "I(Advanced)"
+          - "Username to use to protect endpoints with basic auth"
+      fail2ban_exporter_password:
+        description:
+          - "I(Advanced)"
+          - "Password to use to protect endpoints with basic auth"
+      fail2ban_exporter_local_cache_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp/fail2ban_exporter-{{ ansible_facts['system'] | lower }}-{{ _fail2ban_exporter_go_ansible_arch }}/{{ fail2ban_exporter_version }}"
+      fail2ban_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "fail2ban exporter system user"
+        default: root
+      fail2ban_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for fail2ban exporter"
+        default: root

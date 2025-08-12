@@ -1,16 +1,14 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-import os
-import testinfra.utils.ansible_runner
+from testinfra_helpers import get_target_hosts
 import pytest
 
-testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
+testinfra_hosts = get_target_hosts()
 
 
 @pytest.mark.parametrize("files", [
-    "/etc/blackbox_exporter.yml",
+    "/etc/blackbox_exporter/blackbox_exporter.yml",
     "/etc/systemd/system/blackbox_exporter.service",
     "/usr/local/bin/blackbox_exporter"
 ])
