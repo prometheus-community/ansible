@@ -30,3 +30,10 @@
     - ipmi_exporter
     - configure
     - ipmi_exporter_configure
+
+- name: Create the sudoers file to run ipmi commands
+  community.general.sudoers:
+    name: "{{ ipmi_exporter_sudoers_name }}"
+    user: "{{ ipmi_exporter_system_user }}"
+    commands: "{{ _ipmi_exporter_sudo_commands }}"
+  when: ipmi_exporter_run_with_sudo
