@@ -57,7 +57,7 @@
   ansible.builtin.package:
     name: "{{ _common_dependencies }}"
     state: present
-  when: (_common_dependencies)
+  when: _common_dependencies is defined
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - configure
@@ -84,4 +84,4 @@
           reject('match', '.+:\\d+$') |
           list |
           length == 0
-  when: (_common_web_listen_address)
+  when: _common_web_listen_address is defined
