@@ -4,7 +4,7 @@
 
 ## Description
 
-Deploy prometheus [ipmi_exporter](https://github.com/prometheus-community/ipmi_exporter) using ansible.
+Deploy the Prometheus [ipmi_exporter](https://github.com/prometheus-community/ipmi_exporter) using Ansible.
 
 ## Requirements
 
@@ -14,14 +14,14 @@ Deploy prometheus [ipmi_exporter](https://github.com/prometheus-community/ipmi_e
 
 ## Role Variables
 
-All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) file as well as in [meta/argument_specs.yml](meta/argument_specs.yml).
+All variables which can be overridden are present in [defaults/main.yml](defaults/main.yml) file as well as in [meta/argument_specs.yml](meta/argument_specs.yml).
 Please refer to the [collection docs](https://prometheus-community.github.io/ansible/branch/main/ipmi_exporter_role.html) for description and default values of the variables.
 
 ## Example
 
 ### Demo site
 
-We provide demo site for full monitoring solution based on prometheus and grafana. Repository with code and links to running instances is [available on github](https://github.com/prometheus/demo-site) and site is hosted on [DigitalOcean](https://digitalocean.com).
+We provide a demo site for a full monitoring solution based on Prometheus and Grafana. The repository with code and links to running instances is [available on github](https://github.com/prometheus/demo-site) and the site is hosted on [DigitalOcean](https://digitalocean.com).
 
 ## Local Testing
 
