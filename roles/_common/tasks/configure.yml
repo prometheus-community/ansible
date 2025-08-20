@@ -33,7 +33,7 @@
   become: true
   notify:
     - "{{ ansible_parent_role_names | first }} : Restart {{ _common_service_name }}"
-  when: (_common_config_dir)
+  when: _common_config_dir is defined
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - configure
