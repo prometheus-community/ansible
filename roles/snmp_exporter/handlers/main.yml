@@ -7,6 +7,7 @@
     name: snmp_exporter
     state: restarted
   register: snmp_exporter_restarted
+  when: "'snmp_exporter_restart' not in ansible_skip_tags"
 
 - name: Reload snmp_exporter
   listen: "reload snmp_exporter"
@@ -15,4 +16,6 @@
     daemon_reload: true
     name: snmp_exporter
     state: reloaded
-  when: snmp_exporter_restarted is not defined
+  when:
+    - snmp_exporter_restarted is not defined
+    - "'snmp_exporter_restart' not in ansible_skip_tags"
