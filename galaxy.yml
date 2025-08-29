@@ -20,6 +20,7 @@ tags:
   - cloud
 dependencies:
   community.general: '>=1.0.0'
+  ans2dev.general: '0.2.0'
 repository: "https://github.com/prometheus-community/ansible"
 documentation: "https://prometheus-community.github.io/ansible"
 homepage: "https://prometheus.io"
