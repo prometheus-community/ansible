@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.27.3:
+    changes:
+      trivial:
+        - 'patch: New oliver006/redis_exporter upstream release 1.76.0! (https://github.com/prometheus-community/ansible/pull/641)'
+    release_date: '2025-08-29'
   0.27.1:
     changes:
       trivial:
