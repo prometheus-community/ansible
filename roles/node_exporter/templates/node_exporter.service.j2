@@ -43,7 +43,8 @@ ExecStart={{ node_exporter_binary_install_dir }}/node_exporter \
 {% else %}
     '--web.listen-address={{ node_exporter_web_listen_address }}' \
 {% endif %}
-    '--web.telemetry-path={{ node_exporter_web_telemetry_path }}'
+    '--web.telemetry-path={{ node_exporter_web_telemetry_path }}' \
+    '--log.level={{ node_exporter_log_level }}'
 
 SyslogIdentifier=node_exporter
 Restart=always
