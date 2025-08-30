@@ -47,5 +47,7 @@
     name: snmp_exporter
     state: started
     enabled: true
+  when:
+    - not ansible_check_mode
   tags:
     - snmp_exporter_run

@@ -10,14 +10,14 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
 
       - name: "Build the collection"
         id: build-collection
         uses: ansible-community/github-action-build-collection@main
 
       - name: "Upload built collection to release"
-        uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd  # 2.9.0
+        uses: svenstaro/upload-release-action@81c65b7cd4de9b2570615ce3aad67a41de5b1a13  # 2.11.2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.build-collection.outputs.artifact-filename }}
