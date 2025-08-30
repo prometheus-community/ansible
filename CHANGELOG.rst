@@ -4,6 +4,36 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.27.3
+=======
+
+v0.27.1
+=======
+
+v0.27.0
+=======
+
+Minor Changes
+-------------
+
+- minor: Bump for release (https://github.com/prometheus-community/ansible/pull/614)
+
+Bugfixes
+--------
+
+- fix(snmp_exporter): Added when clause to snmp_exporter role (https://github.com/prometheus-community/ansible/pull/610)
+
+v0.26.4
+=======
+
+Bugfixes
+--------
+
+- fix(snmp_exporter): Added when clause to snmp_exporter role (https://github.com/prometheus-community/ansible/pull/610)
+
+v0.26.3
+=======
+
 v0.26.2
 =======
 
