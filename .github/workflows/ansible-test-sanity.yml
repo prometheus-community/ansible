@@ -19,7 +19,7 @@ jobs:
     name: "sanity-${{ matrix.ansible-core-versions }}"
     steps:
       - name: "Perform sanity test with ansible-test"
-        uses: ansible-community/ansible-test-gh-action@b416b6ecf7ddb0ea3b0a51c1d198d715eba52c9d  # v1.16.0
+        uses: ansible-community/ansible-test-gh-action@d3a8ec7a59694e25e210fcd44738910149537f0e  # v1.17.0
         with:
           ansible-core-version: ${{ matrix.ansible-core-versions }}
           testing-type: sanity

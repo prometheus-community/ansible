@@ -85,14 +85,14 @@ jobs:
           on-merged-body: |
             ## Docs Build 📝
 
-            Thank you for contribution!✨
+            Thank you for contributing!✨
 
             This PR has been merged and the docs are now incorporated into `main`:
             ${{ env.GHP_BASE_URL }}/branch/main
           body: |
             ## Docs Build 📝
 
-            Thank you for contribution!✨
+            Thank you for contributing!✨
 
             The docs for **this PR** have been published here:
             ${{ env.GHP_BASE_URL }}/pr/${{ github.event.number }}

@@ -54,11 +54,24 @@ jobs:
     needs: pr-label
     if: github.event.pull_request.labels.length == 0
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+        with:
+          fetch-depth: 0
 
       - name: Get changed roles
         id: changed-roles
-        run: git diff --name-only ${{ github.event.pull_request.head.sha }} -r | grep -E '^roles/' | cut -f 1-2 -d'/' | sort -u >> "$GITHUB_OUTPUT"
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          files="$(git diff --name-only "origin/${BASE_REF}...origin/${HEAD_REF}" \
+            | grep -E '^roles/' \
+            | cut -f 1-2 -d'/' \
+            | sort -u \
+            | tr '\n' ' ' \
+            | sed 's/[[:space:]]*$//')"
+
+          echo "all_changed_and_modified_files=${files}" >> "$GITHUB_OUTPUT"
 
       - name: Add changed roles labels
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7.0.1

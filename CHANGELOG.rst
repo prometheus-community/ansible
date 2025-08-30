@@ -4,13 +4,32 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.27.3
+=======
+
+v0.27.1
+=======
+
 v0.27.0
 =======
 
-Removed Features (previously deprecated)
-----------------------------------------
+Minor Changes
+-------------
 
-- removed: drop Ubuntu 20.04 (Focal Fossa) support as it is EOL (https://github.com/prometheus-community/ansible/pull/596)
+- minor: Bump for release (https://github.com/prometheus-community/ansible/pull/614)
+
+Bugfixes
+--------
+
+- fix(snmp_exporter): Added when clause to snmp_exporter role (https://github.com/prometheus-community/ansible/pull/610)
+
+v0.26.4
+=======
+
+Bugfixes
+--------
+
+- fix(snmp_exporter): Added when clause to snmp_exporter role (https://github.com/prometheus-community/ansible/pull/610)
 
 v0.26.3
 =======
