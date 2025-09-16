@@ -8,6 +8,6 @@ _blackbox_exporter_repo: "prometheus/blackbox_exporter"
 _github_api_headers: "{{ {'GITHUB_TOKEN': lookup('ansible.builtin.env', 'GITHUB_TOKEN')} if (lookup('ansible.builtin.env', 'GITHUB_TOKEN')) else {} }}"
 _blackbox_exporter_binaries: ['blackbox_exporter']
 _blackbox_exporter_dependencies: "{% if (ansible_facts['pkg_mgr'] == 'apt') %}\
-                                  {{ (['python-apt', 'libcap2-bin'] if ansible_facts['python_version'] is version('3', '<') else ['python3-apt', 'libcap2-bin']) }}
+                                  {{ (['python-apt', 'libcap2-bin'] if ansible_facts['python_version'] is version('3', '<') else ['python3-apt', 'libcap2-bin']) }}\
                                   {% else %}\
                                   {% endif %}"
