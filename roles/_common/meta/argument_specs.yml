@@ -77,10 +77,10 @@ argument_specs:
     options:
       _common_dependencies:
         description: "Package dependencies to install"
-        default: "{% if (ansible_facts['pkg_mgr'] == 'apt') %}\
-                  {{ ('python-apt' if ansible_facts['python_version'] is version('3', '<') else 'python3-apt') }}
-                  {% else %}\
-                  {% endif %}"
+        default: >-
+          {{ ['python-apt'] if ansible_facts['pkg_mgr'] == 'apt' and ansible_facts['python_version'] is version('3', '<')
+             else ['python3-apt'] if ansible_facts['pkg_mgr'] == 'apt'
+             else [] }}
       _common_web_listen_address:
         description: "Address on which to listen"
         default: ""

@@ -55,9 +55,9 @@
 - name: Install dependencies
   become: true
   ansible.builtin.package:
-    name: "{{ _common_dependencies }}"
+    name: "{{ item }}"
     state: present
-  when: (_common_dependencies != None)
+  loop: "{{_common_dependencies}}"
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - configure
