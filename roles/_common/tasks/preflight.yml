@@ -57,7 +57,7 @@
   ansible.builtin.package:
     name: "{{ item }}"
     state: present
-  loop: "{{_common_dependencies}}"
+  loop: "{{ _common_dependencies }}"
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - configure
