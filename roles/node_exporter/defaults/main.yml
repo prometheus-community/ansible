@@ -1,5 +1,5 @@
 ---
-node_exporter_version: 1.9.1
+node_exporter_version: 1.10.0
 node_exporter_binary_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/\
                            node_exporter-{{ node_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _node_exporter_go_ansible_arch }}.tar.gz"
 node_exporter_checksums_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/sha256sums.txt"
