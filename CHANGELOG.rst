@@ -7,6 +7,11 @@ Prometheus.Prometheus Release Notes
 v0.27.4
 =======
 
+Bugfixes
+--------
+
+- fix(_common): Fix missing tags for binary install dir check (https://github.com/prometheus-community/ansible/pull/669)
+
 v0.27.3
 =======
 
