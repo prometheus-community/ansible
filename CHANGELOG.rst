@@ -4,6 +4,9 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.27.4
+=======
+
 v0.27.3
 =======
 
