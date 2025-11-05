@@ -3,6 +3,8 @@ ancestor:
 releases:
   0.27.4:
     changes:
+      bugfixes:
+        - 'fix(_common): Fix missing tags for binary install dir check (https://github.com/prometheus-community/ansible/pull/669)'
       trivial:
         - 'patch: New prometheus/alertmanager upstream release 0.29.0! (https://github.com/prometheus-community/ansible/pull/677)'
         - 'patch: New oliver006/redis_exporter upstream release 1.80.0! (https://github.com/prometheus-community/ansible/pull/676)'
