@@ -6,6 +6,8 @@ releases:
       trivial:
         - 'patch: New prometheus/alertmanager upstream release 0.29.0! (https://github.com/prometheus-community/ansible/pull/677)'
         - 'patch: New oliver006/redis_exporter upstream release 1.80.0! (https://github.com/prometheus-community/ansible/pull/676)'
+        - 'patch: New prometheus/pushgateway upstream release 1.11.2! (https://github.com/prometheus-community/ansible/pull/675)'
+        - 'patch: New prometheus/prometheus upstream release 3.7.3! (https://github.com/prometheus-community/ansible/pull/674)'
     release_date: '2025-11-05'
   0.27.3:
     changes:
