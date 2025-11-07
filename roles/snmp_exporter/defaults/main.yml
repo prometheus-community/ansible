@@ -8,6 +8,7 @@ snmp_exporter_log_level: info
 
 # If this is empty, role will download snmp.yml file from https://github.com/prometheus/snmp_exporter.
 snmp_exporter_config_file: ""
+snmp_exporter_configure: true
 
 snmp_exporter_binary_install_dir: "/usr/local/bin"
 snmp_exporter_config_dir: "/etc/snmp_exporter"

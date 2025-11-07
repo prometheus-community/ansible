@@ -27,6 +27,11 @@ argument_specs:
         description:
           - "If this is empty, role will download snmp.yml file from U(https://github.com/prometheus/snmp_exporter)."
           - "Otherwise this should contain path to file with custom snmp exporter configuration"
+      snmp_exporter_configure:
+        description:
+          - "Whether this role manages the snmp_exporter configuration file (snmp.yml)."
+          - "Set to false to skip downloading/copying the config; use when the file is managed externally."
+        default: true
       snmp_exporter_binary_install_dir:
         description:
           - "I(Advanced)"

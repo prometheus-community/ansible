@@ -13,6 +13,7 @@
     - snmp_exporter_configure
 
 - name: Copy configuration file
+  when: snmp_exporter_configure | default(true) | bool
   ansible.builtin.template:
     src: "{{ snmp_exporter_config_file | default(snmp_exporter_local_cache_path ~ '/snmp.yml', true) }}"
     dest: "{{ snmp_exporter_config_dir }}/snmp.yml"
