@@ -10,3 +10,11 @@ _ipmi_exporter_binaries: ['ipmi_exporter']
 _ipmi_exporter_dependencies: "{{ (ansible_facts['pkg_mgr'] == 'apt')
                               | ternary((['python-apt'] if ansible_facts['python_version'] is version('3', '<') else ['python3-apt']),
                               []) + ['freeipmi'] }}"
+_ipmi_exporter_sudo_commands:
+  - /usr/sbin/ipmimonitoring
+  - /usr/sbin/ipmi-sensors
+  - /usr/sbin/ipmi-dcmi
+  - /usr/sbin/ipmi-raw
+  - /usr/sbin/bmc-info
+  - /usr/sbin/ipmi-chassis
+  - /usr/sbin/ipmi-sel
