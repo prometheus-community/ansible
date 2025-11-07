@@ -1,0 +1,113 @@
+{{ ansible_managed | comment }}
+
+# Exposure level `systemd-analyze security`: 2.7 OK
+
+[Unit]
+Description=Prometheus Proxmox VE Exporter
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ pve_exporter_system_user }}
+Group={{ pve_exporter_system_group }}
+ExecStart={{ pve_exporter_virtualenv }}/bin/pve_exporter \
+{% for collector in pve_exporter_enabled_collectors -%}
+{%   if not collector is mapping %}
+    '--collector.{{ collector }}' \
+{%   else -%}
+{%     set name, options = (collector.items()|list)[0] -%}
+    '--collector.{{ name }}' \
+{%     for k,v in options|dictsort %}
+    '--collector.{{ name }}.{{ k }}={{ v }}' \
+{%     endfor -%}
+{%   endif -%}
+{% endfor -%}
+{% for collector in pve_exporter_disabled_collectors %}
+    '--no-collector.{{ collector }}' \
+{% endfor %}
+    --web.listen-address {{ pve_exporter_web_listen_address }} \
+    --config.file {{ pve_exporter_config_dir }}/pve_exporter.yml
+
+
+SyslogIdentifier=pve_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+{% set ns = namespace(protect_home = 'yes') %}
+{% for m in ansible_mounts if m.mount.startswith('/home') %}
+{%   set ns.protect_home = 'read-only' %}
+{% endfor %}
+{% if pve_exporter_textfile_dir.startswith('/home') %}
+{%   set ns.protect_home = 'read-only' %}
+{% endif %}
+ProtectHome={{ ns.protect_home }}
+NoNewPrivileges=yes
+PrivateTmp=true
+UMask=077
+
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
+ProtectSystem=strict
+ProtectProc=noaccess
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+ProtectHostname=yes
+ProtectClock=yes
+LockPersonality=true
+RestrictRealtime=true
+RestrictNamespaces=yes
+RestrictSUIDSGID=yes
+MemoryDenyWriteExecute=yes
+RemoveIPC=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+IPAccounting=yes
+IPAddressAllow=localhost link-local multicast 10.0.0.0/8 192.168.0.0/16
+# IPAddressDeny=
+
+CapabilityBoundingSet=~CAP_AUDIT_CONTROL CAP_AUDIT_READ CAP_DAC_READ_SEARCH
+CapabilityBoundingSet=~CAP_BLOCK_SUSPEND
+CapabilityBoundingSet=~CAP_BPF
+CapabilityBoundingSet=~CAP_DAC_* CAP_FOWNER CAP_IPC_OWNER
+CapabilityBoundingSet=~CAP_FSETID CAP_SETFCAP
+CapabilityBoundingSet=~CAP_IPC_LOCK
+CapabilityBoundingSet=~CAP_KILL
+CapabilityBoundingSet=~CAP_LEASE
+CapabilityBoundingSet=~CAP_LINUX_IMMUTABLE
+CapabilityBoundingSet=~CAP_MKNOD
+CapabilityBoundingSet=~CAP_NET_ADMIN
+CapabilityBoundingSet=~CAP_NET_BIND_SERVICE CAP_NET_BROADCAST
+CapabilityBoundingSet=~CAP_NET_RAW
+CapabilityBoundingSet=~CAP_SETUID CAP_SETGID CAP_SETPCAP
+CapabilityBoundingSet=~CAP_SYS_CHROOT
+CapabilityBoundingSet=~CAP_SYS_PACCT
+CapabilityBoundingSet=~CAP_SYS_TTY_CONFIG
+CapabilityBoundingSet=~CAP_SYS_ADMIN
+CapabilityBoundingSet=~CAP_SYS_NICE CAP_SYS_RESOURCE
+CapabilityBoundingSet=~CAP_SYS_BOOT
+CapabilityBoundingSet=~CAP_SYS_RAWIO
+CapabilityBoundingSet=~CAP_SYS_PTRACE
+
+{% if not (ansible_virtualization_type is defined and
+          (ansible_virtualization_type == "lxc" or ansible_virtualization_type == "docker")
+        )
+%}
+SystemCallFilter=@system-service @privileged @resources
+{% endif %}
+SystemCallFilter=~@clock @cpu-emulation @debug @mount @obsolete @privileged @raw-io @reboot @resources @swap @module
+SystemCallArchitectures=native
+# When system call is disallowed, return error code instead of killing process
+SystemCallErrorNumber=EPERM
+
+{% if pve_exporter_cgroups_restriction_enable is defined and pve_exporter_cgroups_restriction_enable|bool %}
+CPUWeight={{ pve_exporter_cgroups_cpushares | default('80') }}
+CPUQuota={{ pve_exporter_cgroups_cpuquota | default('40%') }}
+MemoryMax={{ pve_exporter_cgroups_memorylimit | default('2G') }}
+IOWeight={{ pve_exporter_cgroups_ioweight | default('80') }}
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target
