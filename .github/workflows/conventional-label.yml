@@ -74,7 +74,7 @@ jobs:
           echo "all_changed_and_modified_files=${files}" >> "$GITHUB_OUTPUT"
 
       - name: Add changed roles labels
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7.0.1
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd  # v8.0.0
         if: |
           steps.changed-roles.outputs.all_changed_and_modified_files
         with:
