@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.27.5:
+    changes:
+      bugfixes:
+        - 'fix: remove trailing space in dependencies when using APT (https://github.com/prometheus-community/ansible/pull/650)'
+    release_date: '2025-11-14'
   0.27.4:
     changes:
       bugfixes:
