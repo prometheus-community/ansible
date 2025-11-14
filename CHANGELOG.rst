@@ -4,6 +4,14 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.27.5
+=======
+
+Bugfixes
+--------
+
+- fix: remove trailing space in dependencies when using APT (https://github.com/prometheus-community/ansible/pull/650)
+
 v0.27.4
 =======
 
