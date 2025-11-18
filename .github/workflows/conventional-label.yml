@@ -52,48 +52,70 @@ jobs:
   role-label:
     runs-on: ubuntu-latest
     needs: pr-label
-    if: github.event.pull_request.labels.length == 0
+    permissions:
+      pull-requests: write
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
-        with:
-          fetch-depth: 0
-
-      - name: Get changed roles
-        id: changed-roles
-        env:
-          BASE_REF: ${{ github.event.pull_request.base.ref }}
-          HEAD_REF: ${{ github.event.pull_request.head.ref }}
-        run: |
-          files="$(git diff --name-only "origin/${BASE_REF}...origin/${HEAD_REF}" \
-            | grep -E '^roles/' \
-            | cut -f 1-2 -d'/' \
-            | sort -u \
-            | tr '\n' ' ' \
-            | sed 's/[[:space:]]*$//')"
-
-          echo "all_changed_and_modified_files=${files}" >> "$GITHUB_OUTPUT"
-
       - name: Add changed roles labels
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7.0.1
-        if: |
-          steps.changed-roles.outputs.all_changed_and_modified_files
         with:
           script: |
-            const changedRoles = '${{ steps.changed-roles.outputs.all_changed_and_modified_files }}'.split(' ');
-            let labels = changedRoles.map(i => 'roles/' + i);
+            const prNumber = context.issue.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
 
-            if (changedRoles.includes('_common')) {
-              const allLabels = await github.paginate(github.rest.issues.listLabelsForRepo, {
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-              });
-              const roleLabels = allLabels.map(label => label.name).filter(name => name.startsWith('roles/'));
-              labels = [...new Set([...labels, ...roleLabels])];
+            // List all files in the PR
+            const files = await github.paginate(
+              github.rest.pulls.listFiles,
+              {
+                owner,
+                repo,
+                pull_number: prNumber,
+              }
+            );
+
+            // Collect changed role names
+            const changedRoles = new Set();
+            for (const file of files) {
+              const path = file.filename;
+              if (!path.startsWith("roles/")) continue;
+
+              const parts = path.split("/");
+              if (parts.length < 2) continue;
+
+              const roleName = parts[1];
+              changedRoles.add(roleName);
             }
 
-            github.rest.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: labels
-            })
+            if (changedRoles.size === 0) {
+              console.log("No role changes detected; skipping role labels.");
+              return;
+            }
+
+            // Turn role names into labels
+            const labels = new Set(
+              Array.from(changedRoles, (name) => `roles/${name}`)
+            );
+
+            // If _common changed, add ALL existing roles/* labels
+            if (changedRoles.has("_common")) {
+              const allLabels = await github.paginate(
+                github.rest.issues.listLabelsForRepo,
+                { owner, repo }
+              );
+
+              for (const label of allLabels) {
+                if (label.name.startsWith("roles/")) {
+                  labels.add(label.name);
+                }
+              }
+            }
+
+            // Apply labels to the PR
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number: prNumber,
+              labels: Array.from(labels),
+            });
+
+            console.log("Added labels:", Array.from(labels).join(", "));
