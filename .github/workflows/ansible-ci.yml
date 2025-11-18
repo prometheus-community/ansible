@@ -24,7 +24,7 @@ jobs:
   ansible-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
 
       - name: Lint collection
         uses: ansible/ansible-lint@9765b8704b2c3f4ab782815b528e0393662e1c04  # v25.7.0
@@ -36,14 +36,14 @@ jobs:
     container:
       image: quay.io/prometheus/golang-builder:base
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
       - name: Lint arguments spec
         run: ./.github/scripts/lint_arguments_spec.sh
 
   check-unused-variables:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
       - name: Run action
         uses: hoo29/little-timmy@c8ca5086db961499fc3d4e37637f566c3d0ec6d6  # v3-action
 
@@ -52,7 +52,7 @@ jobs:
     outputs:
       versions: ${{ steps.supported-ansible-versions.outputs.result }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
 
       - name: Get Ansible versions that the collection supports
         id: supported-ansible-versions
@@ -74,7 +74,7 @@ jobs:
       integration-tests: ${{ steps.set-integration-tests.outputs.tests }}
       ansible-roles: ${{ steps.set-ansible-roles.outputs.roles }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
         with:
           fetch-depth: 0
 
