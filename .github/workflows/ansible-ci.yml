@@ -78,10 +78,27 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Fetch current PR labels
+        id: fetch-labels
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7.0.1
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+
+            const labels = await github.paginate(
+              github.rest.issues.listLabelsOnIssue,
+              { owner, repo, issue_number }
+            );
+
+            const names = labels.map(l => l.name);
+            core.info(`Current labels: ${names.join(', ') || '(none)'}`);
+            core.setOutput('names', JSON.stringify(names));
+
       - name: Discover ansible roles
         id: set-ansible-roles
         env:
-          LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
+          LABELS: ${{ steps.fetch-labels.outputs.names }}
         run: |
           roles=$(echo $LABELS | jq -c '[.[] | select(startswith("roles/")) | ltrimstr("roles/")]')
           echo $roles
