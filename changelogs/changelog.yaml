@@ -5,8 +5,6 @@ releases:
     changes:
       bugfixes:
         - 'fix: remove trailing space in dependencies when using APT (https://github.com/prometheus-community/ansible/pull/650)'
-      trivial:
-        - 'chore(deps): update actions/checkout action to v5.0.1 (https://github.com/prometheus-community/ansible/pull/682)'
     release_date: '2025-11-14'
   0.27.4:
     changes:
