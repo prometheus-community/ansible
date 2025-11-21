@@ -23,13 +23,18 @@ RestartSec=1
 StartLimitInterval=0
 
 ProtectHome=yes
+
+{% if not ipmi_exporter_run_with_sudo %}
 NoNewPrivileges=yes
+{% endif %}
 
 {% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
 ProtectSystem=strict
 ProtectControlGroups=true
+{% if not ipmi_exporter_run_with_sudo %}
 ProtectKernelModules=true
 ProtectKernelTunables=yes
+{% endif %}
 PrivateTmp=true
 {% else %}
 ProtectSystem=full
