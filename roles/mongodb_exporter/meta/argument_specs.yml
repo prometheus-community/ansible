@@ -10,7 +10,7 @@ argument_specs:
     options:
       mongodb_exporter_version:
         description: "mongodb_exporter package version. Also accepts latest as parameter."
-        default: "0.47.1"
+        default: "0.47.2"
       mongodb_exporter_binary_url:
         description: "URL of the mongodb_exporter binaries .tar.gz file"
         default: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/mongodb_exporter-{{ mongodb_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _mongodb_exporter_go_ansible_arch }}.tar.gz"
