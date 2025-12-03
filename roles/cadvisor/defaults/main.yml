@@ -1,5 +1,5 @@
 ---
-cadvisor_version: 0.52.1
+cadvisor_version: 0.54.0
 cadvisor_binary_url: "https://github.com/{{ _cadvisor_repo }}/releases/download/v{{ cadvisor_version }}/\
                       cadvisor-v{{ cadvisor_version }}-{{ ansible_facts['system'] | lower }}-{{ _cadvisor_go_ansible_arch }}"
 
