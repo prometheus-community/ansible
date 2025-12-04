@@ -10,7 +10,7 @@ argument_specs:
     options:
       cadvisor_version:
         description: "cAdvisor package version. Also accepts latest as parameter."
-        default: "0.52.1"
+        default: "0.54.1"
       cadvisor_binary_url:
         description: "URL of the cadvisor binary file"
         default: "https://github.com/{{ _cadvisor_repo }}/releases/download/v{{ cadvisor_version }}/cadvisor-v{{ cadvisor_version }}-{{ ansible_facts['system'] | lower }}-{{ _cadvisor_go_ansible_arch }}"
