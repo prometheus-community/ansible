@@ -101,6 +101,8 @@ prometheus_scrape_config_files:
   - prometheus/scrape_configs/*.yml
   - prometheus/scrape_configs/*.json
 
+prometheus_provisioning_synced: false
+
 # yamllint disable rule:line-length
 prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
   - alert: Watchdog
