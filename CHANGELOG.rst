@@ -4,6 +4,25 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.27.5
+=======
+
+Bugfixes
+--------
+
+- fix: remove trailing space in dependencies when using APT (https://github.com/prometheus-community/ansible/pull/650)
+
+v0.27.4
+=======
+
+Bugfixes
+--------
+
+- fix(_common): Fix missing tags for binary install dir check (https://github.com/prometheus-community/ansible/pull/669)
+
+v0.27.3
+=======
+
 v0.27.1
 =======
 

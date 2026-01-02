@@ -1,6 +1,26 @@
 ---
 ancestor:
 releases:
+  0.27.5:
+    changes:
+      bugfixes:
+        - 'fix: remove trailing space in dependencies when using APT (https://github.com/prometheus-community/ansible/pull/650)'
+    release_date: '2025-11-14'
+  0.27.4:
+    changes:
+      bugfixes:
+        - 'fix(_common): Fix missing tags for binary install dir check (https://github.com/prometheus-community/ansible/pull/669)'
+      trivial:
+        - 'patch: New prometheus/alertmanager upstream release 0.29.0! (https://github.com/prometheus-community/ansible/pull/677)'
+        - 'patch: New oliver006/redis_exporter upstream release 1.80.0! (https://github.com/prometheus-community/ansible/pull/676)'
+        - 'patch: New prometheus/pushgateway upstream release 1.11.2! (https://github.com/prometheus-community/ansible/pull/675)'
+        - 'patch: New prometheus/prometheus upstream release 3.7.3! (https://github.com/prometheus-community/ansible/pull/674)'
+    release_date: '2025-11-05'
+  0.27.3:
+    changes:
+      trivial:
+        - 'patch: New oliver006/redis_exporter upstream release 1.76.0! (https://github.com/prometheus-community/ansible/pull/641)'
+    release_date: '2025-08-29'
   0.27.1:
     changes:
       trivial:

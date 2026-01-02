@@ -16,7 +16,7 @@ jobs:
     container:
       image: quay.io/prometheus/golang-builder:base
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3  # v6.0.0
 
       - name: Get repos for each role
         id: discover
@@ -36,5 +36,5 @@ jobs:
       matrix:
         include: ${{ fromJson(needs.discover-role-repos.outputs.role-repos) }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3  # v6.0.0
       - run: ./.github/scripts/version_updater.sh ${{ matrix.repo }} ${{ matrix.role }} ${{ matrix.type }}

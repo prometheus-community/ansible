@@ -24,10 +24,10 @@ jobs:
   ansible-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3  # v6.0.0
 
       - name: Lint collection
-        uses: ansible/ansible-lint@9765b8704b2c3f4ab782815b528e0393662e1c04  # v25.7.0
+        uses: ansible/ansible-lint@43e758bad47344f1ce7b699c0020299f486a8026  # v25.11.0
         with:
           requirements_file: requirements.yml
 
@@ -36,14 +36,14 @@ jobs:
     container:
       image: quay.io/prometheus/golang-builder:base
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3  # v6.0.0
       - name: Lint arguments spec
         run: ./.github/scripts/lint_arguments_spec.sh
 
   check-unused-variables:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3  # v6.0.0
       - name: Run action
         uses: hoo29/little-timmy@c8ca5086db961499fc3d4e37637f566c3d0ec6d6  # v3-action
 
@@ -52,7 +52,7 @@ jobs:
     outputs:
       versions: ${{ steps.supported-ansible-versions.outputs.result }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3  # v6.0.0
 
       - name: Get Ansible versions that the collection supports
         id: supported-ansible-versions
@@ -74,14 +74,31 @@ jobs:
       integration-tests: ${{ steps.set-integration-tests.outputs.tests }}
       ansible-roles: ${{ steps.set-ansible-roles.outputs.roles }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3  # v6.0.0
         with:
           fetch-depth: 0
+
+      - name: Fetch current PR labels
+        id: fetch-labels
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7.0.1
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+
+            const labels = await github.paginate(
+              github.rest.issues.listLabelsOnIssue,
+              { owner, repo, issue_number }
+            );
+
+            const names = labels.map(l => l.name);
+            core.info(`Current labels: ${names.join(', ') || '(none)'}`);
+            core.setOutput('names', JSON.stringify(names));
 
       - name: Discover ansible roles
         id: set-ansible-roles
         env:
-          LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
+          LABELS: ${{ steps.fetch-labels.outputs.names }}
         run: |
           roles=$(echo $LABELS | jq -c '[.[] | select(startswith("roles/")) | ltrimstr("roles/")]')
           echo $roles
