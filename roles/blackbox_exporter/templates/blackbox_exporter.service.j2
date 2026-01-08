@@ -27,7 +27,7 @@ ExecStart={{ blackbox_exporter_binary_install_dir }}/blackbox_exporter \
   --web.listen-address={{ blackbox_exporter_web_listen_address }}
 {% endif %}
 
-SyslogIdentifier=blackbox_exporter
+SyslogIdentifier={{ blackbox_exporter_service_name }}
 KillMode=process
 Restart=always
 RestartSec=5

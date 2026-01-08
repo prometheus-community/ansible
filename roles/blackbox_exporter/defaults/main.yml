@@ -9,6 +9,8 @@ blackbox_exporter_web_listen_address: "0.0.0.0:9115"
 blackbox_exporter_system_user: blackbox-exp
 blackbox_exporter_system_group: "{{ blackbox_exporter_system_user }}"
 
+blackbox_exporter_service_name: blackbox_exporter
+
 blackbox_exporter_cli_flags: {}
 # blackbox_exporter_cli_flags:
 #   log.level: "warn"
