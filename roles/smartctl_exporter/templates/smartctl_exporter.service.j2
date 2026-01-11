@@ -33,6 +33,11 @@ StartLimitInterval=0
 ProtectHome=yes
 NoNewPrivileges=yes
 
+{% if (ansible_facts.packages.systemd | first).version is version('229', '>=') %}
+AmbientCapabilities=CAP_SYS_RAWIO CAP_DAC_READ_SEARCH
+CapabilityBoundingSet=CAP_SYS_RAWIO CAP_DAC_READ_SEARCH
+{% endif %}
+
 {% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
 ProtectSystem=strict
 ProtectControlGroups=true
