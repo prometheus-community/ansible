@@ -7,6 +7,11 @@ Prometheus.Prometheus Release Notes
 v0.27.6
 =======
 
+Bugfixes
+--------
+
+- fix: pin bcrypt < 5 to resolve passlib compatibility issues (https://github.com/prometheus-community/ansible/pull/722)
+
 v0.27.5
 =======
 
