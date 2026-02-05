@@ -1,1 +1,1 @@
-bcrypt
+bcrypt<5
