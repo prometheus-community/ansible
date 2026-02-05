@@ -10,7 +10,7 @@ argument_specs:
     options:
       redis_exporter_version:
         description: "redis_exporter package version. Also accepts latest as parameter."
-        default: "1.80.1"
+        default: "1.80.2"
       redis_exporter_binary_url:
         description: "URL of the redis_exporter binaries .tar.gz file"
         default: "https://github.com/{{ _redis_exporter_repo }}/releases/download/v{{ redis_exporter_version }}/redis_exporter-v{{ redis_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _redis_exporter_go_ansible_arch }}.tar.gz"
