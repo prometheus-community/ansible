@@ -11,6 +11,7 @@ releases:
         - 'chore(deps): update release-drafter/release-drafter action to v6.2.0 (https://github.com/prometheus-community/ansible/pull/718)'
         - 'patch: New prometheus/alertmanager upstream release 0.30.1! (https://github.com/prometheus-community/ansible/pull/712)'
         - 'chore(deps): update ansible/ansible-lint action to v26 (https://github.com/prometheus-community/ansible/pull/710)'
+        - 'patch: New prometheus/prometheus upstream release 3.9.0! (https://github.com/prometheus-community/ansible/pull/705)'
         - 'chore(deps): update stefanzweifel/git-auto-commit-action action to v7.1.0
           (https://github.com/prometheus-community/ansible/pull/701)'
         - 'patch: New prometheus/prometheus upstream release 3.8.1! (https://github.com/prometheus-community/ansible/pull/700)'
