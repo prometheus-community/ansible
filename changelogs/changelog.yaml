@@ -6,6 +6,8 @@ releases:
       bugfixes:
         - 'fix: pin bcrypt < 5 to resolve passlib compatibility issues (https://github.com/prometheus-community/ansible/pull/722)'
       trivial:
+        - 'patch: New prometheus-community/postgres_exporter upstream release 0.19.0!
+          (https://github.com/prometheus-community/ansible/pull/724)'
         - 'patch: New prometheus/alertmanager upstream release 0.31.0! (https://github.com/prometheus-community/ansible/pull/721)'
         - 'patch: New superq/chrony_exporter upstream release 0.12.3! (https://github.com/prometheus-community/ansible/pull/720)'
         - 'patch: New oliver006/redis_exporter upstream release 1.80.2! (https://github.com/prometheus-community/ansible/pull/719)'
