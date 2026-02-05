@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.27.6:
+    changes:
+      trivial:
+        - 'chore(deps): update release-drafter/release-drafter action to v6.2.0 (https://github.com/prometheus-community/ansible/pull/718)'
+    release_date: '2026-02-05'
   0.27.5:
     changes:
       bugfixes:
