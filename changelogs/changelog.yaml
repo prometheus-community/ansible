@@ -6,6 +6,7 @@ releases:
       bugfixes:
         - 'fix: pin bcrypt < 5 to resolve passlib compatibility issues (https://github.com/prometheus-community/ansible/pull/722)'
       trivial:
+        - 'patch: New prometheus/alertmanager upstream release 0.31.0! (https://github.com/prometheus-community/ansible/pull/721)'
         - 'patch: New oliver006/redis_exporter upstream release 1.80.2! (https://github.com/prometheus-community/ansible/pull/719)'
         - 'chore(deps): update release-drafter/release-drafter action to v6.2.0 (https://github.com/prometheus-community/ansible/pull/718)'
         - 'patch: New prometheus/alertmanager upstream release 0.30.1! (https://github.com/prometheus-community/ansible/pull/712)'
