@@ -12,6 +12,7 @@ releases:
         - 'patch: New superq/chrony_exporter upstream release 0.12.3! (https://github.com/prometheus-community/ansible/pull/720)'
         - 'patch: New oliver006/redis_exporter upstream release 1.80.2! (https://github.com/prometheus-community/ansible/pull/719)'
         - 'chore(deps): update release-drafter/release-drafter action to v6.2.0 (https://github.com/prometheus-community/ansible/pull/718)'
+        - 'patch: New google/cadvisor upstream release 0.56.2! (https://github.com/prometheus-community/ansible/pull/717)'
         - 'patch: New prometheus/memcached_exporter upstream release 0.15.5! (https://github.com/prometheus-community/ansible/pull/716)'
         - 'patch: New google/cadvisor upstream release 0.56.1! (https://github.com/prometheus-community/ansible/pull/715)'
         - 'patch: New google/cadvisor upstream release 0.56.0! (https://github.com/prometheus-community/ansible/pull/714)'
