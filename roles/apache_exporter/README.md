@@ -6,7 +6,7 @@ Deploy prometheus [apache exporter](https://github.com/Lusitaniae/apache_exporte
 
 - Ansible >= 2.9 (It might work on previous versions, but we cannot guarantee it)
 - gnu-tar on Mac deployer host (`brew install gnu-tar`)
-- Passlib is required when using the basic authentication feature (`pip install passlib[bcrypt]`)
+- Passlib is required when using the basic authentication feature (`pip install "passlib[bcrypt<5]"`)
 
 ## Role Variables
 All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) file as well as in [meta/argument_specs.yml](meta/argument_specs.yml).
