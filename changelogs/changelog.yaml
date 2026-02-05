@@ -18,7 +18,14 @@ releases:
         - 'patch: New prometheus/prometheus upstream release 3.8.0! (https://github.com/prometheus-community/ansible/pull/692)'
         - 'chore(deps): update ansible/ansible-lint action to v25.12.2 (https://github.com/prometheus-community/ansible/pull/689)'
         - 'patch: New oliver006/redis_exporter upstream release 1.80.1! (https://github.com/prometheus-community/ansible/pull/688)'
+        - 'patch: New prometheus/memcached_exporter upstream release 0.15.4! (https://github.com/prometheus-community/ansible/pull/679)'
+        - 'patch: New prometheus/node_exporter upstream release 1.10.2! (https://github.com/prometheus-community/ansible/pull/673)'
+        - 'patch: New prometheus-community/postgres_exporter upstream release 0.18.1!
+          (https://github.com/prometheus-community/ansible/pull/655)'
+        - 'patch: New prometheus/mysqld_exporter upstream release 0.18.0! (https://github.com/prometheus-community/ansible/pull/654)'
+        - 'chore(deps): update actions/github-script action to v8 (https://github.com/prometheus-community/ansible/pull/648)'
         - 'chore(deps): update actions/github-script action to v7.1.0 (https://github.com/prometheus-community/ansible/pull/647)'
+        - 'patch: New percona/mongodb_exporter upstream release 0.47.1! (https://github.com/prometheus-community/ansible/pull/646)'
     release_date: '2026-02-05'
   0.27.5:
     changes:
