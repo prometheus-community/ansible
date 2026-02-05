@@ -10,7 +10,7 @@ argument_specs:
     options:
       postgres_exporter_version:
         description: "PostgreSQL exporter package version. Also accepts latest as parameter."
-        default: "0.18.1"
+        default: "0.19.0"
       postgres_exporter_binary_url:
         description: "URL of the postgres_exporter binaries .tar.gz file"
         default: "https://github.com/{{ _postgres_exporter_repo }}/releases/download/v{{ postgres_exporter_version }}/postgres_exporter-{{ postgres_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _postgres_exporter_go_ansible_arch }}.tar.gz"
