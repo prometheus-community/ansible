@@ -1,5 +1,5 @@
 ---
-chrony_exporter_version: 0.12.1
+chrony_exporter_version: 0.12.3
 chrony_exporter_binary_url: "https://github.com/{{ _chrony_exporter_repo }}/releases/download/v{{ chrony_exporter_version }}/\
                              chrony_exporter-{{ chrony_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _chrony_exporter_go_ansible_arch }}.tar.gz"
 chrony_exporter_checksums_url: "https://github.com/{{ _chrony_exporter_repo }}/releases/download/v{{ chrony_exporter_version }}/sha256sums.txt"
