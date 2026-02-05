@@ -5,7 +5,9 @@ releases:
     changes:
       trivial:
         - 'chore(deps): update release-drafter/release-drafter action to v6.2.0 (https://github.com/prometheus-community/ansible/pull/718)'
+        - 'patch: New prometheus/alertmanager upstream release 0.30.0! (https://github.com/prometheus-community/ansible/pull/699)'
         - 'chore(deps): update actions/checkout action to v6.0.2 (https://github.com/prometheus-community/ansible/pull/693)'
+        - 'chore(deps): update ansible/ansible-lint action to v25.12.2 (https://github.com/prometheus-community/ansible/pull/689)'
         - 'chore(deps): update actions/github-script action to v7.1.0 (https://github.com/prometheus-community/ansible/pull/647)'
     release_date: '2026-02-05'
   0.27.5:
