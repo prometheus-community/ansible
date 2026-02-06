@@ -23,6 +23,12 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
+  - name: debian-12
+    image: ghcr.io/test-kitchen/dokken/debian-12
+    pre_build_image: true
+    privileged: true
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
   - name: ubuntu-22.04
     image: ghcr.io/test-kitchen/dokken/ubuntu-22.04
     pre_build_image: true
