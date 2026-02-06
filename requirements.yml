@@ -4,3 +4,5 @@ collections:
     type: git
   - name: https://github.com/ansible-collections/community.crypto.git
     type: git
+  - name: ans2dev.general
+    version: 0.2.0

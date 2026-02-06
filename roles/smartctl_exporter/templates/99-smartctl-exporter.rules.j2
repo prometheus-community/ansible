@@ -1,0 +1,14 @@
+{{ ansible_managed | comment }}
+
+# SCSI/SATA disks (e.g., /dev/sdX)
+SUBSYSTEM=="block", KERNEL=="sd[a-z]*", GROUP="{{ smartctl_exporter_system_group }}", MODE="{{ _smartctl_exporter_udev_mode }}"
+
+# SCSI generic (e.g., /dev/sg0)
+KERNEL=="sg[0-9]*", GROUP="{{ smartctl_exporter_system_group }}", MODE="{{ _smartctl_exporter_udev_mode }}"
+
+# Block SCSI generic (bsg)
+KERNEL=="bsg", GROUP="{{ smartctl_exporter_system_group }}", MODE="{{ _smartctl_exporter_udev_mode }}"
+
+# NVMe controllers and namespaces
+KERNEL=="nvme[0-9]*", GROUP="{{ smartctl_exporter_system_group }}", MODE="{{ _smartctl_exporter_udev_mode }}"
+KERNEL=="nvme[0-9]*n[0-9]*", GROUP="{{ smartctl_exporter_system_group }}", MODE="{{ _smartctl_exporter_udev_mode }}"
