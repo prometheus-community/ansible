@@ -4,3 +4,4 @@ pytest
 pytest-testinfra
 selinux
 passlib
+molecule_plugins==25.8.12
