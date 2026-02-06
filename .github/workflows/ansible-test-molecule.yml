@@ -19,7 +19,7 @@ jobs:
 
     name: "${{ inputs.role }}-discover-molecule-scenarios"
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
@@ -35,8 +35,6 @@ jobs:
     uses: ./.github/workflows/ansible-test-integration.yml
     needs:
       - discover-molecule-scenarios
-    if: needs.discover-molecule-scenarios.outputs.molecule-tests != '[]' &&
-        needs.discover-molecule-scenarios.outputs.molecule-tests != ''
     with:
       targets: ${{ needs.discover-molecule-scenarios.outputs.molecule-tests }}
       ansible-core-versions: ${{ inputs.ansible-core-versions }}

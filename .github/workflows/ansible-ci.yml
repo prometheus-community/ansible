@@ -116,8 +116,6 @@ jobs:
     needs:
       - discover-ansible-tests
       - discover-ansible-versions
-    if: needs.discover-ansible-tests.outputs.ansible-roles != '[]' &&
-        needs.discover-ansible-tests.outputs.ansible-roles != ''
     with:
       role: ${{ matrix.role }}
       ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}
@@ -131,9 +129,6 @@ jobs:
     needs:
       - discover-ansible-tests
       - discover-ansible-versions
-    if:
-      needs.discover-ansible-tests.outputs.integration-tests != '[]' &&
-      needs.discover-ansible-tests.outputs.integration-tests != ''
     with:
       targets: ${{ needs.discover-ansible-tests.outputs.integration-tests }}
       ansible-core-versions: ${{ needs.discover-ansible-versions.outputs.versions }}
