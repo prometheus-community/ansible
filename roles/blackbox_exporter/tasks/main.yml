@@ -47,5 +47,7 @@
     name: blackbox_exporter
     state: started
     enabled: true
+  when:
+    - not ansible_check_mode
   tags:
     - blackbox_exporter_run

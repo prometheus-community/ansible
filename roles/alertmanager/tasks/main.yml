@@ -55,6 +55,8 @@
     name: alertmanager
     enabled: true
     state: started
+  when:
+    - not ansible_check_mode
   tags:
     - alertmanager
     - run
