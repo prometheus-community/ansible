@@ -97,16 +97,19 @@ jobs:
 
       - name: Discover ansible roles
         id: set-ansible-roles
+        env:
+          LABELS: ${{ steps.fetch-labels.outputs.names }}
         run: |
-          # echo roles="$(python -c 'import os, json; print(json.dumps(os.listdir("roles")))')" | tee -a $GITHUB_OUTPUT
-          echo 'roles=["prometheus"]' | tee -a "$GITHUB_OUTPUT"
+          roles=$(echo $LABELS | jq -c '[.[] | select(startswith("roles/")) | ltrimstr("roles/")]')
+          echo $roles
+          echo "roles=$roles" >> $GITHUB_OUTPUT
 
       - name: Discover integration tests
         id: set-integration-tests
         run: |
           echo tests="[`for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -not -iname "molecule-*" -printf "%f\n"); do
             echo '{"test":\"'"${test}"'\","name":\"'"${test}\"'"}';
-          done | tr '\n' ',' | sed '$s/,$//'`]" | tee -a $GITHUB_OUTPUT
+          done | tr '\n' ',' | sed '$s/,$//'`]" >> $GITHUB_OUTPUT
 
   molecule:
     uses: ./.github/workflows/ansible-test-molecule.yml
