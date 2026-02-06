@@ -57,7 +57,7 @@ jobs:
       - name: Get Ansible versions that the collection supports
         id: supported-ansible-versions
         run: |
-          echo "result=$(python ./.github/scripts/collection_version_parser.py)" >> $GITHUB_OUTPUT
+          echo "result=$(python ./.github/scripts/collection_version_parser.py)" | tee -a "$GITHUB_OUTPUT"
 
   ansible-test-sanity:
     uses: ./.github/workflows/ansible-test-sanity.yml
@@ -102,14 +102,14 @@ jobs:
         run: |
           roles=$(echo $LABELS | jq -c '[.[] | select(startswith("roles/")) | ltrimstr("roles/")]')
           echo $roles
-          echo "roles=$roles" >> $GITHUB_OUTPUT
+          echo "roles=$roles" | tee -a "$GITHUB_OUTPUT"
 
       - name: Discover integration tests
         id: set-integration-tests
         run: |
           echo tests="[`for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -not -iname "molecule-*" -printf "%f\n"); do
             echo '{"test":\"'"${test}"'\","name":\"'"${test}\"'"}';
-          done | tr '\n' ',' | sed '$s/,$//'`]" >> $GITHUB_OUTPUT
+          done | tr '\n' ',' | sed '$s/,$//'`]" | tee -a "$GITHUB_OUTPUT"
 
   molecule:
     uses: ./.github/workflows/ansible-test-molecule.yml
