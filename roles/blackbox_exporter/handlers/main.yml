@@ -4,7 +4,7 @@
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
-    name: blackbox_exporter
+    name: "{{ blackbox_exporter_service_name }}"
     state: restarted
   register: blackbox_exporter_restarted
 
@@ -12,6 +12,6 @@
   listen: "reload blackbox_exporter"
   become: true
   ansible.builtin.systemd:
-    name: blackbox_exporter
+    name: "{{ blackbox_exporter_service_name }}"
     state: reloaded
   when: blackbox_exporter_restarted is not defined
