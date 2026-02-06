@@ -1,0 +1,23 @@
+---
+provisioner:
+  playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/alternative/prepare.yml"
+  inventory:
+    group_vars:
+      all:
+        dns_exporter_web_listen_address:
+          - '127.0.0.1:8080'
+          - '127.0.1.1:8080'
+        dns_exporter_textfile_dir: ""
+        dns_exporter_enabled_collectors:
+          - entropy
+        dns_exporter_disabled_collectors:
+          - diskstats
+        dns_exporter_tls_server_config:
+          cert_file: /etc/dns_exporter/tls.cert
+          key_file: /etc/dns_exporter/tls.key
+        dns_exporter_http_server_config:
+          http2: true
+        dns_exporter_basic_auth_users:
+          randomuser: examplepassword
+        dns_exporter_version: 1.5.0
