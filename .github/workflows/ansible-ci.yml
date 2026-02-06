@@ -97,12 +97,8 @@ jobs:
 
       - name: Discover ansible roles
         id: set-ansible-roles
-        env:
-          LABELS: ${{ steps.fetch-labels.outputs.names }}
         run: |
-          roles=$(echo $LABELS | jq -c '[.[] | select(startswith("roles/")) | ltrimstr("roles/")]')
-          echo $roles
-          echo "roles=$roles" >> $GITHUB_OUTPUT
+          echo roles="$(python -c 'import os, json; print(json.dumps(os.listdir("roles")))')"
 
       - name: Discover integration tests
         id: set-integration-tests
