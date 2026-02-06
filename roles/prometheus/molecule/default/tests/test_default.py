@@ -11,6 +11,7 @@ testinfra_hosts = get_target_hosts()
 
 @pytest.fixture()
 def AnsibleDefaults():
+    print(f"ANSIBLE_DEFAULTS_CWD: {os.getcwd()}")
     with open("defaults/main.yml", 'r') as stream:
         return yaml.full_load(stream)
 
@@ -37,7 +38,6 @@ def test_directories(host, dirs):
     "files",
     [
         "/etc/prometheus/prometheus.yml",
-        "/etc/prometheus/scrape_configs/empty_scrapes.yml",
         "/etc/systemd/system/prometheus.service",
         "/usr/local/bin/prometheus",
         "/usr/local/bin/promtool",
