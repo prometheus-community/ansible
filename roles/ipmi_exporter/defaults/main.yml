@@ -30,3 +30,6 @@ ipmi_exporter_config_dir: /etc/ipmi_exporter
 
 # Local path to stash the archive and its extraction
 ipmi_exporter_local_cache_path: "/tmp/ipmi_exporter-{{ ansible_facts['system'] | lower }}-{{ _ipmi_exporter_go_ansible_arch }}/{{ ipmi_exporter_version }}"
+
+ipmi_exporter_run_with_sudo: true
+ipmi_exporter_sudoers_name: "99-ipmi-exporter"
