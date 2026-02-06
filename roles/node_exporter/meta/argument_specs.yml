@@ -27,6 +27,20 @@ argument_specs:
       node_exporter_web_telemetry_path:
         description: "Path under which to expose metrics"
         default: "/metrics"
+      node_exporter_log_level:
+        description: "Severity level for node exporter logs"
+        choices:
+          - "debug"
+          - "info"
+          - "warn"
+          - "error"
+        default: "info"
+      node_exporter_log_format:
+        description: "Format for node exporter logs"
+        choices:
+          - "logfmt"
+          - "json"
+        default: "logfmt"
       node_exporter_enabled_collectors:
         description:
           - "List of dicts defining additionally enabled collectors and their configuration."
