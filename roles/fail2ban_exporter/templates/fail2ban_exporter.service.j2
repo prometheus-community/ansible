@@ -11,10 +11,10 @@ Group={{ fail2ban_exporter_system_group }}
 ExecStart={{ fail2ban_exporter_binary_install_dir }}/fail2ban_exporter \
     --web.listen-address={{ fail2ban_exporter_web_listen_address }} \
 {% if fail2ban_exporter_username | length > 0 -%}
-    --web.basic-auth.username={{ fail2ban_exporter_username }}
+    --web.basic-auth.username={{ fail2ban_exporter_username }} \
 {% endif %}
 {% if fail2ban_exporter_password | length > 0 -%}
-    --web.basic-auth.password={{ fail2ban_exporter_password }}
+    --web.basic-auth.password={{ fail2ban_exporter_password }} \
 {% endif %}
     --collector.f2b.socket={{ fail2ban_exporter_socket }}
 
