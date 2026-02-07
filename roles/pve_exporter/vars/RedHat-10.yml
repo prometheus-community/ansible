@@ -1,0 +1,12 @@
+---
+
+epel_rpm_key: 'https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-10'
+epel_rpm_key_hash: de390fc168eae5ab2852e9e93d34a0b9ddf05cf9ce90ee28d97de26a4b1f6b93
+
+redhat_epel_rpm: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_facts['distribution_major_version'] }}.noarch.rpm"
+redhat_epel_pkgs:
+  - gnupg2
+
+_pve_exporter_pkgs:
+  - "python{{ ansible_facts['python']['version']['major'] }}-setuptools"
+  - "python{{ ansible_facts['python']['version']['major'] }}-virtualenv"
