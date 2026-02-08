@@ -8,6 +8,16 @@ After=network-online.target
 Type=simple
 User={{ node_exporter_system_user }}
 Group={{ node_exporter_system_group }}
+{% if node_exporter_textfile_dir | length > 0 %}
+{% if (ansible_facts.packages.systemd | first).version is version('235', '>=') %}
+ExecStartPre=+/bin/mkdir -p {{ node_exporter_textfile_dir }}
+ExecStartPre=+/bin/chown -R {{ node_exporter_system_user }}:{{ node_exporter_system_group }} {{ node_exporter_textfile_dir }}
+{% else %}
+ExecStartPre=/bin/mkdir -p {{ node_exporter_textfile_dir }}
+ExecStartPre=/bin/chown -R {{ node_exporter_system_user }}:{{ node_exporter_system_group }} {{ node_exporter_textfile_dir }}
+PermissionsStartOnly=true
+{% endif %}
+{% endif %}
 ExecStart={{ node_exporter_binary_install_dir }}/node_exporter \
 {% for collector in node_exporter_enabled_collectors -%}
 {%   if not collector is mapping %}
