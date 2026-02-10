@@ -4,3 +4,7 @@ collections:
     type: git
   - name: https://github.com/ansible-collections/community.crypto.git
     type: git
+  - name: https://github.com/ansible-collections/community.docker.git
+    type: git
+  - name: https://github.com/ansible-collections/ansible.posix.git
+    type: git
