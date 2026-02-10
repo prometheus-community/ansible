@@ -14,7 +14,7 @@
         path: "{{ __cache_path }}"
         state: directory
         mode: 0755
-      when: (__cache_path)
+      when: __cache_path != ''
 
     - name: "Fetch binary"
       become: false
@@ -28,7 +28,7 @@
         creates: "{{ __cache_path }}/{{ __binary_name }}"
       check_mode: false
       register: __download_binary
-      when: (__binary_url)
+      when: __binary_url != ''
 
     - name: Generate self signed certificates
       when: "'cert_file' in __tls_server_config"
