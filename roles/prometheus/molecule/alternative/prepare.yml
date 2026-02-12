@@ -1,4 +1,7 @@
 ---
+- name: Import shared preparation playbook
+  import_playbook: "../../../../.config/molecule/alternative/prepare.yml"
+
 - name: Run local preparation
   hosts: localhost
   gather_facts: false
@@ -15,6 +18,3 @@
         state: touch
         mode: 0664
       check_mode: false
-
-- name: Import shared preparation playbook
-  import_playbook: "../../../../.config/molecule/alternative/prepare.yml"
