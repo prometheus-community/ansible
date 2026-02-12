@@ -5,36 +5,46 @@ prerun: false
 driver:
   name: docker
 platforms:
-  - name: almalinux-8
-    image: ghcr.io/test-kitchen/dokken/almalinux-8:sha-f9f79cb
-    pre_build_image: true
-    privileged: true
-    cgroup_parent: docker.slice
-    command: /lib/systemd/systemd
   - name: almalinux-9
-    image: ghcr.io/test-kitchen/dokken/almalinux-9:sha-f9f79cb
+    image: ghcr.io/test-kitchen/dokken/almalinux-9:sha-03eabbc
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
+    groups:
+      - redhat
+  - name: almalinux-10
+    image: ghcr.io/test-kitchen/dokken/almalinux-10:sha-03eabbc
+    pre_build_image: true
+    privileged: true
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
+    groups:
+      - redhat
   - name: debian-11
     image: ghcr.io/test-kitchen/dokken/debian-11
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
+    groups:
+      - debian
   - name: ubuntu-22.04
     image: ghcr.io/test-kitchen/dokken/ubuntu-22.04
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
+    groups:
+      - ubuntu
   - name: ubuntu-24.04
     image: ghcr.io/test-kitchen/dokken/ubuntu-24.04
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
+    groups:
+      - ubuntu
 verifier:
   name: testinfra
   additional_files_or_dirs:
@@ -45,6 +55,7 @@ provisioner:
   env:
     ANSIBLE_INJECT_FACT_VARS: false
   playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/prepare.yml"
     converge: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/converge.yml"
   inventory:
     hosts:
