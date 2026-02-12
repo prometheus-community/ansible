@@ -15,6 +15,28 @@
     - configure
     - smokeping_prober_configure
 
+- name: Ensure smokeping prober binary has cap_net_raw capability
+  community.general.capabilities:
+    path: "{{ smokeping_prober_binary_install_dir }}/smokeping_prober"
+    capability: cap_net_raw=ep
+    state: present
+  become: true
+  when: not ansible_check_mode
+  tags:
+    - smokeping_prober
+    - configure
+    - smokeping_prober_configure
+    - molecule-idempotence-notest
+
+- name: Check Debug Message
+  ansible.builtin.debug:
+    msg: "The capabilities module is skipped during check mode, as the file may not exist, causing execution to fail."
+  when: ansible_check_mode
+  tags:
+    - smokeping_prober
+    - configure
+    - smokeping_prober_configure
+
 - name: Copy the smokeping_prober config file
   ansible.builtin.template:
     src: probes.yml.j2
