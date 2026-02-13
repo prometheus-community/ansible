@@ -1,4 +1,21 @@
 ---
+- name: "Prepare redhat dokken workarounds"
+  hosts: redhat
+  tasks:
+    # Workaround to prevent "sudo: PAM account management error" because
+    # of non-readable shadows file on AlmaLinux.
+    - name: "Get file stats for /etc/shadow"
+      ansible.builtin.stat:
+        path: "/etc/shadow"
+      register: "shadow"
+    - name: "Fix permissions for /etc/shadow"
+      ansible.builtin.file:
+        path: "/etc/shadow"
+        owner: "root"
+        group: "{{ shadow.stat.gr_name }}"
+        mode: "0640"
+      when: "not shadow.stat.rusr"
+
 - name: Run local preparation
   hosts: localhost
   gather_facts: false
