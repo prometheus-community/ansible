@@ -1,5 +1,5 @@
 ---
-mysqld_exporter_version: 0.17.2
+mysqld_exporter_version: 0.18.0
 mysqld_exporter_binary_url: "https://github.com/{{ _mysqld_exporter_repo }}/releases/download/v{{ mysqld_exporter_version }}/\
                            mysqld_exporter-{{ mysqld_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _mysqld_exporter_go_ansible_arch }}.tar.gz"
 mysqld_exporter_checksums_url: "https://github.com/{{ _mysqld_exporter_repo }}/releases/download/v{{ mysqld_exporter_version }}/sha256sums.txt"
