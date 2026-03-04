@@ -4,8 +4,15 @@ releases:
   0.27.7:
     changes:
       trivial:
+        - 'patch: New superq/chrony_exporter upstream release 0.13.2! (https://github.com/prometheus-community/ansible/pull/739)'
         - 'patch: New prometheus/prometheus upstream release 3.10.0! (https://github.com/prometheus-community/ansible/pull/738)'
         - 'chore(deps): update ansible/ansible-lint action to v26.2.0 (https://github.com/prometheus-community/ansible/pull/737)'
+        - 'patch: New prometheus-community/postgres_exporter upstream release 0.19.1!
+          (https://github.com/prometheus-community/ansible/pull/736)'
+        - 'patch: New superq/chrony_exporter upstream release 0.13.1! (https://github.com/prometheus-community/ansible/pull/735)'
+        - 'chore(deps): update svenstaro/upload-release-action action to v2.11.4 (https://github.com/prometheus-community/ansible/pull/734)'
+        - 'patch: New prometheus/alertmanager upstream release 0.31.1! (https://github.com/prometheus-community/ansible/pull/732)'
+        - 'patch: New oliver006/redis_exporter upstream release 1.81.0! (https://github.com/prometheus-community/ansible/pull/731)'
     release_date: '2026-02-27'
   0.27.6:
     changes:
