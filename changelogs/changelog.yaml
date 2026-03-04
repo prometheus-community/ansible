@@ -4,6 +4,7 @@ releases:
   0.27.7:
     changes:
       trivial:
+        - 'patch: New superq/chrony_exporter upstream release 0.13.3! (https://github.com/prometheus-community/ansible/pull/740)'
         - 'patch: New superq/chrony_exporter upstream release 0.13.2! (https://github.com/prometheus-community/ansible/pull/739)'
         - 'patch: New prometheus/prometheus upstream release 3.10.0! (https://github.com/prometheus-community/ansible/pull/738)'
         - 'chore(deps): update ansible/ansible-lint action to v26.2.0 (https://github.com/prometheus-community/ansible/pull/737)'
