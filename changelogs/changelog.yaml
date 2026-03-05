@@ -2,7 +2,9 @@
 ancestor:
 releases:
   0.28.0:
-    changes: {}
+    changes:
+      minor_changes:
+        - 'minor: Update Alma metadata (https://github.com/prometheus-community/ansible/pull/743)'
     release_date: '2026-03-05'
   0.27.7:
     release_date: '2026-02-27'
