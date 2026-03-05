@@ -8,15 +8,15 @@ galaxy_info:
     - name: "Ubuntu"
       versions:
         - "jammy"
-        - "xenial"
+        - "noble"
         - "noble"
     - name: "Debian"
       versions:
         - "bullseye"
     - name: "EL"
       versions:
-        - "8"
         - "9"
+        - "10"
   galaxy_tags:
     - "monitoring"
     - "prometheus"
