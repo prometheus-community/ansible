@@ -81,7 +81,7 @@
     - name: "Verify checksum of {{ __common_binary_basename }}"
       run_once: true
       check_mode: false
-      when: (_common_checksums_url)
+      when: (_common_checksums_url | length > 0)
       block:
         - name: "Fetch checksum list for {{ __common_binary_basename }}"
           ansible.builtin.uri:
@@ -126,6 +126,10 @@
   ansible.builtin.stat:
     path: "{{ _common_binary_install_dir }}"
   register: __common_binary_install_dir
+  tags:
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
+    - install
+    - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_install"
 
 - name: "Make sure binary install dir exists"
   ansible.builtin.file:

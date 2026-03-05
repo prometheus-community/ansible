@@ -10,7 +10,7 @@ Deploy prometheus [chrony_exporter](https://github.com/superq/chrony_exporter) u
 
 - Ansible >= 2.9 (It might work on previous versions, but we cannot guarantee it)
 - gnu-tar on Mac deployer host (`brew install gnu-tar`)
-- Passlib is required when using the basic authentication feature (`pip install passlib[bcrypt]`)
+- Passlib is required when using the basic authentication feature (`pip install "passlib[bcrypt<5]"`)
 
 ## Role Variables
 
