@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
 
       - name: Lint collection
-        uses: ansible/ansible-lint@19f673a091111d07688352cd2f19f0460055feba  # v26.2.0
+        uses: ansible/ansible-lint@8ba9595a4acd1b906eb75568b34f6ef592cd1528  # v26.3.0
         with:
           requirements_file: requirements.yml
 
