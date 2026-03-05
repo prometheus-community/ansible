@@ -5,14 +5,14 @@ prerun: false
 driver:
   name: docker
 platforms:
-  - name: almalinux-8
-    image: ghcr.io/test-kitchen/dokken/almalinux-8:sha-f9f79cb
+  - name: almalinux-9
+    image: ghcr.io/test-kitchen/dokken/almalinux-9:sha-03eabbc
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
-  - name: almalinux-9
-    image: ghcr.io/test-kitchen/dokken/almalinux-9:sha-f9f79cb
+  - name: almalinux-10
+    image: ghcr.io/test-kitchen/dokken/almalinux-10:sha-03eabbc
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
@@ -51,7 +51,7 @@ provisioner:
       target_hosts:
         hosts: {}
     host_vars:
-      almalinux-8:
-        exclude_ansible_vers:
-          - "2.17"
-          - "2.18"
+      almalinux-9:
+        ansible_become_method: su
+      almalinux-10:
+        ansible_become_method: su
