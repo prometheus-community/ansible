@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.28.1:
+    changes:
+      trivial:
+        - 'chore(deps): update ansible/ansible-lint action to v26.3.0 (https://github.com/prometheus-community/ansible/pull/744)'
+    release_date: '2026-03-05'
   0.28.0:
     changes:
       minor_changes:
