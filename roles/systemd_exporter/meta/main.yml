@@ -8,7 +8,7 @@ galaxy_info:
     - name: "Ubuntu"
       versions:
         - "jammy"
-        - "xenial"
+        - "noble"
         - "noble"
     - name: "Debian"
       versions:
@@ -16,8 +16,8 @@ galaxy_info:
         - "bookworm"
     - name: "EL"
       versions:
-        - "8"
         - "9"
+        - "10"
   galaxy_tags:
     - "monitoring"
     - "prometheus"
