@@ -1,8 +1,10 @@
 ---
 ancestor:
 releases:
-  0.27.7:
+  0.28.0:
     changes: {}
+    release_date: '2026-03-05'
+  0.27.7:
     release_date: '2026-02-27'
   0.27.6:
     changes:
