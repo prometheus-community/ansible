@@ -16,7 +16,7 @@ node_exporter_http_server_config: {}
 
 node_exporter_basic_auth_users: {}
 
-/node_exporter_enabled_collectors:
+node_exporter_enabled_collectors:
   - systemd
   - textfile:
       directory: "{{ node_exporter_textfile_dir }}"
