@@ -4,6 +4,20 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.28.1
+=======
+
+v0.28.0
+=======
+
+Minor Changes
+-------------
+
+- minor: Update Alma metadata (https://github.com/prometheus-community/ansible/pull/743)
+
+v0.27.7
+=======
+
 v0.27.6
 =======
 
