@@ -11,7 +11,7 @@ _common_service_name: "{{ __common_parent_role_short_name }}"
 _common_system_user: ""
 _common_system_group: ""
 _common_dependencies: "{% if (ansible_facts['pkg_mgr'] == 'apt') %}\
-                       {{ ('python-apt' if ansible_facts['python_version'] is version('3', '<') else 'python3-apt') }}
+                       {{ ('python-apt' if ansible_facts['python_version'] is version('3', '<') else 'python3-apt') }}\
                        {% else %}\
                        {% endif %}"
 _common_binary_unarchive_opts: ""
