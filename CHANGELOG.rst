@@ -4,6 +4,50 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.29.0
+=======
+
+v0.28.1
+=======
+
+v0.28.0
+=======
+
+Minor Changes
+-------------
+
+- minor: Update Alma metadata (https://github.com/prometheus-community/ansible/pull/743)
+
+v0.27.7
+=======
+
+v0.27.6
+=======
+
+Bugfixes
+--------
+
+- fix: pin bcrypt < 5 to resolve passlib compatibility issues (https://github.com/prometheus-community/ansible/pull/722)
+
+v0.27.5
+=======
+
+Bugfixes
+--------
+
+- fix: remove trailing space in dependencies when using APT (https://github.com/prometheus-community/ansible/pull/650)
+
+v0.27.4
+=======
+
+Bugfixes
+--------
+
+- fix(_common): Fix missing tags for binary install dir check (https://github.com/prometheus-community/ansible/pull/669)
+
+v0.27.3
+=======
+
 v0.27.1
 =======
 

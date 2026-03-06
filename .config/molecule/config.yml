@@ -1,24 +1,37 @@
 ---
+###
+# For each platform be sure to look at the Python version included and filter out
+# incompatible versinos from the upstream support table.
+#
+# https://docs.ansible.com/projects/ansible/latest/reference_appendices/release_and_maintenance.html
+#
+###
 dependency:
   name: galaxy
 prerun: false
 driver:
   name: docker
 platforms:
-  - name: almalinux-8
-    image: ghcr.io/test-kitchen/dokken/almalinux-8:sha-f9f79cb
+  - name: almalinux-9
+    image: ghcr.io/test-kitchen/dokken/almalinux-9:sha-03eabbc
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
-  - name: almalinux-9
-    image: ghcr.io/test-kitchen/dokken/almalinux-9:sha-f9f79cb
+  - name: almalinux-10
+    image: ghcr.io/test-kitchen/dokken/almalinux-10:sha-03eabbc
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
   - name: debian-11
     image: ghcr.io/test-kitchen/dokken/debian-11
+    pre_build_image: true
+    privileged: true
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
+  - name: debian-12
+    image: ghcr.io/test-kitchen/dokken/debian-12
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
@@ -51,7 +64,17 @@ provisioner:
       target_hosts:
         hosts: {}
     host_vars:
-      almalinux-8:
-        exclude_ansible_vers:
-          - "2.17"
-          - "2.18"
+      almalinux-9:
+        ansible_become_method: su
+        exclude_ansible_vers: ["2.16", "2.17", "2.18", "2.19", "2.20"]
+      almalinux-10:
+        ansible_become_method: su
+        exclude_ansible_vers: ["2.12", "2.13", "2.14", "2.15"]
+      debian-11:
+        exclude_ansible_vers: ["2.16", "2.17", "2.18", "2.19", "2.20"]
+      debian-12:
+        exclude_ansible_vers: ["2.12", "2.13", "2.20"]
+      ubuntu-22.04:
+        exclude_ansible_vers: ["2.12", "2.13", "2.18", "2.19", "2.20"]
+      ubuntu-24.04:
+        exclude_ansible_vers: ["2.12", "2.13", "2.14", "2.15"]
