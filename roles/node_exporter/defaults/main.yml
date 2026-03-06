@@ -24,8 +24,8 @@ node_exporter_enabled_collectors:
   - textfile:
       directory: "{{ node_exporter_textfile_dir }}"
 #  - filesystem:
-#      ignored-mount-points: "^/(sys|proc|dev)($|/)"
-#      ignored-fs-types: "^(sys|proc|auto)fs$"
+#      mount-points-exclude: "^/(sys|proc|dev)($|/)"
+#      fs-types-exclude: "^(sys|proc|auto)fs$"
 
 node_exporter_disabled_collectors: []
 
