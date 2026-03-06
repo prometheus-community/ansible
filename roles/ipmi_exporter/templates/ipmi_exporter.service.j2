@@ -23,13 +23,10 @@ RestartSec=1
 StartLimitInterval=0
 
 ProtectHome=yes
-NoNewPrivileges=yes
 
 {% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
 ProtectSystem=strict
 ProtectControlGroups=true
-ProtectKernelModules=true
-ProtectKernelTunables=yes
 PrivateTmp=true
 {% else %}
 ProtectSystem=full
