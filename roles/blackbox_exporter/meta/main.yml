@@ -12,10 +12,11 @@ galaxy_info:
     - name: "Debian"
       versions:
         - "bullseye"
+        - "bookworm"
     - name: "EL"
       versions:
-        - "8"
         - "9"
+        - "10"
   galaxy_tags:
     - "exporter"
     - "monitoring"
