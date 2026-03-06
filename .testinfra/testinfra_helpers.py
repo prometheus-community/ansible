@@ -47,6 +47,7 @@ def filter_compatible_hosts(inventory, ansible_version):
             excluded_versions = host_vars['exclude_ansible_vers']
             if ansible_version in excluded_versions:
                 continue
+
         compatible_hosts.append(host)
 
     return compatible_hosts
