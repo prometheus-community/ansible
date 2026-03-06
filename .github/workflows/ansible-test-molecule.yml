@@ -29,7 +29,7 @@ jobs:
           role=${{ inputs.role }}
           echo tests="[`for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -iname "molecule-${role}-*" -printf "%f\n"); do
               echo '{"test":\"'"${test}"'\","name":\"'"${test#*-}\"'"}';
-          done | tr '\n' ',' | sed '$s/,$//'`]" >> $GITHUB_OUTPUT
+          done | tr '\n' ',' | sed '$s/,$//'`]" | tee -a "$GITHUB_OUTPUT"
 
   ansible-test-integration-molecule:
     uses: ./.github/workflows/ansible-test-integration.yml
