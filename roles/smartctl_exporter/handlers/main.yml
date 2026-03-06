@@ -8,3 +8,20 @@
     state: restarted
   when:
     - not ansible_check_mode
+
+- name: Reload udev rules
+  listen: "udev reload"
+  become: true
+  ans2dev.general.udevadm_control:
+    reload: true
+  when:
+    - not ansible_check_mode
+
+- name: Trigger udev (apply new perms)
+  listen: "udev apply"
+  become: true
+  ans2dev.general.udevadm_trigger:
+    action: change
+    type: devices
+  when:
+    - not ansible_check_mode
