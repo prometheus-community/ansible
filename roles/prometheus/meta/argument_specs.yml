@@ -11,11 +11,11 @@ argument_specs:
       prometheus_version:
         description:
           - "Prometheus package version. Also accepts C(latest) as parameter."
-          - "Only prometheus 2.x is supported"
-        default: "2.54.1"
+          - "Prometheus >= 2.x is supported"
+        default: "3.10.0"
       prometheus_binary_url:
         description: "URL of the prometheus binaries .tar.gz file"
-        default: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.{{ ansible_system | lower }}-{{ _prometheus_go_ansible_arch }}.tar.gz"
+        default: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.{{ ansible_facts['system'] | lower }}-{{ _prometheus_go_ansible_arch }}.tar.gz"
       prometheus_checksums_url:
         description: URL of the prometheus checksums file
         default: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/sha256sums.txt"
@@ -125,19 +125,20 @@ argument_specs:
         default: "prometheus.yml.j2"
       prometheus_alert_rules:
         description:
-          - "Full list of alerting rules which will be copied to C({{ prometheus_config_dir }}/rules/ansible_managed.rules)."
-          - "Alerting rules can be also provided by other files located in C({{ prometheus_config_dir }}/rules/) which have C(*.rules) extension"
+          - "Full list of alerting rules which will be copied to C({{ prometheus_config_dir }}/rules/ansible_managed.yml)."
+          - "Alerting rules can be also provided by other files located in C({{ prometheus_config_dir }}/rules/) which have a C(*.yml) or C(*.yaml) extension"
           - "Please see default values in role defaults/main.yml"
         type: "list"
         elements: "dict"
       prometheus_alert_rules_files:
         description:
           - "List of folders where ansible will look for files containing alerting rules which will be copied to C({{ prometheus_config_dir }}/rules/)."
-          - "Files must have C(*.rules) extension"
+          - "Files must have a C(*.yml) or C(*.yaml) extension"
         type: "list"
         elements: "str"
         default:
-          - "prometheus/rules/*.rules"
+          - "prometheus/rules/*.yml"
+          - "prometheus/rules/*.yaml"
       prometheus_static_targets_files:
         description:
           - "List of folders where ansible will look for files containing custom static target configuration files which will be copied to C({{ prometheus_config_dir }}/file_sd/)."
@@ -148,13 +149,13 @@ argument_specs:
           - "prometheus/targets/*.json"
       prometheus_scrape_config_files:
         description:
-          - "List of folders where ansible will look for files containing custom scrape config configuration files which will be copied to C({{ prometheus_config_dir }}/scrapes/)."
+          - "List of folders where ansible will look for files containing custom scrape config configuration files which will be copied to C({{ prometheus_config_dir }}/scrape_configs/)."
           - "This feature is available starting from Prometheus v2.43.0."
         type: "list"
         elements: "str"
         default:
-          - "prometheus/scrapes/*.yml"
-          - "prometheus/scrapes/*.json"
+          - "prometheus/scrape_configs/*.yml"
+          - "prometheus/scrape_configs/*.json"
       prometheus_system_group:
         description:
           - "System group for Prometheus."
@@ -172,4 +173,4 @@ argument_specs:
         default: "600s"
       prometheus_local_cache_path:
         description: Local path to stash the archive and its extraction
-        default: /tmp/prometheus-{{ ansible_system | lower }}-{{ _prometheus_go_ansible_arch }}/{{ prometheus_version }}
+        default: /tmp/prometheus-{{ ansible_facts['system'] | lower }}-{{ _prometheus_go_ansible_arch }}/{{ prometheus_version }}

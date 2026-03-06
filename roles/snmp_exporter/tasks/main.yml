@@ -30,7 +30,7 @@
     tasks_from: selinux.yml
   vars:
     _common_selinux_port: "{{ snmp_exporter_web_listen_address | urlsplit('port') }}"
-  when: ansible_selinux.status == "enabled"
+  when: ansible_facts['selinux'].status == "enabled"
   tags:
     - snmp_exporter_configure
 
@@ -47,5 +47,7 @@
     name: snmp_exporter
     state: started
     enabled: true
+  when:
+    - not ansible_check_mode
   tags:
     - snmp_exporter_run

@@ -1,0 +1,31 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Influxdb to Prometheus Exporter Service
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ influxdb_exporter_system_user }}
+Group={{ influxdb_exporter_system_group }}
+ExecStart={{ influxdb_exporter_binary_install_dir }}/influxdb_exporter \
+    '--web.listen-address={{ influxdb_exporter_web_listen_address }}' \
+    '--udp.bind-address={{ influxdb_exporter_udp_bind_address }}' \
+    '--web.telemetry-path={{ influxdb_exporter_web_telemetry_path }}' \
+    '--web.exporter-telemetry-path={{ influxdb_exporter_exporter_web_telemetry_path }}' \
+    '--influxdb.sample-expiry={{ influxdb_exporter_influxdb_sample_expiry }}' \
+    '--log.level={{ influxdb_exporter_log_level }}' \
+    '--log.format={{ influxdb_exporter_log_format }}' \
+{%   if influxdb_exporter_export_timestamps %}
+    '--timestamps'
+{% else %}
+    '--no-timestamps'
+{% endif %}
+
+SyslogIdentifier=influxdb_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+[Install]
+WantedBy=multi-user.target

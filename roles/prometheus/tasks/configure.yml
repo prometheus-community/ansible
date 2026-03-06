@@ -36,9 +36,11 @@
     group: "{{ prometheus_system_group }}"
     mode: 0775
   loop:
+    - "{{ prometheus_config_dir }}/consoles"
+    - "{{ prometheus_config_dir }}/console_libraries"
     - "{{ prometheus_config_dir }}/rules"
     - "{{ prometheus_config_dir }}/file_sd"
-    - "{{ prometheus_config_dir }}/scrapes"
+    - "{{ prometheus_config_dir }}/scrape_configs"
   become: true
   tags:
     - prometheus
@@ -58,6 +60,7 @@
   notify:
     - restart prometheus
   become: true
+  when: prometheus_version is version('3.0.0', '<')
   tags:
     - prometheus
     - configure
@@ -65,12 +68,12 @@
 
 - name: Alerting rules file
   ansible.builtin.template:
-    src: "alert.rules.j2"
-    dest: "{{ prometheus_config_dir }}/rules/ansible_managed.rules"
+    src: "ansible_managed.yml.j2"
+    dest: "{{ prometheus_config_dir }}/rules/ansible_managed.yml"
     owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
-    validate: "{{ _prometheus_binary_install_dir }}/promtool check rules %s"
+    validate: "{{ prometheus_binary_install_dir }}/promtool check rules %s"
   when:
     - prometheus_alert_rules != []
     - not prometheus_agent_mode
@@ -89,7 +92,7 @@
     owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
-    validate: "{{ _prometheus_binary_install_dir }}/promtool check rules %s"
+    validate: "{{ prometheus_binary_install_dir }}/promtool check rules %s"
   loop: "{{ prometheus_alert_rules_files | map('ansible.builtin.fileglob') | flatten }}"
   when:
     - not prometheus_agent_mode
@@ -109,7 +112,7 @@
     owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
-    validate: "{{ _prometheus_binary_install_dir }}/promtool check config %s"
+    validate: "{{ prometheus_binary_install_dir }}/promtool check config %s"
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   notify:
     - reload prometheus
@@ -135,6 +138,8 @@
     - prometheus
     - configure
     - prometheus_configure
+  notify:
+    - reload prometheus
 
 - name: Copy prometheus custom static targets
   ansible.builtin.copy:
@@ -150,16 +155,30 @@
     - prometheus
     - configure
     - prometheus_configure
+  notify:
+    - reload prometheus
 
 - name: Copy prometheus scrape config files
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ prometheus_config_dir }}/scrapes/"
+    dest: "{{ prometheus_config_dir }}/scrape_configs/"
     force: true
     owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
   loop: "{{ prometheus_scrape_config_files | map('ansible.builtin.fileglob') | flatten }}"
+  become: true
+  tags:
+    - prometheus
+    - configure
+    - prometheus_configure
+  notify:
+    - reload prometheus
+
+- name: Remove "scrapes" folder replaced by "scrape_configs"
+  ansible.builtin.file:
+    path: "{{ prometheus_config_dir }}/scrapes"
+    state: absent
   become: true
   tags:
     - prometheus

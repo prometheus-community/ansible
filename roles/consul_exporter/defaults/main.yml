@@ -1,0 +1,38 @@
+---
+consul_exporter_version: 0.13.0
+consul_exporter_binary_url: "https://github.com/{{ _consul_exporter_repo }}/releases/download/v{{ consul_exporter_version }}/\
+                             consul_exporter-{{ consul_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _consul_exporter_go_ansible_arch }}.tar.gz"
+consul_exporter_checksums_url: "https://github.com/{{ _consul_exporter_repo }}/releases/download/v{{ consul_exporter_version }}/sha256sums.txt"
+
+consul_exporter_web_listen_address: "0.0.0.0:9107"
+consul_exporter_web_telemetry_path: "/metrics"
+
+consul_exporter_tls_server_config: {}
+
+consul_exporter_http_server_config: {}
+
+consul_exporter_basic_auth_users: {}
+
+consul_exporter_server: "http://localhost:8500"
+consul_exporter_timeout: "500ms"
+consul_exporter_request_limit: 0
+consul_exporter_kv_prefix: ""
+consul_exporter_kv_filter: ""
+consul_exporter_meta_filter: ""
+consul_exporter_health_summary: false
+consul_exporter_agent_only: false
+consul_exporter_allow_stale: false
+consul_exporter_require_consistent: false
+
+consul_exporter_log_level: "info"
+consul_exporter_log_format: "logfmt"
+
+consul_exporter_system_user: "consul-exp"
+consul_exporter_system_group: "{{ consul_exporter_system_user }}"
+
+
+# Local path to stash the archive and its extraction
+consul_exporter_local_cache_path: "/tmp/consul_exporter-{{ ansible_facts['system'] | lower }}-{{ _consul_exporter_go_ansible_arch }}/{{ consul_exporter_version }}"
+
+consul_exporter_binary_install_dir: "/usr/local/bin"
+consul_exporter_config_dir: "/etc/consul_exporter"

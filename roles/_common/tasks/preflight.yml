@@ -43,7 +43,7 @@
 
 - name: Assert usage of systemd as an init system
   ansible.builtin.assert:
-    that: ansible_service_mgr == 'systemd'
+    that: ansible_facts['service_mgr'] == 'systemd'
     msg: "This module only works with systemd"
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
@@ -57,7 +57,7 @@
   ansible.builtin.package:
     name: "{{ _common_dependencies }}"
     state: present
-  when: (_common_dependencies)
+  when: (_common_dependencies != None)
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - configure
@@ -74,3 +74,14 @@
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_configure"
     - install
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_install"
+
+- name: Naive assertion of proper listen address
+  ansible.builtin.assert:
+    that:
+      - >-
+        [_common_web_listen_address] |
+          flatten |
+          reject('match', '.+:\\d+$') |
+          list |
+          length == 0
+  when: (_common_web_listen_address | length > 0)

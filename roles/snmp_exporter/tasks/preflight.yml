@@ -3,6 +3,8 @@
   ansible.builtin.include_role:
     name: prometheus.prometheus._common
     tasks_from: preflight.yml
+  vars:
+    _common_web_listen_address: "{{ snmp_exporter_web_listen_address }}"
 
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
@@ -14,16 +16,6 @@
           snmp_exporter_version is version('0.21.0', '>=') and
           snmp_exporter_web_listen_address | type_debug == "list"
         )
-
-- name: Naive assertion of proper listen address
-  ansible.builtin.assert:
-    that:
-      - >-
-        [snmp_exporter_web_listen_address] |
-          flatten |
-          reject('match', '.+:\\d+$') |
-          list |
-          length == 0
 
 - name: Discover latest version
   ansible.builtin.set_fact:

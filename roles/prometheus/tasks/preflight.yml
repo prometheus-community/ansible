@@ -3,22 +3,14 @@
   ansible.builtin.include_role:
     name: prometheus.prometheus._common
     tasks_from: preflight.yml
+  vars:
+    _common_web_listen_address: "{{ prometheus_web_listen_address }}"
 
 - name: Assert that used version supports listen address type
   ansible.builtin.assert:
     that:
       - >-
         prometheus_web_listen_address is string
-
-- name: Naive assertion of proper listen address
-  ansible.builtin.assert:
-    that:
-      - >-
-        [prometheus_web_listen_address] |
-          flatten |
-          reject('match', '.+:\\d+$') |
-          list |
-          length == 0
 
 - name: Assert no duplicate config flags
   ansible.builtin.assert:
@@ -72,6 +64,17 @@
   when:
     - prometheus_alertmanager_config == []
     - prometheus_alert_rules != []
+
+- name: Alert when alert rules files are found in the old .rules format
+  ansible.builtin.debug:
+    msg: >
+      prometheus_alert_rules_files contains rules in the old .rules file format.
+      This format has been deprecated in favour of the new YAML format since Prometheus v2.x.
+      You can update your rules using promtool: promtool update rules <filenames>
+
+      If your rules are already in the YAML format but with the .rules extension, you can safely ignore this message,
+      or rename the files to <filename>.yaml or <filename>.yml to get rid of it.
+  when: prometheus_alert_rules_files | select('search', '.rules$') | list | length > 0
 
 - name: Discover latest version
   ansible.builtin.set_fact:

@@ -4,19 +4,158 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
-v0.21.0
+v0.28.1
 =======
 
-Removed Features (previously deprecated)
-----------------------------------------
+v0.28.0
+=======
 
-- removed: CentOS Stream and Fedora from being officially supported (https://github.com/prometheus-community/ansible/pull/432)
+Minor Changes
+-------------
+
+- minor: Update Alma metadata (https://github.com/prometheus-community/ansible/pull/743)
+
+v0.27.7
+=======
+
+v0.27.6
+=======
 
 Bugfixes
 --------
 
-- fix:  prevent local binary cache creation with elevated privileges (https://github.com/prometheus-community/ansible/pull/434)
-- fix: add check_mode in localhost binary cache task (https://github.com/prometheus-community/ansible/pull/431)
+- fix: pin bcrypt < 5 to resolve passlib compatibility issues (https://github.com/prometheus-community/ansible/pull/722)
+
+v0.27.5
+=======
+
+Bugfixes
+--------
+
+- fix: remove trailing space in dependencies when using APT (https://github.com/prometheus-community/ansible/pull/650)
+
+v0.27.4
+=======
+
+Bugfixes
+--------
+
+- fix(_common): Fix missing tags for binary install dir check (https://github.com/prometheus-community/ansible/pull/669)
+
+v0.27.3
+=======
+
+v0.27.1
+=======
+
+v0.27.0
+=======
+
+Minor Changes
+-------------
+
+- minor: Bump for release (https://github.com/prometheus-community/ansible/pull/614)
+
+Bugfixes
+--------
+
+- fix(snmp_exporter): Added when clause to snmp_exporter role (https://github.com/prometheus-community/ansible/pull/610)
+
+v0.26.4
+=======
+
+Bugfixes
+--------
+
+- fix(snmp_exporter): Added when clause to snmp_exporter role (https://github.com/prometheus-community/ansible/pull/610)
+
+v0.26.3
+=======
+
+v0.26.2
+=======
+
+v0.26.1
+=======
+
+v0.26.0
+=======
+
+Minor Changes
+-------------
+
+- minor: bump support for ansible from v2.17.* to v2.18.* (https://github.com/prometheus-community/ansible/pull/535)
+
+v0.25.0
+=======
+
+Minor Changes
+-------------
+
+- feat: Add consul_exporter role (https://github.com/prometheus-community/ansible/pull/514)
+- feature: Add apache exporter (https://github.com/prometheus-community/ansible/pull/527)
+
+Bugfixes
+--------
+
+- fix: add `enabled: true` to alertmanager (https://github.com/prometheus-community/ansible/pull/530)
+- fix: identation in service file (https://github.com/prometheus-community/ansible/pull/528)
+
+v0.24.2
+=======
+
+v0.24.1
+=======
+
+v0.24.0
+=======
+
+v0.23.2
+=======
+
+v0.23.1
+=======
+
+v0.23.0
+=======
+
+Minor Changes
+-------------
+
+- feat: Support Prometheus 3.0 (https://github.com/prometheus-community/ansible/pull/462)
+
+v0.22.1
+=======
+
+Bugfixes
+--------
+
+- fix(prometheus): remove old internal variable remnants (https://github.com/prometheus-community/ansible/pull/456)
+
+v0.22.0
+=======
+
+Minor Changes
+-------------
+
+- enhancement(prometheus): support prometheus2 .yml rule file format (https://github.com/prometheus-community/ansible/pull/333)
+- feat: Add nvidia_gpu_exporter (https://github.com/prometheus-community/ansible/pull/441)
+
+Bugfixes
+--------
+
+- bugfix: update default home directory (https://github.com/prometheus-community/ansible/pull/442)
+
+v0.21.0
+=======
+
+Bugfixes
+--------
+
+- fix: remove unused variable (https://github.com/prometheus-community/ansible/pull/437)
+
+v0.20.3
+=======
 
 v0.20.1
 =======

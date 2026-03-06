@@ -18,7 +18,7 @@ def AnsibleDefaults():
     ("/etc/systemd/system/prometheus.service",
      "storage.agent.path=/var/lib/prometheus"),
     ("/etc/systemd/system/prometheus.service",
-     "enable-feature=agent"),
+     "agent"),
 ])
 def test_file_contents(host, file, content):
     f = host.file(file)

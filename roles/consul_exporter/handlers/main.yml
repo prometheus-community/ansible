@@ -1,0 +1,10 @@
+---
+- name: Restart consul_exporter
+  listen: "restart consul_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: consul_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode

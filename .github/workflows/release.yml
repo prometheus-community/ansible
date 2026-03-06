@@ -14,12 +14,12 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
           fetch-depth: 0
 
       - name: "Install tools"
-        run: "python -m pip install --upgrade ansible-base antsibull-changelog --disable-pip-version-check"
+        run: "python -m pip install --upgrade ansible-core antsibull-changelog --disable-pip-version-check"
 
       - name: "Calculate next version"
         id: version
@@ -45,19 +45,19 @@ jobs:
           cmd: yq -i '.version = "${{ steps.version.outputs.next-version }}"' 'galaxy.yml'
 
       - name: "Write changelog and version"
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9  # v7.1.0
         with:
           branch: ${{ github.event.pull_request.base.ref }}
           commit_message: "chore: update version"
           push_options: --force
 
       - name: "Checkout updated branch"
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
           ref: ${{ github.event.pull_request.base.ref }}
 
       - name: "Publish release"
         id: release-publish
-        uses: release-drafter/release-drafter@v6
+        uses: release-drafter/release-drafter@6db134d15f3909ccc9eefd369f02bd1e9cffdf97  # v6.2.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
