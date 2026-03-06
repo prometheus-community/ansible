@@ -43,6 +43,16 @@ ansible-galaxy collection install git+https://github.com/ansible-collections/com
 # Install collection requirements
 ansible-galaxy collection install -r "${collection_root}/requirements.yml"
 
+# Downgrade collections for older versions of ansible (https://github.com/ansible/ansible/issues/78539)
+# version <= 2.18
+if [ "$(printf '%s\n' "2.18.999.999" "${ansible_version}" | sort -V | head -n1)" = "${ansible_version}" ]; then
+    ansible-galaxy collection install 'git+https://github.com/ansible-collections/community.general.git,stable-11'
+fi
+# version <= 2.14
+if [ "$(printf '%s\n' "2.14.999.999" "${ansible_version}" | sort -V | head -n1)" = "${ansible_version}" ]; then
+    ansible-galaxy collection install 'git+https://github.com/ansible-collections/ansible.posix.git,stable-1'
+fi
+
 # Define config locations within collection
 export MOLECULE_FILE="${collection_root}/.config/molecule/config.yml"
 export YAMLLINT_CONFIG_FILE="${collection_root}/.yamllint.yml"

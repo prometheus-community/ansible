@@ -3,6 +3,7 @@
   hosts: localhost
   gather_facts: false
   tasks:
+    # see the `prometheus_scrape_config_files` variable
     - name: Create scrape_configs directory
       ansible.builtin.file:
         name: "{{ playbook_dir }}/prometheus/scrape_configs"
