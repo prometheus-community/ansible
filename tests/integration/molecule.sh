@@ -20,7 +20,6 @@ if [ -f "$collection_root/test-requirements.txt"  ]; then
 	python -m pip install --upgrade -r "$collection_root/test-requirements.txt"
 fi
 
-python -m pip install molecule-plugins[docker]
 ansible-galaxy collection install -r "$collection_root/requirements.yml"
 
 # Install ansible version specific requirements
@@ -43,6 +42,8 @@ else
        echo "ansible version 2.12 or greater is required!" >&2
        exit 1
 fi
+
+python -m pip install molecule-plugins[docker]
 
 # Define config locations within collection
 export MOLECULE_FILE=$collection_root/.config/molecule/config.yml
