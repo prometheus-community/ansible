@@ -1,4 +1,4 @@
 ---
 # Make sure to update the Ansilbe Python support matrix when updating this.
 # See: .testinfra/testinfra_helpers.py
-requires_ansible: ">=2.12.0,<=2.18.99"
+requires_ansible: ">=2.12.0,<=2.19.99"
