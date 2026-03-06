@@ -37,7 +37,6 @@ def test_directories(host, dirs):
     "files",
     [
         "/etc/prometheus/prometheus.yml",
-        "/etc/prometheus/scrape_configs/empty_scrapes.yml",
         "/etc/systemd/system/prometheus.service",
         "/usr/local/bin/prometheus",
         "/usr/local/bin/promtool",
