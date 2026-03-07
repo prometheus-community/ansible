@@ -19,6 +19,7 @@
   run_once: true
   until: fail2ban_exporter_version is version('0.0.0', '>=')
   retries: 10
+  delay: 10
   when:
     - fail2ban_exporter_version == "latest"
   tags:

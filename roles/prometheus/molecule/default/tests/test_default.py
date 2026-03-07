@@ -11,7 +11,7 @@ testinfra_hosts = get_target_hosts()
 
 @pytest.fixture()
 def AnsibleDefaults():
-    with open("defaults/main.yml", 'r') as stream:
+    with open(os.path.dirname(__file__) + "/../../../defaults/main.yml", 'r') as stream:
         return yaml.full_load(stream)
 
 

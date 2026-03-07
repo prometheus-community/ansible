@@ -46,6 +46,7 @@
   run_once: true
   until: redis_exporter_version is version('0.0.0', '>=')
   retries: 10
+  delay: 10
   when:
     - redis_exporter_version == "latest"
   tags:
