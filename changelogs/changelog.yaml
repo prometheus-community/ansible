@@ -1,6 +1,23 @@
 ---
 ancestor:
 releases:
+  0.29.0:
+    changes:
+      trivial:
+        - 'chore(deps): update release-drafter/release-drafter action to v6.3.0 (https://github.com/prometheus-community/ansible/pull/746)'
+    release_date: '2026-03-06'
+  0.28.1:
+    changes:
+      trivial:
+        - 'chore(deps): update ansible/ansible-lint action to v26.3.0 (https://github.com/prometheus-community/ansible/pull/744)'
+    release_date: '2026-03-05'
+  0.28.0:
+    changes:
+      minor_changes:
+        - 'minor: Update Alma metadata (https://github.com/prometheus-community/ansible/pull/743)'
+    release_date: '2026-03-05'
+  0.27.7:
+    release_date: '2026-02-27'
   0.27.6:
     changes:
       bugfixes:

@@ -20,7 +20,7 @@ jobs:
 
       - name: Get repos for each role
         id: discover
-        run: ./.github/scripts/discover_role_repos.sh >> "$GITHUB_OUTPUT"
+        run: ./.github/scripts/discover_role_repos.sh | tee -a "$GITHUB_OUTPUT"
 
   bump_role:
     runs-on: ubuntu-latest

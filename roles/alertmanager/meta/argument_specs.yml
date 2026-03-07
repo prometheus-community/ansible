@@ -10,7 +10,7 @@ argument_specs:
     options:
       alertmanager_version:
         description: "Alertmanager package version. Also accepts `latest` as parameter."
-        default: 0.31.0
+        default: 0.31.1
       alertmanager_binary_url:
         description: "URL of the alertmanager binaries .tar.gz file"
         default: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/alertmanager-{{ alertmanager_version }}.{{ ansible_facts['system'] | lower }}-{{ _alertmanager_go_ansible_arch }}.tar.gz"
@@ -55,6 +55,9 @@ argument_specs:
         type: "dict"
       alertmanager_http_config:
         description: "Http config for using custom webhooks"
+        type: "dict"
+      alertmanager_web_config:
+        description: "Alertmanager web config for configuring TLS and auth"
         type: "dict"
       alertmanager_slack_api_url:
         description: "Slack webhook url"
@@ -107,7 +110,7 @@ argument_specs:
         description: 'Extended output, use C("") for simple output.'
         default: "extended"
       alertmanager_local_cache_path:
-        description: 'Local path to stash the archive and its extraction'
+        description: "Local path to stash the archive and its extraction"
         default: "/tmp/alertmanager-{{ ansible_facts['system'] | lower }}-{{ _alertmanager_go_ansible_arch }}/{{ alertmanager_version }}"
       alertmanager_system_user:
         description:
