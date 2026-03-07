@@ -14,7 +14,7 @@ provisioner:
           http2: true
         process_exporter_basic_auth_users:
           randomuser: examplepassword
-        process_exporter_version: 0.7.10
+        process_exporter_version: 0.8.1
         process_exporter_names: |
           {% raw %}
             - name: "{{.Comm}}"
@@ -27,5 +27,6 @@ provisioner:
               cmdline:
                 - crond
           {% endraw %}
+        process_exporter_recheck_time_limit: 180s
         process_exporter_binary_url: "https://github.com/ncabatoff/process-exporter/releases/download/v{{\
                                       \ process_exporter_version }}/process-exporter-{{ process_exporter_version }}.linux-amd64.tar.gz"

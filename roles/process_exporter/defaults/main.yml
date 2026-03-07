@@ -25,6 +25,8 @@ process_exporter_names: |
         - '.+'
   {% endraw %}
 
+process_exporter_recheck_time_limit: "0"
+
 process_exporter_binary_install_dir: "/usr/local/bin"
 process_exporter_system_group: "process-exp"
 process_exporter_system_user: "{{ process_exporter_system_group }}"

@@ -24,10 +24,10 @@ jobs:
   ansible-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
 
       - name: Lint collection
-        uses: ansible/ansible-lint@9765b8704b2c3f4ab782815b528e0393662e1c04  # v25.7.0
+        uses: ansible/ansible-lint@8ba9595a4acd1b906eb75568b34f6ef592cd1528  # v26.3.0
         with:
           requirements_file: requirements.yml
 
@@ -36,14 +36,14 @@ jobs:
     container:
       image: quay.io/prometheus/golang-builder:base
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
       - name: Lint arguments spec
         run: ./.github/scripts/lint_arguments_spec.sh
 
   check-unused-variables:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
       - name: Run action
         uses: hoo29/little-timmy@c8ca5086db961499fc3d4e37637f566c3d0ec6d6  # v3-action
 
@@ -52,12 +52,12 @@ jobs:
     outputs:
       versions: ${{ steps.supported-ansible-versions.outputs.result }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
 
       - name: Get Ansible versions that the collection supports
         id: supported-ansible-versions
         run: |
-          echo "result=$(python ./.github/scripts/collection_version_parser.py)" >> $GITHUB_OUTPUT
+          echo "result=$(python ./.github/scripts/collection_version_parser.py)" | tee -a "$GITHUB_OUTPUT"
 
   ansible-test-sanity:
     uses: ./.github/workflows/ansible-test-sanity.yml
@@ -74,25 +74,42 @@ jobs:
       integration-tests: ${{ steps.set-integration-tests.outputs.tests }}
       ansible-roles: ${{ steps.set-ansible-roles.outputs.roles }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
           fetch-depth: 0
+
+      - name: Fetch current PR labels
+        id: fetch-labels
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd  # v8.0.0
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+
+            const labels = await github.paginate(
+              github.rest.issues.listLabelsOnIssue,
+              { owner, repo, issue_number }
+            );
+
+            const names = labels.map(l => l.name);
+            core.info(`Current labels: ${names.join(', ') || '(none)'}`);
+            core.setOutput('names', JSON.stringify(names));
 
       - name: Discover ansible roles
         id: set-ansible-roles
         env:
-          LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
+          LABELS: ${{ steps.fetch-labels.outputs.names }}
         run: |
           roles=$(echo $LABELS | jq -c '[.[] | select(startswith("roles/")) | ltrimstr("roles/")]')
           echo $roles
-          echo "roles=$roles" >> $GITHUB_OUTPUT
+          echo "roles=$roles" | tee -a "$GITHUB_OUTPUT"
 
       - name: Discover integration tests
         id: set-integration-tests
         run: |
           echo tests="[`for test in $(find tests/integration/targets -maxdepth 1 -mindepth 1 -type d -not -iname "molecule-*" -printf "%f\n"); do
             echo '{"test":\"'"${test}"'\","name":\"'"${test}\"'"}';
-          done | tr '\n' ',' | sed '$s/,$//'`]" >> $GITHUB_OUTPUT
+          done | tr '\n' ',' | sed '$s/,$//'`]" | tee -a "$GITHUB_OUTPUT"
 
   molecule:
     uses: ./.github/workflows/ansible-test-molecule.yml
