@@ -7,6 +7,8 @@ redhat_epel_rpm: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ a
 redhat_epel_pkgs:
   - gnupg2
 
+redhatepel_crb_file: "/etc/yum.repos.d/{{ ansible_facts['distribution'] | lower }}-crb.repo"
+
 _pve_exporter_pkgs:
   - "python{{ ansible_facts['python']['version']['major'] }}-setuptools"
   - "python{{ ansible_facts['python']['version']['major'] }}-virtualenv"
