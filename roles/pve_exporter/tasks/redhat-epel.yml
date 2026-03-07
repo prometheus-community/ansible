@@ -7,6 +7,8 @@
   ansible.builtin.package:
     name: "{{ redhat_epel_pkgs | default([]) }}"
     state: present
+  register: pkg_result
+  until: pkg_result is success
 
 - name: Check if epel key already retrieved
   ansible.builtin.stat:
@@ -21,13 +23,16 @@
     validate_certs: false
   register: dl_result
   until: dl_result is success
-  when: not epelkey.stat.exists and epel_rpm_key
+  when:
+    - not epelkey.stat.exists
+    - epel_rpm_key | length > 0
 - name: Installing epel rpm key
   # rpm_key: key={{ epel_rpm_key }}
   ansible.builtin.rpm_key:
     key: "/var/tmp/{{ epel_rpm_key | basename }}"
     state: present
-  when: epel_rpm_key | string
+  when:
+    - epel_rpm_key | length > 0
   register: pkg_result
   until: pkg_result is success
   become: true
@@ -52,5 +57,15 @@
   register: pkg_result
   until: pkg_result is success
   become: true
+  when:
+    - ansible_facts['distribution_major_version'] | int >= 9
+
+- name: RedHat9+ | Enable CRB repo
+  community.general.ini_file:
+    path: "{{ redhatepel_crb_file }}"
+    section: crb
+    option: enabled
+    value: '1'
+    mode: '0644'
   when:
     - ansible_facts['distribution_major_version'] | int >= 9
