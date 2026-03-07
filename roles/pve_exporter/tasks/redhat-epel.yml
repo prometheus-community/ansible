@@ -2,6 +2,11 @@
 
 - name: Include version-specific variables for RedHat
   ansible.builtin.include_vars: "RedHat-{{ ansible_facts['distribution_major_version'] }}.yml"
+- name: Include AlmaLinux-9 specific variables
+  ansible.builtin.include_vars: "AlmaLinux-9.yml"
+  when:
+    - ansible_facts['distribution'] == 'AlmaLinux'
+    - ansible_facts['distribution_major_version'] | int == 9
 
 - name: RedHat | Install dependencies packages
   ansible.builtin.package:
