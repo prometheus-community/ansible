@@ -144,7 +144,7 @@
 <h1>prometheus.prometheus.process_exporter role – Prometheus Process exporter<a class="headerlink" href="#prometheus-prometheus-process-exporter-role-prometheus-process-exporter" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/prometheus/prometheus/">prometheus.prometheus collection</a> (version 0.28.1).</p>
+<p>This role is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/prometheus/prometheus/">prometheus.prometheus collection</a> (version 0.29.0).</p>
 <p>It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
 To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
 <p>To install it use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">prometheus.prometheus</span></code>.</p>
@@ -244,6 +244,17 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--process_exporter_recheck_time_limit"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-process-exporter-role-parameter-main-process-exporter-recheck-time-limit"><strong>process_exporter_recheck_time_limit</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--process_exporter_recheck_time_limit" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Enable process rechecking: process names are re-evaluated only this much time after their start, but no longer.</p>
+<p>See <a class="reference external" href="https://pkg.go.dev/time#ParseDuration">the time.ParseDuration documentation</a> for the supported duration formats.</p>
+<p>This setting can be useful to make sure processes are grouped correctly if their name changes shortly after they start.</p>
+<p>The default value leaves this feature disabled.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--process_exporter_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-process-exporter-role-parameter-main-process-exporter-system-group"><strong>process_exporter_system_group</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--process_exporter_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -252,7 +263,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;process-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--process_exporter_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-process-exporter-role-parameter-main-process-exporter-system-user"><strong>process_exporter_system_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--process_exporter_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -261,14 +272,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;process-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--process_exporter_tls_server_config"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-process-exporter-role-parameter-main-process-exporter-tls-server-config"><strong>process_exporter_tls_server_config</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--process_exporter_tls_server_config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Configuration for TLS authentication.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--process_exporter_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-process-exporter-role-parameter-main-process-exporter-version"><strong>process_exporter_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--process_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -276,7 +287,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.8.7&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--process_exporter_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-process-exporter-role-parameter-main-process-exporter-web-listen-address"><strong>process_exporter_web_listen_address</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--process_exporter_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -284,7 +295,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9256&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--process_exporter_web_telemetry_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-process-exporter-role-parameter-main-process-exporter-web-telemetry-path"><strong>process_exporter_web_telemetry_path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--process_exporter_web_telemetry_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
