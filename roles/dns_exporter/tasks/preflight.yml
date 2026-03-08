@@ -47,19 +47,3 @@
         that:
           - "__dns_exporter_cert_file.stat.exists"
           - "__dns_exporter_key_file.stat.exists"
-
-- name: Discover latest version
-  ansible.builtin.set_fact:
-    dns_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _dns_exporter_repo }}/releases/latest', headers=_github_api_headers,
-                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
-  run_once: true
-  until: dns_exporter_version is version('0.0.0', '>=')
-  retries: 10
-  when:
-    - dns_exporter_version == "latest"
-  tags:
-    - dns_exporter
-    - install
-    - dns_exporter_install
-    - download
-    - dns_exporter_download
