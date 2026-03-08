@@ -42,8 +42,6 @@
         version: "{{ dns_exporter_version }}"
         state: present
         virtualenv: "{{ dns_exporter_virtualenv }}"
-      become: true
-      become_user: "{{ dns_exporter_system_user }}"
     - name: Ensure config dir exists
       ansible.builtin.file:
         path: "{{ dns_exporter_config_dir }}"
