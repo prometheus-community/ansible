@@ -6,17 +6,6 @@
   vars:
     _common_web_listen_address: "{{ dns_exporter_web_listen_address }}"
 
-- name: Assert that used version supports listen address type
-  ansible.builtin.assert:
-    that:
-      - >-
-        dns_exporter_web_listen_address is string
-        or
-        (
-          dns_exporter_version is version('1.5.0', '>=') and
-          dns_exporter_web_listen_address | type_debug == "list"
-        )
-
 - name: Assert collectors are not both disabled and enabled at the same time
   ansible.builtin.assert:
     that:

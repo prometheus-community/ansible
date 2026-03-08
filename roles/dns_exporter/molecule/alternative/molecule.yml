@@ -20,4 +20,4 @@ provisioner:
           http2: true
         dns_exporter_basic_auth_users:
           randomuser: examplepassword
-        dns_exporter_version: 1.5.0
+        dns_exporter_version: 1.0.0
