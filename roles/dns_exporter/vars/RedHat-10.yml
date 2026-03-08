@@ -6,5 +6,6 @@ epel_rpm_key_hash: de390fc168eae5ab2852e9e93d34a0b9ddf05cf9ce90ee28d97de26a4b1f6
 redhat_epel_rpm: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_facts['distribution_major_version'] }}.noarch.rpm"
 redhat_epel_pkgs:
   - gnupg2
+  - python3-packaging
 
 redhatepel_crb_file: "/etc/yum.repos.d/{{ ansible_facts['distribution'] | lower }}-crb.repo"
