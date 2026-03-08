@@ -46,7 +46,7 @@
       ansible.builtin.file:
         path: "{{ dns_exporter_config_dir }}"
         state: directory
-        mode: '0775'  # like _common
+        mode: u+rwX,g+rwX,o=rX  # like _common
         owner: root
     - name: Configure dns_exporter
       ansible.builtin.template:
