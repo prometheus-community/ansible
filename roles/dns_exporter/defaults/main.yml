@@ -1,5 +1,5 @@
 ---
-dns_exporter_version: 1.0.0
+dns_exporter_version: 1.1.0
 # not go, but python pip. placeholders for _common
 dns_exporter_textfile_dir: ""
 dns_exporter_enabled_collectors: []
