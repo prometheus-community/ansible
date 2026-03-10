@@ -1,0 +1,50 @@
+---
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ smartctl_exporter_system_user }}"
+    _common_system_group: "{{ smartctl_exporter_system_group }}"
+    _common_config_dir: "{{ smartctl_exporter_config_dir }}"
+    _common_tls_server_config: "{{ smartctl_exporter_tls_server_config }}"
+    _common_http_server_config: "{{ smartctl_exporter_http_server_config }}"
+    _common_basic_auth_users: "{{ smartctl_exporter_basic_auth_users }}"
+  tags:
+    - smartctl_exporter
+    - configure
+    - smartctl_exporter_configure
+
+- name: Install udev rules for S.M.A.R.T access
+  ansible.builtin.template:
+    src: "{{ _smartctl_exporter_udev_filename }}.j2"
+    dest: "/etc/udev/rules.d/{{ _smartctl_exporter_udev_filename }}"
+    owner: root
+    group: root
+    mode: '0644'
+    validate: 'udevadm verify %s'
+  become: true
+  when:
+    - smartctl_exporter_system_user != 'root'
+    - smartctl_exporter_system_group != 'root'
+  notify:
+    - "udev reload"
+    - "udev apply"
+  tags:
+    - smartctl_exporter
+    - configure
+    - smartctl_exporter_configure
+
+- name: Ensure smartctl has needed file capabilities
+  community.general.capabilities:
+    path: "{{ smartctl_exporter_smartctl_path }}"
+    capability: "cap_sys_rawio,cap_sys_admin+ep"
+    state: present
+  become: true
+  when:
+    - smartctl_exporter_system_user != 'root'
+    - smartctl_exporter_system_group != 'root'
+  tags:
+    - smartctl_exporter
+    - configure
+    - smartctl_exporter_configure
