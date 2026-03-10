@@ -6,6 +6,8 @@ releases:
       minor_changes:
         - 'minor: Update minimum Ansible version (https://github.com/prometheus-community/ansible/pull/747)'
       trivial:
+        - 'patch: New superq/smokeping_prober upstream release 0.11.0! (https://github.com/prometheus-community/ansible/pull/751)'
+        - 'patch: New oliver006/redis_exporter upstream release 1.82.0! (https://github.com/prometheus-community/ansible/pull/750)'
         - 'chore(deps): update release-drafter/release-drafter action to v6.4.0 (https://github.com/prometheus-community/ansible/pull/748)'
         - 'chore(deps): update release-drafter/release-drafter action to v6.3.0 (https://github.com/prometheus-community/ansible/pull/746)'
     release_date: '2026-03-06'
