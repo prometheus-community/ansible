@@ -46,6 +46,7 @@
   run_once: true
   until: consul_exporter_version is version('0.0.0', '>=')
   retries: 10
+  delay: 10
   when:
     - consul_exporter_version == "latest"
   tags:

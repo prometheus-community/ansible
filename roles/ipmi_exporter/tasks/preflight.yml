@@ -45,6 +45,7 @@
   run_once: true
   until: ipmi_exporter_version is version('0.0.0', '>=')
   retries: 10
+  delay: 10
   when:
     - ipmi_exporter_version == "latest"
   tags:
