@@ -28,9 +28,9 @@ if [ "$(printf '%s\n' "2.14" "${ansible_version}" | sort -V | head -n1)" = "2.14
        ansible-galaxy collection install -r "${collection_root}/requirements.yml"
        # version >= 2.19
        if [ "$(printf '%s\n' "2.19" "${ansible_version}" | sort -V | head -n1)" = "2.19" ]; then
-              python -m pip install "molecule-plugins[docker]>=25.8.12"
+              python -m pip install -U --no-deps "molecule-plugins[docker]>=25.8.12"
        else
-              python -m pip install "molecule-plugins[docker]"
+              python -m pip install -U --no-deps "molecule-plugins[docker]"
        fi
        # version <= 2.18
        if [ "$(printf '%s\n' "2.18.999.999" "${ansible_version}" | sort -V | head -n1)" = "${ansible_version}" ]; then
