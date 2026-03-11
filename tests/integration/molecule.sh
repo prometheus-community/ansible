@@ -26,6 +26,7 @@ fi
 if [ "$(printf '%s\n' "2.14" "${ansible_version}" | sort -V | head -n1)" = "2.14" ]; then 
        ansible-galaxy collection install git+https://github.com/ansible-collections/community.docker.git
        ansible-galaxy collection install -r "${collection_root}/requirements.yml"
+       # version >= 2.19
        if [ "$(printf '%s\n' "2.19" "${ansible_version}" | sort -V | head -n1)" = "2.19" ]; then
               python -m pip install "molecule-plugins[docker]>=25.8.12"
        else
