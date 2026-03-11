@@ -21,3 +21,6 @@ cadvisor_system_user: "{{ cadvisor_system_group }}"
 cadvisor_local_cache_path: "/tmp/cadvisor-{{ ansible_facts['system'] | lower }}-{{ _cadvisor_go_ansible_arch }}/{{ cadvisor_version }}"
 
 cadvisor_binary_install_dir: "/usr/local/bin"
+
+# Host that performs binary download and extraction
+cadvisor_download_host: "localhost"

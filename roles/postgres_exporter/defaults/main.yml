@@ -32,3 +32,6 @@ postgres_exporter_system_user: "{{ postgres_exporter_system_group }}"
 
 # Local path to stash the archive and its extraction
 postgres_exporter_local_cache_path: "/tmp/postgres_exporter-{{ ansible_facts['system'] | lower }}-{{ _postgres_exporter_go_ansible_arch }}/{{ postgres_exporter_version }}"
+
+# Host that performs binary download and extraction
+postgres_exporter_download_host: "localhost"

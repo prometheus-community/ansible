@@ -15,6 +15,7 @@
     tasks_from: install.yml
   vars:
     _common_local_cache_path: "{{ alertmanager_local_cache_path }}"
+    _common_download_host: "{{ alertmanager_download_host }}"
     _common_binaries: "{{ _alertmanager_binaries }}"
     _common_binary_install_dir: "{{ alertmanager_binary_install_dir }}"
     _common_binary_url: "{{ alertmanager_binary_url }}"
