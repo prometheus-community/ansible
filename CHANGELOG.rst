@@ -12,6 +12,11 @@ Minor Changes
 
 - minor: Update minimum Ansible version (https://github.com/prometheus-community/ansible/pull/747)
 
+Bugfixes
+--------
+
+- fix: Handle SELinux Port Mapping (https://github.com/prometheus-community/ansible/pull/749)
+
 v0.28.1
 =======
 

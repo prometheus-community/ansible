@@ -3,6 +3,8 @@ ancestor:
 releases:
   0.29.0:
     changes:
+      bugfixes:
+        - 'fix: Handle SELinux Port Mapping (https://github.com/prometheus-community/ansible/pull/749)'
       minor_changes:
         - 'minor: Update minimum Ansible version (https://github.com/prometheus-community/ansible/pull/747)'
       trivial:
