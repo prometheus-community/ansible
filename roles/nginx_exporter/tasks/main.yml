@@ -28,7 +28,7 @@
     name: prometheus.prometheus._common
     tasks_from: selinux.yml
   vars:
-    _common_selinux_port: "{{ nginx_exporter_web_listen_address | split(':') | last }}"
+    _common_selinux_port: "{{ ('//' ~ nginx_exporter_web_listen_address) | ansible.builtin.urlsplit('port') }}"
   when: ansible_facts['selinux'].status == "enabled"
   tags:
     - nginx_exporter_configure
