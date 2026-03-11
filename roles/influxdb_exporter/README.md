@@ -6,7 +6,6 @@ Deploy prometheus [Influxdb exporter](https://github.com/prometheus/influxdb_exp
 
 ## Requirements
 
-- Ansible >= 2.9 (It might work on previous versions, but we cannot guarantee it)
 - gnu-tar on Mac deployer host (`brew install gnu-tar`)
 
 ## Role Variables
