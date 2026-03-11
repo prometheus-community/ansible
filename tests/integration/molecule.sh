@@ -23,11 +23,14 @@ if [ -f "${collection_root}/test-requirements.txt"  ]; then
 fi
 
 # Install ansible version specific requirements
-# version >= 2.14
 if [ "$(printf '%s\n' "2.14" "${ansible_version}" | sort -V | head -n1)" = "2.14" ]; then 
-       python -m pip install "molecule<6" molecule-plugins[docker]
        ansible-galaxy collection install git+https://github.com/ansible-collections/community.docker.git
        ansible-galaxy collection install -r "${collection_root}/requirements.yml"
+       if [ "$(printf '%s\n' "2.19" "${ansible_version}" | sort -V | head -n1)" = "2.19" ]; then
+              python -m pip install "molecule-plugins[docker]>=25.8.12"
+       else
+              python -m pip install "molecule-plugins[docker]"
+       fi
        # version <= 2.18
        if [ "$(printf '%s\n' "2.18.999.999" "${ansible_version}" | sort -V | head -n1)" = "${ansible_version}" ]; then
               ansible-galaxy collection install 'https://github.com/ansible-collections/community.general.git,stable-11'
