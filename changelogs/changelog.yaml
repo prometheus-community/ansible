@@ -8,6 +8,7 @@ releases:
       minor_changes:
         - 'minor: Update minimum Ansible version (https://github.com/prometheus-community/ansible/pull/747)'
       trivial:
+        - 'docs(cadvisor): update metric options (https://github.com/prometheus-community/ansible/pull/753)'
         - 'docs: Cleanup references to old ansible versions (https://github.com/prometheus-community/ansible/pull/752)'
         - 'patch: New superq/smokeping_prober upstream release 0.11.0! (https://github.com/prometheus-community/ansible/pull/751)'
         - 'patch: New oliver006/redis_exporter upstream release 1.82.0! (https://github.com/prometheus-community/ansible/pull/750)'
