@@ -15,6 +15,7 @@ Minor Changes
 Bugfixes
 --------
 
+- fix(CI): upgrade molecule, pin ansible-core, and fail on version drift (https://github.com/prometheus-community/ansible/pull/755)
 - fix: Handle SELinux Port Mapping (https://github.com/prometheus-community/ansible/pull/749)
 
 v0.28.1
