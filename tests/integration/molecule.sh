@@ -25,18 +25,14 @@ printf 'ansible-core==%s\n' "${ansible_version}" > "${constraints_file}"
 apt -y update
 apt -y install docker.io
 
-# Install Molecule and molecule docker driver
-python -m pip install --upgrade -c "${constraints_file}" \
-       molecule molecule-plugins[docker]
+# Install python test requirements from collection
+if [ -f "${collection_root}/test-requirements.txt"  ]; then
+  python -m pip install --upgrade -c "${constraints_file}" -r "${collection_root}/test-requirements.txt"
+fi
 
 # Install python test requirements from role
 if [ -f "${role_root}/test-requirements.txt"  ]; then
   python -m pip install --upgrade -c "${constraints_file}" -r "${role_root}/test-requirements.txt"
-fi
-
-# Install python test requirements from collection
-if [ -f "${collection_root}/test-requirements.txt"  ]; then
-  python -m pip install --upgrade -c "${constraints_file}" -r "${collection_root}/test-requirements.txt"
 fi
 
 # Verify installed Python packages have compatible dependencies
