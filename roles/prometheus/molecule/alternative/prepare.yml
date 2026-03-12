@@ -9,6 +9,7 @@
         state: directory
         recurse: true
       check_mode: false
+
     - name: Create empty scrape config file
       ansible.builtin.file:
         name: /tmp/prometheus/scrape_configs/empty_scrapes.yml
