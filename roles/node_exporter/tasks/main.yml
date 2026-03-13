@@ -13,6 +13,7 @@
     tasks_from: install.yml
   vars:
     _common_local_cache_path: "{{ node_exporter_local_cache_path }}"
+    _common_download_host: "{{ node_exporter_download_host }}"
     _common_binaries: "{{ _node_exporter_binaries }}"
     _common_binary_install_dir: "{{ node_exporter_binary_install_dir }}"
     _common_binary_url: "{{ node_exporter_binary_url }}"

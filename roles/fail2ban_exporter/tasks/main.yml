@@ -13,6 +13,7 @@
     tasks_from: install.yml
   vars:
     _common_local_cache_path: "{{ fail2ban_exporter_local_cache_path }}"
+    _common_download_host: "{{ fail2ban_exporter_download_host }}"
     _common_binaries: "{{ _fail2ban_exporter_binaries }}"
     _common_binary_install_dir: "{{ fail2ban_exporter_binary_install_dir }}"
     _common_binary_url: "{{ fail2ban_exporter_binary_url }}"

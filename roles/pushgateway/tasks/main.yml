@@ -13,6 +13,7 @@
     tasks_from: install.yml
   vars:
     _common_local_cache_path: "{{ pushgateway_local_cache_path }}"
+    _common_download_host: "{{ pushgateway_download_host }}"
     _common_binaries: "{{ _pushgateway_binaries }}"
     _common_binary_install_dir: "{{ pushgateway_binary_install_dir }}"
     _common_binary_url: "{{ pushgateway_binary_url }}"

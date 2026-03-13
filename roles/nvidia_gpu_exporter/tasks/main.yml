@@ -17,6 +17,7 @@
     tasks_from: install.yml
   vars:
     _common_local_cache_path: "{{ nvidia_gpu_exporter_local_cache_path }}"
+    _common_download_host: "{{ nvidia_gpu_exporter_download_host }}"
     _common_binaries: "{{ _nvidia_gpu_exporter_binaries }}"
     _common_binary_install_dir: "{{ nvidia_gpu_exporter_binary_install_dir }}"
     _common_binary_url: "{{ nvidia_gpu_exporter_binary_url }}"
