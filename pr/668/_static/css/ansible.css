@@ -144,6 +144,10 @@ table.documentation-table .value-required {
 .wy-menu-vertical a.reference.internal {
     padding: 0.4045em 1.618em;
 }
+/* Fix truncation when extranav is hidden */
+.wy-menu-vertical:not(:has(.sideBanner)) {
+    padding-bottom: 2rem;
+}
 /*! Override sphinx rtd theme max-with of 800px */
 .wy-nav-content {
     max-width: 100%;
