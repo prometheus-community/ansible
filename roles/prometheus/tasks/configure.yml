@@ -93,7 +93,7 @@
     group: "{{ prometheus_system_group }}"
     mode: 0640
     validate: "{{ prometheus_binary_install_dir }}/promtool check rules %s"
-  loop: "{{ prometheus_alert_rules_files | map('ansible.builtin.fileglob') | flatten }}"
+  loop: "{{ prometheus_alert_rules_files | map('ansible.builtin.fileglob') | flatten | map('ansible.builtin.realpath') }}"
   when:
     - not prometheus_agent_mode
   notify:
@@ -149,7 +149,7 @@
     owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
-  loop: "{{ prometheus_static_targets_files | map('ansible.builtin.fileglob') | flatten }}"
+  loop: "{{ prometheus_static_targets_files | map('ansible.builtin.fileglob') | flatten | map('ansible.builtin.realpath') }}"
   become: true
   tags:
     - prometheus
@@ -166,7 +166,7 @@
     owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: 0640
-  loop: "{{ prometheus_scrape_config_files | map('ansible.builtin.fileglob') | flatten }}"
+  loop: "{{ prometheus_scrape_config_files | map('ansible.builtin.fileglob') | flatten | map('ansible.builtin.realpath') }}"
   become: true
   tags:
     - prometheus

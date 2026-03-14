@@ -29,7 +29,7 @@
     name: prometheus.prometheus._common
     tasks_from: selinux.yml
   vars:
-    _common_selinux_port: "{{ prometheus_web_listen_address | urlsplit('port') }}"
+    _common_selinux_port: "{{ ('//' ~ prometheus_web_listen_address) | ansible.builtin.urlsplit('port') }}"
   when: ansible_facts['selinux'].status == "enabled"
   tags:
     - prometheus_configure
@@ -47,6 +47,8 @@
     name: prometheus
     state: started
     enabled: true
+  when:
+    - not ansible_check_mode
   tags:
     - prometheus_run
 

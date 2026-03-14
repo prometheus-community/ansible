@@ -4,7 +4,7 @@ argument_specs:
   main:
     short_description: "Prometheus ipmi_exporter"
     description:
-      - "Deploy prometheus L(ipmi exporter,https://github.com/prometheus-community/ipmi_exporter) using ansible"
+      - "Deploy the Prometheus L(ipmi exporter,https://github.com/prometheus-community/ipmi_exporter) using Ansible"
     author:
       - "Prometheus Community"
     options:
@@ -23,7 +23,7 @@ argument_specs:
           - "https://github.com/prometheus-community/ipmi_exporter#configuration"
         type: "dict"
       ipmi_exporter_web_listen_address:
-        description: "Address on which ipmi exporter will listen"
+        description: "Address on which the ipmi_exporter will listen"
         default: "0.0.0.0:9290"
       ipmi_exporter_tls_server_config:
         description:
@@ -36,7 +36,7 @@ argument_specs:
           - "Keys and values are the same as in L(ipmi_exporter docs,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)."
         type: "dict"
       ipmi_exporter_basic_auth_users:
-        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        description: "Dictionary of users and passwords for basic authentication. Passwords are automatically hashed with bcrypt."
         type: "dict"
       ipmi_exporter_log_level:
         description: "Only log messages with the given severity or above. One of: [debug, info, warn, error]"
@@ -47,7 +47,7 @@ argument_specs:
       ipmi_exporter_binary_install_dir:
         description:
           - "I(Advanced)"
-          - "Directory to install ipmi_exporter binary"
+          - "Directory in which to install ipmi_exporter binary"
         default: "/usr/local/bin"
       ipmi_exporter_system_group:
         description:
@@ -60,7 +60,7 @@ argument_specs:
           - "ipmi_exporter user"
         default: "ipmi-exp"
       ipmi_exporter_local_cache_path:
-        description: "Local path to stash the archive and its extraction"
+        description: "Local path at which to download and extract the archive"
         default: "/tmp/ipmi_exporter-{{ ansible_facts['system'] | lower }}-{{ _ipmi_exporter_go_ansible_arch }}/{{ ipmi_exporter_version }}"
       ipmi_exporter_config_dir:
         description: "Path to directory with ipmi_exporter configuration"

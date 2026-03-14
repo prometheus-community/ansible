@@ -3,20 +3,21 @@ galaxy_info:
   author: "Prometheus Community"
   description: "Prometheus Systemd Exporter"
   license: "Apache"
-  min_ansible_version: "2.12"
+  min_ansible_version: "2.14"
   platforms:
     - name: "Ubuntu"
       versions:
         - "jammy"
-        - "xenial"
+        - "noble"
         - "noble"
     - name: "Debian"
       versions:
         - "bullseye"
+        - "bookworm"
     - name: "EL"
       versions:
-        - "8"
         - "9"
+        - "10"
   galaxy_tags:
     - "monitoring"
     - "prometheus"

@@ -1,5 +1,5 @@
 ---
-alertmanager_version: 0.29.0
+alertmanager_version: 0.31.1
 alertmanager_binary_url: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/\
                           alertmanager-{{ alertmanager_version }}.{{ ansible_facts['system'] | lower }}-{{ _alertmanager_go_ansible_arch }}.tar.gz"
 alertmanager_checksums_url: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/sha256sums.txt"
@@ -16,6 +16,11 @@ alertmanager_web_listen_address: '0.0.0.0:9093'
 alertmanager_web_external_url: 'http://localhost:9093/'
 
 alertmanager_http_config: {}
+
+alertmanager_web_config:
+  tls_server_config: {}
+  http_server_config: {}
+  basic_auth_users: {}
 
 alertmanager_resolve_timeout: 3m
 

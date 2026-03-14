@@ -3,7 +3,7 @@ galaxy_info:
   author: "Prometheus Community"
   description: "Prometheus memcached_exporter"
   license: "Apache"
-  min_ansible_version: "2.12"
+  min_ansible_version: "2.14"
   platforms:
     - name: "Ubuntu"
       versions:
@@ -12,10 +12,11 @@ galaxy_info:
     - name: "Debian"
       versions:
         - "bullseye"
+        - "bookworm"
     - name: "EL"
       versions:
-        - "8"
         - "9"
+        - "10"
   galaxy_tags:
     - "monitoring"
     - "prometheus"
