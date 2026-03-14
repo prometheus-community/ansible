@@ -3,7 +3,8 @@
 [Unit]
 Description=Prometheus MongoDB Exporter
 Documentation=https://github.com/percona/mongodb_exporter
-After=network.target
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple

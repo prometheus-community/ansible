@@ -3,6 +3,7 @@
 [Unit]
 Description=Influxdb to Prometheus Exporter Service
 After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple
