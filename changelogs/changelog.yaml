@@ -3,12 +3,13 @@ ancestor:
 releases:
   0.29.0:
     changes:
+      minor_changes:
+        - 'enhancement: Improve systemd dependencies (https://github.com/prometheus-community/ansible/pull/757)'
+        - 'minor: Update minimum Ansible version (https://github.com/prometheus-community/ansible/pull/747)'
       bugfixes:
         - 'fix(CI): upgrade molecule, pin ansible-core, and fail on version drift
           (https://github.com/prometheus-community/ansible/pull/755)'
         - 'fix: Handle SELinux Port Mapping (https://github.com/prometheus-community/ansible/pull/749)'
-      minor_changes:
-        - 'minor: Update minimum Ansible version (https://github.com/prometheus-community/ansible/pull/747)'
       trivial:
         - 'chore(deps): update release-drafter/release-drafter action to v7 (https://github.com/prometheus-community/ansible/pull/756)'
         - 'docs(cadvisor): update metric options (https://github.com/prometheus-community/ansible/pull/753)'
