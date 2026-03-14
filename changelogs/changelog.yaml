@@ -10,6 +10,7 @@ releases:
       minor_changes:
         - 'minor: Update minimum Ansible version (https://github.com/prometheus-community/ansible/pull/747)'
       trivial:
+        - 'chore(deps): update release-drafter/release-drafter action to v7 (https://github.com/prometheus-community/ansible/pull/756)'
         - 'docs(cadvisor): update metric options (https://github.com/prometheus-community/ansible/pull/753)'
         - 'docs: Cleanup references to old ansible versions (https://github.com/prometheus-community/ansible/pull/752)'
         - 'patch: New superq/smokeping_prober upstream release 0.11.0! (https://github.com/prometheus-community/ansible/pull/751)'
