@@ -20,6 +20,10 @@ fi
 constraints_file="$(mktemp)"
 trap 'rm -f "${constraints_file}"' EXIT
 printf 'ansible-core==%s\n' "${ansible_version}" > "${constraints_file}"
+# version >= 2.19
+if [ "$(printf '%s\n' "2.19" "${ansible_version}" | sort -V | head -n1)" = "2.19" ]; then
+    printf 'molecule-plugins>=25.8.12\n' >> "${constraints_file}"
+fi
 
 # Install package requirements
 apt -y update
