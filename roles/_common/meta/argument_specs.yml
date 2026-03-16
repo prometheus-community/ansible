@@ -69,6 +69,12 @@ argument_specs:
       _common_system_group:
         description: "User group for the system user."
         default: ""
+      _common_remote_download:
+        description: Determines if the package archive is downloaded and extracted on local (false) or remote host (true)"
+        default: "false"
+      _common_remote_cache_path:
+        description: "Remote path to stash the archive and its extraction"
+        default: ""
   preflight:
     short_description: "Internal only - common preflight tasks"
     description: "Internal only - selinux requirements"

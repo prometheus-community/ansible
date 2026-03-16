@@ -54,11 +54,11 @@
     - download
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_download"
   become: false
-  delegate_to: localhost
+  delegate_to: "{{ inventory_hostname if (_common_remote_download | bool) else 'localhost' }}"
   block:
     - name: "Create localhost binary cache path"
       ansible.builtin.file:
-        path: "{{ _common_local_cache_path }}"
+        path: "{{ _common_remote_cache_path if (_common_remote_download | bool) else _common_local_cache_path }}"
         state: directory
         mode: 0755
       check_mode: false
@@ -115,6 +115,7 @@
       ansible.builtin.unarchive:
         src: "{{ _common_local_cache_path }}/{{ __common_binary_basename }}"
         dest: "{{ _common_local_cache_path }}"
+        remote_src: "{{ _common_remote_download | bool }}"
         mode: 0755
         list_files: true
         extra_opts: "{{ _common_binary_unarchive_opts | default(omit, true) }}"
@@ -148,6 +149,7 @@
   ansible.builtin.copy:
     src: "{{ _common_local_cache_path }}/{{ item }}"
     dest: "{{ _common_binary_install_dir }}/{{ item }}"
+    remote_src: "{{ _common_remote_download | bool }}"
     mode: 0755
     owner: root
     group: root
