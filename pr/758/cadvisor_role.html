@@ -182,6 +182,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#parameter-main--cadvisor_basic_auth_users" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Dictionary of username / password for HTTP basic authentication</p>
+<p>Warning : The endpoints `/api/*` and `/metrics` are exposed without authentication. See <a class="reference external" href="https://github.com/google/cadvisor/blob/master/docs/web.md#web-ui-authentication">https://github.com/google/cadvisor/blob/master/docs/web.md#web-ui-authentication</a> and <a class="reference external" href="https://github.com/google/cadvisor/issues/3401">https://github.com/google/cadvisor/issues/3401</a> for more details.</p>
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">{}</span></code></p>
 </div></td>
 </tr>
