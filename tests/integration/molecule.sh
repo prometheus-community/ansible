@@ -7,7 +7,7 @@ targetname=${PWD##*/}
 role=$(expr "${targetname}" : '\w*-\(\w*\)-\w*')
 role_root="${collection_root}/roles/${role}"
 scenario=$(expr "${targetname}" : '\w*-\w*-\(\w*\)')
-initial_ansible_version="$(ansible --version | head -1 | sed 's/[^0-9\.]*//g')"
+initial_ansible_version="$(ansible --version | head -1 | sed -E 's/.*\[core (.*?)\].*/\1/')"
 ansible_version="${initial_ansible_version}"
 
 if [ "$(printf '%s\n' "${ansible_version}" "2.14" | sort -V | head -n1)" != "2.14" ]; then
