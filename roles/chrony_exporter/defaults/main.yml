@@ -28,3 +28,6 @@ chrony_exporter_local_cache_path: "/tmp/chrony_exporter-{{ ansible_facts['system
 
 chrony_exporter_binary_install_dir: "/usr/local/bin"
 chrony_exporter_config_dir: "/etc/chrony_exporter"
+
+# Host that performs binary download and extraction
+chrony_exporter_download_host: "localhost"
