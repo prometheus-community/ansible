@@ -11,6 +11,7 @@ releases:
           (https://github.com/prometheus-community/ansible/pull/755)'
         - 'fix: Handle SELinux Port Mapping (https://github.com/prometheus-community/ansible/pull/749)'
       trivial:
+        - 'chore(deps): update release-drafter/release-drafter action to v7.1.1 (https://github.com/prometheus-community/ansible/pull/760)'
         - 'chore(deps): update svenstaro/upload-release-action action to v2.11.5 (https://github.com/prometheus-community/ansible/pull/759)'
         - 'chore(deps): update release-drafter/release-drafter action to v7 (https://github.com/prometheus-community/ansible/pull/756)'
         - 'docs(cadvisor): update metric options (https://github.com/prometheus-community/ansible/pull/753)'
