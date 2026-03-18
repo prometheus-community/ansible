@@ -3,6 +3,7 @@
 [Unit]
 Description=cAdvisor cgroup/container metrics server
 After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple

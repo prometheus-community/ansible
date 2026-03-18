@@ -1,6 +1,9 @@
-molecule
+bcrypt<5
 docker
+molecule
+molecule-plugins[docker]
+passlib
+passlib[bcrypt]
 pytest
 pytest-testinfra
 selinux
-passlib

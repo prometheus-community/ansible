@@ -3,6 +3,7 @@
 [Unit]
 Description=Prometheus Chrony Exporter
 After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple

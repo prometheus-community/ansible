@@ -2,6 +2,7 @@
 [Unit]
 Description=Blackbox Exporter
 After=network-online.target
+Wants=network-online.target
 StartLimitInterval=0
 StartLimitIntervalSec=0
 

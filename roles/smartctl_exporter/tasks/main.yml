@@ -30,7 +30,7 @@
     name: prometheus.prometheus._common
     tasks_from: selinux.yml
   vars:
-    _common_selinux_port: "{{ smartctl_exporter_web_listen_address | urlsplit('port') }}"
+    _common_selinux_port: "{{ ('//' ~ smartctl_exporter_web_listen_address) | ansible.builtin.urlsplit('port') }}"
   when: ansible_facts['selinux'].status == "enabled"
   tags:
     - smartctl_exporter_configure
