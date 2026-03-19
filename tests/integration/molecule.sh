@@ -7,7 +7,8 @@ targetname=${PWD##*/}
 role=$(expr "${targetname}" : '\w*-\(\w*\)-\w*')
 role_root="${collection_root}/roles/${role}"
 scenario=$(expr "${targetname}" : '\w*-\w*-\(\w*\)')
-initial_ansible_version="$("${pythonLocation}/pip" show ansible | grep Version: | sed -E 's/^Version: (.*)/\1/')"
+ansible_pip_path="$(dirname "$(ansible --version | grep 'ansible python module location' | sed -E 's/^  ansible python module location = (.*)$/\1/')")"
+initial_ansible_version="$(pip freeze --path="$ansible_pip_path" | grep ansible== | sed -E 's/ansible==(.*)/\1/')"
 ansible_version="${initial_ansible_version}"
 
 if [ "$(printf '%s\n' "${ansible_version}" "2.14" | sort -V | head -n1)" != "2.14" ]; then
@@ -65,7 +66,7 @@ export YAMLLINT_CONFIG_FILE="${collection_root}/.yamllint.yml"
 unset _ANSIBLE_COVERAGE_CONFIG
 unset ANSIBLE_PYTHON_INTERPRETER
 
-final_ansible_version="$("${pythonLocation}/pip" show ansible | grep Version: | sed -E 's/^Version: (.*)/\1/')"
+final_ansible_version="$(pip freeze --path="$ansible_pip_path" | grep ansible== | sed -E 's/ansible==(.*)/\1/')"
 if [ "${final_ansible_version}" != "${initial_ansible_version}" ]; then
   echo "ansible version changed during script execution: ${initial_ansible_version} -> ${final_ansible_version}" >&2
   exit 1
