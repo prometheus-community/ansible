@@ -2,9 +2,10 @@
 
 set -u -o pipefail
 
-get_ansible_core_version() {
+get_ansible_core_version() (
+  unset ANSIBLE_TEST_ANSIBLE_LIB_ROOT
   python -c 'from importlib.metadata import version; print(version("ansible-core"))'
-}
+)
 
 collection_root=$(pwd | grep -oP ".+\/ansible_collections\/\w+?\/\w+")
 targetname=${PWD##*/}
