@@ -2,12 +2,16 @@
 
 set -u -o pipefail
 
+get_ansible_core_version() {
+  python -c 'from importlib.metadata import version; print(version("ansible-core"))'
+}
+
 collection_root=$(pwd | grep -oP ".+\/ansible_collections\/\w+?\/\w+")
 targetname=${PWD##*/}
 role=$(expr "${targetname}" : '\w*-\(\w*\)-\w*')
 role_root="${collection_root}/roles/${role}"
 scenario=$(expr "${targetname}" : '\w*-\w*-\(\w*\)')
-initial_ansible_version="$(ansible --version | head -1 | sed -E 's/\.post[0-9]+//' | sed -E 's/^ansible \[core (.*)\]$/\1/')"
+initial_ansible_version="$(get_ansible_core_version)"
 ansible_version="${initial_ansible_version}"
 
 if [ "$(printf '%s\n' "${ansible_version}" "2.14" | sort -V | head -n1)" != "2.14" ]; then
@@ -65,7 +69,7 @@ export YAMLLINT_CONFIG_FILE="${collection_root}/.yamllint.yml"
 unset _ANSIBLE_COVERAGE_CONFIG
 unset ANSIBLE_PYTHON_INTERPRETER
 
-final_ansible_version="$(ansible --version | head -1 | sed -E 's/\.post[0-9]+//' | sed -E 's/^ansible \[core (.*)\]$/\1/')"
+final_ansible_version="$(get_ansible_core_version)"
 if [ "${final_ansible_version}" != "${initial_ansible_version}" ]; then
   echo "ansible version changed during script execution: ${initial_ansible_version} -> ${final_ansible_version}" >&2
   exit 1
