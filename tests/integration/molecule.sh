@@ -14,11 +14,9 @@ get_ansible_core_version() {
 
 get_ansible_core_series() {
   python - <<'PY'
-import re
 from ansible.release import __version__
-
-match = re.match(r'^(\d+\.\d+)', __version__)
-print(match.group(1))
+series = '.'.join(__version__.split('.')[:2])
+print(series)
 PY
 }
 
@@ -41,11 +39,82 @@ fi
 requirements_file="$(mktemp)"
 trap 'rm -f "${requirements_file}"' EXIT
 
+# Fixes for missing metadata
+ls -l /root/ansible/pyproject.toml /root/ansible/setup.py /root/ansible/setup.cfg 2>/dev/null || true
+python -m pip install -e /root/ansible
+python -m pip show ansible-core || true
+
+# Debug
+echo "=== python / ansible debug ==="
+pwd
+whoami
+python -V
+command -v python
+command -v ansible
+env | sort
+
+python - <<'PY'
+import sys
+print("sys.executable:", sys.executable)
+print("sys.path:")
+for p in sys.path:
+    print("  ", p)
+
+try:
+    import ansible
+    print("ansible.__file__:", ansible.__file__)
+except Exception as e:
+    print("import ansible failed:", repr(e))
+
+try:
+    from ansible.release import __version__
+    print("ansible.release.__version__:", __version__)
+except Exception as e:
+    print("import ansible.release failed:", repr(e))
+PY
+
+ls -ld /root/ansible || true
+find /root/ansible -maxdepth 3 \( -name release.py -o -name '*.dist-info' -o -name pyproject.toml -o -name PKG-INFO \) 2>/dev/null || true
+python -m pip show ansible-core || true
+echo "=== end debug ==="
+
+
+echo '=== metadata inspect ==='
+
+cat /root/ansible/lib/ansible_core.egg-info/PKG-INFO 2>/dev/null | sed -n '1,20p' || true
+
+python - <<'PY'
+from importlib.metadata import distributions, distribution
+
+print("distribution('ansible-core'):")
+try:
+    d = distribution("ansible-core")
+    print("  dist name:", d.metadata.get("Name"))
+    print("  dist version:", d.version)
+    print("  dist path:", d._path)
+except Exception as e:
+    print("  failed:", repr(e))
+
+print("all installed dists containing 'ansible':")
+for d in distributions():
+    name = d.metadata.get("Name")
+    if name and "ansible" in name.lower():
+        print("  name:", name)
+        print("  version:", d.version)
+        print("  path:", d._path)
+        print("  ---")
+PY
+
+python -m pip show ansible || true
+python -m pip show ansible-core || true
+ls -la /root/ansible/lib || true
+ls -la /root/ansible/bin || true
+
+echo '=== end metadata inspect ==='
+
 # Install package requirements
 apt -y update
 apt -y install docker.io
-
-env
 
 have_python_test_requirements=0
 : > "${requirements_file}"
