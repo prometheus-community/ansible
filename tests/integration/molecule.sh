@@ -29,6 +29,8 @@ printf 'ansible-core==%s\n' "${initial_ansible_version}" > "${constraints_file}"
 apt -y update
 apt -y install docker.io
 
+env
+
 # # Install python test requirements from collection
 # if [ -f "${collection_root}/test-requirements.txt"  ]; then
 #   python -m pip install --upgrade -c "${constraints_file}" -r "${collection_root}/test-requirements.txt"
