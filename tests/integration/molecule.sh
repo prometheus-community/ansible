@@ -12,7 +12,19 @@ get_ansible_core_version() {
   python -c 'from ansible.release import __version__; print(__version__)'
 }
 
+get_ansible_core_series() {
+  python - <<'PY'
+import re
+from ansible.release import __version__
+
+match = re.match(r'^(\d+\.\d+)', __version__)
+print(match.group(1))
+PY
+}
+
 initial_ansible_version="$(get_ansible_core_version)"
+ansible_series="$(get_ansible_core_series)"
+ansible_ref="stable-${ansible_series}"
 
 if [ "$(printf '%s\n' "${initial_ansible_version}" "2.14" | sort -V | head -n1)" != "2.14" ]; then
        echo "ansible version 2.14 or greater is required!" >&2
@@ -21,15 +33,42 @@ fi
 
 # Pin ansible-core to the already-installed version for all pip installs below.
 # This prevents pip from upgrading ansible-core while resolving Molecule or test dependencies.
-constraints_file="$(mktemp)"
-trap 'rm -f "${constraints_file}"' EXIT
-printf 'ansible-core==%s\n' "${initial_ansible_version}" > "${constraints_file}"
+#constraints_file="$(mktemp)"
+#trap 'rm -f "${constraints_file}"' EXIT
+#printf 'ansible-core==%s\n' "${initial_ansible_version}" > "${constraints_file}"
+ 
+
+requirements_file="$(mktemp)"
+trap 'rm -f "${requirements_file}"' EXIT
 
 # Install package requirements
 apt -y update
 apt -y install docker.io
 
 env
+
+have_python_test_requirements=0
+: > "${requirements_file}"
+
+if [ -f "${collection_root}/test-requirements.txt" ] || [ -f "${role_root}/test-requirements.txt" ]; then
+  printf 'ansible-core @ https://github.com/ansible/ansible/archive/%s.tar.gz\n' "${ansible_ref}" >> "${requirements_file}"
+
+  if [ -f "${collection_root}/test-requirements.txt" ]; then
+    printf -- '-r %s\n' "${collection_root}/test-requirements.txt" >> "${requirements_file}"
+    have_python_test_requirements=1
+  fi
+
+  if [ -f "${role_root}/test-requirements.txt" ]; then
+    printf -- '-r %s\n' "${role_root}/test-requirements.txt" >> "${requirements_file}"
+    have_python_test_requirements=1
+  fi
+fi
+
+if [ "${have_python_test_requirements}" -eq 1 ]; then
+  python -m pip install --upgrade -r "${requirements_file}"
+  python -m pip check
+fi
+
 
 # # Install python test requirements from collection
 # if [ -f "${collection_root}/test-requirements.txt"  ]; then
