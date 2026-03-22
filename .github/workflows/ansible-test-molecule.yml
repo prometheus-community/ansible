@@ -41,4 +41,4 @@ jobs:
       targets: ${{ needs.discover-molecule-scenarios.outputs.molecule-tests }}
       ansible-core-versions: ${{ inputs.ansible-core-versions }}
       coverage: never
-      test-deps: "-r tests/integration/requirements.yml"
+      test-deps: "-r ansible_collections/prometheus/prometheus/tests/integration/requirements.yml"
