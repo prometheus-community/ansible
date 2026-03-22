@@ -119,11 +119,11 @@ apt -y install docker.io
 have_python_test_requirements=0
 : > "${requirements_file}"
 
-if [ -f "${collection_root}/test-requirements.txt" ] || [ -f "${role_root}/test-requirements.txt" ]; then
+if [ -f "${collection_root}/tests/integration/requirements.txt" ] || [ -f "${role_root}/test-requirements.txt" ]; then
   printf 'ansible-core @ https://github.com/ansible/ansible/archive/%s.tar.gz\n' "${ansible_ref}" >> "${requirements_file}"
 
-  if [ -f "${collection_root}/test-requirements.txt" ]; then
-    printf -- '-r %s\n' "${collection_root}/test-requirements.txt" >> "${requirements_file}"
+  if [ -f "${collection_root}/tests/integration/requirements.txt" ]; then
+    printf -- '-r %s\n' "${collection_root}/tests/integration/requirements.txt" >> "${requirements_file}"
     have_python_test_requirements=1
   fi
 
@@ -152,10 +152,10 @@ fi
 # # Verify installed Python packages have compatible dependencies
 # python -m pip check
 
-# Install molecule collection requirements
-ansible-galaxy collection install git+https://github.com/ansible-collections/community.docker.git
-# Install collection requirements
-ansible-galaxy collection install -r "${collection_root}/requirements.yml"
+# # Install molecule collection requirements
+# ansible-galaxy collection install git+https://github.com/ansible-collections/community.docker.git
+# # Install collection requirements
+# ansible-galaxy collection install -r "${collection_root}/requirements.yml"
 
 # Define config locations within collection
 export MOLECULE_FILE="${collection_root}/.config/molecule/config.yml"
