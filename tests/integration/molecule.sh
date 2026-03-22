@@ -33,21 +33,21 @@ fi
 apt -y update
 apt -y install docker.io
 
-# Pin ansible-core to the already-installed stable- branch version for all pip installs below.
-# This prevents pip from upgrading ansible-core while resolving Molecule or test dependencies.
-requirements_file="$(mktemp)"
-trap 'rm -f "${requirements_file}"' EXIT
-
-
-python_test_requirements="${collection_root}/tests/integration/requirements.txt"
-
-if [ -f "${python_test_requirements}" ]; then
-  printf 'ansible-core @ https://github.com/ansible/ansible/archive/%s.tar.gz\n' "${ansible_ref}" > "${requirements_file}"
-  printf -- '-r %s\n' "${python_test_requirements}" >> "${requirements_file}"
-
-  python -m pip install -r "${requirements_file}"
-  python -m pip check
-fi
+## Pin ansible-core to the already-installed stable- branch version for all pip installs below.
+## This prevents pip from upgrading ansible-core while resolving Molecule or test dependencies.
+#requirements_file="$(mktemp)"
+#trap 'rm -f "${requirements_file}"' EXIT
+#
+#
+#python_test_requirements="${collection_root}/tests/integration/requirements.txt"
+#
+#if [ -f "${python_test_requirements}" ]; then
+#  printf 'ansible-core @ https://github.com/ansible/ansible/archive/%s.tar.gz\n' "${ansible_ref}" > "${requirements_file}"
+#  printf -- '-r %s\n' "${python_test_requirements}" >> "${requirements_file}"
+#
+#  python -m pip install -r "${requirements_file}"
+#  python -m pip check
+#fi
 
 # Define config locations within collection
 export MOLECULE_FILE="${collection_root}/.config/molecule/config.yml"
