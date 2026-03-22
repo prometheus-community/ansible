@@ -45,7 +45,7 @@ if [ -f "${python_test_requirements}" ]; then
   printf 'ansible-core @ https://github.com/ansible/ansible/archive/%s.tar.gz\n' "${ansible_ref}" > "${requirements_file}"
   printf -- '-r %s\n' "${python_test_requirements}" >> "${requirements_file}"
 
-  python -m pip install --upgrade -r "${requirements_file}"
+  python -m pip install -r "${requirements_file}"
   python -m pip check
 fi
 

@@ -1,9 +1,8 @@
-bcrypt==4.0.1
+bcrypt==4.0.1  # to resolve passlib compatibility issues #722
 docker
 molecule
 molecule-plugins[docker]
 passlib
-passlib[bcrypt]
 pytest
 pytest-testinfra
 selinux
