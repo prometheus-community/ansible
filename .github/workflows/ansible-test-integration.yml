@@ -21,9 +21,10 @@ on:
       test-deps:
         required: false
         type: string
-      pce-test-cmd:
+      pre-test-cmd:
         required: false
         type: string
+        default: ":"
 
 jobs:
   ansible-test-integration:
@@ -51,6 +52,8 @@ jobs:
           ansible-core-github-repository-slug: ${{ contains(fromJson('["stable-2.9", "stable-2.10", "stable-2.11"]'), matrix.ansible-core-versions) &&
                                                'ansible-community/eol-ansible' || 'ansible/ansible' }}
           test-deps: ${{ inputs.test-deps }}
-          pre-test-cmd: ${{ inputs.pre-test-cmd }}
+          pre-test-cmd: |-
+            printf '%s\n' '${{ matrix.ansible-core-versions }}' > .ansible-test-core-ref
+            ${{ inputs.pre-test-cmd }}
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
