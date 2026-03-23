@@ -31,5 +31,4 @@ build_ignore:
   - changelogs
   - roles/*/molecule
   - tests
-  - '*test-requirements.txt'
   - '*.tar.gz'
