@@ -3,24 +3,8 @@ ancestor:
 releases:
   0.29.0:
     changes:
-      minor_changes:
-        - 'enhancement: Improve systemd dependencies (https://github.com/prometheus-community/ansible/pull/757)'
-        - 'minor: Update minimum Ansible version (https://github.com/prometheus-community/ansible/pull/747)'
-      bugfixes:
-        - 'fix(CI): upgrade molecule, pin ansible-core, and fail on version drift
-          (https://github.com/prometheus-community/ansible/pull/755)'
-        - 'fix: Handle SELinux Port Mapping (https://github.com/prometheus-community/ansible/pull/749)'
       trivial:
-        - 'patch: New prometheus/mysqld_exporter upstream release 0.19.0! (https://github.com/prometheus-community/ansible/pull/761)'
-        - 'chore(deps): update release-drafter/release-drafter action to v7.1.1 (https://github.com/prometheus-community/ansible/pull/760)'
-        - 'chore(deps): update svenstaro/upload-release-action action to v2.11.5 (https://github.com/prometheus-community/ansible/pull/759)'
-        - 'chore(deps): update release-drafter/release-drafter action to v7 (https://github.com/prometheus-community/ansible/pull/756)'
-        - 'docs(cadvisor): update metric options (https://github.com/prometheus-community/ansible/pull/753)'
-        - 'docs: Cleanup references to old ansible versions (https://github.com/prometheus-community/ansible/pull/752)'
-        - 'patch: New superq/smokeping_prober upstream release 0.11.0! (https://github.com/prometheus-community/ansible/pull/751)'
-        - 'patch: New oliver006/redis_exporter upstream release 1.82.0! (https://github.com/prometheus-community/ansible/pull/750)'
-        - 'chore(deps): update release-drafter/release-drafter action to v6.4.0 (https://github.com/prometheus-community/ansible/pull/748)'
-        - 'chore(deps): update release-drafter/release-drafter action to v6.3.0 (https://github.com/prometheus-community/ansible/pull/746)'
+        - 'refactor: move molecule deps to ansible-test native handling (https://github.com/prometheus-community/ansible/pull/764)'
     release_date: '2026-03-06'
   0.28.1:
     changes:
