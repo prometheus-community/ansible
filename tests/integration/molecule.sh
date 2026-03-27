@@ -7,41 +7,33 @@ targetname=${PWD##*/}
 role=$(expr "${targetname}" : '\w*-\(\w*\)-\w*')
 role_root="${collection_root}/roles/${role}"
 scenario=$(expr "${targetname}" : '\w*-\w*-\(\w*\)')
-initial_ansible_version="$(ansible --version | head -1 | sed 's/[^0-9\.]*//g')"
-ansible_version="${initial_ansible_version}"
+expected_ansible_version="$(cat "${collection_root}/.ansible-test-core-ref" 2>/dev/null || true)"
+expected_ansible_version="${expected_ansible_version#stable-}"
+actual_ansible_version="$(
+  python - <<'PY'
+from ansible.release import __version__
+from packaging.version import Version
 
-if [ "$(printf '%s\n' "${ansible_version}" "2.14" | sort -V | head -n1)" != "2.14" ]; then
-       echo "ansible version 2.14 or greater is required!" >&2
-       exit 1
+v = Version(__version__)
+print(f"{v.major}.{v.minor}")
+PY
+)"
+
+# Verify min Ansible version
+if [ "$(printf '%s\n' "${actual_ansible_version}" "2.14" | sort -V | head -n1)" != "2.14" ]; then
+  echo "ansible version 2.14 or greater is required! got ${actual_ansible_version}" >&2
+  exit 1
 fi
 
-# Pin ansible-core to the already-installed version for all pip installs below.
-# This prevents pip from upgrading ansible-core while resolving Molecule or test dependencies.
-constraints_file="$(mktemp)"
-trap 'rm -f "${constraints_file}"' EXIT
-printf 'ansible-core==%s\n' "${ansible_version}" > "${constraints_file}"
+# Verify expected Ansible version
+if [ -n "${expected_ansible_version}" ] && [ "${expected_ansible_version}" != "${actual_ansible_version}" ]; then
+  echo "ansible version mismatch: expected ${expected_ansible_version}, got ${actual_ansible_version}" >&2
+  exit 1
+fi
 
 # Install package requirements
 apt -y update
 apt -y install docker.io
-
-# Install python test requirements from collection
-if [ -f "${collection_root}/test-requirements.txt"  ]; then
-  python -m pip install --upgrade -c "${constraints_file}" -r "${collection_root}/test-requirements.txt"
-fi
-
-# Install python test requirements from role
-if [ -f "${role_root}/test-requirements.txt"  ]; then
-  python -m pip install --upgrade -c "${constraints_file}" -r "${role_root}/test-requirements.txt"
-fi
-
-# Verify installed Python packages have compatible dependencies
-python -m pip check
-
-# Install molecule collection requirements
-ansible-galaxy collection install git+https://github.com/ansible-collections/community.docker.git
-# Install collection requirements
-ansible-galaxy collection install -r "${collection_root}/requirements.yml"
 
 # Define config locations within collection
 export MOLECULE_FILE="${collection_root}/.config/molecule/config.yml"
@@ -51,12 +43,6 @@ export YAMLLINT_CONFIG_FILE="${collection_root}/.yamllint.yml"
 unset _ANSIBLE_COVERAGE_CONFIG
 unset ANSIBLE_PYTHON_INTERPRETER
 
-final_ansible_version="$(ansible --version | head -1 | sed 's/[^0-9\.]*//g')"
-if [ "${final_ansible_version}" != "${initial_ansible_version}" ]; then
-  echo "ansible version changed during script execution: ${initial_ansible_version} -> ${final_ansible_version}" >&2
-  exit 1
-fi
-
 # Run molecule test
 cd "${role_root}" || { echo "Fail to change directory into ${role_root}"; exit 1; }
-molecule -c "${collection_root}/.config/molecule/config.yml" test -s "${scenario}"
+molecule -c "${MOLECULE_FILE}" test -s "${scenario}"
