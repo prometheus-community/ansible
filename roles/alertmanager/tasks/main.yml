@@ -23,6 +23,7 @@
     _common_system_user: "{{ alertmanager_system_user }}"
     _common_config_dir: "{{ alertmanager_config_dir }}"
     _common_binary_unarchive_opts: ['--strip-components=1']
+    _common_skip_configure: "{{ alertmanager_skip_configure }}"
   tags:
     - alertmanager
     - install
@@ -43,6 +44,7 @@
 - name: Configure
   ansible.builtin.include_tasks:
     file: configure.yml
+  when: not alertmanager_skip_configure
   tags:
     - alertmanager
     - configure
@@ -57,6 +59,7 @@
     state: started
   when:
     - not ansible_check_mode
+    - not alertmanager_skip_configure
   tags:
     - alertmanager
     - run

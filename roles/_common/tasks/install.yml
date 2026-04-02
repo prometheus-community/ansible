@@ -153,8 +153,9 @@
     group: root
   loop: "{{ _common_binaries }}"
   become: true
-  notify:
-    - "{{ ansible_parent_role_names | first }} : Restart {{ _common_service_name }}"
+  # Avoid notifying the Restart SERVICE handler when SERVICE_skip_configure has been set because the systemd service doesn't exist
+  notify: >-
+    {{ _common_skip_configure | default(False) | ternary([], [(ansible_parent_role_names | first) ~ " : Restart " ~ _common_service_name]) | list }}
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - install
