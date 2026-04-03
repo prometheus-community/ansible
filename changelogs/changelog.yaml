@@ -4,7 +4,7 @@ releases:
   0.29.0:
     changes:
       trivial:
-        - 'refactor: move molecule deps to ansible-test native handling (https://github.com/prometheus-community/ansible/pull/764)'
+        - 'chore: get tests to pass on ansible v2.19 (2) (https://github.com/prometheus-community/ansible/pull/769)'
     release_date: '2026-03-06'
   0.28.1:
     changes:
