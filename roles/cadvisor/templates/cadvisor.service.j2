@@ -29,6 +29,8 @@ ExecStart={{ cadvisor_binary_install_dir }}/cadvisor \
     '--listen_ip={{ cadvisor_listen_ip }}' \
     '--port={{ cadvisor_port }}' \
     '--prometheus_endpoint={{ cadvisor_prometheus_endpoint }}'
+    '--housekeeping_interval={{ cadvisor_housekeeping_interval }}'
+    '--max_housekeeping_interval={{ cadvisor_max_housekeeping_interval }}'
 
 SyslogIdentifier=cadvisor
 Restart=always
