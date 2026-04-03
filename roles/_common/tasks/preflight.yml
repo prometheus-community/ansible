@@ -67,6 +67,7 @@
 
 - name: Gather package facts
   ansible.builtin.package_facts:
+    strategy: all
   when: "not 'packages' in ansible_facts"
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
