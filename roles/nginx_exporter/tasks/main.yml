@@ -13,6 +13,7 @@
     tasks_from: install.yml
   vars:
     _common_local_cache_path: "{{ nginx_exporter_local_cache_path }}"
+    _common_download_host: "{{ nginx_exporter_download_host }}"
     _common_binaries: "{{ _nginx_exporter_binaries }}"
     _common_binary_install_dir: "{{ nginx_exporter_binary_install_dir }}"
     _common_binary_url: "{{ nginx_exporter_binary_url }}"
