@@ -5,6 +5,7 @@ releases:
     changes:
       trivial:
         - 'chore: get tests to pass on ansible v2.19 (2) (https://github.com/prometheus-community/ansible/pull/769)'
+        - 'patch: New prometheus/prometheus upstream release 3.11.0! (https://github.com/prometheus-community/ansible/pull/768)'
     release_date: '2026-03-06'
   0.28.1:
     changes:
