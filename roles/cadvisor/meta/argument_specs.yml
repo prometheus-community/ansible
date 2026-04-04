@@ -10,7 +10,7 @@ argument_specs:
     options:
       cadvisor_version:
         description: "cAdvisor package version. Also accepts latest as parameter."
-        default: "0.52.1"
+        default: "0.56.2"
       cadvisor_binary_url:
         description: "URL of the cadvisor binary file"
         default: "https://github.com/{{ _cadvisor_repo }}/releases/download/v{{ cadvisor_version }}/cadvisor-v{{ cadvisor_version }}-{{ ansible_facts['system'] | lower }}-{{ _cadvisor_go_ansible_arch }}"
@@ -25,8 +25,8 @@ argument_specs:
         default: "/metrics"
       cadvisor_disable_metrics:
         description:
-          - "comma-separated list of metrics to be disabled"
-          - "(default advtcp,cpu_topology,cpuset,hugetlb,memory_numa,process,referenced_memory,resctrl,sched,tcp,udp)"
+          - "A list of metrics to be disabled"
+          - "cAdvisor disables by default [advtcp, cpu_topology, cpuset, hugetlb, memory_numa, process, referenced_memory, resctrl, sched, tcp, udp]"
         type: "list"
         default: []
         choices: &metrics_choices
@@ -45,13 +45,15 @@ argument_specs:
           - oom_event
           - percpu
           - perf_event
+          - pressure
           - process
           - referenced_memory
           - resctrl
           - sched
           - tcp
+          - udp
       cadvisor_enable_metrics:
-        description: "comma-separated list of metrics to be enabled. If set, overrides 'cadvisor_disable_metrics'"
+        description: "A list of metrics to be enabled. If set, overrides 'cadvisor_disable_metrics'"
         default: []
         type: "list"
         choices: *metrics_choices
@@ -60,11 +62,11 @@ argument_specs:
         type: "bool"
         default: true
       cadvisor_whitelisted_container_labels:
-        description: "comma-separated list of container labels to be used as labels on prometheus metrics"
+        description: "A list of container labels to be used as labels on prometheus metrics"
         default: []
         type: "list"
       cadvisor_env_metadata_whitelist:
-        description: "comma-separated list of env variables to be used as labels on prometheus metrics"
+        description: "A list of env variables to be used as labels on prometheus metrics"
         default: []
         type: "list"
       cadvisor_docker_only:

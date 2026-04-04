@@ -1,5 +1,5 @@
 ---
-node_exporter_version: 1.9.1
+node_exporter_version: 1.10.2
 node_exporter_binary_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/\
                            node_exporter-{{ node_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _node_exporter_go_ansible_arch }}.tar.gz"
 node_exporter_checksums_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/sha256sums.txt"
@@ -7,6 +7,9 @@ node_exporter_checksums_url: "https://github.com/{{ _node_exporter_repo }}/relea
 node_exporter_web_disable_exporter_metrics: false
 node_exporter_web_listen_address: "0.0.0.0:9100"
 node_exporter_web_telemetry_path: "/metrics"
+
+node_exporter_log_level: "info"
+node_exporter_log_format: "logfmt"
 
 node_exporter_textfile_dir: "/var/lib/node_exporter"
 
@@ -21,8 +24,8 @@ node_exporter_enabled_collectors:
   - textfile:
       directory: "{{ node_exporter_textfile_dir }}"
 #  - filesystem:
-#      ignored-mount-points: "^/(sys|proc|dev)($|/)"
-#      ignored-fs-types: "^(sys|proc|auto)fs$"
+#      mount-points-exclude: "^/(sys|proc|dev)($|/)"
+#      fs-types-exclude: "^(sys|proc|auto)fs$"
 
 node_exporter_disabled_collectors: []
 

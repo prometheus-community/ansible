@@ -1,5 +1,5 @@
 ---
-apache_exporter_version: 1.0.10
+apache_exporter_version: 1.0.12
 apache_exporter_binary_url: "https://github.com/{{ _apache_exporter_repo }}/releases/download/v{{ apache_exporter_version }}/\
                           apache_exporter-{{ apache_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _apache_exporter_go_ansible_arch }}.tar.gz"
 apache_exporter_checksums_url: "https://github.com/{{ _apache_exporter_repo }}/releases/download/v{{ apache_exporter_version }}/sha256sums.txt"

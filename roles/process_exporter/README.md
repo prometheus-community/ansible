@@ -6,10 +6,6 @@ Deploy [process-exporter](https://github.com/ncabatoff/process-exporter) using a
 
 Note. This repository and role uses the name process_exporter to conform with ansible galaxy constraints.
 
-## Requirements
-
-- Ansible >= 2.9 (It might work on previous versions, but we cannot guarantee it)
-
 ## Role Variables
 
 All variables which can be overridden are stored in [meta/argument_specs.yml](meta/argument_specs.yml) file.

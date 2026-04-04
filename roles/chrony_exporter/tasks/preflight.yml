@@ -55,6 +55,7 @@
   run_once: true
   until: chrony_exporter_version is version('0.0.0', '>=')
   retries: 10
+  delay: 10
   when:
     - chrony_exporter_version == "latest"
   tags:

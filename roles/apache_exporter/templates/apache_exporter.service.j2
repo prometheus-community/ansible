@@ -3,7 +3,8 @@
 [Unit]
 Description=Prometheus Apache Exporter
 Documentation=https://github.com/Lusitaniae/apache_exporter
-After=network.target
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple
