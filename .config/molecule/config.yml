@@ -69,12 +69,12 @@ provisioner:
         exclude_ansible_vers: ["2.16", "2.17", "2.18", "2.19", "2.20"]
       almalinux-10:
         ansible_become_method: su
-        exclude_ansible_vers: ["2.12", "2.13", "2.14", "2.15"]
+        exclude_ansible_vers: ["2.14", "2.15"]
       debian-11:
         exclude_ansible_vers: ["2.16", "2.17", "2.18", "2.19", "2.20"]
       debian-12:
-        exclude_ansible_vers: ["2.12", "2.13", "2.20"]
+        exclude_ansible_vers: ["2.20"]
       ubuntu-22.04:
-        exclude_ansible_vers: ["2.12", "2.13", "2.18", "2.19", "2.20"]
+        exclude_ansible_vers: ["2.18", "2.19", "2.20"]
       ubuntu-24.04:
-        exclude_ansible_vers: ["2.12", "2.13", "2.14", "2.15"]
+        exclude_ansible_vers: ["2.14", "2.15"]

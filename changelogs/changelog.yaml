@@ -4,7 +4,8 @@ releases:
   0.29.0:
     changes:
       trivial:
-        - 'chore(deps): update release-drafter/release-drafter action to v6.3.0 (https://github.com/prometheus-community/ansible/pull/746)'
+        - 'chore: get tests to pass on ansible v2.19 (2) (https://github.com/prometheus-community/ansible/pull/769)'
+        - 'patch: New prometheus/prometheus upstream release 3.11.0! (https://github.com/prometheus-community/ansible/pull/768)'
     release_date: '2026-03-06'
   0.28.1:
     changes:

@@ -3,6 +3,7 @@
 [Unit]
 Description=Prometheus
 After=network-online.target
+Wants=network-online.target
 Requires=local-fs.target
 After=local-fs.target
 

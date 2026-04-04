@@ -11,6 +11,7 @@
   run_once: true
   until: cadvisor_version is version('0.0.0', '>=')
   retries: 10
+  delay: 10
   when:
     - cadvisor_version == "latest"
   tags:

@@ -83,6 +83,7 @@
   run_once: true
   until: prometheus_version is version('0.0.0', '>=')
   retries: 10
+  delay: 10
   when:
     - prometheus_version == "latest"
   tags:

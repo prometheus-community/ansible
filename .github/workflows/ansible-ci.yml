@@ -28,8 +28,6 @@ jobs:
 
       - name: Lint collection
         uses: ansible/ansible-lint@8ba9595a4acd1b906eb75568b34f6ef592cd1528  # v26.3.0
-        with:
-          requirements_file: requirements.yml
 
   arguments-spec-lint:
     runs-on: ubuntu-latest

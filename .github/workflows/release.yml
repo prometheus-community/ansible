@@ -58,6 +58,6 @@ jobs:
 
       - name: "Publish release"
         id: release-publish
-        uses: release-drafter/release-drafter@00ce30b0ce8a4d67bccfca59421cdf6c55dd0784  # v6.3.0
+        uses: release-drafter/release-drafter@139054aeaa9adc52ab36ddf67437541f039b88e2  # v7.1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
