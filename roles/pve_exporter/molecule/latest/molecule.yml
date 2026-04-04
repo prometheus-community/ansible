@@ -1,0 +1,7 @@
+---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        pve_exporter_version: latest
+        pve_exporter_textfile_dir: /home/pve_exporter
