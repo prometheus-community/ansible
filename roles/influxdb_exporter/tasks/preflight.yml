@@ -27,6 +27,7 @@
   run_once: true
   until: influxdb_exporter_version is version('0.0.0', '>=')
   retries: 10
+  delay: 10
   when:
     - influxdb_exporter_version == "latest"
   tags:

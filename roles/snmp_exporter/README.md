@@ -6,10 +6,6 @@
 
 Deploy and manage prometheus [SNMP exporter](https://github.com/prometheus/snmp_exporter) using ansible.
 
-## Requirements
-
-- Ansible >= 2.9 (It might work on previous versions, but we cannot guarantee it)
-
 ## Role Variables
 
 All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) file as well as in [meta/argument_specs.yml](meta/argument_specs.yml).
