@@ -6,6 +6,7 @@ releases:
       minor_changes:
         - 'feat(cadvisor): Add cAdvisor housekeeping (https://github.com/prometheus-community/ansible/pull/770)'
       trivial:
+        - 'patch: New prometheus/prometheus upstream release 3.11.1! (https://github.com/prometheus-community/ansible/pull/776)'
         - 'docs: fix typo (https://github.com/prometheus-community/ansible/pull/774)'
         - 'patch: New percona/mongodb_exporter upstream release 0.50.0! (https://github.com/prometheus-community/ansible/pull/773)'
         - 'patch: New prometheus/node_exporter upstream release 1.11.0! (https://github.com/prometheus-community/ansible/pull/772)'
