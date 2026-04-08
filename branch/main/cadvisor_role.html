@@ -282,6 +282,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--cadvisor_housekeeping_interval"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-cadvisor-role-parameter-main-cadvisor-housekeeping-interval"><strong>cadvisor_housekeeping_interval</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--cadvisor_housekeeping_interval" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Interval between container housekeepings</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;10s&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--cadvisor_listen_ip"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-cadvisor-role-parameter-main-cadvisor-listen-ip"><strong>cadvisor_listen_ip</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--cadvisor_listen_ip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -289,12 +297,20 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--cadvisor_local_cache_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-cadvisor-role-parameter-main-cadvisor-local-cache-path"><strong>cadvisor_local_cache_path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--cadvisor_local_cache_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Local path to stash the archive and its extraction</p>
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp/cadvisor-{{</span> <span class="pre">ansible_facts['system']</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_cadvisor_go_ansible_arch</span> <span class="pre">}}/{{</span> <span class="pre">cadvisor_version</span> <span class="pre">}}&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--cadvisor_max_housekeeping_interval"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-cadvisor-role-parameter-main-cadvisor-max-housekeeping-interval"><strong>cadvisor_max_housekeeping_interval</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--cadvisor_max_housekeeping_interval" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Largest interval to allow between container housekeepings</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;10s&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
