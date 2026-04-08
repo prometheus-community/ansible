@@ -3,9 +3,13 @@ ancestor:
 releases:
   0.29.0:
     changes:
+      minor_changes:
+        - 'feat(cadvisor): Add cAdvisor housekeeping (https://github.com/prometheus-community/ansible/pull/770)'
       trivial:
+        - 'docs: fix typo (https://github.com/prometheus-community/ansible/pull/774)'
         - 'chore: get tests to pass on ansible v2.19 (2) (https://github.com/prometheus-community/ansible/pull/769)'
         - 'patch: New prometheus/prometheus upstream release 3.11.0! (https://github.com/prometheus-community/ansible/pull/768)'
+        - 'chore(deps): update ansible/ansible-lint action to v26.4.0 (https://github.com/prometheus-community/ansible/pull/767)'
     release_date: '2026-03-06'
   0.28.1:
     changes:

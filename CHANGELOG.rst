@@ -7,6 +7,11 @@ Prometheus.Prometheus Release Notes
 v0.29.0
 =======
 
+Minor Changes
+-------------
+
+- feat(cadvisor): Add cAdvisor housekeeping (https://github.com/prometheus-community/ansible/pull/770)
+
 v0.28.1
 =======
 
