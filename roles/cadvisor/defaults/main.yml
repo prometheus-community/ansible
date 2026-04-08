@@ -21,3 +21,9 @@ cadvisor_system_user: "{{ cadvisor_system_group }}"
 cadvisor_local_cache_path: "/tmp/cadvisor-{{ ansible_facts['system'] | lower }}-{{ _cadvisor_go_ansible_arch }}/{{ cadvisor_version }}"
 
 cadvisor_binary_install_dir: "/usr/local/bin"
+
+# cAdvisor has its own internal metrics colleciton loop. The default is aggressive (1s).
+# Tune this to be more reasonable.
+#
+cadvisor_housekeeping_interval: 10s
+cadvisor_max_housekeeping_interval: 15s

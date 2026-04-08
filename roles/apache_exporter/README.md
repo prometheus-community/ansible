@@ -26,7 +26,7 @@ Use it in a playbook as follows:
 
 ### TLS config
 
-Before running mysqld_exporter role, the user needs to provision their own certificate and key.
+Before running apache_exporter role, the user needs to provision their own certificate and key.
 ```yaml
 - hosts: all
   pre_tasks:

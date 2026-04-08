@@ -27,6 +27,19 @@ Use it in a playbook as follows:
     - prometheus.prometheus.cadvisor
 ```
 
+### Prometheus config
+
+Note that cAdvisor is different to a standard Prometheus exporter. It has its 
+own internal metrics data collection loop and exposes timestamps. Some care
+will be needed in the Prometheus configuration for this to work correctly.
+
+```yaml
+prometheus_scrape_configs:
+  - job_name: cadvisor
+    scrape_interval: 10s
+    track_timestamps_staleness: true
+```
+
 ### Demo site
 
 We provide an example site that demonstrates a full monitoring solution based on prometheus and grafana. The repository with code and links to running instances is [available on github](https://github.com/superq/demo-site) and the site is hosted on [DigitalOcean](https://digitalocean.com).
