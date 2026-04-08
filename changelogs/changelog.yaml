@@ -7,6 +7,7 @@ releases:
         - 'feat(cadvisor): Add cAdvisor housekeeping (https://github.com/prometheus-community/ansible/pull/770)'
       trivial:
         - 'docs: fix typo (https://github.com/prometheus-community/ansible/pull/774)'
+        - 'patch: New prometheus/node_exporter upstream release 1.11.0! (https://github.com/prometheus-community/ansible/pull/772)'
         - 'chore: get tests to pass on ansible v2.19 (2) (https://github.com/prometheus-community/ansible/pull/769)'
         - 'patch: New prometheus/prometheus upstream release 3.11.0! (https://github.com/prometheus-community/ansible/pull/768)'
         - 'chore(deps): update ansible/ansible-lint action to v26.4.0 (https://github.com/prometheus-community/ansible/pull/767)'
