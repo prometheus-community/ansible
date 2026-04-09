@@ -5,6 +5,8 @@ releases:
     changes:
       bugfixes:
         - 'fix(roles/_common): package_facts to gather details from all managers (https://github.com/prometheus-community/ansible/pull/771)'
+      trivial:
+        - 'chore(deps): update release-drafter/release-drafter action to v7.2.0 (https://github.com/prometheus-community/ansible/pull/779)'
     release_date: '2026-04-09'
   0.29.0:
     changes:
