@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.29.1:
+    changes:
+      bugfixes:
+        - 'fix(roles/_common): package_facts to gather details from all managers (https://github.com/prometheus-community/ansible/pull/771)'
+    release_date: '2026-04-09'
   0.29.0:
     changes:
       minor_changes:
