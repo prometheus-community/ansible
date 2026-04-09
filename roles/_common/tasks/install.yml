@@ -81,7 +81,7 @@
     - name: "Verify checksum of {{ __common_binary_basename }}"
       run_once: true
       check_mode: false
-      when: (_common_checksums_url | length > 0)
+      when: (_common_checksum | length > 0) or (_common_checksums_url | length > 0)
       block:
         - name: "Fetch checksum list for {{ __common_binary_basename }}"
           ansible.builtin.uri:
@@ -91,12 +91,14 @@
             return_content: true
             status_code: [200, 203, 204, 206, 300, 301, 302, 303, 304, 307, 308]
             follow_redirects: all
+          when: (_common_checksum | length == 0)
           register: __common_binary_checksums_raw
 
         - name: "Parse checksum list for {{ __common_binary_basename }}"
           ansible.builtin.set_fact:
             __common_binary_checksums: "{{ dict(__common_binary_checksums_raw.content.splitlines()
                                         | map('regex_findall', '^([a-fA-F0-9]+)\\s+(.+)$') | map('flatten') | map('reverse')) }}"
+          when: (_common_checksum | length == 0)
 
         - name: "Calculate checksum of {{ __common_binary_basename }}"
           ansible.builtin.stat:
@@ -104,6 +106,11 @@
             checksum_algorithm: sha256
             get_checksum: true
           register: __common_binary_checksum
+
+        - name: "Use provided checksum"
+          ansible.builtin.set_fact:
+            __common_binary_checksums: "{{ { __common_binary_basename: _common_checksum } }}"
+          when: (_common_checksum | length > 0)
 
         - name: "Verify correct checksum of {{ __common_binary_basename }}"
           ansible.builtin.assert:

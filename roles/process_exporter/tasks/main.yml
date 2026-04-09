@@ -16,6 +16,7 @@
     _common_binaries: "{{ _process_exporter_binaries }}"
     _common_binary_install_dir: "{{ process_exporter_binary_install_dir }}"
     _common_binary_url: "{{ process_exporter_binary_url }}"
+    _common_checksum: "{{ process_exporter_checksum }}"
     _common_checksums_url: "{{ process_exporter_checksums_url }}"
     _common_system_group: "{{ process_exporter_system_group }}"
     _common_system_user: "{{ process_exporter_system_user }}"

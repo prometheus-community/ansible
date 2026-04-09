@@ -2,6 +2,7 @@
 consul_exporter_version: 0.13.0
 consul_exporter_binary_url: "https://github.com/{{ _consul_exporter_repo }}/releases/download/v{{ consul_exporter_version }}/\
                              consul_exporter-{{ consul_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _consul_exporter_go_ansible_arch }}.tar.gz"
+consul_exporter_checksum: ""
 consul_exporter_checksums_url: "https://github.com/{{ _consul_exporter_repo }}/releases/download/v{{ consul_exporter_version }}/sha256sums.txt"
 
 consul_exporter_web_listen_address: "0.0.0.0:9107"

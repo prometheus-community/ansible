@@ -16,6 +16,7 @@
     _common_binaries: "{{ _chrony_exporter_binaries }}"
     _common_binary_install_dir: "{{ chrony_exporter_binary_install_dir }}"
     _common_binary_url: "{{ chrony_exporter_binary_url }}"
+    _common_checksum: "{{ chrony_exporter_checksum }}"
     _common_checksums_url: "{{ chrony_exporter_checksums_url }}"
     _common_system_group: "{{ chrony_exporter_system_group }}"
     _common_system_user: "{{ chrony_exporter_system_user }}"

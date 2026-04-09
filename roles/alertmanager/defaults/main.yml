@@ -2,6 +2,7 @@
 alertmanager_version: 0.31.1
 alertmanager_binary_url: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/\
                           alertmanager-{{ alertmanager_version }}.{{ ansible_facts['system'] | lower }}-{{ _alertmanager_go_ansible_arch }}.tar.gz"
+alertmanager_checksum: ""
 alertmanager_checksums_url: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/sha256sums.txt"
 
 alertmanager_config_dir: /etc/alertmanager

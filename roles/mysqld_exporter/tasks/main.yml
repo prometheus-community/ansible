@@ -16,6 +16,7 @@
     _common_binaries: "{{ _mysqld_exporter_binaries }}"
     _common_binary_install_dir: "{{ mysqld_exporter_binary_install_dir }}"
     _common_binary_url: "{{ mysqld_exporter_binary_url }}"
+    _common_checksum: "{{ mysqld_exporter_checksum }}"
     _common_checksums_url: "{{ mysqld_exporter_checksums_url }}"
     _common_system_group: "{{ mysqld_exporter_system_group }}"
     _common_system_user: "{{ mysqld_exporter_system_user }}"

@@ -20,6 +20,7 @@
     _common_binaries: "{{ _influxdb_exporter_binaries }}"
     _common_binary_install_dir: "{{ influxdb_exporter_binary_install_dir }}"
     _common_binary_url: "{{ influxdb_exporter_binary_url }}"
+    _common_checksum: "{{ influxdb_exporter_checksum }}"
     _common_checksums_url: "{{ influxdb_exporter_checksums_url }}"
     _common_system_group: "{{ influxdb_exporter_system_group }}"
     _common_system_user: "{{ influxdb_exporter_system_user }}"

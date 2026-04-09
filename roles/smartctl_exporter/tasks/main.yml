@@ -16,6 +16,7 @@
     _common_binaries: "{{ _smartctl_exporter_binaries }}"
     _common_binary_install_dir: "{{ smartctl_exporter_binary_install_dir }}"
     _common_binary_url: "{{ smartctl_exporter_binary_url }}"
+    _common_checksum: "{{ smartctl_exporter_checksum }}"
     _common_checksums_url: "{{ smartctl_exporter_checksums_url }}"
     _common_system_group: "{{ smartctl_exporter_system_group }}"
     _common_system_user: "{{ smartctl_exporter_system_user }}"

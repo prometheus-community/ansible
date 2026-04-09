@@ -16,6 +16,7 @@
     _common_binaries: "{{ _snmp_exporter_binaries }}"
     _common_binary_install_dir: "{{ snmp_exporter_binary_install_dir }}"
     _common_binary_url: "{{ snmp_exporter_binary_url }}"
+    _common_checksum: "{{ snmp_exporter_checksum }}"
     _common_checksums_url: "{{ snmp_exporter_checksums_url }}"
     _common_system_group: "{{ snmp_exporter_system_group }}"
     _common_system_user: "{{ snmp_exporter_system_user }}"
