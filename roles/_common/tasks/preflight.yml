@@ -81,7 +81,7 @@
       - >-
         [_common_web_listen_address] |
           flatten |
-          reject('match', '.+:\\d+$') |
+          reject('match', '.*:\\d+$') |
           list |
           length == 0
   when: (_common_web_listen_address | length > 0)
