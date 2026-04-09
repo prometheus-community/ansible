@@ -13,6 +13,10 @@ http_server_config:
 {% if _common_basic_auth_users | length > 0 %}
 basic_auth_users:
 {% for k, v in _common_basic_auth_users.items() %}
+  {% if v is mapping %}
+  {{ k }}: {{ v.hashed | mandatory(msg='Give basic_auth_users in format {"USERNAME": "PASSWORD IN CLEARTEXT"} or {"USERNAME: {"hashed": "PASSWORD ALREADY HASHED"}}') }}
+  {% else %}
   {{ k }}: {{ v | string | password_hash('bcrypt', ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890' | shuffle(seed=inventory_hostname) | join)[:22], rounds=9) }}
+  {% endif %}
 {% endfor %}
 {% endif %}
