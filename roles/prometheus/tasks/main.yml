@@ -11,6 +11,7 @@
   ansible.builtin.include_role:
     name: prometheus.prometheus._common
     tasks_from: install.yml
+  when: not (prometheus_skip_install | default(False))
   vars:
     _common_local_cache_path: "{{ prometheus_local_cache_path }}"
     _common_binaries: "{{ _prometheus_binaries }}"
