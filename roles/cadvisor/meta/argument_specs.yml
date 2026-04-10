@@ -73,6 +73,13 @@ argument_specs:
         description: "do not report raw cgroup metrics, except the root cgroup"
         type: "bool"
         default: false
+      cadvisor_basic_auth_users:
+        description:
+          - "Dictionary of username / password for HTTP basic authentication"
+          - >-
+            Warning : The endpoints `/api/*` and `/metrics` are exposed without authentication. See https://github.com/google/cadvisor/blob/master/docs/web.md#web-ui-authentication and https://github.com/google/cadvisor/issues/3401 for more details.
+        type: "dict"
+        default: {}
       cadvisor_system_group:
         description:
           - "I(Advanced)"
@@ -97,3 +104,6 @@ argument_specs:
       cadvisor_max_housekeeping_interval:
         description: 'Largest interval to allow between container housekeepings'
         default: '10s'
+      cadvisor_config_dir:
+        description: "Directory for cAdvisor configuration files"
+        default: "/etc/cadvisor"
