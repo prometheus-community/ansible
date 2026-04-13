@@ -6,6 +6,7 @@ releases:
       bugfixes:
         - 'fix(roles/_common): package_facts to gather details from all managers (https://github.com/prometheus-community/ansible/pull/771)'
       trivial:
+        - 'patch: New prometheus/influxdb_exporter upstream release 0.12.1! (https://github.com/prometheus-community/ansible/pull/784)'
         - 'patch: New prometheus/prometheus upstream release 3.11.2! (https://github.com/prometheus-community/ansible/pull/783)'
         - 'chore: Synchronize common files from prometheus/prometheus (https://github.com/prometheus-community/ansible/pull/781)'
         - 'chore(deps): update actions/github-script action to v9 (https://github.com/prometheus-community/ansible/pull/780)'
