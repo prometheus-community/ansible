@@ -10,6 +10,7 @@ v0.29.1
 Bugfixes
 --------
 
+- fix(cadvisor): Fix command line continuation (https://github.com/prometheus-community/ansible/pull/785)
 - fix(roles/_common): package_facts to gather details from all managers (https://github.com/prometheus-community/ansible/pull/771)
 
 v0.29.0
