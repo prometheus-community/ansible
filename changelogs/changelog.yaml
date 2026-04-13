@@ -6,6 +6,7 @@ releases:
       bugfixes:
         - 'fix(roles/_common): package_facts to gather details from all managers (https://github.com/prometheus-community/ansible/pull/771)'
       trivial:
+        - 'patch: New prometheus/prometheus upstream release 3.11.2! (https://github.com/prometheus-community/ansible/pull/783)'
         - 'chore: Synchronize common files from prometheus/prometheus (https://github.com/prometheus-community/ansible/pull/781)'
         - 'chore(deps): update actions/github-script action to v9 (https://github.com/prometheus-community/ansible/pull/780)'
         - 'chore(deps): update release-drafter/release-drafter action to v7.2.0 (https://github.com/prometheus-community/ansible/pull/779)'
