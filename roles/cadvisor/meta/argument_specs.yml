@@ -96,3 +96,9 @@ argument_specs:
           - "Host that downloads and extracts the archive (localhost by default). Set to the target host to avoid controller temp usage."
         type: "str"
         default: "localhost"
+      cadvisor_housekeeping_interval:
+        description: 'Interval between container housekeepings'
+        default: '10s'
+      cadvisor_max_housekeeping_interval:
+        description: 'Largest interval to allow between container housekeepings'
+        default: '10s'

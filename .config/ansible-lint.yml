@@ -6,3 +6,8 @@ warn_list:
 skip_list:
   - role-name  # Allow underscore prefix in role name for internal role
   - var-naming[no-role-prefix]  # https://github.com/ansible/ansible-lint/pull/3422#issuecomment-1549584988
+supported_ansible_also:
+  - "2.14"
+  - "2.15"
+  - "2.16"
+  - "2.17"

@@ -4,20 +4,21 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.29.1
+=======
+
+Bugfixes
+--------
+
+- fix(roles/_common): package_facts to gather details from all managers (https://github.com/prometheus-community/ansible/pull/771)
+
 v0.29.0
 =======
 
 Minor Changes
 -------------
 
-- enhancement: Improve systemd dependencies (https://github.com/prometheus-community/ansible/pull/757)
-- minor: Update minimum Ansible version (https://github.com/prometheus-community/ansible/pull/747)
-
-Bugfixes
---------
-
-- fix(CI): upgrade molecule, pin ansible-core, and fail on version drift (https://github.com/prometheus-community/ansible/pull/755)
-- fix: Handle SELinux Port Mapping (https://github.com/prometheus-community/ansible/pull/749)
+- feat(cadvisor): Add cAdvisor housekeeping (https://github.com/prometheus-community/ansible/pull/770)
 
 v0.28.1
 =======
