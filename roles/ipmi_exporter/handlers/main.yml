@@ -8,3 +8,12 @@
     state: restarted
   when:
     - not ansible_check_mode
+
+- name: Reload udev rules
+  listen: "reload udev rules"
+  become: true
+  ansible.builtin.command:
+    cmd: udevadm control --reload-rules && udevadm trigger --subsystem-match=ipmi
+  changed_when: false
+  when:
+    - not ansible_check_mode
