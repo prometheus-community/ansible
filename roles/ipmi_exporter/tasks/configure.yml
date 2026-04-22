@@ -23,7 +23,7 @@
     group: root
     mode: 0644
   become: true
-  when: ipmi_exporter_run_with_capabilities
+  when: ipmi_exporter_udev_enable
   notify:
     - reload udev rules
   tags:
@@ -36,7 +36,7 @@
     path: "{{ ipmi_exporter_udev_rule_path }}"
     state: absent
   become: true
-  when: not ipmi_exporter_run_with_capabilities
+  when: not ipmi_exporter_udev_enable
   notify:
     - reload udev rules
   tags:
