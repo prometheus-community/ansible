@@ -15,6 +15,35 @@
     - configure
     - ipmi_exporter_configure
 
+- name: Deploy udev rule for IPMI device access
+  ansible.builtin.template:
+    src: ipmi_udev.rules.j2
+    dest: "{{ ipmi_exporter_udev_rule_path }}"
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+  when: ipmi_exporter_run_with_capabilities
+  notify:
+    - reload udev rules
+  tags:
+    - ipmi_exporter
+    - configure
+    - ipmi_exporter_configure
+
+- name: Remove udev rule for IPMI device access
+  ansible.builtin.file:
+    path: "{{ ipmi_exporter_udev_rule_path }}"
+    state: absent
+  become: true
+  when: not ipmi_exporter_run_with_capabilities
+  notify:
+    - reload udev rules
+  tags:
+    - ipmi_exporter
+    - configure
+    - ipmi_exporter_configure
+
 - name: Copy the ipmi_exporter config file
   ansible.builtin.template:
     src: config.yaml.j2

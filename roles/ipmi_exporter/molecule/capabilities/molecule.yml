@@ -1,0 +1,7 @@
+---
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        ipmi_exporter_web_listen_address: "127.0.0.1:9290"
+        ipmi_exporter_run_with_capabilities: true
