@@ -8,7 +8,7 @@ Deploy prometheus [bind exporter](https://github.com/prometheus-community/bind_e
 ## Requirements
 
 - gnu-tar on Mac deployer host (`brew install gnu-tar`)
-- Passlib is required when using the basic authentication feature (`pip install "passlib[bcrypt<5]"`)
+- Passlib is required when using the basic authentication feature (`python -m pip install passlib bcrypt==4.0.1`)
 
 ## Role Variables
 All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) file as well as in [meta/argument_specs.yml](meta/argument_specs.yml).
