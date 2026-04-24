@@ -36,3 +36,6 @@ consul_exporter_local_cache_path: "/tmp/consul_exporter-{{ ansible_facts['system
 
 consul_exporter_binary_install_dir: "/usr/local/bin"
 consul_exporter_config_dir: "/etc/consul_exporter"
+
+# Host that performs binary download and extraction
+consul_exporter_download_host: "localhost"
