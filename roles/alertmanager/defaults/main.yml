@@ -145,3 +145,6 @@ alertmanager_local_cache_path: "/tmp/alertmanager-{{ ansible_facts['system'] | l
 
 alertmanager_system_user: alertmanager
 alertmanager_system_group: "{{ alertmanager_system_user }}"
+
+# Host that performs binary download and extraction
+alertmanager_download_host: "localhost"

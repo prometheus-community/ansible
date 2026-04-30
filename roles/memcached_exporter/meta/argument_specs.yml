@@ -68,6 +68,11 @@ argument_specs:
       memcached_exporter_local_cache_path:
         description: "Local path to stash the archive and its extraction"
         default: "/tmp/memcached_exporter-{{ ansible_facts['system'] | lower }}-{{ _memcached_exporter_go_ansible_arch }}/{{ memcached_exporter_version }}"
+      memcached_exporter_download_host:
+        description:
+          - "Host that downloads and extracts the archive (localhost by default). Set to the target host to avoid controller temp usage."
+        type: "str"
+        default: "localhost"
       memcached_exporter_config_dir:
         description: "Path to directory with memcached_exporter configuration"
         default: "/etc/memcached_exporter"

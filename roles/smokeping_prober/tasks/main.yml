@@ -13,6 +13,7 @@
     tasks_from: install.yml
   vars:
     _common_local_cache_path: "{{ smokeping_prober_local_cache_path }}"
+    _common_download_host: "{{ smokeping_prober_download_host }}"
     _common_binaries: "{{ _smokeping_prober_binaries }}"
     _common_binary_install_dir: "{{ smokeping_prober_binary_install_dir }}"
     _common_binary_url: "{{ smokeping_prober_binary_url }}"

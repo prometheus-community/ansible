@@ -174,3 +174,8 @@ argument_specs:
       prometheus_local_cache_path:
         description: Local path to stash the archive and its extraction
         default: /tmp/prometheus-{{ ansible_facts['system'] | lower }}-{{ _prometheus_go_ansible_arch }}/{{ prometheus_version }}
+      prometheus_download_host:
+        description:
+          - "Host that downloads and extracts the archive (localhost by default). Set to the target host to avoid controller temp usage."
+        type: "str"
+        default: "localhost"

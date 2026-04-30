@@ -54,8 +54,16 @@
     - download
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_download"
   become: false
-  delegate_to: localhost
+  delegate_to: "{{ _common_download_host }}"
   block:
+    - name: "Validate download host selection for {{ __common_binary_basename }}"
+      ansible.builtin.assert:
+        that:
+          - _common_download_host in ['localhost', inventory_hostname]
+        fail_msg: "Only localhost or the target host are supported for _common_download_host at this time."
+      tags:
+        - always
+
     - name: "Create localhost binary cache path"
       ansible.builtin.file:
         path: "{{ _common_local_cache_path }}"
@@ -118,6 +126,7 @@
         mode: 0755
         list_files: true
         extra_opts: "{{ _common_binary_unarchive_opts | default(omit, true) }}"
+        remote_src: "{{ _common_download_host != 'localhost' }}"
       check_mode: false
       throttle: 1  # see prometheus-community/ansible#457
       when: __common_binary_basename is search('\.zip$|\.tar\.gz$')
@@ -151,6 +160,7 @@
     mode: 0755
     owner: root
     group: root
+    remote_src: "{{ _common_download_host == inventory_hostname }}"
   loop: "{{ _common_binaries }}"
   become: true
   notify:
