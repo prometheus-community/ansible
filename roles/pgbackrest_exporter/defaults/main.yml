@@ -18,7 +18,7 @@ pgbackrest_exporter_backrest_config: "/etc/pgbackrest/pgbackrest.conf"
 
 pgbackrest_exporter_backrest_backrest_config_include_path: ""
 pgbackrest_exporter_backrest_stanza_include: ""
-pgbackrest_exporter_backrest_stanza_exclude: "" 
+pgbackrest_exporter_backrest_stanza_exclude: ""
 pgbackrest_exporter_backrest_backup_type: "full"
 pgbackrest_exporter_backrest_database_count: false
 pgbackrest_exporter_backrest_database_parrallel_processes: 1
