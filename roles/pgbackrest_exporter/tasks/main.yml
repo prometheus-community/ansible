@@ -58,7 +58,7 @@
     - configure
     - pgbackrest_exporter_configure
 
-- name: Ensure consul Exporter is enabled on boot
+- name: Ensure pgBackRest Exporter is enabled on boot
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
