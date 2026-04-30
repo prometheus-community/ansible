@@ -4,6 +4,7 @@ releases:
   0.29.2:
     changes:
       trivial:
+        - 'chore(deps): update release-drafter/release-drafter action to v7.2.1 (https://github.com/prometheus-community/ansible/pull/796)'
         - 'patch: New prometheus/prometheus upstream release 3.11.3! (https://github.com/prometheus-community/ansible/pull/795)'
         - 'docs: fix pip syntax for passlib requirements (https://github.com/prometheus-community/ansible/pull/786)'
     release_date: '2026-04-14'
