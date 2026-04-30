@@ -1,0 +1,73 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+  tags:
+    - pgbackrest_exporter
+    - install
+    - configure
+    - run
+    - pgbackrest_exporter_install
+    - pgbackrest_exporter_configure
+    - pgbackrest_exporter_run
+
+- name: Install
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: install.yml
+  vars:
+    _common_local_cache_path: "{{ pgbackrest_exporter_local_cache_path }}"
+    _common_binaries: "{{ _pgbackrest_exporter_binaries }}"
+    _common_binary_install_dir: "{{ pgbackrest_exporter_binary_install_dir }}"
+    _common_binary_url: "{{ pgbackrest_exporter_binary_url }}"
+    _common_checksums_url: "{{ pgbackrest_exporter_checksums_url }}"
+    _common_system_group: "{{ pgbackrest_exporter_system_group }}"
+    _common_system_user: "{{ pgbackrest_exporter_system_user }}"
+    _common_config_dir: "{{ pgbackrest_exporter_config_dir }}"
+    _common_binary_unarchive_opts: ['--strip-components=1']
+  tags:
+    - pgbackrest_exporter
+    - install
+    - pgbackrest_exporter_install
+
+- name: SELinux
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ ('//' ~ pgbackrest_exporter_web_listen_address) | ansible.builtin.urlsplit('port') }}"
+  when: ansible_facts['selinux'].status == "enabled"
+  tags:
+    - pgbackrest_exporter
+    - configure
+    - pgbackrest_exporter_configure
+
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ pgbackrest_exporter_system_user }}"
+    _common_system_group: "{{ pgbackrest_exporter_system_group }}"
+    _common_config_dir: "{{ pgbackrest_exporter_config_dir }}"
+    _common_tls_server_config: "{{ pgbackrest_exporter_tls_server_config }}"
+    _common_http_server_config: "{{ pgbackrest_exporter_http_server_config }}"
+    _common_basic_auth_users: "{{ pgbackrest_exporter_basic_auth_users }}"
+  tags:
+    - pgbackrest_exporter
+    - configure
+    - pgbackrest_exporter_configure
+
+- name: Ensure consul Exporter is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: pgbackrest_exporter
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - pgbackrest_exporter
+    - run
+    - pgbackrest_exporter_run

@@ -1,0 +1,41 @@
+---
+pgbackrest_exporter_version: 0.23.0
+pgbackrest_exporter_binary_url: "https://github.com/{{ _pgbackrest_exporter_repo }}/releases/download/v{{ pgbackrest_exporter_version }}/\
+                             pgbackrest_exporter-{{ pgbackrest_exporter_version }}-{{ ansible_facts['system'] | lower }}-{{ _pgbackrest_exporter_go_ansible_arch }}.tar.gz"
+pgbackrest_exporter_checksums_url: "https://github.com/{{ _pgbackrest_exporter_repo }}/releases/download/v{{ pgbackrest_exporter_version }}/pgbackrest_exporter_checksums.txt"
+
+pgbackrest_exporter_web_listen_address: "0.0.0.0:9854"
+pgbackrest_exporter_web_telemetry_path: "/metrics"
+
+pgbackrest_exporter_tls_server_config: {}
+
+pgbackrest_exporter_http_server_config: {}
+
+pgbackrest_exporter_basic_auth_users: {}
+
+pgbackrest_exporter_collect_interval: "600"
+pgbackrest_exporter_backrest_config: "/etc/pgbackrest/pgbackrest.conf"
+
+pgbackrest_exporter_backrest_backrest_config_include_path: ""
+pgbackrest_exporter_backrest_stanza_include: ""
+pgbackrest_exporter_backrest_stanza_exclude: "" 
+pgbackrest_exporter_backrest_backup_type: "full"
+pgbackrest_exporter_backrest_database_count: false
+pgbackrest_exporter_backrest_database_parrallel_processes: 1
+pgbackrest_exporter_backrest_database_count_latest: false
+pgbackrest_exporter_backrest_reference_count: false
+pgbackrest_exporter_backrest_verbose_wal: false
+pgbackrest_exporter_collctor_pgbackrest: true
+
+pgbackrest_exporter_log_level: "info"
+pgbackrest_exporter_log_format: "logfmt"
+
+pgbackrest_exporter_system_user: "pgbackrest-exp"
+pgbackrest_exporter_system_group: "{{ pgbackrest_exporter_system_user }}"
+
+
+# Local path to stash the archive and its extraction
+pgbackrest_exporter_local_cache_path: "/tmp/pgbackrest_exporter-{{ ansible_facts['system'] | lower }}-{{ _pgbackrest_exporter_go_ansible_arch }}/{{ pgbackrest_exporter_version }}"
+
+pgbackrest_exporter_binary_install_dir: "/usr/local/bin"
+pgbackrest_exporter_config_dir: "/etc/pgbackrest_exporter"

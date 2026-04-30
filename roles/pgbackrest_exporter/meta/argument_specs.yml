@@ -1,0 +1,117 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus pgbackrest Exporter"
+    description:
+      - "Deploy prometheus L(pgbackrest_exporter,https://github.com/woblerr/pgbackrest_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      pgbackrest_exporter_version:
+        description: "pgbackrest exporter package version. Also accepts latest as parameter."
+        default: "0.23.0"
+      pgbackrest_exporter_binary_url:
+        description: "URL of the pgbackrest_exporter binaries .tar.gz file"
+        default: "https://github.com/{{ _pgbackrest_exporter_repo }}/releases/download/v{{ pgbackrest_exporter_version }}/pgbackrest_exporter-{{ pgbackrest_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _pgbackrest_exporter_go_ansible_arch }}.tar.gz"
+      pgbackrest_exporter_checksums_url:
+        description: "URL of the pgbackrest_exporter checksums file"
+        default: "https://github.com/{{ _pgbackrest_exporter_repo }}/releases/download/v{{ pgbackrest_exporter_version }}/sha256sums.txt"
+      pgbackrest_exporter_web_listen_address:
+        description: "Address on which pgbackrest_exporter will listen"
+        default: "0.0.0.0:9854"
+      pgbackrest_exporter_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      pgbackrest_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(pgbackrest_exporter docs,https://github.com/superq/pgbackrest_exporter/blob/master/https/README.md#sample-config)."
+        type: "dict"
+      pgbackrest_exporter_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(pgbackrest_exporter docs,https://github.com/superq/pgbackrest_exporter/blob/master/https/README.md#sample-config)."
+        type: "dict"
+      pgbackrest_exporter_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      pgbackrest_exporter_log_level:
+        description: "Only log messages with the given severity or above"
+        default: "info"
+        choices:
+          - "debug"
+          - "info"
+          - "warn"
+          - "error"
+      pgbackrest_exporter_log_format:
+        description: "Output format of log messages"
+        default: "logfmt"
+        choices:
+          - "logfmt"
+          - "json"
+
+      pgbackrest_exporter_collect_interval:
+        description: "Collecting metrics interval in seconds."
+        default: "600"
+      pgbackrest_exporter_backrest_config:
+        description: "Full path to pgBackRest configuration file."
+        default: "/etc/pgbackrest/pgbackrest.conf"
+      pgbackrest_exporter_backrest_backrest_config_include_path:
+        description: "Path to include additional pgBackRest configuration files."
+      pgbackrest_exporter_backrest_stanza_include:
+        description: "Specific stanza for collecting metrics. Can be specified several times."
+      pgbackrest_exporter_backrest_stanza_exclude:
+        description: "Specific stanza to exclude from collecting metrics. Can be specified several times."
+      pgbackrest_exporter_backrest_backup_type:
+        description: "Filter backups by type. Can be specified several times."
+        default: "full"
+        choices:
+          - "full"
+          - "diff"
+          - "incr"
+      pgbackrest_exporter_backrest_database_count:
+        description: "Exposing the number of databases in backups."
+        type: bool
+        default: false
+      pgbackrest_exporter_backrest_database_parrallel_processes:
+        description: "Number of parallel processes for collecting information about databases."
+        default: 1
+      pgbackrest_exporter_backrest_database_count_latest:
+        description: "Exposing the number of databases in the latest backups."
+        type: bool
+        default: false
+      pgbackrest_exporter_backrest_reference_count:
+        description: "Exposing the number of references to other backups (backup reference list)."
+        type: bool
+        default: false
+      pgbackrest_exporter_backrest_verbose_wal:
+        description: "Exposing additional labels for WAL metrics."
+        type: bool
+        default: false
+      pgbackrest_exporter_collctor_pgbackrest:
+        description: "Enable pgBackRest collector. When disabled, only pgBackRest version and exporter build info are collected."
+        type: bool
+        default: true
+
+      pgbackrest_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for pgbackrest_exporter"
+        default: "pgbackrest-exp"
+      pgbackrest_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "pgbackrest exporter user"
+        default: "pgbackrest-exp"
+      pgbackrest_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install binaries"
+        default: "/usr/local/bin"
+      pgbackrest_exporter_local_cache_path:
+        description: 'Local path to stash the archive and its extraction'
+        default: "/tmp/pgbackrest_exporter-{{ ansible_facts['system'] | lower }}-{{ _pgbackrest_exporter_go_ansible_arch }}/{{ pgbackrest_exporter_version }}"
+      pgbackrest_exporter_config_dir:
+        description: "Path to directory with pgbackrest_exporter configuration"
+        default: "/etc/pgbackrest_exporter"

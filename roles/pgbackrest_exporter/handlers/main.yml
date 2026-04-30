@@ -1,0 +1,10 @@
+---
+- name: Restart pgbackrest_exporter
+  listen: "restart pgbackrest_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: pgbackrest_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode
