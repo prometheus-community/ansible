@@ -91,3 +91,9 @@ argument_specs:
       cadvisor_local_cache_path:
         description: 'Local path to stash the archive and its extraction'
         default: "/tmp/cadvisor-{{ ansible_facts['system'] | lower }}-{{ _cadvisor_go_ansible_arch }}/{{ cadvisor_version }}"
+      cadvisor_housekeeping_interval:
+        description: 'Interval between container housekeepings'
+        default: '10s'
+      cadvisor_max_housekeeping_interval:
+        description: 'Largest interval to allow between container housekeepings'
+        default: '10s'
