@@ -4,6 +4,7 @@ releases:
   0.29.2:
     changes:
       trivial:
+        - 'patch: New oliver006/redis_exporter upstream release 1.83.0! (https://github.com/prometheus-community/ansible/pull/800)'
         - 'patch: New percona/mongodb_exporter upstream release 0.51.0! (https://github.com/prometheus-community/ansible/pull/798)'
         - 'patch: New prometheus/alertmanager upstream release 0.32.1! (https://github.com/prometheus-community/ansible/pull/797)'
         - 'chore(deps): update release-drafter/release-drafter action to v7.2.1 (https://github.com/prometheus-community/ansible/pull/796)'
