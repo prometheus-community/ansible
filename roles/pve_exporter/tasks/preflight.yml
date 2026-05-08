@@ -1,0 +1,65 @@
+---
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
+  vars:
+    _common_web_listen_address: "{{ pve_exporter_web_listen_address }}"
+
+- name: Assert that used version supports listen address type
+  ansible.builtin.assert:
+    that:
+      - >-
+        pve_exporter_web_listen_address is string
+        or
+        (
+          pve_exporter_version is version('1.5.0', '>=') and
+          pve_exporter_web_listen_address | type_debug == "list"
+        )
+
+- name: Assert collectors are not both disabled and enabled at the same time
+  ansible.builtin.assert:
+    that:
+      - "item not in pve_exporter_enabled_collectors"
+  with_items: "{{ pve_exporter_disabled_collectors }}"
+
+- name: Assert that TLS config is correct
+  when: pve_exporter_tls_server_config | length > 0
+  block:
+    - name: Assert that TLS key and cert path are set
+      ansible.builtin.assert:
+        that:
+          - "pve_exporter_tls_server_config.cert_file is defined"
+          - "pve_exporter_tls_server_config.key_file is defined"
+
+    - name: Check existence of TLS cert file
+      ansible.builtin.stat:
+        path: "{{ pve_exporter_tls_server_config.cert_file }}"
+      register: __pve_exporter_cert_file
+
+    - name: Check existence of TLS key file
+      ansible.builtin.stat:
+        path: "{{ pve_exporter_tls_server_config.key_file }}"
+      register: __pve_exporter_key_file
+
+    - name: Assert that TLS key and cert are present
+      ansible.builtin.assert:
+        that:
+          - "__pve_exporter_cert_file.stat.exists"
+          - "__pve_exporter_key_file.stat.exists"
+
+- name: Discover latest version
+  ansible.builtin.set_fact:
+    pve_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _pve_exporter_repo }}/releases/latest', headers=_github_api_headers,
+                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+  run_once: true
+  until: pve_exporter_version is version('0.0.0', '>=')
+  retries: 10
+  when:
+    - pve_exporter_version == "latest"
+  tags:
+    - pve_exporter
+    - install
+    - pve_exporter_install
+    - download
+    - pve_exporter_download
