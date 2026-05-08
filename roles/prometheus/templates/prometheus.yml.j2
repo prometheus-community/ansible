@@ -7,6 +7,15 @@ global:
   external_labels:
     {{ prometheus_external_labels | to_nice_yaml(indent=2,sort_keys=False) | indent(4, False) }}
 
+{% if prometheus_version is version('3.11.0', '>=') %}
+storage:
+  tsdb:
+    retention:
+      time: {{ prometheus_storage_retention }}
+      size: {{ prometheus_storage_retention_size }}
+      percentage: {{ prometheus_storage_retention_percentage }}
+{% endif %}
+
 {% if prometheus_remote_write != [] %}
 remote_write:
   {{ prometheus_remote_write | to_nice_yaml(indent=2,sort_keys=False) | indent(2, False) }}
