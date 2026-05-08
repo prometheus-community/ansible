@@ -62,6 +62,11 @@ argument_specs:
       ipmi_exporter_local_cache_path:
         description: "Local path at which to download and extract the archive"
         default: "/tmp/ipmi_exporter-{{ ansible_facts['system'] | lower }}-{{ _ipmi_exporter_go_ansible_arch }}/{{ ipmi_exporter_version }}"
+      ipmi_exporter_download_host:
+        description:
+          - "Host that downloads and extracts the archive (localhost by default). Set to the target host to avoid controller temp usage."
+        type: "str"
+        default: "localhost"
       ipmi_exporter_config_dir:
         description: "Path to directory with ipmi_exporter configuration"
         default: "/etc/ipmi_exporter"

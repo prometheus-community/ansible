@@ -93,6 +93,11 @@ argument_specs:
       node_exporter_local_cache_path:
         description: "Local path to stash the archive and its extraction"
         default: "/tmp/node_exporter-{{ ansible_facts['system'] | lower }}-{{ _node_exporter_go_ansible_arch }}/{{ node_exporter_version }}"
+      node_exporter_download_host:
+        description:
+          - "Host that downloads and extracts the archive (localhost by default). Set to the target host to avoid controller temp usage."
+        type: "str"
+        default: "localhost"
       node_exporter_config_dir:
         description: "Path to directory with node_exporter configuration"
         default: "/etc/node_exporter"

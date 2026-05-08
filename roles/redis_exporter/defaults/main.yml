@@ -51,3 +51,6 @@ redis_exporter_config_dir: "/etc/redis_exporter"
 
 # Local path to stash the archive and its extraction
 redis_exporter_local_cache_path: "/tmp/redis_exporter-{{ ansible_facts['system'] | lower }}-{{ _redis_exporter_go_ansible_arch }}/{{ redis_exporter_version }}"
+
+# Host that performs binary download and extraction
+redis_exporter_download_host: "localhost"

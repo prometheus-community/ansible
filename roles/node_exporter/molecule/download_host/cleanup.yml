@@ -1,0 +1,9 @@
+---
+- name: Remove controller cache between converges
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Remove local node_exporter cache path
+      ansible.builtin.file:
+        path: "/tmp/node_exporter-managed-download-host"
+        state: absent

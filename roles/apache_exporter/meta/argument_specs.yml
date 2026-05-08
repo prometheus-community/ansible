@@ -70,3 +70,8 @@ argument_specs:
           - "I(Advanced)"
           - "Local path to stash the archive and its extraction"
         default: "/tmp/apache_exporter-{{ ansible_facts['system'] | lower }}-{{ _apache_exporter_go_ansible_arch }}/{{ apache_exporter_version }}"
+      apache_exporter_download_host:
+        description:
+          - "Host that downloads and extracts the archive (localhost by default). Set to the target host to avoid controller temp usage."
+        type: "str"
+        default: "localhost"

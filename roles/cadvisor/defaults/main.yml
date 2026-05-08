@@ -22,6 +22,9 @@ cadvisor_local_cache_path: "/tmp/cadvisor-{{ ansible_facts['system'] | lower }}-
 
 cadvisor_binary_install_dir: "/usr/local/bin"
 
+# Host that performs binary download and extraction
+cadvisor_download_host: "localhost"
+
 # cAdvisor has its own internal metrics colleciton loop. The default is aggressive (1s).
 # Tune this to be more reasonable.
 #

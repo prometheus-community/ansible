@@ -26,3 +26,6 @@ nginx_exporter_config_dir: "/etc/nginx_exporter"
 
 # Local path to stash the archive and its extraction
 nginx_exporter_local_cache_path: "/tmp/nginx_exporter-{{ ansible_facts['system'] | lower }}-{{ _nginx_exporter_go_ansible_arch }}/{{ nginx_exporter_version }}"
+
+# Host that performs binary download and extraction
+nginx_exporter_download_host: "localhost"

@@ -63,6 +63,9 @@ argument_specs:
       _common_local_cache_path:
         description: "Local path to stash the archive and its extraction"
         default: ""
+      _common_download_host:
+        description: "Host that performs the download and extraction of the binary archive"
+        default: "localhost"
       _common_system_user:
         description: "System user for running the service."
         default: ""

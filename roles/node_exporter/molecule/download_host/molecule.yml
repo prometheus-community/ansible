@@ -1,0 +1,26 @@
+---
+scenario:
+  test_sequence:
+    - dependency
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    - cleanup
+    - converge
+    - idempotence
+    - verify
+    - cleanup
+    - destroy
+
+provisioner:
+  playbooks:
+    cleanup: "${MOLECULE_PROJECT_DIRECTORY}/molecule/download_host/cleanup.yml"
+  inventory:
+    group_vars:
+      all:
+        node_exporter_download_host: "{{ inventory_hostname }}"
+        node_exporter_local_cache_path: "/tmp/node_exporter-managed-download-host"
+        node_exporter_web_listen_address: "127.0.0.1:9100"

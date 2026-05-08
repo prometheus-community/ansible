@@ -17,3 +17,6 @@ fail2ban_exporter_system_group: "{{ fail2ban_exporter_system_user }}"
 # Local path to stash the archive and its extraction
 fail2ban_exporter_local_cache_path: "/tmp/fail2ban_exporter-{{ ansible_facts['system'] | lower }}-{{ _fail2ban_exporter_go_ansible_arch }}/\
                                      {{ fail2ban_exporter_version }}"
+
+# Host that performs binary download and extraction
+fail2ban_exporter_download_host: "localhost"
