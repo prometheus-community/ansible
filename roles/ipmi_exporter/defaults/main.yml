@@ -13,6 +13,15 @@ ipmi_exporter_modules:
       - chassis
       - sel
 
+ipmi_exporter_sudo_commands:
+  - /usr/sbin/ipmimonitoring
+  - /usr/sbin/ipmi-sensors
+  - /usr/sbin/ipmi-dcmi
+  - /usr/sbin/ipmi-raw
+  - /usr/sbin/bmc-info
+  - /usr/sbin/ipmi-chassis
+  - /usr/sbin/ipmi-sel
+
 ipmi_exporter_web_listen_address: "0.0.0.0:9290"
 
 ipmi_exporter_tls_server_config: {}

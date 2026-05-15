@@ -30,3 +30,14 @@
     - ipmi_exporter
     - configure
     - ipmi_exporter_configure
+
+- name: Create sudoers file to allow passwordless IPMI commands
+  ansible.builtin.copy:
+    dest: "/etc/sudoers.d/{{ ipmi_exporter_system_user }}"
+    content: |
+      {{ ipmi_exporter_system_user }} ALL=(ALL) NOPASSWD: {{ ipmi_exporter_sudo_commands | join(', ') }}
+    owner: root
+    group: root
+    mode: '0440'
+  become: true
+  when: ipmi_exporter_system_user is defined
