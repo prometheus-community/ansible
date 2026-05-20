@@ -48,6 +48,12 @@ platforms:
     privileged: true
     cgroup_parent: docker.slice
     command: /lib/systemd/systemd
+  - name: ubuntu-26.04
+    image: ghcr.io/test-kitchen/dokken/ubuntu-26.04
+    pre_build_image: true
+    privileged: true
+    cgroup_parent: docker.slice
+    command: /lib/systemd/systemd
 verifier:
   name: testinfra
   additional_files_or_dirs:
@@ -66,15 +72,17 @@ provisioner:
     host_vars:
       almalinux-9:
         ansible_become_method: su
-        exclude_ansible_vers: ["2.16", "2.17", "2.18", "2.19", "2.20"]
+        exclude_ansible_vers: []
       almalinux-10:
         ansible_become_method: su
         exclude_ansible_vers: ["2.14", "2.15"]
       debian-11:
-        exclude_ansible_vers: ["2.16", "2.17", "2.18", "2.19", "2.20"]
+        exclude_ansible_vers: []
       debian-12:
         exclude_ansible_vers: ["2.20"]
       ubuntu-22.04:
-        exclude_ansible_vers: ["2.18", "2.19", "2.20"]
+        exclude_ansible_vers: []
       ubuntu-24.04:
+        exclude_ansible_vers: ["2.14", "2.15"]
+      ubuntu-26.04:
         exclude_ansible_vers: ["2.14", "2.15"]
