@@ -13,7 +13,7 @@
       ansible.builtin.file:
         path: "{{ __cache_path }}"
         state: directory
-        mode: "0755"
+        mode: 0755
       when: __cache_path is truthy
 
     - name: "Fetch binary"
