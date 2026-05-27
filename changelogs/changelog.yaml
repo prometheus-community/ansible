@@ -1,6 +1,11 @@
 ---
 ancestor:
 releases:
+  0.30.0:
+    changes:
+      minor_changes:
+        - 'feat: Add Ansible Core 2.21 support (https://github.com/prometheus-community/ansible/pull/807)'
+    release_date: '2026-05-27'
   0.29.2:
     changes:
       trivial:
