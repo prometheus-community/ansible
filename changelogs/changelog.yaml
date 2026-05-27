@@ -5,6 +5,8 @@ releases:
     changes:
       minor_changes:
         - 'feat: Add Ansible Core 2.21 support (https://github.com/prometheus-community/ansible/pull/807)'
+      trivial:
+        - 'patch: New oliver006/redis_exporter upstream release 1.84.0! (https://github.com/prometheus-community/ansible/pull/806)'
     release_date: '2026-05-27'
   0.29.2:
     changes:
