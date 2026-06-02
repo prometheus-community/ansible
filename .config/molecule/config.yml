@@ -66,15 +66,21 @@ provisioner:
     host_vars:
       almalinux-9:
         ansible_become_method: su
-        exclude_ansible_vers: ["2.16", "2.17", "2.18", "2.19", "2.20"]
+        # Python 3.9, ansible-core support 2.14 to 2.15
+        exclude_ansible_vers: ["2.16", "2.17", "2.18", "2.19", "2.20", "2.21"]
       almalinux-10:
         ansible_become_method: su
+        # Python 3.12, ansible-core support 2.16 to 2.21
         exclude_ansible_vers: ["2.14", "2.15"]
       debian-11:
-        exclude_ansible_vers: ["2.16", "2.17", "2.18", "2.19", "2.20"]
+        # Python 3.9, ansible-core support 2.14 to 2.15
+        exclude_ansible_vers: ["2.16", "2.17", "2.18", "2.19", "2.20", "2.21"]
       debian-12:
-        exclude_ansible_vers: ["2.20"]
+        # Python 3.11, ansible-core support 2.14 to 2.19
+        exclude_ansible_vers: ["2.20", "2.21"]
       ubuntu-22.04:
-        exclude_ansible_vers: ["2.18", "2.19", "2.20"]
+        # Python 3.10, ansible-core support 2.12 to 2.17
+        exclude_ansible_vers: ["2.18", "2.19", "2.20", "2.21"]
       ubuntu-24.04:
+        # Python 3.12, ansible-core support 2.16 to 2.21
         exclude_ansible_vers: ["2.14", "2.15"]
