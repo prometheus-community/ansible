@@ -65,3 +65,12 @@ argument_specs:
       ipmi_exporter_config_dir:
         description: "Path to directory with ipmi_exporter configuration"
         default: "/etc/ipmi_exporter"
+      ipmi_exporter_udev_enable:
+        description:
+          - "When true, deploy a udev rule granting the service group read/write access to /dev/ipmi* devices."
+          - "This allows freeipmi tools to access IPMI hardware without sudo."
+        type: "bool"
+        default: false
+      ipmi_exporter_udev_rule_path:
+        description: "Path where the udev rule file is deployed when ipmi_exporter_udev_enable is true."
+        default: "/etc/udev/rules.d/99-ipmi-exporter.rules"
