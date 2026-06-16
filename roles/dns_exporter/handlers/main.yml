@@ -1,0 +1,10 @@
+---
+- name: Restart dns_exporter
+  listen: "restart dns_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: dns_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode
