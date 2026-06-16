@@ -1,0 +1,23 @@
+---
+provisioner:
+  playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/alternative/prepare.yml"
+  inventory:
+    group_vars:
+      all:
+        pve_exporter_web_listen_address:
+          - '127.0.0.1:8080'
+          - '127.0.1.1:8080'
+        pve_exporter_textfile_dir: ""
+        pve_exporter_enabled_collectors:
+          - entropy
+        pve_exporter_disabled_collectors:
+          - diskstats
+        pve_exporter_tls_server_config:
+          cert_file: /etc/pve_exporter/tls.cert
+          key_file: /etc/pve_exporter/tls.key
+        pve_exporter_http_server_config:
+          http2: true
+        pve_exporter_basic_auth_users:
+          randomuser: examplepassword
+        pve_exporter_version: 3.5.0
