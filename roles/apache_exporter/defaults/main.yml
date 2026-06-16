@@ -22,3 +22,6 @@ apache_exporter_config_dir: "/etc/apache_exporter"
 
 # Local path to stash the archive and its extraction
 apache_exporter_local_cache_path: "/tmp/apache_exporter-{{ ansible_facts['system'] | lower }}-{{ _apache_exporter_go_ansible_arch }}/{{ apache_exporter_version }}"
+
+# Host that performs binary download and extraction
+apache_exporter_download_host: "localhost"
