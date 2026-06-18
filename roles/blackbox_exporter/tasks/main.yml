@@ -16,6 +16,7 @@
     _common_binaries: "{{ _blackbox_exporter_binaries }}"
     _common_binary_install_dir: "{{ blackbox_exporter_binary_install_dir }}"
     _common_binary_url: "{{ blackbox_exporter_binary_url }}"
+    _common_download_host: "{{ blackbox_exporter_download_host }}"
     _common_checksum: "{{ blackbox_exporter_checksum }}"
     _common_checksums_url: "{{ blackbox_exporter_checksums_url }}"
     _common_system_group: "{{ blackbox_exporter_system_group }}"

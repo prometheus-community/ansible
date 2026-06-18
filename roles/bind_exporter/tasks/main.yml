@@ -16,6 +16,7 @@
     _common_binaries: "{{ _bind_exporter_binaries }}"
     _common_binary_install_dir: "{{ bind_exporter_binary_install_dir }}"
     _common_binary_url: "{{ bind_exporter_binary_url }}"
+    _common_download_host: "{{ bind_exporter_download_host }}"
     _common_checksum: "{{ bind_exporter_checksum }}"
     _common_checksums_url: "{{ bind_exporter_checksums_url }}"
     _common_system_group: "{{ bind_exporter_system_group }}"

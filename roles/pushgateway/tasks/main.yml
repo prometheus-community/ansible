@@ -16,6 +16,7 @@
     _common_binaries: "{{ _pushgateway_binaries }}"
     _common_binary_install_dir: "{{ pushgateway_binary_install_dir }}"
     _common_binary_url: "{{ pushgateway_binary_url }}"
+    _common_download_host: "{{ pushgateway_download_host }}"
     _common_checksum: "{{ pushgateway_checksum }}"
     _common_checksums_url: "{{ pushgateway_checksums_url }}"
     _common_system_group: "{{ pushgateway_system_group }}"

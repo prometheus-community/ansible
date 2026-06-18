@@ -16,6 +16,7 @@
     _common_binaries: "{{ _ipmi_exporter_binaries }}"
     _common_binary_install_dir: "{{ ipmi_exporter_binary_install_dir }}"
     _common_binary_url: "{{ ipmi_exporter_binary_url }}"
+    _common_download_host: "{{ ipmi_exporter_download_host }}"
     _common_checksum: "{{ ipmi_exporter_checksum }}"
     _common_checksums_url: "{{ ipmi_exporter_checksums_url }}"
     _common_system_group: "{{ ipmi_exporter_system_group }}"

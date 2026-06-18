@@ -16,6 +16,7 @@
     _common_binaries: "{{ _smokeping_prober_binaries }}"
     _common_binary_install_dir: "{{ smokeping_prober_binary_install_dir }}"
     _common_binary_url: "{{ smokeping_prober_binary_url }}"
+    _common_download_host: "{{ smokeping_prober_download_host }}"
     _common_checksum: "{{ smokeping_prober_checksum }}"
     _common_checksums_url: "{{ smokeping_prober_checksums_url }}"
     _common_system_group: "{{ smokeping_prober_system_group }}"

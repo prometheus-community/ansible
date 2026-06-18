@@ -242,3 +242,6 @@ prometheus_local_cache_path: "/tmp/prometheus-{{ ansible_facts['system'] | lower
 
 # Set to true for install-only runs
 prometheus_skip_configure: false
+
+# Another host than localhost only works in single-host plays
+prometheus_common_download_host: localhost

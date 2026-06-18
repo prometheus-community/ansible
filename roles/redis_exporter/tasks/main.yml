@@ -16,6 +16,7 @@
     _common_binaries: "{{ _redis_exporter_binaries }}"
     _common_binary_install_dir: "{{ redis_exporter_binary_install_dir }}"
     _common_binary_url: "{{ redis_exporter_binary_url }}"
+    _common_download_host: "{{ redis_exporter_download_host }}"
     _common_checksum: "{{ redis_exporter_checksum }}"
     _common_checksums_url: "{{ redis_exporter_checksums_url }}"
     _common_system_group: "{{ redis_exporter_system_group }}"
