@@ -5,6 +5,7 @@ releases:
     changes:
       trivial:
         - 'chore(deps): update actions/checkout action to v6.0.3 (https://github.com/prometheus-community/ansible/pull/812)'
+        - 'patch: New prometheus/prometheus upstream release 3.12.0! (https://github.com/prometheus-community/ansible/pull/809)'
         - 'patch: New prometheus/pushgateway upstream release 1.11.3! (https://github.com/prometheus-community/ansible/pull/808)'
     release_date: '2026-06-03'
   0.30.0:
