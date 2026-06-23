@@ -4,6 +4,8 @@ releases:
   0.30.1:
     changes:
       trivial:
+        - 'chore(deps): update ansible-community/ansible-test-gh-action action to
+          v1.18.0 (https://github.com/prometheus-community/ansible/pull/829)'
         - 'chore(deps): update actions/checkout action to v6.0.3 (https://github.com/prometheus-community/ansible/pull/812)'
         - 'patch: New prometheus/prometheus upstream release 3.12.0! (https://github.com/prometheus-community/ansible/pull/809)'
         - 'patch: New prometheus/pushgateway upstream release 1.11.3! (https://github.com/prometheus-community/ansible/pull/808)'
