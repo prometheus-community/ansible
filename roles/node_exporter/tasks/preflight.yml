@@ -41,6 +41,8 @@
       ansible.builtin.stat:
         path: "{{ node_exporter_tls_server_config.key_file }}"
       register: __node_exporter_key_file
+      become: true
+      become_user: "{{ node_exporter_system_user }}"
 
     - name: Assert that TLS key and cert are present
       ansible.builtin.assert:
