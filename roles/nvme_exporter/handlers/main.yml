@@ -1,0 +1,10 @@
+---
+- name: Restart nvme_exporter
+  listen: "restart nvme_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: nvme_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode
