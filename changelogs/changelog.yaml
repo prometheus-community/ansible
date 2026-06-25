@@ -4,6 +4,12 @@ releases:
   0.30.1:
     changes:
       trivial:
+        - 'chore(deps): update ansible-community/ansible-test-gh-action action to
+          v1.18.0 (https://github.com/prometheus-community/ansible/pull/829)'
+        - 'chore(deps): update actions/checkout action to v7 (https://github.com/prometheus-community/ansible/pull/823)'
+        - 'chore(deps): update release-drafter/release-drafter action to v7.5.1 (https://github.com/prometheus-community/ansible/pull/819)'
+        - 'patch: New prometheus/alertmanager upstream release 0.32.2! (https://github.com/prometheus-community/ansible/pull/815)'
+        - 'patch: New oliver006/redis_exporter upstream release 1.85.0! (https://github.com/prometheus-community/ansible/pull/814)'
         - 'chore(deps): update actions/checkout action to v6.0.3 (https://github.com/prometheus-community/ansible/pull/812)'
         - 'patch: New prometheus/prometheus upstream release 3.12.0! (https://github.com/prometheus-community/ansible/pull/809)'
         - 'patch: New prometheus/pushgateway upstream release 1.11.3! (https://github.com/prometheus-community/ansible/pull/808)'
