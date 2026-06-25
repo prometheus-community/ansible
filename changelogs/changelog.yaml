@@ -6,6 +6,7 @@ releases:
       trivial:
         - 'chore(deps): update ansible-community/ansible-test-gh-action action to
           v1.18.0 (https://github.com/prometheus-community/ansible/pull/829)'
+        - 'patch: New google/cadvisor upstream release 0.60.0! (https://github.com/prometheus-community/ansible/pull/825)'
         - 'patch: New Lusitaniae/apache_exporter upstream release 1.1.0! (https://github.com/prometheus-community/ansible/pull/824)'
         - 'chore(deps): update actions/checkout action to v7 (https://github.com/prometheus-community/ansible/pull/823)'
         - 'chore(deps): update release-drafter/release-drafter action to v7.5.1 (https://github.com/prometheus-community/ansible/pull/819)'
