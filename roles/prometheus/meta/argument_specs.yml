@@ -55,6 +55,12 @@ argument_specs:
           - "Maximum number of bytes that can be stored for blocks."
           - "Units supported: KB, MB, GB, TB, PB."
         default: "0"
+      prometheus_storage_retention_percentage:
+        description:
+          - "Maximum percent of total disk space allowed for block storage"
+          - "Set to 0 to disable percentage-based retention"
+          - "Supported only on Prometheus >= 3.11.0"
+        default: "0"
       prometheus_agent_mode:
         description:
           - "The Agent mode optimizes Prometheus for the remote write use case. It disables querying, alerting, and local storage, and replaces it with a customized TSDB WAL. L(Everything,https://prometheus.io/docs/prometheus/latest/feature_flags/#prometheus-agent) else stays the same."
