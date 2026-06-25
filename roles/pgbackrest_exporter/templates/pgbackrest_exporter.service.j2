@@ -1,0 +1,71 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus pgBackRest Exporter
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User={{ pgbackrest_exporter_system_user }}
+Group={{ pgbackrest_exporter_system_group }}
+ExecStart={{ pgbackrest_exporter_binary_install_dir }}/pgbackrest_exporter \
+{% if pgbackrest_exporter_tls_server_config | length > 0 or pgbackrest_exporter_http_server_config | length > 0 or pgbackrest_exporter_basic_auth_users | length > 0 %}
+    '--web.config.file={{ pgbackrest_exporter_config_dir }}/web_config.yml' \
+{% endif %}
+    '--collect.interval={{ pgbackrest_exporter_collect_interval }}' \
+    '--backrest.config={{ pgbackrest_exporter_backrest_config }}' \
+    '--backrest.config-include-path={{ pgbackrest_exporter_backrest_backrest_config_include_path }}' \
+    '--backrest.stanza-include={{ pgbackrest_exporter_backrest_stanza_include }}' \
+    '--backrest.stanza-exclude={{ pgbackrest_exporter_backrest_stanza_exclude }}' \
+    '--backrest.backup-type={{ pgbackrest_exporter_backrest_backup_type }}' \
+{% if pgbackrest_exporter_backrest_database_count %}
+    '--backrest.database-count' \
+{% else %}
+    '--no-backrest.database-count' \
+{% endif %}
+    '--backrest.database-parallel-processes={{ pgbackrest_exporter_backrest_database_parrallel_processes }}' \
+{% if pgbackrest_exporter_backrest_database_count_latest %}
+    '--backrest.database-count-latest' \
+{% else %}
+    '--no-backrest.database-count-latest' \
+{% endif %}
+{% if pgbackrest_exporter_backrest_reference_count %}
+    '--backrest.reference-count' \
+{% else %}
+    '--no-backrest.reference-count' \
+{% endif %}
+{% if pgbackrest_exporter_backrest_verbose_wal %}
+    '--backrest.verbose-wal' \
+{% else %}
+    '--no-backrest.verbose-wal' \
+{% endif %}
+{% if pgbackrest_exporter_collctor_pgbackrest %}
+    '--collector.pgbackrest' \
+{% else %}
+    '--no-collector.pgbackrest' \
+{% endif %}
+    '--web.listen-address={{ pgbackrest_exporter_web_listen_address }}' \
+    '--web.telemetry-path={{ pgbackrest_exporter_web_telemetry_path }}' \
+    '--log.level={{ pgbackrest_exporter_log_level }}' \
+    '--log.format={{ pgbackrest_exporter_log_format }}'
+
+SyslogIdentifier=pgbackrest_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+ProtectHome=yes
+NoNewPrivileges=yes
+
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,19 @@
+---
+provisioner:
+  playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/alternative/prepare.yml"
+  inventory:
+    group_vars:
+      all:
+        pgbackrest_exporter_version: 0.23.0
+        pgbackrest_exporter_local_cache_path: "/tmp/pgbackrest_exporter-linux-amd64/{{ pgbackrest_exporter_version }}"
+        pgbackrest_exporter_web_listen_address: '127.0.1.1:8080'
+        pgbackrest_exporter_tls_server_config:
+          cert_file: /etc/pgbackrest_exporter/tls.cert
+          key_file: /etc/pgbackrest_exporter/tls.key
+        pgbackrest_exporter_http_server_config:
+          http2: true
+        pgbackrest_exporter_basic_auth_users:
+          randomuser: examplepassword
+        pgbackrest_exporter_binary_url: "https://github.com/prometheus/pgbackrest_exporter/releases/download/v{{ pgbackrest_exporter_version\
+                                     \ }}/pgbackrest_exporter-{{ pgbackrest_exporter_version }}.linux-amd64.tar.gz"
