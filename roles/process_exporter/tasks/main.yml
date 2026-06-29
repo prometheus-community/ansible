@@ -20,7 +20,7 @@
     _common_system_group: "{{ process_exporter_system_group }}"
     _common_system_user: "{{ process_exporter_system_user }}"
     _common_config_dir: "{{ process_exporter_config_dir }}"
-    _common_binary_unarchive_opts: ['--strip-components=1']
+    _common_binary_unarchive_opts: ["--strip-components=1"]
   tags:
     - process_exporter_install
 

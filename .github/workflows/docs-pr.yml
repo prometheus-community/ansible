@@ -1,8 +1,10 @@
 ---
 name: Collection Docs (PR)
+
 concurrency:
   group: docs-pr-${{ github.head_ref }}
   cancel-in-progress: true
+
 on:
   pull_request_target:
     types: [opened, synchronize, reopened, closed]
@@ -18,7 +20,7 @@ jobs:
     steps:
       - name: Get the latest tag
         id: get-latest-tag
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const latestTag = await github.rest.repos.listTags({
@@ -45,9 +47,7 @@ jobs:
       init-html-short-title: Prometheus.Prometheus Collection Docs
       init-extra-html-theme-options: |
         documentation_home_url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/tag/${{ needs.get-tags.outputs.latest }}
-      render-file-line:
-        '> * `$<status>`
-         [$<path_tail>](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr/${{ github.event.number }}/$<path_tail>)'
+      render-file-line: "> * `$<status>` [$<path_tail>](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr/${{ github.event.number }}/$<path_tail>)"
 
   publish-docs-gh-pages:
     # for now we won't run this on forks
@@ -76,7 +76,7 @@ jobs:
       - name: PR comment
         uses: ansible-community/github-docs-build/actions/ansible-docs-build-comment@main
         with:
-          body-includes: '## Docs Build'
+          body-includes: "## Docs Build"
           action: ${{ needs.build-docs.outputs.changed != 'true' && 'remove' || '' }}
           on-closed-body: |
             ## Docs Build 📝

@@ -20,7 +20,7 @@
     _common_system_group: "{{ pushgateway_system_group }}"
     _common_system_user: "{{ pushgateway_system_user }}"
     _common_config_dir: "{{ pushgateway_config_dir }}"
-    _common_binary_unarchive_opts: ['--strip-components=1']
+    _common_binary_unarchive_opts: ["--strip-components=1"]
   tags:
     - pushgateway_install
 

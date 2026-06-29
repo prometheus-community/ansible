@@ -40,17 +40,17 @@ jobs:
     name: "${{ matrix.targets.name }}-${{ matrix.ansible-core-versions }}"
     steps:
       - name: "Perform ${{ matrix.targets.test }} integration test with ansible-test"
-        uses: ansible-community/ansible-test-gh-action@6ded727edb598e670ac056a8e680ca4050bac0a3  # v1.18.0
+        uses: ansible-community/ansible-test-gh-action@6ded727edb598e670ac056a8e680ca4050bac0a3 # v1.18.0
         with:
           ansible-core-version: ${{ matrix.ansible-core-versions }}
           target-python-version: ${{ matrix.target-python-versions }}
           controller-python-version: auto
-          docker-image: "--docker-privileged"  # Workaround because ansible-test action doesn't support setting privileged flag
+          docker-image: "--docker-privileged" # Workaround because ansible-test action doesn't support setting privileged flag
           testing-type: integration
           target: ${{ matrix.targets.test }}
           coverage: ${{ inputs.coverage }}
-          ansible-core-github-repository-slug: ${{ contains(fromJson('["stable-2.9", "stable-2.10", "stable-2.11"]'), matrix.ansible-core-versions) &&
-                                               'ansible-community/eol-ansible' || 'ansible/ansible' }}
+          ansible-core-github-repository-slug: ${{ contains(fromJson('["stable-2.9", "stable-2.10", "stable-2.11"]'), matrix.ansible-core-versions) && 'ansible-community/eol-ansible' ||
+            'ansible/ansible' }}
           test-deps: ${{ inputs.test-deps }}
           pre-test-cmd: |-
             printf '%s\n' '${{ matrix.ansible-core-versions }}' > .ansible-test-core-ref

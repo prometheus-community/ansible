@@ -24,7 +24,7 @@
     _common_system_group: "{{ apache_exporter_system_group }}"
     _common_system_user: "{{ apache_exporter_system_user }}"
     _common_config_dir: "{{ apache_exporter_config_dir }}"
-    _common_binary_unarchive_opts: ['--strip-components=1']
+    _common_binary_unarchive_opts: ["--strip-components=1"]
   tags:
     - apache_exporter
     - install
