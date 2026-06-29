@@ -4,6 +4,7 @@ releases:
   0.30.1:
     changes:
       trivial:
+        - 'chore: Update OS test matrix (https://github.com/prometheus-community/ansible/pull/833)'
         - 'patch: New superq/smokeping_prober upstream release 0.12.0! (https://github.com/prometheus-community/ansible/pull/832)'
         - 'patch: New google/cadvisor upstream release 0.60.2! (https://github.com/prometheus-community/ansible/pull/830)'
         - 'chore(deps): update ansible-community/ansible-test-gh-action action to
