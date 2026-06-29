@@ -13,7 +13,8 @@ argument_specs:
         default: "1.86.0"
       redis_exporter_binary_url:
         description: "URL of the redis_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _redis_exporter_repo }}/releases/download/v{{ redis_exporter_version }}/redis_exporter-v{{ redis_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _redis_exporter_go_ansible_arch }}.tar.gz"
+        default: "https://github.com/{{ _redis_exporter_repo }}/releases/download/v{{ redis_exporter_version }}/redis_exporter-v{{ redis_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _redis_exporter_go_ansible_arch
+          }}.tar.gz"
       redis_exporter_checksums_url:
         description: "URL of the redis_exporter checksums file"
         default: "https://github.com/{{ _redis_exporter_repo }}/releases/download/v{{ redis_exporter_version }}/sha256sums.txt"
@@ -33,11 +34,14 @@ argument_specs:
         type: "dict"
         default: {}
       redis_exporter_check_keys:
-        description: "List of key patterns to export value and length/size, eg: db3=user_count will export key user_count from db 3. db defaults to 0 if omitted. The key patterns specified with this flag will be found using SCAN. Use this option if you need glob pattern matching; check-single-keys is faster for non-pattern keys. Warning: using --check-keys to match a very large number of keys can slow down the exporter to the point where it doesn't finish scraping the redis instance."
+        description: "List of key patterns to export value and length/size, eg: db3=user_count will export key user_count from db 3. db defaults to 0 if omitted. The key patterns specified with this flag
+          will be found using SCAN. Use this option if you need glob pattern matching; check-single-keys is faster for non-pattern keys. Warning: using --check-keys to match a very large number of keys
+          can slow down the exporter to the point where it doesn't finish scraping the redis instance."
         type: "list"
         default: []
       redis_exporter_check_single_keys:
-        description: "List of keys to export value and length/size, eg: db3=user_count will export key user_count from db 3. db defaults to 0 if omitted. The keys specified with this flag will be looked up directly without any glob pattern matching. Use this option if you don't need glob pattern matching; it is faster than check-keys."
+        description: "List of keys to export value and length/size, eg: db3=user_count will export key user_count from db 3. db defaults to 0 if omitted. The keys specified with this flag will be looked
+          up directly without any glob pattern matching. Use this option if you don't need glob pattern matching; it is faster than check-keys."
         type: "list"
         default: []
       redis_exporter_check_streams:
@@ -45,15 +49,18 @@ argument_specs:
         type: "list"
         default: []
       redis_exporter_check_single_streams:
-        description: "List of streams to export info about streams, groups and consumers. The streams specified with this flag will be looked up directly without any glob pattern matching. Use this option if you don't need glob pattern matching; it is faster than check-streams."
+        description: "List of streams to export info about streams, groups and consumers. The streams specified with this flag will be looked up directly without any glob pattern matching. Use this option
+          if you don't need glob pattern matching; it is faster than check-streams."
         type: "list"
         default: []
       redis_exporter_check_keys_batch_size:
-        description: "Approximate number of keys to process in each execution. This is basically the COUNT option that will be passed into the SCAN command as part of the execution of the key or key group metrics, see COUNT option. Larger value speeds up scanning. Still Redis is a single-threaded app, huge COUNT can affect production environment."
+        description: "Approximate number of keys to process in each execution. This is basically the COUNT option that will be passed into the SCAN command as part of the execution of the key or key group
+          metrics, see COUNT option. Larger value speeds up scanning. Still Redis is a single-threaded app, huge COUNT can affect production environment."
         type: "int"
         default: 1000
       redis_exporter_count_keys:
-        description: "List of patterns to count, eg: db3=sessions:* will count all keys with prefix sessions: from db 3. db defaults to 0 if omitted. Warning: The exporter runs SCAN to count the keys. This might not perform well on large databases."
+        description: "List of patterns to count, eg: db3=sessions:* will count all keys with prefix sessions: from db 3. db defaults to 0 if omitted. Warning: The exporter runs SCAN to count the keys. This
+          might not perform well on large databases."
         type: "list"
         default: []
       redis_exporter_script:
@@ -112,7 +119,8 @@ argument_specs:
         type: bool
         default: false
       redis_exporter_export_client_port:
-        description: "Whether to include the client's port when exporting the client list. Warning: including the port increases the number of metrics generated and will make your Prometheus server take up more memory"
+        description: "Whether to include the client's port when exporting the client list. Warning: including the port increases the number of metrics generated and will make your Prometheus server take
+          up more memory"
         type: bool
         default: false
       redis_exporter_skip_tls_verification:
@@ -145,11 +153,13 @@ argument_specs:
         type: bool
         default: true
       redis_exporter_check_key_groups:
-        description: "List of LUA regexes for classifying keys into groups. The regexes are applied in specified order to individual keys, and the group name is generated by concatenating all capture groups of the first regex that matches a key. A key will be tracked under the unclassified group if none of the specified regexes matches it."
+        description: "List of LUA regexes for classifying keys into groups. The regexes are applied in specified order to individual keys, and the group name is generated by concatenating all capture groups
+          of the first regex that matches a key. A key will be tracked under the unclassified group if none of the specified regexes matches it."
         type: "list"
         default: []
       redis_exporter_max_distinct_key_groups:
-        description: "Maximum number of distinct key groups that can be tracked independently per Redis database. If exceeded, only key groups with the highest memory consumption within the limit will be tracked separately, all remaining key groups will be tracked under a single overflow key group."
+        description: "Maximum number of distinct key groups that can be tracked independently per Redis database. If exceeded, only key groups with the highest memory consumption within the limit will be
+          tracked separately, all remaining key groups will be tracked under a single overflow key group."
         type: "int"
         default: 100
       redis_exporter_config_command:

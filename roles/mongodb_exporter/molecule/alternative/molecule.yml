@@ -15,5 +15,4 @@ provisioner:
         mongodb_exporter_basic_auth_users:
           randomuser: examplepassword
         mongodb_exporter_version: 0.40.0
-        mongodb_exporter_binary_url: "https://github.com/percona/mongodb_exporter/releases/download/v{{ mongodb_exporter_version }}/\
-                                      mongodb_exporter-{{ mongodb_exporter_version }}.linux-amd64.tar.gz"
+        mongodb_exporter_binary_url: "https://github.com/percona/mongodb_exporter/releases/download/v{{ mongodb_exporter_version }}/mongodb_exporter-{{ mongodb_exporter_version }}.linux-amd64.tar.gz"

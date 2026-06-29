@@ -1,27 +1,25 @@
 ---
 alertmanager_version: 0.33.0
-alertmanager_binary_url: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/\
-                          alertmanager-{{ alertmanager_version }}.{{ ansible_facts['system'] | lower }}-{{ _alertmanager_go_ansible_arch }}.tar.gz"
+alertmanager_binary_url: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/alertmanager-{{ alertmanager_version }}.{{ ansible_facts['system'] | lower }}-{{ _alertmanager_go_ansible_arch
+  }}.tar.gz"
 alertmanager_checksums_url: "https://github.com/{{ _alertmanager_repo }}/releases/download/v{{ alertmanager_version }}/sha256sums.txt"
 
 alertmanager_config_dir: /etc/alertmanager
 alertmanager_db_dir: /var/lib/alertmanager
 
-alertmanager_config_file: 'alertmanager.yml.j2'
+alertmanager_config_file: "alertmanager.yml.j2"
 
 alertmanager_template_files:
   - alertmanager/templates/*.tmpl
 
-alertmanager_web_listen_address: '0.0.0.0:9093'
-alertmanager_web_external_url: 'http://localhost:9093/'
+alertmanager_web_listen_address: "0.0.0.0:9093"
+alertmanager_web_external_url: "http://localhost:9093/"
 
 alertmanager_http_config: {}
-
 alertmanager_web_config:
   tls_server_config: {}
   http_server_config: {}
   basic_auth_users: {}
-
 alertmanager_resolve_timeout: 3m
 
 alertmanager_config_flags_extra: {}
@@ -40,17 +38,17 @@ alertmanager_smtp: {}
 #   require_tls: "True"
 
 # Default values you can see here -> https://prometheus.io/docs/alerting/configuration/
-alertmanager_slack_api_url: ''
-alertmanager_pagerduty_url: ''
-alertmanager_opsgenie_api_key: ''
-alertmanager_opsgenie_api_url: ''
-alertmanager_victorops_api_key: ''
-alertmanager_victorops_api_url: ''
-alertmanager_hipchat_api_url: ''
-alertmanager_hipchat_auth_token: ''
-alertmanager_wechat_url: ''
-alertmanager_wechat_secret: ''
-alertmanager_wechat_corp_id: ''
+alertmanager_slack_api_url: ""
+alertmanager_pagerduty_url: ""
+alertmanager_opsgenie_api_key: ""
+alertmanager_opsgenie_api_url: ""
+alertmanager_victorops_api_key: ""
+alertmanager_victorops_api_url: ""
+alertmanager_hipchat_api_url: ""
+alertmanager_hipchat_auth_token: ""
+alertmanager_wechat_url: ""
+alertmanager_wechat_secret: ""
+alertmanager_wechat_corp_id: ""
 
 # First read: https://github.com/prometheus/alertmanager#high-availability
 alertmanager_cluster:
@@ -130,15 +128,15 @@ alertmanager_route: {}
 #           receiver: team-Y-pager
 
 # The template for amtool's configuration
-alertmanager_amtool_config_file: 'amtool.yml.j2'
+alertmanager_amtool_config_file: "amtool.yml.j2"
 
 # Location (URL) of the alertmanager
 alertmanager_amtool_config_alertmanager_url: "{{ alertmanager_web_external_url }}"
 
 # Extended output of `amtool` commands, use '' for less verbosity
-alertmanager_amtool_config_output: 'extended'
+alertmanager_amtool_config_output: "extended"
 
-alertmanager_binary_install_dir: '/usr/local/bin'
+alertmanager_binary_install_dir: "/usr/local/bin"
 
 # Local path to stash the archive and its extraction
 alertmanager_local_cache_path: "/tmp/alertmanager-{{ ansible_facts['system'] | lower }}-{{ _alertmanager_go_ansible_arch }}/{{ alertmanager_version }}"

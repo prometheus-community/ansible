@@ -1,23 +1,21 @@
 ---
 prometheus_version: 3.12.0
-prometheus_binary_url: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/\
-                        prometheus-{{ prometheus_version }}.{{ ansible_facts['system'] | lower }}-{{ _prometheus_go_ansible_arch }}.tar.gz"
+prometheus_binary_url: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.{{ ansible_facts['system'] | lower }}-{{ _prometheus_go_ansible_arch
+  }}.tar.gz"
 prometheus_checksums_url: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/sha256sums.txt"
 
 prometheus_binary_install_dir: /usr/local/bin
 prometheus_config_dir: /etc/prometheus
 prometheus_db_dir: /var/lib/prometheus
 prometheus_read_only_dirs: []
-
 prometheus_web_listen_address: "0.0.0.0:9090"
-prometheus_web_external_url: ''
+prometheus_web_external_url: ""
 prometheus_metrics_path: "/{{ (prometheus_web_external_url + '/metrics') | regex_replace('^(.*://)?(.*?)/') }}"
 # See https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md
 prometheus_web_config:
   tls_server_config: {}
   http_server_config: {}
   basic_auth_users: {}
-
 prometheus_storage_retention: "30d"
 # Available since Prometheus 2.7.0
 # [EXPERIMENTAL] Maximum number of bytes that can be stored for blocks. Units
@@ -87,7 +85,7 @@ prometheus_scrape_configs:
           - "{{ prometheus_config_dir }}/file_sd/node.yml"
 
 # Alternative config file name, searched in ansible templates path.
-prometheus_config_file: 'prometheus.yml.j2'
+prometheus_config_file: "prometheus.yml.j2"
 
 prometheus_alert_rules_files:
   - prometheus/rules/*.yml
@@ -102,82 +100,89 @@ prometheus_scrape_config_files:
   - prometheus/scrape_configs/*.json
 
 # yamllint disable rule:line-length
-prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
+prometheus_alert_rules: # noqa yaml[line-length]  # noqa line-length
   - alert: Watchdog
     expr: vector(1)
     for: 10m
     labels:
       severity: warning
     annotations:
-      description: "This is an alert meant to ensure that the entire alerting pipeline is functional.\nThis alert is always firing, therefore it should always be firing in Alertmanager\nand always fire against a receiver. There are integrations with various notification\nmechanisms that send a notification when this alert is not firing. For example the\n\"DeadMansSnitch\" integration in PagerDuty."
-      summary: 'Ensure entire alerting pipeline is functional'
+      description: "This is an alert meant to ensure that the entire alerting pipeline is functional.\nThis alert is always firing, therefore it should always be firing in Alertmanager\nand always fire
+        against a receiver. There are integrations with various notification\nmechanisms that send a notification when this alert is not firing. For example the\n\"DeadMansSnitch\" integration in PagerDuty."
+      summary: "Ensure entire alerting pipeline is functional"
   - alert: InstanceDown
-    expr: 'up == 0'
+    expr: "up == 0"
     for: 5m
     labels:
       severity: critical
     annotations:
-      description: '{% raw %}{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes.{% endraw %}'
-      summary: '{% raw %}Instance {{ $labels.instance }} down{% endraw %}'
+      description: "{% raw %}{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes.{% endraw %}"
+      summary: "{% raw %}Instance {{ $labels.instance }} down{% endraw %}"
   - alert: RebootRequired
-    expr: 'node_reboot_required > 0'
+    expr: "node_reboot_required > 0"
     labels:
       severity: warning
     annotations:
-      description: '{% raw %}{{ $labels.instance }} requires a reboot.{% endraw %}'
-      summary: '{% raw %}Instance {{ $labels.instance }} - reboot required{% endraw %}'
+      description: "{% raw %}{{ $labels.instance }} requires a reboot.{% endraw %}"
+      summary: "{% raw %}Instance {{ $labels.instance }} - reboot required{% endraw %}"
   - alert: NodeFilesystemSpaceFillingUp
     annotations:
       description: '{% raw %}Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left and is filling up.{% endraw %}'
-      summary: 'Filesystem is predicted to run out of space within the next 24 hours.'
-    expr: "(\n  node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 40\nand\n  predict_linear(node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"}[6h], 24*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+      summary: "Filesystem is predicted to run out of space within the next 24 hours."
+    expr: "(\n  node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 40\nand\n  predict_linear(node_filesystem_avail_bytes{job=\"node\"\
+      ,fstype!=\"\"}[6h], 24*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
     for: 1h
     labels:
       severity: warning
   - alert: NodeFilesystemSpaceFillingUp
     annotations:
       description: '{% raw %}Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left and is filling up fast.{% endraw %}'
-      summary: 'Filesystem is predicted to run out of space within the next 4 hours.'
-    expr: "(\n  node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 20\nand\n  predict_linear(node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"}[6h], 4*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+      summary: "Filesystem is predicted to run out of space within the next 4 hours."
+    expr: "(\n  node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 20\nand\n  predict_linear(node_filesystem_avail_bytes{job=\"node\"\
+      ,fstype!=\"\"}[6h], 4*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
     for: 1h
     labels:
       severity: critical
   - alert: NodeFilesystemAlmostOutOfSpace
     annotations:
       description: '{% raw %}Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.{% endraw %}'
-      summary: 'Filesystem has less than 5% space left.'
-    expr: "(\n  node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 5\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+      summary: "Filesystem has less than 5% space left."
+    expr: "(\n  node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 5\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n\
+      )\n"
     for: 1h
     labels:
       severity: warning
   - alert: NodeFilesystemAlmostOutOfSpace
     annotations:
       description: '{% raw %}Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.{% endraw %}'
-      summary: 'Filesystem has less than 3% space left.'
-    expr: "(\n  node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 3\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+      summary: "Filesystem has less than 3% space left."
+    expr: "(\n  node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 3\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n\
+      )\n"
     for: 1h
     labels:
       severity: critical
   - alert: NodeFilesystemFilesFillingUp
     annotations:
       description: '{% raw %}Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left and is filling up.{% endraw %}'
-      summary: 'Filesystem is predicted to run out of inodes within the next 24 hours.'
-    expr: "(\n  node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"} * 100 < 40\nand\n  predict_linear(node_filesystem_files_free{job=\"node\",fstype!=\"\"}[6h], 24*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+      summary: "Filesystem is predicted to run out of inodes within the next 24 hours."
+    expr: "(\n  node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"} * 100 < 40\nand\n  predict_linear(node_filesystem_files_free{job=\"node\",fstype!=\"\
+      \"}[6h], 24*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
     for: 1h
     labels:
       severity: warning
   - alert: NodeFilesystemFilesFillingUp
     annotations:
       description: '{% raw %}Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left and is filling up fast.{% endraw %}'
-      summary: 'Filesystem is predicted to run out of inodes within the next 4 hours.'
-    expr: "(\n  node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"} * 100 < 20\nand\n  predict_linear(node_filesystem_files_free{job=\"node\",fstype!=\"\"}[6h], 4*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+      summary: "Filesystem is predicted to run out of inodes within the next 4 hours."
+    expr: "(\n  node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"} * 100 < 20\nand\n  predict_linear(node_filesystem_files_free{job=\"node\",fstype!=\"\
+      \"}[6h], 4*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
     for: 1h
     labels:
       severity: critical
   - alert: NodeFilesystemAlmostOutOfFiles
     annotations:
       description: '{% raw %}Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left.{% endraw %}'
-      summary: 'Filesystem has less than 5% inodes left.'
+      summary: "Filesystem has less than 5% inodes left."
     expr: "(\n  node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"} * 100 < 5\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
     for: 1h
     labels:
@@ -185,7 +190,7 @@ prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
   - alert: NodeFilesystemAlmostOutOfFiles
     annotations:
       description: '{% raw %}Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left.{% endraw %}'
-      summary: 'Filesystem has less than 3% inodes left.'
+      summary: "Filesystem has less than 3% inodes left."
     expr: "(\n  node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"} * 100 < 3\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
     for: 1h
     labels:
@@ -193,7 +198,7 @@ prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
   - alert: NodeNetworkReceiveErrs
     annotations:
       description: '{% raw %}{{ $labels.instance }} interface {{ $labels.device }} has encountered {{ printf "%.0f" $value }} receive errors in the last two minutes.{% endraw %}'
-      summary: 'Network interface is reporting many receive errors.'
+      summary: "Network interface is reporting many receive errors."
     expr: "increase(node_network_receive_errs_total[2m]) > 10\n"
     for: 1h
     labels:
@@ -201,40 +206,40 @@ prometheus_alert_rules:  # noqa yaml[line-length]  # noqa line-length
   - alert: NodeNetworkTransmitErrs
     annotations:
       description: '{% raw %}{{ $labels.instance }} interface {{ $labels.device }} has encountered {{ printf "%.0f" $value }} transmit errors in the last two minutes.{% endraw %}'
-      summary: 'Network interface is reporting many transmit errors.'
+      summary: "Network interface is reporting many transmit errors."
     expr: "increase(node_network_transmit_errs_total[2m]) > 10\n"
     for: 1h
     labels:
       severity: warning
   - alert: NodeHighNumberConntrackEntriesUsed
     annotations:
-      description: '{% raw %}{{ $value | humanizePercentage }} of conntrack entries are used{% endraw %}'
-      summary: 'Number of conntrack are getting close to the limit'
+      description: "{% raw %}{{ $value | humanizePercentage }} of conntrack entries are used{% endraw %}"
+      summary: "Number of conntrack are getting close to the limit"
     expr: "(node_nf_conntrack_entries / node_nf_conntrack_entries_limit) > 0.75\n"
     labels:
       severity: warning
   - alert: NodeClockSkewDetected
     annotations:
-      message: '{% raw %}Clock on {{ $labels.instance }} is out of sync by more than 300s. Ensure NTP is configured correctly on this host.{% endraw %}'
-      summary: 'Clock skew detected.'
+      message: "{% raw %}Clock on {{ $labels.instance }} is out of sync by more than 300s. Ensure NTP is configured correctly on this host.{% endraw %}"
+      summary: "Clock skew detected."
     expr: "(\n  node_timex_offset_seconds > 0.05\nand\n  deriv(node_timex_offset_seconds[5m]) >= 0\n)\nor\n(\n  node_timex_offset_seconds < -0.05\nand\n  deriv(node_timex_offset_seconds[5m]) <= 0\n)\n"
     for: 10m
     labels:
       severity: warning
   - alert: NodeClockNotSynchronising
     annotations:
-      message: '{% raw %}Clock on {{ $labels.instance }} is not synchronising. Ensure NTP is configured on this host.{% endraw %}'
-      summary: 'Clock not synchronising.'
+      message: "{% raw %}Clock on {{ $labels.instance }} is not synchronising. Ensure NTP is configured on this host.{% endraw %}"
+      summary: "Clock not synchronising."
     expr: "min_over_time(node_timex_sync_status[5m]) == 0\n"
     for: 10m
     labels:
       severity: warning
 # yamllint enable rule:line-length
 
-prometheus_system_group: 'prometheus'
+prometheus_system_group: "prometheus"
 prometheus_system_user: "{{ prometheus_system_group }}"
 
-prometheus_stop_timeout: '600s'
+prometheus_stop_timeout: "600s"
 
 # Local path to stash the archive and its extraction
 prometheus_local_cache_path: "/tmp/prometheus-{{ ansible_facts['system'] | lower }}-{{ _prometheus_go_ansible_arch }}/{{ prometheus_version }}"

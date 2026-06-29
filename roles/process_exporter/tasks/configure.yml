@@ -21,7 +21,7 @@
     dest: "/etc/process_exporter/config.yml"
     owner: "{{ process_exporter_system_user }}"
     group: "{{ process_exporter_system_group }}"
-    mode: 0644
+    mode: "0644"
   when:
     - process_exporter_names != []
   notify: restart process_exporter

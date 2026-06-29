@@ -18,7 +18,7 @@
     dest: "{{ redis_exporter_config_dir }}/passwords.json"
     owner: "{{ redis_exporter_system_user }}"
     group: "{{ redis_exporter_system_group }}"
-    mode: 0644
+    mode: "0644"
   notify: restart redis_exporter
   when: redis_exporter_passwords | length > 0
   become: true

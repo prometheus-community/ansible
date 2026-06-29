@@ -33,8 +33,8 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    bind_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _bind_exporter_repo }}/releases/latest', headers=_github_api_headers,
-                              split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+    bind_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _bind_exporter_repo }}/releases/latest', headers=_github_api_headers, split_lines=False) | from_json).get('tag_name') | replace('v',
+      '') }}"
   run_once: true
   until: bind_exporter_version is version('0.0.0', '>=')
   retries: 10

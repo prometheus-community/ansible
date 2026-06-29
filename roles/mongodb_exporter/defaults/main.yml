@@ -1,9 +1,8 @@
 ---
 mongodb_exporter_version: 0.51.0
-mongodb_exporter_binary_url: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/\
-                          mongodb_exporter-{{ mongodb_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _mongodb_exporter_go_ansible_arch }}.tar.gz"
-mongodb_exporter_checksums_url: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/\
-                          mongodb_exporter_{{ mongodb_exporter_version }}_checksums.txt"
+mongodb_exporter_binary_url: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/mongodb_exporter-{{ mongodb_exporter_version }}.{{ ansible_facts['system']
+  | lower }}-{{ _mongodb_exporter_go_ansible_arch }}.tar.gz"
+mongodb_exporter_checksums_url: "https://github.com/{{ _mongodb_exporter_repo }}/releases/download/v{{ mongodb_exporter_version }}/mongodb_exporter_{{ mongodb_exporter_version }}_checksums.txt"
 
 mongodb_exporter_web_listen_address: "0.0.0.0:9216"
 mongodb_exporter_web_telemetry_path: "/metrics"
@@ -25,7 +24,6 @@ mongodb_exporter_metrics_overridedescendingindex: false
 mongodb_exporter_tls_server_config: {}
 mongodb_exporter_http_server_config: {}
 mongodb_exporter_basic_auth_users: {}
-
 mongodb_exporter_log_level: "error"
 
 mongodb_exporter_binary_install_dir: "/usr/local/bin"

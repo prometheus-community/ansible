@@ -3,7 +3,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        prometheus_local_cache_path: '/tmp/prometheus-linux-amd64'
+        prometheus_local_cache_path: "/tmp/prometheus-linux-amd64"
         prometheus_config_dir: /opt/prom/etc
         prometheus_db_dir: /opt/prom/lib
         prometheus_web_listen_address: "127.0.0.1:9090"
@@ -63,8 +63,7 @@ provisioner:
             metrics_path: "{{ prometheus_metrics_path }}"
             static_configs:
               - targets:
-                  - "{{ ansible_fqdn | default(ansible_host) | default('localhost')\
-                    \ }}:9090"
+                  - "{{ ansible_fqdn | default(ansible_host) | default('localhost') }}:9090"
           - job_name: "node"
             file_sd_configs:
               - files:
@@ -73,7 +72,7 @@ provisioner:
             file_sd_configs:
               - files:
                   - "{{ prometheus_config_dir }}/file_sd/docker.yml"
-          - job_name: 'blackbox'
+          - job_name: "blackbox"
             metrics_path: /probe
             params:
               module: [http_2xx]
@@ -87,8 +86,7 @@ provisioner:
               - source_labels: [__param_target]
                 target_label: instance
               - target_label: __address__
-                replacement: 127.0.0.1:9115  # Blackbox exporter.
+                replacement: 127.0.0.1:9115 # Blackbox exporter.
         prometheus_version: 2.25.2
         prometheus_stop_timeout: 1min
-        prometheus_binary_url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version\
-                                \ }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
+        prometheus_binary_url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"

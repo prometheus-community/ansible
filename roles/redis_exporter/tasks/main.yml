@@ -20,7 +20,7 @@
     _common_system_group: "{{ redis_exporter_system_group }}"
     _common_system_user: "{{ redis_exporter_system_user }}"
     _common_config_dir: "{{ redis_exporter_config_dir }}"
-    _common_binary_unarchive_opts: ['--strip-components=1']
+    _common_binary_unarchive_opts: ["--strip-components=1"]
   tags:
     - redis_exporter_install
 

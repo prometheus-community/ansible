@@ -1,7 +1,7 @@
 ---
 apache_exporter_version: 1.1.1
-apache_exporter_binary_url: "https://github.com/{{ _apache_exporter_repo }}/releases/download/v{{ apache_exporter_version }}/\
-                          apache_exporter-{{ apache_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _apache_exporter_go_ansible_arch }}.tar.gz"
+apache_exporter_binary_url: "https://github.com/{{ _apache_exporter_repo }}/releases/download/v{{ apache_exporter_version }}/apache_exporter-{{ apache_exporter_version }}.{{ ansible_facts['system'] | lower
+  }}-{{ _apache_exporter_go_ansible_arch }}.tar.gz"
 apache_exporter_checksums_url: "https://github.com/{{ _apache_exporter_repo }}/releases/download/v{{ apache_exporter_version }}/sha256sums.txt"
 
 apache_exporter_web_listen_address: "0.0.0.0:9117"
@@ -12,7 +12,6 @@ apache_exporter_timeout_offset: 1
 apache_exporter_tls_server_config: {}
 apache_exporter_http_server_config: {}
 apache_exporter_basic_auth_users: {}
-
 apache_exporter_log_level: "error"
 
 apache_exporter_binary_install_dir: "/usr/local/bin"

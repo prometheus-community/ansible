@@ -13,7 +13,8 @@ argument_specs:
         default: "0.28.0"
       blackbox_exporter_binary_url:
         description: "URL of the blackbox_exporter binaries .tar.gz file"
-        default: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/blackbox_exporter-{{ blackbox_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _blackbox_exporter_go_ansible_arch }}.tar.gz"
+        default: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/blackbox_exporter-{{ blackbox_exporter_version }}.{{ ansible_facts['system'] | lower
+          }}-{{ _blackbox_exporter_go_ansible_arch }}.tar.gz"
       blackbox_exporter_checksums_url:
         description: "URL of the blackbox exporter checksums file"
         default: "https://github.com/{{ _blackbox_exporter_repo }}/releases/download/v{{ blackbox_exporter_version }}/sha256sums.txt"
@@ -48,5 +49,5 @@ argument_specs:
         description: "The group the exporter runs as"
         default: "blackbox-exp"
       blackbox_exporter_local_cache_path:
-        description: 'Local path to stash the archive and its extraction'
+        description: "Local path to stash the archive and its extraction"
         default: "/tmp/blackbox_exporter-{{ ansible_facts['system'] | lower }}-{{ _blackbox_exporter_go_ansible_arch }}/{{ blackbox_exporter_version }}"

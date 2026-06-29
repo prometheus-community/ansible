@@ -14,15 +14,22 @@ rules:
   commas:
     max-spaces-after: -1
     level: error
+  comments:
+    min-spaces-from-content: 1
+  comments-indentation: false
   empty-lines:
     max: 3
     level: error
   hyphens:
     level: error
   line-length:
-    max: 200
+    max: 250
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
   truthy:
     check-keys: false
 
 ignore: |
   changelogs/.plugin-cache.yaml
+  changelogs/changelog.yaml

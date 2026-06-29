@@ -16,16 +16,14 @@ jobs:
       - name: "Confirm correct pull request title"
         uses: deepakputhraya/action-pr-title@077bddd7bdabd0d2b1b25ed0754c7e62e184d7ee
         with:
-          allowed_prefixes: "breaking,chore,feat,feature,fix,major,minor,enhancement,\
-           deprecated,removed,security,bug,bugfix,docs,packaging,\
-           test,refactor,refactoring,skip-release,skip_changelog,patch"
+          allowed_prefixes: "breaking,chore,feat,feature,fix,major,minor,enhancement,deprecated,removed,security,bug,bugfix,docs,packaging,test,refactor,refactoring,skip-release,skip_changelog,patch"
 
       - name: "Apply label"
         if: github.event.pull_request.labels.length == 0
-        uses: bcoe/conventional-release-labels@886f696738527c7be444262c327c89436dfb95a8  # v1.3.1
+        uses: bcoe/conventional-release-labels@886f696738527c7be444262c327c89436dfb95a8 # v1.3.1
         with:
           type_labels: |
-              {
+            {
               "feature": "enhancement",
               "feat": "enhancement",
               "fix": "bugfix",
@@ -47,7 +45,7 @@ jobs:
               "skip_changelog": "skip_changelog",
               "patch": "trivial",
               "chore": "trivial"
-              }
+            }
 
   role-label:
     runs-on: ubuntu-latest
@@ -56,7 +54,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Add changed roles labels
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const prNumber = context.issue.number;
