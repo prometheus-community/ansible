@@ -4,6 +4,8 @@ releases:
   0.30.1:
     changes:
       trivial:
+        - 'chore(deps): update stefanzweifel/git-auto-commit-action action to v7.2.0
+          (https://github.com/prometheus-community/ansible/pull/834)'
         - 'chore: Update OS test matrix (https://github.com/prometheus-community/ansible/pull/833)'
         - 'patch: New superq/smokeping_prober upstream release 0.12.0! (https://github.com/prometheus-community/ansible/pull/832)'
         - 'patch: New google/cadvisor upstream release 0.60.2! (https://github.com/prometheus-community/ansible/pull/830)'
