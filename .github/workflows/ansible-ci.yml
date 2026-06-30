@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
 
       - name: Lint collection
-        uses: ansible/ansible-lint@5fac056c45595896c973fbde871f01f6cb14d74c  # v26.4.0
+        uses: ansible/ansible-lint@262624cd0ab22a4221293216856c59671ce7aa5e  # v26.6.0
 
   arguments-spec-lint:
     runs-on: ubuntu-latest
