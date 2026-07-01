@@ -122,3 +122,8 @@ argument_specs:
           - "I(Advanced)"
           - "System group for alertmanager"
         default: alertmanager
+      alertmanager_mask_diff:
+        description:
+          - "Switch for preventing output of diff"
+        type: bool
+        default: false
