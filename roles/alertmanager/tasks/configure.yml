@@ -56,7 +56,7 @@
     mode: 0644
     validate: "{{ alertmanager_binary_install_dir }}/amtool check-config %s"
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
-  diff: "{{ false if alert_manager_mask_diff else true }}"
+  diff: "{{ alert_manager_mask_diff | bool | default(false) }}"
   become: true
   notify:
     - restart alertmanager
