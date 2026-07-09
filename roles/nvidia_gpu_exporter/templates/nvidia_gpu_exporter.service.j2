@@ -19,7 +19,10 @@ ExecStart={{ nvidia_gpu_exporter_binary_install_dir }}/nvidia_gpu_exporter \
 {% else %}
     '--web.listen-address={{ nvidia_gpu_exporter_web_listen_address }}' \
 {% endif %}
-    '--web.telemetry-path={{ nvidia_gpu_exporter_web_telemetry_path }}'
+    '--web.telemetry-path={{ nvidia_gpu_exporter_web_telemetry_path }}' \
+{% for arg in nvidia_gpu_exporter_extra_args | default([]) %}
+    '{{ arg }}' \
+{% endfor %}
 
 SyslogIdentifier=nvidia_gpu_exporter
 Restart=always
