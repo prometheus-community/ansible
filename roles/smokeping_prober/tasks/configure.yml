@@ -42,7 +42,7 @@
     dest: "{{ smokeping_prober_config_dir }}/{{ smokeping_prober_config_file }}"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   notify: restart smokeping_prober
   become: true

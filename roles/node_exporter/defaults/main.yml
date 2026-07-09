@@ -1,7 +1,7 @@
 ---
 node_exporter_version: 1.11.1
-node_exporter_binary_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/\
-                           node_exporter-{{ node_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _node_exporter_go_ansible_arch }}.tar.gz"
+node_exporter_binary_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{
+  _node_exporter_go_ansible_arch }}.tar.gz"
 node_exporter_checksums_url: "https://github.com/{{ _node_exporter_repo }}/releases/download/v{{ node_exporter_version }}/sha256sums.txt"
 
 node_exporter_web_disable_exporter_metrics: false
@@ -14,11 +14,8 @@ node_exporter_log_format: "logfmt"
 node_exporter_textfile_dir: "/var/lib/node_exporter"
 
 node_exporter_tls_server_config: {}
-
 node_exporter_http_server_config: {}
-
 node_exporter_basic_auth_users: {}
-
 node_exporter_enabled_collectors:
   - systemd
   - textfile:
@@ -28,7 +25,6 @@ node_exporter_enabled_collectors:
 #      fs-types-exclude: "^(sys|proc|auto)fs$"
 
 node_exporter_disabled_collectors: []
-
 node_exporter_binary_install_dir: "/usr/local/bin"
 node_exporter_system_group: "node-exp"
 node_exporter_system_user: "{{ node_exporter_system_group }}"

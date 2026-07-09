@@ -1,12 +1,11 @@
 ---
 systemd_exporter_version: 0.7.0
-systemd_exporter_binary_url: "https://github.com/{{ _systemd_exporter_repo }}/releases/download/v{{ systemd_exporter_version }}/\
-                                    systemd_exporter-{{ systemd_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _systemd_exporter_go_ansible_arch }}.tar.gz"
+systemd_exporter_binary_url: "https://github.com/{{ _systemd_exporter_repo }}/releases/download/v{{ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version }}.{{ ansible_facts['system']
+  | lower }}-{{ _systemd_exporter_go_ansible_arch }}.tar.gz"
 systemd_exporter_checksums_url: "https://github.com/{{ _systemd_exporter_repo }}/releases/download/v{{ systemd_exporter_version }}/sha256sums.txt"
 systemd_exporter_web_listen_address: "0.0.0.0:9558"
 
 systemd_exporter_tls_server_config: {}
-
 systemd_exporter_enable_restart_count: false
 systemd_exporter_enable_ip_accounting: false
 systemd_exporter_enable_file_descriptor_size: false

@@ -50,8 +50,8 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    chrony_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _chrony_exporter_repo }}/releases/latest', headers=_github_api_headers,
-                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+    chrony_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _chrony_exporter_repo }}/releases/latest', headers=_github_api_headers, split_lines=False) | from_json).get('tag_name') |
+      replace('v', '') }}"
   run_once: true
   until: chrony_exporter_version is version('0.0.0', '>=')
   retries: 10

@@ -19,8 +19,8 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    snmp_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _snmp_exporter_repo }}/releases/latest', headers=_github_api_headers,
-                            split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+    snmp_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _snmp_exporter_repo }}/releases/latest', headers=_github_api_headers, split_lines=False) | from_json).get('tag_name') | replace('v',
+      '') }}"
   run_once: true
   until: snmp_exporter_version is version('0.0.0', '>=')
   retries: 10

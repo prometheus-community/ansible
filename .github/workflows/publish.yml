@@ -3,21 +3,20 @@ name: Ansible collection publish
 on:
   push:
     tags:
-      - '*'
+      - "*"
   workflow_dispatch:
-
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: "Build the collection"
         id: build-collection
         uses: ansible-community/github-action-build-collection@main
 
       - name: "Upload built collection to release"
-        uses: svenstaro/upload-release-action@29e53e917877a24fad85510ded594ab3c9ca12de  # 2.11.5
+        uses: svenstaro/upload-release-action@29e53e917877a24fad85510ded594ab3c9ca12de # 2.11.5
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.build-collection.outputs.artifact-filename }}
@@ -26,6 +25,6 @@ jobs:
           overwrite: true
 
       - name: "Publish collection on galaxy"
-        uses: ansible/ansible-publish-action@a56a0328c92c1d4feedf5bd7f7cf7ec7a4ae3f09  # v1.0.0
+        uses: ansible/ansible-publish-action@a56a0328c92c1d4feedf5bd7f7cf7ec7a4ae3f09 # v1.0.0
         with:
           api_key: ${{ secrets.ANSIBLE_GALAXY_API_KEY }}

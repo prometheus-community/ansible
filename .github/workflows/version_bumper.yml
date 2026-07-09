@@ -2,7 +2,7 @@
 name: Check for new upstream releases
 on:
   schedule:
-    - cron: '21 14 * * *'
+    - cron: "21 14 * * *"
   workflow_call:
     inputs:
       role-repos:
@@ -16,7 +16,7 @@ jobs:
     container:
       image: quay.io/prometheus/golang-builder:base
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Get repos for each role
         id: discover
@@ -36,5 +36,5 @@ jobs:
       matrix:
         include: ${{ fromJson(needs.discover-role-repos.outputs.role-repos) }}
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - run: ./.github/scripts/version_updater.sh ${{ matrix.repo }} ${{ matrix.role }} ${{ matrix.type }}

@@ -20,7 +20,7 @@
     _common_system_group: "{{ bind_exporter_system_group }}"
     _common_system_user: "{{ bind_exporter_system_user }}"
     _common_config_dir: "{{ bind_exporter_config_dir }}"
-    _common_binary_unarchive_opts: ['--strip-components=1']
+    _common_binary_unarchive_opts: ["--strip-components=1"]
   tags:
     - bind_exporter_install
 
@@ -33,7 +33,6 @@
   when: ansible_facts['selinux'].status == "enabled"
   tags:
     - bind_exporter_configure
-
 
 - name: Configure
   ansible.builtin.include_role:

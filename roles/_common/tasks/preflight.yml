@@ -12,8 +12,7 @@
   ansible.builtin.assert:
     that:
       - __common_parent_role_short_name ~ '_skip_install' not in vars
-    fail_msg: "The variable {{ __common_parent_role_short_name ~ '_skip_install' }} is deprecated.
-               Please use `--skip-tags {{ __common_parent_role_short_name }}_install` instead to skip the installation."
+    fail_msg: "The variable {{ __common_parent_role_short_name ~ '_skip_install' }} is deprecated. Please use `--skip-tags {{ __common_parent_role_short_name }}_install` instead to skip the installation."
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - configure
@@ -23,8 +22,7 @@
   ansible.builtin.assert:
     that:
       - __common_parent_role_short_name ~ '_binary_local_dir' not in vars
-    fail_msg: "The variable {{ __common_parent_role_short_name ~ '_binary_local_dir' }} is deprecated.
-               Please use the variable {{ __common_parent_role_short_name ~ '_local_cache_path' }} instead"
+    fail_msg: "The variable {{ __common_parent_role_short_name ~ '_binary_local_dir' }} is deprecated. Please use the variable {{ __common_parent_role_short_name ~ '_local_cache_path' }} instead"
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - configure
@@ -34,8 +32,7 @@
   ansible.builtin.assert:
     that:
       - __common_parent_role_short_name ~ '_archive_path' not in vars
-    fail_msg: "The variable {{ __common_parent_role_short_name ~ '_archive_path' }} is deprecated.
-               Please use the variable {{ __common_parent_role_short_name ~ '_local_cache_path' }} instead"
+    fail_msg: "The variable {{ __common_parent_role_short_name ~ '_archive_path' }} is deprecated. Please use the variable {{ __common_parent_role_short_name ~ '_local_cache_path' }} instead"
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - configure

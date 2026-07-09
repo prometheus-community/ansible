@@ -1,7 +1,7 @@
 ---
 postgres_exporter_version: 0.19.1
-postgres_exporter_binary_url: "https://github.com/{{ _postgres_exporter_repo }}/releases/download/v{{ postgres_exporter_version }}/\
-                           postgres_exporter-{{ postgres_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _postgres_exporter_go_ansible_arch }}.tar.gz"
+postgres_exporter_binary_url: "https://github.com/{{ _postgres_exporter_repo }}/releases/download/v{{ postgres_exporter_version }}/postgres_exporter-{{ postgres_exporter_version }}.{{ ansible_facts['system']
+  | lower }}-{{ _postgres_exporter_go_ansible_arch }}.tar.gz"
 postgres_exporter_checksums_url: "https://github.com/{{ _postgres_exporter_repo }}/releases/download/v{{ postgres_exporter_version }}/sha256sums.txt"
 
 postgres_exporter_web_listen_address: "0.0.0.0:9187"
@@ -15,15 +15,10 @@ postgres_exporter_username: ""
 postgres_exporter_password: ""
 
 postgres_exporter_tls_server_config: {}
-
 postgres_exporter_http_server_config: {}
-
 postgres_exporter_basic_auth_users: {}
-
 postgres_exporter_enabled_collectors: []
-
 postgres_exporter_disabled_collectors: []
-
 # Internal variables.
 postgres_exporter_binary_install_dir: "/usr/local/bin"
 postgres_exporter_config_dir: "/etc/postgres_exporter"

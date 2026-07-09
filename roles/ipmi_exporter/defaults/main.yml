@@ -1,7 +1,7 @@
 ---
 ipmi_exporter_version: 1.10.1
-ipmi_exporter_binary_url: "https://github.com/{{ _ipmi_exporter_repo }}/releases/download/v{{ ipmi_exporter_version }}/\
-                           ipmi_exporter-{{ ipmi_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _ipmi_exporter_go_ansible_arch }}.tar.gz"
+ipmi_exporter_binary_url: "https://github.com/{{ _ipmi_exporter_repo }}/releases/download/v{{ ipmi_exporter_version }}/ipmi_exporter-{{ ipmi_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{
+  _ipmi_exporter_go_ansible_arch }}.tar.gz"
 ipmi_exporter_checksums_url: "https://github.com/{{ _ipmi_exporter_repo }}/releases/download/v{{ ipmi_exporter_version }}/sha256sums.txt"
 
 ipmi_exporter_modules:
@@ -18,7 +18,6 @@ ipmi_exporter_web_listen_address: "0.0.0.0:9290"
 ipmi_exporter_tls_server_config: {}
 ipmi_exporter_http_server_config: {}
 ipmi_exporter_basic_auth_users: {}
-
 ipmi_exporter_log_level: "info"
 ipmi_exporter_log_format: "logfmt"
 

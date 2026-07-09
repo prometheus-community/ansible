@@ -19,8 +19,8 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    alertmanager_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _alertmanager_repo }}/releases/latest', headers=_github_api_headers,
-                           split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+    alertmanager_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _alertmanager_repo }}/releases/latest', headers=_github_api_headers, split_lines=False) | from_json).get('tag_name') | replace('v',
+      '') }}"
   run_once: true
   until: alertmanager_version is version('0.0.0', '>=')
   retries: 10
@@ -37,11 +37,8 @@
 - name: Fail when extra config flags are duplicating ansible variables
   ansible.builtin.fail:
     msg: "Detected duplicate configuration entry. Please check your ansible variables and role README.md."
-  when:
-    (alertmanager_config_flags_extra['config.file'] is defined) or
-    (alertmanager_config_flags_extra['storage.path'] is defined) or
-    (alertmanager_config_flags_extra['web.listen-address'] is defined) or
-    (alertmanager_config_flags_extra['web.external-url'] is defined)
+  when: (alertmanager_config_flags_extra['config.file'] is defined) or (alertmanager_config_flags_extra['storage.path'] is defined) or (alertmanager_config_flags_extra['web.listen-address'] is
+    defined) or (alertmanager_config_flags_extra['web.external-url'] is defined)
 
 - name: Fail when there are no receivers defined
   ansible.builtin.fail:
@@ -113,14 +110,12 @@
 
 - name: "`alertmanager_child_routes` is no longer supported"
   ansible.builtin.fail:
-    msg: "Please move content of `alertmanager_child_routes` to `alertmanager_route.routes` as the former variable is deprecated
-          and will be removed in future versions."
+    msg: "Please move content of `alertmanager_child_routes` to `alertmanager_route.routes` as the former variable is deprecated and will be removed in future versions."
   when: alertmanager_child_routes is defined
 
 - name: "`alertmanager_time_intervals` is only supported on version 0.22.0. Please upgrade to this version."
   ansible.builtin.fail:
-    msg: "To use `alertmanager_time_intervals`,
-          Please upgrade to AlertManager 0.22.0 or newer."
+    msg: "To use `alertmanager_time_intervals`, Please upgrade to AlertManager 0.22.0 or newer."
   when:
     - alertmanager_version is version_compare('0.22.0', '<')
     - alertmanager_time_intervals is defined

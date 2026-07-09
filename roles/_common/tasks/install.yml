@@ -60,7 +60,7 @@
       ansible.builtin.file:
         path: "{{ _common_local_cache_path }}"
         state: directory
-        mode: 0755
+        mode: "0755"
       check_mode: false
 
     - name: "Download {{ __common_binary_basename }}"
@@ -68,7 +68,7 @@
         url: "{{ _common_binary_url }}"
         dest: "{{ _common_local_cache_path }}/{{ _common_binary_name | default(__common_binary_basename) }}"
         headers: "{{ __common_github_api_headers }}"
-        mode: 0644
+        mode: "0644"
         status_code: [200, 203, 204, 206, 300, 301, 302, 303, 304, 307, 308]
         follow_redirects: all
       register: __common_download
@@ -95,8 +95,7 @@
 
         - name: "Parse checksum list for {{ __common_binary_basename }}"
           ansible.builtin.set_fact:
-            __common_binary_checksums: "{{ dict(__common_binary_checksums_raw.content.splitlines()
-                                        | map('regex_findall', '^([a-fA-F0-9]+)\\s+(.+)$') | map('flatten') | map('reverse')) }}"
+            __common_binary_checksums: "{{ dict(__common_binary_checksums_raw.content.splitlines() | map('regex_findall', '^([a-fA-F0-9]+)\\s+(.+)$') | map('flatten') | map('reverse')) }}"
 
         - name: "Calculate checksum of {{ __common_binary_basename }}"
           ansible.builtin.stat:
@@ -115,11 +114,11 @@
       ansible.builtin.unarchive:
         src: "{{ _common_local_cache_path }}/{{ __common_binary_basename }}"
         dest: "{{ _common_local_cache_path }}"
-        mode: 0755
+        mode: "0755"
         list_files: true
         extra_opts: "{{ _common_binary_unarchive_opts | default(omit, true) }}"
       check_mode: false
-      throttle: 1  # see prometheus-community/ansible#457
+      throttle: 1 # see prometheus-community/ansible#457
       when: __common_binary_basename is search('\.zip$|\.tar\.gz$')
 
 - name: "Check existence of binary install dir"
@@ -134,7 +133,7 @@
 - name: "Make sure binary install dir exists"
   ansible.builtin.file:
     path: "{{ _common_binary_install_dir }}"
-    mode: 0755
+    mode: "0755"
     owner: root
     group: root
   become: true
@@ -148,7 +147,7 @@
   ansible.builtin.copy:
     src: "{{ _common_local_cache_path }}/{{ item }}"
     dest: "{{ _common_binary_install_dir }}/{{ item }}"
-    mode: 0755
+    mode: "0755"
     owner: root
     group: root
   loop: "{{ _common_binaries }}"
