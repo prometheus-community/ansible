@@ -9,6 +9,9 @@ provisioner:
         nvidia_gpu_exporter_web_listen_address:
           - '127.0.0.1:9835'
           - '127.0.1.1:9835'
-        nvidia_gpu_exporter_version: 1.2.1
+        nvidia_gpu_exporter_version: 1.9.0
         nvidia_gpu_exporter_binary_url: "https://github.com/utkuozdemir/nvidia_gpu_exporter/releases/download/v{{\
                                         \ nvidia_gpu_exporter_version }}/nvidia_gpu_exporter_{{ nvidia_gpu_exporter_version }}_linux_x86_64.tar.gz"
+        nvidia_gpu_exporter_extra_args: [
+          "--collect.compute-apps"
+        ]
