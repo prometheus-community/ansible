@@ -7,6 +7,11 @@ Prometheus.Prometheus Release Notes
 v0.30.1
 =======
 
+Bugfixes
+--------
+
+- fix: optionally mask diff output for alertmanager (https://github.com/prometheus-community/ansible/pull/838)
+
 v0.30.0
 =======
 
