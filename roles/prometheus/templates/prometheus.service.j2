@@ -16,11 +16,15 @@ ExecReload=/bin/kill -HUP $MAINPID
 ExecStart={{ prometheus_binary_install_dir }}/prometheus \
 {% if not prometheus_agent_mode %}
   --storage.tsdb.path={{ prometheus_db_dir }} \
+{# If using Prometheus 3.11 or newer, don't set the TSDB retention flags at #}
+{# all, instead use the config file. #}
+{% if prometheus_version is version('3.11.0', '<') %}
 {% if prometheus_version is version('2.7.0', '>=') %}
   --storage.tsdb.retention.time={{ prometheus_storage_retention }} \
   --storage.tsdb.retention.size={{ prometheus_storage_retention_size }} \
 {% else %}
   --storage.tsdb.retention={{ prometheus_storage_retention }} \
+{% endif %}
 {% endif %}
 {% else %}
 {% if prometheus_version is version('3.0.0', '>=') %}
