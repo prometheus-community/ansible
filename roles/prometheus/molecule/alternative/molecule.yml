@@ -13,7 +13,6 @@ provisioner:
         prometheus_storage_retention: "60d"
         prometheus_storage_retention_size: "1GB"
         prometheus_config_flags_extra:
-          alertmanager.timeout: 10s
           web.enable-admin-api:
           enable-feature:
             - promql-at-modifier
@@ -88,7 +87,7 @@ provisioner:
                 target_label: instance
               - target_label: __address__
                 replacement: 127.0.0.1:9115  # Blackbox exporter.
-        prometheus_version: 2.25.2
+        prometheus_version: 3.13.0
         prometheus_stop_timeout: 1min
         prometheus_binary_url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version\
                                 \ }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
