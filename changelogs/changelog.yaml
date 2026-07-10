@@ -10,6 +10,7 @@ releases:
           (https://github.com/prometheus-community/ansible/pull/847)'
         - 'patch: New utkuozdemir/nvidia_gpu_exporter upstream release 1.10.0! (https://github.com/prometheus-community/ansible/pull/846)'
         - 'refactor(selinux): replace deprecated fact vars (https://github.com/prometheus-community/ansible/pull/845)'
+        - 'patch: New prometheus/alertmanager upstream release 0.33.1! (https://github.com/prometheus-community/ansible/pull/843)'
         - 'patch: New utkuozdemir/nvidia_gpu_exporter upstream release 1.6.0! (https://github.com/prometheus-community/ansible/pull/835)'
         - 'chore(deps): update stefanzweifel/git-auto-commit-action action to v7.2.0
           (https://github.com/prometheus-community/ansible/pull/834)'
