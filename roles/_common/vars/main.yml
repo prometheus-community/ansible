@@ -19,6 +19,8 @@ _common_tls_server_config: {}
 _common_http_server_config: {}
 _common_basic_auth_users: {}
 _common_web_listen_address: ""
+_common_remote_download: "false"
+_common_remote_cache_path: ""
 # Variables that should not be overwritten
 __common_binary_basename: "{{ _common_binary_url | urlsplit('path') | basename }}"
 __common_github_api_headers: "{{ {'GITHUB_TOKEN': lookup('ansible.builtin.env', 'GITHUB_TOKEN')} if (lookup('ansible.builtin.env', 'GITHUB_TOKEN')) else {} }}"
