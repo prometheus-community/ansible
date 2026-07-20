@@ -1,0 +1,30 @@
+---
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ pve_exporter_system_user }}"
+    _common_system_group: "{{ pve_exporter_system_group }}"
+    _common_config_dir: "{{ pve_exporter_config_dir }}"
+    _common_tls_server_config: "{{ pve_exporter_tls_server_config }}"
+    _common_http_server_config: "{{ pve_exporter_http_server_config }}"
+    _common_basic_auth_users: "{{ pve_exporter_basic_auth_users }}"
+  tags:
+    - pve_exporter
+    - configure
+    - pve_exporter_configure
+
+- name: Create textfile collector dir
+  ansible.builtin.file:
+    path: "{{ pve_exporter_textfile_dir }}"
+    state: directory
+    owner: "{{ pve_exporter_system_user }}"
+    group: "{{ pve_exporter_system_group }}"
+    mode: u+rwX,g+rwX,o=rX
+  become: true
+  when: pve_exporter_textfile_dir | length > 0
+  tags:
+    - pve_exporter
+    - configure
+    - pve_exporter_configure
