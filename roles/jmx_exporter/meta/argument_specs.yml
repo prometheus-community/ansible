@@ -1,0 +1,77 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus jmx_exporter"
+    description:
+      - "Deploy prometheus L(jmx exporter,https://github.com/prometheus/jmx_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      jmx_exporter_version:
+        description: "jmx_exporter package version. Also accepts latest as parameter."
+        default: "1.6.0"
+      jmx_exporter_binary_url:
+        description: "URL of the jmx_exporter binaries .jar file"
+        default: "https://github.com/{{ _jmx_exporter_repo }}/releases/download/v{{ jmx_exporter_version }}/jmx_prometheus_javaagent-{{ jmx_exporter_version }}.jar"
+      jmx_exporter_checksums_url:
+        description: "URL of the jmx_exporter checksums file"
+        default: "https://github.com/{{ _jmx_exporter_repo }}/releases/download/v{{ jmx_exporter_version }}/jmx_prometheus_javaagent-{{ jmx_exporter_version }}.jar.sha256"
+      jmx_exporter_web_listen_address:
+        description: "Address on which jmx exporter will listen"
+        default: "0.0.0.0:9404"
+      jmx_exporter_web_telemetry_path:
+        description: "Path under which to expose metrics"
+        default: "/metrics"
+      jmx_exporter_uri:
+        description: "URI to scrape jmx metrics"
+        default: "http://localhost/server-status/?auto"
+      jmx_exporter_timeout_offset:
+        description: "Offset to add to the timeout for the scrape"
+        default: 1
+      jmx_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(jmx_exporter docs,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)."
+        type: "dict"
+      jmx_exporter_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(jmx_exporter docs,https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md)."
+        type: "dict"
+      jmx_exporter_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      jmx_exporter_log_level:
+        description: "Only log messages with the given severity or above. One of: [debug, info, warn, error]"
+        default: "error"
+      jmx_exporter_binary_install_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to install jmx_exporter binary"
+        default: "/usr/local/bin"
+      jmx_exporter_config_file:
+        description:
+          - "I(Advanced)"
+          - "Path to the JMX Exporter configuration file"
+        default: "/etc/jmx_exporter/jmx_exporter.yml"
+      jmx_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "System user for jmx_exporter"
+        default: "jmx-exp"
+      jmx_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for jmx_exporter"
+        default: "jmx-exp"
+      jmx_exporter_config_dir:
+        description:
+          - "I(Advanced)"
+          - "Directory to store jmx_exporter configuration"
+        default: "/etc/jmx_exporter"
+      jmx_exporter_local_cache_path:
+        description:
+          - "I(Advanced)"
+          - "Local path to stash the archive and its extraction"
+        default: "/tmp/jmx_exporter-{{ ansible_facts['system'] | lower }}-{{ _jmx_exporter_go_ansible_arch }}/{{ jmx_exporter_version }}"

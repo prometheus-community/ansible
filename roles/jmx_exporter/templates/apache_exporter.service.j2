@@ -1,0 +1,35 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus jmx Exporter
+Documentation=https://github.com/Lusitaniae/jmx_exporter
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+User={{ jmx_exporter_system_user }}
+Group={{ jmx_exporter_system_group }}
+
+ExecStart={{ jmx_exporter_binary_install_dir }}/jmx_exporter
+
+SyslogIdentifier=jmx_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+ProtectHome=yes
+NoNewPrivileges=yes
+
+{% if (ansible_facts.packages.systemd | first).version is version('232', '>=') %}
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target
