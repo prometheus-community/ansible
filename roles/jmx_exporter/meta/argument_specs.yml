@@ -33,9 +33,6 @@ argument_specs:
       jmx_exporter_basic_auth_users:
         description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
         type: "dict"
-      jmx_exporter_log_level:
-        description: "Only log messages with the given severity or above. One of: [debug, info, warn, error]"
-        default: "error"
       jmx_exporter_binary_install_dir:
         description:
           - "I(Advanced)"
