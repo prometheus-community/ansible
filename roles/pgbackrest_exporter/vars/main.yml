@@ -1,0 +1,9 @@
+---
+_pgbackrest_exporter_go_ansible_arch: "{{ {'i386': '386',
+                                   'x86_64': 'x86_64',
+                                   'aarch64': 'arm64',
+                                   'armv7l': 'armv7',
+                                   'armv6l': 'armv6'}.get(ansible_facts['architecture'], ansible_facts['architecture']) }}"
+_pgbackrest_exporter_repo: "woblerr/pgbackrest_exporter"
+_github_api_headers: "{{ {'GITHUB_TOKEN': lookup('ansible.builtin.env', 'GITHUB_TOKEN')} if (lookup('ansible.builtin.env', 'GITHUB_TOKEN')) else {} }}"
+_pgbackrest_exporter_binaries: ['pgbackrest_exporter']
