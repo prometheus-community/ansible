@@ -20,15 +20,6 @@ argument_specs:
       jmx_exporter_web_listen_address:
         description: "Address on which jmx exporter will listen"
         default: "0.0.0.0:9404"
-      jmx_exporter_web_telemetry_path:
-        description: "Path under which to expose metrics"
-        default: "/metrics"
-      jmx_exporter_uri:
-        description: "URI to scrape jmx metrics"
-        default: "http://localhost/server-status/?auto"
-      jmx_exporter_timeout_offset:
-        description: "Offset to add to the timeout for the scrape"
-        default: 1
       jmx_exporter_tls_server_config:
         description:
           - "Configuration for TLS authentication."
