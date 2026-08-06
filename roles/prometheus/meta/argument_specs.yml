@@ -100,7 +100,7 @@ argument_specs:
         description: "Provide map of additional labels which will be added to any time series or alerts when communicating with external systems"
         type: "dict"
         default:
-          environment: "{{ ansible_fqdn | default(ansible_host) | default(inventory_hostname) }}"
+          environment: "{{ ansible_facts['fqdn'] | default(ansible_host) | default(inventory_hostname) }}"
       prometheus_targets:
         description:
           - "Targets which will be scraped."
@@ -115,7 +115,7 @@ argument_specs:
             metrics_path: "{{ prometheus_metrics_path }}"
             static_configs:
               - targets:
-                  - "{{ ansible_fqdn | default(ansible_host) | default('localhost') }}:9090"
+                  - "{{ ansible_facts['fqdn'] | default(ansible_host) | default('localhost') }}:9090"
           - job_name: "node"
             file_sd_configs:
               - files:
