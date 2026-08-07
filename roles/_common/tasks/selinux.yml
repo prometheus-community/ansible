@@ -35,7 +35,7 @@
   delay: 2
   become: true
   when:
-    - ansible_distribution | lower == "clearlinux"
+    - ansible_facts['distribution'] | lower == "clearlinux"
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
     - configure
@@ -50,7 +50,7 @@
   become: true
   when:
     - ansible_version.full is version_compare('2.4', '>=')
-    - ansible_selinux.status == "enabled"
+    - ansible_facts['selinux']['status'] == "enabled"
     - _common_selinux_port | int > 0
   tags:
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}"
