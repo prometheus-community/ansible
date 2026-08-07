@@ -1,10 +1,88 @@
 ---
 ancestor:
 releases:
-  0.29.0:
+  0.30.1:
+    changes:
+      bugfixes:
+        - 'fix: optionally mask diff output for alertmanager (https://github.com/prometheus-community/ansible/pull/838)'
+      trivial:
+        - 'patch: New prometheus-community/postgres_exporter upstream release 0.20.1!
+          (https://github.com/prometheus-community/ansible/pull/847)'
+        - 'patch: New utkuozdemir/nvidia_gpu_exporter upstream release 1.10.0! (https://github.com/prometheus-community/ansible/pull/846)'
+        - 'refactor(selinux): replace deprecated fact vars (https://github.com/prometheus-community/ansible/pull/845)'
+        - 'patch: New prometheus/alertmanager upstream release 0.33.1! (https://github.com/prometheus-community/ansible/pull/843)'
+        - 'patch: New prometheus/prometheus upstream release 3.13.0! (https://github.com/prometheus-community/ansible/pull/840)'
+        - 'chore(deps): update ansible/ansible-lint action to v26.6.0 (https://github.com/prometheus-community/ansible/pull/839)'
+        - 'patch: New utkuozdemir/nvidia_gpu_exporter upstream release 1.6.0! (https://github.com/prometheus-community/ansible/pull/835)'
+        - 'chore(deps): update stefanzweifel/git-auto-commit-action action to v7.2.0
+          (https://github.com/prometheus-community/ansible/pull/834)'
+        - 'chore: Update OS test matrix (https://github.com/prometheus-community/ansible/pull/833)'
+        - 'patch: New superq/smokeping_prober upstream release 0.12.0! (https://github.com/prometheus-community/ansible/pull/832)'
+        - 'patch: New google/cadvisor upstream release 0.60.3! (https://github.com/prometheus-community/ansible/pull/831)'
+        - 'patch: New google/cadvisor upstream release 0.60.2! (https://github.com/prometheus-community/ansible/pull/830)'
+        - 'chore(deps): update ansible-community/ansible-test-gh-action action to
+          v1.18.0 (https://github.com/prometheus-community/ansible/pull/829)'
+        - 'patch: New utkuozdemir/nvidia_gpu_exporter upstream release 1.5.0! (https://github.com/prometheus-community/ansible/pull/828)'
+        - 'patch: New Lusitaniae/apache_exporter upstream release 1.1.1! (https://github.com/prometheus-community/ansible/pull/827)'
+        - 'patch: New google/cadvisor upstream release 0.60.1! (https://github.com/prometheus-community/ansible/pull/826)'
+        - 'patch: New google/cadvisor upstream release 0.60.0! (https://github.com/prometheus-community/ansible/pull/825)'
+        - 'patch: New Lusitaniae/apache_exporter upstream release 1.1.0! (https://github.com/prometheus-community/ansible/pull/824)'
+        - 'chore(deps): update actions/checkout action to v7 (https://github.com/prometheus-community/ansible/pull/823)'
+        - 'chore(deps): update release-drafter/release-drafter action to v7.5.1 (https://github.com/prometheus-community/ansible/pull/819)'
+        - 'patch: New prometheus/alertmanager upstream release 0.33.0! (https://github.com/prometheus-community/ansible/pull/817)'
+        - 'patch: New oliver006/redis_exporter upstream release 1.86.0! (https://github.com/prometheus-community/ansible/pull/816)'
+        - 'patch: New prometheus/alertmanager upstream release 0.32.2! (https://github.com/prometheus-community/ansible/pull/815)'
+        - 'patch: New oliver006/redis_exporter upstream release 1.85.0! (https://github.com/prometheus-community/ansible/pull/814)'
+        - 'chore(deps): update actions/checkout action to v6.0.3 (https://github.com/prometheus-community/ansible/pull/812)'
+        - 'patch: New prometheus/prometheus upstream release 3.12.0! (https://github.com/prometheus-community/ansible/pull/809)'
+        - 'patch: New prometheus/pushgateway upstream release 1.11.3! (https://github.com/prometheus-community/ansible/pull/808)'
+    release_date: '2026-06-03'
+  0.30.0:
+    changes:
+      minor_changes:
+        - 'feat: Add Ansible Core 2.21 support (https://github.com/prometheus-community/ansible/pull/807)'
+      trivial:
+        - 'patch: New oliver006/redis_exporter upstream release 1.84.0! (https://github.com/prometheus-community/ansible/pull/806)'
+        - 'patch: New google/cadvisor upstream release 0.57.0! (https://github.com/prometheus-community/ansible/pull/803)'
+        - 'chore(deps): update release-drafter/release-drafter action to v7.3.1 (https://github.com/prometheus-community/ansible/pull/802)'
+    release_date: '2026-05-27'
+  0.29.2:
     changes:
       trivial:
-        - 'refactor: move molecule deps to ansible-test native handling (https://github.com/prometheus-community/ansible/pull/764)'
+        - 'patch: New oliver006/redis_exporter upstream release 1.83.0! (https://github.com/prometheus-community/ansible/pull/800)'
+        - 'patch: New percona/mongodb_exporter upstream release 0.51.0! (https://github.com/prometheus-community/ansible/pull/798)'
+        - 'patch: New prometheus/alertmanager upstream release 0.32.1! (https://github.com/prometheus-community/ansible/pull/797)'
+        - 'chore(deps): update release-drafter/release-drafter action to v7.2.1 (https://github.com/prometheus-community/ansible/pull/796)'
+        - 'patch: New prometheus/prometheus upstream release 3.11.3! (https://github.com/prometheus-community/ansible/pull/795)'
+        - 'docs: fix pip syntax for passlib requirements (https://github.com/prometheus-community/ansible/pull/786)'
+    release_date: '2026-04-14'
+  0.29.1:
+    changes:
+      bugfixes:
+        - 'fix(cadvisor): Fix command line continuation (https://github.com/prometheus-community/ansible/pull/785)'
+        - 'fix(roles/_common): package_facts to gather details from all managers (https://github.com/prometheus-community/ansible/pull/771)'
+      trivial:
+        - 'patch: New prometheus/influxdb_exporter upstream release 0.12.1! (https://github.com/prometheus-community/ansible/pull/784)'
+        - 'patch: New prometheus/prometheus upstream release 3.11.2! (https://github.com/prometheus-community/ansible/pull/783)'
+        - 'chore: Synchronize common files from prometheus/prometheus (https://github.com/prometheus-community/ansible/pull/781)'
+        - 'chore(deps): update actions/github-script action to v9 (https://github.com/prometheus-community/ansible/pull/780)'
+        - 'chore(deps): update release-drafter/release-drafter action to v7.2.0 (https://github.com/prometheus-community/ansible/pull/779)'
+        - 'patch: New prometheus/alertmanager upstream release 0.32.0! (https://github.com/prometheus-community/ansible/pull/778)'
+    release_date: '2026-04-09'
+  0.29.0:
+    changes:
+      minor_changes:
+        - 'feat(cadvisor): Add cAdvisor housekeeping (https://github.com/prometheus-community/ansible/pull/770)'
+      trivial:
+        - 'patch: New prometheus/memcached_exporter upstream release 0.16.0! (https://github.com/prometheus-community/ansible/pull/777)'
+        - 'patch: New prometheus/prometheus upstream release 3.11.1! (https://github.com/prometheus-community/ansible/pull/776)'
+        - 'patch: New prometheus/node_exporter upstream release 1.11.1! (https://github.com/prometheus-community/ansible/pull/775)'
+        - 'docs: fix typo (https://github.com/prometheus-community/ansible/pull/774)'
+        - 'patch: New percona/mongodb_exporter upstream release 0.50.0! (https://github.com/prometheus-community/ansible/pull/773)'
+        - 'patch: New prometheus/node_exporter upstream release 1.11.0! (https://github.com/prometheus-community/ansible/pull/772)'
+        - 'chore: get tests to pass on ansible v2.19 (2) (https://github.com/prometheus-community/ansible/pull/769)'
+        - 'patch: New prometheus/prometheus upstream release 3.11.0! (https://github.com/prometheus-community/ansible/pull/768)'
+        - 'chore(deps): update ansible/ansible-lint action to v26.4.0 (https://github.com/prometheus-community/ansible/pull/767)'
     release_date: '2026-03-06'
   0.28.1:
     changes:

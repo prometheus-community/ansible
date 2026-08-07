@@ -55,7 +55,6 @@
     - configure
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_configure"
 
-#
 # - name: "Configure {{ _common_service_name }}"
 #   ansible.builtin.template:
 #     # src: "{{ ansible_parent_role_paths | first }}/templates/{{ _common_service_name }}.yml.j2"

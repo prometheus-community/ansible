@@ -16,3 +16,4 @@ provisioner:
         whitelisted_container_labels: [ "com.docker.compose.image" ]
         env_metadata_whitelist: [ "PATH" ]
         store_container_labels: false
+        cadvisor_housekeeping_interval: 15s

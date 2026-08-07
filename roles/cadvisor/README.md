@@ -9,7 +9,7 @@ Deploy [cadvisor](https://github.com/google/cadvisor) using ansible.
 ## Requirements
 
 - gnu-tar on Mac deployer host (`brew install gnu-tar`)
-- Passlib is required when using the basic authentication feature (`pip install "passlib[bcrypt<5]"`)
+- Passlib is required when using the basic authentication feature (`python -m pip install passlib bcrypt==4.0.1`)
 
 ## Role Variables
 
@@ -25,6 +25,19 @@ Use it in a playbook as follows:
 - hosts: all
   roles:
     - prometheus.prometheus.cadvisor
+```
+
+### Prometheus config
+
+Note that cAdvisor is different to a standard Prometheus exporter. It has its 
+own internal metrics data collection loop and exposes timestamps. Some care
+will be needed in the Prometheus configuration for this to work correctly.
+
+```yaml
+prometheus_scrape_configs:
+  - job_name: cadvisor
+    scrape_interval: 10s
+    track_timestamps_staleness: true
 ```
 
 ### Demo site

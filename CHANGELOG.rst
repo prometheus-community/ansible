@@ -4,8 +4,41 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.30.1
+=======
+
+Bugfixes
+--------
+
+- fix: optionally mask diff output for alertmanager (https://github.com/prometheus-community/ansible/pull/838)
+
+v0.30.0
+=======
+
+Minor Changes
+-------------
+
+- feat: Add Ansible Core 2.21 support (https://github.com/prometheus-community/ansible/pull/807)
+
+v0.29.2
+=======
+
+v0.29.1
+=======
+
+Bugfixes
+--------
+
+- fix(cadvisor): Fix command line continuation (https://github.com/prometheus-community/ansible/pull/785)
+- fix(roles/_common): package_facts to gather details from all managers (https://github.com/prometheus-community/ansible/pull/771)
+
 v0.29.0
 =======
+
+Minor Changes
+-------------
+
+- feat(cadvisor): Add cAdvisor housekeeping (https://github.com/prometheus-community/ansible/pull/770)
 
 v0.28.1
 =======

@@ -5,7 +5,7 @@ Deploy prometheus [apache exporter](https://github.com/Lusitaniae/apache_exporte
 ## Requirements
 
 - gnu-tar on Mac deployer host (`brew install gnu-tar`)
-- Passlib is required when using the basic authentication feature (`pip install "passlib[bcrypt<5]"`)
+- Passlib is required when using the basic authentication feature (`python -m pip install passlib bcrypt==4.0.1`)
 
 ## Role Variables
 All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) file as well as in [meta/argument_specs.yml](meta/argument_specs.yml).
@@ -26,7 +26,7 @@ Use it in a playbook as follows:
 
 ### TLS config
 
-Before running mysqld_exporter role, the user needs to provision their own certificate and key.
+Before running apache_exporter role, the user needs to provision their own certificate and key.
 ```yaml
 - hosts: all
   pre_tasks:

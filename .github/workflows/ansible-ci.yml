@@ -24,24 +24,24 @@ jobs:
   ansible-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
 
       - name: Lint collection
-        uses: ansible/ansible-lint@8ba9595a4acd1b906eb75568b34f6ef592cd1528  # v26.3.0
+        uses: ansible/ansible-lint@262624cd0ab22a4221293216856c59671ce7aa5e  # v26.6.0
 
   arguments-spec-lint:
     runs-on: ubuntu-latest
     container:
       image: quay.io/prometheus/golang-builder:base
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
       - name: Lint arguments spec
         run: ./.github/scripts/lint_arguments_spec.sh
 
   check-unused-variables:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
       - name: Run action
         uses: hoo29/little-timmy@c8ca5086db961499fc3d4e37637f566c3d0ec6d6  # v3-action
 
@@ -50,7 +50,7 @@ jobs:
     outputs:
       versions: ${{ steps.supported-ansible-versions.outputs.result }}
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
 
       - name: Get Ansible versions that the collection supports
         id: supported-ansible-versions
@@ -72,13 +72,13 @@ jobs:
       integration-tests: ${{ steps.set-integration-tests.outputs.tests }}
       ansible-roles: ${{ steps.set-ansible-roles.outputs.roles }}
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
         with:
           fetch-depth: 0
 
       - name: Fetch current PR labels
         id: fetch-labels
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd  # v8.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9.0.0
         with:
           script: |
             const { owner, repo } = context.repo;
