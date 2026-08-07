@@ -18,6 +18,7 @@
     _common_binaries: "{{ _alertmanager_binaries }}"
     _common_binary_install_dir: "{{ alertmanager_binary_install_dir }}"
     _common_binary_url: "{{ alertmanager_binary_url }}"
+    _common_download_host: "{{ alertmanager_download_host }}"
     _common_checksum: "{{ alertmanager_checksum }}"
     _common_checksums_url: "{{ alertmanager_checksums_url }}"
     _common_system_group: "{{ alertmanager_system_group }}"

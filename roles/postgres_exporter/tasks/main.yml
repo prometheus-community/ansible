@@ -16,6 +16,7 @@
     _common_binaries: "{{ _postgres_exporter_binaries }}"
     _common_binary_install_dir: "{{ postgres_exporter_binary_install_dir }}"
     _common_binary_url: "{{ postgres_exporter_binary_url }}"
+    _common_download_host: "{{ postgres_exporter_download_host }}"
     _common_checksum: "{{ postgres_exporter_checksum }}"
     _common_checksums_url: "{{ postgres_exporter_checksums_url }}"
     _common_system_group: "{{ postgres_exporter_system_group }}"

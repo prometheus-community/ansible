@@ -151,3 +151,6 @@ alertmanager_mask_diff: false
 
 # Set to true for install-only runs
 alertmanager_skip_configure: false
+
+# Another host than localhost only works in single-host plays
+alertmanager_common_download_host: localhost

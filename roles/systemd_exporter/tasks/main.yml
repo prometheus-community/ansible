@@ -16,6 +16,7 @@
     _common_binaries: "{{ _systemd_exporter_binaries }}"
     _common_binary_install_dir: "{{ systemd_exporter_binary_install_dir }}"
     _common_binary_url: "{{ systemd_exporter_binary_url }}"
+    _common_download_host: "{{ systemd_exporter_download_host }}"
     _common_checksum: "{{ systemd_exporter_checksum }}"
     _common_checksums_url: "{{ systemd_exporter_checksums_url }}"
     _common_system_group: "{{ systemd_exporter_system_group }}"

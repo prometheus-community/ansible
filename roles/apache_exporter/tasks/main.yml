@@ -20,6 +20,7 @@
     _common_binaries: "{{ _apache_exporter_binaries }}"
     _common_binary_install_dir: "{{ apache_exporter_binary_install_dir }}"
     _common_binary_url: "{{ apache_exporter_binary_url }}"
+    _common_download_host: "{{ apache_exporter_download_host }}"
     _common_checksum: "{{ apache_exporter_checksum }}"
     _common_checksums_url: "{{ apache_exporter_checksums_url }}"
     _common_system_group: "{{ apache_exporter_system_group }}"

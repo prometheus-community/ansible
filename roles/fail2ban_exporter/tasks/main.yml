@@ -16,6 +16,7 @@
     _common_binaries: "{{ _fail2ban_exporter_binaries }}"
     _common_binary_install_dir: "{{ fail2ban_exporter_binary_install_dir }}"
     _common_binary_url: "{{ fail2ban_exporter_binary_url }}"
+    _common_download_host: "{{ fail2ban_exporter_download_host }}"
     _common_checksum: "{{ fail2ban_exporter_checksum }}"
     _common_checksums_url: "{{ fail2ban_exporter_checksums_url }}"
     _common_system_group: "{{ fail2ban_exporter_system_group }}"

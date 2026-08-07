@@ -8,6 +8,14 @@
   tags:
     - always
 
+- name: "Validate Download host is localhost or remote host"
+  ansible.builtin.assert:
+    that:
+      - "_common_download_host in ('localhost', inventory_hostname)"
+    fail_msg: "Error: _common_download_host != localhost only works in single host plays (no way to copy from an arbitrary host to another)."
+  tags:
+    - always
+
 - name: "Gather system user and group facts"
   ansible.builtin.getent:
     database: "{{ item }}"
@@ -54,7 +62,7 @@
     - download
     - "{{ ansible_parent_role_names | first | regex_replace(ansible_collection_name ~ '.', '') }}_download"
   become: false
-  delegate_to: localhost
+  delegate_to: "{{ _common_download_host }}"
   block:
     - name: "Create localhost binary cache path"
       ansible.builtin.file:
@@ -125,6 +133,7 @@
         mode: 0755
         list_files: true
         extra_opts: "{{ _common_binary_unarchive_opts | default(omit, true) }}"
+        remote_src: "{{ inventory_hostname == _common_download_host }}"
       check_mode: false
       throttle: 1  # see prometheus-community/ansible#457
       when: __common_binary_basename is search('\.zip$|\.tar\.gz$')
@@ -158,6 +167,7 @@
     mode: 0755
     owner: root
     group: root
+    remote_src: "{{ inventory_hostname == _common_download_host }}"
   loop: "{{ _common_binaries }}"
   become: true
   # Avoid notifying the Restart SERVICE handler when SERVICE_skip_configure has been set because the systemd service doesn't exist

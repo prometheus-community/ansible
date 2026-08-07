@@ -17,6 +17,7 @@
     _common_binaries: "{{ _prometheus_binaries }}"
     _common_binary_install_dir: "{{ prometheus_binary_install_dir }}"
     _common_binary_url: "{{ prometheus_binary_url }}"
+    _common_download_host: "{{ prometheus_download_host }}"
     _common_checksum: "{{ prometheus_checksum }}"
     _common_checksums_url: "{{ prometheus_checksums_url }}"
     _common_system_group: "{{ prometheus_system_group }}"

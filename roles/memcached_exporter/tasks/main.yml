@@ -16,6 +16,7 @@
     _common_binaries: "{{ _memcached_exporter_binaries }}"
     _common_binary_install_dir: "{{ memcached_exporter_binary_install_dir }}"
     _common_binary_url: "{{ memcached_exporter_binary_url }}"
+    _common_download_host: "{{ memcached_exporter_download_host }}"
     _common_checksum: "{{ memcached_exporter_checksum }}"
     _common_checksums_url: "{{ memcached_exporter_checksums_url }}"
     _common_system_group: "{{ memcached_exporter_system_group }}"
