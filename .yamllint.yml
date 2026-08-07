@@ -25,4 +25,5 @@ rules:
     check-keys: false
 
 ignore: |
+  .github/workflows/approve-workflows.yml
   changelogs/.plugin-cache.yaml
