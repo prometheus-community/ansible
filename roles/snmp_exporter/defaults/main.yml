@@ -19,4 +19,4 @@ snmp_exporter_system_user: snmp-exp
 snmp_exporter_system_group: "{{ snmp_exporter_system_user }}"
 
 # Another host than localhost only works in single-host plays
-snmp_exporter_common_download_host: localhost
+snmp_exporter_download_host: localhost

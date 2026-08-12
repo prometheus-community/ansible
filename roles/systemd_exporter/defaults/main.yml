@@ -26,4 +26,4 @@ systemd_exporter_log_level: info
 systemd_exporter_local_cache_path: "/tmp/systemd_exporter-{{ ansible_facts['system'] | lower }}-{{ _systemd_exporter_go_ansible_arch }}/{{ systemd_exporter_version }}"
 
 # Another host than localhost only works in single-host plays
-systemd_exporter_common_download_host: localhost
+systemd_exporter_download_host: localhost

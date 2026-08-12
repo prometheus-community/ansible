@@ -34,4 +34,4 @@ process_exporter_system_user: "{{ process_exporter_system_group }}"
 process_exporter_config_dir: "/etc/process_exporter"
 
 # Another host than localhost only works in single-host plays
-process_exporter_common_download_host: localhost
+process_exporter_download_host: localhost

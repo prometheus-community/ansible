@@ -54,4 +54,4 @@ redis_exporter_config_dir: "/etc/redis_exporter"
 redis_exporter_local_cache_path: "/tmp/redis_exporter-{{ ansible_facts['system'] | lower }}-{{ _redis_exporter_go_ansible_arch }}/{{ redis_exporter_version }}"
 
 # Another host than localhost only works in single-host plays
-redis_exporter_common_download_host: localhost
+redis_exporter_download_host: localhost

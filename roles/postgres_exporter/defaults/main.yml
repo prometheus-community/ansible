@@ -35,4 +35,4 @@ postgres_exporter_system_user: "{{ postgres_exporter_system_group }}"
 postgres_exporter_local_cache_path: "/tmp/postgres_exporter-{{ ansible_facts['system'] | lower }}-{{ _postgres_exporter_go_ansible_arch }}/{{ postgres_exporter_version }}"
 
 # Another host than localhost only works in single-host plays
-postgres_exporter_common_download_host: localhost
+postgres_exporter_download_host: localhost

@@ -38,4 +38,4 @@ mysqld_exporter_system_user: "{{ mysqld_exporter_system_group }}"
 mysqld_exporter_local_cache_path: "/tmp/mysqld_exporter-{{ ansible_facts['system'] | lower }}-{{ _mysqld_exporter_go_ansible_arch }}/{{ mysqld_exporter_version }}"
 
 # Another host than localhost only works in single-host plays
-mysqld_exporter_common_download_host: localhost
+mysqld_exporter_download_host: localhost

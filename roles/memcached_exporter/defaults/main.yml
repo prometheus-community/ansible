@@ -29,4 +29,4 @@ memcached_exporter_local_cache_path: "/tmp/memcached_exporter-{{ ansible_facts['
 memcached_exporter_config_dir: "/etc/memcached_exporter"
 
 # Another host than localhost only works in single-host plays
-memcached_exporter_common_download_host: localhost
+memcached_exporter_download_host: localhost
