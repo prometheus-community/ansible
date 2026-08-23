@@ -3,6 +3,8 @@ ancestor:
 releases:
   0.30.2:
     changes:
+      bugfixes:
+        - 'fix: Update molecule driver schema (https://github.com/prometheus-community/ansible/pull/871)'
       trivial:
         - 'chore(deps): update actions/checkout action to v7.0.1 (https://github.com/prometheus-community/ansible/pull/862)'
     release_date: '2026-07-24'

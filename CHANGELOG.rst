@@ -7,6 +7,11 @@ Prometheus.Prometheus Release Notes
 v0.30.2
 =======
 
+Bugfixes
+--------
+
+- fix: Update molecule driver schema (https://github.com/prometheus-community/ansible/pull/871)
+
 v0.30.1
 =======
 
