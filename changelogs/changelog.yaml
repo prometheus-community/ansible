@@ -6,6 +6,7 @@ releases:
       bugfixes:
         - 'fix: Update molecule driver schema (https://github.com/prometheus-community/ansible/pull/871)'
       trivial:
+        - 'patch: New percona/mongodb_exporter upstream release 0.53.0! (https://github.com/prometheus-community/ansible/pull/881)'
         - 'patch: New prometheus/prometheus upstream release 3.14.0! (https://github.com/prometheus-community/ansible/pull/880)'
         - 'patch: New prometheus/alertmanager upstream release 0.34.0! (https://github.com/prometheus-community/ansible/pull/879)'
         - 'patch: New prometheus/memcached_exporter upstream release 0.17.0! (https://github.com/prometheus-community/ansible/pull/878)'
