@@ -1,0 +1,23 @@
+---
+aerospike_exporter_version: 1.34.0
+aerospike_exporter_binary_url: "https://github.com/{{ _aerospike_exporter_repo }}/releases/download/v{{ aerospike_exporter_version }}/\
+                           aerospike-prometheus-exporter_{{ aerospike_exporter_version }}_{{ ansible_architecture }}.tgz"
+aerospike_exporter_checksums_url: "{{ aerospike_exporter_binary_url }}.sha256"
+
+aerospike_exporter_web_listen_address: "0.0.0.0:9145"
+
+aerospike_exporter_username: ""
+aerospike_exporter_password: ""
+
+aerospike_exporter_config_file: "ape.toml"
+aerospike_exporter_host: localhost
+aerospike_exporter_port: 3000
+
+# Internal variables.
+aerospike_exporter_binary_install_dir: "/usr/local/bin"
+aerospike_exporter_config_dir: "/etc/aerospike_exporter"
+aerospike_exporter_system_group: "aerospike-exp"
+aerospike_exporter_system_user: "{{ aerospike_exporter_system_group }}"
+
+# Local path to stash the archive and its extraction
+aerospike_exporter_local_cache_path: "/tmp/aerospike_exporter-{{ ansible_facts['system'] | lower }}-{{ _aerospike_exporter_go_ansible_arch }}/{{ aerospike_exporter_version }}"

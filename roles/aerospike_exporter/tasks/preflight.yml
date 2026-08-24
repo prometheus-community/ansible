@@ -1,0 +1,35 @@
+---
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
+  vars:
+    _common_web_listen_address: "{{ aerospike_exporter_web_listen_address }}"
+
+- name: Assert that used version supports listen address type
+  ansible.builtin.assert:
+    that:
+      - >-
+        aerospike_exporter_web_listen_address is string
+        or
+        (
+          aerospike_exporter_version is version('0.15.0', '>=') and
+          aerospike_exporter_web_listen_address | type_debug == "list"
+        )
+
+- name: Discover latest version
+  ansible.builtin.set_fact:
+    aerospike_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _aerospike_exporter_repo }}/releases/latest', headers=_github_api_headers,
+                              split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+  run_once: true
+  until: aerospike_exporter_version is version('0.0.0', '>=')
+  retries: 10
+  delay: 10
+  when:
+    - aerospike_exporter_version == "latest"
+  tags:
+    - aerospike_exporter
+    - install
+    - aerospike_exporter_install
+    - download
+    - aerospike_exporter_download

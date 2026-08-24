@@ -1,0 +1,18 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Aerospike Prometheus Exporter
+Documentation=https://github.com/aerospike/aerospike-prometheus-exporter
+Wants=network.target
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ aerospike_exporter_system_user }}
+Group={{ aerospike_exporter_system_group }}
+ExecStart={{ aerospike_exporter_binary_install_dir }}/aerospike-prometheus-exporter \
+    -config {{ aerospike_exporter_config_dir }}/ape.toml \
+    -gauge-list {{ aerospike_exporter_config_dir }}/gauge_stats_list.toml
+
+[Install]
+WantedBy=multi-user.target

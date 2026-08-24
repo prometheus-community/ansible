@@ -1,0 +1,44 @@
+---
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_system_user: "{{ aerospike_exporter_system_user }}"
+    _common_system_group: "{{ aerospike_exporter_system_group }}"
+    _common_config_dir: "{{ aerospike_exporter_config_dir }}"
+    # _common_basic_auth_users: "{{ aerospike_exporter_basic_auth_users }}"
+  tags:
+    - aerospike_exporter
+    - configure
+    - aerospike_exporter_configure
+
+- name: Copy the aerospike_exporter config file
+  ansible.builtin.template:
+    src: ape.toml.j2
+    dest: "{{ aerospike_exporter_config_dir }}/{{ aerospike_exporter_config_file }}"
+    owner: root
+    group: '{{ aerospike_exporter_system_group }}'
+    mode: '0640'
+  no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
+  become: true
+  notify: restart aerospike_exporter
+  tags:
+    - aerospike_exporter
+    - configure
+    - aerospike_exporter_configure
+
+- name: Copy Gauge stats File
+  ansible.builtin.copy:
+    src: "{{ aerospike_exporter_local_cache_path }}/gauge_stats_list.toml"
+    dest: "{{ aerospike_exporter_config_dir }}/gauge_stats_list.toml"
+    owner: root
+    group: '{{ aerospike_exporter_system_group }}'
+    mode: '0640'
+  # no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
+  become: true
+  notify: restart aerospike_exporter
+  tags:
+    - aerospike_exporter
+    - configure
+    - aerospike_exporter_configure

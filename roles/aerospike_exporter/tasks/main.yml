@@ -1,0 +1,53 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+  tags:
+    - aerospike_exporter_install
+    - aerospike_exporter_configure
+    - aerospike_exporter_run
+
+- name: Install
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: install.yml
+  vars:
+    _common_local_cache_path: "{{ aerospike_exporter_local_cache_path }}"
+    _common_binaries: "{{ _aerospike_exporter_binaries }}"
+    _common_binary_install_dir: "{{ aerospike_exporter_binary_install_dir }}"
+    _common_binary_url: "{{ aerospike_exporter_binary_url }}"
+    _common_checksums_url: "{{ aerospike_exporter_checksums_url }}"
+    _common_system_group: "{{ aerospike_exporter_system_group }}"
+    _common_system_user: "{{ aerospike_exporter_system_user }}"
+    _common_config_dir: "{{ aerospike_exporter_config_dir }}"
+    _common_binary_unarchive_opts: ["--transform=s|.*/||"]
+  tags:
+    - aerospike_exporter_install
+
+- name: SELinux
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ ('//' ~ aerospike_exporter_web_listen_address) | ansible.builtin.urlsplit('port') }}"
+  when: ansible_facts['selinux'].status == "enabled"
+  tags:
+    - aerospike_exporter_configure
+
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yml
+  tags:
+    - aerospike_exporter_configure
+
+- name: Ensure Aerospike Exporter is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: aerospike_exporter
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - aerospike_exporter_run

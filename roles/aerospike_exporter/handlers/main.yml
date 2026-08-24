@@ -1,0 +1,10 @@
+---
+- name: Restart aerospike_exporter
+  listen: "restart aerospike_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: aerospike_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode

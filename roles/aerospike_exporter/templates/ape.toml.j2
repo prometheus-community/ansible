@@ -1,0 +1,219 @@
+{{ ansible_managed | comment }}
+[Agent]
+      # Metrics Serving modes
+      enable_prometheus = true
+      enable_open_telemetry = false
+
+      # labels to add to the prometheus metrics for e.g. labels={zone="asia-south1-a", platform="google compute engine"}
+      # labels = {latitude="0",longitude="0"}
+
+      # mention cloud provider (supported: aws, gcp, azure ) so exporter collects few details like region, zone etc.,
+      cloud_provider = ""
+
+      # metrics server timeout in seconds
+      timeout = 10
+
+      # support system statistics also
+      refresh_system_stats = false
+
+      # Exporter logging configuration
+      # Log file path (optional, logs to console by default)
+      # Level can be info|warning,warn|error,err|debug|trace ('info' by default)
+      log_file = ""
+      log_level = ""
+
+      # Exporter HTTPS (TLS) configuration
+      # HTTPS between Prometheus and Exporter
+
+      # TLS certificates.
+      # Supports below formats,
+      # 1. Certificate file path                                      - "file:<file-path>"
+      # 2. Environment variable containing base64 encoded certificate - "env-b64:<environment-variable-that-contains-base64-encoded-certificate>"
+      # 3. Base64 encoded certificate                                 - "b64:<base64-encoded-certificate>"
+      # Applicable to 'root_ca', 'cert_file' and 'key_file' configurations.
+
+      # Server certificate
+      cert_file = ""
+
+      # Private key associated with server certificate
+      key_file = ""
+
+      # Root CA to validate client certificates (for mutual TLS)
+      root_ca = ""
+
+      # a comma separated TLS Cipher suites to use, example: TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384
+      # Golang - refer documentation https://pkg.go.dev/crypto/tls#pkg-constants of golang CipherSuites for TLS >=1.2 (both supported and Insecure)
+      # NOTE: Cipher configuration is support only till TLS1.2 verison and not possible in TLS1.3
+      tls_cipher_suites = ""
+
+      # Passphrase for encrypted key_file. Supports below formats,
+      # 1. Passphrase directly                                                      - "<passphrase>"
+      # 2. Passphrase via file                                                      - "file:<file-that-contains-passphrase>"
+      # 3. Passphrase via environment variable                                      - "env:<environment-variable-that-holds-passphrase>"
+      # 4. Passphrase via environment variable containing base64 encoded passphrase - "env-b64:<environment-variable-that-contains-base64-encoded-passphrase>"
+      # 5. Passphrase in base64 encoded form                                        - "b64:<base64-encoded-passphrase>"
+      key_file_passphrase = ""
+
+      # prometheus binding port
+      bind = "{{ aerospike_exporter_web_listen_address }}"
+
+      # Basic HTTP authentication for '/metrics'.
+      # Supports below formats,
+      # 1. Credential directly                                                      - "<credential>"
+      # 2. Credential via file                                                      - "file:<file-that-contains-credential>"
+      # 3. Credential via environment variable                                      - "env:<environment-variable-that-contains-credential>"
+      # 4. Credential via environment variable containing base64 encoded credential - "env-b64:<environment-variable-that-contains-base64-encoded-credential>"
+      # 5. Credential in base64 encoded form                                        - "b64:<base64-encoded-credential>"
+      basic_auth_username = ""
+      basic_auth_password = ""
+
+[Agent.OpenTelemetry]
+      # OTel service-name
+      service_name = "aerospike-server-metrics-service"
+
+      # OTel Endpoint
+      # DEPRECATED. Use grpc_endpoint
+      endpoint = ""
+
+      # OTel Endpoint
+      # NOTE: Only url, does not include protocol http/https
+      # NOTE: configure either grpc_endpoint or endpoint (DEPRECATED), both cannot be configured
+      grpc_endpoint = ""
+
+      # OTel Endpoint URL Path 
+      # provide entire url, including http/https protocol
+      http_endpoint = ""
+
+      # OTel headers, 
+      # NOTE: Each header will be a "<key>"="<value>" pair and each header is comma separated
+      # Example: "api-key"="<api-key>","Authorization"="Api-Token <token>"
+      headers = {}
+
+      # OTel server-stat fetch interval (default 15, not recommended to to reduce this)
+      server_stat_fetch_interval = 15
+
+      # OTel metric push interval (default 15, not recommended to to reduce this)
+      push_interval = 15
+
+      # Defines the temporality to be applied depending on end point treats
+      # supported values: delta (default), cumulative
+      # Why Delta is default, many customer use Datadog and Dynatrace.
+      # NOTE: Datadog and Dynatrace only support Delta's for monotonic-cumulative counters 
+      #       Newrelic accepts Delta and monotonic-sum
+      counter_temporality = "delta"
+
+      # Defines if all metrics to be treated as Gauges
+      all_metrics_as_gauges = true
+
+      # metric name prefix, defines the prefix before each metric before dispatching to endpoint
+      metric_name_prefix = "aerospike.server"
+
+      # metric context seperator, suggests what seperator to use while constructing a metric from stat
+      #   supported values "period" (default) or "underscore"
+      metric_context_separator = "period"
+
+      # renamed variables
+      renamed_labels = {cluster_name="aerospike_cluster",service="aerospike_service"}
+
+[Aerospike]
+      db_host = "{{ aerospike_exporter_host }}"
+      db_port = {{ aerospike_exporter_port }}
+
+      # TLS certificates.
+      # Supports below formats,
+      # 1. Certificate file path                                      - "file:<file-path>"
+      # 2. Environment variable containing base64 encoded certificate - "env-b64:<environment-variable-that-contains-base64-encoded-certificate>"
+      # 3. Base64 encoded certificate                                 - "b64:<base64-encoded-certificate>"
+      # Applicable to 'root_ca', 'cert_file' and 'key_file' configurations.
+
+      # root certificate file
+      root_ca = ""
+
+      # certificate file
+      cert_file = ""
+
+      # key file
+      key_file = ""
+
+      # Passphrase for encrypted key_file. Supports below formats,
+      # 1. Passphrase directly                                                      - "<passphrase>"
+      # 2. Passphrase via file                                                      - "file:<file-that-contains-passphrase>"
+      # 3. Passphrase via environment variable                                      - "env:<environment-variable-that-holds-passphrase>"
+      # 4. Passphrase via environment variable containing base64 encoded passphrase - "env-b64:<environment-variable-that-contains-base64-encoded-passphrase>"
+      # 5. Passphrase in base64 encoded form                                        - "b64:<base64-encoded-passphrase>"
+      key_file_passphrase = ""
+
+      # node TLS name for authentication
+      node_tls_name = ""
+
+      # Aerospike cluster security credentials.
+      # Supports below formats,
+      # 1. Credential directly                                                      - "<credential>"
+      # 2. Credential via file                                                      - "file:<file-that-contains-credential>"
+      # 3. Credential via environment variable                                      - "env:<environment-variable-that-contains-credential>"
+      # 4. Credential via environment variable containing base64 encoded credential - "env-b64:<environment-variable-that-contains-base64-encoded-credential>"
+      # 5. Credential in base64 encoded form                                        - "b64:<base64-encoded-credential>"
+      # Applicable to 'user' and 'password' configurations.
+
+      # database user
+      user = "{{ aerospike_exporter_username }}"
+
+      # database password
+      password = "{{ aerospike_exporter_password}}"
+
+      # authentication mode: internal (server authentication) [default], external (e.g., LDAP), pki. 
+      auth_mode = ""
+
+      # timeout for sending commands to the server node in seconds
+      timeout = 5
+
+      # Number of histogram buckets to export for latency metrics. Bucket thresholds range from 2^0 to 2^16 (17 buckets).
+      # e.g. latency_buckets_count=5 will export first five buckets i.e. <=1ms, <=2ms, <=4ms, <=8ms and <=16ms.
+      # Default: 0 (export all threshold buckets).
+      latency_buckets_count = 0
+
+      # Order of context - namespace, set, latencies, node-stats, xdr, user, jobs, sindex
+
+      # Metrics Allowlist - If specified, only these metrics will be scraped. An empty list will exclude all metrics.
+      # Commenting out the below allowlist configs will disable metrics filtering (i.e. all metrics will be scraped).
+
+      # Metrics Blocklist - If specified, these metrics will be NOT be scraped. An empty list will include all metrics.
+      # Commenting out the below blocklist configs will disable metrics filtering (i.e. no metrics will be blocked/filtered).
+
+      # globbing pattern (wildcard) are allowed for allowlist and blocklist
+      # for example "batch_index_*_buffers"
+      # to block all namespace metrics "*"
+
+      # Namespace metrics allowlist, to control which Namespace metrics should be collected.
+      # to exclude or stop all namespace metrics, use ["*"] in blocklist
+      # namespace_metrics_allowlist = []
+      # namespace_metrics_blocklist = []
+
+      # Set metrics allowlist, empty list includes or allows all metrics to scrape
+      # to exclude or stop all set metrics, use ["*"] in blocklist
+      # set_metrics_allowlist = []
+      # set_metrics_blocklist = []
+
+      # Latencies histogram allowlist, to control which Histogram-name metrics should be collected. 
+      # Note: globbing patterns (wildcard) are not supported for this latency metric configuration. 
+      # to exclude or stop all latencies metrics, use ["*"] in blocklist
+      # latencies_metrics_allowlist = []
+      # latencies_metrics_blocklist = []
+
+      # node_metrics_allowlist = []
+      # node_metrics_blocklist = []
+
+      # Support only from Aerospike versions 5.0 and above
+      # to exclude or stop all xdr metrics, use ["*"] in blocklist
+      # xdr_metrics_allowlist = []
+      # xdr_metrics_blocklist = []
+
+      # User statistics are available in Aerospike 5.6+
+      # Note globbing patterns (wildcard) are not supported for this User configuration.
+      # to exclude or stop all set metrics, use ["*"] in blocklist
+      # user_metrics_users_allowlist = []
+      # user_metrics_users_blocklist = []
+
+      # to exclude or stop all sindex metrics, use ["*"] in blocklist
+      # sindex_metrics_allowlist = []
+      # sindex_metrics_blocklist = []
