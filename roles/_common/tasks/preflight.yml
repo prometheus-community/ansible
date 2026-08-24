@@ -11,7 +11,7 @@
 - name: "Check for deprecated skip_install variable"
   ansible.builtin.assert:
     that:
-      - __common_parent_role_short_name ~ '_skip_install' not in vars
+      - lookup('vars', __common_parent_role_short_name + '_skip_install') | length == 0
     fail_msg: "The variable {{ __common_parent_role_short_name ~ '_skip_install' }} is deprecated.
                Please use `--skip-tags {{ __common_parent_role_short_name }}_install` instead to skip the installation."
   tags:
@@ -22,7 +22,7 @@
 - name: "Check for deprecated binary_local_dir variable"
   ansible.builtin.assert:
     that:
-      - __common_parent_role_short_name ~ '_binary_local_dir' not in vars
+      - lookup('vars', __common_parent_role_short_name + '_binary_local_dir') | length == 0
     fail_msg: "The variable {{ __common_parent_role_short_name ~ '_binary_local_dir' }} is deprecated.
                Please use the variable {{ __common_parent_role_short_name ~ '_local_cache_path' }} instead"
   tags:
@@ -33,7 +33,7 @@
 - name: "Check for deprecated archive_path variable"
   ansible.builtin.assert:
     that:
-      - __common_parent_role_short_name ~ '_archive_path' not in vars
+      - lookup('vars', __common_parent_role_short_name + '_archive_path') | length == 0
     fail_msg: "The variable {{ __common_parent_role_short_name ~ '_archive_path' }} is deprecated.
                Please use the variable {{ __common_parent_role_short_name ~ '_local_cache_path' }} instead"
   tags:
