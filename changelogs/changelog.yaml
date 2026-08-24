@@ -5,6 +5,7 @@ releases:
     changes:
       bugfixes:
         - 'fix: Update molecule driver schema (https://github.com/prometheus-community/ansible/pull/871)'
+        - 'fix(prometheus): use ansible_facts for fqdn (https://github.com/prometheus-community/ansible/pull/870)'
       trivial:
         - 'patch: New percona/mongodb_exporter upstream release 0.53.0! (https://github.com/prometheus-community/ansible/pull/881)'
         - 'patch: New prometheus/prometheus upstream release 3.14.0! (https://github.com/prometheus-community/ansible/pull/880)'

@@ -10,6 +10,7 @@ v0.30.2
 Bugfixes
 --------
 
+- fix(prometheus): use ansible_facts for fqdn (https://github.com/prometheus-community/ansible/pull/870)
 - fix: Update molecule driver schema (https://github.com/prometheus-community/ansible/pull/871)
 
 v0.30.1
