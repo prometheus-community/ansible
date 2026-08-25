@@ -33,13 +33,13 @@
       # Applicable to 'root_ca', 'cert_file' and 'key_file' configurations.
 
       # Server certificate
-      cert_file = ""
+      cert_file = "{{ aerospike_exporter_tls_server_config.cert_file | default('') }}"
 
       # Private key associated with server certificate
-      key_file = ""
+      key_file = "{{ aerospike_exporter_tls_server_config.key_file | default('') }}"
 
       # Root CA to validate client certificates (for mutual TLS)
-      root_ca = ""
+      root_ca = "{{ aerospike_exporter_tls_server_config.root_ca | default('') }}"
 
       # a comma separated TLS Cipher suites to use, example: TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384
       # Golang - refer documentation https://pkg.go.dev/crypto/tls#pkg-constants of golang CipherSuites for TLS >=1.2 (both supported and Insecure)
@@ -52,7 +52,7 @@
       # 3. Passphrase via environment variable                                      - "env:<environment-variable-that-holds-passphrase>"
       # 4. Passphrase via environment variable containing base64 encoded passphrase - "env-b64:<environment-variable-that-contains-base64-encoded-passphrase>"
       # 5. Passphrase in base64 encoded form                                        - "b64:<base64-encoded-passphrase>"
-      key_file_passphrase = ""
+      key_file_passphrase = "{{ aerospike_exporter_tls_server_config.key_file_passphrase | default('') }}"
 
       # prometheus binding port
       bind = "{{ aerospike_exporter_web_listen_address }}"

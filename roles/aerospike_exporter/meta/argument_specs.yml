@@ -38,6 +38,11 @@ argument_specs:
       aerospike_exporter_password:
         description: "The password for Aerospike login"
         default: ""
+      aerospike_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(aerospike_exporter docs,https://github.com/aerospike/aerospike-prometheus-exporter/blob/master/https/README.md#sample-config)."
+        type: "dict"
       aerospike_exporter_binary_install_dir:
         description:
           - "I(Advanced)"

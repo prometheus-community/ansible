@@ -17,6 +17,31 @@
           aerospike_exporter_web_listen_address | type_debug == "list"
         )
 
+- name: Assert that TLS config is correct
+  when: aerospike_exporter_tls_server_config | length > 0
+  block:
+    - name: Assert that TLS key and cert path are set
+      ansible.builtin.assert:
+        that:
+          - "aerospike_exporter_tls_server_config.cert_file is defined"
+          - "aerospike_exporter_tls_server_config.key_file is defined"
+
+    - name: Check existence of TLS cert file
+      ansible.builtin.stat:
+        path: "{{ aerospike_exporter_tls_server_config.cert_file }}"
+      register: __aerospike_exporter_cert_file
+
+    - name: Check existence of TLS key file
+      ansible.builtin.stat:
+        path: "{{ aerospike_exporter_tls_server_config.key_file }}"
+      register: __aerospike_exporter_key_file
+
+    - name: Assert that TLS key and cert are present
+      ansible.builtin.assert:
+        that:
+          - "__aerospike_exporter_cert_file.stat.exists"
+          - "__aerospike_exporter_key_file.stat.exists"
+
 - name: Discover latest version
   ansible.builtin.set_fact:
     aerospike_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _aerospike_exporter_repo }}/releases/latest', headers=_github_api_headers,

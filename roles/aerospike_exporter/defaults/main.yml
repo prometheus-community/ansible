@@ -13,6 +13,8 @@ aerospike_exporter_config_file: "ape.toml"
 aerospike_exporter_host: localhost
 aerospike_exporter_port: 3000
 
+aerospike_exporter_tls_server_config: {}
+
 # Internal variables.
 aerospike_exporter_binary_install_dir: "/usr/local/bin"
 aerospike_exporter_config_dir: "/etc/aerospike_exporter"

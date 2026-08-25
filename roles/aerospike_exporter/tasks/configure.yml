@@ -7,7 +7,7 @@
     _common_system_user: "{{ aerospike_exporter_system_user }}"
     _common_system_group: "{{ aerospike_exporter_system_group }}"
     _common_config_dir: "{{ aerospike_exporter_config_dir }}"
-    # _common_basic_auth_users: "{{ aerospike_exporter_basic_auth_users }}"
+    _common_tls_server_config: "{{ aerospike_exporter_tls_server_config }}"
   tags:
     - aerospike_exporter
     - configure
@@ -35,7 +35,7 @@
     owner: root
     group: '{{ aerospike_exporter_system_group }}'
     mode: '0640'
-  # no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
+  no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   become: true
   notify: restart aerospike_exporter
   tags:
