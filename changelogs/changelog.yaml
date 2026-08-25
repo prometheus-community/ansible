@@ -15,6 +15,7 @@ releases:
         - 'patch: New prometheus/mysqld_exporter upstream release 0.20.0! (https://github.com/prometheus-community/ansible/pull/877)'
         - 'patch: New utkuozdemir/nvidia_gpu_exporter upstream release 1.14.0! (https://github.com/prometheus-community/ansible/pull/876)'
         - 'patch: New superq/chrony_exporter upstream release 0.14.0! (https://github.com/prometheus-community/ansible/pull/874)'
+        - 'chore(deps): update ansible/ansible-lint action to v26.8.0 (https://github.com/prometheus-community/ansible/pull/873)'
         - 'patch: New oliver006/redis_exporter upstream release 1.89.0! (https://github.com/prometheus-community/ansible/pull/872)'
         - 'patch: New percona/mongodb_exporter upstream release 0.52.0! (https://github.com/prometheus-community/ansible/pull/867)'
         - 'patch: New prometheus/prometheus upstream release 3.13.2! (https://github.com/prometheus-community/ansible/pull/866)'
