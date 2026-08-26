@@ -1,0 +1,30 @@
+---
+- name: Common preflight
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: preflight.yml
+  vars:
+    _common_web_listen_address: "{{ nvme_exporter_web_listen_address }}"
+
+- name: Assert that used version supports listen address type
+  ansible.builtin.assert:
+    that:
+      - >-
+        nvme_exporter_web_listen_address is string
+
+- name: Discover latest version
+  ansible.builtin.set_fact:
+    nvme_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _nvme_exporter_repo }}/releases/latest',
+                            headers=_nvme_exporter_github_api_headers, split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
+  run_once: true
+  until: nvme_exporter_version is version('0.0.0', '>=')
+  retries: 10
+  delay: 10
+  when:
+    - nvme_exporter_version == "latest"
+  tags:
+    - nvme_exporter
+    - install
+    - nvme_exporter_install
+    - download
+    - nvme_exporter_download
