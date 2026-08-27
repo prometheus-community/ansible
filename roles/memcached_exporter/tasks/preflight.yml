@@ -39,7 +39,7 @@
 
 - name: Discover latest version
   ansible.builtin.set_fact:
-    memcached_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _memcached_exporter_repo }}/releases/latest', headers=_github_api_headers,
+    memcached_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/' ~ _memcached_exporter_repo ~ '/releases/latest', headers=_github_api_headers,
                             split_lines=False) | from_json).get('tag_name') | replace('v', '') }}"
   run_once: true
   until: memcached_exporter_version is version('0.0.0', '>=')
