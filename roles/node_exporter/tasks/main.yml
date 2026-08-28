@@ -21,6 +21,8 @@
     _common_system_user: "{{ node_exporter_system_user }}"
     _common_config_dir: "{{ node_exporter_config_dir }}"
     _common_binary_unarchive_opts: ['--strip-components=1']
+    _common_remote_download: "{{ node_exporter_remote_download }}"
+    _common_remote_cache_path: "{{ node_exporter_remote_cache_path }}"
   tags:
     - node_exporter_install
 
