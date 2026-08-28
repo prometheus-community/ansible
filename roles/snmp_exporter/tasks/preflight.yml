@@ -17,6 +17,13 @@
           snmp_exporter_web_listen_address | type_debug == "list"
         )
 
+- name: Assert that version supports multiple configuration files
+  ansible.builtin.assert:
+    that:
+      - snmp_exporter_version is version('0.26.0', '>=')
+      - snmp_exporter_additional_configs | type_debug == "list"
+  when: snmp_exporter_additional_configs is defined and snmp_exporter_additional_configs | length > 0
+
 - name: Discover latest version
   ansible.builtin.set_fact:
     snmp_exporter_version: "{{ (lookup('url', 'https://api.github.com/repos/{{ _snmp_exporter_repo }}/releases/latest', headers=_github_api_headers,
