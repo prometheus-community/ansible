@@ -44,3 +44,9 @@ argument_specs:
       nvidia_gpu_exporter_config_dir:
         description: "Path to directory with nvidia_gpu_exporter configuration"
         default: "/etc/nvidia_gpu_exporter"
+      nvidia_gpu_exporter_collect_compute_apps:
+        type: bool
+        default: false
+        description: >-
+          Enable the --collect.compute-apps flag on the exporter.
+          Requires nvidia_gpu_exporter_version >= 1.9.0.

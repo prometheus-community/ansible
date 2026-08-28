@@ -4,3 +4,4 @@ provisioner:
     group_vars:
       all:
         nvidia_gpu_exporter_version: latest
+        nvidia_gpu_exporter_collect_compute_apps: true
