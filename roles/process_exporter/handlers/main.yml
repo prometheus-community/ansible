@@ -6,3 +6,5 @@
     daemon_reload: true
     name: process_exporter
     state: restarted
+  when:
+    - not ansible_check_mode
