@@ -1,0 +1,2 @@
+#!/bin/sh
+exec java -javaagent:{{ jmx_exporter_binary_install_dir }}/jmx_exporter.jar={{ jmx_exporter_web_listen_address | ansible.builtin.urlsplit('port') }}:{{ jmx_exporter_config_file }} "$@"
