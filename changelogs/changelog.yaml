@@ -3,8 +3,27 @@ ancestor:
 releases:
   0.30.2:
     changes:
+      bugfixes:
+        - 'fix: Update molecule driver schema (https://github.com/prometheus-community/ansible/pull/871)'
+        - 'fix(prometheus): use ansible_facts for fqdn (https://github.com/prometheus-community/ansible/pull/870)'
+        - 'fix(_common): replace deprecated vars dictionary access (https://github.com/prometheus-community/ansible/pull/869)'
       trivial:
+        - 'patch: New percona/mongodb_exporter upstream release 0.53.0! (https://github.com/prometheus-community/ansible/pull/881)'
+        - 'patch: New prometheus/prometheus upstream release 3.14.0! (https://github.com/prometheus-community/ansible/pull/880)'
+        - 'patch: New prometheus/alertmanager upstream release 0.34.0! (https://github.com/prometheus-community/ansible/pull/879)'
+        - 'patch: New prometheus/memcached_exporter upstream release 0.17.0! (https://github.com/prometheus-community/ansible/pull/878)'
+        - 'patch: New prometheus/mysqld_exporter upstream release 0.20.0! (https://github.com/prometheus-community/ansible/pull/877)'
+        - 'patch: New utkuozdemir/nvidia_gpu_exporter upstream release 1.14.0! (https://github.com/prometheus-community/ansible/pull/876)'
+        - 'patch: New superq/chrony_exporter upstream release 0.14.0! (https://github.com/prometheus-community/ansible/pull/874)'
+        - 'chore(deps): update ansible/ansible-lint action to v26.8.0 (https://github.com/prometheus-community/ansible/pull/873)'
+        - 'patch: New oliver006/redis_exporter upstream release 1.89.0! (https://github.com/prometheus-community/ansible/pull/872)'
+        - 'patch: New percona/mongodb_exporter upstream release 0.52.0! (https://github.com/prometheus-community/ansible/pull/867)'
+        - 'patch: New prometheus/prometheus upstream release 3.13.2! (https://github.com/prometheus-community/ansible/pull/866)'
+        - 'patch: New utkuozdemir/nvidia_gpu_exporter upstream release 1.13.1! (https://github.com/prometheus-community/ansible/pull/865)'
+        - 'patch: New oliver006/redis_exporter upstream release 1.88.0! (https://github.com/prometheus-community/ansible/pull/864)'
         - 'chore(deps): update actions/checkout action to v7.0.1 (https://github.com/prometheus-community/ansible/pull/862)'
+        - 'patch: New utkuozdemir/nvidia_gpu_exporter upstream release 1.13.0! (https://github.com/prometheus-community/ansible/pull/861)'
+        - 'chore(deps): update release-drafter/release-drafter action to v7.7.0 (https://github.com/prometheus-community/ansible/pull/860)'
     release_date: '2026-07-24'
   0.30.1:
     changes:

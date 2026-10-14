@@ -1,5 +1,5 @@
 ---
-prometheus_version: 3.13.0
+prometheus_version: 3.14.0
 prometheus_binary_url: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/\
                         prometheus-{{ prometheus_version }}.{{ ansible_facts['system'] | lower }}-{{ _prometheus_go_ansible_arch }}.tar.gz"
 prometheus_checksums_url: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/sha256sums.txt"
@@ -66,7 +66,7 @@ prometheus_remote_read: []
 #       password: FOO
 
 prometheus_external_labels:
-  environment: "{{ ansible_fqdn | default(ansible_host) | default(inventory_hostname) }}"
+  environment: "{{ ansible_facts['fqdn'] | default(ansible_host) | default(inventory_hostname) }}"
 
 prometheus_targets: {}
 #  node:
@@ -80,7 +80,7 @@ prometheus_scrape_configs:
     metrics_path: "{{ prometheus_metrics_path }}"
     static_configs:
       - targets:
-          - "{{ ansible_fqdn | default(ansible_host) | default('localhost') }}:9090"
+          - "{{ ansible_facts['fqdn'] | default(ansible_host) | default('localhost') }}:9090"
   - job_name: "node"
     file_sd_configs:
       - files:

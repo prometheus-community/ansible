@@ -63,7 +63,7 @@ provisioner:
             metrics_path: "{{ prometheus_metrics_path }}"
             static_configs:
               - targets:
-                  - "{{ ansible_fqdn | default(ansible_host) | default('localhost')\
+                  - "{{ ansible_facts['fqdn'] | default(ansible_host) | default('localhost')\
                     \ }}:9090"
           - job_name: "node"
             file_sd_configs:
