@@ -1,0 +1,23 @@
+---
+nvme_exporter_version: 3.0.0
+nvme_exporter_binary_url: "https://github.com/{{ _nvme_exporter_repo }}/releases/download/v{{ nvme_exporter_version }}/\
+                          nvme_exporter_{{ nvme_exporter_version }}_{{ ansible_facts['system'] | lower }}_{{ _nvme_exporter_go_ansible_arch }}.tar.gz"
+nvme_exporter_checksums_url: "https://github.com/{{ _nvme_exporter_repo }}/releases/download/v{{ nvme_exporter_version }}/checksums.txt"
+
+nvme_exporter_web_listen_address: "0.0.0.0:9998"
+nvme_exporter_web_telemetry_path: "/metrics"
+
+# Collector management. When nvme_exporter_disable_defaults is true only the
+# collectors listed in nvme_exporter_enabled_collectors are enabled. Collectors
+# in nvme_exporter_disabled_collectors are always disabled.
+nvme_exporter_disable_defaults: false
+nvme_exporter_enabled_collectors: []
+nvme_exporter_disabled_collectors: []
+
+nvme_exporter_binary_install_dir: "/usr/local/bin"
+nvme_exporter_system_group: "nvme-exp"
+nvme_exporter_system_user: "{{ nvme_exporter_system_group }}"
+
+nvme_exporter_config_dir: "/etc/nvme_exporter"
+# Local path to stash the archive and its extraction
+nvme_exporter_local_cache_path: "/tmp/nvme_exporter-{{ ansible_facts['system'] | lower }}-{{ _nvme_exporter_go_ansible_arch }}/{{ nvme_exporter_version }}"
