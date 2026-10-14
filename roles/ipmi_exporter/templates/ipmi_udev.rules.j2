@@ -1,0 +1,3 @@
+{{ ansible_managed | comment }}
+
+KERNEL=="ipmi*", SUBSYSTEM=="ipmi", GROUP="{{ ipmi_exporter_system_group }}", MODE="0660"
