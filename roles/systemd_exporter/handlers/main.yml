@@ -6,3 +6,5 @@
     state: restarted
   become: true
   listen: restart systemd_exporter
+  when:
+    - not ansible_check_mode
