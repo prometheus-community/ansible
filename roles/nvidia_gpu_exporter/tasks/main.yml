@@ -1,4 +1,14 @@
 ---
+- name: Ensure --collect.compute-apps is only used with a supported version
+  ansible.builtin.assert:
+    that:
+      - not nvidia_gpu_exporter_collect_compute_apps
+        or nvidia_gpu_exporter_version == 'latest'
+        or nvidia_gpu_exporter_version is version('1.9.0', '>=')
+    fail_msg: >-
+      nvidia_gpu_exporter_collect_compute_apps requires nvidia_gpu_exporter_version >= 1.9.0
+      (current: {{ nvidia_gpu_exporter_version }})
+
 - name: Preflight
   ansible.builtin.include_tasks:
     file: preflight.yml
