@@ -1,6 +1,9 @@
 ---
 ancestor:
 releases:
+  0.30.3:
+    changes: {}
+    release_date: '2026-10-16'
   0.30.2:
     changes:
       bugfixes:
