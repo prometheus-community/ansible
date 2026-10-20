@@ -1,0 +1,37 @@
+---
+elasticsearch_exporter_version: 1.8.0
+elasticsearch_exporter_binary_url: "https://github.com/{{ _elasticsearch_exporter_repo }}/releases/download/v{{ elasticsearch_exporter_version }}/\
+                           elasticsearch_exporter-{{ elasticsearch_exporter_version }}.{{ ansible_facts['system'] | lower }}-{{ _elasticsearch_exporter_go_ansible_arch }}.tar.gz"
+elasticsearch_exporter_checksums_url: "https://github.com/{{ _elasticsearch_exporter_repo }}/releases/download/v{{ elasticsearch_exporter_version }}/sha256sums.txt"
+
+elasticsearch_exporter_web_disable_exporter_metrics: false
+elasticsearch_exporter_web_listen_address: "0.0.0.0:9114"
+elasticsearch_exporter_web_telemetry_path: "/metrics"
+
+elasticsearch_exporter_textfile_dir: "/var/lib/elasticsearch_exporter"
+
+elasticsearch_exporter_tls_server_config: {}
+
+elasticsearch_exporter_http_server_config: {}
+
+elasticsearch_exporter_basic_auth_users: {}
+
+elasticsearch_exporter_enabled_collectors:
+  - systemd
+  - textfile:
+      directory: "{{ elasticsearch_exporter_textfile_dir }}"
+#  - filesystem:
+#      ignored-mount-points: "^/(sys|proc|dev)($|/)"
+#      ignored-fs-types: "^(sys|proc|auto)fs$"
+
+elasticsearch_exporter_disabled_collectors: []
+
+elasticsearch_exporter_binary_install_dir: "/usr/local/bin"
+elasticsearch_exporter_system_group: "elastic-exp"
+elasticsearch_exporter_system_user: "{{ elasticsearch_exporter_system_group }}"
+# systemd cli extra arguments
+elasticsearch_exporter_extra_args: []
+
+elasticsearch_exporter_config_dir: "/etc/elasticsearch_exporter"
+# Local path to stash the archive and its extraction
+elasticsearch_exporter_local_cache_path: "/tmp/elasticsearch_exporter-{{ ansible_facts['system'] | lower }}-{{ _elasticsearch_exporter_go_ansible_arch }}/{{ elasticsearch_exporter_version }}"
