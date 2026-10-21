@@ -25,8 +25,8 @@ ExecStart={{ cadvisor_binary_install_dir }}/cadvisor \
 {% if cadvisor_env_metadata_whitelist | length > 0 %}
     '--env_metadata_whitelist={{ cadvisor_env_metadata_whitelist | join(',') }}' \
 {% endif %}
-{% if cadvisor_docker_socket | length > 0 %}
-    '--docker="unix://{{ cadvisor_docker_socket }}"' \
+{% if cadvisor_docker_endpoint | length > 0 %}
+    '--docker={{ cadvisor_docker_endpoint }}' \
 {% endif %}
     '--store_container_labels={{ cadvisor_store_container_labels | lower }}' \
     '--listen_ip={{ cadvisor_listen_ip }}' \
