@@ -1,0 +1,10 @@
+---
+- name: Restart jmx_exporter
+  listen: "restart jmx_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: jmx_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode
