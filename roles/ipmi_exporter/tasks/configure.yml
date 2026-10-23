@@ -18,7 +18,7 @@
 - name: Copy the ipmi_exporter config file
   ansible.builtin.template:
     src: config.yaml.j2
-    dest: /etc/ipmi_exporter/config.yaml
+    dest: "{{ ipmi_exporter_config_dir }}/config.yaml"
     owner: "{{ ipmi_exporter_system_user }}"
     group: "{{ ipmi_exporter_system_group }}"
     mode: 0640

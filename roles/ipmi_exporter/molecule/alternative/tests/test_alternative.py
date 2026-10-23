@@ -8,12 +8,17 @@ testinfra_hosts = get_target_hosts()
 
 def test_directories(host):
     dirs = [
-        "/etc/ipmi_exporter"
+        "/opt/ipmi_exporter/etc"
     ]
     for dir in dirs:
         d = host.file(dir)
         assert d.is_directory
         assert d.exists
+
+
+def test_config_file(host):
+    config = host.file("/opt/ipmi_exporter/etc/config.yaml")
+    assert config.is_file
 
 
 def test_service(host):
