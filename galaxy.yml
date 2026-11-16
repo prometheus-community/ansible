@@ -1,7 +1,7 @@
 ---
 namespace: prometheus
 name: prometheus
-version: 0.30.3
+version: 0.31.0
 readme: README.md
 authors:
   - "Ben Kochie (https://github.com/SuperQ)"
