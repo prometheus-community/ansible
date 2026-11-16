@@ -10,17 +10,17 @@ Type=simple
 User={{ node_exporter_system_user }}
 Group={{ node_exporter_system_group }}
 ExecStart={{ node_exporter_binary_install_dir }}/node_exporter \
-{% for collector in node_exporter_enabled_collectors -%}
-{%   if not collector is mapping %}
-    '--collector.{{ collector }}' \
-{%   else -%}
-{%     set name, options = (collector.items()|list)[0] -%}
+{% for collector in node_exporter_enabled_collectors %}
+{%   if collector is mapping %}
+{%     set name, options = (collector.items() | list)[0] %}
     '--collector.{{ name }}' \
-{%     for k,v in options|dictsort %}
+{%     for k, v in options | dictsort %}
     '--collector.{{ name }}.{{ k }}={{ v }}' \
-{%     endfor -%}
-{%   endif -%}
-{% endfor -%}
+{%     endfor %}
+{%   else %}
+    '--collector.{{ collector }}' \
+{%   endif %}
+{% endfor %}
 {% for collector in node_exporter_disabled_collectors %}
     '--no-collector.{{ collector }}' \
 {% endfor %}
