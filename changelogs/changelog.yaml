@@ -1,8 +1,12 @@
 ---
 ancestor:
 releases:
+  0.31.0:
+    changes:
+      minor_changes:
+        - 'feature: Update support for Ansible 2.22 (https://github.com/prometheus-community/ansible/pull/930)'
+    release_date: '2026-11-16'
   0.30.3:
-    changes: {}
     release_date: '2026-10-16'
   0.30.2:
     changes:
