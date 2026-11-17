@@ -1,0 +1,10 @@
+---
+- name: Restart pve_exporter
+  listen: "restart pve_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: pve_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode
