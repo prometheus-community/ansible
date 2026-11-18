@@ -14,7 +14,7 @@
     dest: "/etc/systemd/system/{{ _common_service_name }}.service"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   become: true
   notify:
     - "{{ ansible_parent_role_names | first }} : Restart {{ _common_service_name }}"
@@ -45,7 +45,7 @@
     dest: "{{ _common_config_dir }}/web_config.yml"
     owner: "{{ _common_system_user }}"
     group: "{{ _common_system_group }}"
-    mode: 0644
+    mode: "0644"
   become: true
   notify:
     - "{{ ansible_parent_role_names | first }} : Restart {{ _common_service_name }}"

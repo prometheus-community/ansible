@@ -15,5 +15,4 @@ provisioner:
         memcached_exporter_basic_auth_users:
           randomuser: examplepassword
         memcached_exporter_version: 0.12.0
-        memcached_exporter_binary_url: "https://github.com/prometheus/memcached_exporter/releases/download/v{{\
-                                        \ memcached_exporter_version }}/memcached_exporter-{{ memcached_exporter_version }}.linux-amd64.tar.gz"
+        memcached_exporter_binary_url: "https://github.com/prometheus/memcached_exporter/releases/download/v{{ memcached_exporter_version }}/memcached_exporter-{{ memcached_exporter_version }}.linux-amd64.tar.gz"

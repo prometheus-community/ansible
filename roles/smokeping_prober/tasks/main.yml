@@ -20,7 +20,7 @@
     _common_system_group: "{{ smokeping_prober_system_group }}"
     _common_system_user: "{{ smokeping_prober_system_user }}"
     _common_config_dir: "{{ smokeping_prober_config_dir }}"
-    _common_binary_unarchive_opts: ['--strip-components=1']
+    _common_binary_unarchive_opts: ["--strip-components=1"]
   tags:
     - smokeping_prober_install
 

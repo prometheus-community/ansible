@@ -15,5 +15,4 @@ provisioner:
         ipmi_exporter_basic_auth_users:
           randomuser: examplepassword
         ipmi_exporter_version: 1.6.1
-        ipmi_exporter_binary_url: "https://github.com/prometheus-community/ipmi_exporter/releases/download/v{{\
-                                   \ ipmi_exporter_version }}/ipmi_exporter-{{ ipmi_exporter_version }}.linux-amd64.tar.gz"
+        ipmi_exporter_binary_url: "https://github.com/prometheus-community/ipmi_exporter/releases/download/v{{ ipmi_exporter_version }}/ipmi_exporter-{{ ipmi_exporter_version }}.linux-amd64.tar.gz"
