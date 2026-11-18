@@ -14,8 +14,8 @@ storage:
       time: {{ prometheus_storage_retention }}
       size: {{ prometheus_storage_retention_size }}
       percentage: {{ prometheus_storage_retention_percentage }}
-{% endif %}
 
+{% endif %}
 {% if prometheus_remote_write != [] %}
 remote_write:
   {{ prometheus_remote_write | to_nice_yaml(indent=2,sort_keys=False) | indent(2, False) }}
