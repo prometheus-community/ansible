@@ -73,6 +73,9 @@ argument_specs:
         description: "do not report raw cgroup metrics, except the root cgroup"
         type: "bool"
         default: false
+      cadvisor_docker_endpoint:
+        description: "set the docker socket path"
+        default: "unix:///var/run/docker.sock"
       cadvisor_system_group:
         description:
           - "I(Advanced)"
