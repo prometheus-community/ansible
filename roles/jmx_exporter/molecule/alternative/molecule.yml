@@ -1,0 +1,16 @@
+---
+provisioner:
+  playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/alternative/prepare.yml"
+  inventory:
+    group_vars:
+      all:
+        jmx_exporter_web_listen_address: "127.0.0.1:9118"
+        jmx_exporter_tls_server_config:
+          cert_file: /etc/jmx_exporter/tls.cert
+          key_file: /etc/jmx_exporter/tls.key
+        jmx_exporter_http_server_config:
+          http2: true
+        jmx_exporter_basic_auth_users:
+          randomuser: examplepassword
+        jmx_exporter_version: 1.0.8

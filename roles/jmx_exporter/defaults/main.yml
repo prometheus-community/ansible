@@ -1,0 +1,20 @@
+---
+jmx_exporter_version: 1.6.0
+jmx_exporter_binary_url: "https://github.com/{{ _jmx_exporter_repo }}/releases/download/v{{ jmx_exporter_version }}/\
+                          jmx_prometheus_javaagent-{{ jmx_exporter_version }}.jar"
+jmx_exporter_checksums_url: "https://github.com/{{ _jmx_exporter_repo }}/releases/download/v{{ jmx_exporter_version }}/jmx_prometheus_javaagent-{{ jmx_exporter_version }}.jar.sha256"
+
+jmx_exporter_web_listen_address: "0.0.0.0:9404"
+
+jmx_exporter_tls_server_config: {}
+jmx_exporter_http_server_config: {}
+jmx_exporter_basic_auth_users: {}
+
+jmx_exporter_binary_install_dir: "/usr/local/bin"
+jmx_exporter_system_user: "jmx-exp"
+jmx_exporter_system_group: "{{ jmx_exporter_system_user }}"
+jmx_exporter_config_dir: "/etc/jmx_exporter"
+jmx_exporter_config_file: "{{ jmx_exporter_config_dir }}/jmx_exporter.yml"
+
+# Local path to stash the archive and its extraction
+jmx_exporter_local_cache_path: "/tmp/jmx_exporter/{{ jmx_exporter_version }}"

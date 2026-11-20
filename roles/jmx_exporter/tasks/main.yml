@@ -1,0 +1,105 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+  tags:
+    - jmx_exporter
+    - install
+    - jmx_exporter_install
+    - configure
+    - jmx_exporter_configure
+    - run
+    - jmx_exporter_run
+
+- name: Install
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: install.yml
+  vars:
+    _common_local_cache_path: "{{ jmx_exporter_local_cache_path }}"
+    _common_binaries: "{{ _jmx_exporter_binaries }}"
+    _common_binary_name: "jmx_exporter.jar"
+    _common_binary_install_dir: "{{ jmx_exporter_binary_install_dir }}"
+    _common_binary_url: "{{ jmx_exporter_binary_url }}"
+    _common_checksums_url: "{{ jmx_exporter_checksums_url }}"
+    _common_system_group: "{{ jmx_exporter_system_group }}"
+    _common_system_user: "{{ jmx_exporter_system_user }}"
+    _common_config_dir: "{{ jmx_exporter_config_dir }}"
+    _common_binary_unarchive_opts: ['--strip-components=1']
+  tags:
+    - jmx_exporter
+    - install
+    - jmx_exporter_install
+
+- name: SELinux
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: selinux.yml
+  vars:
+    _common_selinux_port: "{{ ('//' ~ jmx_exporter_web_listen_address) | ansible.builtin.urlsplit('port') }}"
+  when: ansible_facts['selinux'].status == "enabled"
+  tags:
+    - jmx_exporter
+    - configure
+    - jmx_exporter_configure
+
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_service_name: "jmx_exporter"
+    _common_system_user: "{{ jmx_exporter_system_user }}"
+    _common_system_group: "{{ jmx_exporter_system_group }}"
+    _common_config_dir: "{{ jmx_exporter_config_dir }}"
+    _common_tls_server_config: "{{ jmx_exporter_tls_server_config }}"
+    _common_http_server_config: "{{ jmx_exporter_http_server_config }}"
+    _common_basic_auth_users: "{{ jmx_exporter_basic_auth_users }}"
+  tags:
+    - jmx_exporter
+    - configure
+    - jmx_exporter_configure
+
+- name: Install jmx_exporter wrapper
+  ansible.builtin.template:
+    src: jmx_exporter.sh.j2
+    dest: "{{ jmx_exporter_binary_install_dir }}/jmx_exporter"
+    owner: root
+    group: root
+    mode: 0755
+  become: true
+  notify:
+    - "restart jmx_exporter"
+  tags:
+    - jmx_exporter
+    - install
+    - jmx_exporter_install
+
+- name: Install JMX exporter configuration
+  ansible.builtin.template:
+    src: jmx_exporter.yml.j2
+    dest: "{{ jmx_exporter_config_file }}"
+    owner: "{{ jmx_exporter_system_user }}"
+    group: "{{ jmx_exporter_system_group }}"
+    mode: 0644
+  become: true
+  notify:
+    - "restart jmx_exporter"
+  tags:
+    - jmx_exporter
+    - configure
+    - jmx_exporter_configure
+
+- name: Ensure jmx_exporter is enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: jmx_exporter
+    enabled: true
+    state: started
+  when:
+    - not ansible_check_mode
+  tags:
+    - jmx_exporter
+    - run
+    - jmx_exporter_run
