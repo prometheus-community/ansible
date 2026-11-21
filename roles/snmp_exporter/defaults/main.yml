@@ -11,6 +11,7 @@ snmp_exporter_config_file: ""
 
 snmp_exporter_binary_install_dir: "/usr/local/bin"
 snmp_exporter_config_dir: "/etc/snmp_exporter"
+snmp_exporter_expand_environment_variables: false
 
 # Local path to stash the archive and its extraction
 snmp_exporter_local_cache_path: "/tmp/snmp_exporter-{{ ansible_facts['system'] | lower }}-{{ _snmp_exporter_go_ansible_arch }}/{{ snmp_exporter_version }}"
