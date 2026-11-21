@@ -20,6 +20,9 @@ ExecStart={{ snmp_exporter_binary_install_dir }}/snmp_exporter \
 {% else %}
   --web.listen-address={{ snmp_exporter_web_listen_address }} \
 {% endif %}
+{% for config in snmp_exporter_additional_configs %}
+  --config.file={{ config }} \
+{% endfor %}
   --log.level={{ snmp_exporter_log_level }} \
   --config.file={{ snmp_exporter_config_dir }}/snmp.yml
 
