@@ -4,6 +4,17 @@ Prometheus.Prometheus Release Notes
 
 .. contents:: Topics
 
+v0.31.0
+=======
+
+Minor Changes
+-------------
+
+- feature: Update support for Ansible 2.22 (https://github.com/prometheus-community/ansible/pull/930)
+
+v0.30.3
+=======
+
 v0.30.2
 =======
 

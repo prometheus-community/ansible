@@ -12,7 +12,7 @@ argument_specs:
         description:
           - "Prometheus package version. Also accepts C(latest) as parameter."
           - "Prometheus >= 2.x is supported"
-        default: "3.14.0"
+        default: "3.16.0"
       prometheus_binary_url:
         description: "URL of the prometheus binaries .tar.gz file"
         default: "https://github.com/{{ _prometheus_repo }}/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.{{ ansible_facts['system'] | lower }}-{{ _prometheus_go_ansible_arch }}.tar.gz"
@@ -54,6 +54,12 @@ argument_specs:
           - "Data retention period by size"
           - "Maximum number of bytes that can be stored for blocks."
           - "Units supported: KB, MB, GB, TB, PB."
+        default: "0"
+      prometheus_storage_retention_percentage:
+        description:
+          - "Maximum percent of total disk space allowed for block storage"
+          - "Set to 0 to disable percentage-based retention"
+          - "Supported only on Prometheus >= 3.11.0"
         default: "0"
       prometheus_agent_mode:
         description:
