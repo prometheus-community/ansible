@@ -1,0 +1,10 @@
+---
+- name: Restart elasticsearch_exporter
+  listen: "restart elasticsearch_exporter"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: elasticsearch_exporter
+    state: restarted
+  when:
+    - not ansible_check_mode
