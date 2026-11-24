@@ -44,3 +44,6 @@ argument_specs:
       nvidia_gpu_exporter_config_dir:
         description: "Path to directory with nvidia_gpu_exporter configuration"
         default: "/etc/nvidia_gpu_exporter"
+      nvidia_gpu_exporter_collect_backend:
+        description: "How to collect GPU metrics. `nvml` (recommended) reads the driver library (libnvidia-ml on Linux, nvml.dll on Windows) directly without nvidia-smi, exposing the core metrics plus NVML-only extras (see the docs). On Windows it is included in the standard build. On Linux it ships in the `-nvml` release artifact, where it is the default. `exec` runs nvidia-smi (the default in the standard build). `demo` serves synthetic data mimicking the nvml surface, with no GPU or driver needed, on any platform."
+        default: "exec"
