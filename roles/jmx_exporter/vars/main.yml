@@ -1,0 +1,4 @@
+---
+_jmx_exporter_repo: "prometheus/jmx_exporter"
+_github_api_headers: "{{ {'GITHUB_TOKEN': lookup('ansible.builtin.env', 'GITHUB_TOKEN')} if (lookup('ansible.builtin.env', 'GITHUB_TOKEN')) else {} }}"
+_jmx_exporter_binaries: ['jmx_exporter.jar']
