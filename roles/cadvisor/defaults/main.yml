@@ -14,6 +14,8 @@ cadvisor_whitelisted_container_labels: []
 cadvisor_store_container_labels: true
 cadvisor_docker_only: false
 
+cadvisor_basic_auth_users: {}
+
 cadvisor_system_group: "root"
 cadvisor_system_user: "{{ cadvisor_system_group }}"
 
@@ -27,3 +29,5 @@ cadvisor_binary_install_dir: "/usr/local/bin"
 #
 cadvisor_housekeeping_interval: 10s
 cadvisor_max_housekeeping_interval: 15s
+
+cadvisor_config_dir: "/etc/cadvisor"

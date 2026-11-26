@@ -34,9 +34,8 @@
     - cadvisor_configure
 
 - name: Configure
-  ansible.builtin.include_role:
-    name: prometheus.prometheus._common
-    tasks_from: configure.yml
+  ansible.builtin.include_tasks:
+    file: configure.yml
   tags:
     - cadvisor_configure
 

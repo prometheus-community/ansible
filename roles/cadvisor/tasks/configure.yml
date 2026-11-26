@@ -1,0 +1,30 @@
+---
+
+- name: Configure
+  ansible.builtin.include_role:
+    name: prometheus.prometheus._common
+    tasks_from: configure.yml
+  vars:
+    _common_config_dir: "{{ cadvisor_config_dir if (cadvisor_basic_auth_users | length > 0) else None }}"
+    _common_system_group: "{{ cadvisor_system_group }}"
+    _common_system_user: "{{ cadvisor_system_user }}"
+  tags:
+    - cadvisor
+    - configure
+    - cadvisor_configure
+
+- name: Generate htpasswd file
+  ansible.builtin.template:
+    src: "htpasswd.j2"
+    dest: "{{ cadvisor_config_dir }}/htpasswd"
+    owner: "{{ cadvisor_system_user }}"
+    group: "{{ cadvisor_system_group }}"
+    mode: 0640
+  become: true
+  when: cadvisor_basic_auth_users | length > 0
+  notify:
+    - Restart cadvisor
+  tags:
+    - cadvisor
+    - configure
+    - cadvisor_configure

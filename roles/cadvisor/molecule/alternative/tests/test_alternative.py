@@ -31,3 +31,13 @@ def test_protecthome_property(host):
 ])
 def test_socket(host, sockets):
     assert host.socket(sockets).is_listening
+
+
+def test_forbidden_access(host):
+    output = host.check_output('curl -s -o /dev/null -w "%{http_code}" -L http://127.0.0.1:8000/')
+    assert '401' in output
+
+
+def test_granted_access(host):
+    output = host.check_output('curl -s -o /dev/null -w "%{http_code}" -L http://127.0.0.1:8000/ -u foo:bar')
+    assert '200' in output
