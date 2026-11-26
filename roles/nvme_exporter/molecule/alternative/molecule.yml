@@ -1,0 +1,19 @@
+---
+provisioner:
+  playbooks:
+    prepare: "${MOLECULE_PROJECT_DIRECTORY}/../../.config/molecule/alternative/prepare.yml"
+  inventory:
+    group_vars:
+      all:
+        nvme_exporter_local_cache_path: "/tmp/nvme_exporter-linux-amd64"
+        nvme_exporter_web_listen_address: "127.0.0.1:8080"
+        nvme_exporter_web_telemetry_path: "/nvme-metrics"
+        nvme_exporter_disable_defaults: true
+        nvme_exporter_enabled_collectors:
+          - "info"
+          - "smart"
+        nvme_exporter_disabled_collectors:
+          - "ocp"
+        nvme_exporter_version: 2.2.0
+        nvme_exporter_binary_url: "https://github.com/E4-Computer-Engineering/nvme-exporter/releases/download/v{{\
+                                  \ nvme_exporter_version }}/nvme_exporter_{{ nvme_exporter_version }}_linux_amd64.tar.gz"
