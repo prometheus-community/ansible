@@ -1,0 +1,82 @@
+---
+# yamllint disable rule:line-length
+argument_specs:
+  main:
+    short_description: "Prometheus DNS Exporter"
+    description:
+      - "Deploy prometheus L(dns exporter,https://github.com/tykling/dns_exporter) using ansible"
+    author:
+      - "Prometheus Community"
+    options:
+      dns_exporter_web_listen_ip:
+        description: "IP address for dns_exporter to listen to"
+        default: "127.0.0.1"
+      dns_exporter_web_listen_port:
+        description: "Port for dns_exporter to listen to"
+        default: "15353"
+      dns_exporter_debug_enable:
+        description: "Enable or not daemon debug"
+        type: bool
+        default: false
+      dns_exporter_home:
+        description: "Home of dns_exporter user and base file locations"
+        default: "/var/lib/dns_exporter"
+      dns_exporter_virtualenv:
+        description: "Python virtualenv filepath for dns_exporter"
+        default: "/var/lib/dns_exporter/venv"
+      dns_exporter_config_template:
+        description: "Configuration template for dns_exporter"
+        default: "dns_exporter.yml.j2"
+      dns_exporter_version:
+        description: "DNS exporter package version. Also accepts latest as parameter."
+        default: "1.0.0"
+      dns_exporter_web_listen_address:
+        description: "Address on which dns exporter will listen"
+        default: "0.0.0.0:15353"
+      dns_exporter_enabled_collectors:
+        description:
+          - "List of dicts defining additionally enabled collectors and their configuration."
+          - "It adds collectors to L(those enabled by default,https://github.com/prometheus/dns_exporter#enabled-by-default)."
+        type: "list"
+        default:
+          - systemd
+          - textfile:
+              directory: "{{ dns_exporter_textfile_dir }}"
+      dns_exporter_disabled_collectors:
+        description:
+          - "List of disabled collectors."
+          - "By default dns_exporter disables collectors listed L(here,https://github.com/prometheus/dns_exporter#disabled-by-default)."
+        type: "list"
+        elements: "str"
+      dns_exporter_textfile_dir:
+        description:
+          - "Directory used by the L(Textfile Collector,https://github.com/prometheus/dns_exporter#textfile-collector)."
+          - "To get permissions to write metrics in this directory, users must be in C(dns-exp) system group."
+          - "B(Note:) More information in TROUBLESHOOTING.md guide."
+        default: "/var/lib/dns_exporter"
+      dns_exporter_tls_server_config:
+        description:
+          - "Configuration for TLS authentication."
+          - "Keys and values are the same as in L(dns_exporter docs,https://prometheus.io/docs/prometheus/latest/configuration/https/)."
+        type: "dict"
+      dns_exporter_http_server_config:
+        description:
+          - "Config for HTTP/2 support."
+          - "Keys and values are the same as in L(dns_exporter docs,https://prometheus.io/docs/prometheus/latest/configuration/https/)."
+        type: "dict"
+      dns_exporter_basic_auth_users:
+        description: "Dictionary of users and password for basic authentication. Passwords are automatically hashed with bcrypt."
+        type: "dict"
+      dns_exporter_system_group:
+        description:
+          - "I(Advanced)"
+          - "System group for dns exporter"
+        default: "dns-exp"
+      dns_exporter_system_user:
+        description:
+          - "I(Advanced)"
+          - "DNS exporter user"
+        default: "dns-exp"
+      dns_exporter_config_dir:
+        description: "Path to directory with dns_exporter configuration"
+        default: "/etc/dns_exporter"
