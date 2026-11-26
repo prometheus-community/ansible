@@ -48,3 +48,8 @@ argument_specs:
       snmp_exporter_config_dir:
         description: "Path to directory with snmp_exporter configuration"
         default: "/etc/snmp_exporter"
+      snmp_exporter_expand_environment_variables:
+        description:
+          - "allows passing environment variables into some fields of the configuration file."
+          - "The username, password & priv_password fields in the auths section are supported."
+        default: false
