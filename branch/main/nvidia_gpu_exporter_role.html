@@ -203,6 +203,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-main--nvidia_gpu_exporter_collect_backend"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nvidia-gpu-exporter-role-parameter-main-nvidia-gpu-exporter-collect-backend"><strong>nvidia_gpu_exporter_collect_backend</strong></p>
+<a class="ansibleOptionLink" href="#parameter-main--nvidia_gpu_exporter_collect_backend" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>How to collect GPU metrics. `nvml` (recommended) reads the driver library (libnvidia-ml on Linux, nvml.dll on Windows) directly without nvidia-smi, exposing the core metrics plus NVML-only extras (see the docs). On Windows it is included in the standard build. On Linux it ships in the `-nvml` release artifact, where it is the default. `exec` runs nvidia-smi (the default in the standard build). `demo` serves synthetic data mimicking the nvml surface, with no GPU or driver needed, on any platform.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;exec&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nvidia_gpu_exporter_config_dir"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nvidia-gpu-exporter-role-parameter-main-nvidia-gpu-exporter-config-dir"><strong>nvidia_gpu_exporter_config_dir</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nvidia_gpu_exporter_config_dir" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -210,7 +218,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/etc/nvidia_gpu_exporter&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nvidia_gpu_exporter_local_cache_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nvidia-gpu-exporter-role-parameter-main-nvidia-gpu-exporter-local-cache-path"><strong>nvidia_gpu_exporter_local_cache_path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nvidia_gpu_exporter_local_cache_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -218,7 +226,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;/tmp/nvidia_gpu_exporter-{{</span> <span class="pre">ansible_facts['system']</span> <span class="pre">|</span> <span class="pre">lower</span> <span class="pre">}}-{{</span> <span class="pre">_nvidia_gpu_exporter_go_ansible_arch</span> <span class="pre">}}/{{</span> <span class="pre">nvidia_gpu_exporter_version</span> <span class="pre">}}&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nvidia_gpu_exporter_system_group"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nvidia-gpu-exporter-role-parameter-main-nvidia-gpu-exporter-system-group"><strong>nvidia_gpu_exporter_system_group</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nvidia_gpu_exporter_system_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -227,7 +235,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;nvidia-gpu-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nvidia_gpu_exporter_system_user"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nvidia-gpu-exporter-role-parameter-main-nvidia-gpu-exporter-system-user"><strong>nvidia_gpu_exporter_system_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nvidia_gpu_exporter_system_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -236,7 +244,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;nvidia-gpu-exp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nvidia_gpu_exporter_version"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nvidia-gpu-exporter-role-parameter-main-nvidia-gpu-exporter-version"><strong>nvidia_gpu_exporter_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nvidia_gpu_exporter_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -244,7 +252,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;1.19.0&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nvidia_gpu_exporter_web_listen_address"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nvidia-gpu-exporter-role-parameter-main-nvidia-gpu-exporter-web-listen-address"><strong>nvidia_gpu_exporter_web_listen_address</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nvidia_gpu_exporter_web_listen_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -252,7 +260,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;0.0.0.0:9835&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-main--nvidia_gpu_exporter_web_telemetry_path"></div><p class="ansible-option-title" id="ansible-collections-prometheus-prometheus-nvidia-gpu-exporter-role-parameter-main-nvidia-gpu-exporter-web-telemetry-path"><strong>nvidia_gpu_exporter_web_telemetry_path</strong></p>
 <a class="ansibleOptionLink" href="#parameter-main--nvidia_gpu_exporter_web_telemetry_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
