@@ -36,6 +36,11 @@ jobs:
     uses: ansible-community/github-docs-build/.github/workflows/_shared-docs-build-pr.yml@main
     with:
       collection-name: prometheus.prometheus
+      # Pinned until https://github.com/ansible-community/antsibull-docs-loader/pull/17
+      # is merged and released. antsibull-docs 2.29.0 switched to antsibull-docs-loader,
+      # which cannot parse the !unsafe tag in
+      # roles/process_exporter/meta/argument_specs.yml.
+      init-antsibull-docs-version: '2.28.0'
       init-lenient: false
       init-fail-on-error: true
       squash-hierarchy: true
