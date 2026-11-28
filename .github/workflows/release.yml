@@ -14,7 +14,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
@@ -23,7 +23,7 @@ jobs:
 
       - name: "Calculate next version"
         id: version
-        uses: gardar/version-drafter-action@event-triggers  # Until PR gets merged: https://github.com/patrickjahns/version-drafter-action/pull/343
+        uses: gardar/version-drafter-action@event-triggers # Until PR gets merged: https://github.com/patrickjahns/version-drafter-action/pull/343
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
@@ -45,19 +45,19 @@ jobs:
           cmd: yq -i '.version = "${{ steps.version.outputs.next-version }}"' 'galaxy.yml'
 
       - name: "Write changelog and version"
-        uses: stefanzweifel/git-auto-commit-action@d0b01107b5db882071f96de5dd4b54961ea93f4c  # v7.2.1
+        uses: stefanzweifel/git-auto-commit-action@d0b01107b5db882071f96de5dd4b54961ea93f4c # v7.2.1
         with:
           branch: ${{ github.event.pull_request.base.ref }}
           commit_message: "chore: update version"
           push_options: --force
 
       - name: "Checkout updated branch"
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event.pull_request.base.ref }}
 
       - name: "Publish release"
         id: release-publish
-        uses: release-drafter/release-drafter@34d80673e067bdc0c24568d3af899c216adcfaa9  # v7.7.0
+        uses: release-drafter/release-drafter@34d80673e067bdc0c24568d3af899c216adcfaa9 # v7.7.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
