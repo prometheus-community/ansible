@@ -19,9 +19,9 @@ jobs:
     name: "sanity-${{ matrix.ansible-core-versions }}"
     steps:
       - name: "Perform sanity test with ansible-test"
-        uses: ansible-community/ansible-test-gh-action@6ded727edb598e670ac056a8e680ca4050bac0a3  # v1.18.0
+        uses: ansible-community/ansible-test-gh-action@6ded727edb598e670ac056a8e680ca4050bac0a3 # v1.18.0
         with:
           ansible-core-version: ${{ matrix.ansible-core-versions }}
           testing-type: sanity
-          ansible-core-github-repository-slug: ${{ contains(fromJson('["stable-2.9", "stable-2.10", "stable-2.11"]'), matrix.ansible-core-versions) &&
-                                               'ansible-community/eol-ansible' || 'ansible/ansible' }}
+          ansible-core-github-repository-slug: ${{ contains(fromJson('["stable-2.9", "stable-2.10", "stable-2.11"]'), matrix.ansible-core-versions) && 'ansible-community/eol-ansible' ||
+            'ansible/ansible' }}
