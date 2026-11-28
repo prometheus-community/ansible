@@ -19,7 +19,7 @@ tags:
   - alerting
   - cloud
 dependencies:
-  community.general: '>=1.0.0'
+  community.general: ">=1.0.0"
 repository: "https://github.com/prometheus-community/ansible"
 documentation: "https://prometheus-community.github.io/ansible"
 homepage: "https://prometheus.io"
@@ -31,4 +31,4 @@ build_ignore:
   - changelogs
   - roles/*/molecule
   - tests
-  - '*.tar.gz'
+  - "*.tar.gz"
