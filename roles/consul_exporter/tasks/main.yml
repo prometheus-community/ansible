@@ -24,7 +24,7 @@
     _common_system_group: "{{ consul_exporter_system_group }}"
     _common_system_user: "{{ consul_exporter_system_user }}"
     _common_config_dir: "{{ consul_exporter_config_dir }}"
-    _common_binary_unarchive_opts: ['--strip-components=1']
+    _common_binary_unarchive_opts: ["--strip-components=1"]
   tags:
     - consul_exporter
     - install

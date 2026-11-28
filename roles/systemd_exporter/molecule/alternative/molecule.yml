@@ -12,6 +12,4 @@ provisioner:
           cert_file: /etc/systemd_exporter/tls.cert
           key_file: /etc/systemd_exporter/tls.key
         systemd_exporter_enable_file_descriptor_size: true
-        systemd_exporter_binary_url: "https://github.com/prometheus-community/systemd_exporter/releases/download/v{{\
-                                      \ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version\
-                                      \ }}.linux-amd64.tar.gz"
+        systemd_exporter_binary_url: "https://github.com/prometheus-community/systemd_exporter/releases/download/v{{ systemd_exporter_version }}/systemd_exporter-{{ systemd_exporter_version }}.linux-amd64.tar.gz"

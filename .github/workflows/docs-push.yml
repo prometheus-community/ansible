@@ -8,13 +8,12 @@ on:
     branches:
       - main
     tags:
-      - '*'
+      - "*"
   # Run CI once per day (at 06:00 UTC)
   schedule:
-    - cron: '0 6 * * *'
+    - cron: "0 6 * * *"
   # Allow manual trigger (for newer antsibull-docs, sphinx-ansible-theme, ... versions)
   workflow_dispatch:
-
 jobs:
   get-tags:
     runs-on: ubuntu-latest
@@ -23,7 +22,7 @@ jobs:
     steps:
       - name: Get the latest tag
         id: get-latest-tag
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const latestTag = await github.rest.repos.listTags({
@@ -41,6 +40,11 @@ jobs:
     uses: ansible-community/github-docs-build/.github/workflows/_shared-docs-build-push.yml@main
     with:
       collection-name: prometheus.prometheus
+      # Pinned until https://github.com/ansible-community/antsibull-docs-loader/pull/17
+      # is merged and released. antsibull-docs 2.29.0 switched to antsibull-docs-loader,
+      # which cannot parse the !unsafe tag in
+      # roles/process_exporter/meta/argument_specs.yml.
+      init-antsibull-docs-version: '2.28.0'
       init-lenient: false
       init-fail-on-error: true
       squash-hierarchy: true

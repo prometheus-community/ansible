@@ -21,7 +21,7 @@
     dest: /etc/ipmi_exporter/config.yaml
     owner: "{{ ipmi_exporter_system_user }}"
     group: "{{ ipmi_exporter_system_group }}"
-    mode: 0640
+    mode: "0640"
   become: true
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   notify:
