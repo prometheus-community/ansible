@@ -7,7 +7,7 @@ provisioner:
       all:
         consul_exporter_version: 0.13.0
         consul_exporter_local_cache_path: "/tmp/consul_exporter-linux-amd64/{{ consul_exporter_version }}"
-        consul_exporter_web_listen_address: '127.0.1.1:8080'
+        consul_exporter_web_listen_address: "127.0.1.1:8080"
         consul_exporter_tls_server_config:
           cert_file: /etc/consul_exporter/tls.cert
           key_file: /etc/consul_exporter/tls.key
@@ -15,5 +15,4 @@ provisioner:
           http2: true
         consul_exporter_basic_auth_users:
           randomuser: examplepassword
-        consul_exporter_binary_url: "https://github.com/prometheus/consul_exporter/releases/download/v{{ consul_exporter_version\
-                                     \ }}/consul_exporter-{{ consul_exporter_version }}.linux-amd64.tar.gz"
+        consul_exporter_binary_url: "https://github.com/prometheus/consul_exporter/releases/download/v{{ consul_exporter_version }}/consul_exporter-{{ consul_exporter_version }}.linux-amd64.tar.gz"

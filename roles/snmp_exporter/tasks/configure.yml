@@ -18,7 +18,7 @@
     dest: "{{ snmp_exporter_config_dir }}/snmp.yml"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   notify:
     - reload snmp_exporter

@@ -14,5 +14,5 @@
       ansible.builtin.file:
         name: "{{ playbook_dir }}/prometheus/scrape_configs/empty_scrapes.yml"
         state: touch
-        mode: 0664
+        mode: "0664"
       check_mode: false
