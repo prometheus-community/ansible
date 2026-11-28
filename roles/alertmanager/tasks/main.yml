@@ -22,7 +22,7 @@
     _common_system_group: "{{ alertmanager_system_group }}"
     _common_system_user: "{{ alertmanager_system_user }}"
     _common_config_dir: "{{ alertmanager_config_dir }}"
-    _common_binary_unarchive_opts: ['--strip-components=1']
+    _common_binary_unarchive_opts: ["--strip-components=1"]
   tags:
     - alertmanager
     - install

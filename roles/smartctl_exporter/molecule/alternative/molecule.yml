@@ -19,5 +19,4 @@ provisioner:
         smartctl_exporter_basic_auth_users:
           randomuser: examplepassword
         smartctl_exporter_version: 0.11.0
-        smartctl_exporter_binary_url: "https://github.com/prometheus-community/smartctl_exporter/releases/download/v{{\
-                                       \ smartctl_exporter_version }}/smartctl_exporter-{{ smartctl_exporter_version }}.linux-amd64.tar.gz"
+        smartctl_exporter_binary_url: "https://github.com/prometheus-community/smartctl_exporter/releases/download/v{{ smartctl_exporter_version }}/smartctl_exporter-{{ smartctl_exporter_version }}.linux-amd64.tar.gz"

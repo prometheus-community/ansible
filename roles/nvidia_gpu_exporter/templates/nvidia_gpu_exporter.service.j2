@@ -10,6 +10,7 @@ Type=simple
 User={{ nvidia_gpu_exporter_system_user }}
 Group={{ nvidia_gpu_exporter_system_group }}
 ExecStart={{ nvidia_gpu_exporter_binary_install_dir }}/nvidia_gpu_exporter \
+    '--collect.backend={{nvidia_gpu_exporter_collect_backend}}' \
 {% if nvidia_gpu_exporter_web_listen_address is iterable and
       nvidia_gpu_exporter_web_listen_address is not mapping and
       nvidia_gpu_exporter_web_listen_address is not string %}

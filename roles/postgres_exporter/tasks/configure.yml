@@ -20,8 +20,8 @@
     src: postgres_exporter.yml.j2
     dest: "{{ postgres_exporter_config_dir }}/{{ postgres_exporter_config_file }}"
     owner: root
-    group: '{{ postgres_exporter_system_group }}'
-    mode: '0640'
+    group: "{{ postgres_exporter_system_group }}"
+    mode: "0640"
   no_log: "{{ false if (lookup('env', 'CI')) or (lookup('env', 'MOLECULE_PROVISIONER_NAME')) else true }}"
   notify: restart postgres_exporter
   become: true
@@ -43,8 +43,8 @@
         dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_uri"
         content: "{{ postgres_exporter_uri }}"
         owner: root
-        group: '{{ postgres_exporter_system_group }}'
-        mode: '0640'
+        group: "{{ postgres_exporter_system_group }}"
+        mode: "0640"
       notify: restart postgres_exporter
 
     - name: Creating file postgres_exporter_user
@@ -52,8 +52,8 @@
         dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_user"
         content: "{{ postgres_exporter_username }}"
         owner: root
-        group: '{{ postgres_exporter_system_group }}'
-        mode: '0640'
+        group: "{{ postgres_exporter_system_group }}"
+        mode: "0640"
       notify: restart postgres_exporter
 
     - name: Creating file postgres_exporter_pass
@@ -61,6 +61,6 @@
         dest: "{{ postgres_exporter_config_dir }}/postgres_exporter_pass"
         content: "{{ postgres_exporter_password }}"
         owner: root
-        group: '{{ postgres_exporter_system_group }}'
-        mode: '0640'
+        group: "{{ postgres_exporter_system_group }}"
+        mode: "0640"
       notify: restart postgres_exporter
